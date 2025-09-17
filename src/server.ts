@@ -1,5 +1,5 @@
 import express from 'express';
-import roleRoute from './routes/roleRoute';
+import roleRoute from './routes/role.route';
 
 import swaggerUi from 'swagger-ui-express';
 import specs from './config/swagger.jsdoc';
