@@ -2,7 +2,7 @@ import express from 'express';
 import roleRoute from './routes/roleRoute';
 
 import swaggerUi from 'swagger-ui-express';
-import specs from './config/swaggerJsdo';
+import specs from './config/swagger.jsdoc';
 
 const app = express();
 app.use(express.json());
