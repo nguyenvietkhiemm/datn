@@ -10,3 +10,6 @@ ip = 192.168.23.5
 docker exec -it postgre bash
 psql -U postgres
 docker inspect 
+
+
+docker-compose up -d
