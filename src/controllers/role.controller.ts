@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import * as roleService from '../services/roleService';
+import * as roleService from '../services/role.service';
 
 export const getAll = async (req: Request, res: Response) => {
   const roles = await roleService.getAllRoles();
