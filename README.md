@@ -4,6 +4,9 @@ docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" doc
 xu ly logic o service
 nhay yeu cau va tra ve o controller
 ip = 192.168.23.5
-"POSTGRES_USER=admin",
+"POSTGRES_USER=user",
 "POSTGRES_PASSWORD=12345",
 "POSTGRES_DB=my_data",
+docker exec -it postgre bash
+psql -U postgres
+docker inspect 
