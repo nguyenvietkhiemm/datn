@@ -1,5 +1,5 @@
 import { query } from '../config/database';
-import { Role } from '../model/roleModel';
+import { Role } from '../model/role.model';
 
 export const getAllRoles = async (): Promise<Role[]> => {
   const result = await query('SELECT * FROM role');
