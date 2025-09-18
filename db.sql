@@ -64,7 +64,7 @@ CREATE TABLE document (
     document_id INT PRIMARY KEY,
     title TEXT,
     link VARCHAR(250),
-    embedding FLOAT8[],
+    embedding vector(768),
     created_at TIMESTAMP,
     topic_id INT,
     FOREIGN KEY (topic_id) REFERENCES topic(topic_id)
@@ -129,7 +129,7 @@ CREATE TABLE chat_history (
     chat_history_id INT PRIMARY KEY,
     is_user BOOLEAN,
     message TEXT,
-    embedding FLOAT8[],
+    embedding vector(768),
     created_at TIMESTAMP,
     user_id INT,
     FOREIGN KEY (user_id) REFERENCES "user"(user_id)
@@ -227,8 +227,3 @@ CREATE TABLE question_bank (
     FOREIGN KEY (user_id) REFERENCES "user"(user_id),
     FOREIGN KEY (answer_id) REFERENCES answer(answer_id)
 );
-
-
-
-
-

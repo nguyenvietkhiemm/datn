@@ -1,18 +1,27 @@
+require('dotenv').config();
+
 import express from 'express';
-import roleRoute from './routes/role.route';
+
+import routes from './routes/index';
 
 import swaggerUi from 'swagger-ui-express';
 import specs from './config/swagger.jsdoc';
+import morgan from 'morgan';
 
 const app = express();
+app.use(morgan('dev'));
 app.use(express.json());
 
-app.use('/roles', roleRoute);;
-
+// route cho api-docs
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
-const PORT = 3000;
+// routes chung cho tat ca cac api
+app.use('/', routes);
+
+const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || "localhost";
+
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-  console.log(`Swagger docs at http://localhost:${PORT}/api-docs`);
+  console.log(`Server running on http://${HOST}:${PORT}`);
+  console.log(`Swagger docs at http://${HOST}:${PORT}/api-docs`);
 });
