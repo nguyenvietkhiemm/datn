@@ -1,34 +1,27 @@
 import { Request, Response } from 'express';
 import * as roleService from '../services/role.service';
+import safeExcute from '../utils/safe.excute';
 
 export const getAll = async (req: Request, res: Response) => {
-  const roles = await roleService.getAllRoles();
-  res.json(roles);
+  res.json(await safeExcute(() => roleService.getAllRoles()));
 };
 
 export const getOne = async (req: Request, res: Response) => {
   const id = Number(req.params.id);
-  const role = await roleService.getRoleById(id);
-  if (!role) return res.status(404).json({ message: 'Role not found' });
-  res.json(role);
+  res.json(await safeExcute(() => roleService.getRoleById(id)))
 };
 
 export const create = async (req: Request, res: Response) => {
   const role = req.body;
-  const created = await roleService.createRole(role);
-  res.status(201).json(created);
+  res.json(await safeExcute(() => roleService.createRole(role)))
 };
 
 export const update = async (req: Request, res: Response) => {
   const id = Number(req.params.id);
-  const updated = await roleService.updateRole(id, req.body);
-  if (!updated) return res.status(404).json({ message: 'Role not found' });
-  res.json(updated);
+  res.json(await safeExcute(() => roleService.updateRole(id, req.body)));
 };
 
 export const remove = async (req: Request, res: Response) => {
   const id = Number(req.params.id);
-  const success = await roleService.deleteRole(id);
-  if (!success) return res.status(404).json({ message: 'Role not found' });
-  res.status(204).send();
+  res.json(await safeExcute(() => roleService.deleteRole(id)));
 };
