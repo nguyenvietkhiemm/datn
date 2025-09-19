@@ -16,7 +16,7 @@ const questionRoute = Router();
  *       500:
  *         description : loi
  */
-questionRoute.get('/', QuestionController.getAll);
+questionRoute.get('/', QuestionController.get);
 
 
 export default questionRoute;
