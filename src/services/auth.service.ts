@@ -3,7 +3,7 @@ import { User } from "../model/user.model";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET || "mysecret";
+const JWT_SECRET = process.env.JSON_TOKEN_KEY || "mysecret";
 
 const createToken = (user_id: number, role_id: number) => {
   return jwt.sign({ user_id, role_id }, JWT_SECRET, { expiresIn: "1h" });

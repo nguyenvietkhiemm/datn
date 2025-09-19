@@ -1,5 +1,6 @@
 import { Router } from "express";
 import UserController from "../controllers/user.controller";
+import Authentication from "../middleware/authentication";
 
 const UserRouter = Router();
 
@@ -14,20 +15,33 @@ const UserRouter = Router();
  * @swagger
  * /users:
  *   get:
- *     summary: Lấy danh sách tất cả user
+ *     summary: Lấy danh sách tất cả user (yêu cầu admin)
  *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Thành công
+ *       401:
+ *         description: Thiếu hoặc sai token
+ *       403:
+ *         description: Không có quyền
  */
-UserRouter.get("/", UserController.getAll);
+UserRouter.get(
+  "/",
+  Authentication.AuthenticateToken,
+  Authentication.AuthorizeRoles(["3"]), 
+  UserController.getAll
+);
 
 /**
  * @swagger
  * /users/{id}:
  *   get:
- *     summary: Lấy thông tin user theo ID
+ *     summary: Lấy thông tin user theo ID (cần đăng nhập)
  *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -40,14 +54,20 @@ UserRouter.get("/", UserController.getAll);
  *       404:
  *         description: Không tìm thấy user
  */
-UserRouter.get("/:id", UserController.getOne);
+UserRouter.get(
+  "/:id",
+  Authentication.AuthenticateToken,
+  UserController.getOne
+);
 
 /**
  * @swagger
  * /users/{id}:
  *   put:
- *     summary: Cập nhật user
+ *     summary: Cập nhật user (chủ sở hữu hoặc admin)
  *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -63,17 +83,25 @@ UserRouter.get("/:id", UserController.getOne);
  *     responses:
  *       200:
  *         description: Cập nhật thành công
+ *       403:
+ *         description: Không có quyền
  *       404:
  *         description: Không tìm thấy user
  */
-UserRouter.put("/:id", UserController.update);
+UserRouter.put(
+  "/:id",
+  Authentication.AuthenticateToken,
+  UserController.update // logic check quyền nằm trong controller
+);
 
 /**
  * @swagger
  * /users/{id}:
  *   delete:
- *     summary: Xóa user
+ *     summary: Xóa user (chỉ admin)
  *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -83,9 +111,16 @@ UserRouter.put("/:id", UserController.update);
  *     responses:
  *       200:
  *         description: Xóa thành công
+ *       403:
+ *         description: Không có quyền
  *       404:
  *         description: Không tìm thấy user
  */
-UserRouter.delete("/:id", UserController.remove);
+UserRouter.delete(
+  "/:id",
+  Authentication.AuthenticateToken,
+  Authentication.AuthorizeRoles(["3"]), // chỉ admin được xóa
+  UserController.remove
+);
 
 export default UserRouter;
