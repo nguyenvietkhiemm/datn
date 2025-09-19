@@ -16,6 +16,7 @@ docker-compose up -d
 
 Status code quy ước:
 
+```txt
 200 : GET thành công
 201 : POST thành công (tạo mới)
 202 : PUT thành công (update)
@@ -23,3 +24,4 @@ Status code quy ước:
 400 : Kiem tra ton tai hay chua
 404 : Không tìm thấy
 500 : Lỗi server
+```
