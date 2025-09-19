@@ -1,7 +1,8 @@
+import { error } from "console";
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JSON_TOKEN_KEY || "my_secret_key"; // bạn nên để trong .env
+const JWT_SECRET = process.env.JSON_TOKEN_KEY || "mysecret";
 
 const Authentication = {
   // Middleware kiểm tra token
@@ -22,10 +23,10 @@ const Authentication = {
   },
 
   // Middleware kiểm tra vai trò
-  AuthorizeRoles(...roles: string[]) {
+  AuthorizeRoles(roles: string[]) {
     return (req: Request, res: Response, next: NextFunction) => {
       try {
-        const user_role = (req as any).user?.role;
+        const user_role = (req as any).user?.role_name;
 
         if (!user_role) {
           return res.status(401).json({ message: "Unauthorized" });
