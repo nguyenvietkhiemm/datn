@@ -1,0 +1,80 @@
+import { Router } from "express";
+import AuthController from "../controllers/auth.controller";
+
+const AuthRouter = Router();
+
+/**
+ * @swagger
+ * tags:
+ *   name: Auth
+ *   description: API cho đăng ký và đăng nhập
+ */
+
+/**
+ * @swagger
+ * /auth/register:
+ *   post:
+ *     summary: Đăng ký người dùng mới
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - user_name
+ *               - password
+ *               - email
+ *             properties:
+ *               user_name:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               birthday:
+ *                 type: string
+ *                 format: date
+ *               role_id:
+ *                 type: number
+ *                 example: 1
+ *     responses:
+ *       201:
+ *         description: Đăng ký thành công
+ *       400:
+ *         description: Email đã tồn tại
+ */
+AuthRouter.post("/register", AuthController.register);
+
+/**
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     summary: Đăng nhập hệ thống
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Đăng nhập thành công
+ *       401:
+ *         description: Sai mật khẩu
+ *       404:
+ *         description: Không tìm thấy user
+ */
+AuthRouter.post("/login", AuthController.login);
+
+export default AuthRouter;

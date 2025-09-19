@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import RoleController from '../controllers/role.controller';
 
-const roleRoute = Router();
+const RoleRoute = Router();
 
 /**
  * @openapi
@@ -16,7 +16,7 @@ const roleRoute = Router();
  *       500:
  *         description : loi
  */
-roleRoute.get('/', RoleController.getAll);
+RoleRoute.get('/', RoleController.getAll);
 
 /**
  * @openapi
@@ -39,7 +39,7 @@ roleRoute.get('/', RoleController.getAll);
  *       500:
  *         description : loi
  */
-roleRoute.get('/:id', RoleController.getOne);
+RoleRoute.get('/:id', RoleController.getOne);
 
 /**
  * @openapi
@@ -68,7 +68,7 @@ roleRoute.get('/:id', RoleController.getOne);
  *       500:
  *         description : loi
  */
-roleRoute.post('/', RoleController.create);
+RoleRoute.post('/', RoleController.create);
 
 /**
  * @openapi
@@ -100,7 +100,7 @@ roleRoute.post('/', RoleController.create);
  *       500:
  *         description : loi
  */
-roleRoute.put('/:id', RoleController.update);
+RoleRoute.put('/:id', RoleController.update);
 
 /**
  * @openapi
@@ -123,6 +123,6 @@ roleRoute.put('/:id', RoleController.update);
  *       500:
  *         description : loi
  */
-roleRoute.delete('/:id', RoleController.remove);
+RoleRoute.delete('/:id', RoleController.remove);
 
-export default roleRoute;
+export default RoleRoute;
