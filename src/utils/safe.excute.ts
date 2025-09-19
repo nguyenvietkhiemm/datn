@@ -1,4 +1,4 @@
-interface DefaultResponse<T> {
+export  interface DefaultResponse<T> {
     status : number,
     message? : string,
     error? : string

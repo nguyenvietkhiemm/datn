@@ -20,5 +20,6 @@ Status code quy ước:
 201 : POST thành công (tạo mới)
 202 : PUT thành công (update)
 204 : DELETE thành công (không trả data)
+400 : Kiem tra ton tai hay chua
 404 : Không tìm thấy
 500 : Lỗi server

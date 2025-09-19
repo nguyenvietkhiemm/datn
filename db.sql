@@ -11,7 +11,7 @@ CREATE TABLE "user" (
     password_hash VARCHAR(200),
     birthday DATE,
     created_at TIMESTAMP,
-    role_id INT,
+    role_id INT DEFAULT 1,
     FOREIGN KEY (role_id) REFERENCES role(role_id)
 );
 
