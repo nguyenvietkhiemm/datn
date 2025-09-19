@@ -13,6 +13,8 @@ const roleRoute = Router();
  *     responses:
  *       200:
  *         description: Danh sách role
+ *       500:
+ *         description : loi
  */
 roleRoute.get('/', RoleController.getAll);
 
@@ -34,6 +36,8 @@ roleRoute.get('/', RoleController.getAll);
  *         description: Role tìm thấy
  *       404:
  *         description: Không tìm thấy role
+ *       500:
+ *         description : loi
  */
 roleRoute.get('/:id', RoleController.getOne);
 
@@ -61,6 +65,8 @@ roleRoute.get('/:id', RoleController.getOne);
  *     responses:
  *       201:
  *         description: Role đã được tạo
+ *       500:
+ *         description : loi
  */
 roleRoute.post('/', RoleController.create);
 
@@ -87,10 +93,12 @@ roleRoute.post('/', RoleController.create);
  *               role_name:
  *                 type: string
  *     responses:
- *       200:
+ *       202:
  *         description: Cập nhật thành công
  *       404:
  *         description: Không tìm thấy role
+ *       500:
+ *         description : loi
  */
 roleRoute.put('/:id', RoleController.update);
 
@@ -112,6 +120,8 @@ roleRoute.put('/:id', RoleController.update);
  *         description: Xóa thành công
  *       404:
  *         description: Không tìm thấy role
+ *       500:
+ *         description : loi
  */
 roleRoute.delete('/:id', RoleController.remove);
 
