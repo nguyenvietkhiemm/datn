@@ -2,36 +2,41 @@ import { query } from '../config/database';
 import { User } from '../model/user.model';
 
 const UserService = {
-//   async getAll(): Promise<User[]> {
-//     const result = await query('SELECT * FROM user');
-//     return result.rows;
-//   },
+    // Lấy toàn bộ user
+    async getAll(): Promise<User[]> {
+        const result = await query('SELECT * FROM "user" ORDER BY user_id');
+        return result.rows as User[];
+    },
 
-//   async getById(id: number): Promise<User | null> {
-//     const result = await query('SELECT * FROM user WHERE role_id = $1', [id]);
-//     return result.rows[0] || null;
-//   },
+    // Lấy user theo ID
+    async getById(id: number): Promise<User> {
+        const result = await query('SELECT * FROM "user" WHERE user_id = $1', [id]);
+        if (!result.rows[0]) throw new Error('USER_NOT_FOUND');
+        return result.rows[0] as User;
+    },
 
-//   async create(user: User): Promise<User> {
-//     const result = await query(
-//       'INSERT INTO user (role_id, role_name) VALUES ($1, $2) RETURNING *',
-//       [user.role_id, user.role_name]
-//     );
-//     return result.rows[0];
-//   },
+    // Cập nhật user
+    async update(id: number, user: Partial<Omit<User, 'user_id' | 'created_at'>>): Promise<User> {
+        const result = await query(
+            `UPDATE "user" 
+            SET user_name = COALESCE($1, user_name),
+             email = COALESCE($2, email),
+             password_hash = COALESCE($3, password_hash),
+             birthday = COALESCE($4, birthday),
+             role_id = COALESCE($5, role_id)
+            WHERE user_id = $6
+            RETURNING *`,
+            [user.user_name, user.email, user.password_hash, user.birthday, user.role_id, id]
+        );
+        if (!result.rows[0]) throw new Error('USER_NOT_FOUND');
+        return result.rows[0] as User;
+    },
 
-//   async update(id: number, user: Partial<User>): Promise<User | null> {
-//     const result = await query(
-//       'UPDATE user SET role_name = $1 WHERE role_id = $2 RETURNING *',
-//       [user.role_name, id]
-//     );
-//     return result.rows[0] || null;
-//   },
-
-//   async remove(id: number): Promise<boolean> {
-//     const result = await query('DELETE FROM user WHERE role_id = $1', [id]);
-//     return result.rowCount! > 0;
-//   },
+    // Xóa user
+    async remove(id: number): Promise<void> {
+        const result = await query('DELETE FROM "user" WHERE user_id = $1', [id]);
+        if (result.rowCount === 0) throw new Error('USER_NOT_FOUND');
+    },
 };
 
 export default UserService;

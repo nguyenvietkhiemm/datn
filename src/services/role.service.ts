@@ -3,34 +3,42 @@ import { Role } from '../model/role.model';
 
 const RoleService = {
   async getAll(): Promise<Role[]> {
-    const result = await query('SELECT * FROM role');
-    return result.rows;
+    const result = await query('SELECT * FROM role ORDER BY role_id');
+    return result.rows as Role[];
   },
 
-  async getById(id: number): Promise<Role | null> {
+  async getById(id: number): Promise<Role> {
     const result = await query('SELECT * FROM role WHERE role_id = $1', [id]);
-    return result.rows[0] || null;
+    if (!result.rows[0]) {
+      throw new Error('ROLE_NOT_FOUND');
+    }
+    return result.rows[0] as Role;
   },
 
   async create(role: Role): Promise<Role> {
     const result = await query(
-      'INSERT INTO role (role_id, role_name) VALUES ($1, $2) RETURNING *',
-      [role.role_id, role.role_name]
+      'INSERT INTO role (role_name) VALUES ($1) RETURNING *',
+      [role.role_name]
     );
-    return result.rows[0];
+    return result.rows[0] as Role;
   },
 
-  async update(id: number, role: Partial<Role>): Promise<Role | null> {
+  async update(id: number, role: Partial<Role>): Promise<Role> {
     const result = await query(
-      'UPDATE role SET role_name = $1 WHERE role_id = $2 RETURNING *',
+      'UPDATE role SET role_name = COALESCE($1, role_name) WHERE role_id = $2 RETURNING *',
       [role.role_name, id]
     );
-    return result.rows[0] || null;
+    if (!result.rows[0]) {
+      throw new Error('ROLE_NOT_FOUND');
+    }
+    return result.rows[0] as Role;
   },
 
-  async remove(id: number): Promise<boolean> {
+  async remove(id: number): Promise<void> {
     const result = await query('DELETE FROM role WHERE role_id = $1', [id]);
-    return result.rowCount! > 0;
+    if (result.rowCount === 0) {
+      throw new Error('ROLE_NOT_FOUND');
+    }
   },
 };
 
