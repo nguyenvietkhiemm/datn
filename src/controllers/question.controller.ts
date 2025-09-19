@@ -2,8 +2,13 @@ import { Request, Response } from 'express';
 import QuestionService from '../services/question.service';
 
 const QuestionController = {
-  async get(req: Request, res: Response) {
-    const questions = await QuestionService.get();
+  // async get(req: Request, res: Response) {
+  //   const questions = await QuestionService.get();
+  //   res.json(questions);
+  // },
+
+  async getAll(req: Request, res: Response) {
+    const questions = await QuestionService.getAll();
     res.json(questions);
   },
 
@@ -14,10 +19,12 @@ const QuestionController = {
 //     res.json(role);
 //   },
 
-//   async create(req: Request, res: Response) {
-//     const created = await RoleService.create(req.body);
-//     res.status(201).json(created);
-//   },
+  async create(req: Request, res: Response) {
+    const { questions } = req.body;
+    console.log(questions);
+    const created = await QuestionService.create(questions);
+    res.status(201).json(created);
+  },
 
 //   async update(req: Request, res: Response) {
 //     const id = Number(req.params.id);

@@ -16,7 +16,22 @@ const questionRoute = Router();
  *       500:
  *         description : loi
  */
-questionRoute.get('/', QuestionController.get);
+questionRoute.get('/', QuestionController.getAll);
+
+/**
+ * @openapi
+ * /questions:
+ *   get:
+ *     summary: Lấy danh sách câu hỏi
+ *     tags:
+ *       - Question
+ *     responses:
+ *       200:
+ *         description: Danh sách câu hỏi
+ *       500:
+ *         description: Lỗi server
+ */
+questionRoute.post('/create', QuestionController.create);
 
 
 export default questionRoute;
