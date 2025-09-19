@@ -1,11 +1,11 @@
-
+CREATE EXTENSION IF NOT EXISTS vector;
 CREATE TABLE role (
-    role_id INT PRIMARY KEY,
+    role_id INT IDENTITY PRIMARY KEY,
     role_name VARCHAR(50)
 );
 
 CREATE TABLE "user" (
-    user_id INT PRIMARY KEY,
+    user_id INT IDENTITY PRIMARY KEY,
     user_name VARCHAR(100),
     email VARCHAR(200),
     password_hash VARCHAR(200),
@@ -29,12 +29,12 @@ CREATE TABLE user_update (
 );
 
 CREATE TABLE subject (
-    subject_id INT PRIMARY KEY,
+    subject_id INT IDENTITY PRIMARY KEY,
     subject_name VARCHAR(50)
 );
 
 CREATE TABLE topic (
-    topic_id INT PRIMARY KEY,
+    topic_id INT IDENTITY PRIMARY KEY,
     title TEXT,
     description TEXT,
     subject_id INT,
@@ -42,7 +42,7 @@ CREATE TABLE topic (
 );
 
 CREATE TABLE roadmap_step (
-    roadmap_step_id INT PRIMARY KEY,
+    roadmap_step_id INT IDENTITY PRIMARY KEY,
     title VARCHAR(100),
     description TEXT,
     topic_id INT,
@@ -52,7 +52,7 @@ CREATE TABLE roadmap_step (
 CREATE TYPE roadmap_status AS ENUM ('pending', 'done', 'skip', 'in process');
 
 CREATE TABLE user_roadmap_step (
-    user_roadmap_step_id INT PRIMARY KEY,
+    user_roadmap_step_id INT IDENTITY PRIMARY KEY,
     status roadmap_status,
     roadmap_step_id INT,
     user_id INT,
@@ -61,7 +61,7 @@ CREATE TABLE user_roadmap_step (
 );
 
 CREATE TABLE document (
-    document_id INT PRIMARY KEY,
+    document_id INT IDENTITY PRIMARY KEY,
     title TEXT,
     link VARCHAR(250),
     embedding vector(768),
@@ -79,7 +79,7 @@ CREATE TABLE roadmap_step_document (
 );
 
 CREATE TABLE document_history (
-    document_history_id INT PRIMARY KEY,
+    document_history_id INT IDENTITY PRIMARY KEY,
     start_time TIMESTAMP,
     end_time TIMESTAMP,
     user_id INT,
@@ -91,7 +91,7 @@ CREATE TABLE document_history (
 CREATE TYPE study_status AS ENUM ('pending', 'done', 'miss');
 
 CREATE TABLE study_schedule (
-    study_schedule_id INT PRIMARY KEY,
+    study_schedule_id INT IDENTITY PRIMARY KEY,
     title VARCHAR(500),
     description TEXT,
     start_time TIMESTAMP,
@@ -104,7 +104,7 @@ CREATE TABLE study_schedule (
 );
 
 CREATE TABLE flashcard_deck (
-    flashcard_deck_id INT PRIMARY KEY,
+    flashcard_deck_id INT IDENTITY PRIMARY KEY,
     title VARCHAR(500),
     description TEXT,
     created_at TIMESTAMP,
@@ -115,7 +115,7 @@ CREATE TABLE flashcard_deck (
 CREATE TYPE flashcard_status AS ENUM ('pending', 'done', 'miss');
 
 CREATE TABLE flashcard (
-    flashcard_id INT PRIMARY KEY,
+    flashcard_id INT IDENTITY PRIMARY KEY,
     front TEXT,
     back TEXT,
     example TEXT,
@@ -126,7 +126,7 @@ CREATE TABLE flashcard (
 );
 
 CREATE TABLE chat_history (
-    chat_history_id INT PRIMARY KEY,
+    chat_history_id INT IDENTITY PRIMARY KEY,
     is_user BOOLEAN,
     message TEXT,
     embedding vector(768),
@@ -136,7 +136,7 @@ CREATE TABLE chat_history (
 );
 
 CREATE TABLE current_progress (
-    current_progress_id INT PRIMARY KEY,
+    current_progress_id INT IDENTITY PRIMARY KEY,
     current_progress DECIMAL(4,2),
     created_at TIMESTAMP,
     user_id INT,
@@ -144,7 +144,7 @@ CREATE TABLE current_progress (
 );
 
 CREATE TABLE user_goal (
-    user_goal_id INT PRIMARY KEY,
+    user_goal_id INT IDENTITY PRIMARY KEY,
     target_score DECIMAL(4,2),
     deadline TIMESTAMP,
     user_id INT,
@@ -154,7 +154,7 @@ CREATE TABLE user_goal (
 );
 
 CREATE TABLE exam_schedule (
-    exam_schedule_id INT PRIMARY KEY,
+    exam_schedule_id INT IDENTITY PRIMARY KEY,
     start_time TIMESTAMP,
     end_time TIMESTAMP,
     created_at TIMESTAMP,
@@ -162,7 +162,7 @@ CREATE TABLE exam_schedule (
 );
 
 CREATE TABLE exam (
-    exam_id INT PRIMARY KEY,
+    exam_id INT IDENTITY PRIMARY KEY,
     exam_name VARCHAR(100),
     created_at TIMESTAMP,
     time_limit INT,
@@ -173,7 +173,7 @@ CREATE TABLE exam (
 );
 
 CREATE TABLE user_exam_answer (
-    user_exam_answer_id INT PRIMARY KEY,
+    user_exam_answer_id INT IDENTITY PRIMARY KEY,
     score DECIMAL(4,2),
     created_at TIMESTAMP,
     user_id INT,
@@ -183,13 +183,13 @@ CREATE TABLE user_exam_answer (
 );
 
 CREATE TABLE question (
-    question_id INT PRIMARY KEY,
+    question_id INT IDENTITY PRIMARY KEY,
     question_name VARCHAR(100),
     question_content TEXT
 );
 
 CREATE TABLE answer (
-    answer_id INT PRIMARY KEY,
+    answer_id INT IDENTITY PRIMARY KEY,
     question_id INT,
     answer_content TEXT,
     is_correct BOOLEAN,
@@ -205,7 +205,7 @@ CREATE TABLE question_exam (
 );
 
 CREATE TABLE bank (
-    bank_id INT PRIMARY KEY,
+    bank_id INT IDENTITY PRIMARY KEY,
     description VARCHAR(200),
     topic_id INT,
     FOREIGN KEY (topic_id) REFERENCES topic(topic_id)
@@ -217,8 +217,10 @@ CREATE TABLE question_bank (
     PRIMARY KEY (question_id, bank_id),
     FOREIGN KEY (question_id) REFERENCES question(question_id),
     FOREIGN KEY (bank_id) REFERENCES bank(bank_id)
-);CREATE TABLE user_bank_answer (
-    user_bank_answer_id INT PRIMARY KEY,
+);
+
+CREATE TABLE user_bank_answer (
+    user_bank_answer_id INT IDENTITY PRIMARY KEY,
     created_at TIMESTAMP,
     bank_id INT,
     user_id INT,
