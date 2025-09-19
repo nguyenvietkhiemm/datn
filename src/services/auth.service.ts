@@ -14,7 +14,7 @@ const createToken = (user_id: number, role_id: number) => {
     );
 };
 
-const authService = {
+const AuthService = {
     async regist(
         user_name: string,
         password: string,
@@ -35,7 +35,7 @@ const authService = {
         const result = await query(
             `INSERT INTO "user" (user_name, email, password_hash, birthday, created_at, role_id) 
        VALUES ($1, $2, $3, $4, NOW(), $5) RETURNING *`,
-            [user_name, email, hash_password, birthday, role_id]
+            [user_name, email, hash_password, birthday, role_id || 1]
         );
 
         const newUser: User = result.rows[0];
@@ -53,30 +53,33 @@ const authService = {
     async login(
         email: string,
         password: string
-    ): Promise<DefaultResponse<{ token: string }>> {
+      ): Promise<DefaultResponse<{ user: User; token: string }>> {
         const user = await query(`SELECT * FROM "user" WHERE email = $1`, [email]);
-
+      
         if (user.rows.length === 0) {
-            return { status: 404, message: "Không tìm thấy người dùng" };
+          return { status: 404, message: "Không tìm thấy người dùng" };
         }
-
+      
         const foundUser: User = user.rows[0];
-
+      
         // kiểm tra password
         const isMatch = await bcrypt.compare(password, foundUser.password_hash);
         if (!isMatch) {
-            return { status: 401, message: "Mật khẩu không đúng" };
+          return { status: 401, message: "Mật khẩu không đúng" };
         }
-
+      
         // tạo token
         const token = createToken(foundUser.user_id, foundUser.role_id);
-
+      
+        // loại bỏ password_hash trước khi trả về
+        const { password_hash, ...safeUser } = foundUser;
+      
         return {
-            status: 200,
-            message: "Đăng nhập thành công",
-            data: { token }
+          status: 200,
+          message: "Đăng nhập thành công",
+          data: { user: safeUser as User, token }
         };
-    }
+      }      
 };
 
-export default authService;
+export default AuthService;
