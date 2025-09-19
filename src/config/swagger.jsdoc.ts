@@ -2,13 +2,27 @@ import swaggerJsdoc from 'swagger-jsdoc';
 
 const options = {
   definition: {
-    openapi: '3.0.0',
+    openapi: "3.0.0",
     info: {
-      title: 'My API',
-      version: '1.0.0',
+      title: "API Documentation",
+      version: "1.0.0",
     },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT", // tùy chọn, chỉ để mô tả
+        },
+      },
+    },
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
   },
-  apis: ['./src/server.ts', './src/routes/*.ts'], // Đường dẫn file chứa swagger comment
+  apis: ["./src/routes/*.ts", "./src/server.ts"], // đường dẫn chứa swagger comment
 };
 
 const specs = swaggerJsdoc(options);
