@@ -1,6 +1,6 @@
 import { query } from "../config/database";
 import { User } from "../model/user.model";
-import { DefaultResponse } from "../utils/safe.excute";
+import { DefaultResponse } from "../utils/safe.execute";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
