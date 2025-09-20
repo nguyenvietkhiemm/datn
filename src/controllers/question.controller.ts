@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import QuestionService from '../services/question.service';
-import { DefaultResponse } from "../utils/safe.excute";
+import safeExecute, { DefaultResponse } from "../utils/safe.execute";
 
 const QuestionController = {
   // async get(req: Request, res: Response) {
@@ -9,32 +9,42 @@ const QuestionController = {
   // },
 
   async getAll(req: Request, res: Response) {
-    const questions = await QuestionService.getAll();
-    res.json(questions);
+    const responses: DefaultResponse<any> = await safeExecute(async () => {
+      return {
+        status: 200,
+        message: "Lấy danh sách câu hỏi thành công",
+        data: await QuestionService.getAll()
+      } as DefaultResponse<any>;
+    });
+
+    res.json(responses);
   },
 
-//   async getOne(req: Request, res: Response) {
-//     const id = Number(req.params.id);
-//     const role = await RoleService.getById(id);
-//     if (!role) return res.status(404).json({ message: 'Role not found' });
-//     res.json(role);
-//   },
-
   async create(req: Request, res: Response) {
-    const { questions } = req.body;
-    console.log(questions);
-    const created = await QuestionService.create(questions);
+    const responses: DefaultResponse<any> = await safeExecute(async () => {
+      const { questions } = req.body;
+      const created = await QuestionService.create(questions);
 
-    res.status(201).json(created);
+      return {
+        status: 201,
+        message: "Tạo câu hỏi thành công",
+        data: created
+      } as DefaultResponse<any>;
+    });
+
+    res.json(responses);
   },
 
   async update(req: Request, res: Response) {
-    const question = req.body;
-    const updated = await QuestionService.update(question);
+    const responses: DefaultResponse<any> = await safeExecute(async () => {
+      return {
+        status: 200,
+        message: "Cập nhật câu hỏi thành công",
+        data: await QuestionService.update(req.body)
+      } as DefaultResponse<any>;
+    });
 
-    if (!updated) return res.status(404).json({ message: 'Question not found' });
-
-    res.json(updated);
+    res.json(responses);
   },
 
   // async remove(req: Request, res: Response) {

@@ -15,7 +15,7 @@ const QuestionService = {
         return result.rows;
     },
 
-    async getAll(limit: number = 100, offset: number = 0) {
+    async getAll(limit: number = 100, offset: number = 0) : Promise<Question[]> {
         const queryText = `
           SELECT q.question_id, q.question_name, q.question_content,
                  COALESCE(

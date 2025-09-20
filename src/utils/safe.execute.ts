@@ -5,7 +5,7 @@ export  interface DefaultResponse<T> {
     data? : T
 }
 
-export default async function safeExcute<T>(fn: () => Promise<DefaultResponse<T>>): 
+export default async function safeExecute<T>(fn: () => Promise<DefaultResponse<T>>): 
     Promise<DefaultResponse<T>> {
     try {
         const { status, data, message } = await fn();
@@ -17,7 +17,7 @@ export default async function safeExcute<T>(fn: () => Promise<DefaultResponse<T>
     } catch (error: any) {
         return {
             status: 500,
-            message: "Loi thuc hien ham",
+            message: "Lỗi thực thi hàm",
             error: error.message,
         }
     }
