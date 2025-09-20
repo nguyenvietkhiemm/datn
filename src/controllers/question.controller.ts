@@ -23,14 +23,16 @@ const QuestionController = {
     const { questions } = req.body;
     console.log(questions);
     const created = await QuestionService.create(questions);
+
     res.status(201).json(created);
   },
 
   async update(req: Request, res: Response) {
-    const id = Number(req.params.id);
     const question = req.body;
-    const updated = await QuestionService.update(id, question);
+    const updated = await QuestionService.update(question);
+
     if (!updated) return res.status(404).json({ message: 'Question not found' });
+
     res.json(updated);
   },
 

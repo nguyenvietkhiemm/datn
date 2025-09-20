@@ -84,26 +84,90 @@ const QuestionService = {
         }
     },
 
-    async update(id: number, question: Partial<Question>): Promise<Question | null> {
-        const allowed = ["question_name", "question_content"];
-        const fields: string[] = [];
-        const values: any[] = [];
-        let idx = 1;
+    // hàm update sẽ cập nhật cả question và answers
+    // nếu answer đã có answer_id thì sẽ update, nếu chưa thì sẽ thêm mới vào DB
+    async update(question: Partial<Question>): Promise<Question | null> {
+        const client = await pool.connect();
+        try {
+            const id = question.question_id;
 
-        for (const key in question) {
-            if (!allowed.includes(key)) continue;
-            fields.push(`${key} = $${idx}`);
-            values.push((question as any)[key]);
-            idx++;
+            await client.query("BEGIN");
+
+            // --- 1. Update question ---
+            const allowed = ["question_name", "question_content"];
+            const fields: string[] = [];
+            const values: any[] = [];
+            let idx = 1;
+
+            for (const key of allowed) {
+                if ((question as any)[key] !== undefined) {
+                    fields.push(`${key} = $${idx}`);
+                    values.push((question as any)[key]);
+                    idx++;
+                }
+            }
+
+            let updatedQuestion: Question | null = null;
+
+            if (fields.length > 0) {
+                values.push(id);
+                const queryText = `
+              UPDATE question 
+              SET ${fields.join(", ")} 
+              WHERE question_id = $${idx} 
+              RETURNING *`;
+                const result = await client.query(queryText, values);
+                updatedQuestion = result.rows[0] || null;
+            } else {
+                const result = await client.query(
+                    `SELECT * FROM question WHERE question_id = $1`,
+                    [id]
+                );
+                updatedQuestion = result.rows[0] || null;
+            }
+
+            if (!updatedQuestion) {
+                await client.query("ROLLBACK");
+                return null;
+            }
+
+            // --- 2. Update answers (nếu có) ---
+            if (question.answers && question.answers.length > 0) {
+                for (const ans of question.answers) {
+                    if (ans.answer_id) {
+                        // update answer đã có
+                        await client.query(
+                            `UPDATE answer 
+                   SET answer_content = $1, is_correct = $2 
+                   WHERE answer_id = $3 AND question_id = $4`,
+                            [ans.answer_content, ans.is_correct, ans.answer_id, id]
+                        );
+                    } else {
+                        // thêm mới answer nếu answer đó không có answer_id
+                        await client.query(
+                            `INSERT INTO answer (question_id, answer_content, is_correct) 
+                   VALUES ($1, $2, $3)`,
+                            [id, ans.answer_content, ans.is_correct]
+                        );
+                    }
+                }
+            }
+
+            // --- 3. Lấy lại toàn bộ question + answers ---
+            const answersRes = await client.query(
+                `SELECT * FROM answer WHERE question_id = $1`,
+                [id]
+            );
+            updatedQuestion.answers = answersRes.rows;
+
+            await client.query("COMMIT");
+            return updatedQuestion;
+        } catch (err) {
+            await client.query("ROLLBACK");
+            throw err;
+        } finally {
+            client.release();
         }
-
-        if (fields.length === 0) return null;
-
-        values.push(id);
-        const queryText = `UPDATE question SET ${fields.join(', ')} WHERE question_id = $${idx} RETURNING *`;
-        const result = await query(queryText, values);
-
-        return result.rows[0] || null;
     },
 
 };
