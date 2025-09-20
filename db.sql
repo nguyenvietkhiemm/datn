@@ -249,6 +249,12 @@ CREATE TABLE user_bank_answer (
     FOREIGN KEY (answer_id) REFERENCES answer(answer_id) ON DELETE SET NULL
 );
 
+ALTER TABLE "user" ADD COLUMN available BOOLEAN DEFAULT true;
+ALTER TABLE document ADD COLUMN available BOOLEAN DEFAULT true;
+ALTER TABLE exam ADD COLUMN available BOOLEAN DEFAULT true;
+ALTER TABLE question ADD COLUMN available BOOLEAN DEFAULT true;
+ALTER TABLE bank ADD COLUMN available BOOLEAN DEFAULT true;
+
 -- Indexes (tạo index cho các FK / cột thường truy vấn)
 CREATE INDEX idx_topic_subject ON topic(subject_id);
 CREATE INDEX idx_document_topic ON document(topic_id);

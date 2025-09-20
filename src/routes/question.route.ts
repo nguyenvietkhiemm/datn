@@ -39,7 +39,7 @@ questionRoute.get('/', QuestionController.getAll);
  *                 type: string
  *                 example: "F = m * a"
  *     responses:
- *       200:
+ *       201:
  *         description: Tạo câu hỏi thành công
  *       500:
  *         description: Lỗi server
@@ -74,7 +74,7 @@ questionRoute.post('/create', QuestionController.create);
  *                 type: string
  *                 example: "Một vật sẽ đứng yên hoặc chuyển động thẳng đều nếu không chịu tác dụng của lực"
  *     responses:
- *       200:
+ *       202:
  *         description: Cập nhật câu hỏi thành công
  *       404:
  *         description: Không tìm thấy câu hỏi
@@ -82,5 +82,53 @@ questionRoute.post('/create', QuestionController.create);
  *         description: Lỗi server
  */
 questionRoute.patch('/update', QuestionController.update);
+
+/**
+ * @openapi
+ * /questions/remove/{question_id}:
+ *   delete:
+ *     summary: Xóa một câu hỏi theo ID
+ *     tags:
+ *       - Question
+ *     parameters:
+ *       - in: path
+ *         name: question_id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID của câu hỏi cần xóa
+ *     responses:
+ *       204:
+ *         description: Xóa câu hỏi thành công
+ *       404:
+ *         description: Không tìm thấy câu hỏi
+ *       500:
+ *         description: Lỗi server
+ */
+questionRoute.delete('/remove/:question_id', QuestionController.remove);
+
+/**
+ * @openapi
+ * /questions/remove/{question_id}:
+ *   delete:
+ *     summary: Xóa một câu hỏi theo ID
+ *     tags:
+ *       - Question
+ *     parameters:
+ *       - in: path
+ *         name: question_id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID của câu hỏi cần xóa
+ *     responses:
+ *       204:
+ *         description: Xóa câu hỏi thành công
+ *       404:
+ *         description: Không tìm thấy câu hỏi
+ *       500:
+ *         description: Lỗi server
+ */
+questionRoute.patch('/setAvailable/:question_id', QuestionController.setAvailable);
 
 export default questionRoute;
