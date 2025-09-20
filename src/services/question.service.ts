@@ -2,7 +2,6 @@ import { query } from "../config/database";
 import pool from "../config/database";
 import { Question } from "../model/question.model";
 import { Answer } from "../model/answer.model";
-import { DefaultResponse } from "../utils/safe.excute";
 
 const QuestionService = {
     async get(question_ids: number[]): Promise<Question[]> {
