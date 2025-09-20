@@ -26,12 +26,13 @@ const QuestionController = {
     res.status(201).json(created);
   },
 
-  // async update(req: Request, res: Response) {
-  //   const id = Number(req.params.id);
-  //   const updated = await QuestionService.update(id, req.body);
-  //   if (!updated) return res.status(404).json({ message: 'Role not found' });
-  //   res.json(updated);
-  // },
+  async update(req: Request, res: Response) {
+    const id = Number(req.params.id);
+    const question = req.body;
+    const updated = await QuestionService.update(id, question);
+    if (!updated) return res.status(404).json({ message: 'Question not found' });
+    res.json(updated);
+  },
 
   // async remove(req: Request, res: Response) {
   //   const id = Number(req.params.id);
