@@ -38,7 +38,7 @@ const QuestionController = {
   async update(req: Request, res: Response) {
     const responses: DefaultResponse<any> = await safeExecute(async () => {
       return {
-        status: 200,
+        status: 202,
         message: "Cập nhật câu hỏi thành công",
         data: await QuestionService.update(req.body)
       } as DefaultResponse<any>;
@@ -47,12 +47,30 @@ const QuestionController = {
     res.json(responses);
   },
 
-  // async remove(req: Request, res: Response) {
-  //   const id = Number(req.params.id);
-  //   const success = await RoleService.remove(id);
-  //   if (!success) return res.status(404).json({ message: 'Role not found' });
-  //   res.status(204).send();
-  // },
+  async setAvailable(req: Request, res: Response) {
+    console.log(req.body);
+    const responses: DefaultResponse<any> = await safeExecute(async () => {
+      return {
+        status: 202,
+        message: "Đổi trạng thái câu hỏi thành công",
+        data: await QuestionService.setAvailable(parseInt(req.params.question_id, 10), Boolean(req.body.available))
+      } as DefaultResponse<any>;
+    });
+
+    res.json(responses);
+  },
+
+  async remove(req: Request, res: Response) {
+    const responses: DefaultResponse<any> = await safeExecute(async () => {
+      return {
+        status: 204,
+        message: "Xoá câu hỏi thành công",
+        data: await QuestionService.remove(parseInt(req.params.question_id, 10))
+      } as DefaultResponse<any>;
+    });
+
+    res.json(responses);
+  },
 };
 
 export default QuestionController;

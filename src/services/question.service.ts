@@ -15,9 +15,9 @@ const QuestionService = {
         return result.rows;
     },
 
-    async getAll(limit: number = 100, offset: number = 0) : Promise<Question[]> {
-        const queryText = `
-          SELECT q.question_id, q.question_name, q.question_content,
+    async getAll(limit: number = 100, offset: number = 0, available?: boolean): Promise<Question[]> {
+        let queryText = `
+          SELECT q.question_id, q.question_name, q.question_content, q.available,
                  COALESCE(
                    json_agg(
                      json_build_object(
@@ -29,15 +29,23 @@ const QuestionService = {
                  ) AS answers
           FROM question q
           LEFT JOIN answer a ON q.question_id = a.question_id
+        `;
+
+        const params: any[] = [limit, offset];
+        if (available !== undefined) {
+            queryText += ` WHERE q.available = $3 `;
+            params.push(available);
+        }
+
+        queryText += `
           GROUP BY q.question_id
           ORDER BY q.question_id
           LIMIT $1 OFFSET $2;
         `;
 
-        const result = await query(queryText, [limit, offset]);
+        const result = await query(queryText, params);
         return result.rows;
     },
-
 
     async create(questions: Question[]): Promise<Question[]> {
         const client = await pool.connect();
@@ -169,6 +177,39 @@ const QuestionService = {
         }
     },
 
+    async setAvailable(question_id: number, available: boolean): Promise<boolean> {
+        const result = await query(
+            `UPDATE question SET available = $1 WHERE question_id = $2`,
+            [available, question_id]
+        );
+        return (result.rowCount ?? 0) > 0;
+    },
+
+    async remove(question_id: number): Promise<void> {
+        const client = await pool.connect();
+        try {
+            await client.query('BEGIN');
+
+            // Xoá câu trả lời liên quan
+            await client.query(
+                'DELETE FROM answer WHERE question_id = $1',
+                [question_id]
+            );
+
+            // Xoá câu hỏi
+            await client.query(
+                'DELETE FROM question WHERE question_id = $1',
+                [question_id]
+            );
+
+            await client.query('COMMIT');
+        } catch (err) {
+            await client.query('ROLLBACK');
+            throw err;
+        } finally {
+            client.release();
+        }
+    }
 };
 
 export default QuestionService;
