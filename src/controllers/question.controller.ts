@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import QuestionService from '../services/question.service';
+import { DefaultResponse } from "../utils/safe.excute";
 
 const QuestionController = {
   // async get(req: Request, res: Response) {
