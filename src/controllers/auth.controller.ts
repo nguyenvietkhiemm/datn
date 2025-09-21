@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import AuthService from "../services/auth.service";
-import safeExecute, { DefaultResponse } from "../utils/safe.excute";
+import safeExecute, { DefaultResponse } from "../utils/safe.execute";
 
 const AuthController = {
   async register(req: Request, res: Response) {

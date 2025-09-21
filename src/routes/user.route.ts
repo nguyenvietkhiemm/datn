@@ -30,7 +30,7 @@ const UserRouter = Router();
 UserRouter.get(
   "/",
   Authentication.AuthenticateToken,
-  Authentication.AuthorizeRoles(["3"]), 
+  Authentication.AuthorizeRoles(["2"]), 
   UserController.getAll
 );
 
@@ -119,7 +119,7 @@ UserRouter.put(
 UserRouter.delete(
   "/:id",
   Authentication.AuthenticateToken,
-  Authentication.AuthorizeRoles(["3"]), // chỉ admin được xóa
+  Authentication.AuthorizeRoles(["2"]), // chỉ admin được xóa
   UserController.remove
 );
 
