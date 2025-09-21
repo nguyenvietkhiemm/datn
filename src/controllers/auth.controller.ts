@@ -7,7 +7,7 @@ const AuthController = {
     const { user_name, password, email, birthday, role_id } = req.body;
 
     const response: DefaultResponse<any> = await safeExecute(async () => {
-      const result = await AuthService.regist(
+      const result = await AuthService.register(
         user_name,
         password,
         email,
