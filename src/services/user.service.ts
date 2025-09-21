@@ -4,13 +4,22 @@ import { User } from '../model/user.model';
 const UserService = {
     // Lấy toàn bộ user
     async getAll(): Promise<User[]> {
-        const result = await query('SELECT * FROM "user" WHERE role_id = 1 ORDER BY user_id');
+        const result = await query(`
+        SELECT user_id, user_name, email, birthday, created_at, available
+        FROM "user"
+        WHERE role_id = 1
+        ORDER BY user_id
+        `);
         return result.rows as User[];
     },
 
     // Lấy user theo ID
     async getById(id: number): Promise<User> {
-        const result = await query('SELECT * FROM "user" WHERE user_id = $1', [id]);
+        const result = await query(`
+        SELECT user_id, user_name, email, birthday, created_at, available
+        FROM "user"
+        WHERE user_id = $1`
+        , [id]);
         if (!result.rows[0]) throw new Error('USER_NOT_FOUND');
         return result.rows[0] as User;
     },
@@ -25,7 +34,7 @@ const UserService = {
              birthday = COALESCE($4, birthday),
              role_id = COALESCE($5, role_id)
             WHERE user_id = $6
-            RETURNING *`,
+            RETURNING user_id, user_name, email, birthday, created_at, available`,
             [user.user_name, user.email, user.password_hash, user.birthday, user.role_id, id]
         );
         if (!result.rows[0]) throw new Error('USER_NOT_FOUND');
