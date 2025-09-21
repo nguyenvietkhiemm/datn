@@ -16,7 +16,6 @@ const AuthService = {
     password: string,
     email: string,
     birthday: Date,
-    role_id: number
   ): Promise<{ user: User; token: string }> {
     // kiểm tra email tồn tại
     const checkUser = await query(`SELECT * FROM "user" WHERE email = $1`, [email]);
@@ -29,9 +28,9 @@ const AuthService = {
 
     // tạo user mới
     const result = await query(
-      `INSERT INTO "user" (user_name, email, password_hash, birthday, created_at, role_id)
-       VALUES ($1, $2, $3, $4, NOW(), $5) RETURNING *`,
-      [user_name, email, hashPassword, birthday, role_id]
+      `INSERT INTO "user" (user_name, email, password_hash, birthday, created_at)
+       VALUES ($1, $2, $3, $4, NOW()) RETURNING *`,
+      [user_name, email, hashPassword, birthday ]
     );
 
     const newUser: User = result.rows[0];

@@ -16,10 +16,22 @@ const RoleService = {
   },
 
   async create(role: Role): Promise<Role> {
+    // kiểm tra role đã tồn tại
+    const check = await query(
+      'SELECT * FROM role WHERE role_name = $1',
+      [role.role_name]
+    );
+
+    if (check.rows.length > 0) {
+      throw new Error('ROLE_EXISTS');
+    }
+
+    // thêm mới
     const result = await query(
       'INSERT INTO role (role_name) VALUES ($1) RETURNING *',
       [role.role_name]
     );
+
     return result.rows[0] as Role;
   },
 

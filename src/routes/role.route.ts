@@ -58,8 +58,6 @@ RoleRoute.get('/:id', RoleController.getOne);
  *               - role_id
  *               - role_name
  *             properties:
- *               role_id:
- *                 type: integer
  *               role_name:
  *                 type: string
  *     responses:

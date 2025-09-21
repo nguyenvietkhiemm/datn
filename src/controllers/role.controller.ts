@@ -29,8 +29,17 @@ const RoleController = {
   async create(req: Request, res: Response) {
     const response: DefaultResponse<any> = await safeExcute(async () => {
       const role = await RoleService.create(req.body);
-      return { status: 201, data: role, message: 'Tạo vai trò thành công' };
+      return {
+        status: 201,
+        data: role,
+        message: 'Tạo vai trò thành công',
+      };
     });
+    if (response.error === "ROLE_EXISTS") {
+      response.status = 400;
+      response.message = "Role đã tồn tại";
+      delete response.error;
+    }
     res.status(response.status).json(response);
   },
 
