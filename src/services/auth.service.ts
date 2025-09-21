@@ -2,13 +2,7 @@ import { register } from "module";
 import { query } from "../config/database";
 import { User } from "../model/user.model";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-
-const JWT_SECRET = process.env.JSON_TOKEN_KEY || "mysecret";
-
-const createToken = (user_id: number, role_id: number) => {
-  return jwt.sign({ user_id, role_id }, JWT_SECRET, { expiresIn: "1h" });
-};
+import CreateToken from "../utils/create.token";
 
 const AuthService = {
   async register(
@@ -34,10 +28,10 @@ const AuthService = {
     );
 
     const newUser: User = result.rows[0];
-    const { password_hash, ...safeUser } = newUser;
+    const { password_hash, user_id, role_id, ...safeUser } = newUser;
 
     // tạo token
-    const token = createToken(newUser.user_id, newUser.role_id);
+    const token = CreateToken(newUser.user_id, newUser.email);
 
     return { user: safeUser as User, token };
   },
@@ -58,10 +52,10 @@ const AuthService = {
     }
 
     // tạo token
-    const token = createToken(foundUser.user_id, foundUser.role_id);
+    const token = CreateToken(foundUser.user_id, foundUser.email);
 
     // loại bỏ password_hash trước khi trả về
-    const { password_hash, ...safeUser } = foundUser;
+    const { password_hash, user_id, role_id, ...safeUser } = foundUser;
 
     return { user: safeUser as User, token };
   },

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import RoleService from '../services/role.service';
-import safeExcute, { DefaultResponse } from '../utils/safe.excute';
+import safeExcute, { DefaultResponse } from '../utils/safe.execute';
 
 const RoleController = {
   async getAll(req: Request, res: Response) {
