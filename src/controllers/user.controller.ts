@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import UserService from '../services/user.service';
-import safeExecute, { DefaultResponse } from '../utils/safe.excute';
+import safeExecute, { DefaultResponse } from '../utils/safe.execute';
 
 const UserController = {
     // Lấy toàn bộ user

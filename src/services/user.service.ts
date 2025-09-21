@@ -4,7 +4,7 @@ import { User } from '../model/user.model';
 const UserService = {
     // Lấy toàn bộ user
     async getAll(): Promise<User[]> {
-        const result = await query('SELECT * FROM "user" ORDER BY user_id');
+        const result = await query('SELECT * FROM "user" WHERE role_id = 1 ORDER BY user_id');
         return result.rows as User[];
     },
 
