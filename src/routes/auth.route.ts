@@ -36,9 +36,6 @@ const AuthRouter = Router();
  *               birthday:
  *                 type: string
  *                 format: date
- *               role_id:
- *                 type: number
- *                 example: 1
  *     responses:
  *       201:
  *         description: Đăng ký thành công
