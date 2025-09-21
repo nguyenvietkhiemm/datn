@@ -1,11 +1,11 @@
 import { Pool } from 'pg';
 
 const pool = new Pool({
-  user: process.env.DATABASE_USER || 'postgres',
-  host: process.env.DATABASE_HOST || 'localhost',
-  database: process.env.DATABASE_NAME || 'postgres',
-  password: process.env.DATABASE_PASSWORD || '12345',
-  port: Number(process.env.DATABASE_PORT) || 5432,
+  user: process.env.DATABASE_USER ,
+  host: process.env.DATABASE_HOST,
+  database: process.env.DATABASE_NAME ,
+  password: process.env.DATABASE_PASSWORD ,
+  port: Number(process.env.DATABASE_PORT) ,
 });
 
 // test kết nối
@@ -15,6 +15,14 @@ const pool = new Pool({
     console.log('✅ Kết nối thành công, thời gian DB:', res.rows[0]);
   } catch (err) {
     console.error('❌ Lỗi kết nối:', err);
+    console.log("DB CONFIG:", {
+  user: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD,
+  host: process.env.DATABASE_HOST,
+  port: process.env.DATABASE_PORT,
+  database: process.env.DATABASE_NAME,
+});
+
   }
 })();
 

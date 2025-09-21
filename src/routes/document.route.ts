@@ -1,0 +1,123 @@
+import { Router } from 'express';
+import DocumentController from '../controllers/document.controller';
+
+const documentRoute = Router();
+
+/**
+ * @openapi
+ * /documents:
+ *   get:
+ *     summary: Lấy danh sách document
+ *     tags:
+ *       - Document
+ *     responses:
+ *       200:
+ *         description: Danh sách document
+ *       500:
+ *         description: Lỗi server
+ */
+documentRoute.get('/', DocumentController.getAll);
+
+/**
+ * @openapi
+ * /documents/create:
+ *   post:
+ *     summary: Tạo document mới
+ *     tags:
+ *       - Document
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 example: "Tài liệu Vật lý"
+ *               link:
+ *                 type: string
+ *                 example: "https://example.com/document.pdf"
+ *               embedding:
+ *                 type: array
+ *                 items:
+ *                   type: number
+ *                 example: [0.1, 0.2, 0.3]
+ *               topic_id:
+ *                 type: integer
+ *                 example: 1
+ *     responses:
+ *       201:
+ *         description: Tạo document thành công
+ *       500:
+ *         description: Lỗi server
+ */
+documentRoute.post('/create', DocumentController.create);
+
+/**
+ * @openapi
+ * /documents/update:
+ *   patch:
+ *     summary: Cập nhật thông tin document
+ *     tags:
+ *       - Document
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               document_id:
+ *                 type: integer
+ *                 example: 1
+ *               title:
+ *                 type: string
+ *                 example: "Tài liệu Vật lý cập nhật"
+ *               link:
+ *                 type: string
+ *                 example: "https://example.com/updated-document.pdf"
+ *               embedding:
+ *                 type: array
+ *                 items:
+ *                   type: number
+ *                 example: [0.4, 0.5, 0.6]
+ *               topic_id:
+ *                 type: integer
+ *                 example: 2
+ *     responses:
+ *       202:
+ *         description: Cập nhật document thành công
+ *       404:
+ *         description: Không tìm thấy document
+ *       500:
+ *         description: Lỗi server
+ */
+documentRoute.patch('/update', DocumentController.update);
+
+/**
+ * @openapi
+ * /documents/remove/{document_id}:
+ *   delete:
+ *     summary: Xóa một document theo ID
+ *     tags:
+ *       - Document
+ *     parameters:
+ *       - in: path
+ *         name: document_id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID của document cần xóa
+ *     responses:
+ *       204:
+ *         description: Xóa document thành công
+ *       404:
+ *         description: Không tìm thấy document
+ *       500:
+ *         description: Lỗi server
+ */
+documentRoute.delete('/remove/:document_id', DocumentController.remove);
+
+
+export default documentRoute;
