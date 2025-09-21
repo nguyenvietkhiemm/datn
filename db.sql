@@ -1,14 +1,16 @@
--- Phải chắc rằng pgvector đã được cài trong instance Postgres (docker image ankane/pgvector)
-CREATE EXTENSION IF NOT EXISTS vector;
-
 -- Roles
-CREATE TABLE role (
+CREATE TABLE IF NOT EXISTS role (
     role_id SERIAL PRIMARY KEY,
-    role_name VARCHAR(50) NOT NULL
+    role_name VARCHAR(50) NOT NULL UNIQUE
 );
 
+-- seed roles
+INSERT INTO role (role_id, role_name)
+VALUES (1, 'USER'), (2, 'ADMIN')
+ON CONFLICT (role_id) DO NOTHING;
+
 -- Users
-CREATE TABLE "user" (
+CREATE TABLE IF NOT EXISTS "user" (
     user_id SERIAL PRIMARY KEY,
     user_name VARCHAR(100) NOT NULL,
     email VARCHAR(200) UNIQUE,
@@ -20,7 +22,7 @@ CREATE TABLE "user" (
 );
 
 -- User update history
-CREATE TABLE user_update (
+CREATE TABLE IF NOT EXISTS user_update (
     user_update_id SERIAL PRIMARY KEY,
     user_name VARCHAR(100),
     email VARCHAR(200),
@@ -35,12 +37,12 @@ CREATE TABLE user_update (
 );
 
 -- Subjects & topics
-CREATE TABLE subject (
+CREATE TABLE IF NOT EXISTS subject (
     subject_id SERIAL PRIMARY KEY,
     subject_name VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE topic (
+CREATE TABLE IF NOT EXISTS topic (
     topic_id SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
     description TEXT,
@@ -49,7 +51,7 @@ CREATE TABLE topic (
 );
 
 -- Roadmap steps + user mapping
-CREATE TABLE roadmap_step (
+CREATE TABLE IF NOT EXISTS roadmap_step (
     roadmap_step_id SERIAL PRIMARY KEY,
     title VARCHAR(100) NOT NULL,
     description TEXT,
@@ -57,10 +59,15 @@ CREATE TABLE roadmap_step (
     FOREIGN KEY (topic_id) REFERENCES topic(topic_id) ON DELETE SET NULL
 );
 
--- enum: (gợi ý: đổi 'in process' -> 'in_process' sau nếu muốn)
-CREATE TYPE roadmap_status AS ENUM ('pending', 'done', 'skip', 'in process');
+-- Note: consider renaming 'in process' -> 'in_process' if using programmatic enums.
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'roadmap_status') THEN
+    CREATE TYPE roadmap_status AS ENUM ('pending', 'done', 'skip', 'in process');
+  END IF;
+END$$;
 
-CREATE TABLE user_roadmap_step (
+CREATE TABLE IF NOT EXISTS user_roadmap_step (
     user_roadmap_step_id SERIAL PRIMARY KEY,
     status roadmap_status DEFAULT 'pending',
     roadmap_step_id INT,
@@ -70,17 +77,17 @@ CREATE TABLE user_roadmap_step (
 );
 
 -- Documents
-CREATE TABLE document (
+CREATE TABLE IF NOT EXISTS document (
     document_id SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
     link VARCHAR(250),
-    embedding vector(768),  -- chỉnh dimension cho phù hợp
+    embedding vector(768),
     created_at TIMESTAMPTZ DEFAULT now(),
     topic_id INT,
     FOREIGN KEY (topic_id) REFERENCES topic(topic_id) ON DELETE SET NULL
 );
 
-CREATE TABLE roadmap_step_document (
+CREATE TABLE IF NOT EXISTS roadmap_step_document (
     roadmap_step_id INT NOT NULL,
     document_id INT NOT NULL,
     PRIMARY KEY (roadmap_step_id, document_id),
@@ -88,7 +95,7 @@ CREATE TABLE roadmap_step_document (
     FOREIGN KEY (document_id) REFERENCES document(document_id) ON DELETE CASCADE
 );
 
-CREATE TABLE document_history (
+CREATE TABLE IF NOT EXISTS document_history (
     document_history_id SERIAL PRIMARY KEY,
     start_time TIMESTAMPTZ,
     end_time TIMESTAMPTZ,
@@ -100,9 +107,14 @@ CREATE TABLE document_history (
 );
 
 -- Study schedule
-CREATE TYPE study_status AS ENUM ('pending', 'done', 'miss');
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'study_status') THEN
+    CREATE TYPE study_status AS ENUM ('pending', 'done', 'miss');
+  END IF;
+END$$;
 
-CREATE TABLE study_schedule (
+CREATE TABLE IF NOT EXISTS study_schedule (
     study_schedule_id SERIAL PRIMARY KEY,
     title VARCHAR(500) NOT NULL,
     description TEXT,
@@ -111,13 +123,13 @@ CREATE TABLE study_schedule (
     status study_status DEFAULT 'pending',
     target_question INT,
     created_at TIMESTAMPTZ DEFAULT now(),
-    update_at TIMESTAMPTZ DEFAULT now(), -- bạn có thể đổi tên thành updated_at nếu muốn
+    update_at TIMESTAMPTZ DEFAULT now(),
     subject_id INT,
     FOREIGN KEY (subject_id) REFERENCES subject(subject_id) ON DELETE SET NULL
 );
 
 -- Flashcards
-CREATE TABLE flashcard_deck (
+CREATE TABLE IF NOT EXISTS flashcard_deck (
     flashcard_deck_id SERIAL PRIMARY KEY,
     title VARCHAR(500) NOT NULL,
     description TEXT,
@@ -126,9 +138,7 @@ CREATE TABLE flashcard_deck (
     FOREIGN KEY (user_id) REFERENCES "user"(user_id) ON DELETE CASCADE
 );
 
-CREATE TYPE flashcard_status AS ENUM ('pending', 'done', 'miss');
-
-CREATE TABLE flashcard (
+CREATE TABLE IF NOT EXISTS flashcard (
     flashcard_id SERIAL PRIMARY KEY,
     front TEXT NOT NULL,
     back TEXT,
@@ -139,8 +149,15 @@ CREATE TABLE flashcard (
     FOREIGN KEY (flashcard_deck_id) REFERENCES flashcard_deck(flashcard_deck_id) ON DELETE CASCADE
 );
 
--- Chat history (partitioning recommended later)
-CREATE TABLE chat_history (
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'flashcard_status') THEN
+    CREATE TYPE flashcard_status AS ENUM ('pending', 'done', 'miss');
+  END IF;
+END$$;
+
+-- Chat history
+CREATE TABLE IF NOT EXISTS chat_history (
     chat_history_id SERIAL PRIMARY KEY,
     is_user BOOLEAN,
     message TEXT,
@@ -151,7 +168,7 @@ CREATE TABLE chat_history (
 );
 
 -- Progress & goals
-CREATE TABLE current_progress (
+CREATE TABLE IF NOT EXISTS current_progress (
     current_progress_id SERIAL PRIMARY KEY,
     current_progress DECIMAL(4,2),
     created_at TIMESTAMPTZ DEFAULT now(),
@@ -159,7 +176,7 @@ CREATE TABLE current_progress (
     FOREIGN KEY (user_id) REFERENCES "user"(user_id) ON DELETE CASCADE
 );
 
-CREATE TABLE user_goal (
+CREATE TABLE IF NOT EXISTS user_goal (
     user_goal_id SERIAL PRIMARY KEY,
     target_score DECIMAL(4,2),
     deadline TIMESTAMPTZ,
@@ -170,7 +187,7 @@ CREATE TABLE user_goal (
 );
 
 -- Exams
-CREATE TABLE exam_schedule (
+CREATE TABLE IF NOT EXISTS exam_schedule (
     exam_schedule_id SERIAL PRIMARY KEY,
     start_time TIMESTAMPTZ,
     end_time TIMESTAMPTZ,
@@ -178,7 +195,7 @@ CREATE TABLE exam_schedule (
     updated_at TIMESTAMPTZ DEFAULT now()
 );
 
-CREATE TABLE exam (
+CREATE TABLE IF NOT EXISTS exam (
     exam_id SERIAL PRIMARY KEY,
     exam_name VARCHAR(100) NOT NULL,
     created_at TIMESTAMPTZ DEFAULT now(),
@@ -189,7 +206,7 @@ CREATE TABLE exam (
     FOREIGN KEY (exam_schedule_id) REFERENCES exam_schedule(exam_schedule_id) ON DELETE SET NULL
 );
 
-CREATE TABLE user_exam_answer (
+CREATE TABLE IF NOT EXISTS user_exam_answer (
     user_exam_answer_id SERIAL PRIMARY KEY,
     score DECIMAL(4,2),
     created_at TIMESTAMPTZ DEFAULT now(),
@@ -200,13 +217,13 @@ CREATE TABLE user_exam_answer (
 );
 
 -- Questions & answers
-CREATE TABLE question (
+CREATE TABLE IF NOT EXISTS question (
     question_id SERIAL PRIMARY KEY,
     question_name VARCHAR(100) NOT NULL,
     question_content TEXT
 );
 
-CREATE TABLE answer (
+CREATE TABLE IF NOT EXISTS answer (
     answer_id SERIAL PRIMARY KEY,
     question_id INT NOT NULL,
     answer_content TEXT NOT NULL,
@@ -214,7 +231,7 @@ CREATE TABLE answer (
     FOREIGN KEY (question_id) REFERENCES question(question_id) ON DELETE CASCADE
 );
 
-CREATE TABLE question_exam (
+CREATE TABLE IF NOT EXISTS question_exam (
     question_id INT,
     exam_id INT,
     PRIMARY KEY (question_id, exam_id),
@@ -223,14 +240,14 @@ CREATE TABLE question_exam (
 );
 
 -- Bank & mappings
-CREATE TABLE bank (
+CREATE TABLE IF NOT EXISTS bank (
     bank_id SERIAL PRIMARY KEY,
     description VARCHAR(200),
     topic_id INT,
     FOREIGN KEY (topic_id) REFERENCES topic(topic_id) ON DELETE SET NULL
 );
 
-CREATE TABLE question_bank (
+CREATE TABLE IF NOT EXISTS question_bank (
     question_id INT,
     bank_id INT,
     PRIMARY KEY (question_id, bank_id),
@@ -238,7 +255,7 @@ CREATE TABLE question_bank (
     FOREIGN KEY (bank_id) REFERENCES bank(bank_id) ON DELETE CASCADE
 );
 
-CREATE TABLE user_bank_answer (
+CREATE TABLE IF NOT EXISTS user_bank_answer (
     user_bank_answer_id SERIAL PRIMARY KEY,
     created_at TIMESTAMPTZ DEFAULT now(),
     bank_id INT,
@@ -249,24 +266,57 @@ CREATE TABLE user_bank_answer (
     FOREIGN KEY (answer_id) REFERENCES answer(answer_id) ON DELETE SET NULL
 );
 
-ALTER TABLE "user" ADD COLUMN available BOOLEAN DEFAULT true;
-ALTER TABLE document ADD COLUMN available BOOLEAN DEFAULT true;
-ALTER TABLE exam ADD COLUMN available BOOLEAN DEFAULT true;
-ALTER TABLE question ADD COLUMN available BOOLEAN DEFAULT true;
-ALTER TABLE bank ADD COLUMN available BOOLEAN DEFAULT true;
+-- Add available columns if not exists (safe)
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name='user' AND column_name='available'
+  ) THEN
+    ALTER TABLE "user" ADD COLUMN available BOOLEAN DEFAULT true;
+  END IF;
 
--- Indexes (tạo index cho các FK / cột thường truy vấn)
-CREATE INDEX idx_topic_subject ON topic(subject_id);
-CREATE INDEX idx_document_topic ON document(topic_id);
-CREATE INDEX idx_document_history_user ON document_history(user_id);
-CREATE INDEX idx_document_history_document ON document_history(document_id);
-CREATE INDEX idx_chat_history_user ON chat_history(user_id);
-CREATE INDEX idx_answer_question ON answer(question_id);
-CREATE INDEX idx_question_exam_exam ON question_exam(exam_id);
-CREATE INDEX idx_bank_topic ON bank(topic_id);
-CREATE INDEX idx_user_goal_user ON user_goal(user_id);
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name='document' AND column_name='available'
+  ) THEN
+    ALTER TABLE document ADD COLUMN available BOOLEAN DEFAULT true;
+  END IF;
 
--- (Optional) pgvector ANN index example (chạy sau khi có dữ liệu và tuning)
--- CREATE INDEX ON document USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
--- CREATE INDEX ON chat_history USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
--- CREATE INDEX ON question USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name='exam' AND column_name='available'
+  ) THEN
+    ALTER TABLE exam ADD COLUMN available BOOLEAN DEFAULT true;
+  END IF;
+
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name='question' AND column_name='available'
+  ) THEN
+    ALTER TABLE question ADD COLUMN available BOOLEAN DEFAULT true;
+  END IF;
+
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name='bank' AND column_name='available'
+  ) THEN
+    ALTER TABLE bank ADD COLUMN available BOOLEAN DEFAULT true;
+  END IF;
+END$$;
+
+-- Indexes
+CREATE INDEX IF NOT EXISTS idx_topic_subject ON topic(subject_id);
+CREATE INDEX IF NOT EXISTS idx_document_topic ON document(topic_id);
+CREATE INDEX IF NOT EXISTS idx_document_history_user ON document_history(user_id);
+CREATE INDEX IF NOT EXISTS idx_document_history_document ON document_history(document_id);
+CREATE INDEX IF NOT EXISTS idx_chat_history_user ON chat_history(user_id);
+CREATE INDEX IF NOT EXISTS idx_answer_question ON answer(question_id);
+CREATE INDEX IF NOT EXISTS idx_question_exam_exam ON question_exam(exam_id);
+CREATE INDEX IF NOT EXISTS idx_bank_topic ON bank(topic_id);
+CREATE INDEX IF NOT EXISTS idx_user_goal_user ON user_goal(user_id);
+
+-- Optional: pgvector ANN index examples (run after you inserted vectors and tuned lists)
+-- CREATE INDEX IF NOT EXISTS idx_document_embedding ON document USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
+-- CREATE INDEX IF NOT EXISTS idx_chat_history_embedding ON chat_history USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
+-- CREATE INDEX IF NOT EXISTS idx_question_embedding ON question USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
