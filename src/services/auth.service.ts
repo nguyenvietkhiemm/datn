@@ -1,3 +1,4 @@
+import { register } from "module";
 import { query } from "../config/database";
 import { User } from "../model/user.model";
 import bcrypt from "bcrypt";
@@ -10,7 +11,7 @@ const createToken = (user_id: number, role_id: number) => {
 };
 
 const AuthService = {
-  async regist(
+  async register(
     user_name: string,
     password: string,
     email: string,
