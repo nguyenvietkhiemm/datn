@@ -4,16 +4,16 @@ import { Document } from "../model/document.model";
 import pool from "../config/database";
 
 const DocumentService = {
-    async get(document_ids: number[]): Promise<Document[]> {
-        if (!document_ids || document_ids.length === 0) {
-            return [];
-        }
+    // async get(document_ids: number[]): Promise<Document[]> {
+    //     if (!document_ids || document_ids.length === 0) {
+    //         return [];
+    //     }
 
-        const queryText = 'SELECT * FROM document WHERE document_id = ANY($1)';
-        const result = await query(queryText, [document_ids]);
+    //     const queryText = 'SELECT * FROM document WHERE document_id = ANY($1)';
+    //     const result = await query(queryText, [document_ids]);
 
-        return result.rows;
-    },
+    //     return result.rows;
+    // },
 
     async getAll(limit: number = 100, offset: number = 0): Promise<Document[]> {
         const queryText = 'SELECT * FROM document ORDER BY document_id LIMIT $1 OFFSET $2';
