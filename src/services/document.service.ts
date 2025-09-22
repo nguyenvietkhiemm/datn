@@ -98,6 +98,11 @@ const DocumentService = {
         }
     },
 
+    async setAvailable(document_id: number, available: boolean): Promise<boolean> {
+        const result = await query('UPDATE document SET available = $1 WHERE document_id = $2', [available, document_id]);
+        return (result.rowCount ?? 0) > 0;
+    },
+
     async remove(document_id: number): Promise<boolean> {
         const result = await query('DELETE FROM document WHERE document_id = $1', [document_id]);
         return result.rowCount! > 0;
