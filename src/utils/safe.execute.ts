@@ -15,6 +15,7 @@ export default async function safeExecute<T>(fn: () => Promise<DefaultResponse<T
             message
         }
     } catch (error: any) {
+        console.error("safeExecute error:", error);
         return {
             status: 500,
             message: "Lỗi thực thi hàm",
