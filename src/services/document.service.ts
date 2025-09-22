@@ -22,26 +22,24 @@ const DocumentService = {
         return result.rows;
     },
     
-    async create(documents: Document[]): Promise<string> {
+    async create(document: Document): Promise<string> {
         const client = await pool.connect();
 
         try {
             await client.query('BEGIN');
+            const embeddingString = `[${document.embedding.join(",")}]`;
 
-            for (const document of documents) {
-                const result = await client.query(
-                    'INSERT INTO document (title, link, embedding, created_at, topic_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-                    [document.title, document.link, document.embedding, document.created_at, document.topic_id]
-                );
+            const result = await client.query(
+                'INSERT INTO document (title, link, embedding, created_at, topic_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+                [document.title, document.link, embeddingString, document.created_at, document.topic_id]
+            );
 
-                const newDocument: Document = result.rows[0];
-                for (const document of documents) {
-                    await client.query(
-                        'INSERT INTO document_history (document_id, created_at) VALUES ($1, $2)',
-                        [newDocument.document_id, document.created_at]
-                    );
-                }
-            }
+            const newDocument: Document = result.rows[0];
+
+            await client.query(
+                'INSERT INTO document_history (document_id, created_at) VALUES ($1, $2)',
+                [newDocument.document_id, document.created_at]
+            );
 
             await client.query('COMMIT');
             return "COMMIT";
@@ -53,10 +51,14 @@ const DocumentService = {
         }
     },
 
+
     async update(document: Partial<Document>): Promise<Document> {
         const client = await pool.connect();
         try {
             const id = document.document_id;
+            if (!id) {
+                throw new Error("document_id is required for update");
+            }
 
             await client.query('BEGIN');
 
@@ -66,23 +68,27 @@ const DocumentService = {
             let idx = 1;
 
             for (const key of allowed) {
-                if ((document as any)[key] !== undefined) {
+                let value = (document as any)[key];
+                if (value !== undefined) {
+                    // Nếu là embedding (mảng), chuyển thành string để lưu vào pgvector
+                    if (key === "embedding" && Array.isArray(value)) {
+                        value = `[${value.join(",")}]`;
+                    }
                     fields.push(`${key} = $${idx}`);
-                    values.push((document as any)[key]);
+                    values.push(value);
                     idx++;
                 }
             }
 
-            let updatedDocument: Document | null = null;
-
-            if (fields.length > 0) {
-                values.push(id);
-                const queryText = `UPDATE document SET ${fields.join(", ")} WHERE document_id = $${idx} RETURNING *`;
-                const result = await client.query(queryText, values);
-                updatedDocument = result.rows[0] || null;
+            if (fields.length === 0) {
+                throw new Error("No valid fields provided for update");
             }
-            const result = await query('UPDATE document SET title = $1, link = $2, embedding = $3, created_at = $4, topic_id = $5 WHERE document_id = $6 RETURNING *', 
-                [document.title, document.link, document.embedding, document.created_at, document.topic_id, id]);
+
+            values.push(id);
+            const queryText = `UPDATE document SET ${fields.join(", ")} WHERE document_id = $${idx} RETURNING *`;
+            const result = await client.query(queryText, values);
+
+            await client.query('COMMIT');
             return result.rows[0];
         } catch (err) {
             await client.query('ROLLBACK');
