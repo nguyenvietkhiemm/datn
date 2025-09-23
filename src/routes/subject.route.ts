@@ -7,12 +7,12 @@ const subjectRoute = Router();
  * @openapi
  * /subjects:
  *   get:
- *     summary: Lấy danh sách subject
+ *     summary: Lấy danh sách môn học
  *     tags:
  *       - Subject
  *     responses:
  *       200:
- *         description: Danh sách subject
+ *         description: Danh sách môn học
  *       500:
  *         description: Lỗi server
  */
@@ -22,7 +22,7 @@ subjectRoute.get('/', SubjectController.getAll);
  * @openapi
  * /subjects/create:
  *   post:
- *     summary: Tạo subject mới
+ *     summary: Tạo môn học mới
  *     tags:
  *       - Subject
  *     requestBody:
@@ -37,7 +37,7 @@ subjectRoute.get('/', SubjectController.getAll);
  *                 example: "Vật lý"
  *     responses:
  *       201:
- *         description: Tạo subject thành công
+ *         description: Tạo môn học thành công
  *       500:
  *         description: Lỗi server
  */
@@ -47,7 +47,7 @@ subjectRoute.post('/create', SubjectController.create);
  * @openapi
  * /subjects/update:
  *   patch:
- *     summary: Cập nhật thông tin subject
+ *     summary: Cập nhật thông tin môn học
  *     tags:
  *       - Subject
  *     requestBody:
@@ -65,9 +65,9 @@ subjectRoute.post('/create', SubjectController.create);
  *                 example: "Toán"
  *     responses:
  *       202:
- *         description: Cập nhật subject thành công
+ *         description: Cập nhật môn học thành công
  *       404:
- *         description: Không tìm thấy subject
+ *         description: Không tìm thấy môn học
  *       500:
  *         description: Lỗi server
  */
@@ -86,15 +86,39 @@ subjectRoute.patch('/update', SubjectController.update);
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID của subject cần xóa
+ *         description: ID của môn học cần xóa
  *     responses:
  *       204:
- *         description: Xóa subject thành công
+ *         description: Xóa môn học thành công
+ *       404:
+ *         description: Không tìm thấy môn học
+ *       500:
+ *         description: Lỗi server
+ */
+subjectRoute.delete('/remove/:subject_id', SubjectController.remove);
+
+/**
+ * @openapi
+ * /subjects/remove/{subject_id}:
+ *   delete:
+ *     summary: Xóa một subject theo ID
+ *     tags:
+ *       - Subject
+ *     parameters:
+ *       - in: path
+ *         name: subject_id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID của môn học cần xóa
+ *     responses:
+ *       204:
+ *         description: Xóa môn học thành công
  *       404:
  *         description: Không tìm thấy subject
  *       500:
  *         description: Lỗi server
  */
-subjectRoute.delete('/remove/:subject_id', SubjectController.remove);
+subjectRoute.patch('/setAvailable/:subject_id', SubjectController.setAvailable);
 
 export default subjectRoute;

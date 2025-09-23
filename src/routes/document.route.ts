@@ -7,12 +7,12 @@ const documentRoute = Router();
  * @openapi
  * /documents:
  *   get:
- *     summary: Lấy danh sách document
+ *     summary: Lấy danh sách tài liệu
  *     tags:
  *       - Document
  *     responses:
  *       200:
- *         description: Danh sách document
+ *         description: Danh sách tài liệu
  *       500:
  *         description: Lỗi server
  */
@@ -22,7 +22,7 @@ documentRoute.get('/', DocumentController.getAll);
  * @openapi
  * /documents/create:
  *   post:
- *     summary: Tạo document mới
+ *     summary: Tạo tài liệu mới
  *     tags:
  *       - Document
  *     requestBody:
@@ -48,7 +48,7 @@ documentRoute.get('/', DocumentController.getAll);
  *                 example: 1
  *     responses:
  *       201:
- *         description: Tạo document thành công
+ *         description: Tạo tài liệu thành công
  *       500:
  *         description: Lỗi server
  */
@@ -58,7 +58,7 @@ documentRoute.post('/create', DocumentController.create);
  * @openapi
  * /documents/{id}:
  *   patch:
- *     summary: Cập nhật thông tin document
+ *     summary: Cập nhật thông tin tài liệu
  *     tags:
  *       - Document
  *     parameters:
@@ -67,7 +67,7 @@ documentRoute.post('/create', DocumentController.create);
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID của document cần cập nhật
+ *         description: ID của tài liệu cần cập nhật
  *     requestBody:
  *       required: true
  *       content:
@@ -91,9 +91,9 @@ documentRoute.post('/create', DocumentController.create);
  *                 example: 1
  *     responses:
  *       202:
- *         description: Cập nhật document thành công
+ *         description: Cập nhật tài liệu thành công
  *       404:
- *         description: Không tìm thấy document
+ *         description: Không tìm thấy tài liệu
  *       500:
  *         description: Lỗi server
  */
@@ -103,7 +103,7 @@ documentRoute.patch('/update', DocumentController.update);
  * @openapi
  * /documents/remove/{document_id}:
  *   delete:
- *     summary: Xóa một document theo ID
+ *     summary: Xóa một tài liệu theo ID
  *     tags:
  *       - Document
  *     parameters:
@@ -112,12 +112,12 @@ documentRoute.patch('/update', DocumentController.update);
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID của document cần xóa
+ *         description: ID của tài liệu cần xóa
  *     responses:
  *       204:
- *         description: Xóa document thành công
+ *         description: Xóa tài liệu thành công
  *       404:
- *         description: Không tìm thấy document
+ *         description: Không tìm thấy tài liệu
  *       500:
  *         description: Lỗi server
  */
@@ -127,7 +127,7 @@ documentRoute.delete('/remove/:document_id', DocumentController.remove);
  * @openapi
  * /documents/remove/{document_id}:
  *   delete:
- *     summary: Xóa một document theo ID
+ *     summary: Xóa một tài liệu theo ID
  *     tags:
  *       - Document
  *     parameters:
@@ -136,15 +136,15 @@ documentRoute.delete('/remove/:document_id', DocumentController.remove);
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID của document cần xóa
+ *         description: ID của tài liệu cần xóa
  *     responses:
  *       204:
- *         description: Xóa document thành công
+ *         description: Xóa tài liệu thành công
  *       404:
- *         description: Không tìm thấy document
+ *         description: Không tìm thấy tài liệu
  *       500:
  *         description: Lỗi server
  */
-documentRoute.delete('/setAvailable/:document_id', DocumentController.setAvailable);
+documentRoute.patch('/setAvailable/:document_id', DocumentController.setAvailable);
 
 export default documentRoute;
