@@ -57,7 +57,7 @@ const DocumentService = {
         try {
             const id = document.document_id;
             if (!id) {
-                throw new Error("document_id is required for update");
+                throw new Error("document_id isn't exist");
             }
 
             await client.query('BEGIN');
@@ -98,9 +98,26 @@ const DocumentService = {
         }
     },
 
-    async remove(document_id: number): Promise<boolean> {
-        const result = await query('DELETE FROM document WHERE document_id = $1', [document_id]);
-        return result.rowCount! > 0;
+    async setAvailable(document_id: number, available: boolean): Promise<boolean> {
+        const result = await query('UPDATE document SET available = $1 WHERE document_id = $2', [available, document_id]);
+        return (result.rowCount ?? 0) > 0;
+    },
+
+    async remove(document_id: number): Promise<void> {
+        const client = await pool.connect();
+        try {
+            await client.query('BEGIN');
+
+            // Xóa document 
+            await client.query('DELETE FROM document WHERE document_id = $1', [document_id]);
+            
+            await client.query('COMMIT');
+        } catch (err) {
+            await client.query('ROLLBACK');
+            throw err;
+        } finally { 
+            client.release();
+        }
     },
     
 }

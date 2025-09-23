@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import QuestionController from '../controllers/question.controller';
 
-const QuestionRoute = Router();
+const questionRoute = Router();
 
 /**
  * @openapi
@@ -16,7 +16,7 @@ const QuestionRoute = Router();
  *       500:
  *         description: Lỗi server
  */
-QuestionRoute.get('/', QuestionController.getAll);
+questionRoute.get('/', QuestionController.getAll);
 
 /**
  * @openapi
@@ -44,7 +44,7 @@ QuestionRoute.get('/', QuestionController.getAll);
  *       500:
  *         description: Lỗi server
  */
-QuestionRoute.post('/create', QuestionController.create);
+questionRoute.post('/create', QuestionController.create);
 
 /**
  * @openapi
@@ -81,7 +81,7 @@ QuestionRoute.post('/create', QuestionController.create);
  *       500:
  *         description: Lỗi server
  */
-QuestionRoute.patch('/update', QuestionController.update);
+questionRoute.patch('/update', QuestionController.update);
 
 /**
  * @openapi
@@ -105,7 +105,7 @@ QuestionRoute.patch('/update', QuestionController.update);
  *       500:
  *         description: Lỗi server
  */
-QuestionRoute.delete('/remove/:question_id', QuestionController.remove);
+questionRoute.delete('/remove/:question_id', QuestionController.remove);
 
 /**
  * @openapi
@@ -129,6 +129,6 @@ QuestionRoute.delete('/remove/:question_id', QuestionController.remove);
  *       500:
  *         description: Lỗi server
  */
-QuestionRoute.patch('/setAvailable/:question_id', QuestionController.setAvailable);
+questionRoute.patch('/setAvailable/:question_id', QuestionController.setAvailable);
 
-export default QuestionRoute;
+export default questionRoute;

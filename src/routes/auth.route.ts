@@ -1,7 +1,7 @@
 import { Router } from "express";
 import AuthController from "../controllers/auth.controller";
 
-const AuthRouter = Router();
+const authRouter = Router();
 
 /**
  * @swagger
@@ -42,7 +42,7 @@ const AuthRouter = Router();
  *       400:
  *         description: Email đã tồn tại
  */
-AuthRouter.post("/register", AuthController.register);
+authRouter.post("/register", AuthController.register);
 
 /**
  * @swagger
@@ -72,6 +72,6 @@ AuthRouter.post("/register", AuthController.register);
  *       404:
  *         description: Không tìm thấy user
  */
-AuthRouter.post("/login", AuthController.login);
+authRouter.post("/login", AuthController.login);
 
-export default AuthRouter;
+export default authRouter;

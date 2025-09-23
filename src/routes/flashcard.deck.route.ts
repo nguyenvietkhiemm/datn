@@ -1,7 +1,7 @@
 import { FlashcardDeckController } from "../controllers/flashcard.deck.controller";
 import { Router } from "express";
 
-const FlashcardDeckRouter = Router();
+const flashcardDeckRouter = Router();
 
 /**
  * @swagger
@@ -45,8 +45,8 @@ const FlashcardDeckRouter = Router();
  *       201:
  *         description: Deck created successfully
  */
-FlashcardDeckRouter.get("/", FlashcardDeckController.getAll);
-FlashcardDeckRouter.post("/", FlashcardDeckController.create);
+flashcardDeckRouter.get("/", FlashcardDeckController.getAll);
+flashcardDeckRouter.post("/", FlashcardDeckController.create);
 
 /**
  * @swagger
@@ -86,7 +86,7 @@ FlashcardDeckRouter.post("/", FlashcardDeckController.create);
  *       404:
  *         description: Deck not found
  */
-FlashcardDeckRouter.put("/:id", FlashcardDeckController.update);
-FlashcardDeckRouter.delete("/:id", FlashcardDeckController.delete);
+flashcardDeckRouter.put("/:id", FlashcardDeckController.update);
+flashcardDeckRouter.delete("/:id", FlashcardDeckController.delete);
 
-export default FlashcardDeckRouter;
+export default flashcardDeckRouter;

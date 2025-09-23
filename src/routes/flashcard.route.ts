@@ -4,7 +4,7 @@ import {
   FlashcardController,
 } from "../controllers/flashcard.controller";
 
-const FlashcardRoute = Router();
+const flashcardRoute = Router();
 
 /**
  * @swagger
@@ -44,8 +44,8 @@ const FlashcardRoute = Router();
  *       201:
  *         description: Flashcard created successfully
  */
-FlashcardRoute.get("/", FlashcardController.getAll);
-FlashcardRoute.post("/", FlashcardController.create);
+flashcardRoute.get("/", FlashcardController.getAll);
+flashcardRoute.post("/", FlashcardController.create);
 
 /**
  * @swagger
@@ -99,8 +99,8 @@ FlashcardRoute.post("/", FlashcardController.create);
  *       404:
  *         description: Flashcard not found
  */
-FlashcardRoute.get("/:id", FlashcardController.getById);
-FlashcardRoute.put("/:id", FlashcardController.update);
-FlashcardRoute.delete("/:id", FlashcardController.delete);
+flashcardRoute.get("/:id", FlashcardController.getById);
+flashcardRoute.put("/:id", FlashcardController.update);
+flashcardRoute.delete("/:id", FlashcardController.delete);
 
-export default FlashcardRoute;
+export default flashcardRoute;

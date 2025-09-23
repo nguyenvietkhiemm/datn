@@ -1,28 +1,28 @@
 import { Router } from 'express';
 import DocumentController from '../controllers/document.controller';
 
-const DocumentRoute = Router();
+const documentRoute = Router();
 
 /**
  * @openapi
  * /documents:
  *   get:
- *     summary: Lấy danh sách document
+ *     summary: Lấy danh sách tài liệu
  *     tags:
  *       - Document
  *     responses:
  *       200:
- *         description: Danh sách document
+ *         description: Danh sách tài liệu
  *       500:
  *         description: Lỗi server
  */
-DocumentRoute.get('/', DocumentController.getAll);
+documentRoute.get('/', DocumentController.getAll);
 
 /**
  * @openapi
  * /documents/create:
  *   post:
- *     summary: Tạo document mới
+ *     summary: Tạo tài liệu mới
  *     tags:
  *       - Document
  *     requestBody:
@@ -48,19 +48,26 @@ DocumentRoute.get('/', DocumentController.getAll);
  *                 example: 1
  *     responses:
  *       201:
- *         description: Tạo document thành công
+ *         description: Tạo tài liệu thành công
  *       500:
  *         description: Lỗi server
  */
-DocumentRoute.post('/create', DocumentController.create);
+documentRoute.post('/create', DocumentController.create);
 
 /**
  * @openapi
- * /documents/update:
+ * /documents/{id}:
  *   patch:
- *     summary: Cập nhật thông tin document
+ *     summary: Cập nhật thông tin tài liệu
  *     tags:
  *       - Document
+ *     parameters:
+ *       - in: path
+ *         name: document_id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID của tài liệu cần cập nhật
  *     requestBody:
  *       required: true
  *       content:
@@ -68,9 +75,6 @@ DocumentRoute.post('/create', DocumentController.create);
  *           schema:
  *             type: object
  *             properties:
- *               document_id:
- *                 type: integer
- *                 example: 1
  *               title:
  *                 type: string
  *                 example: "Tài liệu Vật lý cập nhật"
@@ -87,19 +91,19 @@ DocumentRoute.post('/create', DocumentController.create);
  *                 example: 1
  *     responses:
  *       202:
- *         description: Cập nhật document thành công
+ *         description: Cập nhật tài liệu thành công
  *       404:
- *         description: Không tìm thấy document
+ *         description: Không tìm thấy tài liệu
  *       500:
  *         description: Lỗi server
  */
-DocumentRoute.patch('/update', DocumentController.update);
+documentRoute.patch('/update', DocumentController.update);
 
 /**
  * @openapi
  * /documents/remove/{document_id}:
  *   delete:
- *     summary: Xóa một document theo ID
+ *     summary: Xóa một tài liệu theo ID
  *     tags:
  *       - Document
  *     parameters:
@@ -108,16 +112,39 @@ DocumentRoute.patch('/update', DocumentController.update);
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID của document cần xóa
+ *         description: ID của tài liệu cần xóa
  *     responses:
  *       204:
- *         description: Xóa document thành công
+ *         description: Xóa tài liệu thành công
  *       404:
- *         description: Không tìm thấy document
+ *         description: Không tìm thấy tài liệu
  *       500:
  *         description: Lỗi server
  */
-DocumentRoute.delete('/remove/:document_id', DocumentController.remove);
+documentRoute.delete('/remove/:document_id', DocumentController.remove);
 
+/**
+ * @openapi
+ * /documents/remove/{document_id}:
+ *   delete:
+ *     summary: Xóa một tài liệu theo ID
+ *     tags:
+ *       - Document
+ *     parameters:
+ *       - in: path
+ *         name: document_id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID của tài liệu cần xóa
+ *     responses:
+ *       204:
+ *         description: Xóa tài liệu thành công
+ *       404:
+ *         description: Không tìm thấy tài liệu
+ *       500:
+ *         description: Lỗi server
+ */
+documentRoute.patch('/setAvailable/:document_id', DocumentController.setAvailable);
 
-export default DocumentRoute;
+export default documentRoute;
