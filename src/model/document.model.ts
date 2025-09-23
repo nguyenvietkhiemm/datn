@@ -4,5 +4,6 @@ export interface Document {
     link: string;
     embedding: number[];
     created_at: Date;
+    available: boolean;
     topic_id: number;
 }

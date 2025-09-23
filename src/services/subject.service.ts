@@ -40,9 +40,26 @@ const SubjectService = {
         }
     },
 
-    async remove(subject_id: number): Promise<boolean> {
-        const result = await query('DELETE FROM subject WHERE subject_id = $1 RETURNING *', [subject_id]);
-        return result.rowCount! > 0;
+    async setAvailable(subject_id: number, available: boolean): Promise<boolean> {
+        const result = await query('UPDATE subject SET available = $1 WHERE subject_id = $2', [available, subject_id]);
+        return (result.rowCount ?? 0) > 0;
+    },
+
+    async remove(subject_id: number): Promise<void> {
+        const client = await pool.connect();
+        try {
+            await client.query('BEGIN');
+
+            // Xóa  subject
+            await client.query('DELETE FROM subject WHERE subject_id = $1', [subject_id]);
+            
+            await client.query('COMMIT');
+        } catch (err) {
+            await client.query('ROLLBACK');
+            throw err;
+        } finally {
+            client.release();
+        }
     }
 }
 
