@@ -3,20 +3,20 @@ import { FlashcardDeck } from "../model/flashcard.deck.model";
 
 //Flashcard-deck Service
 export const FlashcardDeckService = {
-  async getAll(): Promise<FlashcardDeck[]> {
-    console.log("logic");
+  async getAll(queryParams: any): Promise<FlashcardDeck[]> {
+    const page = parseInt(queryParams.page as string, 10) || 1;
+    const limit = 10;
+    const offset = (page - 1) * limit;
+  
     const result = await query(
-      "SELECT title, description, created_at FROM flashcard_deck ORDER BY flashcard_deck_id"
+      `SELECT title, description, created_at
+       FROM flashcard_deck
+       ORDER BY flashcard_deck_id
+       LIMIT $1 OFFSET $2`,
+      [limit, offset],
     );
+  
     return result.rows;
-  },
-
-  async getById(id: number): Promise<FlashcardDeck | null> {
-    const result = await query(
-      "SELECT * FROM flashcard_deck WHERE flashcard_deck_id = $1",
-      [id]
-    );
-    return result.rows[0] || null;
   },
 
   async create(data: FlashcardDeck): Promise<FlashcardDeck> {

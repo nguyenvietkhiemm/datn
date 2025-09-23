@@ -6,28 +6,10 @@ import { Request, Response } from "express";
 //flashcard_deck controller
 export const FlashcardDeckController = {
   getAll: async (req: Request, res: Response) => {
-    console.log("start");
     const result = await safeExecute(
       async (): Promise<DefaultResponse<any>> => {
-        const data = await FlashcardDeckService.getAll();
+        const data = await FlashcardDeckService.getAll(req.query);
         return { status: 200, data, message: "List flashcard-deck" };
-      }
-    );
-    return res.status(result.status).json(result);
-  },
-
-  getById: async (req: Request, res: Response) => {
-    const result = await safeExecute(
-      async (): Promise<DefaultResponse<any>> => {
-        const deck = await FlashcardDeckService.getById(Number(req.params.id));
-        if (!deck) {
-          return { status: 404, message: "Deck not found" };
-        }
-        return {
-          status: 200,
-          data: deck,
-          message: "Flashcard deck information",
-        };
       }
     );
     return res.status(result.status).json(result);
