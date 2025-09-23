@@ -7,11 +7,24 @@ const FlashcardDeckRouter = Router();
  * @swagger
  * /flashcards/decks:
  *   get:
- *     summary: Get all flashcard decks
+ *     summary: Get all flashcard decks with pagination
  *     tags: [Decks]
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: Page number
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *         description: Number of items per page
  *     responses:
  *       200:
- *         description: List of decks
+ *         description: List of decks with pagination
  *   post:
  *     summary: Create a new deck
  *     tags: [Decks]
@@ -38,20 +51,6 @@ FlashcardDeckRouter.post("/", FlashcardDeckController.create);
 /**
  * @swagger
  * /flashcards/decks/{id}:
- *   get:
- *     summary: Get deck by ID
- *     tags: [Decks]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *     responses:
- *       200:
- *         description: Deck data
- *       404:
- *         description: Deck not found
  *   put:
  *     summary: Update deck
  *     tags: [Decks]
@@ -87,8 +86,7 @@ FlashcardDeckRouter.post("/", FlashcardDeckController.create);
  *       404:
  *         description: Deck not found
  */
-FlashcardDeckRouter.get("/:id", FlashcardDeckController.getById);
 FlashcardDeckRouter.put("/:id", FlashcardDeckController.update);
 FlashcardDeckRouter.delete("/:id", FlashcardDeckController.delete);
 
-export default FlashcardDeckRouter
+export default FlashcardDeckRouter;
