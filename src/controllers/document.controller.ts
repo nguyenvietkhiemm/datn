@@ -36,6 +36,19 @@ const DocumentController = {
         res.json(responses);
     },
 
+    async setAvailable(req: Request, res: Response) {
+        const responses: DefaultResponse<any> = await safeExecute(async () => {
+            const document_id = parseInt(req.params.document_id, 10);
+            const { available } = req.body;
+            return {
+                status: 202,
+                message: "Đổi trạng thái tài liệu thành công",
+                data: await DocumentService.setAvailable(parseInt(req.params.document_id, 10), Boolean(req.body.available))
+            } as DefaultResponse<any>;
+        });
+        res.json(responses);
+    },
+
     async remove(req: Request, res: Response) {
         const responses: DefaultResponse<any> = await safeExecute(async () => {
             return {
@@ -46,6 +59,8 @@ const DocumentController = {
         });
         res.json(responses);
     },
-}
+
+    
+};
 
 export default DocumentController;
