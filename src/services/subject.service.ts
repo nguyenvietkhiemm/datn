@@ -3,7 +3,7 @@ import { Subject } from "../model/subject.model";
 
 const SubjectService = {
     async getAll(limit: number = 100, offset: number = 0): Promise<Subject[]> {
-        const queryText = 'SELECT * FROM subject ORDER BY subject_id LIMIT $1 OFFSET $2';
+        const queryText = 'SELECT * FROM subject WHERE available = true ORDER BY subject_id LIMIT $1 OFFSET $2';
         const result = await query(queryText, [limit, offset]);
 
         return result.rows;
