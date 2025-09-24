@@ -99,9 +99,9 @@ subjectRoute.delete('/remove/:subject_id', SubjectController.remove);
 
 /**
  * @openapi
- * /subjects/remove/{subject_id}:
- *   delete:
- *     summary: Xóa một subject theo ID
+ * /subjects/hide/{subject_id}:
+ *   patch:
+ *     summary: Ẩn một subject theo ID
  *     tags:
  *       - Subject
  *     parameters:
@@ -110,7 +110,16 @@ subjectRoute.delete('/remove/:subject_id', SubjectController.remove);
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID của môn học cần xóa
+ *         description: ID của môn học cần ẩn
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               available:
+ *                 type: boolean
  *     responses:
  *       204:
  *         description: Xóa môn học thành công
@@ -119,7 +128,7 @@ subjectRoute.delete('/remove/:subject_id', SubjectController.remove);
  *       500:
  *         description: Lỗi server
  */
-subjectRoute.patch('/setAvailable/:subject_id', SubjectController.setAvailable);
+subjectRoute.patch('/hide/:subject_id', SubjectController.setAvailable);
 
 export default subjectRoute;
 

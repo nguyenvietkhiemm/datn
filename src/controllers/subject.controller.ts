@@ -39,11 +39,10 @@ const SubjectController = {
     async setAvailable(req: Request, res: Response) {
         const responses: DefaultResponse<any> = await safeExecute(async () => {
             const subject_id = parseInt(req.params.subject_id, 10);
-            const available = req.body.available;
             return {
                 status: 202,
                 message: "Đổi trạng thái môn học thành công",
-                data: await SubjectService.setAvailable(parseInt(req.params.subject_id, 10), Boolean(req.body.available))
+                data: await SubjectService.setAvailable(subject_id, Boolean(req.body.available))
             } as DefaultResponse<any>;
         });
         res.json(responses);
