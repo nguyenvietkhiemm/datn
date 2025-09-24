@@ -1,6 +1,7 @@
 import { Router } from "express";
 import UserController from "../controllers/user.controller";
 import Authentication from "../middleware/authentication";
+import {ADMIN} from "../config/permission";
 
 const UserRouter = Router();
 
@@ -30,7 +31,7 @@ const UserRouter = Router();
 UserRouter.get(
   "/",
   Authentication.AuthenticateToken,
-  Authentication.AuthorizeRoles(["2"]), 
+  Authentication.AuthorizeRoles(ADMIN), 
   UserController.getAll
 );
 
@@ -62,7 +63,7 @@ UserRouter.get(
 
 /**
  * @swagger
- * /users/{id}:
+ * /users/update/{id}:
  *   put:
  *     summary: Cập nhật user (chủ sở hữu hoặc admin)
  *     tags: [Users]
@@ -74,12 +75,27 @@ UserRouter.get(
  *         schema:
  *           type: integer
  *         required: true
+ *         description: ID của user cần cập nhật
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/User'
+ *             type: object
+ *             properties:
+ *               user_name:
+ *                 type: string
+ *                 example: Khiêm test update
+ *               email:
+ *                 type: string
+ *                 example: "testupdate@example.com"
+ *               password_hash:
+ *                 type: string
+ *               birthday:
+ *                 type: string
+ *                 format: date
+ *               role_id:
+ *                 type: integer
  *     responses:
  *       200:
  *         description: Cập nhật thành công
@@ -89,14 +105,14 @@ UserRouter.get(
  *         description: Không tìm thấy user
  */
 UserRouter.put(
-  "/:id",
+  "/update/:id",
   Authentication.AuthenticateToken,
   UserController.update // logic check quyền nằm trong controller
 );
 
 /**
  * @swagger
- * /users/{id}:
+ * /users/remove/{id}:
  *   delete:
  *     summary: Xóa user (chỉ admin)
  *     tags: [Users]
@@ -117,9 +133,9 @@ UserRouter.put(
  *         description: Không tìm thấy user
  */
 UserRouter.delete(
-  "/:id",
+  "/remove/:id",
   Authentication.AuthenticateToken,
-  Authentication.AuthorizeRoles(["2"]), // chỉ admin được xóa
+  Authentication.AuthorizeRoles(ADMIN), // chỉ admin được xóa
   UserController.remove
 );
 

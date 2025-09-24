@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import QuestionController from '../controllers/question.controller';
+import Authentication from '../middleware/authentication';
+import { ADMIN } from "../config/permission";
 
 const QuestionRoute = Router();
 
@@ -7,7 +9,7 @@ const QuestionRoute = Router();
  * @openapi
  * /questions:
  *   get:
- *     summary: Lấy danh sách câu hỏi
+ *     summary: Lấy danh sách câu hỏi [hiện tại max 100 câu]
  *     tags:
  *       - Question
  *     responses:
@@ -20,9 +22,9 @@ QuestionRoute.get('/', QuestionController.getAll);
 
 /**
  * @openapi
- * /questions:
+ * /questions/create:
  *   post:
- *     summary: Tạo câu hỏi mới
+ *     summary: Tạo nhiều câu hỏi mới (Yêu cầu admin)
  *     tags:
  *       - Question
  *     requestBody:
@@ -32,25 +34,60 @@ QuestionRoute.get('/', QuestionController.getAll);
  *           schema:
  *             type: object
  *             properties:
- *               question_name:
- *                 type: string
- *                 example: "Định luật II Newton"
- *               question_content:
- *                 type: string
- *                 example: "F = m * a"
+ *               questions:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     question_name:
+ *                       type: string
+ *                       example: "Định luật II Newton"
+ *                     question_content:
+ *                       type: string
+ *                       example: "Lực bằng khối lượng nhân gia tốc là phát biểu của định luật nào?"
+ *                     answers:
+ *                       type: array
+ *                       items:
+ *                         type: object
+ *                         properties:
+ *                           answer_content:
+ *                             type: string
+ *                             example: "Định luật II Newton"
+ *                           is_correct:
+ *                             type: boolean
+ *                             example: true
+ *           example:
+ *             questions:
+ *               - question_name: "Định luật II Newton"
+ *                 question_content: "Lực bằng khối lượng nhân gia tốc là phát biểu của định luật nào?"
+ *                 answers:
+ *                   - answer_content: "Định luật I Newton"
+ *                     is_correct: false
+ *                   - answer_content: "Định luật II Newton"
+ *                     is_correct: true
+ *               - question_name: "Thủ đô của Việt Nam"
+ *                 question_content: "Thành phố nào là thủ đô của Việt Nam?"
+ *                 answers:
+ *                   - answer_content: "Hà Nội"
+ *                     is_correct: true
+ *                   - answer_content: "TP. Hồ Chí Minh"
+ *                     is_correct: false
  *     responses:
  *       201:
  *         description: Tạo câu hỏi thành công
  *       500:
  *         description: Lỗi server
  */
-QuestionRoute.post('/create', QuestionController.create);
+QuestionRoute.post('/create',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        QuestionController.create);
 
 /**
  * @openapi
- * /questions/{id}:
+ * /questions/update/{id}:
  *   patch:
- *     summary: Cập nhật một phần thông tin câu hỏi
+ *     summary: Cập nhật một phần thông tin câu hỏi và câu trả lời (Yêu cầu admin)
  *     tags:
  *       - Question
  *     parameters:
@@ -64,15 +101,18 @@ QuestionRoute.post('/create', QuestionController.create);
  *       required: true
  *       content:
  *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               question_name:
- *                 type: string
- *                 example: "Định luật I Newton"
- *               question_content:
- *                 type: string
- *                 example: "Một vật sẽ đứng yên hoặc chuyển động thẳng đều nếu không chịu tác dụng của lực"
+ *           example:
+ *             question_name: "Định luật II Newton (bản cập nhật)"
+ *             question_content: "F = m * a (cập nhật)"
+ *             answers:
+ *               - answer_id: 54
+ *                 answer_content: "Định luật I Newton (cập nhật)"
+ *                 is_correct: false
+ *               - answer_id: 55
+ *                 answer_content: "Định luật II Newton (cập nhật)"
+ *                 is_correct: true
+ *               - answer_content: "Định luật III Newton (thêm mới)"
+ *                 is_correct: false
  *     responses:
  *       202:
  *         description: Cập nhật câu hỏi thành công
@@ -81,18 +121,22 @@ QuestionRoute.post('/create', QuestionController.create);
  *       500:
  *         description: Lỗi server
  */
-QuestionRoute.patch('/update', QuestionController.update);
+
+QuestionRoute.patch('/update/:id',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        QuestionController.update);
 
 /**
  * @openapi
- * /questions/remove/{question_id}:
+ * /questions/remove/{id}:
  *   delete:
- *     summary: Xóa một câu hỏi theo ID
+ *     summary: Xóa một câu hỏi theo ID (Yêu cầu admin)
  *     tags:
  *       - Question
  *     parameters:
  *       - in: path
- *         name: question_id
+ *         name: id
  *         required: true
  *         schema:
  *           type: integer
@@ -105,30 +149,42 @@ QuestionRoute.patch('/update', QuestionController.update);
  *       500:
  *         description: Lỗi server
  */
-QuestionRoute.delete('/remove/:question_id', QuestionController.remove);
+QuestionRoute.delete('/remove/:id',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        QuestionController.remove);
 
 /**
  * @openapi
- * /questions/remove/{question_id}:
- *   delete:
- *     summary: Xóa một câu hỏi theo ID
+ * /questions/setAvailable/{id}:
+ *   patch:
+ *     summary: Thay đổi trạng thái available của câu hỏi theo ID (Yêu cầu admin)
  *     tags:
  *       - Question
  *     parameters:
  *       - in: path
- *         name: question_id
+ *         name: id
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID của câu hỏi cần xóa
+ *         description: ID của câu hỏi cần thay đổi
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           example:
+ *             available: false
  *     responses:
  *       204:
- *         description: Xóa câu hỏi thành công
+ *         description: Cập nhật trạng thái thành công
  *       404:
  *         description: Không tìm thấy câu hỏi
  *       500:
  *         description: Lỗi server
  */
-QuestionRoute.patch('/setAvailable/:question_id', QuestionController.setAvailable);
+QuestionRoute.patch('/setAvailable/:id',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        QuestionController.setAvailable);
 
 export default QuestionRoute;
