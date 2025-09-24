@@ -93,10 +93,10 @@ const QuestionService = {
 
     // hàm update sẽ cập nhật cả question và answers
     // nếu answer đã có answer_id thì sẽ update, nếu chưa thì sẽ thêm mới vào DB
-    async update(question: Partial<Question>): Promise<Question | null> {
+    async update(question_id: Number, question: Partial<Question>): Promise<Question | null> {
         const client = await pool.connect();
         try {
-            const id = question.question_id;
+            const id = question_id;
 
             await client.query("BEGIN");
 
@@ -185,9 +185,11 @@ const QuestionService = {
         return (result.rowCount ?? 0) > 0;
     },
 
-    async remove(question_id: number): Promise<void> {
+    async remove(id: number): Promise<void> {
         const client = await pool.connect();
         try {
+            const question_id = id;
+            
             await client.query('BEGIN');
 
             // Xoá câu trả lời liên quan
