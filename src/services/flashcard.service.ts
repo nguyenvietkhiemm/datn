@@ -3,15 +3,11 @@ import { Flashcard } from "../model/flashcard.model";
 
 // Flashcard Service
 export const FlashcardService = {
-  async getAll(): Promise<Flashcard[]> {
-    const result = await query("SELECT * FROM flashcard ORDER BY flashcard_id");
-    return result.rows;
-  },
 
-  async getById(id: number): Promise<Flashcard | null> {
+  async getById(flashcard_deck_id: number): Promise<Flashcard | null> {
     const result = await query(
-      "SELECT * FROM flashcard WHERE flashcard_id = $1",
-      [id]
+      "SELECT * FROM flashcard WHERE flashcard_deck_id = $1",
+      [flashcard_deck_id]
     );
     return result.rows[0] || null;
   },
