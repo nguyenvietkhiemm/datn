@@ -18,12 +18,6 @@ const flashcardRoute = Router();
 /**
  * @swagger
  * /flashcards:
- *   get:
- *     summary: Get all flashcards
- *     tags: [Flashcards]
- *     responses:
- *       200:
- *         description: List of flashcards
  *   post:
  *     summary: Create a new flashcard
  *     tags: [Flashcards]
@@ -44,18 +38,17 @@ const flashcardRoute = Router();
  *       201:
  *         description: Flashcard created successfully
  */
-flashcardRoute.get("/", FlashcardController.getAll);
 flashcardRoute.post("/", FlashcardController.create);
 
 /**
  * @swagger
- * /flashcards/{id}:
+ * /flashcards/{flashcard_deck_id}:
  *   get:
- *     summary: Get flashcard by ID
+ *     summary: Get flashcard by flashcard_deck_id
  *     tags: [Flashcards]
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: flashcard_deck_id
  *         required: true
  *         schema:
  *           type: integer
@@ -99,7 +92,7 @@ flashcardRoute.post("/", FlashcardController.create);
  *       404:
  *         description: Flashcard not found
  */
-flashcardRoute.get("/:id", FlashcardController.getById);
+flashcardRoute.get("/:flashcard_deck_id", FlashcardController.getById);
 flashcardRoute.put("/:id", FlashcardController.update);
 flashcardRoute.delete("/:id", FlashcardController.delete);
 
