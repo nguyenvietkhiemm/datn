@@ -118,9 +118,9 @@ documentRoute.delete('/remove/:document_id', DocumentController.remove);
 
 /**
  * @openapi
- * /documents/remove/{document_id}:
- *   delete:
- *     summary: Xóa một tài liệu theo ID
+ * /documents/set/available/{document_id}:
+ *   patch:
+ *     summary: Thay đổi trạng thái tài liệu theo ID
  *     tags:
  *       - Document
  *     parameters:
@@ -129,10 +129,10 @@ documentRoute.delete('/remove/:document_id', DocumentController.remove);
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID của tài liệu cần xóa
+ *         description: ID của tài liệu cần Thay đổi trạng thái
  *     responses:
  *       204:
- *         description: Xóa tài liệu thành công
+ *         description: Thay đổi trạng thái tài liệu thành công
  *       404:
  *         description: Không tìm thấy tài liệu
  *       500:
