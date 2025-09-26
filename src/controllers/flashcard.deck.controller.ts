@@ -20,7 +20,6 @@ export const FlashcardDeckController = {
       async (): Promise<DefaultResponse<any>> => {
         const newDeck = await FlashcardDeckService.create({
           ...req.body,
-          flashcard_deck_id: Date.now(),
           created_at: new Date(),
         });
         return {
