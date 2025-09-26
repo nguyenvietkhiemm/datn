@@ -34,23 +34,29 @@ documentRoute.get('/', DocumentController.getAll);
  *             properties:
  *               title:
  *                 type: string
+ *                 description: Tiêu đề của tài liệu
  *                 example: "Tài liệu Vật lý"
  *               link:
  *                 type: string
+ *                 description: Đường dẫn tới tài liệu (PDF, DOCX, v.v.)
  *                 example: "https://example.com/document.pdf"
  *               embedding:
  *                 type: array
+ *                 description: Vector embedding (768 chiều) của tài liệu để dùng cho tìm kiếm ngữ nghĩa
  *                 items:
  *                   type: number
- *                 example: []
+ *                 example: [0.12, 0.03, -0.45, 0.98, 0.0, 0.21]
  *               topic_id:
  *                 type: integer
+ *                 description: ID chủ đề mà tài liệu thuộc về
  *                 example: 1
  *     responses:
  *       201:
  *         description: Tạo tài liệu thành công
+ *       400:
+ *         description: Dữ liệu gửi lên không hợp lệ (ví dụ embedding không đủ 768 chiều)
  *       500:
- *         description: Lỗi server
+ *         description:Lỗi server
  */
 documentRoute.post('/create', DocumentController.create);
 
