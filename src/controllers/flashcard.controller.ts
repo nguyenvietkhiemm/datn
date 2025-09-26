@@ -4,16 +4,6 @@ import safeExecute, { DefaultResponse } from "../utils/safe.execute";
 
 //flashcard controller
 export const FlashcardController = {
-  getById: async (req: Request, res: Response) => {
-    const result = await safeExecute(async (): Promise<DefaultResponse<any>> => {
-      const card = await FlashcardService.getById(Number(req.params.flashcard_deck_id));
-      if (!card) {
-        return { status: 404, message: "Flashcard not found" };
-      }
-      return { status: 200, data: card, message: "Flashcard information" };
-    });
-    return res.status(result.status).json(result);
-  },
 
   create: async (req: Request, res: Response) => {
     const result = await safeExecute(async (): Promise<DefaultResponse<any>> => {

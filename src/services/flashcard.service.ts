@@ -4,14 +4,6 @@ import { Flashcard } from "../model/flashcard.model";
 // Flashcard Service
 export const FlashcardService = {
 
-  async getById(flashcard_deck_id: number): Promise<Flashcard | null> {
-    const result = await query(
-      "SELECT * FROM flashcard WHERE flashcard_deck_id = $1",
-      [flashcard_deck_id]
-    );
-    return result.rows[0] || null;
-  },
-
   async create(data: Flashcard): Promise<Flashcard> {
     const result = await query(
       `INSERT INTO flashcard (front, back, example, created_at, status, flashcard_deck_id)
