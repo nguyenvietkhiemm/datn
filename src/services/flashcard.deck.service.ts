@@ -1,5 +1,6 @@
 import {query} from "../config/database"
 import { FlashcardDeck } from "../model/flashcard.deck.model";
+import { Flashcard } from "../model/flashcard.model";
 
 //Flashcard-deck Service
 export const FlashcardDeckService = {
@@ -17,6 +18,14 @@ export const FlashcardDeckService = {
     );
   
     return result.rows;
+  },
+
+  async getById(id: number): Promise<Flashcard | null> {
+    const result = await query(
+      "SELECT * FROM flashcard WHERE flashcard_deck_id = $1",
+      [id]
+    );
+    return result.rows[0] || null;
   },
 
   async create(data: FlashcardDeck): Promise<FlashcardDeck> {
