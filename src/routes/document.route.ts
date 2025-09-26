@@ -56,14 +56,14 @@ documentRoute.post('/create', DocumentController.create);
 
 /**
  * @openapi
- * /documents/update/{document_id}:
+ * /documents/update/{id}:
  *   patch:
  *     summary: Cập nhật thông tin tài liệu
  *     tags:
  *       - Document
  *     parameters:
  *       - in: path
- *         name: document_id
+ *         name: id
  *         required: true
  *         schema:
  *           type: integer
@@ -90,18 +90,18 @@ documentRoute.post('/create', DocumentController.create);
  *       202:
  *         description: Cập nhật tài liệu thành công
  */
-documentRoute.patch('/update/:document_id', DocumentController.update);
+documentRoute.patch('/update/:id', DocumentController.update);
 
 /**
  * @openapi
- * /documents/remove/{document_id}:
+ * /documents/remove/{id}:
  *   delete:
  *     summary: Xóa một tài liệu theo ID
  *     tags:
  *       - Document
  *     parameters:
  *       - in: path
- *         name: document_id
+ *         name: id
  *         required: true
  *         schema:
  *           type: integer
@@ -114,18 +114,18 @@ documentRoute.patch('/update/:document_id', DocumentController.update);
  *       500:
  *         description: Lỗi server
  */
-documentRoute.delete('/remove/:document_id', DocumentController.remove);
+documentRoute.delete('/remove/:id', DocumentController.remove);
 
 /**
  * @openapi
- * /documents/set/available/{document_id}:
+ * /documents/setAvailable/{id}:
  *   patch:
  *     summary: Thay đổi trạng thái tài liệu theo ID
  *     tags:
  *       - Document
  *     parameters:
  *       - in: path
- *         name: document_id
+ *         name: id
  *         required: true
  *         schema:
  *           type: integer
@@ -138,6 +138,6 @@ documentRoute.delete('/remove/:document_id', DocumentController.remove);
  *       500:
  *         description: Lỗi server
  */
-documentRoute.patch('/setAvailable/:document_id', DocumentController.setAvailable);
+documentRoute.patch('/setAvailable/:id', DocumentController.setAvailable);
 
 export default documentRoute;
