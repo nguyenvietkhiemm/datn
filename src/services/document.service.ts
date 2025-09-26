@@ -52,10 +52,9 @@ const DocumentService = {
     },
 
 
-    async update(document: Partial<Document>): Promise<Document> {
+    async update(id:number, document: Partial<Document>): Promise<Document> {
         const client = await pool.connect();
         try {
-            const id = document.document_id;
             if (!id) {
                 throw new Error("document_id isn't exist");
             }
@@ -98,18 +97,18 @@ const DocumentService = {
         }
     },
 
-    async setAvailable(document_id: number, available: boolean): Promise<boolean> {
-        const result = await query('UPDATE document SET available = $1 WHERE document_id = $2', [available, document_id]);
+    async setAvailable(id: number, available: boolean): Promise<boolean> {
+        const result = await query('UPDATE document SET available = $1 WHERE document_id = $2', [available, id]);
         return (result.rowCount ?? 0) > 0;
     },
 
-    async remove(document_id: number): Promise<void> {
+    async remove(id: number): Promise<void> {
         const client = await pool.connect();
         try {
             await client.query('BEGIN');
 
             // Xóa document 
-            await client.query('DELETE FROM document WHERE document_id = $1', [document_id]);
+            await client.query('DELETE FROM document WHERE document_id = $1', [id]);
             
             await client.query('COMMIT');
         } catch (err) {

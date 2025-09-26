@@ -32,7 +32,7 @@ const DocumentController = {
       return {
         status: 202,
         message: "Cập nhật tài liệu thành công",
-        data: await DocumentService.update(req.body),
+        data: await DocumentService.update(Number(req.params.id), req.body),
       };
     });
 
@@ -40,18 +40,13 @@ const DocumentController = {
   },
 
   async setAvailable(req: Request, res: Response) {
-    const document_id = Number(req.params.document_id);
 
     const result: DefaultResponse<any> = await safeExecute(async () => {
-      if (isNaN(document_id)) {
-        return { status: 400, message: "document_id không hợp lệ" };
-      }
-
       return {
         status: 202,
         message: "Đổi trạng thái tài liệu thành công",
         data: await DocumentService.setAvailable(
-          document_id,
+          Number(req.params.id),
           Boolean(req.body.available)
         ),
       };
@@ -61,17 +56,11 @@ const DocumentController = {
   },
 
   async remove(req: Request, res: Response) {
-    const document_id = Number(req.params.document_id);
-
     const result: DefaultResponse<any> = await safeExecute(async () => {
-      if (isNaN(document_id)) {
-        return { status: 400, message: "document_id không hợp lệ" };
-      }
-
       return {
         status: 204,
         message: "Xoá tài liệu thành công",
-        data: await DocumentService.remove(document_id),
+        data: await DocumentService.remove(Number(req.params.id)),
       };
     });
 

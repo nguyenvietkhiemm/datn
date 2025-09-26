@@ -45,11 +45,18 @@ subjectRoute.post('/create', SubjectController.create);
 
 /**
  * @openapi
- * /subjects/update:
+ * /subjects/update/{id}:
  *   patch:
  *     summary: Cập nhật thông tin môn học
  *     tags:
  *       - Subject
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID của môn học cần cập nhật
  *     requestBody:
  *       required: true
  *       content:
@@ -57,9 +64,6 @@ subjectRoute.post('/create', SubjectController.create);
  *           schema:
  *             type: object
  *             properties:
- *               subject_id:
- *                 type: integer
- *                 example: 1
  *               subject_name:
  *                 type: string
  *                 example: "Toán"
@@ -71,18 +75,18 @@ subjectRoute.post('/create', SubjectController.create);
  *       500:
  *         description: Lỗi server
  */
-subjectRoute.patch('/update', SubjectController.update);
+subjectRoute.patch('/update/:id', SubjectController.update);
 
 /**
  * @openapi
- * /subjects/remove/{subject_id}:
+ * /subjects/remove/{id}:
  *   delete:
  *     summary: Xóa một subject theo ID
  *     tags:
  *       - Subject
  *     parameters:
  *       - in: path
- *         name: subject_id
+ *         name: id
  *         required: true
  *         schema:
  *           type: integer
@@ -95,18 +99,18 @@ subjectRoute.patch('/update', SubjectController.update);
  *       500:
  *         description: Lỗi server
  */
-subjectRoute.delete('/remove/:subject_id', SubjectController.remove);
+subjectRoute.delete('/remove/:id', SubjectController.remove);
 
 /**
  * @openapi
- * /subjects/hide/{subject_id}:
+ * /subjects/setAvailable/{id}:
  *   patch:
  *     summary: Ẩn một subject theo ID
  *     tags:
  *       - Subject
  *     parameters:
  *       - in: path
- *         name: subject_id
+ *         name: id
  *         required: true
  *         schema:
  *           type: integer
@@ -128,7 +132,7 @@ subjectRoute.delete('/remove/:subject_id', SubjectController.remove);
  *       500:
  *         description: Lỗi server
  */
-subjectRoute.patch('/hide/:subject_id', SubjectController.setAvailable);
+subjectRoute.patch('/setAvailable/:id', SubjectController.setAvailable);
 
 export default subjectRoute;
 

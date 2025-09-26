@@ -30,7 +30,7 @@ const SubjectController = {
             return {
                 status: 202,
                 message: "Cập nhật môn học thành công",
-                data: await SubjectService.update(req.body)
+                data: await SubjectService.update(Number(req.params.id), req.body)
             } as DefaultResponse<any>;
         });
         res.json(responses);
@@ -38,11 +38,10 @@ const SubjectController = {
 
     async setAvailable(req: Request, res: Response) {
         const responses: DefaultResponse<any> = await safeExecute(async () => {
-            const subject_id = parseInt(req.params.subject_id, 10);
             return {
                 status: 202,
                 message: "Đổi trạng thái môn học thành công",
-                data: await SubjectService.setAvailable(subject_id, Boolean(req.body.available))
+                data: await SubjectService.setAvailable(Number(req.params.id), Boolean(req.body.available))
             } as DefaultResponse<any>;
         });
         res.json(responses);
@@ -53,7 +52,7 @@ const SubjectController = {
             return {
                 status: 204,
                 message: "Xoá môn học thành công",
-                data: await SubjectService.remove(parseInt(req.params.subject_id, 10))
+                data: await SubjectService.remove(Number(req.params.id))
             } as DefaultResponse<any>;
         });
         res.json(responses);
