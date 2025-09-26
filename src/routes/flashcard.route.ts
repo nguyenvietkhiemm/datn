@@ -34,6 +34,8 @@ const flashcardRoute = Router();
  *                 type: string
  *               example:
  *                 type: string
+ *               flashcard_deck_id:
+ *                 type : string
  *     responses:
  *       201:
  *         description: Flashcard created successfully
@@ -42,27 +44,7 @@ flashcardRoute.post("/create", FlashcardController.create);
 
 /**
  * @swagger
- * /flashcards/deck:
- *   get:
- *     summary: Get flashcard by flashcard_deck_id
- *     tags: [Flashcards]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *     responses:
- *       200:
- *         description: Flashcard data
- *       404:
- *         description: Flashcard not found
- * */
-flashcardRoute.get("/flashcard/deck/:id", FlashcardController.getById);
-
-/**
- * @swagger
- * /flashcards:
+ * /flashcards/{id}:
  *   put:
  *     summary: Update flashcard
  *     tags: [Flashcards]

@@ -51,6 +51,20 @@ flashcardDeckRouter.post("/create", FlashcardDeckController.create);
 /**
  * @swagger
  * /flashcards/decks/{id}:
+ *   get:
+ *     summary: Get flashcard by flashcard_deck_id
+ *     tags: [Decks]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Flashcard data
+ *       404:
+ *         description: Flashcard not found
  *   put:
  *     summary: Update deck
  *     tags: [Decks]
@@ -86,6 +100,7 @@ flashcardDeckRouter.post("/create", FlashcardDeckController.create);
  *       404:
  *         description: Deck not found
  */
+flashcardDeckRouter.get("/:id", FlashcardDeckController.getById)
 flashcardDeckRouter.put("/:id", FlashcardDeckController.update);
 flashcardDeckRouter.delete("/:id", FlashcardDeckController.delete);
 
