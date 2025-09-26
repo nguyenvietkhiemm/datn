@@ -43,7 +43,7 @@ roleRoute.get('/:id', RoleController.getOne);
 
 /**
  * @openapi
- * /roles:
+ * /roles/create:
  *   post:
  *     summary: Tạo role mới
  *     tags:
@@ -66,7 +66,7 @@ roleRoute.get('/:id', RoleController.getOne);
  *       500:
  *         description : loi
  */
-roleRoute.post('/', RoleController.create);
+roleRoute.post('/create', RoleController.create);
 
 /**
  * @openapi

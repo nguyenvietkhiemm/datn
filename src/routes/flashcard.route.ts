@@ -17,7 +17,7 @@ const flashcardRoute = Router();
 
 /**
  * @swagger
- * /flashcards:
+ * /flashcards/create:
  *   post:
  *     summary: Create a new flashcard
  *     tags: [Flashcards]
