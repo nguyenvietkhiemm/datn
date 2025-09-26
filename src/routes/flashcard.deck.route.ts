@@ -25,6 +25,11 @@ const flashcardDeckRouter = Router();
  *     responses:
  *       200:
  *         description: List of decks with pagination
+ */
+
+/**
+ * @swagger
+ * /flashcards/decks/create:
  *   post:
  *     summary: Create a new deck
  *     tags: [Decks]
@@ -52,7 +57,7 @@ flashcardDeckRouter.post("/create", FlashcardDeckController.create);
  * @swagger
  * /flashcards/decks/{id}:
  *   get:
- *     summary: Get flashcard by flashcard_deck_id
+ *     summary: Get flashcard deck by ID
  *     tags: [Decks]
  *     parameters:
  *       - in: path
@@ -62,11 +67,17 @@ flashcardDeckRouter.post("/create", FlashcardDeckController.create);
  *           type: integer
  *     responses:
  *       200:
- *         description: Flashcard data
+ *         description: Flashcard deck data
  *       404:
- *         description: Flashcard not found
+ *         description: Deck not found
+ */
+flashcardDeckRouter.get("/:id", FlashcardDeckController.getById);
+
+/**
+ * @swagger
+ * /flashcards/decks/update/{id}:
  *   put:
- *     summary: Update deck
+ *     summary: Update a flashcard deck
  *     tags: [Decks]
  *     parameters:
  *       - in: path
@@ -85,8 +96,14 @@ flashcardDeckRouter.post("/create", FlashcardDeckController.create);
  *         description: Deck updated successfully
  *       404:
  *         description: Deck not found
+ */
+flashcardDeckRouter.put("/update/:id", FlashcardDeckController.update);
+
+/**
+ * @swagger
+ * /flashcards/decks/delete/{id}:
  *   delete:
- *     summary: Delete deck
+ *     summary: Delete a flashcard deck
  *     tags: [Decks]
  *     parameters:
  *       - in: path
@@ -100,8 +117,6 @@ flashcardDeckRouter.post("/create", FlashcardDeckController.create);
  *       404:
  *         description: Deck not found
  */
-flashcardDeckRouter.get("/:id", FlashcardDeckController.getById)
-flashcardDeckRouter.put("/:id", FlashcardDeckController.update);
-flashcardDeckRouter.delete("/:id", FlashcardDeckController.delete);
+flashcardDeckRouter.delete("/delete/:id", FlashcardDeckController.delete);
 
 export default flashcardDeckRouter;
