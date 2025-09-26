@@ -20,7 +20,7 @@ questionRoute.get('/', QuestionController.getAll);
 
 /**
  * @openapi
- * /questions:
+ * /questions/create:
  *   post:
  *     summary: Tạo câu hỏi mới
  *     tags:

@@ -46,7 +46,7 @@ const flashcardDeckRouter = Router();
  *         description: Deck created successfully
  */
 flashcardDeckRouter.get("/", FlashcardDeckController.getAll);
-flashcardDeckRouter.post("/", FlashcardDeckController.create);
+flashcardDeckRouter.post("/create", FlashcardDeckController.create);
 
 /**
  * @swagger
