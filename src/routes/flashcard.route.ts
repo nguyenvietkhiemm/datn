@@ -1,8 +1,6 @@
 // src/routes/flashcard.route.ts
 import { Router } from "express";
-import {
-  FlashcardController,
-} from "../controllers/flashcard.controller";
+import { FlashcardController } from "../controllers/flashcard.controller";
 
 const flashcardRoute = Router();
 
@@ -11,8 +9,6 @@ const flashcardRoute = Router();
  * tags:
  *   - name: Flashcards
  *     description: Flashcard API
- *   - name: Decks
- *     description: Flashcard Deck API
  */
 
 /**
@@ -35,7 +31,7 @@ const flashcardRoute = Router();
  *               example:
  *                 type: string
  *               flashcard_deck_id:
- *                 type : string
+ *                 type: string
  *     responses:
  *       201:
  *         description: Flashcard created successfully
@@ -44,9 +40,9 @@ flashcardRoute.post("/create", FlashcardController.create);
 
 /**
  * @swagger
- * /flashcards/{id}:
+ * /flashcards/update/{id}:
  *   put:
- *     summary: Update flashcard
+ *     summary: Update a flashcard
  *     tags: [Flashcards]
  *     parameters:
  *       - in: path
@@ -60,13 +56,26 @@ flashcardRoute.post("/create", FlashcardController.create);
  *         application/json:
  *           schema:
  *             type: object
+ *             properties:
+ *               front:
+ *                 type: string
+ *               back:
+ *                 type: string
+ *               example:
+ *                 type: string
  *     responses:
  *       200:
  *         description: Flashcard updated successfully
  *       404:
  *         description: Flashcard not found
+ */
+flashcardRoute.put("/update/:id", FlashcardController.update);
+
+/**
+ * @swagger
+ * /flashcards/delete/{id}:
  *   delete:
- *     summary: Delete flashcard
+ *     summary: Delete a flashcard
  *     tags: [Flashcards]
  *     parameters:
  *       - in: path
@@ -80,7 +89,6 @@ flashcardRoute.post("/create", FlashcardController.create);
  *       404:
  *         description: Flashcard not found
  */
-flashcardRoute.put("/:id", FlashcardController.update);
-flashcardRoute.delete("/:id", FlashcardController.delete);
+flashcardRoute.delete("/delete/:id", FlashcardController.delete);
 
 export default flashcardRoute;
