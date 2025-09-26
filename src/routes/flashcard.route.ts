@@ -42,13 +42,13 @@ flashcardRoute.post("/create", FlashcardController.create);
 
 /**
  * @swagger
- * /flashcards/{flashcard_deck_id}:
+ * /flashcards/deck:
  *   get:
  *     summary: Get flashcard by flashcard_deck_id
  *     tags: [Flashcards]
  *     parameters:
  *       - in: path
- *         name: flashcard_deck_id
+ *         name: id
  *         required: true
  *         schema:
  *           type: integer
@@ -57,6 +57,12 @@ flashcardRoute.post("/create", FlashcardController.create);
  *         description: Flashcard data
  *       404:
  *         description: Flashcard not found
+ * */
+flashcardRoute.get("/flashcard/deck/:id", FlashcardController.getById);
+
+/**
+ * @swagger
+ * /flashcards:
  *   put:
  *     summary: Update flashcard
  *     tags: [Flashcards]
@@ -92,7 +98,6 @@ flashcardRoute.post("/create", FlashcardController.create);
  *       404:
  *         description: Flashcard not found
  */
-flashcardRoute.get("/:flashcard_deck_id", FlashcardController.getById);
 flashcardRoute.put("/:id", FlashcardController.update);
 flashcardRoute.delete("/:id", FlashcardController.delete);
 
