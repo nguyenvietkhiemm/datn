@@ -38,7 +38,7 @@ const flashcardRoute = Router();
  *       201:
  *         description: Flashcard created successfully
  */
-flashcardRoute.post("/", FlashcardController.create);
+flashcardRoute.post("/create", FlashcardController.create);
 
 /**
  * @swagger
