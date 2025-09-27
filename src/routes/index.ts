@@ -22,5 +22,6 @@ router.use('/subjects', subjectRoute);
 router.use("/flashcards/decks", flashcardDeckRouter);
 router.use("/flashcards", flashcardRoute);
 router.use("/topics", topicRouter);
+router.use("/", authRouter);
 
 export default router;
