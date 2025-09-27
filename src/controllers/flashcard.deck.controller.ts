@@ -27,21 +27,25 @@ export const FlashcardDeckController = {
   },
 
   create: async (req: Request, res: Response) => {
-    const result = await safeExecute(
-      async (): Promise<DefaultResponse<any>> => {
-        const newDeck = await FlashcardDeckService.create({
-          ...req.body,
-          created_at: new Date(),
-        });
-        return {
-          status: 201,
-          data: newDeck,
-          message: "Create flashcard_deck successfully",
-        };
-      }
-    );
+    if (!req.user) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+  
+    const result = await safeExecute(async (): Promise<DefaultResponse<any>> => {
+      const newDeck = await FlashcardDeckService.create({
+        ...req.body,
+        user_id: req.user!.user_id
+      });
+      return {
+        status: 201,
+        data: newDeck,
+        message: "Create flashcard_deck successfully",
+      };
+    });
+  
     return res.status(result.status).json(result);
   },
+  
 
   update: async (req: Request, res: Response) => {
     const result = await safeExecute(

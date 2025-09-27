@@ -1,4 +1,5 @@
 import { FlashcardDeckController } from "../controllers/flashcard.deck.controller";
+import Authentication from "../middleware/authentication";
 import { Router } from "express";
 
 const flashcardDeckRouter = Router();
@@ -26,7 +27,9 @@ const flashcardDeckRouter = Router();
  *       200:
  *         description: List of decks with pagination
  */
-flashcardDeckRouter.get("/", FlashcardDeckController.getAll);
+flashcardDeckRouter.get("/", 
+        Authentication.AuthenticateToken,
+        FlashcardDeckController.getAll);
 
 /**
  * @swagger
@@ -43,15 +46,17 @@ flashcardDeckRouter.get("/", FlashcardDeckController.getAll);
  *             properties:
  *               title:
  *                 type: string
+ *                 example: "Sample Deck"
  *               description:
  *                 type: string
- *               user_id:
- *                 type: number
+ *                 example: "This is a sample flashcard deck"
  *     responses:
  *       201:
  *         description: Deck created successfully
  */
-flashcardDeckRouter.post("/create", FlashcardDeckController.create);
+flashcardDeckRouter.post("/create",
+        Authentication.AuthenticateToken,
+        FlashcardDeckController.create);
 
 /**
  * @swagger
@@ -71,7 +76,9 @@ flashcardDeckRouter.post("/create", FlashcardDeckController.create);
  *       404:
  *         description: Deck not found
  */
-flashcardDeckRouter.get("/:id", FlashcardDeckController.getById);
+flashcardDeckRouter.get("/:id",
+        Authentication.AuthenticateToken,
+        FlashcardDeckController.getById);
 
 /**
  * @swagger
@@ -97,7 +104,9 @@ flashcardDeckRouter.get("/:id", FlashcardDeckController.getById);
  *       404:
  *         description: Deck not found
  */
-flashcardDeckRouter.put("/update/:id", FlashcardDeckController.update);
+flashcardDeckRouter.put("/update/:id",
+        Authentication.AuthenticateToken,
+        FlashcardDeckController.update);
 
 /**
  * @swagger
@@ -117,6 +126,8 @@ flashcardDeckRouter.put("/update/:id", FlashcardDeckController.update);
  *       404:
  *         description: Deck not found
  */
-flashcardDeckRouter.delete("/delete/:id", FlashcardDeckController.delete);
+flashcardDeckRouter.delete("/delete/:id",
+        Authentication.AuthenticateToken,
+        FlashcardDeckController.delete);
 
 export default flashcardDeckRouter;
