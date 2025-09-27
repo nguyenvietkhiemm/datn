@@ -50,7 +50,7 @@ Dưới đây là các mã trạng thái HTTP quy ước:
 ```txt
 200 : GET thành công
 201 : POST thành công (tạo mới)
-202 : PUT thành công (cập nhật)
+202 : PUT/PATCH thành công (cập nhật)
 204 : DELETE thành công (không trả dữ liệu)
 400 : Kiểm tra tồn tại hay chưa
 404 : Không tìm thấy
