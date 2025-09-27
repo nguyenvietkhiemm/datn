@@ -16,8 +16,6 @@ const topicRoute = Router();
  *     responses:
  *       200:
  *         description: Danh sách chủ đề
- *       401:
- *         description: Thiếu hoặc sai token
  *       500:
  *         description: Lỗi server
  */
@@ -55,8 +53,6 @@ topicRoute.get(
  *     responses:
  *       201:
  *         description: Tạo chủ đề thành công
- *       401:
- *         description: Thiếu hoặc sai token
  *       403:
  *         description: Không có quyền truy cập
  *       500:
@@ -100,8 +96,6 @@ topicRoute.post(
  *     responses:
  *       202:
  *         description: Cập nhật chủ đề thành công
- *       401:
- *         description: Thiếu hoặc sai token
  *       403:
  *         description: Không có quyền truy cập
  *       404:
@@ -135,8 +129,6 @@ topicRoute.patch(
  *     responses:
  *       204:
  *         description: Xóa chủ đề thành công
- *       401:
- *         description: Thiếu hoặc sai token
  *       403:
  *         description: Không có quyền truy cập
  *       404:
