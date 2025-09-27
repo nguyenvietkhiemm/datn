@@ -30,17 +30,14 @@ export const FlashcardDeckService = {
 
   async create(data: FlashcardDeck): Promise<FlashcardDeck> {
     const result = await query(
-      `INSERT INTO flashcard_deck (title, description, created_at, user_id)
-         VALUES ($1,$2,$3,$4) RETURNING *`,
-      [data.title, data.description, data.created_at, data.user_id]
+      `INSERT INTO flashcard_deck (title, description, user_id)
+         VALUES ($1,$2,$3) RETURNING *`,
+      [data.title, data.description, data.user_id]
     );
     return result.rows[0];
   },
 
-  async update(
-    id: number,
-    data: Partial<Omit<FlashcardDeck, 'flashcard_deck_id' | 'created_at'>>
-  ): Promise<FlashcardDeck | null> {
+  async update(id: number, data: Partial<Omit<FlashcardDeck, 'flashcard_deck_id' | 'created_at'>>): Promise<FlashcardDeck | null> {
     const fields: string[] = [];
     const values: any[] = [];
     let idx = 1;
