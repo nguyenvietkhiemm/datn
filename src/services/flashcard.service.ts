@@ -6,13 +6,12 @@ export const FlashcardService = {
 
   async create(data: Flashcard): Promise<Flashcard> {
     const result = await query(
-      `INSERT INTO flashcard (front, back, example, created_at, status, flashcard_deck_id)
-         VALUES ($1,$2,$3,$4,$5,$6) RETURNING *`,
+      `INSERT INTO flashcard (front, back, example, status, flashcard_deck_id)
+         VALUES ($1,$2,$3,$4,$5) RETURNING *`,
       [
         data.front,
         data.back,
         data.example,
-        data.created_at,
         data.status,
         data.flashcard_deck_id,
       ]
