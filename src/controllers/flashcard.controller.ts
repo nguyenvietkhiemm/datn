@@ -8,8 +8,7 @@ export const FlashcardController = {
   create: async (req: Request, res: Response) => {
     const result = await safeExecute(async (): Promise<DefaultResponse<any>> => {
       const newCard = await FlashcardService.create({
-        ...req.body,
-        created_at: new Date(),
+        ...req.body
       });
       return { status: 201, data: newCard, message: "Flashcard create successfully" };
     });
