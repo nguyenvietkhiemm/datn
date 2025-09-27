@@ -5,6 +5,6 @@ export interface User {
    password_hash: string;
    birthday: Date;
    available: boolean; 
-   reated_at: Date;
+   created_at: Date;
    role_id: number;
 }

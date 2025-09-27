@@ -3,7 +3,7 @@ import QuestionController from '../controllers/question.controller';
 import Authentication from '../middleware/authentication';
 import { ADMIN } from "../config/permission";
 
-const QuestionRoute = Router();
+const questionRoute = Router();
 
 /**
  * @openapi
@@ -18,7 +18,7 @@ const QuestionRoute = Router();
  *       500:
  *         description: Lỗi server
  */
-QuestionRoute.get('/', QuestionController.getAll);
+questionRoute.get('/', QuestionController.getAll);
 
 /**
  * @openapi
@@ -78,7 +78,7 @@ QuestionRoute.get('/', QuestionController.getAll);
  *       500:
  *         description: Lỗi server
  */
-QuestionRoute.post('/create',
+questionRoute.post('/create',
         Authentication.AuthenticateToken,
         Authentication.AuthorizeRoles(ADMIN),
         QuestionController.create);
@@ -122,7 +122,7 @@ QuestionRoute.post('/create',
  *         description: Lỗi server
  */
 
-QuestionRoute.patch('/update/:id',
+questionRoute.patch('/update/:id',
         Authentication.AuthenticateToken,
         Authentication.AuthorizeRoles(ADMIN),
         QuestionController.update);
@@ -149,7 +149,7 @@ QuestionRoute.patch('/update/:id',
  *       500:
  *         description: Lỗi server
  */
-QuestionRoute.delete('/remove/:id',
+questionRoute.delete('/remove/:id',
         Authentication.AuthenticateToken,
         Authentication.AuthorizeRoles(ADMIN),
         QuestionController.remove);
@@ -182,9 +182,9 @@ QuestionRoute.delete('/remove/:id',
  *       500:
  *         description: Lỗi server
  */
-QuestionRoute.patch('/setAvailable/:id',
+questionRoute.patch('/setAvailable/:id',
         Authentication.AuthenticateToken,
         Authentication.AuthorizeRoles(ADMIN),
         QuestionController.setAvailable);
 
-export default QuestionRoute;
+export default questionRoute;
