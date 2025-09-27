@@ -53,6 +53,7 @@ Dưới đây là các mã trạng thái HTTP quy ước:
 202 : PUT/PATCH thành công (cập nhật)
 204 : DELETE thành công (không trả dữ liệu)
 400 : Kiểm tra tồn tại hay chưa
+401 : ko co quyen truy cap
 404 : Không tìm thấy
 500 : Lỗi server
 ```

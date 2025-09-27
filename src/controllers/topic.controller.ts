@@ -29,7 +29,7 @@ const TopicController = {
 
         const response: DefaultResponse<any> = await safeExecute(async () => {
             const updated = await TopicService.update(id, req.body);
-            return { status: 200, data: updated, message: 'Cập nhật chủ đề thành công' };
+            return { status: 202, data: updated, message: 'Cập nhật chủ đề thành công' };
         });
 
         if (response.error === 'TOPIC_NOT_FOUND') {
@@ -47,7 +47,7 @@ const TopicController = {
 
         const response: DefaultResponse<any> = await safeExecute(async () => {
             await TopicService.remove(id);
-            return { status: 200, message: 'Xóa chủ đề thành công' };
+            return { status: 204, message: 'Xóa chủ đề thành công' };
         });
 
         if (response.error === 'TOPIC_NOT_FOUND') {
