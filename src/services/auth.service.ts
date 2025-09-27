@@ -22,8 +22,8 @@ const AuthService = {
 
     // tạo user mới
     const result = await query(
-      `INSERT INTO "user" (user_name, email, password_hash, birthday, created_at)
-       VALUES ($1, $2, $3, $4, NOW()) RETURNING *`,
+      `INSERT INTO "user" (user_name, email, password_hash, birthday)
+       VALUES ($1, $2, $3, $4) RETURNING *`,
       [user_name, email, hashPassword, birthday ]
     );
 
