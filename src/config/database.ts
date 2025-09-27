@@ -2,11 +2,11 @@ import { Pool } from "pg";
 import bcrypt from "bcrypt";
 
 const pool = new Pool({
-  user: process.env.DATABASE_USER || "postgres",
-  host: process.env.DATABASE_HOST || "192.168.23.5",
-  database: process.env.DATABASE_NAME || "postgres",
-  password: process.env.DATABASE_PASSWORD || "12345",
-  port: Number(process.env.DATABASE_PORT) || 5432,
+  user: process.env.DATABASE_USER,
+  host: process.env.DATABASE_HOST,
+  database: process.env.DATABASE_NAME,
+  password: process.env.DATABASE_PASSWORD,
+  port: Number(process.env.DATABASE_PORT),
 });
 
 // test kết nối + tạo admin mặc định
@@ -51,7 +51,14 @@ const pool = new Pool({
       console.log("Tài khoản ADMIN đã tồn tại");
     }
   } catch (err) {
-    console.error("Lỗi kết nối hoặc tạo admin:", err);
+    console.error("❌ Lỗi kết nối:", err);
+    console.log("DB CONFIG:", {
+      user: process.env.DATABASE_USER,
+      password: process.env.DATABASE_PASSWORD,
+      host: process.env.DATABASE_HOST,
+      port: process.env.DATABASE_PORT,
+      database: process.env.DATABASE_NAME,
+    });
   }
 })();
 

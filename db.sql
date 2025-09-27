@@ -282,7 +282,12 @@ BEGIN
   ) THEN
     ALTER TABLE document ADD COLUMN available BOOLEAN DEFAULT true;
   END IF;
-
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name='subject' AND column_name='available'
+  ) THEN
+    ALTER TABLE subject ADD COLUMN available BOOLEAN DEFAULT true;
+  END IF;
   IF NOT EXISTS (
     SELECT 1 FROM information_schema.columns 
     WHERE table_name='exam' AND column_name='available'

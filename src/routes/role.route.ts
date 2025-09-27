@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import RoleController from '../controllers/role.controller';
 
-const RoleRoute = Router();
+const roleRoute = Router();
 
 /**
  * @openapi
@@ -16,7 +16,7 @@ const RoleRoute = Router();
  *       500:
  *         description : loi
  */
-RoleRoute.get('/', RoleController.getAll);
+roleRoute.get('/', RoleController.getAll);
 
 /**
  * @openapi
@@ -39,11 +39,11 @@ RoleRoute.get('/', RoleController.getAll);
  *       500:
  *         description : loi
  */
-RoleRoute.get('/:id', RoleController.getOne);
+roleRoute.get('/:id', RoleController.getOne);
 
 /**
  * @openapi
- * /roles:
+ * /roles/create:
  *   post:
  *     summary: Tạo role mới
  *     tags:
@@ -66,7 +66,7 @@ RoleRoute.get('/:id', RoleController.getOne);
  *       500:
  *         description : loi
  */
-RoleRoute.post('/', RoleController.create);
+roleRoute.post('/create', RoleController.create);
 
 /**
  * @openapi
@@ -98,7 +98,7 @@ RoleRoute.post('/', RoleController.create);
  *       500:
  *         description : loi
  */
-RoleRoute.put('/:id', RoleController.update);
+roleRoute.put('/:id', RoleController.update);
 
 /**
  * @openapi
@@ -121,6 +121,6 @@ RoleRoute.put('/:id', RoleController.update);
  *       500:
  *         description : loi
  */
-RoleRoute.delete('/:id', RoleController.remove);
+roleRoute.delete('/:id', RoleController.remove);
 
-export default RoleRoute;
+export default roleRoute;

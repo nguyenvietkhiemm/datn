@@ -3,7 +3,7 @@ import UserController from "../controllers/user.controller";
 import Authentication from "../middleware/authentication";
 import {ADMIN} from "../config/permission";
 
-const UserRouter = Router();
+const userRouter = Router();
 
 /**
  * @swagger
@@ -28,7 +28,7 @@ const UserRouter = Router();
  *       403:
  *         description: Không có quyền
  */
-UserRouter.get(
+userRouter.get(
   "/",
   Authentication.AuthenticateToken,
   Authentication.AuthorizeRoles(ADMIN), 
@@ -55,7 +55,7 @@ UserRouter.get(
  *       404:
  *         description: Không tìm thấy user
  */
-UserRouter.get(
+userRouter.get(
   "/:id",
   Authentication.AuthenticateToken,
   UserController.getOne
@@ -104,7 +104,7 @@ UserRouter.get(
  *       404:
  *         description: Không tìm thấy user
  */
-UserRouter.put(
+userRouter.put(
   "/update/:id",
   Authentication.AuthenticateToken,
   UserController.update // logic check quyền nằm trong controller
@@ -132,11 +132,11 @@ UserRouter.put(
  *       404:
  *         description: Không tìm thấy user
  */
-UserRouter.delete(
+userRouter.delete(
   "/remove/:id",
   Authentication.AuthenticateToken,
   Authentication.AuthorizeRoles(ADMIN), // chỉ admin được xóa
   UserController.remove
 );
 
-export default UserRouter;
+export default userRouter;
