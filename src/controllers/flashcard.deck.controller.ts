@@ -27,10 +27,6 @@ export const FlashcardDeckController = {
   },
 
   create: async (req: Request, res: Response) => {
-    if (!req.user) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
-  
     const result = await safeExecute(async (): Promise<DefaultResponse<any>> => {
       const newDeck = await FlashcardDeckService.create({
         ...req.body,
