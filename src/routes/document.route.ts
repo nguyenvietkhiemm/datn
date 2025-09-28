@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import DocumentController from '../controllers/document.controller';
+import Authentication from '../middleware/authentication';
+import { ADMIN } from "../config/permission";
 
 const documentRoute = Router();
 
@@ -22,7 +24,7 @@ documentRoute.get('/', DocumentController.getAll);
  * @openapi
  * /documents/create:
  *   post:
- *     summary: Tạo tài liệu mới
+ *     summary: Tạo tài liệu mới (yêu cầu admin)
  *     tags:
  *       - Document
  *     requestBody:
@@ -52,14 +54,17 @@ documentRoute.get('/', DocumentController.getAll);
  *       500:
  *         description: Lỗi server
  */
-documentRoute.post('/create', DocumentController.create);
+documentRoute.post('/create',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        DocumentController.create);
 
 
 /**
  * @openapi
  * /documents/update/{id}:
  *   patch:
- *     summary: Cập nhật thông tin tài liệu
+ *     summary: Cập nhật thông tin tài liệu (yêu cầu admin)
  *     tags:
  *       - Document
  *     parameters:
@@ -95,14 +100,17 @@ documentRoute.post('/create', DocumentController.create);
  *       500:
  *         description: Lỗi server
  */
-documentRoute.patch('/update/:id', DocumentController.update);
+documentRoute.patch('/update/:id',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        DocumentController.update);
 
 
 /**
  * @openapi
  * /documents/remove/{id}:
  *   delete:
- *     summary: Xóa một tài liệu theo ID
+ *     summary: Xóa một tài liệu theo ID (yêu cầu admin)
  *     tags:
  *       - Document
  *     parameters:
@@ -120,13 +128,16 @@ documentRoute.patch('/update/:id', DocumentController.update);
  *       500:
  *         description: Lỗi server
  */
-documentRoute.delete('/remove/:id', DocumentController.remove);
+documentRoute.delete('/remove/:id',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        DocumentController.remove);
 
 /**
  * @openapi
  * /documents/setAvailable/{id}:
  *   patch:
- *     summary: Thay đổi trạng thái tài liệu theo ID
+ *     summary: Thay đổi trạng thái tài liệu theo ID (yêu cầu admin)
  *     tags:
  *       - Document
  *     parameters:
@@ -144,6 +155,9 @@ documentRoute.delete('/remove/:id', DocumentController.remove);
  *       500:
  *         description: Lỗi server
  */
-documentRoute.patch('/setAvailable/:id', DocumentController.setAvailable);
+documentRoute.patch('/setAvailable/:id',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        DocumentController.setAvailable);
 
 export default documentRoute;
