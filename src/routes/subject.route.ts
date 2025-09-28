@@ -1,5 +1,7 @@
 import { Router } from "express";
 import SubjectController from "../controllers/subject.controller";
+import Authentication from "../middleware/authentication";
+import {ADMIN} from "../config/permission";
 
 const subjectRoute = Router();
 
@@ -22,7 +24,7 @@ subjectRoute.get('/', SubjectController.getAll);
  * @openapi
  * /subjects/create:
  *   post:
- *     summary: Tạo môn học mới
+ *     summary: Tạo môn học mới (yêu cầu admin)
  *     tags:
  *       - Subject
  *     requestBody:
@@ -41,13 +43,16 @@ subjectRoute.get('/', SubjectController.getAll);
  *       500:
  *         description: Lỗi server
  */
-subjectRoute.post('/create', SubjectController.create);
+subjectRoute.post('/create',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        SubjectController.create);
 
 /**
  * @openapi
  * /subjects/update/{id}:
  *   patch:
- *     summary: Cập nhật thông tin môn học
+ *     summary: Cập nhật thông tin môn học (yêu cầu admin)
  *     tags:
  *       - Subject
  *     parameters:
@@ -75,13 +80,16 @@ subjectRoute.post('/create', SubjectController.create);
  *       500:
  *         description: Lỗi server
  */
-subjectRoute.patch('/update/:id', SubjectController.update);
+subjectRoute.patch('/update/:id',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        SubjectController.update);
 
 /**
  * @openapi
  * /subjects/remove/{id}:
  *   delete:
- *     summary: Xóa một subject theo ID
+ *     summary: Xóa một subject theo ID (yêu cầu admin)
  *     tags:
  *       - Subject
  *     parameters:
@@ -99,13 +107,16 @@ subjectRoute.patch('/update/:id', SubjectController.update);
  *       500:
  *         description: Lỗi server
  */
-subjectRoute.delete('/remove/:id', SubjectController.remove);
+subjectRoute.delete('/remove/:id',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        SubjectController.remove);
 
 /**
  * @openapi
  * /subjects/setAvailable/{id}:
  *   patch:
- *     summary: Ẩn một subject theo ID
+ *     summary: Ẩn một subject theo ID (yêu cầu admin)
  *     tags:
  *       - Subject
  *     parameters:
@@ -132,7 +143,10 @@ subjectRoute.delete('/remove/:id', SubjectController.remove);
  *       500:
  *         description: Lỗi server
  */
-subjectRoute.patch('/setAvailable/:id', SubjectController.setAvailable);
+subjectRoute.patch('/setAvailable/:id',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        SubjectController.setAvailable);
 
 export default subjectRoute;
 
