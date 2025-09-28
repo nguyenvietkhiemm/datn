@@ -10,7 +10,7 @@ export const FlashcardDeckService = {
     const offset = (page - 1) * limit;
 
     const result = await query(
-      `SELECT title, description, created_at
+      `SELECT flashcard_deck_id, title, description, created_at
        FROM flashcard_deck
        ORDER BY flashcard_deck_id
        LIMIT $1 OFFSET $2`,
@@ -20,12 +20,12 @@ export const FlashcardDeckService = {
     return result.rows;
   },
 
-  async getById(id: number): Promise<Flashcard | null> {
+  async getById(id: number): Promise<Flashcard[] | null> {
     const result = await query(
       "SELECT * FROM flashcard WHERE flashcard_deck_id = $1",
       [id]
     );
-    return result.rows[0] || null;
+    return result.rows || null;
   },
 
   async create(data: FlashcardDeck): Promise<FlashcardDeck> {
