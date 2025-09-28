@@ -4,7 +4,7 @@ import { Flashcard } from "../model/flashcard.model";
 // Flashcard Service
 export const FlashcardService = {
 
-  async create(data: Flashcard): Promise<Flashcard> {
+  async add(data: Flashcard): Promise<Flashcard> {
     const result = await query(
       `INSERT INTO flashcard (front, back, example, status, flashcard_deck_id)
          VALUES ($1,$2,$3,$4,$5) RETURNING *`,
