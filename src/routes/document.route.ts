@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import DocumentController from '../controllers/document.controller';
+import Authentication from '../middleware/authentication';
+import { ADMIN } from "../config/permission";
 
 const documentRoute = Router();
 
@@ -22,7 +24,7 @@ documentRoute.get('/', DocumentController.getAll);
  * @openapi
  * /documents/create:
  *   post:
- *     summary: Tạo tài liệu mới
+ *     summary: Tạo tài liệu mới (yêu cầu admin)
  *     tags:
  *       - Document
  *     requestBody:
@@ -40,12 +42,6 @@ documentRoute.get('/', DocumentController.getAll);
  *                 type: string
  *                 description: Đường dẫn tới tài liệu (PDF, DOCX, v.v.)
  *                 example: "https://example.com/document.pdf"
- *               embedding:
- *                 type: array
- *                 description: Vector embedding (768 chiều) của tài liệu để dùng cho tìm kiếm ngữ nghĩa
- *                 items:
- *                   type: number
- *                 example: [0.12, 0.03, -0.45, 0.98, 0.0, 0.21]
  *               topic_id:
  *                 type: integer
  *                 description: ID chủ đề mà tài liệu thuộc về
@@ -54,17 +50,21 @@ documentRoute.get('/', DocumentController.getAll);
  *       201:
  *         description: Tạo tài liệu thành công
  *       400:
- *         description: Dữ liệu gửi lên không hợp lệ (ví dụ embedding không đủ 768 chiều)
+ *         description: Dữ liệu gửi lên không hợp lệ
  *       500:
- *         description:Lỗi server
+ *         description: Lỗi server
  */
-documentRoute.post('/create', DocumentController.create);
+documentRoute.post('/create',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        DocumentController.create);
+
 
 /**
  * @openapi
  * /documents/update/{id}:
  *   patch:
- *     summary: Cập nhật thông tin tài liệu
+ *     summary: Cập nhật thông tin tài liệu (yêu cầu admin)
  *     tags:
  *       - Document
  *     parameters:
@@ -87,22 +87,30 @@ documentRoute.post('/create', DocumentController.create);
  *               link:
  *                 type: string
  *                 example: "https://example.com/updated.pdf"
- *               embedding:
- *                 type: array
- *                 items:
- *                   type: number
- *                 example: [0.1, 0.2, 0.3]
+ *               topic_id:
+ *                 type: integer
+ *                 example: 2
  *     responses:
  *       202:
  *         description: Cập nhật tài liệu thành công
+ *       400:
+ *         description: Dữ liệu không hợp lệ
+ *       404:
+ *         description: Không tìm thấy tài liệu
+ *       500:
+ *         description: Lỗi server
  */
-documentRoute.patch('/update/:id', DocumentController.update);
+documentRoute.patch('/update/:id',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        DocumentController.update);
+
 
 /**
  * @openapi
  * /documents/remove/{id}:
  *   delete:
- *     summary: Xóa một tài liệu theo ID
+ *     summary: Xóa một tài liệu theo ID (yêu cầu admin)
  *     tags:
  *       - Document
  *     parameters:
@@ -120,13 +128,16 @@ documentRoute.patch('/update/:id', DocumentController.update);
  *       500:
  *         description: Lỗi server
  */
-documentRoute.delete('/remove/:id', DocumentController.remove);
+documentRoute.delete('/remove/:id',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        DocumentController.remove);
 
 /**
  * @openapi
  * /documents/setAvailable/{id}:
  *   patch:
- *     summary: Thay đổi trạng thái tài liệu theo ID
+ *     summary: Thay đổi trạng thái tài liệu theo ID (yêu cầu admin)
  *     tags:
  *       - Document
  *     parameters:
@@ -144,6 +155,9 @@ documentRoute.delete('/remove/:id', DocumentController.remove);
  *       500:
  *         description: Lỗi server
  */
-documentRoute.patch('/setAvailable/:id', DocumentController.setAvailable);
+documentRoute.patch('/setAvailable/:id',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        DocumentController.setAvailable);
 
 export default documentRoute;

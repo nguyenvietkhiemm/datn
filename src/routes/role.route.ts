@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import RoleController from '../controllers/role.controller';
+import Authentication from "../middleware/authentication";
+import {ADMIN} from "../config/permission";
 
 const roleRoute = Router();
 
@@ -7,7 +9,7 @@ const roleRoute = Router();
  * @openapi
  * /roles:
  *   get:
- *     summary: Lấy danh sách tất cả roles
+ *     summary: Lấy danh sách tất cả roles (yêu cầu admin)
  *     tags:
  *       - Role
  *     responses:
@@ -16,13 +18,16 @@ const roleRoute = Router();
  *       500:
  *         description : loi
  */
-roleRoute.get('/', RoleController.getAll);
+roleRoute.get('/',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        RoleController.getAll);
 
 /**
  * @openapi
  * /roles/{id}:
  *   get:
- *     summary: Lấy role theo ID
+ *     summary: Lấy role theo ID (yêu cầu admin)
  *     tags:
  *       - Role
  *     parameters:
@@ -39,13 +44,16 @@ roleRoute.get('/', RoleController.getAll);
  *       500:
  *         description : loi
  */
-roleRoute.get('/:id', RoleController.getOne);
+roleRoute.get('/:id',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        RoleController.getOne);
 
 /**
  * @openapi
  * /roles/create:
  *   post:
- *     summary: Tạo role mới
+ *     summary: Tạo role mới (yêu cầu admin)
  *     tags:
  *       - Role
  *     requestBody:
@@ -66,13 +74,16 @@ roleRoute.get('/:id', RoleController.getOne);
  *       500:
  *         description : loi
  */
-roleRoute.post('/create', RoleController.create);
+roleRoute.post('/create',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        RoleController.create);
 
 /**
  * @openapi
- * /roles/{id}:
+ * /roles/update/{id}:
  *   put:
- *     summary: Cập nhật role theo ID
+ *     summary: Cập nhật role theo ID (yêu cầu admin)
  *     tags:
  *       - Role
  *     parameters:
@@ -90,21 +101,25 @@ roleRoute.post('/create', RoleController.create);
  *             properties:
  *               role_name:
  *                 type: string
+ *                 example: "Admin"
  *     responses:
  *       202:
  *         description: Cập nhật thành công
  *       404:
  *         description: Không tìm thấy role
  *       500:
- *         description : loi
+ *         description: Lỗi server
  */
-roleRoute.put('/:id', RoleController.update);
+roleRoute.put('/update/:id',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        RoleController.update);
 
 /**
  * @openapi
- * /roles/{id}:
+ * /roles/remove/{id}:
  *   delete:
- *     summary: Xóa role theo ID
+ *     summary: Xóa role theo ID (yêu cầu admin)
  *     tags:
  *       - Role
  *     parameters:
@@ -119,8 +134,11 @@ roleRoute.put('/:id', RoleController.update);
  *       404:
  *         description: Không tìm thấy role
  *       500:
- *         description : loi
+ *         description: Lỗi server
  */
-roleRoute.delete('/:id', RoleController.remove);
+roleRoute.delete('/remove/:id',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        RoleController.remove);
 
 export default roleRoute;

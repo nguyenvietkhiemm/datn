@@ -5,9 +5,8 @@ const UserService = {
     // Lấy toàn bộ user
     async getAll(): Promise<User[]> {
         const result = await query(`
-        SELECT user_id, user_name, email, birthday, created_at, available
+        SELECT user_id, user_name, email, birthday, created_at, role_id, available
         FROM "user"
-        WHERE role_id = 1
         ORDER BY user_id
         `);
         return result.rows as User[];
@@ -16,7 +15,7 @@ const UserService = {
     // Lấy user theo ID
     async getById(id: number): Promise<User> {
         const result = await query(`
-        SELECT user_id, user_name, email, birthday, created_at, available
+        SELECT user_id, user_name, email, birthday, created_at, role_id, available
         FROM "user"
         WHERE user_id = $1`
         , [id]);
