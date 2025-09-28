@@ -62,8 +62,10 @@ authRouter.post("/register", AuthController.register);
  *             properties:
  *               email:
  *                 type: string
+ *                 example: admin@example.com
  *               password:
  *                 type: string
+ *                 example: admin123
  *     responses:
  *       200:
  *         description: Đăng nhập thành công
@@ -72,6 +74,7 @@ authRouter.post("/register", AuthController.register);
  *       404:
  *         description: Không tìm thấy user
  */
+
 authRouter.post("/login", AuthController.login);
 
 export default authRouter;

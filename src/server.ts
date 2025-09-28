@@ -5,7 +5,7 @@ import express from 'express';
 import routes from './routes/index';
 
 import swaggerUi from 'swagger-ui-express';
-import specs from './config/swagger.jsdoc';
+import {specs, swaggerOptions} from './config/swagger.jsdoc';
 import morgan from 'morgan';
 
 const app = express();
@@ -13,7 +13,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 // route cho api-docs
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, swaggerOptions));
 
 // routes chung cho tat ca cac api
 app.use('/', routes);
