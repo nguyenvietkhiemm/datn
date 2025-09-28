@@ -1,6 +1,7 @@
 import { Router } from "express";
 import TopicController from "../controllers/topic.controller";
 import Authentication from "../middleware/authentication";
+import {ADMIN} from "../config/permission";
 
 const topicRoute = Router();
 
@@ -61,19 +62,26 @@ topicRoute.get(
 topicRoute.post(
   '/create',
   Authentication.AuthenticateToken,
-  Authentication.AuthorizeRoles(["2"]), // chỉ admin được tạo
+  Authentication.AuthorizeRoles(ADMIN), // chỉ admin được tạo
   TopicController.create
 );
 
 /**
  * @openapi
- * /topics/update:
+ * /topics/update/{id}:
  *   patch:
  *     summary: Cập nhật thông tin chủ đề (chỉ admin)
  *     tags:
  *       - Topic
  *     security:
  *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID của chủ đề cần cập nhật
  *     requestBody:
  *       required: true
  *       content:
@@ -81,9 +89,6 @@ topicRoute.post(
  *           schema:
  *             type: object
  *             properties:
- *               topic_id:
- *                 type: integer
- *                 example: 1
  *               title:
  *                 type: string
  *                 example: "Chủ đề cập nhật"
@@ -104,15 +109,15 @@ topicRoute.post(
  *         description: Lỗi server
  */
 topicRoute.patch(
-  '/update',
+  '/update/:id',
   Authentication.AuthenticateToken,
-  Authentication.AuthorizeRoles(["2"]), // chỉ admin được sửa
+  Authentication.AuthorizeRoles(ADMIN), // chỉ admin được sửa
   TopicController.update
 );
 
 /**
  * @openapi
- * /topics/remove/{topic_id}:
+ * /topics/remove/{id}:
  *   delete:
  *     summary: Xóa một chủ đề theo ID (chỉ admin)
  *     tags:
@@ -121,7 +126,7 @@ topicRoute.patch(
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: topic_id
+ *         name: id
  *         required: true
  *         schema:
  *           type: integer
@@ -137,9 +142,9 @@ topicRoute.patch(
  *         description: Lỗi server
  */
 topicRoute.delete(
-  '/remove/:topic_id',
+  '/remove/:id',
   Authentication.AuthenticateToken,
-  Authentication.AuthorizeRoles(["2"]), // chỉ admin được xóa
+  Authentication.AuthorizeRoles(ADMIN), // chỉ admin được xóa
   TopicController.remove
 );
 

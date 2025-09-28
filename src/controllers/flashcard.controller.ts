@@ -5,11 +5,11 @@ import safeExecute, { DefaultResponse } from "../utils/safe.execute";
 //flashcard controller
 export const FlashcardController = {
 
-  create: async (req: Request, res: Response) => {
+  add: async (req: Request, res: Response) => {
     const result = await safeExecute(async (): Promise<DefaultResponse<any>> => {
-      const newCard = await FlashcardService.create({
+      const newCard = await FlashcardService.add({
         ...req.body,
-        created_at: new Date(),
+        flashcard_deck_id: Number(req.params.id),
       });
       return { status: 201, data: newCard, message: "Flashcard create successfully" };
     });

@@ -9,7 +9,7 @@ const QuestionController = {
   // },
 
   async getAll(req: Request, res: Response) {
-    const responses: DefaultResponse<any> = await safeExecute(async () => {
+    const response: DefaultResponse<any> = await safeExecute(async () => {
       return {
         status: 200,
         message: "Lấy danh sách câu hỏi thành công",
@@ -17,11 +17,11 @@ const QuestionController = {
       } as DefaultResponse<any>;
     });
 
-    res.json(responses);
+    res.status(response.status).json(response);
   },
 
   async create(req: Request, res: Response) {
-    const responses: DefaultResponse<any> = await safeExecute(async () => {
+    const response: DefaultResponse<any> = await safeExecute(async () => {
       const { questions } = req.body;
       const created = await QuestionService.create(questions);
 
@@ -32,44 +32,44 @@ const QuestionController = {
       } as DefaultResponse<any>;
     });
 
-    res.json(responses);
+    res.status(response.status).json(response);
   },
 
   async update(req: Request, res: Response) {
-    const responses: DefaultResponse<any> = await safeExecute(async () => {
+    const response: DefaultResponse<any> = await safeExecute(async () => {
       return {
         status: 202,
         message: "Cập nhật câu hỏi thành công",
-        data: await QuestionService.update(req.body)
+        data: await QuestionService.update(Number(req.params.id), req.body)
       } as DefaultResponse<any>;
     });
 
-    res.json(responses);
+    res.status(response.status).json(response);
   },
 
   async setAvailable(req: Request, res: Response) {
     console.log(req.body);
-    const responses: DefaultResponse<any> = await safeExecute(async () => {
+    const response: DefaultResponse<any> = await safeExecute(async () => {
       return {
         status: 202,
         message: "Đổi trạng thái câu hỏi thành công",
-        data: await QuestionService.setAvailable(parseInt(req.params.question_id, 10), Boolean(req.body.available))
+        data: await QuestionService.setAvailable(parseInt(req.params.id, 10), Boolean(req.body.available))
       } as DefaultResponse<any>;
     });
 
-    res.json(responses);
+    res.status(response.status).json(response);
   },
 
   async remove(req: Request, res: Response) {
-    const responses: DefaultResponse<any> = await safeExecute(async () => {
+    const response: DefaultResponse<any> = await safeExecute(async () => {
       return {
         status: 204,
         message: "Xoá câu hỏi thành công",
-        data: await QuestionService.remove(parseInt(req.params.question_id, 10))
+        data: await QuestionService.remove(parseInt(req.params.id, 10))
       } as DefaultResponse<any>;
     });
 
-    res.json(responses);
+    res.status(response.status).json(response);
   },
 };
 

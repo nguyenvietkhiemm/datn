@@ -21,82 +21,84 @@ const DocumentService = {
 
         return result.rows;
     },
-    
-    async create(document: Document): Promise<string> {
+
+    async create(document: Document): Promise<Document | null> {
         const client = await pool.connect();
-
+    
         try {
-            await client.query('BEGIN');
-            const embeddingString = `[${document.embedding.join(",")}]`;
-
+            await client.query("BEGIN");
+    
             const result = await client.query(
-                'INSERT INTO document (title, link, embedding, created_at, topic_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-                [document.title, document.link, embeddingString, document.created_at, document.topic_id]
+                `INSERT INTO document (title, link, topic_id) 
+                 VALUES ($1, $2, $3) 
+                 RETURNING *`,
+                [document.title, document.link, document.topic_id]
             );
-
+    
             const newDocument: Document = result.rows[0];
-
+    
             await client.query(
-                'INSERT INTO document_history (document_id, created_at) VALUES ($1, $2)',
-                [newDocument.document_id, document.created_at]
+                `INSERT INTO document_history (document_id) 
+                 VALUES ($1)`,
+                [newDocument.document_id]
             );
-
-            await client.query('COMMIT');
-            return "COMMIT";
+    
+            await client.query("COMMIT");
+            return newDocument;
         } catch (err) {
-            await client.query('ROLLBACK');
+            await client.query("ROLLBACK");
             throw err;
         } finally {
             client.release();
         }
     },
 
-
-    async update(id:number, document: Partial<Document>): Promise<Document> {
+    async update(id: number, document: Partial<Document>): Promise<Document> {
         const client = await pool.connect();
         try {
             if (!id) {
                 throw new Error("document_id isn't exist");
             }
-
-            await client.query('BEGIN');
-
-            const allowed = ["title", "link", "embedding", "created_at", "topic_id"];
+    
+            await client.query("BEGIN");
+    
+            // chỉ cho phép update title, link, topic_id
+            const allowed = ["title", "link", "topic_id"];
             const fields: string[] = [];
             const values: any[] = [];
             let idx = 1;
-
+    
             for (const key of allowed) {
-                let value = (document as any)[key];
+                const value = (document as any)[key];
                 if (value !== undefined) {
-                    // Nếu là embedding (mảng), chuyển thành string để lưu vào pgvector
-                    if (key === "embedding" && Array.isArray(value)) {
-                        value = `[${value.join(",")}]`;
-                    }
                     fields.push(`${key} = $${idx}`);
                     values.push(value);
                     idx++;
                 }
             }
-
+    
             if (fields.length === 0) {
                 throw new Error("No valid fields provided for update");
             }
-
+    
             values.push(id);
-            const queryText = `UPDATE document SET ${fields.join(", ")} WHERE document_id = $${idx} RETURNING *`;
+            const queryText = `
+                UPDATE document 
+                SET ${fields.join(", ")} 
+                WHERE document_id = $${idx} 
+                RETURNING *`;
             const result = await client.query(queryText, values);
-
-            await client.query('COMMIT');
+    
+            await client.query("COMMIT");
             return result.rows[0];
         } catch (err) {
-            await client.query('ROLLBACK');
+            await client.query("ROLLBACK");
             throw err;
         } finally {
             client.release();
         }
     },
-
+    
     async setAvailable(id: number, available: boolean): Promise<boolean> {
         const result = await query('UPDATE document SET available = $1 WHERE document_id = $2', [available, id]);
         return (result.rowCount ?? 0) > 0;
@@ -109,15 +111,15 @@ const DocumentService = {
 
             // Xóa document 
             await client.query('DELETE FROM document WHERE document_id = $1', [id]);
-            
+
             await client.query('COMMIT');
         } catch (err) {
             await client.query('ROLLBACK');
             throw err;
-        } finally { 
+        } finally {
             client.release();
         }
     },
-    
+
 }
 export default DocumentService;
