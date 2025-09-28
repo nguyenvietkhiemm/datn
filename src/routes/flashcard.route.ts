@@ -20,7 +20,7 @@ const flashcardRouter = Router();
  * @swagger
  * /flashcards/decks:
  *   get:
- *     summary: Get all flashcard decks with pagination
+ *     summary: Get all flashcard decks with pagination (yêu cầu đăng nhập)
  *     tags: [Flashcards]
  *     parameters:
  *       - in: query
@@ -47,7 +47,7 @@ flashcardRouter.get("/decks",
  * @swagger
  * /flashcards/decks/{id}:
  *   get:
- *     summary: Get flashcard deck by ID
+ *     summary: Get flashcard deck by ID (yêu cầu đăng nhập)
  *     tags: [Flashcards]
  *     parameters:
  *       - in: path
@@ -69,7 +69,7 @@ flashcardRouter.get("/decks/:id",
  * @swagger
  * /flashcards/decks/create:
  *   post:
- *     summary: Create a new deck
+ *     summary: Create a new deck (yêu cầu đăng nhập)
  *     tags: [Flashcards]
  *     requestBody:
  *       required: true
@@ -96,7 +96,7 @@ flashcardRouter.post("/decks/create",
  * @swagger
  * /flashcards/decks/add/{id}:
  *   post:
- *     summary: Thêm flashcard mới vào deck
+ *     summary: Thêm flashcard mới vào deck (yêu cầu đăng nhập)
  *     tags: [Flashcards]
  *     security:
  *       - bearerAuth: []
@@ -139,7 +139,7 @@ flashcardRouter.post("/decks/add/:id",
  * @swagger
  * /flashcards/decks/update/{id}:
  *   put:
- *     summary: Update a flashcard deck
+ *     summary: Update a flashcard deck (yêu cầu đăng nhập)
  *     tags: [Flashcards]
  *     parameters:
  *       - in: path
@@ -174,7 +174,7 @@ flashcardRouter.put("/decks/update/:id",
  * @swagger
  * /flashcards/decks/delete/{id}:
  *   delete:
- *     summary: Delete a flashcard deck
+ *     summary: Delete a flashcard deck (yêu cầu đăng nhập)
  *     tags: [Flashcards]
  *     parameters:
  *       - in: path
@@ -198,7 +198,7 @@ flashcardRouter.delete("/decks/delete/:id",
  * @swagger
  * /flashcards/update/{id}:
  *   put:
- *     summary: Update a flashcard
+ *     summary: Update a flashcard (yêu cầu đăng nhập)
  *     tags: [Flashcards]
  *     parameters:
  *       - in: path
@@ -233,7 +233,7 @@ flashcardRouter.put("/update/:id",
  * @swagger
  * /flashcards/delete/{id}:
  *   delete:
- *     summary: Delete a flashcard
+ *     summary: Delete a flashcard (yêu cầu đăng nhập)
  *     tags: [Flashcards]
  *     parameters:
  *       - in: path
