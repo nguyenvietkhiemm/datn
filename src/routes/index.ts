@@ -10,6 +10,7 @@ import subjectRoute from './subject.route';
 import flashcardRouter from './flashcard.route';
 import topicRouter from './topic.route';
 import examRoute from './exam.route';
+import bankRoute from './bank.route';
 
 const router = Router();
 
@@ -23,5 +24,6 @@ router.use("/flashcards", flashcardRouter);
 router.use("/topics", topicRouter);
 router.use('/exams', examRoute);
 router.use("/", authRouter);
+router.use('/bank', bankRoute);
 
 export default router;
