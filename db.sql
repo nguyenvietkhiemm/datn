@@ -1,3 +1,6 @@
+CREATE EXTENSION IF NOT EXISTS vector;
+
+
 -- Roles
 CREATE TABLE IF NOT EXISTS role (
     role_id SERIAL PRIMARY KEY,
@@ -128,6 +131,13 @@ CREATE TABLE IF NOT EXISTS study_schedule (
     FOREIGN KEY (subject_id) REFERENCES subject(subject_id) ON DELETE SET NULL
 );
 
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'flashcard_status') THEN
+    CREATE TYPE flashcard_status AS ENUM ('pending', 'done', 'miss');
+  END IF;
+END$$;
+
 -- Flashcards
 CREATE TABLE IF NOT EXISTS flashcard_deck (
     flashcard_deck_id SERIAL PRIMARY KEY,
@@ -149,12 +159,7 @@ CREATE TABLE IF NOT EXISTS flashcard (
     FOREIGN KEY (flashcard_deck_id) REFERENCES flashcard_deck(flashcard_deck_id) ON DELETE CASCADE
 );
 
-DO $$
-BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'flashcard_status') THEN
-    CREATE TYPE flashcard_status AS ENUM ('pending', 'done', 'miss');
-  END IF;
-END$$;
+
 
 -- Chat history
 CREATE TABLE IF NOT EXISTS chat_history (
