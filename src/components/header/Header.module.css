@@ -1,0 +1,95 @@
+.header {
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #4f46e5;
+    text-decoration: none;
+}
+
+.nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.navItem {
+    color: #444;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.navItem:hover {
+    color: #4f46e5;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.auth a {
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.login {
+    border: 1px solid #4f46e5;
+    color: #4f46e5;
+}
+
+.login:hover {
+    background: #eef2ff;
+}
+
+.register {
+    background: #4f46e5;
+    color: #fff;
+}
+
+.register:hover {
+    background: #4338ca;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    background: #e5e7eb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #555;
+}
