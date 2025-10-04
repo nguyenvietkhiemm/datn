@@ -2,8 +2,7 @@ import { token } from 'morgan';
 import swaggerJsdoc from 'swagger-jsdoc';
 require('dotenv').config();
 
-const PORT = process.env.PORT || 3000;
-const HOST = process.env.HOST || "0.0.0.0";
+const SERVER_URL = process.env.SERVER_URL || "http://localhost:3000";
 
 const options = {
   definition: {
@@ -14,7 +13,7 @@ const options = {
     },
     servers: [
       {
-        url: `http://${HOST}:${PORT}`, // đúng với server.ts
+        url: `${SERVER_URL}`, // đúng với server.ts
       },
     ],
     components: {
