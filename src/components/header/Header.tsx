@@ -7,7 +7,7 @@ export default function Header() {
   const [isToken, setIsToken] = useState(false);
 
   const listNavbar = [
-    { name: "Giới thiệu", href: "/" },
+    { name: "Giới thiệu", href: "/introduction" },
     { name: "Luyện tập", href: "/practice" },
     { name: "Flashcards", href: "/flashcards" },
     { name: "Road map", href: "/roadmap" },
