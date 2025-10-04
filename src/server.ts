@@ -1,6 +1,9 @@
 require('dotenv').config();
 
 import express from 'express';
+import cors from "cors";
+app.use(cors());
+
 
 import routes from './routes/index';
 
