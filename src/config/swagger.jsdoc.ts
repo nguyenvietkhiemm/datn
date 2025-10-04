@@ -2,8 +2,6 @@ import { token } from 'morgan';
 import swaggerJsdoc from 'swagger-jsdoc';
 require('dotenv').config();
 
-const SERVER_URL = process.env.SERVER_URL || "http://localhost:3000";
-
 const options = {
   definition: {
     openapi: "3.0.0",
@@ -13,9 +11,18 @@ const options = {
     },
     servers: [
       {
-        url: `${SERVER_URL}`, // đúng với server.ts
+        url: "{scheme}://{host}",
+        variables: {
+          scheme: {
+            enum: ["http", "https"],
+            default: "https",
+          },
+          host: {
+            default: process.env.HOST || "localhost:3000",
+          },
+        },
       },
-    ],
+    ],    
     components: {
       securitySchemes: {
         bearerAuth: {
