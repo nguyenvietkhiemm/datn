@@ -226,7 +226,7 @@ examRoute.post("/questions/add/:id",
 /**
  * @swagger
  * /exams/questions/remove/{id}:
- *   post:
+ *   delete:
  *     summary: Xóa câu hỏi khỏi đề thi (yêu cầu đăng nhập)
  *     tags: [Exams]
  *     security:
