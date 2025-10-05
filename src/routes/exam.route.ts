@@ -2,6 +2,7 @@ import { Router } from 'express';
 import ExamController from '../controllers/exam.controller';
 import Authentication from '../middleware/authentication';
 import { ADMIN } from "../config/permission";
+import { ExamQuestionController } from '../controllers/exam.question.controller';
 
 const examRoute = Router();
 
@@ -186,4 +187,108 @@ examRoute.patch('/setAvailable/:id',
         Authentication.AuthorizeRoles(ADMIN),
         ExamController.setAvailable);
 
+/**
+ * @swagger
+ * /question/exams/add/{id}:
+ *   post:
+ *     summary: Thêm câu hỏi vào đề thi (yêu cầu đăng nhập)
+ *     tags: [Exams]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID của đề thi (exam)
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               question_id:
+ *                 type: integer
+ *                 example: 1
+ *             required:
+ *               - question_id
+ *     responses:
+ *       200:
+ *         description: Thêm câu hỏi vào đề thi thành công
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Đã thêm question 45 vào exam 12"
+ *       400:
+ *         description: Dữ liệu không hợp lệ (thiếu hoặc sai kiểu)
+ *       401:
+ *         description: Thiếu hoặc sai token
+ *       404:
+ *         description: Không tìm thấy đề thi
+ *       500:
+ *         description: Lỗi server
+ */
+
+examRoute.post("/exams/add/:id",
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        ExamQuestionController.add);
+
+/**
+ * @swagger
+ * /question/exams/remove/{id}:
+ *   post:
+ *     summary: Thêm câu hỏi vào đề thi (yêu cầu đăng nhập)
+ *     tags: [Exams]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID của đề thi (exam)
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               question_id:
+ *                 type: integer
+ *                 example: 1
+ *             required:
+ *               - question_id
+ *     responses:
+ *       200:
+ *         description: Thêm câu hỏi vào đề thi thành công
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Đã thêm question 45 vào exam 12"
+ *       400:
+ *         description: Dữ liệu không hợp lệ (thiếu hoặc sai kiểu)
+ *       401:
+ *         description: Thiếu hoặc sai token
+ *       404:
+ *         description: Không tìm thấy đề thi
+ *       500:
+ *         description: Lỗi server
+ */
+examRoute.delete("/exams/remove/:id",
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        ExamQuestionController.remove);
 export default examRoute;
