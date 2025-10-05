@@ -7,8 +7,7 @@ export const BankQuestionController = {
     async add(req: Request, res: Response) {
         const result = await safeExecute(async (): Promise<DefaultResponse<any>> => {
             const newQuestion = await BankQuestionService.add({
-                ...req.body,
-                exam_id: Number(req.params.id),
+                bank_id: Number(req.params.id),
                 question_id: Number(req.body.question_id),
             });
             return { status: 201, data: newQuestion, message: "Question add successfully" };
@@ -18,7 +17,10 @@ export const BankQuestionController = {
 
     async remove(req: Request, res: Response) {
         const result = await safeExecute(async (): Promise<DefaultResponse<any>> => {
-            const ok = await BankQuestionService.remove(Number(req.params.bank_id), Number(req.params.question_id));
+            const ok = await BankQuestionService.remove({
+                bank_id: Number(req.params.id),
+                question_id: Number(req.body.question_id),
+            });
             if (!ok) {
                 return { status: 404, message: "BankQuestion not found" };
             }
