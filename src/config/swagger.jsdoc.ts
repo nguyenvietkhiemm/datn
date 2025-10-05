@@ -2,6 +2,9 @@ import { token } from 'morgan';
 import swaggerJsdoc from 'swagger-jsdoc';
 require('dotenv').config();
 
+const HOST = process.env.HOST;
+const PORT = process.env.PORT;
+
 const options = {
   definition: {
     openapi: "3.0.0",
@@ -18,7 +21,7 @@ const options = {
             default: "https",
           },
           host: {
-            default: process.env.HOST || "localhost:3000",
+            default: `${HOST}:${PORT}` || "localhost:3000",
           },
         },
       },
