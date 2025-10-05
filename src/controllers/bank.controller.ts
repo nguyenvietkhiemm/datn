@@ -11,6 +11,7 @@ const BankController = {
                 data: await BankService.getAll(),
             };
         });
+        return res.status(result.status).json(result);
     },
 
     async getById(req: Request, res: Response) {
@@ -21,6 +22,7 @@ const BankController = {
                 data: await BankService.getById(Number(req.params.id)),
             };
         });
+        return res.status(result.status).json(result);
     },
 
     async create(req: Request, res: Response) {
