@@ -60,7 +60,7 @@ export const FlashcardDeckService = {
     return result.rows[0] || null;
   },
 
-  async delete(id: number): Promise<boolean> {
+  async remove(id: number): Promise<boolean> {
     const result = await query(
       "DELETE FROM flashcard_deck WHERE flashcard_deck_id = $1",
       [id]

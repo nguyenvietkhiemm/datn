@@ -188,9 +188,9 @@ flashcardRouter.put("/decks/update/:id",
  *       404:
  *         description: Deck not found
  */
-flashcardRouter.delete("/decks/delete/:id",
+flashcardRouter.delete("/decks/remove/:id",
         Authentication.AuthenticateToken,
-        FlashcardDeckController.delete);
+        FlashcardDeckController.remove);
 
 // FLASHCARD ROUTE
 
@@ -247,8 +247,8 @@ flashcardRouter.put("/update/:id",
  *       404:
  *         description: Flashcard not found
  */
-flashcardRouter.delete("/delete/:id",
+flashcardRouter.delete("/remove/:id",
         Authentication.AuthenticateToken,
-        FlashcardController.delete);
+        FlashcardController.remove);
 
 export default flashcardRouter;
