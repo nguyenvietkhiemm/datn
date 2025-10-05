@@ -34,7 +34,7 @@ export default function Auth({ isLogin }: AuthProps): JSX.Element {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const API = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND || "http://localhost:3000";
+    const API = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
     const route = isLogin ? "/auth/login" : "/auth/register";
     console.log(`${API}${route}`);
     const res = await fetch(`${API}${route}`, {
