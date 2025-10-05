@@ -8,7 +8,7 @@ const bankRoute = Router();
 
 /**
  * @openapi
- * /bank/list:
+ * /bank:
  *   get:
  *     summary: Lấy danh sách ngân hàng câu hỏi
  *     tags:
@@ -19,7 +19,7 @@ const bankRoute = Router();
  *       500:
  *         description: Lỗi server
  */
-bankRoute.get('/list', BankController.getAll);
+bankRoute.get('/', BankController.getAll);
 
 /**
  * @openapi
@@ -133,7 +133,9 @@ bankRoute.post("/banks/add/:id",
  *       content:
  *         application/json:
  *           schema:
- *             description: Cập nhật thông tin đề thi
+ *             type: object
+ *             properties:
+ *               description:
  *                 type: string
  *                 example: "Ngân hàng câu hỏi Toán học nâng cao"
  *               topic_id:
