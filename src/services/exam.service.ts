@@ -1,6 +1,6 @@
-import { get } from "http";
 import { Exam } from "../model/exam.model";
 import { query } from "../config/database"
+import { Question } from "../model/question.model";
 
 const ExamService = {
   async getAll(limit: number = 100, offset: number = 0): Promise<Exam[]> {
@@ -10,13 +10,38 @@ const ExamService = {
     return result.rows;
   },
 
-  async getById(id: number): Promise<Exam[] | null> {
-    const result = await query(
-      "SELECT * FROM exam WHERE exam_id = $1",
-      [id]
-    );
-    return result.rows || null;
-  },
+  async getById(id: number): Promise<Question[] | null> {
+        const queryText = `
+          SELECT q.*
+          FROM exam b
+          JOIN question_exam qb ON b.exam_id = qb.exam_id
+          JOIN question q ON qb.question_id = q.question_id
+          WHERE b.exam_id = $1
+        `;
+        const result = await query(queryText, [id]);
+        if (!result.rows.length) return null;
+
+        // Lấy danh sách question_id
+        const questionIds = result.rows.map(q => q.question_id);
+        const ansRes = await query(
+            'SELECT * FROM answer WHERE question_id = ANY($1)',
+            [questionIds]
+        );
+
+        // Gom answer theo question_id
+        const answerMap = ansRes.rows.reduce((acc, ans) => {
+            (acc[ans.question_id] ||= []).push(ans);
+            return acc;
+        }, {} as Record<number, any[]>);
+
+        // Gắn answers vào từng question
+        const questions = result.rows.map(q => ({
+            ...q,
+            answers: answerMap[q.question_id] || []
+        }));
+
+        return questions as Question[];
+    },
 
   async create(data: Exam): Promise<Exam> {
     const queryText = `

@@ -7,7 +7,6 @@ export const ExamQuestionController = {
     async add(req: Request, res: Response) {
         const result = await safeExecute(async (): Promise<DefaultResponse<any>> => {
             const newQuestion = await ExamQuestionService.add({
-                ...req.body,
                 exam_id: Number(req.params.id),
                 question_id: Number(req.body.question_id),
             });
@@ -17,13 +16,16 @@ export const ExamQuestionController = {
     },
 
     async remove(req: Request, res: Response) {
-        const result = await safeExecute(async (): Promise<DefaultResponse<any>> => {
-            const ok = await ExamQuestionService.remove(Number(req.params.exam_id), Number(req.params.question_id));
-            if (!ok) {
-                return { status: 404, message: "ExamQuestion not found" };
-            }
-            return { status: 204, message: "Deleted successfully" };
-        });
-        return res.status(result.status).json(result);
-    },
+            const result = await safeExecute(async (): Promise<DefaultResponse<any>> => {
+                const ok = await ExamQuestionService.remove({
+                    exam_id: Number(req.params.id),
+                    question_id: Number(req.body.question_id),
+                });
+                if (!ok) {
+                    return { status: 404, message: "BankQuestion not found" };
+                }
+                return { status: 204, message: "Deleted successfully" };
+            });
+            return res.status(result.status).json(result);
+        },
 }
