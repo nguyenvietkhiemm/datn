@@ -215,22 +215,8 @@ examRoute.patch('/setAvailable/:id',
  *             required:
  *               - question_id
  *     responses:
- *       200:
+ *       201:
  *         description: Thêm câu hỏi vào đề thi thành công
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Đã thêm question 45 vào exam 12"
- *       400:
- *         description: Dữ liệu không hợp lệ (thiếu hoặc sai kiểu)
- *       401:
- *         description: Thiếu hoặc sai token
- *       404:
- *         description: Không tìm thấy đề thi
  *       500:
  *         description: Lỗi server
  */
@@ -244,7 +230,7 @@ examRoute.post("/exams/add/:id",
  * @swagger
  * /question/exams/remove/{id}:
  *   post:
- *     summary: Thêm câu hỏi vào đề thi (yêu cầu đăng nhập)
+ *     summary: Xóa câu hỏi khỏi đề thi (yêu cầu đăng nhập)
  *     tags: [Exams]
  *     security:
  *       - bearerAuth: []
@@ -269,23 +255,9 @@ examRoute.post("/exams/add/:id",
  *               - question_id
  *     responses:
  *       200:
- *         description: Thêm câu hỏi vào đề thi thành công
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Đã thêm question 45 vào exam 12"
- *       400:
- *         description: Dữ liệu không hợp lệ (thiếu hoặc sai kiểu)
- *       401:
- *         description: Thiếu hoặc sai token
+ *         description: Xóa câu hỏi khỏi đề thi thành công
  *       404:
  *         description: Không tìm thấy đề thi
- *       500:
- *         description: Lỗi server
  */
 examRoute.delete("/exams/remove/:id",
         Authentication.AuthenticateToken,

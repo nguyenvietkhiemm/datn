@@ -2,6 +2,7 @@ import { Router } from 'express';
 import BankController from '../controllers/bank.controller';
 import Authentication from '../middleware/authentication';
 import { ADMIN } from "../config/permission";
+import { BankQuestionController } from '../controllers/bank.question.controller';
 
 const bankRoute = Router();
 
@@ -73,6 +74,45 @@ bankRoute.post('/create',
         Authentication.AuthenticateToken,
         Authentication.AuthorizeRoles(ADMIN),
         BankController.create);
+
+/**
+ * @swagger
+ * /question/banks/add/{id}:
+ *   post:
+ *     summary: Thêm câu hỏi vào ngân hàng câu hỏi (yêu cầu đăng nhập)
+ *     tags: [Banks]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID của ngân hàng câu hỏi (bank)
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               question_id:
+ *                 type: integer
+ *                 example: 1
+ *             required:
+ *               - question_id
+ *     responses:
+ *       200:
+ *         description: Thêm câu hỏi vào ngân hàng câu hỏi thành công
+ *       404:
+ *         description: Không tìm thấy ngân hàng câu hỏi
+ */
+
+bankRoute.post("/banks/add/:id",
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        BankQuestionController.add);
 
 /**
  * @openapi
@@ -173,5 +213,43 @@ bankRoute.patch('/setAvailable/:id',
         Authentication.AuthenticateToken,
         Authentication.AuthorizeRoles(ADMIN),
         BankController.setAvailable);
+
+/**
+ * @swagger
+ * /question/banks/remove/{id}:
+ *   post:
+ *     summary: Xóa câu hỏi khỏi ngân hàng câu hỏi (yêu cầu đăng nhập)
+ *     tags: [Banks]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID của ngân hàng câu hỏi (bank)
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               question_id:
+ *                 type: integer
+ *                 example: 1
+ *             required:
+ *               - question_id
+ *     responses:
+ *       200:
+ *         description: Xóa câu hỏi khỏi ngân hàng câu hỏi thành công
+ *       404:
+ *         description: Không tìm thấy ngân hàng câu hỏi
+ */
+bankRoute.delete("/exams/remove/:id",
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        BankQuestionController.remove);
 
 export default bankRoute;
