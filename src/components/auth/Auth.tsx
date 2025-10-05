@@ -4,7 +4,6 @@ import { JSX, useState } from "react";
 import styles from "./Auth.module.css";
 import Link from "next/link";
 import Cookies from "js-cookie";
-import { log } from "console";
 import { useRouter } from "next/navigation";
 
 interface AuthProps {
@@ -55,6 +54,9 @@ export default function Auth({ isLogin }: AuthProps): JSX.Element {
     console.log(data.data);
     if (data.data.token) {
       Cookies.set("token", data.data.token, { expires: 3 });
+      if (data.data.user) {
+        localStorage.setItem("user", JSON.stringify(data.data.user));
+      }
       router.push(`/`)
     }
   };
