@@ -4,7 +4,7 @@ export interface Exam {
     exam_id: number;
     title: string;
     create_at: Date;
-    questions: ExamQuestion[];
+    questions?: ExamQuestion[];
     time_limit: number; // in minutes
     topic_id: number;
     exam_schedule_id: number;
