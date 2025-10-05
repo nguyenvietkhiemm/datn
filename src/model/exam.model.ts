@@ -1,10 +1,10 @@
-import { ExamQuestion} from "./exam.question.model";
+import {Question} from "./question.model";
 
 export interface Exam {
     exam_id: number;
     title: string;
     create_at: Date;
-    questions?: ExamQuestion[];
+    questions?: Question[];
     time_limit: number; // in minutes
     topic_id: number;
     exam_schedule_id: number;

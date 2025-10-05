@@ -76,7 +76,7 @@ bankRoute.post('/create',
  * @openapi
  * /banks/update/{id}:
  *   patch:
- *     summary: Cập nhật đề thi (yêu cầu admin)
+ *     summary: Cập nhật ngân hàng câu hỏi (yêu cầu admin)
  *     tags: [Banks]
  *     parameters:
  *       - in: path
@@ -84,7 +84,7 @@ bankRoute.post('/create',
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID của đề thi cần cập nhật
+ *         description: ID của ngân hàng câu hỏi cần cập nhật
  *     requestBody:
  *       required: true
  *       content:
@@ -100,11 +100,11 @@ bankRoute.post('/create',
  *                 example: 1
  *     responses:
  *       202:
- *         description: Cập nhật đề thi thành công
+ *         description: Cập nhật ngân hàng câu hỏi thành công
  *       400:
  *         description: Dữ liệu không hợp lệ
  *       404:
- *         description: Không tìm thấy đề thi
+ *         description: Không tìm thấy ngân hàng câu hỏi
  *       500:
  *         description: Lỗi server
  */
@@ -157,12 +157,12 @@ bankRoute.patch('/setAvailable/:id',
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID của đề thi cần xóa
+ *         description: ID của ngân hàng câu hỏi cần xóa
  *     responses:
  *       204:
- *         description: Xóa đề thi thành công
+ *         description: Xóa ngân hàng câu hỏi thành công
  *       404:
- *         description: Không tìm thấy đề thi
+ *         description: Không tìm thấy ngân hàng câu hỏi
  *       500:
  *         description: Lỗi server
  */
