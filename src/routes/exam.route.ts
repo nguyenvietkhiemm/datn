@@ -11,8 +11,7 @@ const examRoute = Router();
  * /exams:
  *   get:
  *     summary: Lấy danh sách đề thi
- *     tags:
- *       - Exam
+ *     tags: [Exams]
  *     responses:
  *       200:
  *         description: Danh sách đề thi
@@ -26,8 +25,7 @@ examRoute.get('/', ExamController.getAll);
  * /exams/{id}:
  *   get:
  *     summary: Lấy thông tin đề thi theo ID
- *     tags:
- *       - Exam
+ *     tags: [Exams]
  *     parameters:
  *       - in: path
  *         name: id
@@ -47,8 +45,7 @@ examRoute.get('/:id', ExamController.getById);
  * /exams/create:
  *   post:
  *     summary: Tạo đề thi mới (yêu cầu admin)
- *     tags:
- *       - Exam
+ *     tags: [Exams]
  *     requestBody:
  *       required: true
  *       content:
@@ -86,8 +83,7 @@ examRoute.post('/create',
  * /exams/update/{id}:
  *   patch:
  *     summary: Cập nhật đề thi (yêu cầu admin)
- *     tags:
- *       - Exam
+ *     tags: [Exams]
  *     parameters:
  *       - in: path
  *         name: id
@@ -135,8 +131,7 @@ examRoute.patch('/update/:id',
  * /exams/setAvailable/{id}:
  *   patch:
  *     summary: Thay đổi trạng thái đề thi theo ID (yêu cầu admin)
- *     tags:
- *       - Exam
+ *     tags: [Exams]
  *     parameters:
  *       - in: path
  *         name: id
@@ -168,8 +163,7 @@ examRoute.patch('/setAvailable/:id',
  * /exams/remove/{id}:
  *   delete:
  *     summary: Xóa một đề thi theo ID (yêu cầu admin)
- *     tags:
- *       - Exam
+ *     tags: [Exams]
  *     parameters:
  *       - in: path
  *         name: id
@@ -192,7 +186,7 @@ examRoute.delete('/remove/:id',
 
 /**
  * @swagger
- * /exams/question/add/{id}:
+ * /exams/questions/add/{id}:
  *   post:
  *     summary: Thêm câu hỏi vào đề thi (yêu cầu đăng nhập)
  *     tags: [Exams]
@@ -224,14 +218,14 @@ examRoute.delete('/remove/:id',
  *         description: Lỗi server
  */
 
-examRoute.post("/exams/add/:id",
+examRoute.post("/questions/add/:id",
         Authentication.AuthenticateToken,
         Authentication.AuthorizeRoles(ADMIN),
         ExamQuestionController.add);
 
 /**
  * @swagger
- * /exams/question/remove/{id}:
+ * /exams/questions/remove/{id}:
  *   post:
  *     summary: Xóa câu hỏi khỏi đề thi (yêu cầu đăng nhập)
  *     tags: [Exams]
@@ -262,9 +256,9 @@ examRoute.post("/exams/add/:id",
  *       404:
  *         description: Không tìm thấy đề thi
  */
-examRoute.delete("/exams/remove/:id",
+examRoute.delete("/questions/remove/:id",
         Authentication.AuthenticateToken,
         Authentication.AuthorizeRoles(ADMIN),
         ExamQuestionController.remove);
-        
+
 export default examRoute;
