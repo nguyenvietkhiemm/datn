@@ -23,7 +23,7 @@ router.use('/subjects', subjectRoute);
 router.use("/flashcards", flashcardRouter);
 router.use("/topics", topicRouter);
 router.use('/exams', examRoute);
-router.use('/bank', bankRoute);
+router.use('/banks', bankRoute);
 router.use("/", authRouter);
 
 export default router;
