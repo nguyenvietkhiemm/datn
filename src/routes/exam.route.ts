@@ -100,7 +100,9 @@ examRoute.post('/create',
  *       content:
  *         application/json:
  *           schema:
- *             title:
+ *             type: object
+ *             properties:
+ *               title:
  *                 type: string
  *                 example: "Đề thi giữa kỳ"
  *               topic_id:
@@ -122,6 +124,7 @@ examRoute.post('/create',
  *       500:
  *         description: Lỗi server
  */
+
 examRoute.patch('/update/:id',
         Authentication.AuthenticateToken,
         Authentication.AuthorizeRoles(ADMIN),
