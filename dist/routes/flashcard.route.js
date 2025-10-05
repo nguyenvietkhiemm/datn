@@ -1,0 +1,229 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+// src/routes/flashcard.route.ts
+const express_1 = require("express");
+const flashcard_controller_1 = require("../controllers/flashcard.controller");
+const flashcard_deck_controller_1 = require("../controllers/flashcard.deck.controller");
+const authentication_1 = __importDefault(require("../middleware/authentication"));
+const flashcardRouter = (0, express_1.Router)();
+/**
+ * @swagger
+ * tags:
+ *   - name: Flashcards
+ *     description: Flashcard API
+ */
+// DECK ROUTE
+/**
+ * @swagger
+ * /flashcards/decks:
+ *   get:
+ *     summary: Get all flashcard decks with pagination (yêu cầu đăng nhập)
+ *     tags: [Flashcards]
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: Page number
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *         description: Number of items per page
+ *     responses:
+ *       200:
+ *         description: List of decks with pagination
+ */
+flashcardRouter.get("/decks", authentication_1.default.AuthenticateToken, flashcard_deck_controller_1.FlashcardDeckController.getAll);
+/**
+ * @swagger
+ * /flashcards/decks/{id}:
+ *   get:
+ *     summary: Get flashcard deck by ID (yêu cầu đăng nhập)
+ *     tags: [Flashcards]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Flashcard deck data
+ *       404:
+ *         description: Deck not found
+ */
+flashcardRouter.get("/decks/:id", authentication_1.default.AuthenticateToken, flashcard_deck_controller_1.FlashcardDeckController.getById);
+/**
+ * @swagger
+ * /flashcards/decks/create:
+ *   post:
+ *     summary: Create a new deck (yêu cầu đăng nhập)
+ *     tags: [Flashcards]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 example: "Sample Deck"
+ *               description:
+ *                 type: string
+ *                 example: "This is a sample flashcard deck"
+ *     responses:
+ *       201:
+ *         description: Deck created successfully
+ */
+flashcardRouter.post("/decks/create", authentication_1.default.AuthenticateToken, flashcard_deck_controller_1.FlashcardDeckController.create);
+/**
+ * @swagger
+ * /flashcards/decks/add/{id}:
+ *   post:
+ *     summary: Thêm flashcard mới vào deck (yêu cầu đăng nhập)
+ *     tags: [Flashcards]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID của flashcard deck
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               front:
+ *                 type: string
+ *                 example: "What is 2 + 2?"
+ *               back:
+ *                 type: string
+ *                 example: "4"
+ *               example:
+ *                 type: string
+ *                 example: "Basic math"
+ *     responses:
+ *       201:
+ *         description: Flashcard được thêm thành công
+ *       401:
+ *         description: Thiếu hoặc sai token
+ *       404:
+ *         description: Không tìm thấy deck
+ */
+flashcardRouter.post("/decks/add/:id", authentication_1.default.AuthenticateToken, flashcard_controller_1.FlashcardController.add);
+/**
+ * @swagger
+ * /flashcards/decks/update/{id}:
+ *   put:
+ *     summary: Update a flashcard deck (yêu cầu đăng nhập)
+ *     tags: [Flashcards]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 example: "Sample Deck updated"
+ *               description:
+ *                 type: string
+ *                 example: "This is a sample flashcard deck updated"
+ *     responses:
+ *       200:
+ *         description: Deck updated successfully
+ *       404:
+ *         description: Deck not found
+ */
+flashcardRouter.put("/decks/update/:id", authentication_1.default.AuthenticateToken, flashcard_deck_controller_1.FlashcardDeckController.update);
+/**
+ * @swagger
+ * /flashcards/decks/delete/{id}:
+ *   delete:
+ *     summary: Delete a flashcard deck (yêu cầu đăng nhập)
+ *     tags: [Flashcards]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Deck deleted successfully
+ *       404:
+ *         description: Deck not found
+ */
+flashcardRouter.delete("/decks/delete/:id", authentication_1.default.AuthenticateToken, flashcard_deck_controller_1.FlashcardDeckController.delete);
+// FLASHCARD ROUTE
+/**
+ * @swagger
+ * /flashcards/update/{id}:
+ *   put:
+ *     summary: Update a flashcard (yêu cầu đăng nhập)
+ *     tags: [Flashcards]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               front:
+ *                 type: string
+ *               back:
+ *                 type: string
+ *               example:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Flashcard updated successfully
+ *       404:
+ *         description: Flashcard not found
+ */
+flashcardRouter.put("/update/:id", authentication_1.default.AuthenticateToken, flashcard_controller_1.FlashcardController.update);
+/**
+ * @swagger
+ * /flashcards/delete/{id}:
+ *   delete:
+ *     summary: Delete a flashcard (yêu cầu đăng nhập)
+ *     tags: [Flashcards]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Flashcard deleted successfully
+ *       404:
+ *         description: Flashcard not found
+ */
+flashcardRouter.delete("/delete/:id", authentication_1.default.AuthenticateToken, flashcard_controller_1.FlashcardController.delete);
+exports.default = flashcardRouter;
