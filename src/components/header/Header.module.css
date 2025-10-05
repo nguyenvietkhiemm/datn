@@ -1,95 +1,144 @@
+/* Header chính */
 .header {
     width: 100%;
-    background: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    background-color: #4f46e5;
+    /* tím sáng, tươi hơn */
+    color: #ffffff;
+    padding: 0 20px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    /* bóng nhẹ, nổi bật */
     position: sticky;
     top: 0;
     z-index: 50;
+    transition: background-color 0.3s ease;
 }
 
+/* Container bố cục 3 phần */
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: relative;
+    width: 100%;
 }
 
+/* Left */
 .left {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* Right */
+.right {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 15px;
 }
 
-.logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #4f46e5;
-    text-decoration: none;
+/* Center */
+.center {
+    display: flex;
+    justify-content: center;
 }
 
+/* Navbar */
 .nav {
     display: flex;
-    gap: 1.5rem;
+    gap: 20px;
 }
 
 .navItem {
-    color: #444;
+    color: #fff;
     text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
     font-weight: 500;
 }
 
 .navItem:hover {
-    color: #4f46e5;
-}
-
-.right {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.auth a {
-    padding: 0.5rem 1.25rem;
-    border-radius: 6px;
-    font-weight: 500;
-    text-decoration: none;
-}
-
-.login {
-    border: 1px solid #4f46e5;
-    color: #4f46e5;
-}
-
-.login:hover {
-    background: #eef2ff;
-}
-
-.register {
-    background: #4f46e5;
+    background-color: #6366f1;
+    /* tím nhạt hơn khi hover */
     color: #fff;
 }
 
-.register:hover {
-    background: #4338ca;
-}
-
+/* Khi đã login */
 .user {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
+    gap: 8px;
 }
 
 .avatar {
-    width: 40px;
-    height: 40px;
-    background: #e5e7eb;
+    width: 35px;
+    height: 35px;
+    background-color: #facc15;
+    /* vàng sáng, nổi bật */
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 600;
-    color: #555;
+    font-weight: bold;
+    color: #1f2937;
+    /* chữ đen trên nền vàng */
+}
+
+/* Khi chưa login */
+.auth {
+    display: flex;
+    gap: 10px;
+}
+
+.login,
+.register {
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+/* Login */
+.login {
+    color: #4f46e5;
+    /* tím sáng */
+    background-color: #fff;
+    /* nền trắng */
+    border: 1px solid #4f46e5;
+}
+
+.login:hover {
+    background-color: #6366f1;
+    color: #fff;
+}
+
+/* Register */
+.register {
+    color: #fff;
+    background-color: #f472b6;
+    /* hồng sáng */
+}
+
+.register:hover {
+    background-color: #f9a8d4;
+    /* hồng nhạt hơn */
+}
+
+/* Responsive nhỏ */
+@media (max-width: 768px) {
+    .center .nav {
+        display: none;
+    }
+
+    .container {
+        justify-content: space-between;
+    }
 }

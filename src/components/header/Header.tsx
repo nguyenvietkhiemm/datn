@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import styles from "./Header.module.css"; 
+import styles from "./Header.module.css";
 
 export default function Header() {
   const [isToken, setIsToken] = useState(false);
@@ -22,7 +22,9 @@ export default function Header() {
           <Link href="/" className={styles.logo}>
             Avatar trang web
           </Link>
+        </div>
 
+        <div className={styles.center}>
           <nav className={styles.nav}>
             {listNavbar.map((item, i) => (
               <Link key={i} href={item.href} className={styles.navItem}>

@@ -1,0 +1,73 @@
+.container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.title {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.options {
+    display: flex;
+    gap: 10px;
+    margin: 45px 0;
+}
+
+.optionButton {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+.optionButton.active {
+    background-color: #0070f3;
+    color: #fff;
+}
+
+.deckTitle {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.deckList {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.createDeck {
+    display: flex;
+    padding: 12px;
+    border: 2px dashed #0070f3;
+    border-radius: 6px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: all 0.2s ease;
+    flex: 0 0 25%;
+    max-width: 25%;
+    justify-content: center;
+    align-items: center;
+}
+
+.createDeck a {
+    text-decoration: none;
+    color: #0070f3;
+    font-weight: bold;
+}
+
+.createDeck:hover {
+    background-color: #e6f0ff;
+}
+
+.deckCard {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #fafafa;
+    flex: 0 0 25%;
+    max-width: 25%;
+}
