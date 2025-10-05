@@ -214,7 +214,7 @@ bankRoute.post("/questions/add/:id",
  * @swagger
  * /banks/questions/remove/{id}:
  *   delete:
- *     summary: Xóa câu hỏi khỏi ngân hàng câu hỏi (yêu cầu đăng nhập)
+ *     summary: Xóa câu hỏi khỏi ngân hàng câu hỏi (yêu cầu admin)
  *     tags: [Banks]
  *     security:
  *       - bearerAuth: []
