@@ -1,9 +1,9 @@
-import { BankQuestion } from "./bank.question.model";
+import { Question } from "./question.model";
 
 export interface Bank {
     bank_id: number;
     description: string;
     topic_id: number;
-    questions?: BankQuestion[];
+    questions?: Question[];
     available: boolean;
 }
