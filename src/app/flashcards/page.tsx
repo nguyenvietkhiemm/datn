@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import styles from "./Flashcards.module.css";
+import { useRouter } from "next/navigation";
 
 const decks = [
     { id: 1, title: "Từ vựng Tiếng Anh giao tiếp cơ bản", learned: 48, remembered: 48, review: 0, code: "0931trl", category: 0 },
@@ -17,7 +18,11 @@ const option_flash = [
 export default function Flashcards() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const filteredDecks = decks.filter(deck => deck.category === currentIndex);
+    const router = useRouter();
 
+    const flashcardsDetail = (deck_id: number) => {
+        router.push(`flashcards/${deck_id}`)
+    }
     return (
         <div className={styles.container}>
             <div className={styles.options}>
@@ -44,7 +49,7 @@ export default function Flashcards() {
 
                 {filteredDecks.length > 0 ? (
                     filteredDecks.map(deck => (
-                        <div key={deck.id} className={styles.deckCard}>
+                        <div key={deck.id} className={styles.deckCard} onClick={() => flashcardsDetail(deck.id)}>
                             <h3>{deck.title}</h3>
                             <p>Đã học: {deck.learned}</p>
                             <p>Nhớ được: {deck.remembered}</p>
