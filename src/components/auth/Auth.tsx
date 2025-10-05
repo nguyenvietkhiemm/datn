@@ -3,20 +3,24 @@
 import { JSX, useState } from "react";
 import styles from "./Auth.module.css";
 import Link from "next/link";
+import Cookies from "js-cookie";
+import { log } from "console";
+import { useRouter } from "next/navigation";
 
 interface AuthProps {
   isLogin: boolean;
 }
 
 interface SendData {
-  username?: string;
+  user_name?: string;
   email: string;
   password: string;
+
 }
 
 export default function Auth({ isLogin }: AuthProps): JSX.Element {
   const [formData, setFormData] = useState<SendData>({
-    username: "",
+    user_name: "",
     email: "",
     password: "",
   });
@@ -26,9 +30,33 @@ export default function Auth({ isLogin }: AuthProps): JSX.Element {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(" Gửi dữ liệu:", formData);
+
+    const API = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND || "http://localhost:3000";
+    const route = isLogin ? "/auth/login" : "/auth/register";
+    console.log(`${API}${route}`);
+    const res = await fetch(`${API}${route}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.message || "Đã có lỗi xảy ra");
+    }
+
+    const data = await res.json();
+    console.log(data.data);
+    if (data.data.token) {
+      Cookies.set("token", data.data.token, { expires: 3 });
+      router.push(`/`)
+    }
   };
 
   return (
@@ -47,10 +75,10 @@ export default function Auth({ isLogin }: AuthProps): JSX.Element {
           <div className={styles.field}>
             <label>Tên đăng nhập</label>
             <input
-              name="username"
+              name="user_name"
               placeholder="Tên đăng nhập"
               type="text"
-              value={formData.username}
+              value={formData.user_name}
               onChange={handleState}
             />
           </div>

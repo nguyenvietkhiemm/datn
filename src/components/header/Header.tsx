@@ -1,10 +1,26 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Header.module.css";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
-  const [isToken, setIsToken] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (token) {
+      setIsLogin(true);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    Cookies.remove("token"); 
+    setIsLogin(false);      
+    router.push("/login");   
+  };
 
   const listNavbar = [
     { name: "Giới thiệu", href: "/introduction" },
@@ -35,10 +51,13 @@ export default function Header() {
         </div>
 
         <div className={styles.right}>
-          {isToken ? (
+          {isLogin ? (
             <div className={styles.user}>
               <div className={styles.avatar}>A</div>
               <span>Tài khoản</span>
+              <button onClick={handleLogout} className={styles.logoutBtn}>
+                Đăng xuất
+              </button>
             </div>
           ) : (
             <div className={styles.auth}>
