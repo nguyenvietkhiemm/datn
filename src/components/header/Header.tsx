@@ -4,23 +4,23 @@ import { useState, useEffect } from "react";
 import styles from "./Header.module.css";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import Setting from "../setting/Setting";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "@/store/slices/userSlices";
+import { RootState } from "@/store";
 
 export default function Header() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [showSetting, setShowSetting] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    const token = Cookies.get("token");
-    if (token) {
-      setIsLogin(true);
-    }
-  }, []);
-
+  //lay state
+  const isLogin = useSelector((state : RootState) => state.user.isLoggedIn);
+  
   const handleLogout = () => {
-    Cookies.remove("token"); 
-    localStorage.removeItem("user")
-    setIsLogin(false);      
-    router.push("/login");   
+    Cookies.remove("token");
+    dispatch(logout())
+    router.push("/login");
   };
 
   const listNavbar = [
@@ -31,7 +31,7 @@ export default function Header() {
     { name: "Tài liệu", href: "/documents" },
     { name: "Thi thử", href: "/exam" },
   ];
-
+  
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -54,11 +54,10 @@ export default function Header() {
         <div className={styles.right}>
           {isLogin ? (
             <div className={styles.user}>
-              <div className={styles.avatar}>A</div>
-              <span>Tài khoản</span>
-              <button onClick={handleLogout} className={styles.logoutBtn}>
-                Đăng xuất
-              </button>
+              <div className={styles.avatar} onClick={() => setShowSetting(!showSetting)}>A</div>
+              <span onClick={() => setShowSetting(!showSetting)}>Tài khoản</span>
+
+              {showSetting && <Setting onLogout={handleLogout} />}
             </div>
           ) : (
             <div className={styles.auth}>

@@ -5,6 +5,8 @@ import styles from "./Auth.module.css";
 import Link from "next/link";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { login } from "@/store/slices/userSlices";
 
 interface AuthProps {
   isLogin: boolean;
@@ -30,10 +32,11 @@ export default function Auth({ isLogin }: AuthProps): JSX.Element {
   };
 
   const router = useRouter();
+  const dispatch = useDispatch();
 
+  //ham dang ky, dang nhap
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     const API = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
     const route = isLogin ? "/auth/login" : "/auth/register";
     console.log(`${API}${route}`);
@@ -51,11 +54,20 @@ export default function Auth({ isLogin }: AuthProps): JSX.Element {
     }
 
     const data = await res.json();
-    console.log(data.data);
+    //cookie & redux
     if (data.data.token) {
       Cookies.set("token", data.data.token, { expires: 3 });
       if (data.data.user) {
-        localStorage.setItem("user", JSON.stringify(data.data.user));
+        const user = data.data.user;
+        dispatch(login(
+          {
+            user_name: user.user_name,
+            email: user.email,
+            available: user.available,
+            birthday: user.birthday,
+            created_at: user.created_at
+          }
+        ))
       }
       router.push(`/`)
     }
