@@ -6,7 +6,6 @@ import Link from "next/link";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { login } from "@/store/slices/userSlices";
 
 interface AuthProps {
   isLogin: boolean;
@@ -59,17 +58,9 @@ export default function Auth({ isLogin }: AuthProps): JSX.Element {
       Cookies.set("token", data.data.token, { expires: 3 });
       if (data.data.user) {
         const user = data.data.user;
-        dispatch(login(
-          {
-            user_name: user.user_name,
-            email: user.email,
-            available: user.available,
-            birthday: user.birthday,
-            created_at: user.created_at
-          }
-        ))
+        localStorage.setItem("user_name", user.user_name)
       }
-      router.push(`/`)
+      window.location.href = "/";
     }
   };
 
