@@ -1,11 +1,26 @@
-"use client"
-import { configureStore } from "@reduxjs/toolkit";
-import { userReducer } from "./slices/userSlices"
+"use client";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { userReducer, logout } from "./slices/userSlices";
+import { flashcardReducer } from "./slices/flashcardSlices";
 
+// Gộp tất cả reducers vào 1 root
+const appReducer = combineReducers({
+  user: userReducer,
+  flashcard: flashcardReducer,
+});
+
+// Tạo rootReducer có thể reset toàn bộ state khi logout
+const rootReducer = (state: any, action: any) => {
+  if (action.type === logout.type) {
+    //Reset toàn bộ Redux state về initialState
+    state = undefined;
+  }
+  return appReducer(state, action);
+};
+
+//Cấu hình store sử dụng rootReducer
 export const store = configureStore({
-  reducer: {
-    user: userReducer,
-  },
+  reducer: rootReducer,
 });
 
 // Types
