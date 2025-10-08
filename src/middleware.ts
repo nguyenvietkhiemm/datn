@@ -16,5 +16,5 @@ export function middleware(req: NextRequest) {
 
 // Chỉ áp dụng cho các route cần bảo vệ
 export const config = {
-  matcher: ["/flashcards/:id*", "/profile/:id*"],
+  matcher: ["/flashcards/:path*", "/profile/:id*"],
 };

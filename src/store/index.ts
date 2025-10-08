@@ -1,12 +1,10 @@
 "use client";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { userReducer, logout } from "./slices/userSlices";
-import { flashcardReducer } from "./slices/flashcardSlices";
 
 // Gộp tất cả reducers vào 1 root
 const appReducer = combineReducers({
   user: userReducer,
-  flashcard: flashcardReducer,
 });
 
 // Tạo rootReducer có thể reset toàn bộ state khi logout
