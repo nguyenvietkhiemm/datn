@@ -21,7 +21,7 @@ export default function TokenChecker() {
           Cookies.remove("token");
           localStorage.clear();
           dispatch(logout());
-          router.push("/login");
+          window.location.href = "/login"
         }
       } catch (e) {
         console.error("Không thể decode token:", e);
@@ -36,5 +36,5 @@ export default function TokenChecker() {
     return () => clearInterval(interval);
   }, [dispatch, router]);
 
-  return null; // Component này không render gì
+  return null; 
 }

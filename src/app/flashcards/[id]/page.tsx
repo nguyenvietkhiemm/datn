@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import styles from "./Flashcards.module.css";
 import Cookies from "js-cookie";
+import Pagination from "@/components/Pagination/Pagination";
 
 type Flashcard = {
   flashcard_id: number;
@@ -15,9 +16,13 @@ type Flashcard = {
 };
 
 export default function FlashcardDetail() {
-  const { deck_id } = useParams();
+  const { id } = useParams();
   const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
   const [loading, setLoading] = useState(true);
+  const [totalPage, serTotalPage] = useState(1);
+
+  //phan trang
+  const [currentPage, setCurrentPage] = useState(1);
 
   // Gọi API lấy danh sách flashcard của deck
   useEffect(() => {
@@ -25,7 +30,7 @@ export default function FlashcardDetail() {
       try {
         const token = Cookies.get("token");
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_ENDPOINT_BACKEND}/flashcards/decks/${deck_id}`,
+          `${process.env.NEXT_PUBLIC_ENDPOINT_BACKEND}/flashcards/decks/${id}?page=${currentPage}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -36,8 +41,8 @@ export default function FlashcardDetail() {
 
         if (!res.ok) throw new Error("Không thể lấy danh sách flashcard");
         const json = await res.json();
-        const data = Array.isArray(json) ? json : json.data;
-        setFlashcards(data || []);
+        setFlashcards(json.data.data);
+        serTotalPage(json.data.totalPages);
       } catch (error) {
         console.error("Lỗi khi fetch flashcards:", error);
       } finally {
@@ -46,8 +51,8 @@ export default function FlashcardDetail() {
     };
 
     fetchFlashcards();
-  }, [deck_id]);
-
+  }, [id, currentPage]);
+  
   if (loading) return <p>Đang tải dữ liệu...</p>;
 
   return (
@@ -57,21 +62,26 @@ export default function FlashcardDetail() {
       {flashcards.length === 0 ? (
         <p>Chưa có thẻ flashcard nào trong bộ này.</p>
       ) : (
-        <div className={styles.grid}>
-          {flashcards.map((card) => (
-            <div key={card.flashcard_id} className={styles.card}>
-              <h3 className={styles.front}>{card.front}</h3>
-              <p className={styles.back}><strong>Đáp án:</strong> {card.back}</p>
-              {card.example && (
-                <p className={styles.example}><strong>Ví dụ:</strong> {card.example}</p>
-              )}
-              <p className={styles.date}>
-                Ngày tạo: {new Date(card.created_at).toLocaleDateString("vi-VN")}
-              </p>
-            </div>
-          ))}
+        <div>
+          <div className={styles.grid}>
+            {flashcards.map((card, index) => (
+              <div key={index} className={styles.card}>
+                <h3 className={styles.front}>{card.front}</h3>
+                <p className={styles.back}><strong>Đáp án:</strong> {card.back}</p>
+                {card.example && (
+                  <p className={styles.example}><strong>Ví dụ:</strong> {card.example}</p>
+                )}
+                <p className={styles.date}>
+                  Ngày tạo: {new Date(card.created_at).toLocaleDateString("vi-VN")}
+                </p>
+              </div>
+            ))}
+          </div>
+          <div className={styles.pagination}>
+          </div>
         </div>
       )}
+      <Pagination totalPages={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
     </div>
   );
 }

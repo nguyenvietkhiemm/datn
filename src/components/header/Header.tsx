@@ -1,32 +1,37 @@
 "use client";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
-import styles from "./Header.module.css";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import Setting from "../setting/Setting";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logout } from "@/store/slices/userSlices";
-import { RootState } from "@/store";
+import Setting from "../setting/Setting";
+import styles from "./Header.module.css";
 
 export default function Header() {
   const [showSetting, setShowSetting] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+  const [userName, setUserName] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(null);
+
+  const userRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const dispatch = useDispatch();
-  const userRef = useRef<HTMLDivElement>(null);
 
-  // Lấy state user
-  const userName = localStorage.getItem("user_name")
-  const cookie = Cookies.get("token")
-  
+  useEffect(() => {
+    setIsClient(true);
+    setUserName(localStorage.getItem("user_name"));
+    setToken(Cookies.get("token") || null);
+  }, []);
+
   const handleLogout = () => {
+    localStorage.removeItem("user_name");
     Cookies.remove("token");
-    localStorage.removeItem("user_name")
+    setIsClient(false)
     dispatch(logout());
-    window.location.href = "/login";
+    router.push("/login");
   };
 
-  // Click ngoài để đóng menu Setting
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (userRef.current && !userRef.current.contains(e.target as Node)) {
@@ -49,27 +54,24 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        {/* Logo */}
         <div className={styles.left}>
           <Link href="/" className={styles.logo}>
             Avatar trang web
           </Link>
         </div>
 
-        {/* Navbar */}
         <div className={styles.center}>
           <nav className={styles.nav}>
-            {listNavbar.map((item, index) => (
-              <Link key={index} href={item.href} className={styles.navItem}>
+            {listNavbar.map((item, idx) => (
+              <Link key={idx} href={item.href} className={styles.navItem}>
                 {item.name}
               </Link>
             ))}
           </nav>
         </div>
 
-        {/* User / Auth */}
         <div className={styles.right}>
-          {cookie ? (
+          {isClient && token ? (
             <div className={styles.user} ref={userRef}>
               <div
                 className={styles.avatar}
@@ -80,7 +82,6 @@ export default function Header() {
               <span onClick={() => setShowSetting(!showSetting)}>
                 {userName || "Tài khoản"}
               </span>
-
               {showSetting && <Setting onLogout={handleLogout} />}
             </div>
           ) : (

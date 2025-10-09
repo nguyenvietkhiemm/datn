@@ -27,7 +27,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  <TokenChecker/>
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -37,7 +36,12 @@ export default function RootLayout({
           <ReduxProvider>
             <div className="flex flex-col min-h-screen">
               <Header />
-              <main className="flex-1">{children}</main>
+              <main className="flex-1">
+                <>
+                  <TokenChecker />
+                  {children}
+                </>
+              </main>
               <Footer />
             </div>
           </ReduxProvider>
