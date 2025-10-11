@@ -3,11 +3,10 @@ import { useEffect, useState } from "react";
 import styles from "./FlashcardDeck.module.css";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import Pagination from "@/components/Pagination/Pagination";
 
 const option_flash = [
     { name: "List từ của tôi" },
-    { name: "Đang học" },
-    { name: "Khám phá" },
 ];
 
 type FlashcardDeck = {
@@ -20,11 +19,11 @@ type FlashcardDeck = {
 export default function Flashcards() {
     const [decks, setDecks] = useState<FlashcardDeck[]>([]);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [page, setPage] = useState(1);
     const router = useRouter();
-
-    const flashcardsDetail = (deck_id: number) => {
-        router.push(`/flashcards/${deck_id}`);
+    const [totalPages, setTotalPages] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
+    const flashcardsDetail = (deck_id: number, title : string) => {
+        router.push(`/flashcards/${deck_id}?flashcard_deck_title=${title}`);
     };
 
     useEffect(() => {
@@ -32,7 +31,7 @@ export default function Flashcards() {
             try {
                 const token = Cookies.get("token");
                 const res = await fetch(
-                    `${process.env.NEXT_PUBLIC_ENDPOINT_BACKEND}/flashcards/decks?page=${page}`,
+                    `${process.env.NEXT_PUBLIC_ENDPOINT_BACKEND}/flashcards/decks?page=${currentPage}`,
                     {
                         headers: {
                             "Content-Type": "application/json",
@@ -43,15 +42,16 @@ export default function Flashcards() {
 
                 if (!res.ok) throw new Error("Không thể lấy danh sách deck");
                 const json = await res.json();
-                const decksData = Array.isArray(json) ? json : json.data;
-                setDecks(decksData || []);
+
+                setDecks(json.data.data);
+                setTotalPages(json.data.totalPages);
             } catch (error) {
                 console.error("Lỗi khi fetch decks:", error);
             }
         };
 
         fetchDecks();
-    }, [page]);
+    }, [currentPage]);
 
     const filteredDecks = decks;
 
@@ -86,7 +86,7 @@ export default function Flashcards() {
                         <div
                             key={deck.flashcard_deck_id}
                             className={styles.deckCard}
-                            onClick={() => flashcardsDetail(deck.flashcard_deck_id)}
+                            onClick={() => flashcardsDetail(deck.flashcard_deck_id, deck.title)}
                         >
                             <h3>{deck.title}</h3>
                             <p>{deck.description}</p>
@@ -100,15 +100,7 @@ export default function Flashcards() {
                     <p>Chưa có deck nào trong mục này.</p>
                 )}
             </div>
-
-            {/* Điều khiển phân trang */}
-            <div className={styles.pagination}>
-                <button disabled={page === 1} onClick={() => setPage(page - 1)}>
-                    Trang trước
-                </button>
-                <span>Trang {page}</span>
-                <button onClick={() => setPage(page + 1)}>Trang sau</button>
-            </div>
+            <Pagination totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>        
         </div>
     );
 }
