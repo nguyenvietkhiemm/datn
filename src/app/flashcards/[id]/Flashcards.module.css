@@ -13,9 +13,12 @@
 
 .play {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     margin: 20px 0;
     width: 100%;
+    gap: 30px;
+    height: 80%;
 }
 
 .btn_play {
@@ -42,6 +45,57 @@
 .btn_play:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+}
+
+.btn_add_update {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.btn_add {
+    padding: 10px 20px;
+    background-color: #0070f3;
+    /* màu xanh chủ đạo */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn_add:hover {
+    background-color: #005ac1;
+    transform: translateY(-1px);
+    /* hiệu ứng nâng nhẹ */
+}
+
+.btn_add:active {
+    transform: translateY(0);
+}
+
+.btn_add:focus {
+    outline: 2px solid #005ac1;
+    outline-offset: 2px;
+}
+
+.btn_update {
+    padding: 10px 20px;
+    background-color: #ffc107;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn_update:hover {
+    background-color: #e0a800;
 }
 
 .stats {

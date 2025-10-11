@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import styles from "./FlashcardDeck.module.css";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
-import Pagination from "@/components/Pagination/Pagination";
+import Pagination from "@/components/pagination/Pagination";
+import { AddFlashcardDeck } from "@/components/add-flashcard-deck/AddFlashcardDeck";
 
 const option_flash = [
     { name: "List từ của tôi" },
@@ -20,9 +21,10 @@ export default function Flashcards() {
     const [decks, setDecks] = useState<FlashcardDeck[]>([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const router = useRouter();
+    const [showAddDeckForm, setShowAddDeckForm] = useState(false);
     const [totalPages, setTotalPages] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
-    const flashcardsDetail = (deck_id: number, title : string) => {
+    const flashcardsDetail = (deck_id: number, title: string) => {
         router.push(`/flashcards/${deck_id}?flashcard_deck_title=${title}`);
     };
 
@@ -75,10 +77,8 @@ export default function Flashcards() {
             <h2 className={styles.deckTitle}>List từ đã tạo</h2>
 
             <div className={styles.deckList}>
-                <div className={styles.createDeck}>
-                    <a href="#">
-                        <span>Tạo list từ</span>
-                    </a>
+                <div className={styles.createDeck} onClick={() => setShowAddDeckForm(true)}>
+                    <span>Tạo list từ</span>
                 </div>
 
                 {filteredDecks.length > 0 ? (
@@ -92,7 +92,10 @@ export default function Flashcards() {
                             <p>{deck.description}</p>
                             <p>
                                 Ngày tạo:{" "}
-                                {new Date(deck.created_at).toLocaleDateString("vi-VN")}
+                                {new Date(deck.created_at).toLocaleString("vi-VN", {
+                                    dateStyle: "short",
+                                    timeStyle: "short",
+                                })}
                             </p>
                         </div>
                     ))
@@ -100,7 +103,19 @@ export default function Flashcards() {
                     <p>Chưa có deck nào trong mục này.</p>
                 )}
             </div>
-            <Pagination totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>        
+            <Pagination totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+            {/* form tao kist tu */}
+            {showAddDeckForm && (
+                <div className={styles.modalOverlay} onClick={() => setShowAddDeckForm(false)}>
+                    <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+                        <AddFlashcardDeck setShowAddDeckForm={setShowAddDeckForm} />
+                        <button className={styles.closeButton} onClick={() => setShowAddDeckForm(false)}>
+                            Đóng
+                        </button>
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 }

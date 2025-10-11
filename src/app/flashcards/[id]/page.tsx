@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import styles from "./Flashcards.module.css";
 import Cookies from "js-cookie";
-import Pagination from "@/components/Pagination/Pagination";
+import Pagination from "@/components/pagination/Pagination";
+import AddFlashcards from "@/components/add-flashcards/AddFlashcards";
 
 type Flashcard = {
   flashcard_id: number;
@@ -24,6 +25,7 @@ export default function FlashcardDetail() {
   const [totalPage, setTotalPage] = useState(1);
   const [totalItem, setTotalItem] = useState<any>({});
   const [totalDone, setTotalDone] = useState(0);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   //phan trang
   const [currentPage, setCurrentPage] = useState(1);
@@ -65,7 +67,15 @@ export default function FlashcardDetail() {
     <div className={styles.container}>
       <h1 className={styles.title}>{flashcard_deck_title}</h1>
       <div className={styles.play}>
-        <a className={styles.btn_play} href={`/flashcards/${id}/quiz`}>Luyện tập Flashcard</a>
+        <div className={styles.btn_add_update}>
+          <button className={styles.btn_add} onClick={() => setShowAddModal(true)}>Thêm flashcard</button>
+          <button className={styles.btn_update}>Chỉnh sửa</button>
+        </div>
+        {flashcards.length !== 0 &&
+          <div>
+            <a className={styles.btn_play} href={`/flashcards/${id}/quiz`}>Luyện tập Flashcard</a>
+          </div>
+        }
       </div>
       <div className={styles.stats}>
         <div className={styles.statBox}>
@@ -90,16 +100,21 @@ export default function FlashcardDetail() {
                   <p className={styles.example}><strong>Ví dụ:</strong> {card.example}</p>
                 )}
                 <p className={styles.date}>
-                  Ngày tạo: {new Date(card.created_at).toLocaleDateString("vi-VN")}
+                  Ngày tạo: {new Date(card.created_at).toLocaleString("vi-VN", {
+                    dateStyle: "short",
+                    timeStyle: "short",
+                  })}
                 </p>
               </div>
             ))}
           </div>
           <div className={styles.pagination}>
+            <Pagination totalPages={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
           </div>
         </div>
       )}
-      <Pagination totalPages={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+
+      {showAddModal && <AddFlashcards onClose={() => setShowAddModal(false)} id={Number(id!)} setFlashcards={setFlashcards} />}
     </div>
   );
 }
