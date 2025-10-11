@@ -152,7 +152,7 @@ CREATE TABLE IF NOT EXISTS flashcard (
     flashcard_id SERIAL PRIMARY KEY,
     front TEXT NOT NULL,
     back TEXT,
-    example TEXT,
+    example TEXT DEFAULT"",
     created_at TIMESTAMPTZ DEFAULT now(),
     status flashcard_status DEFAULT 'pending',
     flashcard_deck_id INT,

@@ -106,51 +106,6 @@ flashcardRouter.post(
 
 /**
  * @swagger
- * /flashcards/decks/add/{id}:
- *   post:
- *     summary: Thêm flashcard mới vào deck (yêu cầu đăng nhập)
- *     tags: [Flashcards]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: ID của flashcard deck
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               front:
- *                 type: string
- *                 example: "What is 2 + 2?"
- *               back:
- *                 type: string
- *                 example: "4"
- *               example:
- *                 type: string
- *                 example: "Basic math"
- *     responses:
- *       201:
- *         description: Flashcard được thêm thành công
- *       401:
- *         description: Thiếu hoặc sai token
- *       404:
- *         description: Không tìm thấy deck
- */
-flashcardRouter.post(
-  "/decks/add/:id",
-  Authentication.AuthenticateToken,
-  FlashcardController.add
-);
-
-/**
- * @swagger
  * /flashcards/decks/update/{id}:
  *   put:
  *     summary: Update a flashcard deck (yêu cầu đăng nhập)
@@ -211,6 +166,51 @@ flashcardRouter.delete(
 );
 
 // FLASHCARD ROUTE
+
+/**
+ * @swagger
+ * /flashcards/decks/add/{id}:
+ *   post:
+ *     summary: Thêm flashcard mới vào deck (yêu cầu đăng nhập)
+ *     tags: [Flashcards]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID của flashcard deck
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               front:
+ *                 type: string
+ *                 example: "What is 2 + 2?"
+ *               back:
+ *                 type: string
+ *                 example: "4"
+ *               example:
+ *                 type: string
+ *                 example: "Basic math"
+ *     responses:
+ *       201:
+ *         description: Flashcard được thêm thành công
+ *       401:
+ *         description: Thiếu hoặc sai token
+ *       404:
+ *         description: Không tìm thấy deck
+ */
+flashcardRouter.post(
+  "/decks/:id/add/flashcards",
+  Authentication.AuthenticateToken,
+  FlashcardController.add
+);
 
 /**
  * @swagger
