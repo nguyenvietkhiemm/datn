@@ -1,22 +1,25 @@
 import { query } from "../config/database";
 import { Flashcard } from "../model/flashcard.model";
+import pool from "../config/database";
 
 // Flashcard Service
 export const FlashcardService = {
-
-  async add(data: Flashcard): Promise<Flashcard> {
-    const result = await query(
-      `INSERT INTO flashcard (front, back, example, status, flashcard_deck_id)
-         VALUES ($1,$2,$3,$4,$5) RETURNING *`,
-      [
-        data.front,
-        data.back,
-        data.example,
-        data.status,
-        data.flashcard_deck_id,
-      ]
-    );
-    return result.rows[0];
+  async add(data: Flashcard): Promise<Flashcard | null> {
+    const client = await pool.connect();
+    try {
+      const result = await query(
+        `INSERT INTO flashcard (front, back, example, flashcard_deck_id)
+           VALUES ($1,$2,$3,$4) RETURNING *`,
+        [data.front, data.back, data.example, data.flashcard_deck_id]
+      );
+      return result.rows[0];
+    } catch (error) {
+      await client.query("ROLLBACK");
+      console.error("Lỗi khi lấy flashcards:", error);
+      return null;
+    } finally {
+      client.release();
+    }
   },
 
   async update(
@@ -52,4 +55,40 @@ export const FlashcardService = {
     );
     return (result.rowCount ?? 0) > 0;
   },
+
+  async reviewFlashcard(id : number) : Promise<Flashcard[]>{
+    const result = await query(
+      `
+      SELECT * 
+      FROM flashcard
+      WHERE flashcard_deck_id = $1
+        AND (status = 'pending' OR status = 'miss' OR status IS NULL)
+      ORDER BY RANDOM()
+      LIMIT 20
+      `,
+      [id]
+    )
+
+    return result.rows;
+  },
+
+  async submitFlashcard(answerCorrect : number[], answerMiss : number[]) : Promise<void>{
+    if(answerCorrect.length > 0){
+      await query(`
+      UPDATE flashcard
+      SET status = 'done'
+      WHERE flashcard_id = ANY($1)
+      `,
+      [answerCorrect])
+    }
+    if(answerMiss.length > 0){
+      await query(`
+      UPDATE flashcard
+      SET status = 'miss'
+      WHERE flashcard_id = ANY($1)
+      `,
+      [answerMiss])
+    }
+    return
+  }
 };
