@@ -16,7 +16,7 @@ export const FlashcardDeckService = {
       const result = await query(
         `SELECT flashcard_deck_id, title, description, created_at
          FROM flashcard_deck
-         ORDER BY flashcard_deck_id
+         ORDER BY created_at DESC
          LIMIT $1 OFFSET $2`,
         [limit, offset]
       );
