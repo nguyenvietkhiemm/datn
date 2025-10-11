@@ -7,6 +7,10 @@ export const FlashcardController = {
   add: async (req: Request, res: Response) => {
     const result = await safeExecute(
       async (): Promise<DefaultResponse<any>> => {
+        const {example} = req.body;
+        if(example === undefined) req.body.example = null
+        console.log({body :req.body, flashcard_deck_id: req.params.id});
+        
         const newCard = await FlashcardService.add({
           ...req.body,
           flashcard_deck_id: Number(req.params.id),

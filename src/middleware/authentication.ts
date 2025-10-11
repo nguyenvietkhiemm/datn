@@ -13,7 +13,7 @@ const Authentication = {
       if (!token) {
         return res.status(401).json({ message: "No token provided" });
       }
-
+      
       // verify token (sẽ throw nếu invalid)
       const decoded: any = jwt.verify(token, JWT_SECRET);
 
