@@ -1,9 +1,9 @@
 /* Header chính */
 .header {
     width: 100%;
-    background-color: #4f46e5;
+    background-color: #ffffff;
     /* tím sáng, tươi hơn */
-    color: #ffffff;
+    color: #4f46e5;
     padding: 0 20px;
     height: 70px;
     display: flex;
@@ -56,7 +56,7 @@
 }
 
 .navItem {
-    color: #fff;
+    color: #4f46e5;
     text-decoration: none;
     padding: 8px 14px;
     border-radius: 8px;
@@ -67,28 +67,29 @@
 .navItem:hover {
     background-color: #6366f1;
     /* tím nhạt hơn khi hover */
-    color: #fff;
+    color: #4f46e5;
 }
 
 /* Khi đã login */
 .user {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 8px;
+    cursor: pointer;
 }
 
 .avatar {
-    width: 35px;
-    height: 35px;
-    background-color: #facc15;
-    /* vàng sáng, nổi bật */
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
+    background-color: #2563eb;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
-    color: #1f2937;
-    /* chữ đen trên nền vàng */
+    font-weight: 600;
+    font-size: 16px;
 }
 
 /* Khi chưa login */
@@ -117,12 +118,12 @@
 
 .login:hover {
     background-color: #6366f1;
-    color: #fff;
+    color: #4f46e5;
 }
 
 /* Register */
 .register {
-    color: #fff;
+    color: #4f46e5;
     background-color: #f472b6;
     /* hồng sáng */
 }

@@ -58,7 +58,8 @@ export default function Auth({ isLogin }: AuthProps): JSX.Element {
       Cookies.set("token", data.data.token, { expires: 3 });
       if (data.data.user) {
         const user = data.data.user;
-        localStorage.setItem("user_name", user.user_name)
+        localStorage.setItem("user_name", user.user_name);
+        localStorage.setItem("user", JSON.stringify(user));
       }
       window.location.href = "/";
     }
