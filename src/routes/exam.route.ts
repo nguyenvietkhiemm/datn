@@ -3,8 +3,169 @@ import ExamController from '../controllers/exam.controller';
 import Authentication from '../middleware/authentication';
 import { ADMIN } from "../config/permission";
 import { ExamQuestionController } from '../controllers/exam.question.controller';
+import { ScheduleExamController } from '../controllers/schedule.exam.controller';
 
 const examRoute = Router();
+
+// EXAM SCHEDULE ROUTES
+
+/**
+ * @openapi
+ * /exams/schedule:
+ *   get:
+ *     summary: Lấy danh sách tất cả lịch thi
+ *     tags: [Exams]
+ *     responses:
+ *       200:
+ *         description: Lấy danh sách lịch thi thành công
+ *       500:
+ *         description: Lỗi server
+ */
+examRoute.get('/schedule',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        ScheduleExamController.getAll);
+
+/**
+ * @openapi
+ * /exams/schedule/{id}:
+ *   get:
+ *     summary: Lấy thông tin chi tiết một lịch thi theo ID
+ *     tags: [Exams]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID của lịch thi
+ *     responses:
+ *       200:
+ *         description: Lấy thông tin lịch thi thành công
+ *       404:
+ *         description: Không tìm thấy lịch thi
+ *       500:
+ *         description: Lỗi server
+ */
+examRoute.get(
+        '/schedule/:id',
+        Authentication.AuthenticateToken,
+        ScheduleExamController.getById);
+
+/**
+ * @openapi
+ * /exams/schedule/create:
+ *   post:
+ *     summary: Tạo lịch thi mới (yêu cầu admin)
+ *     tags: [Exams]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               start_time:
+ *                 type: string
+ *                 format: date-time
+ *                 example: "2025-10-20T09:00:00Z"
+ *               end_time:
+ *                 type: string
+ *                 format: date-time
+ *                 example: "2025-10-20T11:00:00Z"
+ *     responses:
+ *       201:
+ *         description: Tạo lịch thi thành công
+ *       400:
+ *         description: Dữ liệu gửi lên không hợp lệ
+ *       401:
+ *         description: Không có quyền truy cập
+ *       500:
+ *         description: Lỗi server
+ */
+examRoute.post(
+        '/schedule/create',
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(ADMIN),
+        ScheduleExamController.create);
+
+/**
+ * @openapi
+ * /exams/schedule/update/{id}:
+ *   put:
+ *     summary: Cập nhật lịch thi (yêu cầu admin)
+ *     tags: [Exams]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID của lịch thi cần cập nhật
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               start_time:
+ *                 type: string
+ *                 format: date-time
+ *                 example: "2025-10-25T09:00:00Z"
+ *               end_time:
+ *                 type: string
+ *                 format: date-time
+ *                 example: "2025-10-25T11:00:00Z"
+ *     responses:
+ *       200:
+ *         description: Cập nhật lịch thi thành công
+ *       400:
+ *         description: Dữ liệu gửi lên không hợp lệ
+ *       401:
+ *         description: Không có quyền truy cập
+ *       404:
+ *         description: Không tìm thấy lịch thi
+ *       500:
+ *         description: Lỗi server
+ */
+examRoute.put(
+  '/schedule/update/:id',
+  Authentication.AuthenticateToken,
+  Authentication.AuthorizeRoles(ADMIN),
+  ScheduleExamController.update
+);
+
+/**
+ * @openapi
+ * /exams/schedule/remove/{id}:
+ *   delete:
+ *     summary: Xóa lịch thi (yêu cầu admin)
+ *     tags: [Exams]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID của lịch thi cần xóa
+ *     responses:
+ *       204:
+ *         description: Xóa lịch thi thành công
+ *       401:
+ *         description: Không có quyền truy cập
+ *       404:
+ *         description: Không tìm thấy lịch thi
+ *       500:
+ *         description: Lỗi server
+ */
+examRoute.delete(
+  '/schedule/remove/:id',
+  Authentication.AuthenticateToken,
+  Authentication.AuthorizeRoles(ADMIN),
+  ScheduleExamController.remove);
+
+// EXAM
 
 /**
  * @openapi
@@ -53,7 +214,7 @@ examRoute.get('/:id', ExamController.getById);
  *           schema:
  *             type: object
  *             properties:
- *               title:
+ *               exam_name:
  *                 type: string
  *                 example: "Đề thi giữa kỳ"
  *               topic_id:

@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import safeExecute, { DefaultResponse } from "../utils/safe.execute";
 import ExamService from "../services/exam.service";
-import { get } from "http";
+import { Exam } from "../model/exam.model";
 
 const ExamController = {
-    async getAll(req: Request, res: Response) {
+  async getAll(req: Request, res: Response) {
     const result: DefaultResponse<any> = await safeExecute(async () => {
       return {
         status: 200,
@@ -28,19 +28,19 @@ const ExamController = {
     return res.status(result.status).json(result);
   },
 
-    async create(req: Request, res: Response) {
+  async create(req: Request, res: Response) {
     const result: DefaultResponse<any> = await safeExecute(async () => {
       return {
         status: 201,
         message: "Tạo đề thi thành công",
-        data: await ExamService.create(req.body),
+        data: await ExamService.create({ ...req.body } as Exam),
       };
     });
 
     return res.status(result.status).json(result);
   },
 
-    async update(req: Request, res: Response) {
+  async update(req: Request, res: Response) {
     const result: DefaultResponse<any> = await safeExecute(async () => {
       return {
         status: 202,
@@ -70,7 +70,7 @@ const ExamController = {
 
   async remove(req: Request, res: Response) {
     const result: DefaultResponse<any> = await safeExecute(async () => {
-      
+
       return {
         status: 204,
         message: "Xóa đề thi thành công",
