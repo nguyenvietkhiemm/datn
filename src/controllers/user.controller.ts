@@ -33,7 +33,7 @@ const UserController = {
 
     // Cập nhật user
     async update(req: Request, res: Response) {
-        const id = Number(req.params.id);
+        const id = req.user!.user_id;
 
         const response: DefaultResponse<any> = await safeExecute(async () => {
             const updated = await UserService.update(id, req.body);
