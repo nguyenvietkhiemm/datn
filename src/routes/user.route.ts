@@ -140,3 +140,8 @@ userRouter.delete(
 );
 
 export default userRouter;
+userRouter.put(
+  "/update",
+  Authentication.AuthenticateToken,
+  UserController.update // logic check quyền nằm trong controller
+);
