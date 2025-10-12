@@ -17,7 +17,8 @@ export const FlashcardDeckController = {
 
   getById: async (req: Request, res: Response) => {
     const result = await safeExecute(async (): Promise<DefaultResponse<any>> => {
-      const card = await FlashcardDeckService.getById(Number(req.params.id));
+      const page = Number(req.query.page) || 1;  
+      const card = await FlashcardDeckService.getById(Number(req.params.id), page);
       if (!card) {
         return { status: 404, message: "Flashcard not found" };
       }
