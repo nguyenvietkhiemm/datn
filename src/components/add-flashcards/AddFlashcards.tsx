@@ -32,7 +32,7 @@ export default function AddFlashcards({ onClose, id, setFlashcards }: AddFlashca
         const URL_API = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
         try {
             const token = Cookies.get("token");
-            const res = await fetch(`${URL_API}/flashcards/decks/${id}/add/flashcards`, {
+            const res = await fetch(`${URL_API}/flashcards/decks/add/${id}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
