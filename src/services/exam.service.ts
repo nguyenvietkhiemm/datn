@@ -45,12 +45,12 @@ const ExamService = {
 
   async create(data: Exam): Promise<Exam> {
     const queryText = `
-      INSERT INTO exam (title, topic_id, time_limit, exam_schedule_id)
+      INSERT INTO exam (exam_name, topic_id, time_limit, exam_schedule_id)
       VALUES ($1, $2, $3, $4)
       RETURNING *
     `;
     const result = await query(queryText, [
-      data.title,
+      data.exam_name,
       data.topic_id,
       data.time_limit,
       data.exam_schedule_id,
@@ -61,16 +61,16 @@ const ExamService = {
   async update(id: number, data: Exam): Promise<Exam | null> {
     const queryText = `
       UPDATE exam
-      SET name = $1, subject = $2, date = $3
-      WHERE exam_id = $4
+      SET exam_name = $1, topic_id = $2, time_limit = $3, exam_schedule_id = $4
+      WHERE exam_id = $5
       RETURNING *
     `;
     const result = await query(queryText, [
-      data.title,
+      data.exam_name,
       data.topic_id,
       data.time_limit,
       data.exam_schedule_id,
-      id
+      data.exam_id
     ]);
     return result.rows[0] || null;
   },
