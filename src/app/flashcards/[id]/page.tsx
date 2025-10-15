@@ -23,12 +23,18 @@ export default function FlashcardDetail() {
   const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
   const [loading, setLoading] = useState(true);
   const [totalPage, setTotalPage] = useState(1);
-  const [totalItem, setTotalItem] = useState<any>({});
+  const [totalItem, setTotalItem] = useState<number>();
   const [totalDone, setTotalDone] = useState(0);
   const [showAddModal, setShowAddModal] = useState(false);
+  const [filterFlashcard, setFilterFlashCard] = useState<Flashcard[]>([])
 
   //phan trang
   const [currentPage, setCurrentPage] = useState(1);
+  useEffect(() => {
+    const start = (currentPage - 1) * 10;
+    const end = start + 10;
+    setFilterFlashCard(flashcards.slice(start, end));
+  }, [currentPage, flashcards]);
 
   // Gọi API lấy danh sách flashcard của deck
   useEffect(() => {
@@ -48,9 +54,9 @@ export default function FlashcardDetail() {
         if (!res.ok) throw new Error("Không thể lấy danh sách flashcard");
         const json = await res.json();
         setFlashcards(json.data.data);
-        setTotalPage(json.data.totalPages);
         setTotalDone(json.data.totalDone);
         setTotalItem(json.data.totalFlashcard);
+        setTotalPage(Math.ceil(json.data.totalFlashcard / 10));
       } catch (error) {
         console.error("Lỗi khi fetch flashcards:", error);
       } finally {
@@ -59,7 +65,7 @@ export default function FlashcardDetail() {
     };
 
     fetchFlashcards();
-  }, [id, currentPage]);
+  }, [id]);
 
   if (loading) return <p>Đang tải dữ liệu...</p>;
 
@@ -67,7 +73,7 @@ export default function FlashcardDetail() {
     <div className={styles.container}>
       <h1 className={styles.title}>{flashcard_deck_title}</h1>
       <div className={styles.play}>
-        <div className={styles.btn_add_update}>
+        <div className={styles.btn_add_update_delete}>
           <button className={styles.btn_add} onClick={() => setShowAddModal(true)}>Thêm flashcard</button>
           <button className={styles.btn_update}>Chỉnh sửa</button>
           <button className={styles.btn_delete}>Xoá</button>
@@ -88,12 +94,12 @@ export default function FlashcardDetail() {
           <span className={styles.label}>Số từ đã học</span>
         </div>
       </div>
-      {flashcards.length === 0 ? (
+      {filterFlashcard.length === 0 ? (
         <p>Chưa có thẻ flashcard nào trong bộ này.</p>
       ) : (
         <div>
           <div className={styles.grid}>
-            {flashcards.map((card, index) => (
+            {filterFlashcard.map((card, index) => (
               <div key={index} className={styles.card}>
                 <h3 className={styles.front}>{card.front}</h3>
                 <p className={styles.back}><strong>Đáp án:</strong> {card.back}</p>
@@ -110,7 +116,7 @@ export default function FlashcardDetail() {
             ))}
           </div>
           <div className={styles.pagination}>
-            <Pagination totalPages={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+            <Pagination totalPages={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage} />
           </div>
         </div>
       )}

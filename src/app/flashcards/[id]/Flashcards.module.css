@@ -47,7 +47,7 @@
     cursor: not-allowed;
 }
 
-.btn_add_update {
+.btn_add_update_delete {
     display: flex;
     gap: 10px;
     justify-content: flex-start;
@@ -64,7 +64,7 @@
     border-radius: 0.5rem;
     cursor: pointer;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 20%;
     transition: background-color 0.2s, transform 0.1s;
 }
 
@@ -89,7 +89,7 @@
     color: white;
     border: none;
     border-radius: 0.5rem;
-    font-weight: 600;
+    font-weight: 20%;
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
@@ -106,7 +106,7 @@
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 20%;
     transition: background-color 0.2s ease;
 }
 
