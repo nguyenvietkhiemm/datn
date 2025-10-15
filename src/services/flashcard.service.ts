@@ -7,20 +7,29 @@ export const FlashcardService = {
   async add(data: Flashcard): Promise<Flashcard | null> {
     const client = await pool.connect();
     try {
-      const result = await query(
+      // Nếu bạn cần kiểm tra số lượng flashcard hiện có trong deck:
+      const checkCount = await client.query(
+        `SELECT COUNT(*) AS count FROM flashcard WHERE flashcard_deck_id = $1`,
+        [data.flashcard_deck_id]
+      );
+
+      if (checkCount.rows[0].count >= 50) return null;
+      // Thêm flashcard mới
+      const result = await client.query(
         `INSERT INTO flashcard (front, back, example, flashcard_deck_id)
-           VALUES ($1,$2,$3,$4) RETURNING *`,
+         VALUES ($1, $2, $3, $4)
+         RETURNING *`,
         [data.front, data.back, data.example, data.flashcard_deck_id]
       );
+  
       return result.rows[0];
     } catch (error) {
-      await client.query("ROLLBACK");
-      console.error("Lỗi khi lấy flashcards:", error);
+      console.error("Lỗi khi thêm flashcard:", error);
       return null;
     } finally {
       client.release();
     }
-  },
+  },  
 
   async update(
     id: number,
