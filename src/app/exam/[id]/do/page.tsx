@@ -1,0 +1,163 @@
+"use client";
+import React, { useState, useEffect } from "react";
+import styles from "./DoExam.module.css"
+import { Button } from "@/components/ui/button";
+
+type Answer = {
+    answer_id: number;
+    answer_content: string;
+    is_correct: boolean;
+};
+
+type Question = {
+    question_id: number;
+    question_name: string;
+    answers: Answer[];
+};
+
+export default function DoExam() {
+    const [questions, setQuestions] = useState<Question[]>([]);
+    const [answers, setAnswers] = useState<{ [key: number]: number }>({});
+    const [timeLeft, setTimeLeft] = useState(60 * 30); // 30 phút
+    const [submitted, setSubmitted] = useState(false);
+
+    // Giả lập dữ liệu câu hỏi
+    useEffect(() => {
+        const mockQuestions: Question[] = [
+            {
+                question_id: 1,
+                question_name: "He _______ to school every day.",
+                answers: [
+                    { answer_id: 1, answer_content: "go", is_correct: false },
+                    { answer_id: 2, answer_content: "goes", is_correct: true },
+                    { answer_id: 3, answer_content: "gone", is_correct: false },
+                    { answer_id: 4, answer_content: "going", is_correct: false },
+                ],
+            },
+            {
+                question_id: 2,
+                question_name: "They _______ playing football yesterday.",
+                answers: [
+                    { answer_id: 5, answer_content: "was", is_correct: false },
+                    { answer_id: 6, answer_content: "were", is_correct: true },
+                    { answer_id: 7, answer_content: "is", is_correct: false },
+                    { answer_id: 8, answer_content: "are", is_correct: false },
+                ],
+            },
+            {
+                question_id: 3,
+                question_name: "If I _______ time, I will help you.",
+                answers: [
+                    { answer_id: 9, answer_content: "have", is_correct: true },
+                    { answer_id: 10, answer_content: "had", is_correct: false },
+                    { answer_id: 11, answer_content: "has", is_correct: false },
+                    { answer_id: 12, answer_content: "having", is_correct: false },
+                ],
+            },
+        ];
+        setQuestions(mockQuestions);
+    }, []);
+
+    // Countdown
+    useEffect(() => {
+        if (submitted) return;
+        if (timeLeft <= 0) {
+            setSubmitted(true);
+            return;
+        }
+        const timer = setInterval(() => setTimeLeft((t) => t - 1), 1000);
+        return () => clearInterval(timer);
+    }, [timeLeft, submitted]);
+
+    const handleSelect = (questionId: number, answerId: number) => {
+        setAnswers({ ...answers, [questionId]: answerId });
+    };
+
+    const handleSubmit = () => setSubmitted(true);
+
+    const score = questions.reduce((acc, q) => {
+        const correct = q.answers.find((a) => a.is_correct);
+        if (correct && answers[q.question_id] === correct.answer_id) return acc + 1;
+        return acc;
+    }, 0);
+
+    const formatTime = (seconds: number) => {
+        const m = Math.floor(seconds / 60);
+        const s = seconds % 60;
+        return `${m}:${s.toString().padStart(2, "0")}`;
+    };
+
+    return (
+        <div className={styles.exam_container}>
+            {/* Header */}
+            <div className={styles.exam_header}>
+                <h2>🧠 Đề thi thử Tiếng Anh</h2>
+            </div>
+
+            <div className={styles.exam_body}>
+                {/* Left: Questions */}
+                <div className={styles.leftPanel}>
+                    {submitted ? (
+                        <div className={styles.result}>
+                            <h3>Kết quả</h3>
+                            <p>
+                                Điểm của bạn: <b>{score}</b> / {questions.length}
+                            </p>
+                            <Button onClick={() => window.location.reload()}>Làm lại</Button>
+                        </div>
+                    ) : (
+                        questions.map((q, i) => (
+                            <div key={q.question_id} className={styles.questionBox}>
+                                <p className={styles.questionText}>
+                                    <strong>{i + 1}.</strong> {q.question_name}
+                                </p>
+                                <div className={styles.answers}>
+                                    {q.answers.map((a) => (
+                                        <label key={a.answer_id} className={styles.option}>
+                                            <input
+                                                type="radio"
+                                                name={`q-${q.question_id}`}
+                                                value={a.answer_id}
+                                                checked={answers[q.question_id] === a.answer_id}
+                                                onChange={() => handleSelect(q.question_id, a.answer_id)}
+                                            />
+                                            {a.answer_content}
+                                        </label>
+                                    ))}
+                                </div>
+                            </div>
+                        ))
+                    )}
+                </div>
+
+                {/* Right: Navigator */}
+                <div className={styles.rightPanel}>
+                    <div className={styles.topSection}>
+                        <div className={styles.timer}>
+                            ⏱ {formatTime(timeLeft)}
+                        </div>
+                        <Button variant="outline" onClick={handleSubmit}>
+                            Nộp bài
+                        </Button>
+                    </div>
+                    <div className={styles.grid}>
+                        {questions.map((q, i) => (
+                            <button
+                                key={q.question_id}
+                                className={`${styles.numButton} ${answers[q.question_id] ? styles.answered : ""
+                                    }`}
+                                onClick={() => {
+                                    document
+                                        .getElementById(`q-${q.question_id}`)
+                                        ?.scrollIntoView({ behavior: "smooth" });
+                                }}
+                            >
+                                {i + 1}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}

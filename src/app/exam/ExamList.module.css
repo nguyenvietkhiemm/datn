@@ -1,0 +1,115 @@
+.container {
+    min-height: 100vh;
+    background: #f9fafb;
+    padding: 2rem 3rem;
+}
+
+.title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 2rem;
+}
+
+/* Thanh chọn chủ đề */
+.topicFilter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.topicButton {
+    padding: 0.4rem 1rem;
+    font-size: 0.95rem;
+    border: none;
+    background: transparent;
+    color: #111827;
+    border-radius: 0.6rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.topicButton:hover {
+    background: #e5edff;
+    color: #1d4ed8;
+}
+
+.active {
+    background: #e0e7ff;
+    color: #1e40af;
+    font-weight: 600;
+}
+
+/* Lưới đề thi */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.examName {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.topic {
+    background: #eef2ff;
+    color: #4338ca;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.2rem 0.6rem;
+    border-radius: 0.4rem;
+}
+
+.date,
+.time {
+    color: #4b5563;
+    margin-top: 0.4rem;
+    font-size: 0.9rem;
+}
+
+.button {
+    margin-top: 1rem;
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.button:hover {
+    background: #1e3a8a;
+}
+
+.empty {
+    text-align: center;
+    color: #6b7280;
+    grid-column: 1 / -1;
+    margin-top: 2rem;
+}

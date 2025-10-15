@@ -15,7 +15,6 @@ type FlashcardDeck = {
 
 export default function Flashcards() {
     const [decks, setDecks] = useState<FlashcardDeck[]>([]);
-    const [currentIndex, setCurrentIndex] = useState(0);
     const router = useRouter();
     const [showAddDeckForm, setShowAddDeckForm] = useState(false);
     const [totalPages, setTotalPages] = useState(1);
