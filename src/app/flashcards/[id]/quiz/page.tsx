@@ -45,12 +45,12 @@ export default function FlashcardQuiz() {
   }, [id]);
 
   const generateOptions = (list: Flashcard[], index: number): string[] => {
-    const correct = list[index].front;
+    const correct = list[index].back;
     const wrongs = list
       .filter((_, i) => i !== index)
       .sort(() => Math.random() - 0.5)
       .slice(0, 3)
-      .map(item => item.front);
+      .map(item => item.back);
 
     return [...wrongs, correct].sort(() => Math.random() - 0.5);
   };
@@ -119,7 +119,7 @@ export default function FlashcardQuiz() {
       {flashcards.map((card, index) => (
         <div key={index} className={styles.card}>
           <p className={styles.question}>
-            <strong>{index + 1}. </strong>{card.back}
+            <strong>{index + 1}. </strong>{card.front}
           </p>
 
           <div className={styles.options}>

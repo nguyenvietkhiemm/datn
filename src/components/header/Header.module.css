@@ -4,16 +4,18 @@
     background-color: #ffffff;
     /* tím sáng, tươi hơn */
     color: #4f46e5;
-    padding: 0 20px;
-    height: 70px;
+    padding: 0 32px;
+    height: 80px;
     display: flex;
     align-items: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
     /* bóng nhẹ, nổi bật */
     position: sticky;
     top: 0;
     z-index: 50;
     transition: background-color 0.3s ease;
+    font-size: 1.3rem;
 }
 
 /* Container bố cục 3 phần */
@@ -65,9 +67,9 @@
 }
 
 .navItem:hover {
-    background-color: #6366f1;
-    /* tím nhạt hơn khi hover */
-    color: #4f46e5;
+    background-color: #c7d2fe; 
+    color: #1e1e1e;            
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
 }
 
 /* Khi đã login */

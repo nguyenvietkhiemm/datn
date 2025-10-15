@@ -6,10 +6,6 @@ import Cookies from "js-cookie";
 import Pagination from "@/components/pagination/Pagination";
 import { AddFlashcardDeck } from "@/components/add-flashcard-deck/AddFlashcardDeck";
 
-const option_flash = [
-    { name: "List từ của tôi" },
-];
-
 type FlashcardDeck = {
     flashcard_deck_id: number;
     title: string;
@@ -59,26 +55,12 @@ export default function Flashcards() {
 
     return (
         <div className={styles.container}>
-            {/* Tabs */}
-            <div className={styles.options}>
-                <h1 className={styles.title}>Flashcards</h1>
-                {option_flash.map((option, index) => (
-                    <button
-                        key={index}
-                        className={`${styles.optionButton} ${currentIndex === index ? styles.active : ""}`}
-                        onClick={() => setCurrentIndex(index)}
-                    >
-                        {option.name}
-                    </button>
-                ))}
-            </div>
-
             {/* Danh sách deck */}
-            <h2 className={styles.deckTitle}>List từ đã tạo</h2>
+            <h2 className={styles.deckTitle}>Danh sách bộ thẻ ghi nhớ đã tạo</h2>
 
             <div className={styles.deckList}>
                 <div className={styles.createDeck} onClick={() => setShowAddDeckForm(true)}>
-                    <span>Tạo list từ</span>
+                    <span>Tạo danh sách từ</span>
                 </div>
 
                 {filteredDecks.length > 0 ? (
@@ -100,7 +82,7 @@ export default function Flashcards() {
                         </div>
                     ))
                 ) : (
-                    <p>Chưa có deck nào trong mục này.</p>
+                    <p>Chưa có danh sách nào trong mục này.</p>
                 )}
             </div>
             <Pagination totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
@@ -110,7 +92,7 @@ export default function Flashcards() {
                     <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
                         <AddFlashcardDeck setShowAddDeckForm={setShowAddDeckForm} />
                         <button className={styles.closeButton} onClick={() => setShowAddDeckForm(false)}>
-                            Đóng
+                            x
                         </button>
                     </div>
                 </div>

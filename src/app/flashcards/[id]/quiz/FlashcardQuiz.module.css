@@ -4,6 +4,10 @@
     padding: 20px;
 }
 
+.title {
+    padding-bottom: 20px;
+}
+
 .card {
     background: #fff;
     border-radius: 10px;
