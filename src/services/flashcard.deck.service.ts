@@ -42,10 +42,7 @@ export const FlashcardDeckService = {
 
   async getById(
     id: number,
-    page: number
-  ): Promise<{ data: Flashcard[]; totalPages: number; totalFlashcard : number; totalDone : number } | null> {
-    const limit = 10;
-    const offset = (page - 1) * limit;
+  ): Promise<{ data: Flashcard[]; totalFlashcard : number; totalDone : number } | null> {
     const client = await pool.connect();
 
     try {
@@ -53,8 +50,8 @@ export const FlashcardDeckService = {
 
       // 1Lấy dữ liệu flashcards theo page
       const result = await client.query(
-        "SELECT * FROM flashcard WHERE flashcard_deck_id = $1 ORDER BY flashcard_id LIMIT $2 OFFSET $3",
-        [id, limit, offset]
+        "SELECT * FROM flashcard WHERE flashcard_deck_id = $1 ORDER BY flashcard_id",
+        [id]
       );
       console.log(result);
 
@@ -73,11 +70,9 @@ export const FlashcardDeckService = {
       await client.query("COMMIT");
 
       const totalItems = parseInt(countResult.rows[0].total, 10);
-      const totalPages = Math.ceil(totalItems / limit);
       const totalDone = parseInt(countDone.rows[0].total, 10)
       return {
         data: result.rows || [],
-        totalPages,
         totalFlashcard : totalItems,
         totalDone 
       };
