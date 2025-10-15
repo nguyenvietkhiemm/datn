@@ -44,11 +44,10 @@ export default function Header() {
 
   const listNavbar = [
     { name: "Giới thiệu", href: "/introduction" },
-    { name: "Luyện tập", href: "/exam" },
+    { name: "Thi thử", href: "/exam" },
+    { name: "Luyện tập", href: "/practice" },
     { name: "Thẻ ghi nhớ", href: "/flashcards" },
     { name: "Lộ trình", href: "/roadmap" },
-    { name: "Tài liệu", href: "/documents" },
-    { name: "Thi thử", href: "/exam" },
   ];
 
   return (
