@@ -36,32 +36,53 @@ export default function Auth({ isLogin }: AuthProps): JSX.Element {
   //ham dang ky, dang nhap
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     const API = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
     const route = isLogin ? "/auth/login" : "/auth/register";
-    console.log(`${API}${route}`);
-    const res = await fetch(`${API}${route}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
 
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(errorData.message || "Đã có lỗi xảy ra");
-    }
+    try {
+      const res = await fetch(`${API}${route}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    const data = await res.json();
-    //cookie & redux
-    if (data.data.token) {
-      Cookies.set("token", data.data.token, { expires: 3 });
-      if (data.data.user) {
-        const user = data.data.user;
-        localStorage.setItem("user_name", user.user_name);
-        localStorage.setItem("user", JSON.stringify(user));
+      // Nếu server trả lỗi (status >= 400)
+      if (!res.ok) {
+        const errorData = await res.json();
+
+        // Kiểm tra các lỗi cụ thể
+        if (errorData.error === "USER_NOT_FOUND") {
+          throw new Error("Không tìm thấy người dùng");
+        } else if (errorData.error === "INVALID_PASSWORD") {
+          throw new Error("Mật khẩu không đúng");
+        } else if (errorData.console.error === "EMAIL_EXISTS") {
+          throw new Error("Email đã tồn tại")
+        } else {
+          throw new Error(errorData.message || "Đã có lỗi xảy ra");
+        }
       }
-      window.location.href = "/";
+
+      // Nếu thành công
+      const data = await res.json();
+
+      if (data.data?.token) {
+        Cookies.set("token", data.data.token, { expires: 3 });
+
+        if (data.data.user) {
+          const user = data.data.user;
+          localStorage.setItem("user_name", user.user_name);
+          localStorage.setItem("user", JSON.stringify(user));
+        }
+
+        window.location.href = "/";
+      }
+    } catch (err: any) {
+      // Hiển thị lỗi ra UI hoặc console
+      console.error("Lỗi:", err.message);
+      alert(err.message); // Hoặc setError(err.message) nếu dùng state
     }
   };
 

@@ -79,8 +79,9 @@ export default function FlashcardDetail() {
           <button className={styles.btn_delete}>Xoá</button>
         </div>
         {flashcards.length !== 0 &&
-          <div>
+          <div className={styles.btn_route}>
             <a className={styles.btn_play} href={`/flashcards/${id}/quiz`}>Luyện tập Flashcard</a>
+            <a className={styles.btn_play} href={`/flashcards/${id}/review`}>Ôn tập Flashcard</a>
           </div>
         }
       </div>
