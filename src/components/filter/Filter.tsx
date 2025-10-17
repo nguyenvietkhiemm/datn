@@ -50,13 +50,13 @@ interface FilterProps {
 
 export default function Filter(
     { exams = [], setExams, banks = [], setBanks, documents = [], setDocuments }
-    : FilterProps)
-    {
+        : FilterProps) {
 
     const [topics, setTopics] = useState<Topic[]>([]);
     const [subjects, setSubjects] = useState<Subject[]>([]);
     const [selectedSubject, setSelectedSubject] = useState<number | "All">("All");
     const [selectedTopic, setSelectedTopic] = useState<number | "All">("All");
+    const [showFilter, setShowFilter] = useState<boolean>(false)
 
     // Mock data
     useEffect(() => {
@@ -121,35 +121,40 @@ export default function Filter(
 
     return (
         <div className={styles.filter_container}>
-            <h2>Bộ lọc</h2>
+            <h2 onClick={() => setShowFilter(!showFilter)}
+                className={styles.filter_header}>
+                {showFilter ? "▲" : "▼"} Bộ lọc
+            </h2>
+
             {/* Filter */}
-            <FilterGroup title={"Môn học"}
-                options={[{ label: "Tất cả", value: "All" },
-                ...subjects.map((s) => ({ label: s.name, value: s.subject_id }))
-                ]}
-                selected={selectedSubject}
-                onSelect={(v) => {
-                    setSelectedSubject(v);
-                    setSelectedTopic("All");
-                }}
-            />
-
-            <FilterGroup
-                title="Chủ đề"
-                options={[
-                    { label: "Tất cả", value: "All" },
-                    ...topics
-                        .filter((t) => selectedSubject === "All" || t.subject_id === selectedSubject)
-                        .map((t) => ({ label: t.title, value: t.topic_id })),
-                ]}
-                selected={selectedTopic}
-                onSelect={(v) => setSelectedTopic(v)}
-            />
-
-            {/* nut loc */}
-            <Button variant="outline" onClick={handleFilter}>
-                Lọc kết quả
-            </Button>
+            {showFilter &&
+                <div className={styles.active_border}>
+                    <FilterGroup title={"Môn học"}
+                        options={[{ label: "Tất cả", value: "All" },
+                        ...subjects.map((s) => ({ label: s.name, value: s.subject_id }))
+                        ]}
+                        selected={selectedSubject}
+                        onSelect={(v) => {
+                            setSelectedSubject(v);
+                            setSelectedTopic("All");
+                        }}
+                    />
+                    <FilterGroup
+                        title="Chủ đề"
+                        options={[
+                            { label: "Tất cả", value: "All" },
+                            ...topics
+                                .filter((t) => selectedSubject === "All" || t.subject_id === selectedSubject)
+                                .map((t) => ({ label: t.title, value: t.topic_id })),
+                        ]}
+                        selected={selectedTopic}
+                        onSelect={(v) => setSelectedTopic(v)}
+                    />
+                    {/* nut loc */}
+                    <Button variant="outline" onClick={handleFilter}>
+                        Lọc kết quả
+                    </Button>
+                </div>}
         </div>
     );
 }

@@ -68,7 +68,7 @@ export default function DocumentList() {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>📚 Tài liệu của tôi</h1>
+            <h1 className={styles.title}>Tài liệu của tôi</h1>
 
             {/* Bộ lọc */}
             <Filter documents={documents} setDocuments={setDocuments} />

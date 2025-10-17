@@ -70,7 +70,6 @@ export default function Header() {
             </p>
           </Link>
         </div>
-
         <div className={styles.right}>
           <nav className={styles.nav}>
             {listNavbar.map((item, idx) => (

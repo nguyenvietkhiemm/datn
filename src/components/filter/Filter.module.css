@@ -4,16 +4,28 @@
     margin: 2rem 0rem;
     padding: 1rem;
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 /* Tiêu đề */
-.filter_container h2 {
-    margin-bottom: 1rem;
+.filter_header {
     color: #333;
-    font-size: 1.5rem;
+    cursor: pointer;
+    width: 6rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    background: #f9fafb;
+    position: relative;
+    z-index: 900;
+}
+
+.active_border {
+    border: 1px solid #0070f3;
+    box-shadow: 0 0 8px rgba(0, 112, 243, 0.2);
+    background: #f9f9ff;
+    border-radius: .75rem;
+    padding: 1rem;
+    margin: -1.9rem 0 0 0.5rem;
 }
 
 /* FilterGroup */
