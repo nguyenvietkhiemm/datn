@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import styles from "./BankList.module.css";
+import Filter from "../filter/Filter";
 
 type BankProps = {
     bank_id: number;
@@ -40,21 +41,9 @@ export default function Bank() {
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>Ngân hàng câu hỏi</h1>
-
-            {/* Bộ lọc topic dạng nút */}
-            <div className={styles.topicFilter}>
-                {topics.map((topic) => (
-                    <button
-                        key={topic}
-                        className={`${styles.topicButton} ${selectedTopic === topic ? styles.active : ""
-                            }`}
-                        onClick={() => setSelectedTopic(topic)}
-                    >
-                        {topic}
-                    </button>
-                ))}
-            </div>
-
+            {/* Bộ lọc */}
+            <Filter banks={banks} setBanks={setBanks}/>
+            
             {/* Danh sách bank */}
             <div className={styles.grid}>
                 {filteredBanks.map((bank) => (

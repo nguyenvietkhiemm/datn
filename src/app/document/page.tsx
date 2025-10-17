@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import styles from "./DocumentList.module.css";
+import Filter from "@/components/filter/Filter";
 
 interface Document {
     document_id: number;
@@ -64,28 +65,18 @@ export default function DocumentList() {
         setDocuments(mockData);
     }, []);
 
-    // 🔍 Tìm kiếm theo tiêu đề
-    const filteredDocs = documents.filter((doc) =>
-        doc.title.toLowerCase().includes(search.toLowerCase())
-    );
 
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>📚 Tài liệu của tôi</h1>
 
-            <input
-                type="text"
-                placeholder="🔎 Tìm kiếm theo tiêu đề..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className={styles.search}
-            />
-
+            {/* Bộ lọc */}
+            <Filter documents={documents} setDocuments={setDocuments} />
             <div className={styles.list}>
-                {filteredDocs.length === 0 ? (
+                {documents.length === 0 ? (
                     <p className={styles.empty}>Không có tài liệu nào phù hợp.</p>
                 ) : (
-                    filteredDocs.map((doc) => (
+                    documents.map((doc) => (
                         <div key={doc.document_id} className={styles.card}>
                             <h3 className={styles.docTitle}>{doc.title}</h3>
 

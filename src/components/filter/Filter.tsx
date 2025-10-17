@@ -39,7 +39,7 @@ interface Document {
     topic_id?: number | null;
 }
 
-interface TopicFilterProps {
+interface FilterProps {
     exams?: Exam[];
     banks?: BankProps[];
     documents?: Document[];
@@ -48,9 +48,9 @@ interface TopicFilterProps {
     setDocuments?: React.Dispatch<React.SetStateAction<Document[]>>
 }
 
-export default function TopicFilter(
+export default function Filter(
     { exams = [], setExams, banks = [], setBanks, documents = [], setDocuments }
-    : TopicFilterProps)
+    : FilterProps)
     {
 
     const [topics, setTopics] = useState<Topic[]>([]);
@@ -147,7 +147,7 @@ export default function TopicFilter(
             />
 
             {/* nut loc */}
-            <Button variant="outline">
+            <Button variant="outline" onClick={handleFilter}>
                 Lọc kết quả
             </Button>
         </div>
