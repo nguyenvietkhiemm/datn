@@ -34,7 +34,7 @@ export default function RootLayout({
           <ReduxProvider>
             <div className="flex flex-col min-h-screen">
               <Header />
-              <main className="flex-1">
+              <main className="flex-1 px-20 md:px-4">
                 <>
                   <TokenChecker />
                   {children}

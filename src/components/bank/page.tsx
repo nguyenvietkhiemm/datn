@@ -39,7 +39,7 @@ export default function Bank() {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>📘 Ngân hàng câu hỏi</h1>
+            <h1 className={styles.title}>Ngân hàng câu hỏi</h1>
 
             {/* Bộ lọc topic dạng nút */}
             <div className={styles.topicFilter}>

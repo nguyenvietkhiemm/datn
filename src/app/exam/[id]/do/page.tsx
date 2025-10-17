@@ -91,7 +91,7 @@ export default function DoExam() {
         <div className={styles.exam_container}>
             {/* Header */}
             <div className={styles.exam_header}>
-                <h2>🧠 Đề thi thử Tiếng Anh</h2>
+                <h2>Đề thi thử Tiếng Anh</h2>
             </div>
 
             <div className={styles.exam_body}>

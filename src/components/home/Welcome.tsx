@@ -11,14 +11,14 @@ export default function LandingPage() {
       {/* ================= HERO ================= */}
       <section className="relative bg-gradient-to-br from-blue-700 via-indigo-700 to-purple-700 text-white py-32 px-6 text-center overflow-hidden">
         {/* Background overlay + hình */}
-        <div className="absolute inset-0">
+        {/* <div className="absolute inset-0">
           <img
             src="/hero-bg.jpg"
             alt="Học tập online"
             className="w-full h-full object-cover opacity-25"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-transparent"></div>
-        </div>
+        </div> */}
 
         {/* Content */}
         <motion.div

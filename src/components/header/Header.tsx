@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "@/store/slices/userSlices";
 import Setting from "../setting/Setting";
 import styles from "./Header.module.css";
+import Image from "next/image";
 
 export default function Header() {
   const [showSetting, setShowSetting] = useState(false);
@@ -43,11 +44,11 @@ export default function Header() {
   }, []);
 
   const listNavbar = [
-    { name: "Giới thiệu", href: "/introduction" },
     { name: "Thi thử", href: "/exam" },
     { name: "Luyện tập", href: "/practice" },
     { name: "Thẻ ghi nhớ", href: "/flashcards" },
     { name: "Lộ trình", href: "/roadmap" },
+    { name: "Tài liệu", href: "/document" },
   ];
 
   return (
@@ -55,11 +56,22 @@ export default function Header() {
       <div className={styles.container}>
         <div className={styles.left}>
           <Link href="/" className={styles.logo}>
-            Avatar trang web
+            <span className={styles.logoWrapper}>
+              <Image
+                src="/logo.svg"
+                alt="logo"
+                fill
+                priority
+                style={{ objectFit: "contain" }}
+              />
+            </span>
+            <p className={styles.logoText}>
+              LÒ LUYỆN <span>ONLINE</span>
+            </p>
           </Link>
         </div>
 
-        <div className={styles.center}>
+        <div className={styles.right}>
           <nav className={styles.nav}>
             {listNavbar.map((item, idx) => (
               <Link key={idx} href={item.href} className={styles.navItem}>
@@ -67,20 +79,14 @@ export default function Header() {
               </Link>
             ))}
           </nav>
-        </div>
-
-        <div className={styles.right}>
           {isClient && token ? (
             <div className={styles.user} ref={userRef}>
               <div
                 className={styles.avatar}
                 onClick={() => setShowSetting(!showSetting)}
               >
-                {userName?.[0] || "A"}
+                {userName?.[0] || "Tài khoản"}
               </div>
-              <span onClick={() => setShowSetting(!showSetting)}>
-                {userName || "Tài khoản"}
-              </span>
               {showSetting && <Setting onLogout={handleLogout} />}
             </div>
           ) : (
