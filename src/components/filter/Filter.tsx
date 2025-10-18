@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import styles from "./Filter.module.css";
 import { Button } from "../ui/button";
+import Cookies from "js-cookie";
 
 interface Topic {
     topic_id: number;
@@ -14,7 +15,7 @@ interface Topic {
 
 interface Subject {
     subject_id: number;
-    name: string;
+    subject_name: string;
 }
 
 type Exam = {
@@ -29,6 +30,7 @@ type BankProps = {
     bank_id: number;
     description: string;
     topic_title: string;
+    topic_id? : number
 };
 
 interface Document {
@@ -36,7 +38,7 @@ interface Document {
     title: string;
     link?: string;
     created_at: string;
-    topic_id?: number | null;
+    topic_id?: number
 }
 
 interface FilterProps {
@@ -58,37 +60,40 @@ export default function Filter(
     const [selectedTopic, setSelectedTopic] = useState<number | "All">("All");
     const [showFilter, setShowFilter] = useState<boolean>(false)
 
-    // Mock data
+    // Lay data token, subject
     useEffect(() => {
-        const mockTopics: Topic[] = [
-            { topic_id: 1, title: "Hàm số và đồ thị", subject_id: 1, description: "Ôn tập các dạng bài về hàm số", created_at: "2025-10-01T09:00:00Z" },
-            { topic_id: 2, title: "Hình học không gian", subject_id: 1, description: "Các bài toán về thể tích, góc, khoảng cách trong không gian", created_at: "2025-09-28T15:20:00Z" },
-            { topic_id: 3, title: "Dao động cơ học", subject_id: 2, description: "Lý thuyết dao động điều hòa", created_at: "2025-09-20T08:30:00Z" },
-            { topic_id: 4, title: "Điện xoay chiều", subject_id: 2, description: "Công thức, mạch điện RLC", created_at: "2025-09-10T10:00:00Z" },
-            { topic_id: 5, title: "Phản ứng oxi hóa - khử", subject_id: 3, description: "Cân bằng phản ứng", created_at: "2025-08-25T08:45:00Z" },
-            { topic_id: 6, title: "Este - Lipit", subject_id: 3, description: "Phản ứng este và lipid", created_at: "2025-08-12T13:20:00Z" },
-            { topic_id: 7, title: "Thì trong tiếng Anh", subject_id: 4, description: "Tổng hợp 12 thì cơ bản", created_at: "2025-07-30T09:10:00Z" },
-            { topic_id: 8, title: "Mệnh đề quan hệ", subject_id: 4, description: "Lý thuyết relative clauses", created_at: "2025-07-15T11:00:00Z" },
-            { topic_id: 9, title: "Nghị luận xã hội", subject_id: 5, description: "Cách viết đoạn văn nghị luận", created_at: "2025-07-05T16:45:00Z" },
-            { topic_id: 10, title: "Đọc hiểu văn bản", subject_id: 5, description: "Kỹ năng đọc hiểu trong đề thi", created_at: "2025-06-28T14:00:00Z" },
-        ];
-        const mockSubjects: Subject[] = [
-            { subject_id: 1, name: "Toán học" },
-            { subject_id: 2, name: "Vật lý" },
-            { subject_id: 3, name: "Hóa học" },
-            { subject_id: 4, name: "Tiếng Anh" },
-            { subject_id: 5, name: "Ngữ văn" },
-        ];
-
+        const token = Cookies.get("token")
         const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
         const fetchTopic = async () => {
-            const resTopic = await fetch(`${API_URL}/topics`)
+            const resTopic = await fetch(`${API_URL}/topics`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+
+            const data = await resTopic.json();
+            setTopics(data.data)
         }
 
-        setTopics(mockTopics);
-        setSubjects(mockSubjects);
+        const fetchSubject = async () => {
+            const resSubject = await fetch(`${API_URL}/subjects`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            })
+
+            const data = await resSubject.json();
+            setSubjects(data.data)
+        }
+        fetchTopic();
+        fetchSubject()
     }, []);
 
+    //Thay doi bo loc
     const FilterGroup = ({
         title,
         options,
@@ -117,13 +122,39 @@ export default function Filter(
         </div>
     )
 
-    const handleFilter = () => {
-        setFilterExam?.(
-            selectedTopic === "All"
-                ? exams
-                : exams.filter((exam) => exam.topic_id === selectedTopic)
-        );
+    //Thay doi gia tri exam, document, bank
+    const filterBySelection = <T extends { topic_id?: number }>(
+        items: T[],
+        topics : Topic[],
+        selectedSubject: number | "All",
+        selectedTopic: number | "All",
+    ) => {
+        if(selectedTopic !== "All"){
+            return items.filter((item) => item.topic_id === selectedTopic)
+        }else if(selectedSubject !=="All") {
+            const topicIds = topics
+                            .filter((t) => t.subject_id === selectedSubject)
+                            .map((t) => t.topic_id)
+
+            return items.filter((item) => item.topic_id && topicIds.includes(item.topic_id));
+        }
+        return items;
     }
+
+    const handleFilter = () => {
+        if (setFilterExam) {
+          const filtered = filterBySelection(exams, topics, selectedSubject, selectedTopic);
+          setFilterExam(filtered);
+        }
+        if (setFilterBank) {
+          const filtered = filterBySelection(banks, topics, selectedSubject, selectedTopic);
+          setFilterBank(filtered);
+        }
+        if (setDocuments) {
+          const filtered = filterBySelection(documents, topics, selectedSubject, selectedTopic);
+          setDocuments(filtered);
+        }
+      };
 
     return (
         <div className={styles.filter_container}>
@@ -137,7 +168,7 @@ export default function Filter(
                 <div className={styles.active_border}>
                     <FilterGroup title={"Môn học"}
                         options={[{ label: "Tất cả", value: "All" },
-                        ...subjects.map((s) => ({ label: s.name, value: s.subject_id }))
+                        ...subjects?.map((s) => ({ label: s.subject_name, value: s.subject_id }))
                         ]}
                         selected={selectedSubject}
                         onSelect={(v) => {
@@ -150,7 +181,7 @@ export default function Filter(
                         options={[
                             { label: "Tất cả", value: "All" },
                             ...topics
-                                .filter((t) => selectedSubject === "All" || t.subject_id === selectedSubject)
+                                ?.filter((t) => selectedSubject === "All" || t.subject_id === selectedSubject)
                                 .map((t) => ({ label: t.title, value: t.topic_id })),
                         ]}
                         selected={selectedTopic}

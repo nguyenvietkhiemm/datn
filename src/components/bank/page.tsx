@@ -10,6 +10,7 @@ type BankProps = {
     bank_id: number;
     description: string;
     topic_title: string;
+    topic_id? : number
 };
 
 export default function Bank() {

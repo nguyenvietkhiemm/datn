@@ -11,7 +11,7 @@ interface Document {
     title: string;
     link?: string;
     created_at: string;
-    topic_id?: number | null;
+    topic_id?: number;
 }
 
 export default function DocumentList() {
