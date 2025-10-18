@@ -70,9 +70,9 @@ export default function Flashcards() {
                             onClick={() => flashcardsDetail(deck.flashcard_deck_id, deck.title)}
                         >
                             <h3>{deck.title}</h3>
-                            <p>{deck.description}</p>
-                            <p>
-                                Ngày tạo:{" "}
+                            <p className={styles.description}>{deck.description}</p>
+                            <p className={styles.date}>
+                            📅 Ngày tạo:{" "}
                                 {new Date(deck.created_at).toLocaleString("vi-VN", {
                                     dateStyle: "short",
                                     timeStyle: "short",

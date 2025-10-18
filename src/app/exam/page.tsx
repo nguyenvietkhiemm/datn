@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import styles from "./ExamList.module.css";
 import { useRouter } from "next/navigation";
 import Topic from "@/components/filter/Filter";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store";
+import { setExams } from "@/store/slices/examSlice";
 
 type Exam = {
     exam_id: number;
@@ -13,8 +16,10 @@ type Exam = {
 };
 
 export default function ExamList() {
-    const [exams, setExams] = useState<Exam[]>([]);
+    const [filterExam, setFilterExam] = useState<Exam[]>([])
     const router = useRouter();
+    const exams = useSelector((state : RootState) => state.exam.exams);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         // Mock dữ liệu (thay bằng API thật sau)
@@ -97,8 +102,9 @@ export default function ExamList() {
               topic_id: 10, // Đọc hiểu văn bản
             },
           ];          
-
-        setExams(mockExams);
+        dispatch(
+          setExams(mockExams)
+        )
     }, []);
 
     const handleDoExam = (exam_id : number) => {
@@ -110,15 +116,14 @@ export default function ExamList() {
             <h1 className={styles.title}> Danh sách đề thi thử</h1>
 
             {/* Thanh chọn topic */}
-            <Topic exams={exams} setExams={setExams}/>
+            <Topic exams={exams} setFilterExam={setFilterExam}/>
 
             {/* Danh sách đề thi */}
             <div className={styles.grid}>
-                {exams.map((exam, index) => (
+                {filterExam.map((exam, index) => (
                     <div key={index} className={styles.card}>
                         <div className={styles.header}>
                             <h2 className={styles.examName}>{exam.exam_name}</h2>
-                            <span className={styles.topic}>{exam.topic_id}</span>
                         </div>
                         <p className={styles.date}>
                             📅 Ngày tạo: {new Date(exam.created_at).toLocaleDateString("vi-VN")}
@@ -128,7 +133,7 @@ export default function ExamList() {
                     </div>
                 ))}
 
-                {exams.length === 0 && (
+                {filterExam.length === 0 && (
                     <p className={styles.empty}>Không có đề thi cho chủ đề này.</p>
                 )}
             </div>

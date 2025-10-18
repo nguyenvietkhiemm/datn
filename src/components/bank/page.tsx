@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from "react";
 import styles from "./BankList.module.css";
 import Filter from "../filter/Filter";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store";
+import { setBank } from "@/store/slices/bankSlice";
 
 type BankProps = {
     bank_id: number;
@@ -10,9 +13,9 @@ type BankProps = {
 };
 
 export default function Bank() {
-    const [banks, setBanks] = useState<BankProps[]>([]);
-    const [topics, setTopics] = useState<string[]>([]);
-    const [selectedTopic, setSelectedTopic] = useState<string>("Tất cả");
+    const dispatch = useDispatch();
+    const banks = useSelector((state: RootState) => state.bank.banks);
+    const [filterBank, setFilterBank] = useState<BankProps[]>([])
 
     useEffect(() => {
         const mockData: BankProps[] = [
@@ -27,26 +30,24 @@ export default function Bank() {
             { bank_id: 9, description: "Ngân hàng Vật lý", topic_title: "Vật lý THPTQG" },
             { bank_id: 10, description: "Ngân hàng ACT", topic_title: "ACT" },
         ];
-        setBanks(mockData);
-
-        const topicList = Array.from(new Set(mockData.map((b) => b.topic_title)));
-        setTopics(["Tất cả", ...topicList]);
+        dispatch(
+            setBank(mockData)
+        )
     }, []);
 
-    const filteredBanks =
-        selectedTopic === "Tất cả"
-            ? banks
-            : banks.filter((b) => b.topic_title === selectedTopic);
+    useEffect(() => {
+        setFilterBank(banks)
+    },[banks])
 
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>Ngân hàng câu hỏi</h1>
             {/* Bộ lọc */}
-            <Filter banks={banks} setBanks={setBanks}/>
+            <Filter banks={banks} setFilterBank={setFilterBank}/>
             
             {/* Danh sách bank */}
             <div className={styles.grid}>
-                {filteredBanks.map((bank) => (
+                {filterBank.map((bank) => (
                     <div key={bank.bank_id} className={styles.card}>
                         <h2 className={styles.topic}>{bank.topic_title}</h2>
                         <p className={styles.description}>{bank.description}</p>
@@ -54,7 +55,7 @@ export default function Bank() {
                     </div>
                 ))}
 
-                {filteredBanks.length === 0 && (
+                {filterBank.length === 0 && (
                     <p className={styles.empty}>Không có ngân hàng nào cho chủ đề này.</p>
                 )}
             </div>

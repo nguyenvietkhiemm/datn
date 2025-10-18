@@ -2,6 +2,9 @@
 import { useState, useEffect } from "react";
 import styles from "./DocumentList.module.css";
 import Filter from "@/components/filter/Filter";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store";
+import { setDocument } from "@/store/slices/documentSlice";
 
 interface Document {
     document_id: number;
@@ -12,9 +15,8 @@ interface Document {
 }
 
 export default function DocumentList() {
-    const [documents, setDocuments] = useState<Document[]>([]);
-    const [search, setSearch] = useState("");
-
+    const dispatch = useDispatch();
+    const documents = useSelector((state : RootState) => state.document.documents)
     // 🧠 Giả lập dữ liệu giống với bảng SQL document
     useEffect(() => {
         const mockData: Document[] = [
@@ -62,7 +64,11 @@ export default function DocumentList() {
             },
         ];
 
-        setDocuments(mockData);
+        dispatch(
+            setDocument(
+                mockData
+            )
+        )
     }, []);
 
 
@@ -71,7 +77,7 @@ export default function DocumentList() {
             <h1 className={styles.title}>Tài liệu của tôi</h1>
 
             {/* Bộ lọc */}
-            <Filter documents={documents} setDocuments={setDocuments} />
+            {/* <Filter documents={documents} setDocuments={setDocuments} /> */}
             <div className={styles.list}>
                 {documents.length === 0 ? (
                     <p className={styles.empty}>Không có tài liệu nào phù hợp.</p>
@@ -94,7 +100,7 @@ export default function DocumentList() {
                             )}
 
                             <p className={styles.date}>
-                                Ngày tạo: {new Date(doc.created_at).toLocaleString("vi-VN")}
+                            📅 Ngày tạo: {new Date(doc.created_at).toLocaleString("vi-VN")}
                             </p>
                         </div>
                     ))

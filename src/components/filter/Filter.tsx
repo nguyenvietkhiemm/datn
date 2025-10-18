@@ -43,13 +43,13 @@ interface FilterProps {
     exams?: Exam[];
     banks?: BankProps[];
     documents?: Document[];
-    setExams?: React.Dispatch<React.SetStateAction<Exam[]>>
-    setBanks?: React.Dispatch<React.SetStateAction<BankProps[]>>
+    setFilterExam?: React.Dispatch<React.SetStateAction<Exam[]>>
+    setFilterBank?: React.Dispatch<React.SetStateAction<BankProps[]>>
     setDocuments?: React.Dispatch<React.SetStateAction<Document[]>>
 }
 
 export default function Filter(
-    { exams = [], setExams, banks = [], setBanks, documents = [], setDocuments }
+    { exams = [], setFilterExam, banks = [], setFilterBank, documents = [], setDocuments }
         : FilterProps) {
 
     const [topics, setTopics] = useState<Topic[]>([]);
@@ -79,6 +79,11 @@ export default function Filter(
             { subject_id: 4, name: "Tiếng Anh" },
             { subject_id: 5, name: "Ngữ văn" },
         ];
+
+        const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
+        const fetchTopic = async () => {
+            const resTopic = await fetch(`${API_URL}/topics`)
+        }
 
         setTopics(mockTopics);
         setSubjects(mockSubjects);
@@ -113,10 +118,11 @@ export default function Filter(
     )
 
     const handleFilter = () => {
-        setExams?.(prev =>
+        setFilterExam?.(
             selectedTopic === "All"
-                ? prev
-                : prev.filter(p => p.topic_id === selectedTopic))
+                ? exams
+                : exams.filter((exam) => exam.topic_id === selectedTopic)
+        );
     }
 
     return (

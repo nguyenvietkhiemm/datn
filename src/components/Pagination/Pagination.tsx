@@ -1,5 +1,6 @@
 "use client"
 import styles from "./Pagination.module.css"
+import { ChevronRight, ChevronLeft } from "lucide-react";
 
 type PaginationProps = {
     totalPages: number;
@@ -29,7 +30,7 @@ export default function Pagination({ totalPages, currentPage, setCurrentPage }: 
     return (
         <div className={styles.pagination}>
             <button onClick={() => setCurrentPage(Math.max(currentPage - 1, 1))} disabled={currentPage === 1}>
-                Prev
+                <ChevronLeft size={18} />
             </button>
 
             {pages.map((page, idx) =>
@@ -49,7 +50,7 @@ export default function Pagination({ totalPages, currentPage, setCurrentPage }: 
             )}
 
             <button onClick={() => setCurrentPage(Math.min(currentPage + 1, totalPages))} disabled={currentPage === totalPages}>
-                Next
+                <ChevronRight size={18} />
             </button>
         </div>
     );

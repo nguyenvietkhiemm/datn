@@ -32,9 +32,9 @@ export default function RootLayout({
       <body className="antialiased font-body">
         <ThemeProvider attribute="class" defaultTheme="light">
           <ReduxProvider>
-            <div className="flex flex-col min-h-screen">
+            <div className="flex flex-col min-h-screen gap-8">
               <Header />
-              <main className="flex-1 px-20 md:px-4">
+              <main className="flex-1 px-20 md:px-4 mt-[80px] ">
                 <>
                   <TokenChecker />
                   {children}

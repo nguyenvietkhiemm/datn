@@ -1,24 +1,16 @@
 .container {
     min-height: 100vh;
-    background: #f9fafb;
-    padding: 2rem 3rem;
+    padding: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .title {
-    text-align: center;
+    text-align: left;
     font-size: 2rem;
     font-weight: 700;
-    color: #1e3a8a;
-    margin-bottom: 2rem;
-}
-
-/* Dãy nút chọn topic */
-.topicFilter {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem 1rem;
-    justify-content: center;
-    margin-bottom: 2rem;
+    color: #111827;
+    margin-bottom: 0.5rem;
 }
 
 .topicButton {
@@ -45,9 +37,9 @@
 
 /* Lưới các bank */
 .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    gap: 2rem;
+    display: grid
 }
 
 .card {
@@ -56,6 +48,9 @@
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
     padding: 1.5rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    height: 12rem;
 }
 
 .card:hover {
@@ -64,15 +59,20 @@
 }
 
 .topic {
-    color: #2563eb;
+    color: #111827;
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
+    position: absolute;
+    top: 0.5rem;
 }
 
 .description {
     color: #374151;
     margin-bottom: 1rem;
+    position: absolute;
+    top: 3.5rem;
+    left: 1.5rem;
 }
 
 .button {
@@ -84,6 +84,9 @@
     cursor: pointer;
     font-weight: 500;
     transition: background 0.3s ease;
+    position: absolute;
+    left: 1.5rem;
+    top: 8rem;
 }
 
 .button:hover {
