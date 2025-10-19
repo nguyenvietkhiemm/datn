@@ -9,8 +9,8 @@
 
 /* ===== Tiêu đề trang ===== */
 .deckTitle {
-    font-size: 28px;
-    font-weight: 600;
+    font-size: 24px;
+    font-weight: bold;
     color: #1e293b;
     margin-bottom: 2rem;
     text-align: left;

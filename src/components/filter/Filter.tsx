@@ -29,7 +29,7 @@ type Exam = {
 type BankProps = {
     bank_id: number;
     description: string;
-    topic_title: string;
+    available : boolean;
     topic_id? : number
 };
 

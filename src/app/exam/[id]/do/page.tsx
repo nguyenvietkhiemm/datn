@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import styles from "./DoExam.module.css"
 import { Button } from "@/components/ui/button";
+import Cookies from "js-cookie";
+import { useParams } from "next/navigation";
 
 type Answer = {
     answer_id: number;
@@ -20,43 +22,27 @@ export default function DoExam() {
     const [answers, setAnswers] = useState<{ [key: number]: number }>({});
     const [timeLeft, setTimeLeft] = useState(60 * 30); // 30 phút
     const [submitted, setSubmitted] = useState(false);
-
+    const params = useParams();
+    const id = params.id;
+    
     // Giả lập dữ liệu câu hỏi
     useEffect(() => {
-        const mockQuestions: Question[] = [
-            {
-                question_id: 1,
-                question_name: "He _______ to school every day.",
-                answers: [
-                    { answer_id: 1, answer_content: "go", is_correct: false },
-                    { answer_id: 2, answer_content: "goes", is_correct: true },
-                    { answer_id: 3, answer_content: "gone", is_correct: false },
-                    { answer_id: 4, answer_content: "going", is_correct: false },
-                ],
-            },
-            {
-                question_id: 2,
-                question_name: "They _______ playing football yesterday.",
-                answers: [
-                    { answer_id: 5, answer_content: "was", is_correct: false },
-                    { answer_id: 6, answer_content: "were", is_correct: true },
-                    { answer_id: 7, answer_content: "is", is_correct: false },
-                    { answer_id: 8, answer_content: "are", is_correct: false },
-                ],
-            },
-            {
-                question_id: 3,
-                question_name: "If I _______ time, I will help you.",
-                answers: [
-                    { answer_id: 9, answer_content: "have", is_correct: true },
-                    { answer_id: 10, answer_content: "had", is_correct: false },
-                    { answer_id: 11, answer_content: "has", is_correct: false },
-                    { answer_id: 12, answer_content: "having", is_correct: false },
-                ],
-            },
-        ];
-        setQuestions(mockQuestions);
-    }, []);
+        const token = Cookies.get("token");
+        const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
+        const fetchExamId = async () => {
+            const resExamId = await fetch(`${API_URL}/exams/${id}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            const data = await resExamId.json();
+            setQuestions(data.data)
+        }
+
+        fetchExamId()
+    }, [id]);
 
     // Countdown
     useEffect(() => {
@@ -91,7 +77,7 @@ export default function DoExam() {
         <div className={styles.exam_container}>
             {/* Header */}
             <div className={styles.exam_header}>
-                <h2>Đề thi thử Tiếng Anh</h2>
+                <h2>Đề thi</h2>
             </div>
 
             <div className={styles.exam_body}>

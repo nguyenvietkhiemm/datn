@@ -37,7 +37,7 @@
 
 /* Lưới các bank */
 .grid {
-    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
     gap: 2rem;
     display: grid
 }
@@ -50,7 +50,7 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
-    height: 12rem;
+    height: 11rem;
 }
 
 .card:hover {
@@ -58,21 +58,18 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.topic {
-    color: #111827;
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    position: absolute;
-    top: 0.5rem;
+.topic,
+.description,
+.button {
+    left: 1rem;
+    right: 0.5rem;
 }
 
 .description {
     color: #374151;
     margin-bottom: 1rem;
     position: absolute;
-    top: 3.5rem;
-    left: 1.5rem;
+    top: 1.5rem;
 }
 
 .button {
@@ -82,11 +79,11 @@
     padding: 0.6rem 1rem;
     border-radius: 0.5rem;
     cursor: pointer;
-    font-weight: 500;
+    font-weight: 200;
     transition: background 0.3s ease;
     position: absolute;
-    left: 1.5rem;
-    top: 8rem;
+    bottom: 1rem;
+    width: 140px;
 }
 
 .button:hover {
