@@ -5,8 +5,9 @@ const UserService = {
     // Lấy toàn bộ user
     async getAll(): Promise<User[]> {
         const result = await query(`
-        SELECT user_id, user_name, email, birthday, created_at, role_id, available
-        FROM "user"
+        SELECT u.user_id, u.user_name, u.email, u.birthday, u.created_at, u.available, r.role_name
+        FROM "user" u
+        JOIN "role"r ON r.role_id = u.role_id
         ORDER BY user_id
         `);
         return result.rows as User[];
