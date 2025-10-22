@@ -58,7 +58,7 @@ export default function Auth({ isLogin }: AuthProps): JSX.Element {
           throw new Error("Không tìm thấy người dùng");
         } else if (errorData.error === "INVALID_PASSWORD") {
           throw new Error("Mật khẩu không đúng");
-        } else if (errorData.console.error === "EMAIL_EXISTS") {
+        } else if (errorData.error === "EMAIL_EXISTS") {
           throw new Error("Email đã tồn tại")
         } else {
           throw new Error(errorData.message || "Đã có lỗi xảy ra");

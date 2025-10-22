@@ -14,6 +14,7 @@ type Answer = {
 type Question = {
     question_id: number;
     question_name: string;
+    question_content : string;
     answers: Answer[];
 };
 
@@ -25,7 +26,7 @@ export default function DoExam() {
     const params = useParams();
     const id = params.id;
     
-    // Giả lập dữ liệu câu hỏi
+    //dữ liệu câu hỏi
     useEffect(() => {
         const token = Cookies.get("token");
         const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
@@ -61,11 +62,6 @@ export default function DoExam() {
 
     const handleSubmit = () => setSubmitted(true);
 
-    const score = questions.reduce((acc, q) => {
-        const correct = q.answers.find((a) => a.is_correct);
-        if (correct && answers[q.question_id] === correct.answer_id) return acc + 1;
-        return acc;
-    }, 0);
 
     const formatTime = (seconds: number) => {
         const m = Math.floor(seconds / 60);
@@ -87,7 +83,7 @@ export default function DoExam() {
                         <div className={styles.result}>
                             <h3>Kết quả</h3>
                             <p>
-                                Điểm của bạn: <b>{score}</b> / {questions.length}
+                                Điểm của bạn: <b></b> / {questions.length}
                             </p>
                             <Button onClick={() => window.location.reload()}>Làm lại</Button>
                         </div>
@@ -95,7 +91,7 @@ export default function DoExam() {
                         questions.map((q, i) => (
                             <div key={q.question_id} className={styles.questionBox}>
                                 <p className={styles.questionText}>
-                                    <strong>{i + 1}.</strong> {q.question_name}
+                                    <strong>{i + 1}.</strong> {q.question_content}
                                 </p>
                                 <div className={styles.answers}>
                                     {q.answers.map((a) => (

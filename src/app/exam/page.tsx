@@ -14,6 +14,7 @@ type Exam = {
   created_at: string;
   time_limit: number;
   topic_id: number;
+  exam_schedule_id? : number;
 };
 
 export default function ExamList() {
