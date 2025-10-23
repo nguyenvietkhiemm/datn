@@ -118,6 +118,10 @@
   cursor: pointer;
 }
 
+.editIcon:hover{
+  color: #0070f3;
+}
+
 .roleGroup {
   margin-top: 6px;
 }

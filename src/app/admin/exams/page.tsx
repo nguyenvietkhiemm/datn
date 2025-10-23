@@ -22,7 +22,7 @@ export default function Exam() {
   const [filterExam, setFilterExam] = useState<Exam[]>([]);
   const [search, setSearch] = useState("");
   const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
-  const [status, setStatus] = useState<string>("all");
+  const [status, setStatus] = useState<string>("true");
 
   //  Lấy danh sách bài thi
   useEffect(() => {
@@ -74,8 +74,8 @@ export default function Exam() {
   const handleToggleAvailable = async (examId: number, available: boolean) => {
     try {
       const token = Cookies.get("token");
-      const res = await fetch(`${API_URL}/exams/update/${examId}`, {
-        method: "PUT",
+      const res = await fetch(`${API_URL}/exams/setAvailable/${examId}`, {
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
