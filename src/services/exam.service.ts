@@ -4,9 +4,13 @@ import { Question } from "../model/question.model";
 
 const ExamService = {
   async getAll(limit: number = 100, offset: number = 0): Promise<Exam[]> {
-    const queryText = "SELECT * FROM exam ORDER BY exam_id LIMIT $1 OFFSET $2";
+    const queryText = `SELECT 
+    e.exam_name, e.topic_id, e.time_limit, e.exam_id, e.created_at, e.available,
+    t.title 
+    FROM exam e
+    JOIN topic t ON e.topic_id = t.topic_id
+    ORDER BY exam_id LIMIT $1 OFFSET $2`;
     const result = await query(queryText, [limit, offset]);
-
     return result.rows;
   },
 
