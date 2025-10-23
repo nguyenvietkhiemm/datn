@@ -34,6 +34,8 @@ export const  ScheduleExamController = {
     // ✅ Tạo lịch thi mới
     async create(req: Request, res: Response) {
         const result: DefaultResponse<any> = await safeExecute(async () => {
+            console.log(req.body);
+            
             return {
                 status: 201,
                 message: "Tạo lịch thi thành công",
