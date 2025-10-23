@@ -69,6 +69,7 @@ export default function User() {
       const res = await fetch(`${API_URL}/users/update/${userId}`, {
         method: "PUT",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`
         },
         body: JSON.stringify({ available })

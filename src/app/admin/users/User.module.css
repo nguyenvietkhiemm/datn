@@ -1,5 +1,4 @@
 .user_container {
-  background: #fff;
   border-radius: 12px;
   padding: 24px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
@@ -17,6 +16,8 @@
 
 .title {
   font-size: 24px;
+  font-weight: 700;
+  color: #1f2937;
 }
 
 .user_add_search {
@@ -86,8 +87,9 @@
   font-weight: bold;
 }
 
-.tbody:hover {
+.user_table tbody tr:hover {
   background-color: #f5f5f5;
+  cursor: pointer;
 }
 
 /* Trạng thái hoạt động */

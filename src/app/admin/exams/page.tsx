@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import styles from "./Exam.module.css";
 import Cookies from "js-cookie";
-import FilterExam from "@/component/filter/FilterExam/FilterExam"; // tạo tương tự FilterUser
+import FilterExam from "@/component/filter/Filter/Filter";
 
 type Exam = {
   exam_id: number;
@@ -11,17 +11,20 @@ type Exam = {
   created_at: string;
   time_limit: number;
   topic_id: number;
-  exam_schedule_id?: number;
-  available: boolean; // thêm cờ hoạt động (giống user)
+  exam_schedule_id: number;
+  available: boolean ;
+  title : string
 };
 
 export default function Exam() {
   const [exams, setExams] = useState<Exam[]>([]);
   const [loading, setLoading] = useState(true);
   const [filterExam, setFilterExam] = useState<Exam[]>([]);
+  const [search, setSearch] = useState("");
   const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
+  const [status, setStatus] = useState<string>("all");
 
-  // ✅ Lấy danh sách bài thi
+  //  Lấy danh sách bài thi
   useEffect(() => {
     const fetchExams = async () => {
       try {
@@ -37,7 +40,7 @@ export default function Exam() {
         if (!res.ok) throw new Error("Không thể lấy danh sách bài thi");
 
         const data = await res.json();
-        setExams(data.data); // giả định API trả về { data: [...] }
+        setExams(data.data);
       } catch (err) {
         console.error(err);
       } finally {
@@ -48,12 +51,12 @@ export default function Exam() {
     fetchExams();
   }, []);
 
-  // ✅ Lọc bài thi đang hoạt động
+  // Lọc bài thi đang hoạt động
   useEffect(() => {
     setFilterExam(exams.filter((e) => e.available === true));
   }, [exams]);
 
-  // ✅ Xoá bài thi
+  // Xoá bài thi
   const handleDelete = async (examId: number) => {
     try {
       const token = Cookies.get("token");
@@ -67,7 +70,7 @@ export default function Exam() {
     }
   };
 
-  // ✅ Chuyển trạng thái hoạt động
+  // Chuyển trạng thái hoạt động
   const handleToggleAvailable = async (examId: number, available: boolean) => {
     try {
       const token = Cookies.get("token");
@@ -92,6 +95,26 @@ export default function Exam() {
     }
   };
 
+  //hàm lọc theo trạng thái và tìm theo tên
+  useEffect(() => {
+    let filtered = exams;
+
+    if (search.trim() !== "") {
+      const keyword = search.toLowerCase();
+      filtered = filtered.filter(
+        (u) =>
+          u.exam_name.toLowerCase().includes(keyword)
+      );
+    }
+
+    if (status !== "all") {
+      const isAvailable = status === "true";
+      filtered = filtered.filter((u) => u.available === isAvailable);
+    }
+
+    setFilterExam(filtered);
+  }, [search, status, exams, setFilterExam]);
+
   if (loading) return <p className={styles.loading}>Đang tải danh sách bài thi...</p>;
 
   return (
@@ -99,11 +122,42 @@ export default function Exam() {
       <div className={styles.header}>
         <h1 className={styles.title}>Quản lý bài thi</h1>
         <div className={styles.actions}>
-          <button className={styles.addButton}>+ Thêm bài thi</button>
-          <FilterExam exams={exams} setFilterExam={setFilterExam} />
+          <div className={styles.button}><button className={styles.addButton}>+ Thêm bài thi</button></div>
+          {/* filter search */}
+          <div className={styles.filter_search}>
+            <FilterExam exams={exams} setFilterExam={setFilterExam} />
+            <div className={styles.filter}>
+              <input
+                type="text"
+                placeholder="Tìm theo tên hoặc email..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className={styles.input}
+              />
+              <select
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+                className={styles.select}
+              >
+                <option value="all">Tất cả trạng thái</option>
+                <option value="true">Hoạt động</option>
+                <option value="false">Bị khóa</option>
+              </select>
+              {/* Nút xóa lọc */}
+              <button
+                onClick={() => {
+                  setSearch("");
+                  setStatus("all");
+                }}
+                className={styles.clearBtn}
+              >
+               Đặt lại
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-
+      {/* noi hien  bang*/}
       <table className={styles.table}>
         <thead>
           <tr>
@@ -137,7 +191,7 @@ export default function Exam() {
                     ✎
                   </span>
                 </td>
-                <td>{exam.topic_id}</td>
+                <td>{exam.title}</td>
                 <td>
                   <button
                     className={styles.delBtn}

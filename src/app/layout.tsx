@@ -18,11 +18,11 @@ export default function RootLayout({
       <body
         className={`antialiased`}
       >
-        <div className="flex min-h-screen bg-gray-50">
+        <div className="relative flex min-h-screen bg-gray-50 overflow-visible">
           <Sidebar />
-          <div className="flex-1 flex flex-col w-full">
+          <div className="relative flex-1 flex flex-col w-full ml-60">
             <Header />
-            <main className="flex-1 p-6 w-full">{children}</main>
+            <main className="sticky top-0 z-5 flex-1 p-6 w-full">{children}</main>
           </div>
         </div>
       </body>

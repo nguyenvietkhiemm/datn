@@ -21,7 +21,7 @@ interface FilterUserProps {
 export default function FilterUser({ users, setFilterUser }: FilterUserProps) {
     const [search, setSearch] = useState("");
     const [role, setRole] = useState("all");
-    const [status, setStatus] = useState<string>("all");
+    const [status, setStatus] = useState<string>("true");
 
     useEffect(() => {
         let filtered = users;
@@ -75,8 +75,8 @@ export default function FilterUser({ users, setFilterUser }: FilterUserProps) {
                 onChange={(e) => setStatus(e.target.value)}
                 className={styles.select}
             >
-                <option value="all">Tất cả trạng thái</option>
                 <option value="true">Hoạt động</option>
+                <option value="all">Tất cả trạng thái</option>
                 <option value="false">Bị khóa</option>
             </select>
 
@@ -89,7 +89,7 @@ export default function FilterUser({ users, setFilterUser }: FilterUserProps) {
                 }}
                 className={styles.clearBtn}
             >
-                Xóa lọc
+                Đặt lại
             </button>
         </div>
     );
