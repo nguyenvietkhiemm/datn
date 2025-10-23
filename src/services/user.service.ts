@@ -32,10 +32,11 @@ const UserService = {
              email = COALESCE($2, email),
              password_hash = COALESCE($3, password_hash),
              birthday = COALESCE($4, birthday),
-             role_id = COALESCE($5, role_id)
-            WHERE user_id = $6
+             role_id = COALESCE($5, role_id),
+             available = COALESCE($6, available)
+            WHERE user_id = $7
             RETURNING user_id, user_name, email, birthday, created_at, available`,
-            [user.user_name, user.email, user.password_hash, user.birthday, user.role_id, id]
+            [user.user_name, user.email, user.password_hash, user.birthday, user.role_id, user.available, id]
         );
         if (!result.rows[0]) throw new Error('USER_NOT_FOUND');
         return result.rows[0] as User;

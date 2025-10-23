@@ -18,12 +18,12 @@ export const ScheduleExamService = {
         // ✅ Lấy lịch thi theo ID + danh sách đề thi
         async getById(id: number): Promise<ScheduleExam | null> {
                 const queryText = `
-                SELECT e.exam_name, e.topic_id, e.time_limit, e.exam_id
+                SELECT e.exam_name, e.topic_id, e.time_limit, e.exam_id, e.created_at, t.title
                 FROM exam_schedule s
                 JOIN exam e ON s.exam_schedule_id = e.exam_schedule_id
-                WHERE s.exam_schedule_id = $1`;
+                JOIN topic t ON t.topic_id = e.topic_id
+                WHERE s.exam_schedule_id = $1 AND e.available =true`;
                 const result = await query(queryText, [id]);
-                if (!result.rows.length) return null;
 
                 // Lấy thông tin cơ bản của lịch thi (từ dòng đầu tiên)
                 const scheduleQuery = await query(
@@ -35,7 +35,7 @@ export const ScheduleExamService = {
                 // Gắn danh sách exam vào
                 const scheduleWithExams = {
                         ...schedule,
-                        exams: result.rows, // danh sách các đề thi trong lịch này
+                        exams: result.rows.length > 0 ? result.rows : [], // danh sách các đề thi trong lịch này
                 };
 
                 return scheduleWithExams as ScheduleExam;
