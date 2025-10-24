@@ -23,7 +23,9 @@ const QuestionController = {
   async create(req: Request, res: Response) {
     const response: DefaultResponse<any> = await safeExecute(async () => {
       const { questions } = req.body;
-      const created = await QuestionService.create(questions);
+      
+      const exam_id = req.params.id;
+      const created = await QuestionService.create(questions, Number(exam_id));
 
       return {
         status: 201,

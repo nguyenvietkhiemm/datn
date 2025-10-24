@@ -9,7 +9,7 @@ const ExamService = {
     t.title 
     FROM exam e
     JOIN topic t ON e.topic_id = t.topic_id
-    ORDER BY exam_id LIMIT $1 OFFSET $2`;
+    ORDER BY exam_id DESC LIMIT $1 OFFSET $2`;
     const result = await query(queryText, [limit, offset]);
     return result.rows;
   },
