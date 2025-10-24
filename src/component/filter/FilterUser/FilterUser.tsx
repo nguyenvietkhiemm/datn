@@ -20,7 +20,7 @@ interface FilterUserProps {
 
 export default function FilterUser({ users, setFilterUser }: FilterUserProps) {
     const [search, setSearch] = useState("");
-    const [role, setRole] = useState("all");
+    const [role, setRole] = useState("user");
     const [status, setStatus] = useState<string>("true");
 
     useEffect(() => {

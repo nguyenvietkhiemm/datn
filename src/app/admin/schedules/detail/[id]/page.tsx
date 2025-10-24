@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import Cookies from "js-cookie";
 import styles from "./Exam.Schedule.Detail.module.css";
 import Filter from "@/component/filter/Filter/Filter";
+import { useRouter } from "next/navigation";
 
 type ExamSchedule = {
   exam_schedule_id: number;
@@ -34,6 +35,7 @@ export default function ExamScheduleDetail() {
   const [schedule, setSchedule] = useState<ExamSchedule | null>(null);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
+  const router = useRouter();
 
   // Gọi API lấy chi tiết lịch thi
   useEffect(() => {
@@ -60,6 +62,11 @@ export default function ExamScheduleDetail() {
 
     if (id) fetchScheduleDetail();
   }, [id]);
+
+  const detailExam = (id: number, exam: Exam) => {
+    localStorage.setItem("exam", JSON.stringify(exam));
+    router.push(`/admin/exams/detail/${id}`)
+  };
 
   if (loading) return <p>Đang tải dữ liệu...</p>;
   if (message) return <p className={styles.error}>{message}</p>;
@@ -110,7 +117,7 @@ export default function ExamScheduleDetail() {
             </thead>
             <tbody>
               {schedule.exams.map((exam, index) => (
-                <tr key={exam.exam_id}>
+                <tr key={exam.exam_id} onClick={() => detailExam(exam.exam_id, exam)}>
                   <td>{index + 1}</td>
                   <td>{exam.exam_name}</td>
                   <td>{exam.time_limit}</td>

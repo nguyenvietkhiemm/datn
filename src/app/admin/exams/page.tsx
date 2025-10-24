@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import styles from "./Exam.module.css";
 import Cookies from "js-cookie";
 import FilterExam from "@/component/filter/Filter/Filter";
+import { useRouter } from "next/navigation";
 
 type Exam = {
   exam_id: number;
@@ -12,8 +13,8 @@ type Exam = {
   time_limit: number;
   topic_id: number;
   exam_schedule_id: number;
-  available: boolean ;
-  title : string
+  available: boolean;
+  title: string
 };
 
 export default function Exam() {
@@ -23,6 +24,7 @@ export default function Exam() {
   const [search, setSearch] = useState("");
   const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
   const [status, setStatus] = useState<string>("true");
+  const router = useRouter();
 
   //  Lấy danh sách bài thi
   useEffect(() => {
@@ -115,6 +117,11 @@ export default function Exam() {
     setFilterExam(filtered);
   }, [search, status, exams, setFilterExam]);
 
+  const detailExam = (id: number, exam: Exam) => {
+    localStorage.setItem("exam", JSON.stringify(exam));
+    router.push(`/admin/exams/detail/${id}`)
+  };
+
   if (loading) return <p className={styles.loading}>Đang tải danh sách bài thi...</p>;
 
   return (
@@ -122,7 +129,7 @@ export default function Exam() {
       <div className={styles.header}>
         <h1 className={styles.title}>Quản lý bài thi</h1>
         <div className={styles.actions}>
-          <div className={styles.button}><button className={styles.addButton}>+ Thêm bài thi</button></div>
+          <div className={styles.button} onClick={() => router.push("/admin/exams/create")}><button className={styles.addButton}>+ Thêm bài thi</button></div>
           {/* filter search */}
           <div className={styles.filter_search}>
             <FilterExam exams={exams} setFilterExam={setFilterExam} />
@@ -151,7 +158,7 @@ export default function Exam() {
                 }}
                 className={styles.clearBtn}
               >
-               Đặt lại
+                Đặt lại
               </button>
             </div>
           </div>
@@ -173,7 +180,7 @@ export default function Exam() {
         <tbody>
           {filterExam.length > 0 ? (
             filterExam.map((exam, index) => (
-              <tr key={exam.exam_id}>
+              <tr key={exam.exam_id} onClick={() => detailExam(exam.exam_id, exam)}>
                 <td>{index + 1}</td>
                 <td>{exam.exam_name}</td>
                 <td>{exam.time_limit}</td>
@@ -184,8 +191,10 @@ export default function Exam() {
                   {exam.available ? "Hoạt động" : "Không hoạt động"}
                   <span
                     className={styles.editIcon}
-                    onClick={() =>
+                    onClick={(e) => {
+                      e.stopPropagation();
                       handleToggleAvailable(exam.exam_id, !exam.available)
+                    }
                     }
                   >
                     ✎
