@@ -1,6 +1,8 @@
 require('dotenv').config();
 
 import express from 'express';
+import cors from "cors";
+
 
 import routes from './routes/index';
 
@@ -11,7 +13,7 @@ import morgan from 'morgan';
 const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
-
+app.use(cors());
 // route cho api-docs
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, swaggerOptions));
 
