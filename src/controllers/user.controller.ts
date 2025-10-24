@@ -33,10 +33,11 @@ const UserController = {
 
     // Cập nhật user
     async update(req: Request, res: Response) {
-        const id = Number(req.params.id);
-
+        const {id} = req.params;
+        console.log(id);
+        
         const response: DefaultResponse<any> = await safeExecute(async () => {
-            const updated = await UserService.update(id, req.body);
+            const updated = await UserService.update(Number(id), req.body);
             return { status: 200, data: updated, message: 'Cập nhật người dùng thành công' };
         });
 

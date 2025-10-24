@@ -4,15 +4,31 @@ import { User } from "../model/user.model";
 import bcrypt from "bcrypt";
 import CreateToken from "../utils/create.token";
 
+const ROLE_PERMISSIONS: { [key: number]: { [key: string]: boolean } } = {
+  2: {
+    "post:view": true,
+    "post:create": true,
+    "post:delete": true,
+    "user:manage": true,
+    "admin:access": true,
+  },
+};
+
+const getPermissionsByRole = (roleId: number): { [key: string]: boolean } => {
+  return ROLE_PERMISSIONS[roleId] || {};
+};
+
 const AuthService = {
   async register(
     user_name: string,
     password: string,
     email: string,
-    birthday: Date,
+
   ): Promise<{ user: User; token: string }> {
     // kiểm tra email tồn tại
-    const checkUser = await query(`SELECT * FROM "user" WHERE email = $1`, [email]);
+    const checkUser = await query(`SELECT * FROM "user" WHERE email = $1`, [
+      email,
+    ]);
     if (checkUser.rows.length > 0) {
       throw new Error("EMAIL_EXISTS");
     }
@@ -22,9 +38,9 @@ const AuthService = {
 
     // tạo user mới
     const result = await query(
-      `INSERT INTO "user" (user_name, email, password_hash, birthday)
-       VALUES ($1, $2, $3, $4) RETURNING *`,
-      [user_name, email, hashPassword, birthday ]
+      `INSERT INTO "user" (user_name, email, password_hash)
+       VALUES ($1, $2, $3) RETURNING *`,
+      [user_name, email, hashPassword]
     );
 
     const newUser: User = result.rows[0];
@@ -36,8 +52,17 @@ const AuthService = {
     return { user: safeUser as User, token };
   },
 
-  async login(email: string, password: string): Promise<{ user: User; token: string }> {
-    const userResult = await query(`SELECT * FROM "user" WHERE email = $1`, [email]);
+  async login(
+    email: string,
+    password: string
+  ): Promise<{
+    user: User;
+    token: string;
+    permissions: {[key: string]: boolean };
+  }> {
+    const userResult = await query(`SELECT * FROM "user" WHERE email = $1`, [
+      email,
+    ]);
 
     if (userResult.rows.length === 0) {
       throw new Error("USER_NOT_FOUND");
@@ -53,11 +78,12 @@ const AuthService = {
 
     // tạo token
     const token = CreateToken(foundUser.user_id, foundUser.email);
-
+    //lấy permision
+    const permissions = getPermissionsByRole(foundUser.role_id);
     // loại bỏ password_hash trước khi trả về
     const { password_hash, user_id, role_id, ...safeUser } = foundUser;
 
-    return { user: safeUser as User, token };
+    return { user: safeUser as User, token, permissions };
   },
 };
 
