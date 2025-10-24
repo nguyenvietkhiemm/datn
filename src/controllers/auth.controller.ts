@@ -4,13 +4,12 @@ import safeExecute, { DefaultResponse } from "../utils/safe.execute";
 
 const AuthController = {
   async register(req: Request, res: Response) {
-    const { user_name, password, email, birthday } = req.body;
+    const { user_name, password, email } = req.body;
     const response: DefaultResponse<any> = await safeExecute(async () => {
       const result = await AuthService.register(
         user_name,
         password,
         email,
-        new Date(birthday),
       );
       return { status: 201, message: "Đăng ký thành công", data: result };
     });

@@ -59,10 +59,10 @@ export const FlashcardDeckController = {
     return res.status(result.status).json(result);
   },
 
-  delete: async (req: Request, res: Response) => {
+  remove: async (req: Request, res: Response) => {
     const result = await safeExecute(
       async (): Promise<DefaultResponse<any>> => {
-        const ok = await FlashcardDeckService.delete(Number(req.params.id));
+        const ok = await FlashcardDeckService.remove(Number(req.params.id));
         if (!ok) {
           return { status: 404, message: "Deck not found" };
         }

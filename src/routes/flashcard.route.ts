@@ -2,17 +2,10 @@
 import { Router } from "express";
 import { FlashcardController } from "../controllers/flashcard.controller";
 import { FlashcardDeckController } from "../controllers/flashcard.deck.controller";
-import Authentication from '../middleware/authentication';
-import { ADMIN } from "../config/permission";
+import Authentication from "../middleware/authentication";
+
 
 const flashcardRouter = Router();
-
-/**
- * @swagger
- * tags:
- *   - name: Flashcards
- *     description: API quản lý flashcard và deck
- */
 
 // ========================  DECK ROUTES ========================
 
@@ -56,13 +49,139 @@ const flashcardRouter = Router();
  *       401:
  *         description: Không có quyền truy cập
  */
-flashcardRouter.get("/decks", Authentication.AuthenticateToken, FlashcardDeckController.getAll);
+flashcardRouter.get(
+  "/decks",
+  Authentication.AuthenticateToken,
+  FlashcardDeckController.getAll
+);
 
 /**
  * @swagger
  * /flashcards/decks/{id}:
  *   get:
- *     summary: Lấy thông tin chi tiết của một deck theo ID (yêu cầu đăng nhập)
+ *     summary: Get flashcard deck by ID with pagination (yêu cầu đăng nhập)
+ *     tags: [Flashcards]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *       - in: query
+ *         name: page
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *     responses:
+ *       200:
+ *         description: Flashcard deck data
+ *       404:
+ *         description: Deck not found
+ */
+flashcardRouter.get(
+  "/decks/:id",
+  Authentication.AuthenticateToken,
+  FlashcardDeckController.getById
+);
+
+/**
+ * @swagger
+ * /flashcards/decks/create:
+ *   post:
+ *     summary: Create a new deck (yêu cầu đăng nhập)
+ *     tags: [Flashcards]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 example: "Sample Deck"
+ *               description:
+ *                 type: string
+ *                 example: "This is a sample flashcard deck"
+ *     responses:
+ *       201:
+ *         description: Deck created successfully
+ */
+flashcardRouter.post(
+  "/decks/create",
+  Authentication.AuthenticateToken,
+  FlashcardDeckController.create
+);
+
+/**
+ * @swagger
+ * /flashcards/decks/update/{id}:
+ *   put:
+ *     summary: Update a flashcard deck (yêu cầu đăng nhập)
+ *     tags: [Flashcards]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 example: "Sample Deck updated"
+ *               description:
+ *                 type: string
+ *                 example: "This is a sample flashcard deck updated"
+ *     responses:
+ *       200:
+ *         description: Deck updated successfully
+ *       404:
+ *         description: Deck not found
+ */
+flashcardRouter.put(
+  "/decks/update/:id",
+  Authentication.AuthenticateToken,
+  FlashcardDeckController.update
+);
+
+/**
+ * @swagger
+ * /flashcards/decks/remove/{id}:
+ *   delete:
+ *     summary: Delete a flashcard deck (yêu cầu đăng nhập)
+ *     tags: [Flashcards]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Deck deleted successfully
+ *       404:
+ *         description: Deck not found
+ */
+flashcardRouter.delete(
+  "/decks/remove/:id",
+  Authentication.AuthenticateToken,
+  FlashcardDeckController.remove
+);
+
+// FLASHCARD ROUTE
+
+/**
+ * @swagger
+ * /flashcards/decks/add/{id}:
+ *   post:
+ *     summary: Thêm flashcard mới vào deck (yêu cầu đăng nhập)
  *     tags: [Flashcards]
  *     security:
  *       - bearerAuth: []
@@ -160,7 +279,10 @@ flashcardRouter.post("/decks/create", Authentication.AuthenticateToken, Flashcar
  *       404:
  *         description: Không tìm thấy deck
  */
-flashcardRouter.post("/decks/add/:id", Authentication.AuthenticateToken, FlashcardController.add);
+
+flashcardRouter.post("/decks/add/:id",
+        Authentication.AuthenticateToken,
+        FlashcardController.add);
 
 /**
  * @swagger
@@ -199,7 +321,7 @@ flashcardRouter.put("/decks/update/:id", Authentication.AuthenticateToken, Flash
 
 /**
  * @swagger
- * /flashcards/decks/delete/{id}:
+ * /flashcards/decks/remove/{id}:
  *   delete:
  *     summary: Xóa một deck (yêu cầu đăng nhập)
  *     tags: [Flashcards]
@@ -217,7 +339,9 @@ flashcardRouter.put("/decks/update/:id", Authentication.AuthenticateToken, Flash
  *       404:
  *         description: Không tìm thấy deck
  */
-flashcardRouter.delete("/decks/delete/:id", Authentication.AuthenticateToken, FlashcardDeckController.delete);
+flashcardRouter.delete("/decks/remove/:id",
+        Authentication.AuthenticateToken,
+        FlashcardDeckController.remove);
 
 // ======================== FLASHCARD ROUTES ========================
 
@@ -257,11 +381,16 @@ flashcardRouter.delete("/decks/delete/:id", Authentication.AuthenticateToken, Fl
  *       404:
  *         description: Không tìm thấy flashcard
  */
-flashcardRouter.put("/update/:id", Authentication.AuthenticateToken, FlashcardController.update);
+
+flashcardRouter.put(
+  "/update/:id",
+  Authentication.AuthenticateToken,
+  FlashcardController.update
+);
 
 /**
  * @swagger
- * /flashcards/delete/{id}:
+ * /flashcards/remove/{id}:
  *   delete:
  *     summary: Xóa một flashcard cụ thể (yêu cầu đăng nhập)
  *     tags: [Flashcards]
@@ -279,6 +408,20 @@ flashcardRouter.put("/update/:id", Authentication.AuthenticateToken, FlashcardCo
  *       404:
  *         description: Không tìm thấy flashcard
  */
-flashcardRouter.delete("/delete/:id", Authentication.AuthenticateToken, FlashcardController.delete);
+flashcardRouter.delete("/remove/:id",
+        Authentication.AuthenticateToken,
+        FlashcardController.remove);
+
+flashcardRouter.get(
+  "/review/:id",
+  Authentication.AuthenticateToken,
+  FlashcardController.review
+);
+
+flashcardRouter.patch(
+  "/review/submit",
+  Authentication.AuthenticateToken,
+  FlashcardController.submit
+);
 
 export default flashcardRouter;

@@ -1,5 +1,9 @@
 import { token } from 'morgan';
 import swaggerJsdoc from 'swagger-jsdoc';
+require('dotenv').config();
+
+const HOST = process.env.HOST;
+const PORT = process.env.PORT;
 
 const options = {
   definition: {
@@ -10,9 +14,18 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:3000/", // đúng với server.ts
+        url: "{scheme}://{host}",
+        variables: {
+          scheme: {
+            enum: ["http", "https"],
+            default: "https",
+          },
+          host: {
+            default: `${HOST}:${PORT}` || "localhost:3000",
+          },
+        },
       },
-    ],
+    ],    
     components: {
       securitySchemes: {
         bearerAuth: {
