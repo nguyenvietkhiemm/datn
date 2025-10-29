@@ -1,0 +1,170 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const database_1 = require("../config/database");
+const database_2 = __importDefault(require("../config/database"));
+const QuestionService = {
+    async get(question_ids) {
+        if (!question_ids || question_ids.length === 0) {
+            return [];
+        }
+        const queryText = 'SELECT * FROM question WHERE question_id = ANY($1)';
+        const result = await (0, database_1.query)(queryText, [question_ids]);
+        return result.rows;
+    },
+    async getAll(limit = 100, offset = 0, available) {
+        let queryText = `
+          SELECT q.question_id, q.question_name, q.question_content, q.available,
+                 COALESCE(
+                   json_agg(
+                     json_build_object(
+                       'answer_id', a.answer_id,
+                       'answer_content', a.answer_content,
+                       'is_correct', a.is_correct
+                     )
+                   ) FILTER (WHERE a.answer_id IS NOT NULL), '[]'
+                 ) AS answers
+          FROM question q
+          LEFT JOIN answer a ON q.question_id = a.question_id
+        `;
+        const params = [limit, offset];
+        if (available !== undefined) {
+            queryText += ` WHERE q.available = $3 `;
+            params.push(available);
+        }
+        queryText += `
+          GROUP BY q.question_id
+          ORDER BY q.question_id
+          LIMIT $1 OFFSET $2;
+        `;
+        const result = await (0, database_1.query)(queryText, params);
+        return result.rows;
+    },
+    async create(questions) {
+        const client = await database_2.default.connect();
+        const createdQuestions = [];
+        try {
+            await client.query('BEGIN');
+            for (const qa of questions) {
+                // insert question
+                const qRes = await client.query(`INSERT INTO question (question_name, question_content) 
+               VALUES ($1, $2) RETURNING *`, [qa.question_name, qa.question_content]);
+                const newQuestion = qRes.rows[0];
+                newQuestion.answers = [];
+                // insert answers
+                if (qa.answers && qa.answers.length > 0) {
+                    for (const ans of qa.answers) {
+                        const aRes = await client.query(`INSERT INTO answer (question_id, answer_content, is_correct) 
+                   VALUES ($1, $2, $3) RETURNING *`, [newQuestion.question_id, ans.answer_content, ans.is_correct]);
+                        const newAnswer = aRes.rows[0];
+                        newQuestion.answers.push(newAnswer);
+                    }
+                }
+                createdQuestions.push(newQuestion);
+            }
+            await client.query('COMMIT');
+            return createdQuestions;
+        }
+        catch (err) {
+            await client.query('ROLLBACK');
+            throw err;
+        }
+        finally {
+            client.release();
+        }
+    },
+    // hàm update sẽ cập nhật cả question và answers
+    // nếu answer đã có answer_id thì sẽ update, nếu chưa thì sẽ thêm mới vào DB
+    async update(question_id, question) {
+        const client = await database_2.default.connect();
+        try {
+            const id = question_id;
+            await client.query("BEGIN");
+            // --- 1. Update question ---
+            const allowed = ["question_name", "question_content"];
+            const fields = [];
+            const values = [];
+            let idx = 1;
+            for (const key of allowed) {
+                if (question[key] !== undefined) {
+                    fields.push(`${key} = $${idx}`);
+                    values.push(question[key]);
+                    idx++;
+                }
+            }
+            let updatedQuestion = null;
+            if (fields.length > 0) {
+                values.push(id);
+                const queryText = `
+              UPDATE question 
+              SET ${fields.join(", ")} 
+              WHERE question_id = $${idx} 
+              RETURNING *`;
+                const result = await client.query(queryText, values);
+                updatedQuestion = result.rows[0] || null;
+            }
+            else {
+                const result = await client.query(`SELECT * FROM question WHERE question_id = $1`, [id]);
+                updatedQuestion = result.rows[0] || null;
+            }
+            if (!updatedQuestion) {
+                await client.query("ROLLBACK");
+                return null;
+            }
+            // --- 2. Update answers (nếu có) ---
+            if (question.answers && question.answers.length > 0) {
+                for (const ans of question.answers) {
+                    if (ans.answer_id) {
+                        // update answer đã có
+                        await client.query(`UPDATE answer 
+                   SET answer_content = $1, is_correct = $2 
+                   WHERE answer_id = $3 AND question_id = $4`, [ans.answer_content, ans.is_correct, ans.answer_id, id]);
+                    }
+                    else {
+                        // thêm mới answer nếu answer đó không có answer_id
+                        await client.query(`INSERT INTO answer (question_id, answer_content, is_correct) 
+                   VALUES ($1, $2, $3)`, [id, ans.answer_content, ans.is_correct]);
+                    }
+                }
+            }
+            // --- 3. Lấy lại toàn bộ question + answers ---
+            const answersRes = await client.query(`SELECT * FROM answer WHERE question_id = $1`, [id]);
+            updatedQuestion.answers = answersRes.rows;
+            await client.query("COMMIT");
+            return updatedQuestion;
+        }
+        catch (err) {
+            await client.query("ROLLBACK");
+            throw err;
+        }
+        finally {
+            client.release();
+        }
+    },
+    async setAvailable(question_id, available) {
+        const result = await (0, database_1.query)(`UPDATE question SET available = $1 WHERE question_id = $2`, [available, question_id]);
+        return (result.rowCount ?? 0) > 0;
+    },
+    async remove(id) {
+        const client = await database_2.default.connect();
+        try {
+            const question_id = id;
+            await client.query('BEGIN');
+            // Xoá câu trả lời liên quan
+            await client.query('DELETE FROM answer WHERE question_id = $1', [question_id]);
+            // Xoá câu hỏi
+            await client.query('DELETE FROM question WHERE question_id = $1', [question_id]);
+            await client.query('COMMIT');
+        }
+        catch (err) {
+            await client.query('ROLLBACK');
+            throw err;
+        }
+        finally {
+            client.release();
+        }
+    }
+};
+exports.default = QuestionService;
