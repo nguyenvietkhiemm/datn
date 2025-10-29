@@ -3,6 +3,7 @@ import pool, { query } from "../config/database";
 import { Question } from "../model/question.model";
 
 const ExamService = {
+
   async getAll(page: number): Promise<{ data: Exam[]; totalPages: number } | []> {
 
     const client = await pool.connect();
@@ -159,7 +160,6 @@ const ExamService = {
       client.release();
     }
   }
-
 };
 
 export default ExamService;
