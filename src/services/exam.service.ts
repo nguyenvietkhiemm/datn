@@ -154,7 +154,7 @@ const ExamService = {
 
       return { data: result.rows, totalPages };
     } catch (error) {
-      console.error("Lỗi khi thêm flashcard:", error);
+      console.error("Lỗi khi lấy bài thi:", error);
       return [];
     } finally {
       client.release();
