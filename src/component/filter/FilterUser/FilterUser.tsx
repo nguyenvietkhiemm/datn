@@ -24,7 +24,9 @@ export default function FilterUser({ users, setFilterUser }: FilterUserProps) {
     const [status, setStatus] = useState<string>("true");
 
     useEffect(() => {
-        let filtered = users;
+        if (!users || users.length === 0) return;
+        
+        let filtered = [...users];
 
         if (search.trim() !== "") {
             const keyword = search.toLowerCase();
@@ -35,17 +37,17 @@ export default function FilterUser({ users, setFilterUser }: FilterUserProps) {
             );
         }
 
-        if (role !== "all") {
-            filtered = filtered.filter((u) => u.role_name === role);
-        }
-
         if (status !== "all") {
             const isAvailable = status === "true";  
             filtered = filtered.filter((u) => u.available === isAvailable);
         }
-
+        
+        if (role !== "all") {
+            filtered = filtered.filter((u) => u.role_name === role);
+        }
+        
         setFilterUser(filtered);
-    }, [search, role, status, users, setFilterUser]);
+    }, [search, role, status, users]);
 
     return (
         <div className={styles.container}>

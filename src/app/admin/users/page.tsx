@@ -46,10 +46,6 @@ export default function User() {
     fetchUsers();
   }, []);
 
-  useEffect(() => {
-    setFilterUser(users.filter(u => u.available === true))
-  }, [users]);
-
   const handleDelete = async (userId: number) => {
     try {
       const token = Cookies.get("token");
