@@ -4,17 +4,6 @@ import { Document } from "../model/document.model";
 import pool from "../config/database";
 
 const DocumentService = {
-    // async get(document_ids: number[]): Promise<Document[]> {
-    //     if (!document_ids || document_ids.length === 0) {
-    //         return [];
-    //     }
-
-    //     const queryText = 'SELECT * FROM document WHERE document_id = ANY($1)';
-    //     const result = await query(queryText, [document_ids]);
-
-    //     return result.rows;
-    // },
-
     async getAll(limit: number = 100, offset: number = 0): Promise<Document[]> {
         const queryText = 'SELECT * FROM document ORDER BY document_id LIMIT $1 OFFSET $2';
         const result = await query(queryText, [limit, offset]);
@@ -24,25 +13,25 @@ const DocumentService = {
 
     async create(document: Document): Promise<Document | null> {
         const client = await pool.connect();
-    
+
         try {
             await client.query("BEGIN");
-    
+
             const result = await client.query(
                 `INSERT INTO document (title, link, topic_id) 
                  VALUES ($1, $2, $3) 
                  RETURNING *`,
                 [document.title, document.link, document.topic_id]
             );
-    
+
             const newDocument: Document = result.rows[0];
-    
+
             await client.query(
                 `INSERT INTO document_history (document_id) 
                  VALUES ($1)`,
                 [newDocument.document_id]
             );
-    
+
             await client.query("COMMIT");
             return newDocument;
         } catch (err) {
@@ -59,15 +48,15 @@ const DocumentService = {
             if (!id) {
                 throw new Error("document_id isn't exist");
             }
-    
+
             await client.query("BEGIN");
-    
+
             // chỉ cho phép update title, link, topic_id
             const allowed = ["title", "link", "topic_id"];
             const fields: string[] = [];
             const values: any[] = [];
             let idx = 1;
-    
+
             for (const key of allowed) {
                 const value = (document as any)[key];
                 if (value !== undefined) {
@@ -76,11 +65,11 @@ const DocumentService = {
                     idx++;
                 }
             }
-    
+
             if (fields.length === 0) {
                 throw new Error("No valid fields provided for update");
             }
-    
+
             values.push(id);
             const queryText = `
                 UPDATE document 
@@ -88,7 +77,7 @@ const DocumentService = {
                 WHERE document_id = $${idx} 
                 RETURNING *`;
             const result = await client.query(queryText, values);
-    
+
             await client.query("COMMIT");
             return result.rows[0];
         } catch (err) {
@@ -98,7 +87,7 @@ const DocumentService = {
             client.release();
         }
     },
-    
+
     async setAvailable(id: number, available: boolean): Promise<boolean> {
         const result = await query('UPDATE document SET available = $1 WHERE document_id = $2', [available, id]);
         return (result.rowCount ?? 0) > 0;
@@ -121,5 +110,108 @@ const DocumentService = {
         }
     },
 
+    async search(searchValue: string, page: number): Promise<{ data: Document[]; totalPages: number } | []> {
+        const client = await pool.connect();
+        try {
+            await client.query("BEGIN");
+
+            const limit = 12;
+            const offset = (page - 1) * limit;
+            const keyword = `%${searchValue}%`;
+
+            const queryText = `
+                SELECT 
+                d.document_id, d.title, d.link, d.created_at, d.available 
+                t.topic_id, t.title AS topic_title
+                FROM document d
+                LEFT JOIN topic t ON d.topic_id = t.topic_id
+                WHERE LOWER(d.title) LIKE LOWER($1)
+                OR LOWER(t.title) LIKE LOWER($1)
+                ORDER BY d.document_id DESC
+                LIMIT $2 OFFSET $3
+            `;
+
+            const result = await client.query(queryText, [keyword, limit, offset]);
+
+            const countResult = await client.query(
+                `
+                SELECT COUNT(*) AS total
+                FROM document d
+                LEFT JOIN topic t ON d.topic_id = t.topic_id
+                WHERE LOWER(d.title) LIKE LOWER($1)
+                OR LOWER(t.title) LIKE LOWER($1)
+                `,
+                [keyword]
+            );
+
+            const totalItems = parseInt(countResult.rows[0].total, 10);
+            const totalPages = Math.ceil(totalItems / limit);
+
+            await client.query("COMMIT");
+            return { data: result.rows, totalPages };
+        } catch (error) {
+            await client.query("ROLLBACK");
+            console.error("Lỗi khi tìm kiếm tài liệu:", error);
+            return [];
+        } finally {
+            client.release();
+        }
+    },
+
+    async filter(topicIds: number[], status: string, page: number): Promise<{ data: Document[]; totalPages: number } | []> {
+        const client = await pool.connect();
+        try {
+            await client.query("BEGIN");
+
+            const limit = 12;
+            const offset = (page - 1) * limit;
+
+            // ✅ Xử lý trạng thái hoạt động
+            let isAvailable: boolean[] = [];
+            if (status.toLowerCase() === "all") {
+                isAvailable = [true, false];
+            } else {
+                isAvailable = [status === "true"];
+            }
+
+            // Câu truy vấn chính
+            const queryText = `
+            SELECT 
+              d.document_id, d.title, d.link, d.created_at, d.available,
+              t.topic_id, t.title AS topic_title
+            FROM document d
+            LEFT JOIN topic t ON d.topic_id = t.topic_id
+            WHERE d.available = ANY($1::boolean[])
+              AND ($2::int[] IS NULL OR d.topic_id = ANY($2))
+            ORDER BY d.document_id DESC
+            LIMIT $3 OFFSET $4
+          `;
+
+            const result = await client.query(queryText, [isAvailable, topicIds.length ? topicIds : null, limit, offset]);
+
+            //  Đếm tổng số kết quả
+            const countResult = await client.query(
+                `
+            SELECT COUNT(*) AS total
+            FROM document
+            WHERE available = ANY($1::boolean[])
+              AND ($2::int[] IS NULL OR topic_id = ANY($2))
+            `,
+                [isAvailable, topicIds.length ? topicIds : null]
+            );
+
+            const totalItems = parseInt(countResult.rows[0].total, 10);
+            const totalPages = Math.ceil(totalItems / limit);
+
+            await client.query("COMMIT");
+            return { data: result.rows, totalPages };
+        } catch (error) {
+            await client.query("ROLLBACK");
+            console.error("Lỗi khi lọc tài liệu:", error);
+            return [];
+        } finally {
+            client.release();
+        }
+    }
 }
 export default DocumentService;

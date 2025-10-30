@@ -68,6 +68,112 @@ const BankService = {
         const queryText = 'DELETE FROM bank WHERE bank_id = $1';
         const result = await query(queryText, [id]);
         return (result.rowCount ?? 0) > 0;
+    },
+
+    async search(searchValue: string, page: number): Promise<{ data: Bank[]; totalPages: number } | []> {
+        const client = await pool.connect();
+        try {
+            await client.query("BEGIN");
+
+            const limit = 12;
+            const offset = (page - 1) * limit;
+            const keyword = `%${searchValue}%`;
+
+            // Query chính
+            const queryText = `
+            SELECT 
+              b.bank_id, b.description, b.available,
+              t.topic_id, t.title AS topic_title
+            FROM bank b
+            LEFT JOIN topic t ON b.topic_id = t.topic_id
+            WHERE (LOWER(b.description) LIKE LOWER($1) OR LOWER(t.title) LIKE LOWER($1))
+            ORDER BY b.bank_id DESC
+            LIMIT $2 OFFSET $3
+          `;
+
+            const result = await client.query(queryText, [keyword, limit, offset]);
+
+            // Đếm tổng số kết quả để tính totalPages
+            const countResult = await client.query(
+                `
+            SELECT COUNT(*) AS total
+            FROM bank b
+            LEFT JOIN topic t ON b.topic_id = t.topic_id
+            WHERE (LOWER(b.description) LIKE LOWER($1) OR LOWER(t.title) LIKE LOWER($1))
+            `,
+                [keyword]
+            );
+
+            const totalItems = parseInt(countResult.rows[0].total, 10);
+            const totalPages = Math.ceil(totalItems / limit);
+
+            await client.query("COMMIT");
+
+            return { data: result.rows, totalPages };
+        } catch (error) {
+            await client.query("ROLLBACK");
+            console.error("Lỗi khi tìm kiếm ngân hàng câu hỏi:", error);
+            return [];
+        } finally {
+            client.release();
+        }
+    },
+      
+    async filter(topicIds: number[], status: string, page: number): Promise<{ data: Bank[]; totalPages: number } | []> {
+        const client = await pool.connect();
+        try {
+            await client.query("BEGIN");
+
+            const limit = 12;
+            const offset = (page - 1) * limit;
+
+            //  Xử lý trạng thái hoạt động
+            let isAvailable: boolean[] = [];
+            if (status.toLowerCase() === "all") {
+                isAvailable = [true, false];
+            } else {
+                isAvailable = [status === "true"];
+            }
+
+            // Query dữ liệu bank
+            const queryText = `
+            SELECT 
+              b.bank_id, b.description, b.available,
+              t.topic_id, t.title AS topic_title
+            FROM bank b
+            LEFT JOIN topic t ON b.topic_id = t.topic_id
+            WHERE b.available = ANY($1::boolean[])
+              AND ($2::int[] IS NULL OR b.topic_id = ANY($2))
+            ORDER BY b.bank_id DESC
+            LIMIT $3 OFFSET $4
+          `;
+
+            const result = await client.query(queryText, [isAvailable, topicIds.length ? topicIds : null, limit, offset]);
+
+            // Tính tổng số trang
+            const countResult = await client.query(
+                `
+            SELECT COUNT(*) AS total
+            FROM bank
+            WHERE available = ANY($1::boolean[])
+              AND ($2::int[] IS NULL OR topic_id = ANY($2))
+            `,
+                [isAvailable, topicIds.length ? topicIds : null]
+            );
+
+            const totalItems = parseInt(countResult.rows[0].total, 10);
+            const totalPages = Math.ceil(totalItems / limit);
+
+            await client.query("COMMIT");
+
+            return { data: result.rows, totalPages };
+        } catch (error) {
+            await client.query("ROLLBACK");
+            console.error("Lỗi khi lọc ngân hàng câu hỏi:", error);
+            return [];
+        } finally {
+            client.release();
+        }
     }
 };
 
