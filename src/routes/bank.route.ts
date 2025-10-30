@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import BankController from '../controllers/bank.controller';
 import Authentication from '../middleware/authentication';
-import { ADMIN } from "../config/permission";
+import { ADMIN, USER } from "../config/permission";
 import { BankQuestionController } from '../controllers/bank.question.controller';
 
 const bankRoute = Router();
@@ -20,6 +20,16 @@ const bankRoute = Router();
  */
 bankRoute.get('/', BankController.getAll);
 
+//search va filter
+bankRoute.get('/search', Authentication.AuthorizeRoles(...ADMIN, ...USER),
+        Authentication.AuthenticateToken,
+        BankController.search
+)
+
+bankRoute.get('/filter', Authentication.AuthorizeRoles(...ADMIN, ...USER),
+        Authentication.AuthenticateToken,
+        BankController.filter
+)
 /**
  * @openapi
  * /banks/{id}:
@@ -69,7 +79,7 @@ bankRoute.get('/:id', BankController.getById);
  */
 bankRoute.post('/create',
         Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(ADMIN),
+        Authentication.AuthorizeRoles(...ADMIN),
         BankController.create);
 
 /**
@@ -110,7 +120,7 @@ bankRoute.post('/create',
  */
 bankRoute.patch('/update/:id',
         Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(ADMIN),
+        Authentication.AuthorizeRoles(...ADMIN),
         BankController.update);
 
 /**
@@ -142,7 +152,7 @@ bankRoute.patch('/update/:id',
  */
 bankRoute.patch('/setAvailable/:id',
         Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(ADMIN),
+        Authentication.AuthorizeRoles(...ADMIN),
         BankController.setAvailable);
 
 /**
@@ -168,7 +178,7 @@ bankRoute.patch('/setAvailable/:id',
  */
 bankRoute.delete('/remove/:id',
         Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(ADMIN),
+        Authentication.AuthorizeRoles(...ADMIN),
         BankController.remove);
 
 /**
@@ -207,7 +217,7 @@ bankRoute.delete('/remove/:id',
 
 bankRoute.post("/questions/add/:id",
         Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(ADMIN),
+        Authentication.AuthorizeRoles(...ADMIN),
         BankQuestionController.add);
 
 /**
@@ -245,7 +255,7 @@ bankRoute.post("/questions/add/:id",
  */
 bankRoute.delete("/questions/remove/:id",
         Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(ADMIN),
+        Authentication.AuthorizeRoles(...ADMIN),
         BankQuestionController.remove);
 
 export default bankRoute;
