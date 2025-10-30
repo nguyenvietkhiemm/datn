@@ -183,12 +183,17 @@ examRoute.delete(
  */
 examRoute.get('/', ExamController.getAll);
 
-
+//Tìm kiếm và lọc
 examRoute.get(`/search`,
         Authentication.AuthenticateToken,
         Authentication.AuthorizeRoles(...ADMIN, ...USER),
         ExamController.search);
 
+examRoute.get(`/filter`,
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(...ADMIN, ...USER),
+        ExamController.filter
+);
 /**
  * @openapi
  * /exams/{id}:

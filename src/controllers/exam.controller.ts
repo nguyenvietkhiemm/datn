@@ -17,7 +17,7 @@ const ExamController = {
   },
 
   async getById(req: Request, res: Response) {
-    const result: DefaultResponse<any> = await safeExecute(async () => {   
+    const result: DefaultResponse<any> = await safeExecute(async () => {
       return {
         status: 200,
         message: "Lấy thông tin đề thi thành công",
@@ -70,7 +70,6 @@ const ExamController = {
 
   async remove(req: Request, res: Response) {
     const result: DefaultResponse<any> = await safeExecute(async () => {
-
       return {
         status: 204,
         message: "Xóa đề thi thành công",
@@ -81,15 +80,36 @@ const ExamController = {
     return res.status(result.status).json(result);
   },
 
-  async search(req : Request, res : Response){
+  async search(req: Request, res: Response) {
     const result: DefaultResponse<any> = await safeExecute(async () => {
       return {
         status: 200,
         message: "Lấy danh sách đề thi thành công",
-        data: await ExamService.search(String(req.query.searchValue), Number( req.query.page)),
+        data: await ExamService.search(String(req.query.searchValue), Number(req.query.page)),
       };
     });
 
+    return res.status(result.status).json(result);
+  },
+
+  async filter(req: Request, res: Response) {
+    const result: DefaultResponse<any> = await safeExecute(async () => {
+      const topicParam = req.query.topic;
+      const status = String(req.query.status);
+      const page = Number(req.query.page);
+
+      let topicIds: number[] = [];
+
+      if (typeof topicParam === "string" && topicParam.length > 0) {
+        topicIds = topicParam.split(",").map(Number);
+      }
+
+      return {
+        status: 200,
+        message: "Lọc bài thi thành công",
+        data: await ExamService.filter(topicIds, status, page)
+      };
+    })
     return res.status(result.status).json(result);
   }
 };
