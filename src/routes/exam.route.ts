@@ -1,11 +1,7 @@
 import { Router } from 'express';
 import ExamController from '../controllers/exam.controller';
 import Authentication from '../middleware/authentication';
-<<<<<<< HEAD
 import { ADMIN, USER } from "../config/permission";
-=======
-import { ADMIN } from "../config/permission";
->>>>>>> origin/duc
 import { ExamQuestionController } from '../controllers/exam.question.controller';
 import { ScheduleExamController } from '../controllers/schedule.exam.controller';
 import QuestionController from '../controllers/question.controller';
@@ -28,11 +24,7 @@ const examRoute = Router();
  */
 examRoute.get('/schedule',
         Authentication.AuthenticateToken,
-<<<<<<< HEAD
         Authentication.AuthorizeRoles(...ADMIN),
-=======
-        Authentication.AuthorizeRoles(ADMIN),
->>>>>>> origin/duc
         ScheduleExamController.getAll);
 
 /**
@@ -65,11 +57,7 @@ examRoute.get(
  * @openapi
  * /exams/schedule/create:
  *   post:
-<<<<<<< HEAD
  *     summary: Tạo lịch thi mới (yêu cầu ...)
-=======
- *     summary: Tạo lịch thi mới (yêu cầu admin)
->>>>>>> origin/duc
  *     tags: [Exams]
  *     requestBody:
  *       required: true
@@ -99,22 +87,14 @@ examRoute.get(
 examRoute.post(
         '/schedule/create',
         Authentication.AuthenticateToken,
-<<<<<<< HEAD
         Authentication.AuthorizeRoles(...ADMIN),
-=======
-        Authentication.AuthorizeRoles(ADMIN),
->>>>>>> origin/duc
         ScheduleExamController.create);
 
 /**
  * @openapi
  * /exams/schedule/update/{id}:
  *   put:
-<<<<<<< HEAD
  *     summary: Cập nhật lịch thi (yêu cầu ...admin)
-=======
- *     summary: Cập nhật lịch thi (yêu cầu admin)
->>>>>>> origin/duc
  *     tags: [Exams]
  *     parameters:
  *       - name: id
