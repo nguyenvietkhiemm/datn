@@ -174,7 +174,6 @@ const ExamService = {
       const offset = (page - 1) * limit;
 
       let isAvailable: boolean[] = [];
-      console.log({topicIds, page, status});
       
       if (status === "All") {
         isAvailable = [true, false];

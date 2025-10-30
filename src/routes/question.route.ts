@@ -61,7 +61,7 @@ questionRoute.get('/', QuestionController.getAll);
 
 questionRoute.patch('/update/:id',
         Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(ADMIN),
+        Authentication.AuthorizeRoles(...ADMIN),
         QuestionController.update);
 
 /**
@@ -88,7 +88,7 @@ questionRoute.patch('/update/:id',
  */
 questionRoute.delete('/remove/:id',
         Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(ADMIN),
+        Authentication.AuthorizeRoles(...ADMIN),
         QuestionController.remove);
 
 /**
@@ -121,7 +121,7 @@ questionRoute.delete('/remove/:id',
  */
 questionRoute.patch('/setAvailable/:id',
         Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(ADMIN),
+        Authentication.AuthorizeRoles(...ADMIN),
         QuestionController.setAvailable);
 
 export default questionRoute;

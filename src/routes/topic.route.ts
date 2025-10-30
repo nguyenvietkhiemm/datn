@@ -62,7 +62,7 @@ topicRoute.get(
 topicRoute.post(
   '/create',
   Authentication.AuthenticateToken,
-  Authentication.AuthorizeRoles(ADMIN), // chỉ admin được tạo
+  Authentication.AuthorizeRoles(...ADMIN), // chỉ admin được tạo
   TopicController.create
 );
 
@@ -111,7 +111,7 @@ topicRoute.post(
 topicRoute.patch(
   '/update/:id',
   Authentication.AuthenticateToken,
-  Authentication.AuthorizeRoles(ADMIN), // chỉ admin được sửa
+  Authentication.AuthorizeRoles(...ADMIN), // chỉ admin được sửa
   TopicController.update
 );
 
@@ -144,7 +144,7 @@ topicRoute.patch(
 topicRoute.delete(
   '/remove/:id',
   Authentication.AuthenticateToken,
-  Authentication.AuthorizeRoles(ADMIN), // chỉ admin được xóa
+  Authentication.AuthorizeRoles(...ADMIN), // chỉ admin được xóa
   TopicController.remove
 );
 

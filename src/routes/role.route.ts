@@ -20,7 +20,7 @@ const roleRoute = Router();
  */
 roleRoute.get('/',
         Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(ADMIN),
+        Authentication.AuthorizeRoles(...ADMIN),
         RoleController.getAll);
 
 /**
@@ -46,7 +46,7 @@ roleRoute.get('/',
  */
 roleRoute.get('/:id',
         Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(ADMIN),
+        Authentication.AuthorizeRoles(...ADMIN),
         RoleController.getOne);
 
 /**
@@ -76,7 +76,7 @@ roleRoute.get('/:id',
  */
 roleRoute.post('/create',
         Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(ADMIN),
+        Authentication.AuthorizeRoles(...ADMIN),
         RoleController.create);
 
 /**
@@ -112,7 +112,7 @@ roleRoute.post('/create',
  */
 roleRoute.put('/update/:id',
         Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(ADMIN),
+        Authentication.AuthorizeRoles(...ADMIN),
         RoleController.update);
 
 /**
@@ -138,7 +138,7 @@ roleRoute.put('/update/:id',
  */
 roleRoute.delete('/remove/:id',
         Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(ADMIN),
+        Authentication.AuthorizeRoles(...ADMIN),
         RoleController.remove);
 
 export default roleRoute;

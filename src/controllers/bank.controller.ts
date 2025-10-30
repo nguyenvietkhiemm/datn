@@ -70,7 +70,41 @@ const BankController = {
             };
         });
         return res.status(result.status).json(result);
-    }
+    },
+
+    async search(req: Request, res: Response) {
+        const result: DefaultResponse<any> = await safeExecute(async () => {
+            return {
+                status: 200,
+                message: "Lấy danh sách ngân hàng câu hỏi thành công",
+                data: await BankService.search(String(req.query.searchValue), Number(req.query.page)),
+            };
+        });
+
+        return res.status(result.status).json(result);
+    },
+
+    async filter(req: Request, res: Response) {
+        const result: DefaultResponse<any> = await safeExecute(async () => {
+            const topicParam = req.query.topic;
+            const status = String(req.query.status);
+            const page = Number(req.query.page);
+
+            let topicIds: number[] = [];
+
+            if (typeof topicParam === "string" && topicParam.length > 0) {
+                topicIds = topicParam.split(",").map(Number);
+            }
+
+            return {
+                status: 200,
+                message: "Lọc ngân hàng câu hỏi thành công",
+                data: await BankService.filter(topicIds, status, page)
+            };
+        });
+
+        return res.status(result.status).json(result);
+    },
 };
 
 export default BankController;
