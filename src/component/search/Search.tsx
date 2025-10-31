@@ -1,17 +1,26 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Search.module.css";
 import Cookies from "js-cookie";
 
 const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
 
 type SearchProp = {
-  setFilterExam: (data: any) => void;
-  currentPage : number;
-  setTotalPage : (data : any) => void;
+  setFilterExam?: (data: any) => void;
+  currentPage: number;
+  setTotalPage: (data: any) => void;
+  setFilterDoc? : (data : any) => void;
 };
 
-export default function Search({ setFilterExam, currentPage, setTotalPage }: SearchProp) {
+type ExamSchedule = {
+  exam_schedule_id: number;
+  start_time: string;
+  end_time: string;
+  created_at: string;
+  updated_at: string;
+};
+
+export default function Search({ setFilterExam, currentPage, setTotalPage, setFilterDoc }: SearchProp) {
   const [searchType, setSearchType] = useState("exams");
   const [keyword, setKeyword] = useState("");
 
@@ -24,15 +33,15 @@ export default function Search({ setFilterExam, currentPage, setTotalPage }: Sea
       const url = `${API_URL}/${searchType}/search?searchValue=${encodeURIComponent(
         keyword
       )}&page=${currentPage}`;
-      const res = await fetch(url,{
-        method : "GET",
-        headers : {
-            "Content-Type" : "application/json",
-            Authorization : `Bearer ${token}`
+      const res = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
         }
       });
       const data = await res.json();
-      
+
       setTotalPage(data.data.totalPages)
       setFilterExam(data.data.data || []);
     } catch (err) {
@@ -65,8 +74,8 @@ export default function Search({ setFilterExam, currentPage, setTotalPage }: Sea
       </div>
       {/* Nút tìm kiếm */}
       <button className={styles.searchBtn} onClick={handleSearch}>
-          Tìm kiếm
-        </button>
+        Tìm kiếm
+      </button>
     </div>
   );
 }

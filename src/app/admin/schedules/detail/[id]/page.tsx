@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import styles from "./Exam.Schedule.Detail.module.css";
 import Filter from "@/component/filter/Filter/Filter";
 import { useRouter } from "next/navigation";
+import Search from "@/component/search/Search";
 
 type ExamSchedule = {
   exam_schedule_id: number;
@@ -74,7 +75,7 @@ export default function ExamScheduleDetail() {
 
   return (
     <div className={styles.detail_container}>
-      <h2 className={styles.title}>Chi tiết lịch thi #{schedule.exam_schedule_id}</h2>
+      <h2 className={styles.title}>Chi tiết lịch thi</h2>
 
       <div className={styles.info_box}>
         <p>
@@ -104,6 +105,7 @@ export default function ExamScheduleDetail() {
 
       <div className={styles.list_exam}>
         <h3 className={styles.subtitle}>Danh sách đề thi</h3>
+        {/* <Search setTotalPage={setTotalPage} setFilterExam={setFilterExam} currentPage={currentPage}/> */}
         {schedule.exams && schedule.exams.length > 0 ? (
           <table className={styles.table}>
             <thead>

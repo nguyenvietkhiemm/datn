@@ -1,6 +1,6 @@
 "use client";
 // Dùng cho exam, document, bank
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Filter.module.css";
 import Cookies from "js-cookie";
 import { Button } from "@/component/ui/button/Button";
@@ -50,12 +50,12 @@ interface FilterProps {
     documents?: Document[];
     setFilterExam?: React.Dispatch<React.SetStateAction<Exam[]>>
     setFilterBank?: React.Dispatch<React.SetStateAction<BankProps[]>>
-    setDocuments?: React.Dispatch<React.SetStateAction<Document[]>>
+    setFilterDocuments?: React.Dispatch<React.SetStateAction<Document[]>>
     currentPage: number
 }
 
-export default function Filter(
-    { exams = [], setFilterExam, banks = [], setFilterBank, documents = [], setDocuments, currentPage }
+function Filter(
+    { exams = [], setFilterExam, banks = [], setFilterBank, documents = [], setFilterDocuments, currentPage }
         : FilterProps) {
 
     const [topics, setTopics] = useState<Topic[]>([]);
@@ -72,7 +72,7 @@ export default function Filter(
         { label: "Không hoạt động", value: "false" }
     ]
 
-    // Lay data token, subject
+    // Lay data topic, subject
     useEffect(() => {
         const token = Cookies.get("token")
         const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
@@ -140,7 +140,7 @@ export default function Filter(
         if (setFilterBank) {
             routes = "banks"
         }
-        if (setDocuments) {
+        if (setFilterDocuments) {
             routes = "documents"
         }
 
@@ -167,7 +167,7 @@ export default function Filter(
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Beare ${token}`
+                    "Authorization": `Bearer ${token}`
                 }
             })
 
@@ -178,8 +178,8 @@ export default function Filter(
                 setFilterExam(data.data.data || []);
             } else if (setFilterBank && routes === "banks") {
                 setFilterBank(data.data.data || []);
-            } else if (setDocuments && routes === "documents") {
-                setDocuments(data.data.data || []);
+            } else if (setFilterDocuments && routes === "documents") {
+                setFilterDocuments(data.data.data || []);
             }
         } catch (error) {
             console.error("Lỗi khi lọc dữ liệu:", error);
@@ -228,3 +228,5 @@ export default function Filter(
         </div>
     );
 }
+
+export default React.memo(Filter);

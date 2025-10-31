@@ -10,8 +10,8 @@ const navItems = [
   { name: "Bảng điều khiển", href: "/admin/dashboard", icon: Home },
   { name: "Người dùng", href: "/admin/users", icon: Users },
   { name: "Bài thi", href: "/admin/exams", icon: BookOpen },
+  { name: "Tài liệu", href: "/admin/documents", icon: BookOpen },
   { name: "Lịch thi", href: "/admin/schedules", icon: Clock },
-  { name: "Thống kê", href: "/admin/statistics", icon: Calendar },
   { name: "Cài đặt", href: "/admin/settings", icon: Settings },
 ];
 

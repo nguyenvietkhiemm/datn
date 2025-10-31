@@ -1,0 +1,17 @@
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+}
+
+.card h3 {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.card p {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111827;
+    margin-top: 6px;
+}

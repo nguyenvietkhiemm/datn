@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import FilterExam from "@/component/filter/Filter/Filter";
 import { useRouter } from "next/navigation";
 import Search from "@/component/search/Search";
+import Pagination from "@/component/pagination/Pagination";
 
 type Exam = {
   exam_id: number;
@@ -22,12 +23,9 @@ export default function Exam() {
   const [exams, setExams] = useState<Exam[]>([]);
   const [loading, setLoading] = useState(true);
   const [filterExam, setFilterExam] = useState<Exam[]>([]);
-  const [search, setSearch] = useState("");
   const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
-  const [status, setStatus] = useState<string>("true");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
-  const [searchValue, setSearchValue] = useState<string>("");
 
   const router = useRouter();
 
@@ -92,7 +90,7 @@ export default function Exam() {
 
       if (!res.ok) throw new Error("Cập nhật thất bại");
 
-      setExams((prev) =>
+      setFilterExam((prev) =>
         prev.map((e) =>
           e.exam_id === examId ? { ...e, available } : e
         )
@@ -106,9 +104,9 @@ export default function Exam() {
     localStorage.setItem("exam", JSON.stringify(exam));
     router.push(`/admin/exams/detail/${id}`)
   };
-
   if (loading) return <p className={styles.loading}>Đang tải danh sách bài thi...</p>;
-
+  
+  
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -178,6 +176,9 @@ export default function Exam() {
           )}
         </tbody>
       </table>
+
+      {/* pagination */}
+      <Pagination totalPages={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
     </div>
   );
 }

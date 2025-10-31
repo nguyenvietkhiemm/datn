@@ -2,14 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
-import styles from "./ExamCreate.module.css";
+import styles from "./DocumentCreate.module.css";
 import { useRouter } from "next/navigation";
-
-type ExamSchedule = {
-  exam_schedule_id: number;
-  start_time: string;
-  end_time: string;
-};
 
 type Topic = {
   topic_id: number;
@@ -22,23 +16,21 @@ type Subject = {
   subject_name: string;
 };
 
-export default function ExamCreate() {
-  const [name, setName] = useState("");
-  const [timeLimit, setTimeLimit] = useState("");
+export default function DocumentCreate() {
+  const [title, setTitle] = useState("");
+  const [file, setFile] = useState<File | null>(null);
   const [topicId, setTopicId] = useState<number | null>(null);
   const [subjectId, setSubjectId] = useState<number | null>(null);
-  const [scheduleId, setScheduleId] = useState<number | null>(null);
-
-  const [examSchedules, setExamSchedules] = useState<ExamSchedule[]>([]);
   const [topics, setTopics] = useState<Topic[]>([]);
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [filterTopic, setFilterTopic] = useState<Topic[]>([]);
+  const embedding = "";
   const router = useRouter();
 
   const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
   const token = Cookies.get("token");
 
-  //  Lấy dữ liệu khi component mount
+  //  Lấy dữ liệu topic và subject
   useEffect(() => {
     const fetchAll = async () => {
       try {
@@ -47,17 +39,14 @@ export default function ExamCreate() {
           Authorization: `Bearer ${token}`,
         };
 
-        const [scheduleRes, topicRes, subjectRes] = await Promise.all([
-          fetch(`${API_URL}/exams/schedule`, { headers }),
+        const [topicRes, subjectRes] = await Promise.all([
           fetch(`${API_URL}/topics`, { headers }),
           fetch(`${API_URL}/subjects`, { headers }),
         ]);
 
-        const scheduleData = await scheduleRes.json();
         const topicData = await topicRes.json();
         const subjectData = await subjectRes.json();
 
-        setExamSchedules(scheduleData.data || []);
         setTopics(topicData.data || []);
         setSubjects(subjectData.data || []);
       } catch (error) {
@@ -68,76 +57,61 @@ export default function ExamCreate() {
     fetchAll();
   }, [API_URL, token]);
 
-  //  Submit form tạo bài thi
+  //  Lọc chủ đề theo môn học
+  useEffect(() => {
+    setFilterTopic(topics.filter((t) => t.subject_id === subjectId));
+  }, [subjectId, topics]);
+
+  //  Xử lý submit form
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!name || !timeLimit || !topicId || !subjectId || !scheduleId) {
-      alert("Vui lòng điền đầy đủ thông tin!");
+    if (!title || !file || !topicId || !subjectId) {
+      alert("Vui lòng điền đầy đủ thông tin và chọn file!");
       return;
     }
 
     try {
-      const res = await fetch(`${API_URL}/exams/create`, {
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("topic_id", topicId.toString());
+      formData.append("file", file);
+
+      const res = await fetch(`${API_URL}/documents/create`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({
-          exam_name: name,
-          time_limit: Number(timeLimit),
-          topic_id: topicId,
-          subject_id: subjectId,
-          exam_schedule_id: scheduleId,
-        }),
+        body: formData,
       });
 
       const data = await res.json();
 
       if (res.ok) {
-        alert("Tạo bài thi thành công!");
+        alert("Tải tài liệu thành công!");
+        router.push("/admin/documents");
       } else {
-        alert(data.message || "Lỗi khi tạo bài thi!");
+        alert(data.message || "Lỗi khi tải tài liệu!");
       }
-      localStorage.setItem("exam_id", data.data.exam_id)
-      router.push("/admin/exams/create/questions");
     } catch (error) {
-      alert("Không thể tạo bài thi!");
+      console.error(error);
+      alert("Không thể tải tài liệu!");
     }
   };
 
-  //thay doi topic theo subject
-  useEffect(() => {
-    const allTopic : Topic[] = topics
-    setFilterTopic(allTopic.filter((t) => t.subject_id === subjectId))
-  }, [subjectId])
-
-  console.log(topics);
-
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Tạo bài thi mới</h1>
+      <h1 className={styles.title}>Thêm tài liệu mới</h1>
 
       <form onSubmit={handleSubmit} className={styles.form}>
-        {/* Tên bài thi */}
-        <label className={styles.label}>Tên bài thi</label>
+        {/* Tên tài liệu */}
+        <label className={styles.label}>Tên tài liệu</label>
         <input
           type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
           className={styles.input}
-          placeholder="Nhập tên bài thi..."
-        />
-
-        {/* Thời gian */}
-        <label className={styles.label}>Thời gian (phút)</label>
-        <input
-          type="number"
-          value={timeLimit}
-          onChange={(e) => setTimeLimit(e.target.value)}
-          className={styles.input}
-          placeholder="VD: 60"
+          placeholder="Nhập tên tài liệu..."
         />
 
         {/* Môn học */}
@@ -170,25 +144,18 @@ export default function ExamCreate() {
           ))}
         </select>
 
-        {/* Lịch thi */}
-        <label className={styles.label}>Lịch thi</label>
-        <select
-          value={scheduleId ?? ""}
-          onChange={(e) => setScheduleId(Number(e.target.value))}
-          className={styles.select}
-        >
-          <option value="">-- Chọn lịch thi --</option>
-          {examSchedules.map((s) => (
-            <option key={s.exam_schedule_id} value={s.exam_schedule_id}>
-              {new Date(s.start_time).toLocaleString("vi-VN")} →{" "}
-              {new Date(s.end_time).toLocaleString("vi-VN")}
-            </option>
-          ))}
-        </select>
+        {/* Upload file */}
+        <label className={styles.label}>Chọn file tài liệu (.docx, .pdf...)</label>
+        <input
+          type="file"
+          accept=".doc,.docx,.pdf"
+          onChange={(e) => setFile(e.target.files ? e.target.files[0] : null)}
+          className={styles.inputFile}
+        />
 
         {/* Submit */}
         <button type="submit" className={styles.button}>
-          Lưu bài thi
+          Lưu tài liệu
         </button>
       </form>
     </div>
