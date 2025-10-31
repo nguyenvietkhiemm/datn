@@ -8,7 +8,7 @@ const DocumentController = {
       return {
         status: 200,
         message: "Lấy danh sách tài liệu thành công",
-        data: await DocumentService.getAll(),
+        data: await DocumentService.getAll(Number(req.query.page)),
       };
     });
 
@@ -17,10 +17,15 @@ const DocumentController = {
 
   async create(req: Request, res: Response) {
     const result: DefaultResponse<any> = await safeExecute(async () => {
+      if (!req.file) throw new Error("Không có file được tải lên");
+
+      const filePath = req.file.path;
+      const document = await DocumentService.create(req.body);
+
       return {
-        status: 201,
-        message: "Tạo tài liệu thành công",
-        data: await DocumentService.create(req.body),
+        status: 200,
+        message: "Tải tài liệu thành công",
+        data: document,
       };
     });
 

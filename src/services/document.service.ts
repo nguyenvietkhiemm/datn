@@ -4,11 +4,52 @@ import { Document } from "../model/document.model";
 import pool from "../config/database";
 
 const DocumentService = {
-    async getAll(limit: number = 100, offset: number = 0): Promise<Document[]> {
-        const queryText = 'SELECT * FROM document ORDER BY document_id LIMIT $1 OFFSET $2';
-        const result = await query(queryText, [limit, offset]);
+    async getAll(page: number = 1): Promise<{ document: Document[]; totalPages: number } | []> {
+        const client = await pool.connect();
+        try {
+            await client.query("BEGIN");
 
-        return result.rows;
+            const limit = 12;
+            const offset = (page - 1) * limit;
+
+            // Lấy danh sách document kèm tên topic
+            const queryText = `
+            SELECT 
+              d.document_id,
+              d.title,
+              d.link,
+              d.topic_id,
+              d.available,
+              d.embedding,
+              d.created_at,
+              t.title AS topic_title
+            FROM document d
+            JOIN topic t ON d.topic_id = t.topic_id
+            WHERE d.available = true
+            ORDER BY d.document_id DESC
+            LIMIT $1 OFFSET $2
+          `;
+
+            const result = await client.query(queryText, [limit, offset]);
+
+            // Đếm tổng số document
+            const countResult = await client.query(
+                "SELECT COUNT(*) as total FROM document WHERE available = true"
+            );
+
+            const totalItems = parseInt(countResult.rows[0].total, 10);
+            const totalPages = Math.ceil(totalItems / limit);
+
+            await client.query("COMMIT");
+
+            return { document: result.rows, totalPages };
+        } catch (error) {
+            console.error("Lỗi khi lấy danh sách tài liệu:", error);
+            await client.query("ROLLBACK");
+            return [];
+        } finally {
+            client.release();
+        }
     },
 
     async create(document: Document): Promise<Document | null> {
@@ -18,19 +59,19 @@ const DocumentService = {
             await client.query("BEGIN");
 
             const result = await client.query(
-                `INSERT INTO document (title, link, topic_id) 
-                 VALUES ($1, $2, $3) 
-                 RETURNING *`,
+                `INSERT INTO document (title, link, topic_id)
+                 VALUES ($1, $2, $3)
+                 RETURNING document_id, title, link, embedding, created_at, available, topic_id`,
                 [document.title, document.link, document.topic_id]
             );
 
             const newDocument: Document = result.rows[0];
 
-            await client.query(
-                `INSERT INTO document_history (document_id) 
-                 VALUES ($1)`,
-                [newDocument.document_id]
-            );
+            // await client.query(
+            //     `INSERT INTO document_history (document_id) 
+            //      VALUES ($1)`,
+            //     [newDocument.document_id]
+            // );
 
             await client.query("COMMIT");
             return newDocument;
