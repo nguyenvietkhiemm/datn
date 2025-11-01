@@ -73,21 +73,18 @@
 }
 
 .button {
-    background: #2563eb;
-    color: white;
-    border: none;
-    padding: 0.6rem 1rem;
-    border-radius: 0.5rem;
+    color: rgb(255, 255, 255);
     cursor: pointer;
-    font-weight: 200;
-    transition: background 0.3s ease;
+    font-weight: 500;
     position: absolute;
-    bottom: 1rem;
-    width: 140px;
-}
-
-.button:hover {
-    background: #1e3a8a;
+    bottom: 0.5rem;
+    left: 1.5rem;
+    background-color: white;
+    color: #0070f3;
+    border: 1px solid #0070f3;
+    border-radius: 8px;
+    padding: 8px 14px;
+    width: 55%;
 }
 
 .empty {

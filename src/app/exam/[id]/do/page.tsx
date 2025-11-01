@@ -14,8 +14,17 @@ type Answer = {
 type Question = {
     question_id: number;
     question_name: string;
-    question_content : string;
+    question_content: string;
     answers: Answer[];
+};
+
+type Exam = {
+    exam_id: number;
+    exam_name: string;
+    created_at: string;
+    time_limit: number;
+    topic_id: number;
+    exam_schedule_id?: number;
 };
 
 export default function DoExam() {
@@ -23,9 +32,10 @@ export default function DoExam() {
     const [answers, setAnswers] = useState<{ [key: number]: number }>({});
     const [timeLeft, setTimeLeft] = useState(60 * 30); // 30 phút
     const [submitted, setSubmitted] = useState(false);
+    const [exam, setExam] = useState<Exam>();
     const params = useParams();
     const id = params.id;
-    
+
     //dữ liệu câu hỏi
     useEffect(() => {
         const token = Cookies.get("token");
@@ -39,7 +49,11 @@ export default function DoExam() {
                 }
             })
             const data = await resExamId.json();
-            setQuestions(data.data)
+            if (Array.isArray(data.data)) {
+                setQuestions(data.data);
+            } else {
+                setQuestions([]);
+            }
         }
 
         fetchExamId()
@@ -56,6 +70,16 @@ export default function DoExam() {
         return () => clearInterval(timer);
     }, [timeLeft, submitted]);
 
+    useEffect(() => {
+        const storedExam = localStorage.getItem("exam");
+        if (storedExam) {
+            setExam(JSON.parse(storedExam));
+        }
+
+        return () => {
+            localStorage.removeItem("exam");
+        };
+    }, []);
     const handleSelect = (questionId: number, answerId: number) => {
         setAnswers({ ...answers, [questionId]: answerId });
     };
@@ -73,7 +97,7 @@ export default function DoExam() {
         <div className={styles.exam_container}>
             {/* Header */}
             <div className={styles.exam_header}>
-                <h2>Đề thi</h2>
+                <h2>{exam?.exam_name}</h2>
             </div>
 
             <div className={styles.exam_body}>
@@ -88,27 +112,33 @@ export default function DoExam() {
                             <Button onClick={() => window.location.reload()}>Làm lại</Button>
                         </div>
                     ) : (
-                        questions.map((q, i) => (
-                            <div key={q.question_id} className={styles.questionBox}>
-                                <p className={styles.questionText}>
-                                    <strong>{i + 1}.</strong> {q.question_content}
-                                </p>
-                                <div className={styles.answers}>
-                                    {q.answers.map((a) => (
-                                        <label key={a.answer_id} className={styles.option}>
-                                            <input
-                                                type="radio"
-                                                name={`q-${q.question_id}`}
-                                                value={a.answer_id}
-                                                checked={answers[q.question_id] === a.answer_id}
-                                                onChange={() => handleSelect(q.question_id, a.answer_id)}
-                                            />
-                                            {a.answer_content}
-                                        </label>
-                                    ))}
-                                </div>
-                            </div>
-                        ))
+                        <div>
+                            {questions.length > 0 ? (
+                                questions?.map((q, i) => (
+                                    <div key={q.question_id} className={styles.questionBox}>
+                                        <p className={styles.questionText}>
+                                            <strong>{i + 1}.</strong> {q.question_content}
+                                        </p>
+                                        <div className={styles.answers}>
+                                            {q.answers.map((a) => (
+                                                <label key={a.answer_id} className={styles.option}>
+                                                    <input
+                                                        type="radio"
+                                                        name={`q-${q.question_id}`}
+                                                        value={a.answer_id}
+                                                        checked={answers[q.question_id] === a.answer_id}
+                                                        onChange={() => handleSelect(q.question_id, a.answer_id)}
+                                                    />
+                                                    {a.answer_content}
+                                                </label>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <>Không có câu hỏi nào</>
+                            )}
+                        </div>
                     )}
                 </div>
 

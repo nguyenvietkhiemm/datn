@@ -6,7 +6,9 @@ type Exam = {
   exam_name: string;
   time_limit: number;
   created_at: string;
-  topic_id : number
+  topic_id : number;
+  start_time : string;
+  end_time : string
 };
 
 type ExamState = {

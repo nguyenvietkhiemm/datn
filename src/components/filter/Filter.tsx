@@ -1,9 +1,9 @@
 "use client";
-
+// Dùng cho exam, document, bank
 import { useState, useEffect } from "react";
 import styles from "./Filter.module.css";
-import { Button } from "../ui/button";
 import Cookies from "js-cookie";
+import { Button } from "../ui/button";
 
 interface Topic {
     topic_id: number;
@@ -23,14 +23,16 @@ type Exam = {
     exam_name: string;
     created_at: string;
     time_limit: number;
-    topic_id: number;
+    exam_schedule_id?: number;
+    start_time: string;
+    end_time: string
 };
 
 type BankProps = {
     bank_id: number;
     description: string;
-    available : boolean;
-    topic_id? : number
+    available: boolean;
+    topic_id?: number
 };
 
 interface Document {
@@ -48,22 +50,23 @@ interface FilterProps {
     setFilterExam?: React.Dispatch<React.SetStateAction<Exam[]>>
     setFilterBank?: React.Dispatch<React.SetStateAction<BankProps[]>>
     setDocuments?: React.Dispatch<React.SetStateAction<Document[]>>
+    currentPage: number
 }
 
 export default function Filter(
-    { exams = [], setFilterExam, banks = [], setFilterBank, documents = [], setDocuments }
+    { exams = [], setFilterExam, banks = [], setFilterBank, documents = [], setDocuments, currentPage }
         : FilterProps) {
 
     const [topics, setTopics] = useState<Topic[]>([]);
     const [subjects, setSubjects] = useState<Subject[]>([]);
     const [selectedSubject, setSelectedSubject] = useState<number | "All">("All");
     const [selectedTopic, setSelectedTopic] = useState<number | "All">("All");
-    const [showFilter, setShowFilter] = useState<boolean>(false)
+    const [showFilter, setShowFilter] = useState<boolean>(false);
+    const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
+    const token = Cookies.get("token")
 
     // Lay data token, subject
     useEffect(() => {
-        const token = Cookies.get("token")
-        const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
         const fetchTopic = async () => {
             const resTopic = await fetch(`${API_URL}/topics`, {
                 method: "GET",
@@ -122,39 +125,57 @@ export default function Filter(
         </div>
     )
 
-    //Thay doi gia tri exam, document, bank
-    const filterBySelection = <T extends { topic_id?: number }>(
-        items: T[],
-        topics : Topic[],
-        selectedSubject: number | "All",
-        selectedTopic: number | "All",
-    ) => {
-        if(selectedTopic !== "All"){
-            return items.filter((item) => item.topic_id === selectedTopic)
-        }else if(selectedSubject !=="All") {
-            const topicIds = topics
-                            .filter((t) => t.subject_id === selectedSubject)
-                            .map((t) => t.topic_id)
-
-            return items.filter((item) => item.topic_id && topicIds.includes(item.topic_id));
-        }
-        return items;
-    }
-
-    const handleFilter = () => {
-        if (setFilterExam) {
-          const filtered = filterBySelection(exams, topics, selectedSubject, selectedTopic);
-          setFilterExam(filtered);
-        }
+    //ham loc
+    const handleFilter = async () => {
+        let routes = "exams"
         if (setFilterBank) {
-          const filtered = filterBySelection(banks, topics, selectedSubject, selectedTopic);
-          setFilterBank(filtered);
+            routes = "banks"
         }
         if (setDocuments) {
-          const filtered = filterBySelection(documents, topics, selectedSubject, selectedTopic);
-          setDocuments(filtered);
+            routes = "documents"
         }
-      };
+
+        let topicIds: number[] = [];
+
+        if (selectedSubject === "All") {
+            if (selectedTopic !== "All") {
+                topicIds = [Number(selectedTopic)];
+            } else {
+                topicIds = topics.map((t) => t.topic_id);
+            }
+        }
+        else {
+            topicIds = topics
+                .filter((t) => t.subject_id === selectedSubject)
+                .map((t) => t.topic_id);
+        }
+
+        const topicQuery = topicIds.length > 0 ? topicIds.join(",") : "";
+
+        try {
+
+            const res = await fetch(`${API_URL}/${routes}/filter?topic=${topicQuery}&status=true&page=${currentPage}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Beare ${token}`
+                }
+            })
+
+            const data = await res.json();
+
+            // Cập nhật state tương ứng
+            if (setFilterExam && routes === "exams") {
+                setFilterExam(data.data.data || []);
+            } else if (setFilterBank && routes === "banks") {
+                setFilterBank(data.data.data || []);
+            } else if (setDocuments && routes === "documents") {
+                setDocuments(data.data.data || []);
+            }
+        } catch (error) {
+            console.error("Lỗi khi lọc dữ liệu:", error);
+        }
+    };
 
     return (
         <div className={styles.filter_container}>
@@ -187,7 +208,6 @@ export default function Filter(
                         selected={selectedTopic}
                         onSelect={(v) => setSelectedTopic(v)}
                     />
-                    {/* nut loc */}
                     <Button variant="outline" onClick={handleFilter}>
                         Lọc kết quả
                     </Button>

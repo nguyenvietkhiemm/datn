@@ -4,8 +4,10 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 type Bank = {
     bank_id: number;
     description: string;
-    topic_title: string;
-}
+    topic_id?: number;
+    available : boolean
+};
+
 
 type BankState = {
     banks : Bank[]    
