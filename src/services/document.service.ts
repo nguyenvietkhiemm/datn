@@ -52,7 +52,7 @@ const DocumentService = {
         }
     },
 
-    async create(document: Document): Promise<Document | null> {
+    async create(document: Document, fileLink : string): Promise<Document | null> {
         const client = await pool.connect();
 
         try {
@@ -62,7 +62,7 @@ const DocumentService = {
                 `INSERT INTO document (title, link, topic_id)
                  VALUES ($1, $2, $3)
                  RETURNING document_id, title, link, embedding, created_at, available, topic_id`,
-                [document.title, document.link, document.topic_id]
+                [document.title, fileLink, document.topic_id]
             );
 
             const newDocument: Document = result.rows[0];
