@@ -19,8 +19,10 @@ const DocumentController = {
     const result: DefaultResponse<any> = await safeExecute(async () => {
       if (!req.file) throw new Error("Không có file được tải lên");
 
+      const file = req.file
       const filePath = req.file.path;
-      const document = await DocumentService.create(req.body);
+      const fileLink = `${process.env.BACKEND_URL}/resources/docx_file/${req.file.filename}`;
+      const document = await DocumentService.create(req.body, fileLink);
 
       return {
         status: 200,
