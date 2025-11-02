@@ -1,0 +1,26 @@
+.card {
+  background: #fff;
+  padding: 1.25rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.value {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.change {
+  font-size: 0.9rem;
+}
+
+.positive {
+  color: #22c55e;
+}
+
+.negative {
+  color: #ef4444;
+}

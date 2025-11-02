@@ -1,29 +1,59 @@
-.container {
-    padding: 24px;
+/* ====== Container tổng ====== */
+.dashboard_container {
+    padding: 2rem;
+    background-color: #f9fafc;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    gap: 32px;
-    background: #f9fafb;
-    min-height: 100vh;
+    gap: 2rem;
+    box-sizing: border-box;
 }
 
-.title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #111827;
-    margin-bottom: 12px;
-}
-
-.charts,
-.tables {
+/* ====== Lưới hiển thị Card KPI ====== */
+.grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
 }
 
-.card {
-    background: #fff;
-    padding: 16px;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+/* ====== Khu vực biểu đồ ====== */
+.charts {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.chart_subject{
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+}
+
+.pie_chart{
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+/* ====== Responsive nhỏ hơn 768px ====== */
+@media (max-width: 768px) {
+    .dashboard_container {
+        padding: 1rem;
+    }
+
+    .chartsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ====== Responsive rất nhỏ (điện thoại) ====== */
+@media (max-width: 500px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
 }
