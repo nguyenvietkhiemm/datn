@@ -2,7 +2,7 @@ require('dotenv').config();
 
 import express from 'express';
 import cors from "cors";
-
+import path from "path";
 
 import routes from './routes/index';
 
@@ -11,6 +11,10 @@ import {specs, swaggerOptions} from './config/swagger.jsdoc';
 import morgan from 'morgan';
 
 const app = express();
+
+//cho xem tai lieu
+app.use("/resources", express.static(path.join(__dirname, "../resources")));
+
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cors());

@@ -2,6 +2,8 @@ import { query } from "../config/database";
 import pool from "../config/database";
 import { Question } from "../model/question.model";
 import { Answer } from "../model/answer.model";
+import { ExamQuestionService } from "./exam.question.service";
+import { ExamQuestion } from "../model/exam.question.model";
 
 const QuestionService = {
     async get(question_ids: number[]): Promise<Question[]> {
@@ -47,7 +49,7 @@ const QuestionService = {
         return result.rows;
     },
 
-    async create(questions: Question[]): Promise<Question[]> {
+    async create(questions: Question[], exam_id: number): Promise<Question[]> {
         const client = await pool.connect();
         const createdQuestions: Question[] = [];
         try {
@@ -78,6 +80,16 @@ const QuestionService = {
                     }
                 }
 
+                const newQuestionId = newQuestion.question_id;
+                const exam_question: ExamQuestion = {
+                    exam_id,
+                    question_id: newQuestionId
+                }
+
+                await ExamQuestionService.add(
+                    { exam_id, question_id: newQuestion.question_id },
+                    client
+                );
                 createdQuestions.push(newQuestion);
             }
 
@@ -189,7 +201,7 @@ const QuestionService = {
         const client = await pool.connect();
         try {
             const question_id = id;
-            
+
             await client.query('BEGIN');
 
             // Xoá câu trả lời liên quan
