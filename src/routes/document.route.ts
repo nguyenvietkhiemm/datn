@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import DocumentController from '../controllers/document.controller';
 import Authentication from '../middleware/authentication';
-import { ADMIN } from "../config/permission";
-
+import { ADMIN, USER } from "../config/permission";
+import { upload } from '../utils/upload';
 const documentRoute = Router();
 
 /**
@@ -20,6 +20,16 @@ const documentRoute = Router();
  */
 documentRoute.get('/', DocumentController.getAll);
 
+//search và filter
+documentRoute.get('/search', Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(...ADMIN, ...USER),
+        DocumentController.search
+)
+
+documentRoute.get('/filter', Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(...ADMIN, ...USER),
+        DocumentController.filter
+)
 /**
  * @openapi
  * /documents/create:
@@ -56,7 +66,8 @@ documentRoute.get('/', DocumentController.getAll);
  */
 documentRoute.post('/create',
         Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(ADMIN),
+        Authentication.AuthorizeRoles(...ADMIN),
+        upload.single("file"),
         DocumentController.create);
 
 
@@ -102,7 +113,7 @@ documentRoute.post('/create',
  */
 documentRoute.patch('/update/:id',
         Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(ADMIN),
+        Authentication.AuthorizeRoles(...ADMIN),
         DocumentController.update);
 
 
@@ -130,7 +141,7 @@ documentRoute.patch('/update/:id',
  */
 documentRoute.delete('/remove/:id',
         Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(ADMIN),
+        Authentication.AuthorizeRoles(...ADMIN),
         DocumentController.remove);
 
 /**
@@ -157,7 +168,7 @@ documentRoute.delete('/remove/:id',
  */
 documentRoute.patch('/setAvailable/:id',
         Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(ADMIN),
+        Authentication.AuthorizeRoles(...ADMIN),
         DocumentController.setAvailable);
 
 export default documentRoute;

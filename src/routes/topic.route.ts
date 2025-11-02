@@ -17,8 +17,6 @@ const topicRoute = Router();
  *     responses:
  *       200:
  *         description: Danh sách chủ đề
- *       401:
- *         description: Thiếu hoặc sai token
  *       500:
  *         description: Lỗi server
  */
@@ -56,8 +54,6 @@ topicRoute.get(
  *     responses:
  *       201:
  *         description: Tạo chủ đề thành công
- *       401:
- *         description: Thiếu hoặc sai token
  *       403:
  *         description: Không có quyền truy cập
  *       500:
@@ -66,7 +62,7 @@ topicRoute.get(
 topicRoute.post(
   '/create',
   Authentication.AuthenticateToken,
-  Authentication.AuthorizeRoles(ADMIN), // chỉ admin được tạo
+  Authentication.AuthorizeRoles(...ADMIN), // chỉ admin được tạo
   TopicController.create
 );
 
@@ -105,8 +101,6 @@ topicRoute.post(
  *     responses:
  *       202:
  *         description: Cập nhật chủ đề thành công
- *       401:
- *         description: Thiếu hoặc sai token
  *       403:
  *         description: Không có quyền truy cập
  *       404:
@@ -117,7 +111,7 @@ topicRoute.post(
 topicRoute.patch(
   '/update/:id',
   Authentication.AuthenticateToken,
-  Authentication.AuthorizeRoles(ADMIN), // chỉ admin được sửa
+  Authentication.AuthorizeRoles(...ADMIN), // chỉ admin được sửa
   TopicController.update
 );
 
@@ -140,8 +134,6 @@ topicRoute.patch(
  *     responses:
  *       204:
  *         description: Xóa chủ đề thành công
- *       401:
- *         description: Thiếu hoặc sai token
  *       403:
  *         description: Không có quyền truy cập
  *       404:
@@ -152,7 +144,7 @@ topicRoute.patch(
 topicRoute.delete(
   '/remove/:id',
   Authentication.AuthenticateToken,
-  Authentication.AuthorizeRoles(ADMIN), // chỉ admin được xóa
+  Authentication.AuthorizeRoles(...ADMIN), // chỉ admin được xóa
   TopicController.remove
 );
 
