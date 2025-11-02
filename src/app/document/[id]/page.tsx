@@ -1,5 +1,6 @@
 "use client";
-import DocxViewer from "@/components/docview/DocView";
+// import FileView from "@/components/docview/DocView";
+import FileView from "@/components/docview/FileView";
 import { useSearchParams } from "next/navigation";
 
 export default function MyPage() {
@@ -11,7 +12,7 @@ export default function MyPage() {
   return (
     <div>
       <h1>Preview tài liệu</h1>
-      <DocxViewer link={link} />
+      <FileView link={link} />
     </div>
   );
 }

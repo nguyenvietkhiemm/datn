@@ -62,3 +62,14 @@ h6,
 .font-body {
   font-family: var(--font-body);
 }
+
+.docx {
+  font-family: "Segoe UI", "Arial", "Times New Roman", "Tahoma", sans-serif !important;
+  line-height: 1.6;
+}
+
+.docx p,
+.docx span,
+.docx div {
+  font-family: inherit !important;
+}
