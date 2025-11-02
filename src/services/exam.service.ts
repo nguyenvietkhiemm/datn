@@ -3,15 +3,42 @@ import pool, { query } from "../config/database";
 import { Question } from "../model/question.model";
 
 const ExamService = {
-  async getAll(limit: number = 100, offset: number = 0): Promise<Exam[]> {
-    const queryText = `SELECT 
-    e.exam_name, e.topic_id, e.time_limit, e.exam_id, e.created_at, e.available,
-    t.title 
-    FROM exam e
-    JOIN topic t ON e.topic_id = t.topic_id
-    ORDER BY exam_id LIMIT $1 OFFSET $2`;
-    const result = await query(queryText, [limit, offset]);
-    return result.rows;
+
+  async getAll(page: number): Promise<{ data: Exam[]; totalPages: number } | []> {
+
+    const client = await pool.connect();
+    try {
+      await client.query("BEGIN");
+
+      const limit: number = 12
+      const offset = (page - 1) * limit;
+      const queryText = `SELECT 
+        e.exam_name, e.topic_id, e.time_limit, e.exam_id, e.created_at, e.available,
+        t.title,
+        es.start_time, es.end_time
+        FROM exam e
+        JOIN topic t ON e.topic_id = t.topic_id
+        JOIN exam_schedule es ON es.exam_schedule_id = e.exam_schedule_id
+        WHERE e.available = true
+        ORDER BY exam_id DESC LIMIT $1 OFFSET $2`;
+      const result = await query(queryText, [limit, offset]);
+
+      const countResult = await client.query(
+        "SELECT COUNT(*) as total FROM exam WHERE available = true"
+      );
+
+      const totalItems = parseInt(countResult.rows[0].total, 10);
+      const totalPages = Math.ceil(totalItems / limit);
+
+      await client.query("COMMIT");
+
+      return { data: result.rows, totalPages };
+    } catch (error) {
+      console.error("Lỗi khi thêm bài thi:", error);
+      return [];
+    } finally {
+      client.release();
+    }
   },
 
   async getById(id: number): Promise<Question[] | null> {
@@ -92,6 +119,104 @@ const ExamService = {
     return (result.rowCount ?? 0) > 0;
   },
 
+  async search(searchValue: string, page: number): Promise<{ data: Exam[]; totalPages: number } | []> {
+    const client = await pool.connect();
+    try {
+      await client.query("BEGIN");
+
+      const limit: number = 12
+      const offset = (page - 1) * limit;
+      const keyword = `%${searchValue}%`;
+      const queryText = `
+        SELECT 
+          e.exam_name, e.topic_id, e.time_limit, e.exam_id, e.created_at, e.available,
+          t.title,
+          es.start_time, es.end_time
+        FROM exam e
+        JOIN topic t ON e.topic_id = t.topic_id
+        JOIN exam_schedule es ON es.exam_schedule_id = e.exam_schedule_id
+        WHERE (LOWER(e.exam_name) LIKE LOWER($1) OR LOWER(t.title) LIKE LOWER($1))
+        ORDER BY e.exam_id DESC
+        LIMIT $2 OFFSET $3
+      `;
+
+      const result = await client.query(queryText, [keyword, limit, offset]);
+
+      const countResult = await client.query(
+        `SELECT COUNT(*) as total 
+         FROM exam e
+         JOIN topic t ON e.topic_id = t.topic_id
+         WHERE e.available = true
+           AND (LOWER(e.exam_name) LIKE LOWER($1) OR LOWER(t.title) LIKE LOWER($1))`,
+        [keyword]
+      );
+
+      const totalItems = parseInt(countResult.rows[0].total, 10);
+      const totalPages = Math.ceil(totalItems / limit);
+
+      await client.query("COMMIT");
+
+      return { data: result.rows, totalPages };
+    } catch (error) {
+      console.error("Lỗi khi lấy bài thi:", error);
+      return [];
+    } finally {
+      client.release();
+    }
+  },
+
+  async filter(topicIds: number[], status: string, page: number): Promise<{ data: Exam[]; totalPages: number } | []> {
+    const client = await pool.connect();
+    try {
+      await client.query("BEGIN");
+
+      const limit: number = 12;
+      const offset = (page - 1) * limit;
+
+      let isAvailable: boolean[] = [];
+      
+      if (status === "All") {
+        isAvailable = [true, false];
+      } else {
+        isAvailable = [status === "true"];
+      }
+      
+      const queryText = `
+        SELECT 
+          e.exam_name, e.topic_id, e.time_limit, e.exam_id, e.created_at, e.available,
+          t.title,
+          es.start_time, es.end_time
+        FROM exam e
+        JOIN topic t ON e.topic_id = t.topic_id
+        JOIN exam_schedule es ON es.exam_schedule_id = e.exam_schedule_id
+        WHERE e.available =  ANY($1)
+          AND e.topic_id = ANY($2)
+        ORDER BY e.exam_id DESC
+        LIMIT $3 OFFSET $4
+      `;
+
+      const result = await client.query(queryText, [isAvailable, topicIds, limit, offset])
+
+      // Đếm tổng số hàng để tính totalPages
+      const countResult = await client.query(
+        `SELECT COUNT(*) as total FROM exam WHERE available = ANY($1) AND topic_id = ANY($2)`,
+        [isAvailable, topicIds]
+      );
+
+      const totalItems = parseInt(countResult.rows[0].total, 10);
+      const totalPages = Math.ceil(totalItems / limit);
+
+      await client.query("COMMIT");
+
+      return { data: result.rows, totalPages };
+    } catch (error) {
+      await client.query("ROLLBACK");
+      console.error("Lỗi khi lọc bài thi:", error);
+      return [];
+    } finally {
+      client.release();
+    }
+  }
 };
 
 export default ExamService;

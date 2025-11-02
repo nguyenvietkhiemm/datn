@@ -45,7 +45,7 @@ subjectRoute.get('/', SubjectController.getAll);
  */
 subjectRoute.post('/create',
         Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(ADMIN),
+        Authentication.AuthorizeRoles(...ADMIN),
         SubjectController.create);
 
 /**
@@ -82,7 +82,7 @@ subjectRoute.post('/create',
  */
 subjectRoute.patch('/update/:id',
         Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(ADMIN),
+        Authentication.AuthorizeRoles(...ADMIN),
         SubjectController.update);
 
 /**
@@ -109,7 +109,7 @@ subjectRoute.patch('/update/:id',
  */
 subjectRoute.delete('/remove/:id',
         Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(ADMIN),
+        Authentication.AuthorizeRoles(...ADMIN),
         SubjectController.remove);
 
 /**
@@ -145,7 +145,7 @@ subjectRoute.delete('/remove/:id',
  */
 subjectRoute.patch('/setAvailable/:id',
         Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(ADMIN),
+        Authentication.AuthorizeRoles(...ADMIN),
         SubjectController.setAvailable);
 
 export default subjectRoute;
