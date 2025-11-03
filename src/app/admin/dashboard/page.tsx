@@ -49,6 +49,17 @@ const pieDataBySubject = {
 
 const labels = ['Giỏi (≥8)', 'Khá (6.5–7.9)', 'Trung bình (5–6.4)', 'Yếu (<5)'];
 
+const pieDataBySubject2 = {
+  "Toán": 1800,
+  "Vật lý": 1200,
+  "Hóa học": 1000,
+  "Tiếng Anh": 2500,
+  "Ngữ văn": 1500,
+};
+
+// Nhãn hiển thị tên môn học
+const labels2 = ["Toán", "Vật lý", "Hóa học", "Tiếng Anh", "Ngữ văn"];
+
 export default function DashboardPage() {
   return (
     <div className={styles.dashboard_container}>
@@ -71,7 +82,7 @@ export default function DashboardPage() {
         {/* <RadarChartBox title="Năng lực tổng thể khối D" data={radarData} /> */}
         <div className={styles.pie_chart}>
           <PieChartBox title="Tỷ lệ học sinh theo mức điểm" pieDataBySubject={pieDataBySubject} labels={labels} />
-          <PieChartBox title="Môn được học sinh làm nhiều nhất" pieDataBySubject={pieDataBySubject} labels={labels} />
+          <PieChartBox title="Môn được học sinh làm nhiều nhất" pieDataBySubject={pieDataBySubject2} labels={labels2} />
         </div>
       </div>
       <Table />
