@@ -15,6 +15,7 @@ type Document = {
     created_at: string;
     topic_id?: number;
     available: boolean;
+    topic_title : string
 };
 
 export default function DocumentPage() {
@@ -170,7 +171,7 @@ export default function DocumentPage() {
                                         ✎
                                     </span>
                                 </td>
-                                <td>{doc.topic_id || "-"}</td>
+                                <td>{doc.topic_title || "-"}</td>
                                 <td>
                                     {doc.link ? (
                                         <a
