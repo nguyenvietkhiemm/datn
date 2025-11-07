@@ -20,6 +20,12 @@ const questionRoute = Router();
  */
 questionRoute.get('/', QuestionController.getAll);
 
+//tìm kiếm question
+questionRoute.get("/search",
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(...ADMIN),
+        QuestionController.searchQuestions);
+        
 /**
  * @openapi
  * /questions/update/{id}:
