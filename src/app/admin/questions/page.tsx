@@ -5,6 +5,8 @@ import styles from "./question.module.css";
 import Cookies from "js-cookie";
 import Pagination from "@/component/pagination/Pagination";
 import Search from "@/component/search/Search";
+import { fetchDocxContent } from "@/utils/csv";
+import Papa from "papaparse";
 
 interface Answer {
     answer_id: number;
@@ -63,35 +65,6 @@ export default function Question() {
         setFilterQuestion(questions?.filter((q) => q.available === true));
     }, [questions]);
 
-    //Upload file CSV
-    const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const selectedFile = e.target.files?.[0];
-        if (!selectedFile) return;
-
-        setFile(selectedFile);
-
-        const token = Cookies.get("token");
-        const formData = new FormData();
-        formData.append("file", selectedFile);
-
-        try {
-            const res = await fetch(`${API_URL}/questions/import`, {
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-                body: formData,
-            });
-
-            if (!res.ok) throw new Error("Upload thất bại");
-
-            const data = await res.json();
-            setQuestions(data.data);
-        } catch (error) {
-            console.error(" Lỗi upload CSV:", error);
-        }
-    };
-
     // Xoá câu hỏi
     const handleDelete = async (questionId: number) => {
         try {
@@ -136,6 +109,33 @@ export default function Question() {
         }
     };
 
+    const handleFetchDocx = async (questionId: number) => {
+        try {
+            const fileUrl = `${API_URL}/questions/download-docx/${questionId}`;
+            const text = await fetchDocxContent(fileUrl);
+
+            // Chia text thành mảng dòng (tuỳ cấu trúc DOCX)
+            const rows = text.split("\n").filter(Boolean);
+
+            // Ví dụ: parse text thành JSON để convert CSV
+            const csvData = rows.map((row, index) => ({
+                id: index + 1,
+                content: row,
+            }));
+
+            const csv = Papa.unparse(csvData);
+
+            // Tải CSV về cho user
+            const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = `question_${questionId}.csv`;
+            link.click();
+        } catch (error) {
+            console.error("Lỗi khi fetch DOCX và chuyển CSV:", error);
+        }
+    };
+
     //  Loading
     if (loading)
         return <p className={styles.loading}>Đang tải danh sách câu hỏi...</p>;
@@ -145,11 +145,15 @@ export default function Question() {
             <div className={styles.header}>
                 <h1 className={styles.title}>Quản lý câu hỏi</h1>
                 <div className={styles.actions}>
-                    <Search setFilterQuestion={setFilterQuestion} currentPage={currentPage} setTotalPage={setTotalPage}/>
+                    <Search setFilterQuestion={setFilterQuestion} currentPage={currentPage} setTotalPage={setTotalPage} />
                     {/* Upload CSV */}
-                    <label className={styles.uploadBox}>
-                        <input type="file" accept=".csv" onChange={handleUpload} />
-                    </label>
+
+                    <button
+                        className={styles.downloadBtn}
+                       
+                    >
+                        Xuất CSV
+                    </button>
                 </div>
             </div>
 

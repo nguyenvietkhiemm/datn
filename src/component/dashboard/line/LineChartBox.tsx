@@ -1,39 +1,49 @@
-'use client';
-import { Line } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler,
-} from 'chart.js';
+"use client";
+
 import styles from "./LineChartBox.module.css";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  CartesianGrid,
+} from "recharts";
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
-
-interface Props {
-  title: string;
-  data: any;
+interface TrafficChartProps {
+  data: { date: string; value: number }[];
 }
 
-export default function LineChartBox({ title, data }: Props) {
-  const options = {
-    responsive: true,
-    plugins: { legend: { display: false } },
-    scales: {
-      x: { grid: { display: false } },
-      y: { grid: { color: 'rgba(0,0,0,0.05)' } },
-    },
-  };
-
+export default function LineChartBox({ data }: TrafficChartProps) {
   return (
-    <div className={styles.chartBox}>
-      <h3 className={styles.title}>{title}</h3>
-      <Line data={data} options={options} className={styles.line}/>
+    <div className={styles.chartContainer}>
+      <h3 className={styles.title}>Lượng đăng ký trong 30 ngày</h3>
+      <p className={styles.subtitle}>
+        Biểu đồ thể hiện số lượng người đăng ký mỗi ngày trong 30 ngày gần nhất.
+      </p>
+
+      <div className={styles.chartWrapper}>
+        <ResponsiveContainer width="100%" height={280}>
+          <LineChart data={data}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+            <XAxis dataKey="date" tick={{ fontSize: 12 }} />
+            <YAxis tick={{ fontSize: 12 }} />
+            <Tooltip
+              contentStyle={{ borderRadius: "8px", borderColor: "#ddd" }}
+              labelStyle={{ fontWeight: "bold" }}
+            />
+            <Line
+              type="monotone"
+              dataKey="value"
+              stroke="#3b82f6"
+              strokeWidth={2}
+              dot={{ r: 3 }}
+              activeDot={{ r: 5 }}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 }

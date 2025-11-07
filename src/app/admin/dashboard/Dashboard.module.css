@@ -9,10 +9,19 @@
     box-sizing: border-box;
 }
 
+.overview{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;  
+}
+
+.title{
+    font-size: 2.5rem;
+}
 /* ====== Lưới hiển thị Card KPI ====== */
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(176px, 1fr));
     gap: 1.2rem;
 }
 
@@ -24,7 +33,13 @@
     width: 100%;
 }
 
-.chart_subject{
+.time_graph{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.line{
     display: flex;
     gap: 2rem;
     width: 100%;

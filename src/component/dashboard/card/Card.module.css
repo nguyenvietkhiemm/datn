@@ -8,6 +8,51 @@
   gap: 0.5rem;
 }
 
+.title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tooltipWrapper {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.infoIcon {
+  color: #888;
+  transition: color 0.2s ease;
+}
+
+.infoIcon:hover {
+  color: #333;
+}
+
+.tooltipText {
+  visibility: hidden;
+  opacity: 0;
+  width: max-content;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 6px 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.2s;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.tooltipWrapper:hover .tooltipText {
+  visibility: visible;
+  opacity: 1;
+}
+
 .value {
   font-size: 1.4rem;
   font-weight: 600;
