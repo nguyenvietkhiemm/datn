@@ -5,8 +5,9 @@ import styles from "./question.module.css";
 import Cookies from "js-cookie";
 import Pagination from "@/component/pagination/Pagination";
 import Search from "@/component/search/Search";
-import { fetchDocxContent } from "@/utils/csv";
-import Papa from "papaparse";
+import { fetchCsvContent, uploadCsvFile } from "@/utils/csv";
+import { Button } from "@/component/ui/button/Button";
+import CsvList from "@/component/csv/page";
 
 interface Answer {
     answer_id: number;
@@ -22,20 +23,27 @@ interface Question {
     answers: Answer[];
 }
 
+interface CsvFile {
+    id: number;
+    name: string;
+    url: string;
+}
+
 export default function Question() {
     const [questions, setQuestions] = useState<Question[]>([]);
     const [filterQuestion, setFilterQuestion] = useState<Question[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
-    const [file, setFile] = useState<File | null>(null);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPage, setTotalPage] = useState<number>(1);
+    const [isCsvList, setIsCsvList] = useState<boolean>(false);
+    const [csvList, setCsvList] = useState<CsvFile[]>([]);
     const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
+    const token = Cookies.get("token")
 
     // Lấy danh sách câu hỏi
     useEffect(() => {
         const fetchQuestions = async () => {
             try {
-                const token = Cookies.get("token");
                 const res = await fetch(`${API_URL}/questions?page=${currentPage}`, {
                     method: "GET",
                     headers: {
@@ -109,31 +117,23 @@ export default function Question() {
         }
     };
 
-    const handleFetchDocx = async (questionId: number) => {
-        try {
-            const fileUrl = `${API_URL}/questions/download-docx/${questionId}`;
-            const text = await fetchDocxContent(fileUrl);
+    //lay csv tu server
+    const handleFetchCsv = async () => {
+        const url = `${API_URL}/csv`;
+        const data = await fetchCsvContent(url, token);
+        setCsvList(data)
+        setIsCsvList(true)
+    };
 
-            // Chia text thành mảng dòng (tuỳ cấu trúc DOCX)
-            const rows = text.split("\n").filter(Boolean);
+    // Upload CSV từ máy
+    const handleUploadCsv = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
 
-            // Ví dụ: parse text thành JSON để convert CSV
-            const csvData = rows.map((row, index) => ({
-                id: index + 1,
-                content: row,
-            }));
+        if (!file) return;
 
-            const csv = Papa.unparse(csvData);
-
-            // Tải CSV về cho user
-            const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.download = `question_${questionId}.csv`;
-            link.click();
-        } catch (error) {
-            console.error("Lỗi khi fetch DOCX và chuyển CSV:", error);
-        }
+        const url = `${API_URL}/questions/import`;
+        const result = await uploadCsvFile(url, file, token);
+        console.log("Kết quả upload:", result);
     };
 
     //  Loading
@@ -147,16 +147,49 @@ export default function Question() {
                 <div className={styles.actions}>
                     <Search setFilterQuestion={setFilterQuestion} currentPage={currentPage} setTotalPage={setTotalPage} />
                     {/* Upload CSV */}
+                    <div className={styles.csv}>
+                        <input
+                            type="file"
+                            accept=".csv"
+                            id="uploadCsv"
+                            style={{ display: "none" }}
+                            onChange={handleUploadCsv}
+                        />
+                        <Button
+                            variant="primary"
+                            size="md"
+                            onClick={() => document.getElementById("uploadCsv")?.click()}
+                        >
+                            Thêm câu hỏi
+                        </Button>
 
-                    <button
-                        className={styles.downloadBtn}
-                       
-                    >
-                        Xuất CSV
-                    </button>
+                        <Button
+                            variant="primary"
+                            size="md"
+                            onClick={handleFetchCsv}
+                        >
+                            Danh sách CSV
+                        </Button>
+                    </div>
                 </div>
             </div>
 
+            {isCsvList && (
+                <div className={styles.overlay}>
+                    <div className={styles.csvModal}>
+                        <div className={styles.csvHeader}>
+                            <h2>Danh sách CSV</h2>
+                            <button
+                                className={styles.closeBtn}
+                                onClick={() => setIsCsvList(false)}
+                            >
+                                ✕
+                            </button>
+                        </div>
+                        <CsvList csvList={csvList} />
+                    </div>
+                </div>
+            )}
             {/* Bảng danh sách câu hỏi */}
             <table className={styles.table}>
                 <thead>
