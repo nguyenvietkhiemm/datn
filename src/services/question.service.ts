@@ -104,7 +104,7 @@ const QuestionService = {
                 // insert question
                 const qRes = await client.query(
                     `INSERT INTO question (question_name, question_content) 
-               VALUES ($1, $2) RETURNING *`,
+                        VALUES ($1, $2) RETURNING *`,
                     [qa.question_name, qa.question_content]
                 );
 
@@ -116,7 +116,7 @@ const QuestionService = {
                     for (const ans of qa.answers) {
                         const aRes = await client.query(
                             `INSERT INTO answer (question_id, answer_content, is_correct) 
-                   VALUES ($1, $2, $3) RETURNING *`,
+                                VALUES ($1, $2, $3) RETURNING *`,
                             [newQuestion.question_id, ans.answer_content, ans.is_correct]
                         );
 
@@ -149,7 +149,6 @@ const QuestionService = {
     },
 
     // hàm update sẽ cập nhật cả question và answers
-    // nếu answer đã có answer_id thì sẽ update, nếu chưa thì sẽ thêm mới vào DB
     async update(question_id: Number, question: Partial<Question>): Promise<Question | null> {
         const client = await pool.connect();
         try {
