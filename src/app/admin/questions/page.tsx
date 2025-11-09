@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import styles from "./question.module.css";
 import Cookies from "js-cookie";
 import Pagination from "@/component/pagination/Pagination";
@@ -38,7 +38,8 @@ export default function Question() {
     const [isCsvList, setIsCsvList] = useState<boolean>(false);
     const [csvList, setCsvList] = useState<CsvFile[]>([]);
     const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
-    const token = Cookies.get("token")
+    const token = Cookies.get("token");
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     // Lấy danh sách câu hỏi
     useEffect(() => {
@@ -151,14 +152,15 @@ export default function Question() {
                         <input
                             type="file"
                             accept=".csv"
-                            id="uploadCsv"
+                            ref={fileInputRef}
                             style={{ display: "none" }}
                             onChange={handleUploadCsv}
                         />
+
                         <Button
                             variant="primary"
                             size="md"
-                            onClick={() => document.getElementById("uploadCsv")?.click()}
+                            onClick={() => fileInputRef.current?.click()}
                         >
                             Thêm câu hỏi
                         </Button>
