@@ -23,12 +23,12 @@ export default function BarChartBox({ title, datasets }: Props) {
     const options = {
         responsive: true,
         plugins: {
-            legend: { position: 'top' as const },
+            legend: { display : false},
             title: { display: false },
             datalabels: {
                 anchor: 'end' as const,
                 align: 'end' as const,
-                formatter: (value: any) => `${value} hr`,
+                formatter: (value: any) => `${value}`,
                 color: '#000',
                 font: { weight: 10 }
             }

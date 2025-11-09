@@ -9,15 +9,16 @@
     box-sizing: border-box;
 }
 
-.overview{
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;  
+.overview {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
-.title{
+.title {
     font-size: 2.5rem;
 }
+
 /* ====== Lưới hiển thị Card KPI ====== */
 .grid {
     display: grid;
@@ -33,19 +34,31 @@
     width: 100%;
 }
 
-.time_graph{
+.sections {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    margin-bottom: 2rem;
 }
 
-.line{
+.line {
     display: flex;
     gap: 2rem;
     width: 100%;
 }
 
-.pie_chart{
+
+/* Chứa 3 biểu đồ bar */
+.bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* tự co giãn theo chiều rộng */
+    gap: 1.5rem;
+    /* khoảng cách giữa các biểu đồ */
+    align-items: stretch;
+}
+
+.pie_chart {
     display: flex;
     gap: 2rem;
     justify-content: center;

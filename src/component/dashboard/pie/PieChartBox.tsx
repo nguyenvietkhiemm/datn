@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Pie } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2'; // 👈 Đổi Pie → Doughnut
 import {
   Chart as ChartJS,
   ArcElement,
@@ -19,30 +19,46 @@ interface PieProp {
 
 export default function PieChartBox({ title, pieDataBySubject, labels }: PieProp) {
   const subjects = Object.keys(pieDataBySubject);
-  const isMultiDataset = Array.isArray(pieDataBySubject[subjects[0]]); 
+  const isMultiDataset = Array.isArray(pieDataBySubject[subjects[0]]);
 
   const [selectedSubject, setSelectedSubject] = useState(subjects[0]);
 
-  // Xử lý dữ liệu biểu đồ
+  // Dữ liệu biểu đồ
   const chartData = isMultiDataset
     ? {
-        labels,
-        datasets: [
-          {
-            data: pieDataBySubject[selectedSubject] as number[],
-            backgroundColor: ['#27ae60', '#3498db', '#f1c40f', '#e74c3c'],
-          },
-        ],
-      }
+      labels,
+      datasets: [
+        {
+          data: pieDataBySubject[selectedSubject] as number[],
+          backgroundColor: ['#27ae60', '#3498db', '#f1c40f', '#e74c3c'],
+          borderWidth: 3,        
+          borderColor: '#fff',   
+          borderRadius: 8,
+        },
+      ],
+    }
     : {
-        labels,
-        datasets: [
-          {
-            data: subjects.map((s) => pieDataBySubject[s] as number),
-            backgroundColor: ['#27ae60', '#3498db', '#f1c40f', '#e74c3c', '#9b59b6'],
-          },
-        ],
-      };
+      labels,
+      datasets: [
+        {
+          data: subjects.map((s) => pieDataBySubject[s] as number),
+          backgroundColor: ['#27ae60', '#3498db', '#f1c40f', '#e74c3c', '#9b59b6'],
+          borderWidth: 3,        
+          borderColor: '#fff',   
+          borderRadius: 8,
+        },
+      ],
+    };
+
+  // Thêm phần options để có khoảng trống giữa (donut)
+  const options = {
+    cutout: '60%', // tạo khoảng trống giữa 60%
+    plugins: {
+      legend: {
+        position: 'top' as const,
+      },
+    },
+  };
 
   return (
     <div className={styles.chartBox}>
@@ -62,7 +78,9 @@ export default function PieChartBox({ title, pieDataBySubject, labels }: PieProp
           </select>
         )}
       </div>
-      <Pie data={chartData} />
+
+      {/* Dùng Doughnut thay vì Pie và thêm options */}
+      <Doughnut data={chartData} options={options} />
     </div>
   );
 }
