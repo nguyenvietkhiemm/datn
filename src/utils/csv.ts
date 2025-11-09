@@ -20,15 +20,21 @@ export async function fetchCsvContent(fileUrl: string, token?: string): Promise<
         const res = await fetch(fileUrl, {
             method: "GET",
             headers: {
-                Authorization : `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
             },
         });
-        
+
         if (!res.ok) throw new Error("Không tải được file CSV từ server");
 
-        const csv = await res.json();
-        
-        return csv.data;
+        const csvText = await res.text();
+
+        // parse CSV sang JSON
+        const parsed = Papa.parse(csvText, {
+            header: true,  // dùng dòng đầu CSV làm key
+            skipEmptyLines: true,
+        });
+
+        return parsed.data as CsvFile[];
     } catch (error) {
         console.error("Lỗi fetchCsvContent:", error);
         throw error;
