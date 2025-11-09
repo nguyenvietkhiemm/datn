@@ -94,7 +94,7 @@ const QuestionService = {
         }
     },
 
-    async create(questions: Question[], exam_id: number): Promise<Question[]> {
+    async create(questions: Question[]): Promise<Question[]> {
         const client = await pool.connect();
         const createdQuestions: Question[] = [];
         try {
@@ -124,17 +124,7 @@ const QuestionService = {
                         newQuestion.answers.push(newAnswer);
                     }
                 }
-
-                const newQuestionId = newQuestion.question_id;
-                const exam_question: ExamQuestion = {
-                    exam_id,
-                    question_id: newQuestionId
-                }
-
-                await ExamQuestionService.add(
-                    { exam_id, question_id: newQuestion.question_id },
-                    client
-                );
+                
                 createdQuestions.push(newQuestion);
             }
 
