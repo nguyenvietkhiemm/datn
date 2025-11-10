@@ -17,39 +17,84 @@ const QuestionService = {
         return result.rows;
     },
 
-    async getAll(limit: number = 100, offset: number = 0, available?: boolean): Promise<Question[]> {
-        let queryText = `
-          SELECT q.question_id, q.question_name, q.question_content, q.available,
-                 COALESCE(
-                   json_agg(
-                     json_build_object(
-                       'answer_id', a.answer_id,
-                       'answer_content', a.answer_content,
-                       'is_correct', a.is_correct
-                     )
-                   ) FILTER (WHERE a.answer_id IS NOT NULL), '[]'
-                 ) AS answers
-          FROM question q
-          LEFT JOIN answer a ON q.question_id = a.question_id
-        `;
+    async getAll(page: number, available?: boolean): Promise<{ question: Question[]; totalPages: number } | []> {
+        const client = await pool.connect();
 
-        const params: any[] = [limit, offset];
-        if (available !== undefined) {
-            queryText += ` WHERE q.available = $3 `;
-            params.push(available);
+        try {
+            await client.query("BEGIN");
+
+            const limit = 12;
+            const offset = (page - 1) * limit;
+
+            // Xây dựng câu query chính
+            let queryText = `
+            SELECT 
+              q.question_id,
+              q.question_name,
+              q.question_content,
+              q.available,
+              COALESCE(
+                json_agg(
+                  json_build_object(
+                    'answer_id', a.answer_id,
+                    'answer_content', a.answer_content,
+                    'is_correct', a.is_correct
+                  )
+                ) FILTER (WHERE a.answer_id IS NOT NULL), '[]'
+              ) AS answers
+            FROM question q
+            LEFT JOIN answer a ON q.question_id = a.question_id
+            WHERE q.available = true
+          `;
+
+            const params: any[] = [];
+            let whereClause = "";
+            let paramIndex = 1;
+
+            if (available !== undefined) {
+                whereClause = ` WHERE q.available = $${paramIndex}`;
+                params.push(available);
+                paramIndex++;
+            }
+
+            queryText += `${whereClause}
+            GROUP BY q.question_id
+            ORDER BY q.question_id DESC
+            LIMIT $${paramIndex} OFFSET $${paramIndex + 1};
+          `;
+
+            params.push(limit, offset);
+
+            // Truy vấn dữ liệu chính
+            const result = await client.query(queryText, params);
+
+            // Đếm tổng số bản ghi để tính totalPages
+            let countQuery = `SELECT COUNT(*) as total FROM question`;
+            const countParams: any[] = [];
+
+            if (available !== undefined) {
+                countQuery += ` WHERE available = $1`;
+                countParams.push(available);
+            }
+
+            const countResult = await client.query(countQuery, countParams);
+
+            const totalItems = parseInt(countResult.rows[0].total, 10);
+            const totalPages = Math.ceil(totalItems / limit);
+
+            await client.query("COMMIT");
+
+            return { question: result.rows, totalPages };
+        } catch (error) {
+            await client.query("ROLLBACK");
+            console.error("Lỗi khi lấy danh sách câu hỏi:", error);
+            return [];
+        } finally {
+            client.release();
         }
-
-        queryText += `
-          GROUP BY q.question_id
-          ORDER BY q.question_id
-          LIMIT $1 OFFSET $2;
-        `;
-
-        const result = await query(queryText, params);
-        return result.rows;
     },
 
-    async create(questions: Question[], exam_id: number): Promise<Question[]> {
+    async create(questions: Question[]): Promise<Question[]> {
         const client = await pool.connect();
         const createdQuestions: Question[] = [];
         try {
@@ -59,7 +104,7 @@ const QuestionService = {
                 // insert question
                 const qRes = await client.query(
                     `INSERT INTO question (question_name, question_content) 
-               VALUES ($1, $2) RETURNING *`,
+                        VALUES ($1, $2) RETURNING *`,
                     [qa.question_name, qa.question_content]
                 );
 
@@ -71,7 +116,7 @@ const QuestionService = {
                     for (const ans of qa.answers) {
                         const aRes = await client.query(
                             `INSERT INTO answer (question_id, answer_content, is_correct) 
-                   VALUES ($1, $2, $3) RETURNING *`,
+                                VALUES ($1, $2, $3) RETURNING *`,
                             [newQuestion.question_id, ans.answer_content, ans.is_correct]
                         );
 
@@ -79,17 +124,7 @@ const QuestionService = {
                         newQuestion.answers.push(newAnswer);
                     }
                 }
-
-                const newQuestionId = newQuestion.question_id;
-                const exam_question: ExamQuestion = {
-                    exam_id,
-                    question_id: newQuestionId
-                }
-
-                await ExamQuestionService.add(
-                    { exam_id, question_id: newQuestion.question_id },
-                    client
-                );
+                
                 createdQuestions.push(newQuestion);
             }
 
@@ -104,7 +139,6 @@ const QuestionService = {
     },
 
     // hàm update sẽ cập nhật cả question và answers
-    // nếu answer đã có answer_id thì sẽ update, nếu chưa thì sẽ thêm mới vào DB
     async update(question_id: Number, question: Partial<Question>): Promise<Question | null> {
         const client = await pool.connect();
         try {
@@ -223,7 +257,87 @@ const QuestionService = {
         } finally {
             client.release();
         }
-    }
+    },
+
+    async searchQuestions(
+        searchValue: string,
+        page: number
+    ): Promise<{ data: Question[]; totalPages: number } | []> {
+        const client = await pool.connect();
+        try {
+            await client.query("BEGIN");
+
+            const limit = 12;
+            const offset = (page - 1) * limit;
+            const keyword = `%${searchValue}%`;
+
+            // Lấy questions + answers
+            const queryText = `
+            SELECT 
+              q.question_id,
+              q.question_name,
+              q.question_content,
+              q.available,
+              a.answer_id,
+              a.answer_content,
+              a.is_correct
+            FROM question q
+            LEFT JOIN answer a ON a.question_id = q.question_id
+            WHERE LOWER(q.question_name) LIKE LOWER($1)
+            OR LOWER(q.question_content) LIKE LOWER($1)
+            ORDER BY q.question_id DESC
+            LIMIT $2 OFFSET $3
+          `;
+
+            const result = await client.query(queryText, [keyword, limit, offset]);
+
+            // Đếm tổng số question (không đếm answer)
+            const countResult = await client.query(
+                `
+            SELECT COUNT(*) as total
+            FROM question q
+            WHERE LOWER(q.question_name) LIKE LOWER($1)
+               OR LOWER(q.question_content) LIKE LOWER($1)
+            `,
+                [keyword]
+            );
+
+            const totalItems = parseInt(countResult.rows[0].total, 10);
+            const totalPages = Math.ceil(totalItems / limit);
+
+            // Gom dữ liệu answers vào từng question
+            const questionsMap: Record<number, Question> = {};
+            result.rows.forEach((row) => {
+                if (!questionsMap[row.question_id]) {
+                    questionsMap[row.question_id] = {
+                        question_id: row.question_id,
+                        question_name: row.question_name,
+                        question_content: row.question_content,
+                        available: row.available,
+                        answers: [],
+                    };
+                }
+                if (row.answer_id) {
+                    questionsMap[row.question_id].answers?.push({
+                        answer_id: row.answer_id,
+                        answer_content: row.answer_content,
+                        question_id : row.question_id,
+                        is_correct: row.is_correct,
+                    });
+                }
+            });
+
+            await client.query("COMMIT");
+
+            return { data: Object.values(questionsMap), totalPages };
+        } catch (error) {
+            console.error("Lỗi khi lấy câu hỏi:", error);
+            return [];
+        } finally {
+            client.release();
+        }
+    },
+
 };
 
 export default QuestionService;

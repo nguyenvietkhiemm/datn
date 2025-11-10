@@ -1,5 +1,5 @@
 require('dotenv').config();
-
+import bodyParser from 'body-parser';
 import express from 'express';
 import cors from "cors";
 import path from "path";
@@ -14,7 +14,8 @@ const app = express();
 
 
 app.use(morgan('dev'));
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
 // route cho api-docs
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, swaggerOptions));
@@ -24,6 +25,7 @@ app.use('/', routes);
 
 //cho xem tai lieu
 app.use("/resources", express.static(path.join(__dirname, "../resources")));
+app.use("/data/uploads/csv", express.static(path.join(__dirname, "/../data/uploads/csv")));
 
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "localhost";
