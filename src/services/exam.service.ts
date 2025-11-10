@@ -54,6 +54,8 @@ const ExamService = {
 
     // Lấy danh sách question_id
     const questionIds = result.rows.map((q) => q.question_id);
+
+    //lay danh sach cau tra loi
     const ansRes = await query(
       "SELECT answer_id, question_id, answer_content FROM answer WHERE question_id = ANY($1)",
       [questionIds]
