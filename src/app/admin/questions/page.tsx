@@ -122,6 +122,7 @@ export default function Question() {
     const handleFetchCsv = async () => {
         const url = `${API_URL}/csv`;
         const data = await fetchCsvContent(url, token);
+        
         setCsvList(data)
         setIsCsvList(true)
     };

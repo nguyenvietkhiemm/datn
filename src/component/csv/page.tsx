@@ -45,7 +45,7 @@ export default function CsvList({ csvList }: CsvListProps) {
 
         loadAllCsv();
     }, [csvList, token]);
-
+    
     return (
         <div className={styles.wrapper}>
             <h2 className={styles.title}>Danh sách file CSV</h2>
