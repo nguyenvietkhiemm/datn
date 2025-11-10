@@ -6,7 +6,7 @@
     /* flex */
     align-items: center;
     /* items-center */
-    justify-content: space-between;
+    justify-content: flex-end;
     /* justify-between */
     background-color: white;
     /* bg-white */

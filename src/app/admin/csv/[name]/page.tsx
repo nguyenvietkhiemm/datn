@@ -34,6 +34,8 @@ export default function CsvDetailPage() {
                         },
                     });
                     const result = await res.json();
+                    console.log(result);
+                    
 
                     const cleaned: CsvRow[] = result.data.map((row: any) => {
                         const newRow: any = {};

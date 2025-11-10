@@ -23,9 +23,9 @@ export default function CsvList({ csvList }: CsvListProps) {
     const token = Cookies.get("token");
     const router = useRouter();
 
-  const handleOpenCsv = (csv: CsvFile) => {
-    router.push(`/admin/csv/${encodeURIComponent(csv.name)}`); 
-  }
+    const handleOpenCsv = (csv: CsvFile) => {
+        router.push(`/admin/csv/${encodeURIComponent(csv.name)}`);
+    }
 
     useEffect(() => {
         const loadAllCsv = async () => {
@@ -45,7 +45,7 @@ export default function CsvList({ csvList }: CsvListProps) {
 
         loadAllCsv();
     }, [csvList, token]);
-    
+
     return (
         <div className={styles.wrapper}>
             <h2 className={styles.title}>Danh sách file CSV</h2>
@@ -53,29 +53,26 @@ export default function CsvList({ csvList }: CsvListProps) {
             {csvList.length === 0 && (
                 <p className={styles.hint}>Không có file CSV nào trên server.</p>
             )}
-
-            {csvList.map((file) => (
-                <div key={file.id} className={styles.csvFileContainer}>
-                    <div className={styles.tableContainer}>
-                        <table className={styles.table}>
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Tên file</th>
+            <div className={styles.csvFileContainer}>
+                <div className={styles.tableContainer}>
+                    <table className={styles.table}>
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên file</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {csvList?.map((csv, index) => (
+                                <tr key={csv.id} onClick={() => handleOpenCsv(csv)} className={styles.csvRow}>
+                                    <td> {index + 1}</td>
+                                    <td> {csv.name}</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {csvList?.map((csv, index) => (
-                                    <tr key={csv.id} onClick={() => handleOpenCsv(csv)} className={styles.csvRow}>
-                                        <td> {index + 1}</td>
-                                        <td> {csv.name}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
-            ))}
+            </div>
         </div>
     );
 }
