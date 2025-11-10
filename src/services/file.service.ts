@@ -42,7 +42,7 @@ export function getById(filename: string, csvDir: string): any[] {
 }
 
 export function saveCsvFile(filename: string, data: any[]) {
-    const csvDir = path.join(process.cwd(), "data/uploads/csv");
+    const csvDir = path.join(process.cwd(), "data/final/csv");
     const filePath = path.join(csvDir, filename);
 
     if (!fs.existsSync(csvDir)) {
@@ -52,5 +52,4 @@ export function saveCsvFile(filename: string, data: any[]) {
     const csvContent = stringify(data, { header: true });
 
     fs.writeFileSync(filePath, csvContent, "utf-8");
-    console.log(`Đã lưu file CSV: ${filePath}`);
 }
