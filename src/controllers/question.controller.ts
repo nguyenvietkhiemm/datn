@@ -13,7 +13,7 @@ const QuestionController = {
       return {
         status: 200,
         message: "Lấy danh sách câu hỏi thành công",
-        data: await QuestionService.getAll()
+        data: await QuestionService.getAll(Number(req.query.page))
       } as DefaultResponse<any>;
     });
 
@@ -23,9 +23,8 @@ const QuestionController = {
   async create(req: Request, res: Response) {
     const response: DefaultResponse<any> = await safeExecute(async () => {
       const { questions } = req.body;
-      
-      const exam_id = req.params.id;
-      const created = await QuestionService.create(questions, Number(exam_id));
+
+      const created = await QuestionService.create(questions);
 
       return {
         status: 201,
@@ -73,6 +72,21 @@ const QuestionController = {
 
     res.status(response.status).json(response);
   },
+
+  async searchQuestions(req: Request, res: Response) {
+    const result: DefaultResponse<any> = await safeExecute(async () => {
+      return {
+        status: 200,
+        message: "Lấy danh sách câu hỏi thành công",
+        data: await QuestionService.searchQuestions(
+          String(req.query.searchValue),
+          Number(req.query.page)
+        ),
+      };
+    });
+
+    return res.status(result.status).json(result);
+  }
 };
 
 export default QuestionController;
