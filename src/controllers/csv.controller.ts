@@ -54,12 +54,6 @@ export const CsvController = {
     async saveCsv(req: Request, res: Response) {
         const result = await safeExecute(async (): Promise<DefaultResponse<any>> => {
             const { filename } = req.params; // tên file CSV
-            const csvDir = path.join(__dirname, "../../data/uploads/csv");
-
-            if (!fs.existsSync(csvDir)) {
-                fs.mkdirSync(csvDir, { recursive: true });
-            }
-
             // Lấy dữ liệu JSON từ client
             const data = req.body; // nếu dùng Express, body-parser phải được setup
 
@@ -67,13 +61,7 @@ export const CsvController = {
                 throw new Error("Dữ liệu phải là mảng object");
             }
 
-            // Convert object thành CSV string
-            const { stringify } = await import("csv-stringify/sync"); // dynamic import
-            const csvContent = stringify(data, { header: true });
-
-            // Ghi đè lên file CSV
-            const filePath = path.join(csvDir, filename);
-            fs.writeFileSync(filePath, csvContent, "utf-8");
+            saveCsvFile(filename, data);
 
             return {
                 status: 200,
