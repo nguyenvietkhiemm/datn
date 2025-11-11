@@ -133,6 +133,32 @@ export default function CsvDetailPage() {
         }
     };
 
+    const handleSaveQuestion = async () => {
+        try {
+            const url = `${process.env.NEXT_PUBLIC_ENDPOINT_BACKEND}/questions/create/csv/${name}`;
+            const res = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            const result = await res.json();
+
+            if (!res.ok) {
+                alert(`Lỗi khi lưu: ${result.message || result.error}`);
+                return;
+            }
+
+            alert(" Lưu question vào database thành công!");
+            window.location.reload();
+        } catch (err) {
+            console.error("Lỗi khi lưu questions:", err);
+            alert(" Có lỗi xảy ra khi lưu question!");
+        }
+    };
+
     //hàm input
     function AutoResizeTextarea({
         value,
@@ -198,7 +224,7 @@ export default function CsvDetailPage() {
             </button>
 
             <button
-                onClick={handleSave}
+                onClick={handleSaveQuestion}
                 style={{
                     backgroundColor: "#9a00f3ff",
                     color: "white",
