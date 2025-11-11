@@ -181,6 +181,7 @@ export default function CsvDetailPage() {
     return (
         <div style={{ padding: "1rem" }}>
             <h1>Chỉnh sửa CSV #{name}</h1>
+
             <button
                 onClick={handleSave}
                 style={{
@@ -193,8 +194,24 @@ export default function CsvDetailPage() {
                     marginBottom: "12px",
                 }}
             >
-                💾 Lưu CSV
+                💾 Lưu thay đổi CSV
             </button>
+
+            <button
+                onClick={handleSave}
+                style={{
+                    backgroundColor: "#9a00f3ff",
+                    color: "white",
+                    padding: "8px 16px",
+                    border: "none",
+                    borderRadius: "6px",
+                    cursor: "pointer",
+                    marginBottom: "12px",
+                }}
+            >
+                💾 Lưu câu hỏi vào CSDL
+            </button>
+
             <table style={{ borderCollapse: "collapse", width: "100%" }}>
                 <tbody>
                     {csv.map((row, index) => (
