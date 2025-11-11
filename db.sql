@@ -224,7 +224,7 @@ CREATE TABLE IF NOT EXISTS user_exam_answer (
 -- Questions & answers
 CREATE TABLE IF NOT EXISTS question (
     question_id SERIAL PRIMARY KEY,
-    question_name VARCHAR(100) NOT NULL,
+    question_name VARCHAR() NOT NULL,
     question_content TEXT
 );
 
@@ -330,3 +330,7 @@ CREATE INDEX IF NOT EXISTS idx_user_goal_user ON user_goal(user_id);
 -- CREATE INDEX IF NOT EXISTS idx_document_embedding ON document USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
 -- CREATE INDEX IF NOT EXISTS idx_chat_history_embedding ON chat_history USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
 -- CREATE INDEX IF NOT EXISTS idx_question_embedding ON question USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
+
+ALTER TABLE question ALTER COLUMN question_name TYPE VARCHAR(1000);
+ALTER TABLE question ALTER COLUMN question_content TYPE VARCHAR(10000);
+ALTER TABLE answer ALTER COLUMN answer_content TYPE VARCHAR(10000);

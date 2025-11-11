@@ -1,6 +1,11 @@
 import { Request, Response } from 'express';
 import QuestionService from '../services/question.service';
 import safeExecute, { DefaultResponse } from "../utils/safe.execute";
+import path from "path";
+import fs from "fs";
+import {parseQuestionsFromCSV} from '../utils/parse.csv';
+import { parse } from "csv-parse/sync";
+import { stringify } from "csv-stringify/sync";
 
 const QuestionController = {
   // async get(req: Request, res: Response) {
@@ -39,15 +44,21 @@ const QuestionController = {
     async createByCsv(req: Request, res: Response) {
     const response: DefaultResponse<any> = await safeExecute(async () => {
       const { filename } = req.params;
+      const csvDir = path.join(process.cwd(), "data/final");
+      const filePath = path.join(csvDir, filename);
+      
+      if (!fs.existsSync(csvDir)) {
+          fs.mkdirSync(csvDir, { recursive: true });
+      }
 
-      console.log("Creating questions from CSV file:", filename);
-
-      // const created = await QuestionService.create(questions);
+      const questions = await parseQuestionsFromCSV(filePath);
+      
+      const created = await QuestionService.create(questions);
 
       return {
         status: 201,
         message: "Tạo câu hỏi thành công",
-        // data: created
+        data: created
       } as DefaultResponse<any>;
     });
 
