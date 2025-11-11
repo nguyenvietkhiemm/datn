@@ -36,6 +36,24 @@ const QuestionController = {
     res.status(response.status).json(response);
   },
 
+    async createByCsv(req: Request, res: Response) {
+    const response: DefaultResponse<any> = await safeExecute(async () => {
+      const { filename } = req.params;
+
+      console.log("Creating questions from CSV file:", filename);
+
+      // const created = await QuestionService.create(questions);
+
+      return {
+        status: 201,
+        message: "Tạo câu hỏi thành công",
+        // data: created
+      } as DefaultResponse<any>;
+    });
+
+    res.status(response.status).json(response);
+  },
+
   async update(req: Request, res: Response) {
     const response: DefaultResponse<any> = await safeExecute(async () => {
       return {
