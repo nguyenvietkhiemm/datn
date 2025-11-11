@@ -42,7 +42,7 @@ export function getById(filename: string, csvDir: string): any[] {
 }
 
 export function saveCsvFile(filename: string, data: any[]) {
-    const csvDir = path.join(process.cwd(), "data/final/csv");
+    const csvDir = path.join(process.cwd(), "data/final");
     const filePath = path.join(csvDir, filename);
 
     if (!fs.existsSync(csvDir)) {
