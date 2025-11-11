@@ -195,66 +195,32 @@ questionRoute.patch('/setAvailable/:id',
         QuestionController.setAvailable);
 
 /**
-* @openapi
-* /questions/create:
-*   post:
-*     summary: Tạo nhiều câu hỏi mới (Yêu cầu admin)
-*     tags:
-*       - Question
-*     requestBody:
-*       required: true
-*       content:
-*         application/json:
-*           schema:
-*             type: object
-*             properties:
-*               questions:
-*                 type: array
-*                 items:
-*                   type: object
-*                   properties:
-*                     question_name:
-*                       type: string
-*                       example: "Định luật II Newton"
-*                     question_content:
-*                       type: string
-*                       example: "Lực bằng khối lượng nhân gia tốc là phát biểu của định luật nào?"
-*                     answers:
-*                       type: array
-*                       items:
-*                         type: object
-*                         properties:
-*                           answer_content:
-*                             type: string
-*                             example: "Định luật II Newton"
-*                           is_correct:
-*                             type: boolean
-*                             example: true
-*           example:
-*             questions:
-*               - question_name: "Định luật II Newton"
-*                 question_content: "Lực bằng khối lượng nhân gia tốc là phát biểu của định luật nào?"
-*                 answers:
-*                   - answer_content: "Định luật I Newton"
-*                     is_correct: false
-*                   - answer_content: "Định luật II Newton"
-*                     is_correct: true
-*               - question_name: "Thủ đô của Việt Nam"
-*                 question_content: "Thành phố nào là thủ đô của Việt Nam?"
-*                 answers:
-*                   - answer_content: "Hà Nội"
-*                     is_correct: true
-*                   - answer_content: "TP. Hồ Chí Minh"
-*                     is_correct: false
-*     responses:
-*       201:
-*         description: Tạo câu hỏi thành công
-*       500:
-*         description: Lỗi server
-*/
-questionRoute.post('/create/csv/:filename',
-        Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(...ADMIN),
-        QuestionController.createByCsv);
+ * @openapi
+ * /questions/create/csv/{filename}:
+ *   post:
+ *     summary: Import câu hỏi từ file CSV (Yêu cầu admin)
+ *     tags:
+ *       - Question
+ *     parameters:
+ *       - name: filename
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Tên file CSV (đã được upload trước)
+ *     responses:
+ *       201:
+ *         description: Import câu hỏi thành công
+ *       400:
+ *         description: File CSV không hợp lệ hoặc không tồn tại
+ *       500:
+ *         description: Lỗi server
+ */
+questionRoute.post(
+  '/create/csv/:filename',
+  Authentication.AuthenticateToken,
+  Authentication.AuthorizeRoles(...ADMIN),
+  QuestionController.createByCsv
+);
 
 export default questionRoute;
