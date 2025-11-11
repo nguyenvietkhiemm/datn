@@ -25,7 +25,7 @@ router.use("/flashcards", flashcardRouter);
 router.use("/topics", topicRouter);
 router.use('/exams', examRoute);
 router.use('/banks', bankRoute);
-router.use("/", authRouter);
 router.use("/csv", csvRouter)
+router.use("/", authRouter);
 
 export default router;
