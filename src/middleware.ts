@@ -21,7 +21,7 @@ export const config = {
     "/admin/users/:path*",
     "/admin/csv/:path*",
     "/admin/dashboard/:path*",
-    "/admin/documnets/:path*",
+    "/admin/documnents/:path*",
     "/admin/exams/:path*",
     "/admin/questions/:path*",
     "/admin/settings/:path*",
