@@ -40,10 +40,6 @@
     table-layout: auto;
 }
 
-.table tr td {
-    background-color: #fff;
-}
-
 /* 🔳 Ô dữ liệu */
 .cell {
     border: 1px solid #ddd;

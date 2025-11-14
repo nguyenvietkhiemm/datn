@@ -1,5 +1,5 @@
 .textarea {
-    width: 100%;
+    width: 100% !important;
     min-height: 40px;
     resize: none;
     box-sizing: border-box;
@@ -9,4 +9,5 @@
     overflow: hidden;
     line-height: 1.5;
     font-size: 14px;
+    
 }

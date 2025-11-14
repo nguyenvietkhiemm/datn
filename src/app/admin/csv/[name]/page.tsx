@@ -210,7 +210,7 @@ export default function CsvDetailPage() {
             <table className={styles.table}>
                 <tbody>
                     {originalCsv.map((row, index) => (
-                        <tr key={index}>
+                        <tr className={styles.tr} key={index}>
                             <td
                                 className={`${styles.cell} ${isChanged(index, -1) ? styles.changed : ''}`}
                                 onClick={() => handleEdit(index, -1)}
