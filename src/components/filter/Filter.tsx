@@ -23,6 +23,7 @@ type Exam = {
     exam_name: string;
     created_at: string;
     time_limit: number;
+    topic_id: number;
     exam_schedule_id?: number;
     start_time: string;
     end_time: string

@@ -17,7 +17,8 @@ type BankProps = {
 export default function Bank() {
     const dispatch = useDispatch();
     const banks = useSelector((state: RootState) => state.bank.banks);
-    const [filterBank, setFilterBank] = useState<BankProps[]>([])
+    const [filterBank, setFilterBank] = useState<BankProps[]>([]);
+    const [currentPage, setCurrentPage] = useState<number>(1);
 
     useEffect(() => {
         const token = Cookies.get("token");
@@ -46,7 +47,7 @@ export default function Bank() {
         <div className={styles.container}>
             <h1 className={styles.title}>Ngân hàng câu hỏi</h1>
             {/* Bộ lọc */}
-            <Filter banks={banks} setFilterBank={setFilterBank} />
+            <Filter banks={banks} setFilterBank={setFilterBank} currentPage={currentPage}/>
 
             {/* Danh sách bank */}
             <div className={styles.grid}>
