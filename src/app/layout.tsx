@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Header from "@/component/header/Header";
-import Sidebar from "@/component/sidebar/Sidebar";
+import ClientLayout from "@/lib/ThemeProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,17 +13,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`antialiased`}
-      >
-        <div className="relative flex min-h-screen bg-gray-50 overflow-visible">
-          <Sidebar />
-          <div className="relative flex-1 flex flex-col w-full ml-60">
-            <Header />
-            <main className="sticky top-0 z-5 flex-1 p-6 w-full">{children}</main>
-          </div>
-        </div>
+    <html lang="vi">
+      <body className="antialiased">
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
