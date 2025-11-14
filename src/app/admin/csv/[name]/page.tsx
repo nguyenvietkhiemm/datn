@@ -24,15 +24,19 @@ export default function CsvDetailPage() {
     const [loading, setLoading] = useState(true);
     const [originalCsv, setOriginalCsv] = useState<CsvRow[]>([]);
     const [editCell, setEditCell] = useState<{ row: number, col: number } | null>(null);
-    const [changes, setChanges] = useState<Change[]>(() => {
-        const saved = localStorage.getItem(`csv_diff_${name}`);
-        if (!saved) return [];
+    const [changes, setChanges] = useState<Change[]>([]);
+
+    //lay gia tri 
+    useEffect(() => {
+        if (!name) return;
+    
         try {
-            return JSON.parse(saved) as Change[];
+            const saved = localStorage.getItem(`csv_diff_${name}`);
+            setChanges(saved ? JSON.parse(saved) : []);
         } catch {
-            return [];
+            setChanges([]);
         }
-    });
+    }, [name]);
 
     // Lấy data CSV
     useEffect(() => {
@@ -87,7 +91,10 @@ export default function CsvDetailPage() {
 
     //load csv diff
     const loadCsvDiff = (originalCsv: CsvRow[]) => {
-        if (!changes) return originalCsv
+        if (!changes) {
+            localStorage.removeItem(`csv_diff_${name}`)
+            return originalCsv
+        }
 
         changes.forEach(d => {
             if (d.col === -1) originalCsv[d.row].question = d.value;
@@ -115,7 +122,7 @@ export default function CsvDetailPage() {
             const updated = [...prev];
             const existing = updated.find(c => c.row === rowIndex && c.col === colIndex);
             if (existing) {
-                existing.value = value; 
+                existing.value = value;
             } else {
                 updated.push({ row: rowIndex, col: colIndex, value });
             }
@@ -129,6 +136,12 @@ export default function CsvDetailPage() {
         return changes.some(c => c.row === rowIndex && c.col === colIndex);
     }
 
+    //ham reset
+    const handleReset = () => {
+        localStorage.removeItem(`csv_diff_${name}`);
+        window.location.reload();
+    }
+
     const handleSave = async () => {
         try {
             const url = `${process.env.NEXT_PUBLIC_ENDPOINT_BACKEND}/csv/save/${name}`;
@@ -138,7 +151,7 @@ export default function CsvDetailPage() {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
                 },
-                body: JSON.stringify(csv),
+                body: JSON.stringify(originalCsv),
             });
             const result = await res.json();
             if (!res.ok) {
@@ -146,8 +159,7 @@ export default function CsvDetailPage() {
                 return;
             }
             alert("Lưu CSV thành công!");
-            localStorage.removeItem("csv");
-            localStorage.removeItem("originalCsv");
+            localStorage.removeItem(`csv_diff_${name}`);
             window.location.reload();
         } catch (err) {
             console.error("Lỗi khi lưu CSV:", err);
@@ -171,8 +183,7 @@ export default function CsvDetailPage() {
                 return;
             }
             alert("Lưu question vào database thành công!");
-            localStorage.removeItem("csv");
-            localStorage.removeItem("originalCsv");
+            localStorage.removeItem(`csv_diff_${name}`);
             window.location.reload();
         } catch (err) {
             console.error("Lỗi khi lưu questions:", err);
@@ -192,7 +203,7 @@ export default function CsvDetailPage() {
                     <Button onClick={handleSaveQuestion} variant="primary" size="md">💾 Lưu câu hỏi vào CSDL</Button>
                 </div>
                 <div className={styles.reset}>
-                    <Button variant="primary" size="md">🔄 Tạo lại CSV gốc</Button>
+                    <Button onClick={handleReset} variant="primary" size="md">🔄 Tạo lại CSV gốc</Button>
                 </div>
             </div>
 
