@@ -52,8 +52,8 @@ export async function parseQuestionsFromCSV(filePath: string): Promise<Question[
               arr = formatted
                 .replace(/^\[|\]$/g, "")
                 .split(/","|','|\t|\\t| {2,}/)
-                .map((a) => a.replace(/^"|"$/g, "").trim())
-                .filter((a) => a.length > 0);
+                .map((a : any) => a.replace(/^"|"$/g, "").trim())
+                .filter((a : any) => a.length > 0);
             }
 
             // Chuẩn hóa danh sách đáp án

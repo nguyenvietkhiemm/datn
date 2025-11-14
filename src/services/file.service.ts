@@ -29,15 +29,13 @@ export function getCsvFilesList(baseUrl: string): CsvFileInfo[] {
     }));
 }
 
-export function getById(filename: string, csvDir: string): any[] {
+export function getById(filename: string): any[] {
+    const csvDir = path.join(__dirname, "../../data/uploads/csv");
+    if (!fs.existsSync(csvDir)) { throw new Error("Thư mục CSV không tồn tại"); }
     const filePath = path.join(csvDir, filename);
-    if (!fs.existsSync(filePath)) throw new Error("File không tồn tại");
-
+    if (!fs.existsSync(filePath)) { throw new Error("File không tồn tại"); }
     const csvText = fs.readFileSync(filePath, "utf-8");
-    const records = parse(csvText, {
-        columns: true,
-        skip_empty_lines: true,
-    });
+    const records = parse(csvText, { columns: true, skip_empty_lines: true, });
     return records;
 }
 
