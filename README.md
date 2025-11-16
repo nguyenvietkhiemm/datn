@@ -62,5 +62,7 @@ email: admin@example.com, pass: admin123
 
 
 ## Microservice
+```bash
 git lfs install
 git clone https://huggingface.co/alittledaisy/microservice
+```
