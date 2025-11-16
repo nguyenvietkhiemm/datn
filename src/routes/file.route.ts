@@ -1,27 +1,27 @@
-import { CsvController } from "../controllers/csv.controller";
+import { FileController } from "../controllers/file.controller";
 import Authentication from "../middleware/authentication";
 import { ADMIN } from "../config/permission";
 import { Router } from "express";
 
-const csvRouter = Router();
+const fileRouter = Router();
 
 // GET /documents/csv-list
-csvRouter.get("/",
+fileRouter.get("/csv",
     Authentication.AuthenticateToken,
     Authentication.AuthorizeRoles(...ADMIN),
-    CsvController.getAll);
+    FileController.getAll);
 
-csvRouter.get(
-    "/:filename",
+fileRouter.get(
+    "/csv/:filename",
     Authentication.AuthenticateToken,
     Authentication.AuthorizeRoles(...ADMIN),
-    CsvController.getById
+    FileController.getById
 );
 
-csvRouter.post("/save/:filename",
+fileRouter.post("/csv/save/:filename",
     Authentication.AuthenticateToken,
     Authentication.AuthorizeRoles(...ADMIN),
-    CsvController.saveCsv
+    FileController.saveCsv
 )
 
-export default csvRouter;
+export default fileRouter;
