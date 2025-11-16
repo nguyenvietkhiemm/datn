@@ -39,7 +39,7 @@ export const FileController = {
             const { filename } = req.params;
             const data = req.body;
 
-            // console.log("Dữ liệu nhận được để lưu CSV:", data);
+            // console.log("Dữ liệu nhận được để lưu CSV:", data); 
             // console.log("Dữ liệu nhận được để lưu CSV:", filename);
             // if (!Array.isArray(data)) throw new Error("Dữ liệu phải là mảng object");
 
