@@ -43,7 +43,7 @@ export default function CsvDetailPage() {
         const loadCsv = async () => {
             try {
 
-                const url = `${process.env.NEXT_PUBLIC_ENDPOINT_BACKEND}/csv/${name}`;
+                const url = `${process.env.NEXT_PUBLIC_ENDPOINT_BACKEND}/file/csv/${name}`;
                 const res = await fetch(url, {
                     headers: {
                         "Content-Type": "application/json",
