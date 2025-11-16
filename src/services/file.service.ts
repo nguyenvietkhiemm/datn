@@ -13,7 +13,10 @@ export interface CsvFileInfo {
  * Lấy danh sách file CSV trong thư mục uploads/csv
  */
 export function getCsvFilesList(baseUrl: string): CsvFileInfo[] {
-    const csvDir = path.join(__dirname, "../../data/uploads/csv");
+    // const csvDir = path.join(__dirname, "../../data/uploads/csv");
+    const csvDir = path.join(__dirname, "../../data/outputs");
+
+    console.log("Đường dẫn thư mục CSV:", csvDir);
 
     if (!fs.existsSync(csvDir)) {
         console.warn(" Thư mục uploads/csv chưa tồn tại, tạo mới...");
@@ -25,12 +28,14 @@ export function getCsvFilesList(baseUrl: string): CsvFileInfo[] {
     return files.map((file, index) => ({
         id: index + 1,
         name: file,
-        url: `${baseUrl}/data/uploads/csv/${file}`,
+        // url: `${baseUrl}/data/uploads/csv/${file}`,
+        url: `${baseUrl}/data/outputs/${file}`,
     }));
 }
 
 export function getById(filename: string): any[] {
-    const csvDir = path.join(__dirname, "../../data/uploads/csv");
+    // const csvDir = path.join(__dirname, "../../data/uploads/csv");
+    const csvDir = path.join(__dirname, "../../data/outputs");
     if (!fs.existsSync(csvDir)) { throw new Error("Thư mục CSV không tồn tại"); }
     
     const filePath = path.join(csvDir, filename);
@@ -41,6 +46,7 @@ export function getById(filename: string): any[] {
     return records;
 }
 
+// chưa dùng đến
 export function saveCsvFile(filename: string, data: any[]) {
     const csvDir = path.join(process.cwd(), "../../data/uploads/csv");
     const filePath = path.join(csvDir, filename);
