@@ -48,6 +48,8 @@ export async function uploadCsvFile(uploadUrl: string, file: File, token?: strin
     const formData = new FormData();
     formData.append("file", file);
 
+    console.log("Đang upload file:", file);
+
     try {
         const res = await fetch(uploadUrl, {
             method: "POST",

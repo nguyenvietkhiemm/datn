@@ -38,6 +38,8 @@ export default function Login() {
             });
 
             const data = await res.json();
+        
+            console.log("Login response data:", data);
 
             if (!res.ok) {
                 if (data.error === "USER_NOT_FOUND") {
