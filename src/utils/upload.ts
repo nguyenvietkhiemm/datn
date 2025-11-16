@@ -2,7 +2,7 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 
-const csvDir = path.join(__dirname, "../../data/uploads/resources/csv_file");
+const csvDir = path.join(__dirname, "../../data/uploads/csv");
 const docDir = path.join(__dirname, "../../resources/docx_file");
 
 [csvDir, docDir].forEach(dir => {

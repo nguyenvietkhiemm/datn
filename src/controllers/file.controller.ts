@@ -5,7 +5,7 @@ import path from "path";
 import fs from "fs";
 import { parse } from "csv-parse/sync";
 
-export const CsvController = {
+export const FileController = {
     async getAll(req: Request, res: Response) {
         const result = await safeExecute(async (): Promise<DefaultResponse<any>> => {
             const baseUrl = `${req.protocol}://${req.get("host")}`;
@@ -38,6 +38,8 @@ export const CsvController = {
         const result = await safeExecute(async () => {
             const { filename } = req.params;
             const data = req.body;
+
+            console.log("Dữ liệu nhận được để lưu CSV:", data);
             if (!Array.isArray(data)) throw new Error("Dữ liệu phải là mảng object");
 
             saveCsvFile(filename, data);

@@ -11,7 +11,7 @@ import flashcardRouter from './flashcard.route';
 import topicRouter from './topic.route';
 import examRoute from './exam.route';
 import bankRoute from './bank.route';
-import csvRouter from './csv.route';
+import fileRouter from './file.route';
 
 const router = Router();
 
@@ -25,7 +25,7 @@ router.use("/flashcards", flashcardRouter);
 router.use("/topics", topicRouter);
 router.use('/exams', examRoute);
 router.use('/banks', bankRoute);
-router.use("/csv", csvRouter)
+router.use("/file", fileRouter)
 router.use("/", authRouter);
 
 export default router;
