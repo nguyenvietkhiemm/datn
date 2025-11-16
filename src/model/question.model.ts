@@ -6,4 +6,5 @@ export interface Question {
   question_content: string;
   available: boolean;
   answers?: Answer[];
+  source : string
 }

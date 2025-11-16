@@ -392,7 +392,7 @@ examRoute.delete('/remove/:id',
  *         description: Lỗi server
  */
 
-examRoute.post("/questions/add/:id",
+examRoute.post("/questions/add",
         Authentication.AuthenticateToken,
         Authentication.AuthorizeRoles(...ADMIN),
         ExamQuestionController.add);

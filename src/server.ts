@@ -25,7 +25,6 @@ app.use('/', routes);
 
 //cho xem tai lieu
 app.use("/resources", express.static(path.join(__dirname, "../resources")));
-app.use("/data/uploads/csv", express.static(path.join(__dirname, "/../data/uploads/csv")));
 
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "localhost";
