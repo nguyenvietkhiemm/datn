@@ -52,4 +52,23 @@ export const FileController = {
         });
         return res.status(result.status).json(result);
     },
+
+    async saveDocx(req: Request, res: Response) {
+        const result = await safeExecute(async () => {
+            const { filename } = req.params;
+            const data = req.body;
+
+            // console.log("Dữ liệu nhận được để lưu CSV:", data); 
+            // console.log("Dữ liệu nhận được để lưu CSV:", filename);
+            // if (!Array.isArray(data)) throw new Error("Dữ liệu phải là mảng object");
+
+            // saveCsvFile(filename, data);
+
+            return {
+                status: 200,
+                message: `Lưu DOCX ${filename} thành công!`,
+            };
+        });
+        return res.status(result.status).json(result);
+    },
 }
