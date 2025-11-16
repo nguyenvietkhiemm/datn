@@ -1,6 +1,7 @@
 import { FileController } from "../controllers/file.controller";
 import Authentication from "../middleware/authentication";
 import { ADMIN } from "../config/permission";
+import { uploadCSV } from '../utils/upload';
 import { Router } from "express";
 
 const fileRouter = Router();
@@ -21,7 +22,8 @@ fileRouter.get(
 fileRouter.post("/csv/save/:filename",
     Authentication.AuthenticateToken,
     Authentication.AuthorizeRoles(...ADMIN),
+    uploadCSV.single("file"),
     FileController.saveCsv
-)
+);
 
 export default fileRouter;
