@@ -39,7 +39,8 @@ export default function Question() {
     const [csvList, setCsvList] = useState<CsvFile[]>([]);
     const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
     const token = Cookies.get("token");
-    const fileInputRef = useRef<HTMLInputElement>(null);
+    const csvInputRef = useRef<HTMLInputElement>(null);
+    const docxInputRef = useRef<HTMLInputElement>(null);
 
     // Lấy danh sách câu hỏi
     useEffect(() => {
@@ -118,11 +119,11 @@ export default function Question() {
         }
     };
 
-    //lay csv tu server
+    //lay list csv tu server
     const handleFetchCsv = async () => {
-        const url = `${API_URL}/csv`;
+        const url = `${API_URL}/file/csv`;
         const data = await fetchCsvContent(url, token);
-        
+
         setCsvList(data)
         setIsCsvList(true)
     };
@@ -133,7 +134,18 @@ export default function Question() {
 
         if (!file) return;
 
-        const url = `${API_URL}/questions/import`;
+        const url = `${API_URL}/file/csv/save/${file.name}`;
+        const result = await uploadCsvFile(url, file, token);
+        console.log("Kết quả upload:", result);
+    };
+
+    // Upload DOCX từ máy
+    const handleUploadDocx = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+
+        if (!file) return;
+
+        const url = `${API_URL}/file/docx/save/${file.name}`;
         const result = await uploadCsvFile(url, file, token);
         console.log("Kết quả upload:", result);
     };
@@ -148,12 +160,30 @@ export default function Question() {
                 <h1 className={styles.title}>Quản lý câu hỏi</h1>
                 <div className={styles.actions}>
                     <Search setFilterQuestion={setFilterQuestion} currentPage={currentPage} setTotalPage={setTotalPage} />
+
+                    <div className={styles.csv}>
+                        <input
+                            type="file"
+                            accept=".docx"
+                            ref={docxInputRef}
+                            style={{ display: "none" }}
+                            onChange={handleUploadDocx}
+                        />
+
+                        <Button
+                            variant="primary"
+                            size="md"
+                            onClick={() => docxInputRef.current?.click()}>
+                            Thêm câu hỏi từ DOCX
+                        </Button>
+                    </div>
+
                     {/* Upload CSV */}
                     <div className={styles.csv}>
                         <input
                             type="file"
                             accept=".csv"
-                            ref={fileInputRef}
+                            ref={csvInputRef}
                             style={{ display: "none" }}
                             onChange={handleUploadCsv}
                         />
@@ -161,11 +191,9 @@ export default function Question() {
                         <Button
                             variant="primary"
                             size="md"
-                            onClick={() => fileInputRef.current?.click()}
-                        >
-                            Thêm câu hỏi
+                            onClick={() => csvInputRef.current?.click()}>
+                            Thêm câu hỏi từ CSV
                         </Button>
-
                         <Button
                             variant="primary"
                             size="md"
@@ -174,6 +202,7 @@ export default function Question() {
                             Danh sách CSV
                         </Button>
                     </div>
+
                 </div>
             </div>
 
