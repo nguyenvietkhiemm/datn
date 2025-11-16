@@ -26,6 +26,13 @@ questionRoute.get("/search",
         Authentication.AuthorizeRoles(...ADMIN),
         QuestionController.searchQuestions);
 
+//filter question
+questionRoute.get("/filter",
+        Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(...ADMIN),
+        QuestionController.filterQuestion
+);
+
 //
 /**
  * @openapi

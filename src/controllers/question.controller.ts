@@ -115,6 +115,23 @@ const QuestionController = {
     });
 
     return res.status(result.status).json(result);
+  },
+
+  async filterQuestion(req: Request, res: Response){
+    const result : DefaultResponse<any> = await safeExecute(async () => {
+      return {
+        status : 200,
+        message: "Lấy danh sách câu hỏi thành công",
+        data: await QuestionService.filterQuestions(
+          String(req.query?.question_name),
+          String(req.query?.source),
+          String(req.query?.status),
+          Number(req.query.page)
+        ),
+      }
+    })
+
+    return res.status(result.status).json(result);
   }
 };
 

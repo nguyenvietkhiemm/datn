@@ -82,6 +82,7 @@ export async function parseQuestionsFromCSV(filePath: string): Promise<Question[
               question_name,
               question_content,
               available,
+              source,
               answers,
             });
           }
