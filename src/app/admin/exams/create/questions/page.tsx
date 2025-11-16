@@ -1,240 +1,214 @@
 "use client";
 
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import styles from "./QuestionCreate.module.css";
+import { fetchQuestions } from "@/utils/question.service";
+import Pagination from "@/component/pagination/Pagination";
+import Search from "@/component/search/Search";
+import { fetchCsvContent } from "@/utils/csv";
+import { Button } from "@/component/ui/button/Button";
+import { useSearchParams } from "next/navigation";
 
 interface Answer {
+    answer_id: number;
     answer_content: string;
     is_correct: boolean;
 }
 
 interface Question {
+    question_id: number;
     question_name: string;
     question_content: string;
+    available: boolean;
     answers: Answer[];
+    sourrce: string
+}
+
+interface CsvFile {
+    id: number;
+    name: string;
+    url: string;
 }
 
 export default function QuestionCreate() {
-    const [examId, setExamId] = useState<number>();
     const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
     const token = Cookies.get("token");
-    const [questions, setQuestions] = useState<Question[]>([
-        {
-            question_name: "",
-            question_content: "",
-            answers: [{ answer_content: "", is_correct: false }],
-        },
-    ]);
+    const [questions, setQuestions] = useState<Question[]>([]);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [totalPage, setTotalPage] = useState<number>(1);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [filterQuestion, setFilterQuestion] = useState<Question[]>([]);
+    const [selectedOption, setSelectedOption] = useState<string>("");
+    const [csvList, setCsvList] = useState<CsvFile[]>([]);
+    const [selectedQuestions, setSelectedQuestions] = useState<{ exam_id: number, question_id: number }[]>([]);
+    const searchParams = useSearchParams();
+    const examId = Number(searchParams.get("exam_id"));
+    const type = searchParams.get("type");
 
     useEffect(() => {
-        const id = localStorage.getItem("exam_id");
-        if (id) {
-            setExamId(JSON.parse(id));
-        }
-
-        return () => {
-            localStorage.removeItem("exam_id");
-        };
-    }, []);
-
-    //Thêm câu hỏi mới
-    const addQuestion = () => {
-        setQuestions([
-            ...questions,
-            {
-                question_name: "",
-                question_content: "",
-                answers: [{ answer_content: "", is_correct: false }],
-            },
-        ]);
-    };
-
-    // Xóa câu hỏi
-    const removeQuestion = (qIndex: number) => {
-        setQuestions(questions.filter((_, i) => i !== qIndex));
-    };
-
-    //  Cập nhật nội dung câu hỏi
-    const updateQuestion = <K extends keyof Question>(
-        qIndex: number,
-        key: K,
-        value: Question[K]
-    ) => {
-        setQuestions((prev) =>
-            prev.map((q, i) =>
-                i === qIndex ? { ...q, [key]: value } : q
-            )
-        );
-    };
-
-    //  Thêm đáp án trong 1 câu hỏi
-    const addAnswer = (qIndex: number) => {
-        const updated = [...questions];
-        updated[qIndex].answers.push({ answer_content: "", is_correct: false });
-        setQuestions(updated);
-    };
-
-    //  Cập nhật nội dung đáp án
-    const updateAnswer = <K extends keyof Answer>(
-        qIndex: number,
-        aIndex: number,
-        key: K,
-        value: Answer[K]
-    ) => {
-        setQuestions((prev) =>
-            prev.map((q, i) =>
-                i === qIndex
-                    ? {
-                        ...q,
-                        answers: q.answers.map((a, j) =>
-                            j === aIndex ? { ...a, [key]: value } : a
-                        ),
-                    }
-                    : q
-            )
-        );
-    };
-
-    //  Xóa đáp án
-    const removeAnswer = (qIndex: number, aIndex: number) => {
-        const updated = [...questions];
-        updated[qIndex].answers = updated[qIndex].answers.filter((_, i) => i !== aIndex);
-        setQuestions(updated);
-    };
-
-    //  Gửi toàn bộ danh sách câu hỏi
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-
-        // kiểm tra dữ liệu trống
-        for (const q of questions) {
-            if (!q.question_name || !q.question_content) {
-                alert("Vui lòng nhập đầy đủ thông tin cho tất cả câu hỏi!");
-                return;
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                const data = await fetchQuestions(API_URL!, currentPage, token!);
+                setQuestions(data.data.question);
+                setTotalPage(data.data.totalPages);
+            } catch (err) {
+                console.error("Lỗi khi fetch question:", err);
+            } finally {
+                setLoading(false);
             }
-        }
+        };
 
+        const handleFetchCsv = async () => {
+            const url = `${API_URL}/file/csv`;
+            const data = await fetchCsvContent(url, token);
+            setCsvList(data)
+        };
+
+        fetchData();
+        handleFetchCsv();
+    }, [currentPage]);
+
+    //Lọc các câu hỏi đang hoạt động (optional)
+    useEffect(() => {
+        setFilterQuestion(questions?.filter((q) => q.available === true));
+    }, [questions]);
+
+    const handleFilter = async (source: string) => {
         try {
-            const res = await fetch(`${API_URL}/exams/questions/create/${examId}`, {
-                method: "POST",
+            const res = await fetch(`${API_URL}/questions/filter?source=${source}&page=${currentPage}`, {
+                method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({questions}),
+                    Authorization: `Bearer ${token}`
+                }
             });
+            if (!res.ok) throw new Error("Lỗi khi fetch dữ liệu");
 
-            const data = await res.json();
+            const data = await res.json()
 
-            if (res.ok) {
-                alert(" Tạo nhiều câu hỏi thành công!");
-                console.log("Created:", data);
-                setQuestions([
-                    {
-                        question_name: "",
-                        question_content: "",
-                        answers: [{ answer_content: "", is_correct: false }],
-                    },
-                ]);
-            } else {
-                alert(data.message || "Lỗi khi tạo câu hỏi!");
-            }
-        } catch (err) {
-            console.error(err);
-            alert("Không thể kết nối server!");
+            // Giả sử bạn muốn cập nhật state
+            setQuestions(data.data.questions);
+            setTotalPage(data.totalPage);
+        } catch (error) {
+            console.error("handleFilter error:", error);
         }
     };
+
+    const handleSelectQuestion = (questionId: number) => {
+
+        setSelectedQuestions((prev) => {
+            const exists = prev.some((x) => x.question_id === questionId);
+
+            if (exists) {
+                return prev.filter((x) => x.question_id !== questionId);
+            }
+
+            return [...prev, { exam_id: examId, question_id: questionId }];
+        });
+    };
+
+    const handleReset = () => {
+        window.location.reload();
+    }
+
+    const handleCretaeExamQuestion = async () => {
+        try {
+            const res = await fetch(`${API_URL}/exams/questions/add`,{
+                method : "POST",
+                headers : {
+                    "Content-Type" : "application/json",
+                    Authorization : `Bearer ${token}`
+                },
+                body : JSON.stringify({ selectedQuestions })
+            })
+            
+        } catch (error) {
+            console.error("error:", error);
+        }
+    }
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>Tạo nhiều câu hỏi</h1>
+            <h1 className={styles.title}>Tạo câu hỏi</h1>
 
-            <form onSubmit={handleSubmit} className={styles.form}>
-                {questions.map((q, qIndex) => (
-                    <div key={qIndex} className={styles.questionBlock}>
-                        <h3 className={styles.subtitle}>STT {qIndex + 1}</h3>
-
-                        <input
-                            type="text"
-                            placeholder="Tên câu hỏi..."
-                            value={q.question_name}
-                            onChange={(e) => updateQuestion(qIndex, "question_name", e.target.value)}
-                            className={styles.input}
-                        />
-
-                        <textarea
-                            placeholder="Nội dung câu hỏi..."
-                            value={q.question_content}
-                            onChange={(e) => updateQuestion(qIndex, "question_content", e.target.value)}
-                            className={styles.textarea}
-                        />
-
-                        <div className={styles.answersBlock}>
-                            {q.answers.map((a, aIndex) => (
-                                <div key={aIndex} className={styles.answerItem}>
-                                    <input
-                                        type="text"
-                                        placeholder={`Đáp án ${aIndex + 1}`}
-                                        value={a.answer_content}
-                                        onChange={(e) =>
-                                            updateAnswer(qIndex, aIndex, "answer_content", e.target.value)
-                                        }
-                                        className={styles.input}
-                                    />
-                                    <label className={styles.correctCheck}>
-                                        <input
-                                            type="checkbox"
-                                            checked={a.is_correct}
-                                            onChange={(e) =>
-                                                updateAnswer(qIndex, aIndex, "is_correct", e.target.checked)
-                                            }
-                                        />
-                                        Đúng
-                                    </label>
-                                    <button
-                                        type="button"
-                                        onClick={() => removeAnswer(qIndex, aIndex)}
-                                        className={styles.removeBtn}
-                                    >
-                                        ✕
-                                    </button>
-                                </div>
-                            ))}
-
-                            <button
-                                type="button"
-                                onClick={() => addAnswer(qIndex)}
-                                className={styles.addAnswerBtn}
-                            >
-                                ➕ Thêm đáp án
-                            </button>
-                        </div>
-
-                        <button
-                            type="button"
-                            onClick={() => removeQuestion(qIndex)}
-                            className={styles.removeQuestionBtn}
-                        >
-                            🗑 Xóa câu hỏi này
-                        </button>
-
-                        <hr className={styles.divider} />
-                    </div>
-                ))}
-
-                <button
-                    type="button"
-                    onClick={addQuestion}
-                    className={styles.addQuestionBtn}
+            {/* loc */}
+            <div className={styles.action}>
+                <Search setFilterQuestion={setFilterQuestion} currentPage={currentPage} setTotalPage={setTotalPage} />
+                {/* Dropdown select */}
+                <select
+                    value={selectedOption}
+                    onChange={async (e) => {
+                        const value = (e.target as HTMLSelectElement).value;
+                        setSelectedOption(value);
+                        await handleFilter(value);
+                    }}
+                    className={styles.selectDropdown}
                 >
-                    ➕ Thêm câu hỏi mới
-                </button>
+                    <option value="">Chọn nguồn câu hỏi</option>
+                    {csvList.map((csv) => (
+                        <option key={csv.id} value={csv.name}>{csv.name}</option>
+                    ))}
 
-                <button type="submit" className={styles.submitBtn}>
-                    💾 Lưu tất cả
-                </button>
-            </form>
+                </select>
+                {/* reset */}
+                <div className={styles.button}><Button onClick={() => handleReset()}>Đặt lại</Button></div>
+
+                {/* Thêm câu hỏi cho bài kiểm tra */}
+                <div className={styles.button}><Button onClick={() => handleCretaeExamQuestion()}>Hoàn thành</Button></div>
+
+            </div>
+            {/* Bảng danh sách câu hỏi */}
+            <table className={styles.table}>
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Dạng câu hỏi</th>
+                        <th>Nội dung</th>
+                        <th>Đáp án</th>
+                        <th>Chọn câu hỏi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {filterQuestion?.length > 0 ? (
+                        filterQuestion.map((q, index) => (
+                            <tr key={q.question_id}>
+                                <td>{index + 1}</td>
+                                <td>{q.question_name}</td>
+                                <td>{q.question_content}</td>
+                                <td>
+                                    <ul className={styles.answers}>
+                                        {q.answers.map((a) => (
+                                            <li key={a.answer_id}>
+                                                {a.answer_content}{" "}
+                                                {a.is_correct && <strong>(✔)</strong>}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </td>
+                                <td>
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedQuestions.some(item => item.question_id === q.question_id)}
+                                        onChange={() => handleSelectQuestion(q.question_id)}
+                                    />
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan={6} className={styles.empty}>
+                                Không có câu hỏi nào
+                            </td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
+
+            {/* phan trang */}
+            <Pagination totalPages={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+
         </div>
     );
 }
