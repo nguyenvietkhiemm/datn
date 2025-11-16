@@ -309,6 +309,13 @@ BEGIN
 
   IF NOT EXISTS (
     SELECT 1 FROM information_schema.columns 
+    WHERE table_name='question' AND column_name='source'
+  ) THEN
+    ALTER TABLE question ADD COLUMN source VARCHAR(50);
+  END IF;
+
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns 
     WHERE table_name='bank' AND column_name='available'
   ) THEN
     ALTER TABLE bank ADD COLUMN available BOOLEAN DEFAULT true;
