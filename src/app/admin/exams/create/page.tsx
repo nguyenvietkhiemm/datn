@@ -100,8 +100,8 @@ export default function ExamCreate() {
       } else {
         alert(data.message || "Lỗi khi tạo bài thi!");
       }
-      localStorage.setItem("exam_id", data.data.exam_id)
-      router.push("/admin/exams/create/questions");
+    
+      router.push(`/admin/exams/create/questions?exam_id=${data.data.exam_id}&type=${subjectId}`);
     } catch (error) {
       alert("Không thể tạo bài thi!");
     }
@@ -112,8 +112,6 @@ export default function ExamCreate() {
     const allTopic : Topic[] = topics
     setFilterTopic(allTopic.filter((t) => t.subject_id === subjectId))
   }, [subjectId])
-
-  console.log(topics);
 
   return (
     <div className={styles.container}>

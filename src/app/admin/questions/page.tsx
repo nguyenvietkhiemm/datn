@@ -8,6 +8,7 @@ import Search from "@/component/search/Search";
 import { fetchCsvContent, uploadCsvFile } from "@/utils/csv";
 import { Button } from "@/component/ui/button/Button";
 import CsvList from "@/component/csv/page";
+import { fetchQuestions } from "@/utils/question.service";
 
 interface Answer {
     answer_id: number;
@@ -21,6 +22,7 @@ interface Question {
     question_content: string;
     available: boolean;
     answers: Answer[];
+    source : string
 }
 
 interface CsvFile {
@@ -43,32 +45,21 @@ export default function Question() {
 
     // Lấy danh sách câu hỏi
     useEffect(() => {
-        const fetchQuestions = async () => {
+        const fetchData = async () => {
+            setLoading(true);
             try {
-                const res = await fetch(`${API_URL}/questions?page=${currentPage}`, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-
-                if (!res.ok) throw new Error("Không thể lấy danh sách câu hỏi");
-
-                const data = await res.json();
-
+                const data = await fetchQuestions(API_URL!, currentPage, token!);
                 setQuestions(data.data.question);
                 setTotalPage(data.data.totalPages);
             } catch (err) {
-                console.error(" Lỗi khi fetch question:", err);
+                console.error("Lỗi khi fetch question:", err);
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchQuestions();
+        fetchData();
     }, [currentPage]);
-
     //Lọc các câu hỏi đang hoạt động (optional)
     useEffect(() => {
         setFilterQuestion(questions?.filter((q) => q.available === true));
@@ -120,9 +111,8 @@ export default function Question() {
 
     //lay csv tu server
     const handleFetchCsv = async () => {
-        const url = `${API_URL}/csv`;
+        const url = `${API_URL}/file/csv`;
         const data = await fetchCsvContent(url, token);
-        
         setCsvList(data)
         setIsCsvList(true)
     };

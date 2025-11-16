@@ -19,32 +19,13 @@ interface CsvListProps {
 export default function CsvList({ csvList }: CsvListProps) {
     const [csvDataMap, setCsvDataMap] = useState<Record<number, any[]>>({});
     const [loadingMap, setLoadingMap] = useState<Record<number, boolean>>({});
-
+    const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
     const token = Cookies.get("token");
     const router = useRouter();
 
     const handleOpenCsv = (csv: CsvFile) => {
         router.push(`/admin/csv/${encodeURIComponent(csv.name)}`);
     }
-
-    useEffect(() => {
-        const loadAllCsv = async () => {
-            csvList.forEach(async (file) => {
-                setLoadingMap((prev) => ({ ...prev, [file.id]: true }));
-                try {
-                    const data = await fetchCsvContent(file.url, token);
-                    setCsvDataMap((prev) => ({ ...prev, [file.id]: data }));
-                } catch (error) {
-                    console.error(`Lỗi khi tải file ${file.name}:`, error);
-                    setCsvDataMap((prev) => ({ ...prev, [file.id]: [] }));
-                } finally {
-                    setLoadingMap((prev) => ({ ...prev, [file.id]: false }));
-                }
-            });
-        };
-
-        loadAllCsv();
-    }, [csvList, token]);
 
     return (
         <div className={styles.wrapper}>

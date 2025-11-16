@@ -13,6 +13,7 @@ const navItems = [
   { name: "Tài liệu", href: "/admin/documents", icon: BookOpen },
   { name: "Câu hỏi", href: "/admin/questions", icon: Settings },
   { name: "Lịch thi", href: "/admin/schedules", icon: Clock },
+  { name: "Lộ trình", href: "/admin/roadmap", icon: Clock },
   { name: "Cài đặt", href: "/admin/settings", icon: Settings },
 ];
 

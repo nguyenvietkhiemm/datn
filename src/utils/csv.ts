@@ -17,6 +17,8 @@ interface CsvFile {
  */
 export async function fetchCsvContent(fileUrl: string, token?: string): Promise<CsvFile[]> {
     try {
+        console.log(fileUrl);
+        
         const res = await fetch(fileUrl, {
             method: "GET",
             headers: {
@@ -27,8 +29,7 @@ export async function fetchCsvContent(fileUrl: string, token?: string): Promise<
         if (!res.ok) throw new Error("Không tải được file CSV từ server");
 
         const csvText = await res.json();
-        console.log(csvText);
-        
+
         return csvText.data
     } catch (error) {
         console.error("Lỗi fetchCsvContent:", error);
