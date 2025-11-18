@@ -3,9 +3,9 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import cors from "cors";
 import path from "path";
-
 import routes from './routes/index';
-
+import nodeCron from 'node-cron';
+import StudyScheduleService from './services/schedule.study.service';
 import swaggerUi from 'swagger-ui-express';
 import {specs, swaggerOptions} from './config/swagger.jsdoc';
 import morgan from 'morgan';
@@ -32,4 +32,10 @@ const HOST = process.env.HOST || "localhost";
 app.listen(PORT, () => {
   console.log(`Server running on http://${HOST}:${PORT}`);
   console.log(`Swagger docs at http://${HOST}:${PORT}/api-docs`);
+  nodeCron.schedule('*/3 * * * *', async () => {
+    // chay 1 phut 1 lan de test
+    console.log('--- Bắt đầu tác vụ Cron: Kiểm tra và đánh dấu lịch quá hạn ---');
+    await StudyScheduleService.markOverTime();
+    console.log('--- Kết thúc tác vụ Cron ---');
+  });
 });
