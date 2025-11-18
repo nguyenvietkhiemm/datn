@@ -12,6 +12,8 @@ import topicRouter from './topic.route';
 import examRoute from './exam.route';
 import bankRoute from './bank.route';
 import fileRouter from './file.route';
+import roadmapRouter from './roadmap.route';
+import scheduleStudyRouter from './schedule.study.route';
 
 const router = Router();
 
@@ -25,7 +27,9 @@ router.use("/flashcards", flashcardRouter);
 router.use("/topics", topicRouter);
 router.use('/exams', examRoute);
 router.use('/banks', bankRoute);
-router.use("/file", fileRouter)
+router.use("/file", fileRouter);
+router.use("/roadmap", roadmapRouter);
+router.use("/schedule/study", scheduleStudyRouter)
 router.use("/", authRouter);
 
 export default router;

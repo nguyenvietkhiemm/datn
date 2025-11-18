@@ -2,7 +2,7 @@ import { query } from "../config/database";
 import { ScheduleExam } from "../model/schedule.exam.model";
 
 export const ScheduleExamService = {
-        // ✅ Lấy danh sách tất cả lịch thi (có phân trang)
+        //  Lấy danh sách tất cả lịch thi (có phân trang)
         async getAll(limit: number = 100, offset: number = 0): Promise<ScheduleExam[]> {
                 const queryText = `
                 SELECT * 
@@ -15,7 +15,7 @@ export const ScheduleExamService = {
                 return result.rows as ScheduleExam[];
         },
 
-        // ✅ Lấy lịch thi theo ID + danh sách đề thi
+        //  Lấy lịch thi theo ID + danh sách đề thi
         async getById(id: number): Promise<ScheduleExam | null> {
                 const queryText = `
                 SELECT e.exam_name, e.topic_id, e.time_limit, e.exam_id, e.created_at, t.title
@@ -41,7 +41,7 @@ export const ScheduleExamService = {
                 return scheduleWithExams as ScheduleExam;
         },
 
-        // ✅ Tạo mới lịch thi
+        //  Tạo mới lịch thi
         async create(data: ScheduleExam): Promise<ScheduleExam> {
                 const queryText = `
                 INSERT INTO exam_schedule (start_time, end_time)
@@ -54,7 +54,7 @@ export const ScheduleExamService = {
                 return result.rows[0];
         },
 
-        // ✅ Cập nhật lịch thi
+        //  Cập nhật lịch thi
         async update(id: number, data: ScheduleExam): Promise<ScheduleExam | null> {
                 const queryText = `
                 UPDATE exam_schedule
@@ -71,7 +71,7 @@ export const ScheduleExamService = {
                 return result.rows[0] || null;
         },
 
-        // ✅ Xoá lịch thi
+        //  Xoá lịch thi
         async remove(id: number): Promise<boolean> {
                 const result = await query(
                         "DELETE FROM exam_schedule WHERE exam_schedule_id = $1",
