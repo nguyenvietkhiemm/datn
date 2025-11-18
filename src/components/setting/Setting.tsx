@@ -3,15 +3,16 @@ import Link from "next/link";
 import styles from "./Setting.module.css";
 
 type SettingProps = {
-    onLogout : () => void
+    onLogout : () => void,
+    setShowSetting : (d : boolean) => void
 }
 
-export default function Setting({ onLogout } : SettingProps) {
+export default function Setting({ onLogout, setShowSetting } : SettingProps) {
   return (
     <div className={styles.dropdown}>
       <ul className={styles.menu}>
-        <li><Link href="/schedule">Lịch học của tôi</Link></li>
-        <li><Link href="/profile">Trang cá nhân</Link></li>
+        <li onClick={() => setShowSetting(false)}><Link href="/schedule/study">Lịch học của tôi</Link></li>
+        <li onClick={() => setShowSetting(false)}><Link href="/profile">Trang cá nhân</Link></li>
         <li onClick={onLogout} className={styles.logout}>Đăng xuất</li>
       </ul>
     </div>
