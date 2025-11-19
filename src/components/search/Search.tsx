@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
 
 type SearchProp = {
-  setFilterExam: (data: any) => void;
+  setFilterExam?: (data: any) => void;
   currentPage : number;
   setTotalPage : (data : any) => void;
 };
@@ -34,7 +34,7 @@ export default function Search({ setFilterExam, currentPage, setTotalPage }: Sea
       const data = await res.json();
       
       setTotalPage(data.data.totalPages)
-      setFilterExam(data.data.data || []);
+      setFilterExam?.(data.data.data || []);
     } catch (err) {
       console.error("Lỗi khi tìm kiếm:", err);
     }
