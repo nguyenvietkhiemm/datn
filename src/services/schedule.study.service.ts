@@ -122,7 +122,7 @@ const StudyScheduleService = {
             const params: any[] = []
             
             //Thêm điều kiện động 
-            if (status!=="All") {
+            if (status) {
                 params.push(status);
                 where.push(`s.status = $${params.length}`);
             }
