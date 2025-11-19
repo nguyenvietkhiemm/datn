@@ -49,6 +49,16 @@ const StudyScheduleController = {
     });
     res.status(response.status).json(response);
   },
+
+  async filter(req: Request, res: Response) {
+    const response: DefaultResponse<any> = await safeExecute(async () => {
+      const page = Number(req.query.page);
+      const status = String(req.query.status);
+      const ok = await StudyScheduleService.filter(page, status);
+      return { status: 200, data: ok, message: "Lọc thành công" };
+    });
+    res.status(response.status).json(response);
+  }
 };
 
 export default StudyScheduleController;

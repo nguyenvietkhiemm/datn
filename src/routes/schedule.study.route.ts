@@ -1,9 +1,15 @@
 import { Router } from "express";
 import StudyScheduleController from "../controllers/schedule.study.controller"
+import Authentication from "../middleware/authentication";
 
 const scheduleStudyRouter = Router();
 
-scheduleStudyRouter.get("/", StudyScheduleController.getAll);
+scheduleStudyRouter.get("/",
+    Authentication.AuthenticateToken,
+    StudyScheduleController.getAll);
+scheduleStudyRouter.get("/filter",
+    Authentication.AuthenticateToken,
+    StudyScheduleController.filter);
 scheduleStudyRouter.get("/:id", StudyScheduleController.getById);
 scheduleStudyRouter.post("/create", StudyScheduleController.create);
 scheduleStudyRouter.put("/:id", StudyScheduleController.update);
