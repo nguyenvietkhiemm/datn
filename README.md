@@ -59,3 +59,11 @@ Dưới đây là các mã trạng thái HTTP quy ước:
 ```
 ## Tài khoản admin
 email: admin@example.com, pass: admin123
+
+
+## Microservice
+```bash
+git lfs install
+git clone https://huggingface.co/alittledaisy/microservice
+```
+

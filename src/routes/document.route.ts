@@ -2,7 +2,7 @@ import { Router } from 'express';
 import DocumentController from '../controllers/document.controller';
 import Authentication from '../middleware/authentication';
 import { ADMIN, USER } from "../config/permission";
-import { uploadDOC } from '../utils/upload';
+import { uploadDOCResource } from '../utils/upload';
 const documentRoute = Router();
 
 /**
@@ -67,7 +67,7 @@ documentRoute.get('/filter', Authentication.AuthenticateToken,
 documentRoute.post('/create',
         Authentication.AuthenticateToken,
         Authentication.AuthorizeRoles(...ADMIN),
-        uploadDOC.single("file"),
+        uploadDOCResource.single("file"),
         DocumentController.create);
 
 
