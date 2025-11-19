@@ -122,7 +122,6 @@ const QuestionService = {
                         newQuestion.answers.push(newAnswer);
                     }
                 }
-
                 createdQuestions.push(newQuestion);
             }
 
@@ -320,7 +319,7 @@ const QuestionService = {
                     questionsMap[row.question_id].answers?.push({
                         answer_id: row.answer_id,
                         answer_content: row.answer_content,
-                        question_id: row.question_id,
+                        question_id : row.question_id,
                         is_correct: row.is_correct,
                     });
                 }
@@ -433,7 +432,6 @@ const QuestionService = {
             client.release();
         }
     }    
-
 };
 
 export default QuestionService;
