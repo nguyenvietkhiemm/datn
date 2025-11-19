@@ -86,7 +86,7 @@ export default function Header() {
               >
                 {userName?.[0] || "Tài khoản"}
               </div>
-              {showSetting && <Setting onLogout={handleLogout} />}
+              {showSetting && <Setting onLogout={handleLogout} setShowSetting={setShowSetting}/>}
             </div>
           ) : (
             <div className={styles.auth}>
