@@ -16,7 +16,7 @@ const StudyScheduleService = {
             FROM study_schedule s
             LEFT JOIN subject sub ON s.subject_id = sub.subject_id
             WHERE s.status IN ('pending', 'done')
-                AND (s.end_time IS NULL OR s.end_time >= NOW())
+                AND (s.end_time IS NULL OR s.end_time >= (NOW() + INTERVAL '7 hours'))
             ORDER BY s.start_time DESC
             LIMIT $1 OFFSET $2
             `;
@@ -27,7 +27,7 @@ const StudyScheduleService = {
                 SELECT COUNT(*) AS total
                 FROM study_schedule
                 WHERE status IN ('pending', 'done')
-                    AND (end_time IS NULL OR end_time >= NOW())
+                    AND (end_time IS NULL OR end_time >= (NOW() + INTERVAL '7 hours'))
                 `;
             const countResult = await client.query(countQuery);
             const totalItems = parseInt(countResult.rows[0].total, 10);
@@ -107,9 +107,8 @@ const StudyScheduleService = {
     },
 
     async filter(
-        page: number,   
+            page: number,   
             status?: string,
-            subject_id?: number
     ): Promise<{ schedule: (StudySchedule & { subject_name: string })[]; totalPages: number }> {
         const client = await pool.connect();
         try {
@@ -120,23 +119,18 @@ const StudyScheduleService = {
     
             //Danh sách điều kiện
             const where: string[] = [];
-            const params: any[] = [];
-    
+            const params: any[] = []
+            
             //Thêm điều kiện động 
-            if (status) {
+            if (status!=="All") {
                 params.push(status);
                 where.push(`s.status = $${params.length}`);
             }
     
-            if (subject_id) {
-                params.push(subject_id);
-                where.push(`s.subject_id = $${params.length}`);
-            }
-    
             if (where.length === 0) {
-                where.push(`(s.end_time IS NULL OR s.end_time >= NOW())`);
+                where.push(`(s.end_time IS NULL OR s.end_time >= (NOW() + INTERVAL '7 hours'))`);
             }
-    
+            
             const whereSQL = "WHERE " + where.join(" AND ");
     
             // Query chính
@@ -150,7 +144,7 @@ const StudyScheduleService = {
             `;
     
             const result = await client.query(queryText, [...params, limit, offset]);
-    
+            
             // COUNT cho phân trang
             const countQuery = `
                 SELECT COUNT(*) AS total
