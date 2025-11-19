@@ -32,7 +32,7 @@ const HOST = process.env.HOST || "localhost";
 app.listen(PORT, () => {
   console.log(`Server running on http://${HOST}:${PORT}`);
   console.log(`Swagger docs at http://${HOST}:${PORT}/api-docs`);
-  nodeCron.schedule('*/3 * * * *', async () => {
+  nodeCron.schedule('*/1 * * * *', async () => {
     // chay 1 phut 1 lan de test
     console.log('--- Bắt đầu tác vụ Cron: Kiểm tra và đánh dấu lịch quá hạn ---');
     await StudyScheduleService.markOverTime();

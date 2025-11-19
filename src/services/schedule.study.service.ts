@@ -23,7 +23,13 @@ const StudyScheduleService = {
             const result = await client.query(queryText, [limit, offset]);
 
             // Lấy tổng số item
-            const countResult = await client.query("SELECT COUNT(*) AS total FROM study_schedule");
+            const countQuery = `
+                SELECT COUNT(*) AS total
+                FROM study_schedule
+                WHERE status IN ('pending', 'done')
+                    AND (end_time IS NULL OR end_time >= NOW())
+                `;
+            const countResult = await client.query(countQuery);
             const totalItems = parseInt(countResult.rows[0].total, 10);
             const totalPages = Math.ceil(totalItems / limit);
 
@@ -100,9 +106,78 @@ const StudyScheduleService = {
         return (result.rowCount ?? 0) > 0;
     },
 
+    async filter(
+        page: number,   
+            status?: string,
+            subject_id?: number
+    ): Promise<{ schedule: (StudySchedule & { subject_name: string })[]; totalPages: number }> {
+        const client = await pool.connect();
+        try {
+            await client.query("BEGIN");
+    
+            const limit = 20;
+            const offset = (page - 1) * limit;
+    
+            //Danh sách điều kiện
+            const where: string[] = [];
+            const params: any[] = [];
+    
+            //Thêm điều kiện động 
+            if (status) {
+                params.push(status);
+                where.push(`s.status = $${params.length}`);
+            }
+    
+            if (subject_id) {
+                params.push(subject_id);
+                where.push(`s.subject_id = $${params.length}`);
+            }
+    
+            if (where.length === 0) {
+                where.push(`(s.end_time IS NULL OR s.end_time >= NOW())`);
+            }
+    
+            const whereSQL = "WHERE " + where.join(" AND ");
+    
+            // Query chính
+            const queryText = `
+                SELECT s.*, sub.subject_name
+                FROM study_schedule s
+                LEFT JOIN subject sub ON s.subject_id = sub.subject_id
+                ${whereSQL}
+                ORDER BY s.start_time DESC
+                LIMIT $${params.length + 1} OFFSET $${params.length + 2}
+            `;
+    
+            const result = await client.query(queryText, [...params, limit, offset]);
+    
+            // COUNT cho phân trang
+            const countQuery = `
+                SELECT COUNT(*) AS total
+                FROM study_schedule s
+                LEFT JOIN subject sub ON s.subject_id = sub.subject_id
+                ${whereSQL}
+            `;
+            const countResult = await client.query(countQuery, params);
+    
+            const totalItems = parseInt(countResult.rows[0].total, 10);
+            const totalPages = Math.ceil(totalItems / limit);
+    
+            await client.query("COMMIT");
+    
+            return { schedule: result.rows, totalPages };
+        } catch (error) {
+            await client.query("ROLLBACK");
+            console.error("Lỗi khi filter:", error);
+            return { schedule: [], totalPages: 0 };
+        } finally {
+            client.release();
+        }
+    },    
+
     async markOverTime() {
         try {
-            
+
             const row = await query(`
                 UPDATE study_schedule
                 SET status = 'miss'
