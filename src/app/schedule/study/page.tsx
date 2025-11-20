@@ -36,9 +36,8 @@ export default function ScheduleStudy() {
     const [totalPages, setTotalPages] = useState(1);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [isAdd, setIsAdd] = useState<boolean>(false);
-    const [selectedStatus, setSelectedStatus] = useState<string>("All");
+    const [selectedStatus, setSelectedStatus] = useState<string>("pending");
     const status: StatusProp[] = [
-        { name: "Tất cả", value: "All" },
         { name: "Đang chờ", value: "pending" },
         { name: "Đã hoàn thành", value: "done" },
         { name: "Bỏ lỡ", value: "miss" }

@@ -28,24 +28,47 @@ export default function ExamList() {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
+  const [filterCondition, setFilterCondition] = useState<any>(null);
+  const [searchKeyword, setSearchKeyword] = useState<string>("");
 
   useEffect(() => {
     const token = Cookies.get("token");
     const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
+
     const fetchExam = async () => {
-      const resExam = await fetch(`${API_URL}/exams?page=${currentPage}`, {
+      let url = `${API_URL}/exams?page=${currentPage}`;
+
+      // Filter status
+      if (filterCondition?.status) {
+        url += `&status=${filterCondition.status}`;
+      }
+
+      // Filter topics
+      if (filterCondition?.topics && filterCondition.topics.length > 0) {
+        url += `&topics=${filterCondition.topics.join(",")}`;
+      }
+
+      // Search
+      if (searchKeyword.trim().length > 0) {
+        url += `&search=${encodeURIComponent(searchKeyword)}`;
+      }
+
+      const resExam = await fetch(url, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        }
-      })
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
       const data = await resExam.json();
-      dispatch(setExams(data.data.data));
+
+      dispatch(setExams(data.data.exams));
       setTotalPages(data.data.totalPages);
-    }
+    };
+
     fetchExam();
-  }, [currentPage]);
+  }, [currentPage, filterCondition, searchKeyword]);
 
   useEffect(() => {
     setFilterExam(exams)
@@ -61,12 +84,23 @@ export default function ExamList() {
       <h1 className={styles.title}> Danh sách đề thi thử</h1>
 
       <div className={styles.filter_search}>
-        <Filter exams={exams} setFilterExam={setFilterExam} currentPage={currentPage} />
-        <Search setFilterExam={setFilterExam} currentPage={currentPage} setTotalPage={setTotalPages} />
+        <Filter
+          exams={exams}
+          setFilterExam={setFilterExam}
+          currentPage={currentPage}
+          setFilterCondition={setFilterCondition} 
+        />
+
+        <Search
+          setFilterExam={setFilterExam}
+          currentPage={currentPage}
+          setTotalPage={setTotalPages}
+          setSearchKeyword={setSearchKeyword}
+          setCurrentPage={setCurrentPage} />
       </div>
 
       <div className={styles.grid}>
-        {filterExam.map((exam, index) => (
+        {filterExam?.map((exam, index) => (
           <div key={index} className={styles.card}>
             <div className={styles.header}>
               <h2 className={styles.examName}>{exam.exam_name}</h2>
@@ -81,7 +115,7 @@ export default function ExamList() {
         ))}
       </div>
 
-      {filterExam.length === 0 ? (
+      {filterExam?.length === 0 ? (
         <p className={styles.empty}>Không có đề thi cho chủ đề này.</p>
       ) : (
         <Pagination totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
