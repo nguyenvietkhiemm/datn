@@ -181,19 +181,19 @@ examRoute.delete(
  *       500:
  *         description: Lỗi server
  */
-examRoute.get('/', ExamController.getAll);
+examRoute.get('/', ExamController.list);
 
-//Tìm kiếm và lọc
-examRoute.get(`/search`,
-        Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(...ADMIN, ...USER),
-        ExamController.search);
+// //Tìm kiếm và lọc
+// examRoute.get(`/search`,
+//         Authentication.AuthenticateToken,
+//         Authentication.AuthorizeRoles(...ADMIN, ...USER),
+//         ExamController.search);
 
-examRoute.get(`/filter`,
-        Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(...ADMIN, ...USER),
-        ExamController.filter
-);
+// examRoute.get(`/filter`,
+//         Authentication.AuthenticateToken,
+//         Authentication.AuthorizeRoles(...ADMIN, ...USER),
+//         ExamController.filter
+// );
 /**
  * @openapi
  * /exams/{id}:

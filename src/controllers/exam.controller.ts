@@ -4,12 +4,19 @@ import ExamService from "../services/exam.service";
 import { Exam } from "../model/exam.model";
 
 const ExamController = {
-  async getAll(req: Request, res: Response) {
+  async list(req: Request, res: Response) {
     const result: DefaultResponse<any> = await safeExecute(async () => {
+      const page = Number(req.query.page) || 1;
+      const status = req.query.status?.toString() || "All";
+      const searchValue = req.query.search?.toString() || "";
+      const topicIds = req.query.topics
+        ? req.query.topics.toString().split(",").map(Number)
+        : [];
+      
       return {
         status: 200,
         message: "Lấy danh sách đề thi thành công",
-        data: await ExamService.getAll(Number(req.query.page)),
+        data: await ExamService.list(page, status, searchValue, topicIds),
       };
     });
 
@@ -80,38 +87,38 @@ const ExamController = {
     return res.status(result.status).json(result);
   },
 
-  async search(req: Request, res: Response) {
-    const result: DefaultResponse<any> = await safeExecute(async () => {
-      return {
-        status: 200,
-        message: "Lấy danh sách đề thi thành công",
-        data: await ExamService.search(String(req.query.searchValue), Number(req.query.page)),
-      };
-    });
+  // async search(req: Request, res: Response) {
+  //   const result: DefaultResponse<any> = await safeExecute(async () => {
+  //     return {
+  //       status: 200,
+  //       message: "Lấy danh sách đề thi thành công",
+  //       data: await ExamService.search(String(req.query.searchValue), Number(req.query.page)),
+  //     };
+  //   });
 
-    return res.status(result.status).json(result);
-  },
+  //   return res.status(result.status).json(result);
+  // },
 
-  async filter(req: Request, res: Response) {
-    const result: DefaultResponse<any> = await safeExecute(async () => {
-      const topicParam = req.query.topic;
-      const status = String(req.query.status);
-      const page = Number(req.query.page);
+  // async filter(req: Request, res: Response) {
+  //   const result: DefaultResponse<any> = await safeExecute(async () => {
+  //     const topicParam = req.query.topic;
+  //     const status = String(req.query.status);
+  //     const page = Number(req.query.page);
 
-      let topicIds: number[] = [];
+  //     let topicIds: number[] = [];
 
-      if (typeof topicParam === "string" && topicParam.length > 0) {
-        topicIds = topicParam.split(",").map(Number);
-      }
+  //     if (typeof topicParam === "string" && topicParam.length > 0) {
+  //       topicIds = topicParam.split(",").map(Number);
+  //     }
 
-      return {
-        status: 200,
-        message: "Lọc bài thi thành công",
-        data: await ExamService.filter(topicIds, status, page)
-      };
-    })
-    return res.status(result.status).json(result);
-  }
+  //     return {
+  //       status: 200,
+  //       message: "Lọc bài thi thành công",
+  //       data: await ExamService.filter(topicIds, status, page)
+  //     };
+  //   })
+  //   return res.status(result.status).json(result);
+  // }
 };
 
 export default ExamController;
