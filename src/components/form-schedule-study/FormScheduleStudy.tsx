@@ -4,7 +4,6 @@ import styles from "./FormScheduleStudy.module.css";
 import { Button } from "../ui/button";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
-import { div } from "framer-motion/m";
 
 interface StudyScheduleForm {
     schedule_study_id? : number;
@@ -58,19 +57,19 @@ export default function FormScheduleStudy({
 
             if (numericOnly !== value.replace(/[^0-9]/g, "")) {
                 setForm(prev => ({ ...prev, target_question: "" as any }));
-                setError("Không được để là chữ")
+                setError?.("Không được để là chữ")
                 return;
             }
 
             if (numericOnly === "") {
                 setForm(prev => ({ ...prev, target_question: "" as any }));
-                setError("Số câu hỏi mục tiêu không được để trống.")
+                setError?.("Số câu hỏi mục tiêu không được để trống.")
                 return;
             }
 
             if (numericOnly === "") {
                 setForm(prev => ({ ...prev, target_question: "" as any }));
-                setError("Số câu hỏi mục tiêu không được để trống.")
+                setError?.("Số câu hỏi mục tiêu không được để trống.")
                 return;
             }
 
@@ -78,17 +77,17 @@ export default function FormScheduleStudy({
 
             if (num === 0) {
                 setForm(prev => ({ ...prev, target_question: num }));
-                setError("Số câu hỏi phải lớn hơn 0.");
+                setError?.("Số câu hỏi phải lớn hơn 0.");
                 return;
             }
 
             if (num > 10000) {
                 setForm(prev => ({ ...prev, target_question: num }));
-                setError("Số câu hỏi không được vượt quá 10.000.");
+                setError?.("Số câu hỏi không được vượt quá 10.000.");
                 return;
             }
 
-            setError("");
+            setError?.("");
             setForm(prev => ({ ...prev, target_question: num }));
             return;
         }

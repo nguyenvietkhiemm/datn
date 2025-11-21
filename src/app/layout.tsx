@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/header/Header";
-import Footer from "@/components/footer/Footer";
-import { ThemeProvider } from "next-themes";
-import ReduxProvider from "@/components/provider/ReduxProvider";
-import TokenChecker from "@/checkCookies";
+import UserGoal from "@/components/user-goal/page";
 import { Roboto_Slab } from "next/font/google";
 import ClientLayout from "@/lib/ThemeProvider";
 

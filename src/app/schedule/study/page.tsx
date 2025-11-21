@@ -143,13 +143,13 @@ export default function ScheduleStudy() {
             ))
         });
 
-        const res = await fetch(`${API_URL}/schedule/study/update/${schedule_study_id}`,{
-            method : "PUT",
-            headers : {
-                "Content-Type" : "application/json",
-                Authorization : `Bearer ${token}`
+        const res = await fetch(`${API_URL}/schedule/study/update/${schedule_study_id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
             },
-            body : JSON.stringify({status : "done"})
+            body: JSON.stringify({ status: "done" })
         })
     }
 
@@ -219,11 +219,11 @@ export default function ScheduleStudy() {
                         <div className={styles.card_header}>
                             <div className={styles.card_header_left}>
                                 <h3 className={styles.card_title}>{s.title}</h3>
-                                <span className={styles.edit_icon} onClick={() => handleEdit(s)}>
+                                {s.status === "pending" && <span className={styles.edit_icon} onClick={() => handleEdit(s)}>
                                     ✏️
-                                </span>
+                                </span>}
                             </div>
-                            {s.status==="pending" && <div className={styles.card_header_right}>
+                            {s.status === "pending" && <div className={styles.card_header_right}>
                                 <input
                                     type="checkbox"
                                     checked={selectSchedule.some(item => item.schedule_study_id === s.study_schedule_id)}

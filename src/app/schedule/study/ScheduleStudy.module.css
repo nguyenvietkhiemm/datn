@@ -30,9 +30,9 @@
     margin-top: 1rem;
 }
 
-.search {
+/* .search {
     flex: 4;
-}
+} */
 
 .filter {
     display: flex;
@@ -119,7 +119,8 @@
     display: flex;
     justify-content: space-between;
 }
-.card_header_left{
+
+.card_header_left {
     display: flex;
     gap: 3px;
 }
@@ -137,20 +138,13 @@
     margin-right: 2px;
 }
 
-.edit_icon{
+.edit_icon {
     height: 1.3rem;
+    cursor: pointer;
 }
 
 .card_description {
     white-space: pre-wrap;
-}
-
-.card_status {
-   
-}
-
-.card_subject_name {
-   
 }
 
 .card_date {

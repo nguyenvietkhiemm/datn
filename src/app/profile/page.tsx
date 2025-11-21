@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ProfileInfo from "@/components/profile-infor/ProfileInfor";
 import ExamResults from "@/components/history-exam/HistoryExam";
 import styles from "./Profile.module.css";
+import UserGoal from "@/components/user-goal/page";
 
 interface User {
     user_name: string;
@@ -12,7 +13,7 @@ interface User {
 }
 
 export default function ProfilePage() {
-    const [activeTab, setActiveTab] = useState<"info" | "results">("info");
+    const [activeTab, setActiveTab] = useState<"info" | "results" | "goals">("info");
     const [user, setUser] = useState<User>({
         user_name: "",
         email: "",
@@ -51,10 +52,21 @@ export default function ProfilePage() {
                 >
                     Kết quả luyện thi
                 </button>
+                <button
+                    className={`${styles.tab} ${activeTab === "goals" ? styles.active : ""
+                        }`}
+                    onClick={() => setActiveTab("goals")}
+                >
+                    Mục tiêu điểm số
+                </button>
             </div>
 
             <div className={styles.content}>
-                {activeTab === "info" ? <ProfileInfo user={user} /> : <ExamResults />}
+                {activeTab === "info" ?
+                    <ProfileInfo user={user} />
+                    : activeTab === "results" ?
+                    <ExamResults />
+                    : <UserGoal />}
             </div>
         </main>
     );
