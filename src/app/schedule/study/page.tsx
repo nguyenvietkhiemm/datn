@@ -223,13 +223,13 @@ export default function ScheduleStudy() {
                                     ✏️
                                 </span>
                             </div>
-                            <div className={styles.card_header_right}>
+                            {s.status==="pending" && <div className={styles.card_header_right}>
                                 <input
                                     type="checkbox"
                                     checked={selectSchedule.some(item => item.schedule_study_id === s.study_schedule_id)}
                                     onChange={() => handleSelectSchedule(s.study_schedule_id)}
                                 />
-                            </div>
+                            </div>}
                         </div>
                         <p className={styles.card_subject_name}>Môn học: {s.subject_name}</p>
                         <p className={styles.card_description}>{s.description}</p>
