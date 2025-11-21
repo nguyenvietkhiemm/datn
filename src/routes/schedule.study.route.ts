@@ -12,7 +12,7 @@ scheduleStudyRouter.get("/filter",
     StudyScheduleController.filter);
 scheduleStudyRouter.get("/:id", StudyScheduleController.getById);
 scheduleStudyRouter.post("/create", StudyScheduleController.create);
-scheduleStudyRouter.put("/:id", StudyScheduleController.update);
-scheduleStudyRouter.delete("/:id", StudyScheduleController.delete);
+scheduleStudyRouter.put("/update/:id", StudyScheduleController.update);
+scheduleStudyRouter.delete("/remove/:id", StudyScheduleController.delete);
 
 export default scheduleStudyRouter;

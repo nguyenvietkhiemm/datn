@@ -15,7 +15,7 @@ const StudyScheduleService = {
             SELECT s.*, sub.subject_name
             FROM study_schedule s
             LEFT JOIN subject sub ON s.subject_id = sub.subject_id
-            WHERE s.status IN ('pending', 'done')
+            WHERE s.status IN ('pending')
                 AND (s.end_time IS NULL OR s.end_time >= (NOW() + INTERVAL '7 hours'))
             ORDER BY s.start_time DESC
             LIMIT $1 OFFSET $2
@@ -26,7 +26,7 @@ const StudyScheduleService = {
             const countQuery = `
                 SELECT COUNT(*) AS total
                 FROM study_schedule
-                WHERE status IN ('pending', 'done')
+                WHERE status IN ('pending')
                     AND (end_time IS NULL OR end_time >= (NOW() + INTERVAL '7 hours'))
                 `;
             const countResult = await client.query(countQuery);
@@ -72,20 +72,21 @@ const StudyScheduleService = {
     },
 
     async update(id: number, data: Partial<Omit<StudySchedule, "study_schedule_id">>): Promise<StudySchedule | null> {
+        
         const queryText = `
-      UPDATE study_schedule
-      SET 
-        title = COALESCE($1, title),
-        description = COALESCE($2, description),
-        start_time = COALESCE($3, start_time),
-        end_time = COALESCE($4, end_time),
-        status = COALESCE($5, status),
-        target_question = COALESCE($6, target_question),
-        subject_id = COALESCE($7, subject_id),
-        update_at = now()
-      WHERE study_schedule_id = $8
-      RETURNING *;
-    `;
+            UPDATE study_schedule
+            SET 
+                title = COALESCE($1, title),
+                description = COALESCE($2, description),
+                start_time = COALESCE($3, start_time),
+                end_time = COALESCE($4, end_time),
+                status = COALESCE($5, status),
+                target_question = COALESCE($6, target_question),
+                subject_id = COALESCE($7, subject_id),
+                update_at = now()
+            WHERE study_schedule_id = $8
+            RETURNING *;
+            `;
         const params = [
             data.title ?? null,
             data.description ?? null,
