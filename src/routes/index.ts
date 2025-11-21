@@ -14,6 +14,7 @@ import bankRoute from './bank.route';
 import fileRouter from './file.route';
 import roadmapRouter from './roadmap.route';
 import scheduleStudyRouter from './schedule.study.route';
+import { UserGoalRoute } from './user.goal.route';
 
 const router = Router();
 
@@ -30,6 +31,7 @@ router.use('/banks', bankRoute);
 router.use("/file", fileRouter);
 router.use("/roadmap", roadmapRouter);
 router.use("/schedule/study", scheduleStudyRouter)
+router.use("/goal", UserGoalRoute)
 router.use("/", authRouter);
 
 export default router;
