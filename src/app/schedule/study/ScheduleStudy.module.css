@@ -62,7 +62,7 @@
     border: 1px solid #ccc;
 }
 
-.filter_status_s:hover{
+.filter_status_s:hover {
     border: 1px solid aquamarine;
 }
 
@@ -88,43 +88,44 @@
     border: 1px solid aquamarine;
 } */
 
-.active{
+.active {
     border: 2px solid #4a90e2;
     background-color: #e6f0ff;
 }
 
 .list {
-    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
-    gap: 2rem;
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
     margin-top: 2rem;
+    margin-left: 5rem;
 }
 
 .item {
-    position: relative;
+    display: flex;
+    flex-direction: column;
     background: white;
     border-radius: 1rem;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.31);
     padding: 1.5rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 14rem;
+    height: auto;
     overflow: hidden;
-}
-
-.item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    gap: 10px;
+    margin-bottom: 1.5rem;
 }
 
 .card_header {
-    position: absolute;
-    top: 1rem;
-    left: 1.5rem;
-    right: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+.card_header_left{
+    display: flex;
+    gap: 3px;
 }
 
 .card_title {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     font-weight: 600;
     color: #111827;
     line-height: 1.4;
@@ -133,43 +134,30 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-right: 2px;
+}
+
+.edit_icon{
+    height: 1.3rem;
 }
 
 .card_description {
-    position: absolute;
-    font-size: 0.9rem;
-    color: #4b5563;
-    font-weight: 600;
-    top: 2.8rem;
-    left: 1.5rem;
+    white-space: pre-wrap;
 }
 
 .card_status {
-    position: absolute;
-    font-size: 0.9rem;
-    color: #4b5563;
-    font-weight: 500;
-    top: 5rem;
-    left: 1.5rem;
+   
 }
 
 .card_subject_name {
-    position: absolute;
-    font-size: 0.9rem;
-    color: #4b5563;
-    font-weight: 500;
-    top: 6.5rem;
-    left: 1.5rem;
+   
 }
 
 .card_date {
-    position: absolute;
-    top: 8rem;
-    left: 1.5rem;
-    font-size: 0.9rem;
-    color: #4b5563;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.5rem;
 }
 
 /* Overlay modal */

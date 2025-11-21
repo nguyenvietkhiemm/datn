@@ -7,6 +7,7 @@ import Pagination from "@/components/pagination/Pagination";
 import { Button } from "@/components/ui/button";
 import AddScheduleStudy from "@/components/add-schedule-study/AddScheduleStudy";
 import Search from "@/components/search/Search";
+import FormScheduleStudy from "@/components/form-schedule-study/FormScheduleStudy";
 
 interface StudySchedule {
     study_schedule_id: number;
@@ -29,6 +30,18 @@ interface StatusProp {
     name: string,
     value: string
 }
+
+interface StudyScheduleForm {
+    schedule_study_id?: number;
+    title: string;
+    description?: string;
+    start_time: string;
+    end_time: string;
+    status?: "pending" | "in_progress" | "completed";
+    target_question: number;
+    subject_id?: number;
+}
+
 export default function ScheduleStudy() {
     const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
     const token = Cookies.get("token");
@@ -37,6 +50,20 @@ export default function ScheduleStudy() {
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [isAdd, setIsAdd] = useState<boolean>(false);
     const [selectedStatus, setSelectedStatus] = useState<string>("pending");
+    const [selectSchedule, setSelectSchedule] = useState<({ schedule_study_id: number }[])>([]);
+    const [isEdit, setIsEdit] = useState(false);
+
+    const [editForm, setEditForm] = useState<StudyScheduleForm>({
+        schedule_study_id: undefined,
+        title: "",
+        description: "",
+        start_time: "",
+        end_time: "",
+        status: "pending",
+        target_question: 0,
+        subject_id: undefined
+    });
+
     const status: StatusProp[] = [
         { name: "Đang chờ", value: "pending" },
         { name: "Đã hoàn thành", value: "done" },
@@ -65,7 +92,7 @@ export default function ScheduleStudy() {
         fetchSchedules(currentPage);
     }, [currentPage]);
 
-    const handleFilter = async (currentPage: number, newStatus : string) => {
+    const handleFilter = async (currentPage: number, newStatus: string) => {
         try {
             const res = await fetch(`${API_URL}/schedule/study/filter?page=${currentPage}&status=${newStatus}`, {
                 method: "GET",
@@ -89,6 +116,43 @@ export default function ScheduleStudy() {
         return `${day}/${month}/${year} ${time}`;
     }
 
+    const handleEdit = (schedule: StudySchedule) => {
+        setEditForm({
+            schedule_study_id: schedule.study_schedule_id,
+            title: schedule.title,
+            description: schedule.description,
+            start_time: schedule.start_time,
+            end_time: schedule.end_time,
+            status: schedule.status as "pending" | "in_progress" | "completed",
+            target_question: schedule.target_question,
+            subject_id: schedule.subject_id
+        });
+        setIsEdit(true);
+    };
+
+    const handleSelectSchedule = async (schedule_study_id: number) => {
+        setSelectSchedule(prev => {
+            const exits = selectSchedule.some((x) => x.schedule_study_id === schedule_study_id);
+            if (exits) return prev.filter((x) => x.schedule_study_id !== schedule_study_id)
+            return [...prev, { schedule_study_id: schedule_study_id }]
+        })
+        setSchedules(prev => {
+            return prev.filter((x) => (
+                x.study_schedule_id !== schedule_study_id
+                && !selectSchedule.some(s => s.schedule_study_id === x.study_schedule_id)
+            ))
+        });
+
+        const res = await fetch(`${API_URL}/schedule/study/update/${schedule_study_id}`,{
+            method : "PUT",
+            headers : {
+                "Content-Type" : "application/json",
+                Authorization : `Bearer ${token}`
+            },
+            body : JSON.stringify({status : "done"})
+        })
+    }
+
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>Danh sách lịch học</h1>
@@ -98,9 +162,9 @@ export default function ScheduleStudy() {
                 <div className={styles.btn_add}>
                     <Button onClick={() => setIsAdd(true)}>Tạo lịch học</Button>
                 </div>
-                <div className={styles.search}>
+                {/* <div className={styles.search}>
                     <Search setTotalPage={setTotalPages} currentPage={currentPage} />
-                </div>
+                </div> */}
             </div>
 
             {/* loc */}
@@ -112,10 +176,10 @@ export default function ScheduleStudy() {
                             className={`${styles.filter_status_s} ${selectedStatus === st.value ? styles.active : ""
                                 }`}
                             onClick={async () => {
-                                const newStatus : string = st.value;
-                                setSelectedStatus(newStatus); 
+                                const newStatus: string = st.value;
+                                setSelectedStatus(newStatus);
 
-                                await handleFilter(currentPage, newStatus); // dùng giá trị mới để filter
+                                await handleFilter(currentPage, newStatus);
                             }}
 
                         >
@@ -124,47 +188,55 @@ export default function ScheduleStudy() {
 
                     ))}
                 </div>
-                {/* <div className={styles.filter_subjects}>
-                    {subjects.map((s) => (
-                        <div
-                            key={s.subject_id}
-                            className={`${styles.filter_subject} ${selectedSubject === s.subject_id ? styles.active : ""
-                                }`}
-                            onClick={() =>
-                                setSelectedSubject(prev => prev === s.subject_id ? null : s.subject_id)
-                            }
-                        >
-                            {s.subject_name}
-                        </div>
-
-                    ))}
-                </div> */}
-                {/* <div className={styles.btn_filter}>
-                    <Button>Lọc</Button>
-                </div> */}
             </div>
 
+            {/* them sua */}
             {isAdd && <div className={styles.overlay}>
                 <div className={styles.csvModal}>
                     <div className={styles.csvHeader}>
-                        <AddScheduleStudy setIsAdd={setIsAdd} />
+                        <AddScheduleStudy isAdd={isAdd} setIsAdd={setIsAdd} />
                     </div>
                 </div>
             </div>}
+
+            {isEdit &&
+                <div className={styles.overlay}>
+                    <div className={styles.csvModal}>
+                        <div className={styles.csvHeader}>
+                            <FormScheduleStudy
+                                form={editForm}
+                                setForm={setEditForm}
+                                setIsEdit={setIsEdit}
+                                isEdit={isEdit} />
+                        </div>
+                    </div>
+                </div>
+            }
+
             <ul className={styles.list}>
                 {schedules?.map((s) => (
                     <li key={s.study_schedule_id} className={styles.item}>
-                        <div className={styles.header}>
-                            <h3 className={styles.title}>{s.title}</h3>
+                        <div className={styles.card_header}>
+                            <div className={styles.card_header_left}>
+                                <h3 className={styles.card_title}>{s.title}</h3>
+                                <span className={styles.edit_icon} onClick={() => handleEdit(s)}>
+                                    ✏️
+                                </span>
+                            </div>
+                            <div className={styles.card_header_right}>
+                                <input
+                                    type="checkbox"
+                                    checked={selectSchedule.some(item => item.schedule_study_id === s.study_schedule_id)}
+                                    onChange={() => handleSelectSchedule(s.study_schedule_id)}
+                                />
+                            </div>
                         </div>
-                        <p className={styles.description}>{s.description}</p>
-                        <p className={styles.subject_name}>{s.subject_name}</p>
-
-                        <p className={styles.date}>
+                        <p className={styles.card_subject_name}>Môn học: {s.subject_name}</p>
+                        <p className={styles.card_description}>{s.description}</p>
+                        <p className={styles.card_date}>
                             <span>📅 Bắt đầu: {formatVN(s.start_time)}</span>
                             <span>📅 Kết thúc: {formatVN(s.end_time)}</span>
                         </p>
-                        <p className={styles.status}>Status: {s.status}</p>
                     </li>
                 ))}
             </ul>

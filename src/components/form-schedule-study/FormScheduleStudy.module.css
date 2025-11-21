@@ -84,6 +84,11 @@
     margin: 4px 0 0 2px;
 }
 
+.button_edit{
+    display: flex;
+    margin-top: 1rem;
+    justify-content: space-between;
+}
 @keyframes fadeIn {
     from {
         opacity: 0;
