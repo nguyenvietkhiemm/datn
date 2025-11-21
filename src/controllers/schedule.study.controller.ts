@@ -42,7 +42,7 @@ const StudyScheduleController = {
 
   async delete(req: Request, res: Response) {
     const response: DefaultResponse<any> = await safeExecute(async () => {
-      const id = Number(req.params.id);
+      const id = Number(req.params.schedule_study_id);
       const ok = await StudyScheduleService.delete(id);
       if (!ok) return { status: 404, data: null, message: "Không tìm thấy lịch học" };
       return { status: 200, data: true, message: "Xoá thành công" };
