@@ -21,10 +21,10 @@ export const UserGoalController = {
     async create(req: Request, res: Response) {
         const response = await safeExecute(async () => {
             const userId = req.user?.user_id;
-            const body = req.body;
-
+            const {form} = req.body;
+            
             const newGoal = await UserGoalService.create({
-                ...body,
+                ...form,
                 user_id: userId
             });
 

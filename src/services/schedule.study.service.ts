@@ -2,13 +2,10 @@ import pool, { query } from "../config/database";
 import { StudySchedule } from "../model/schedule.study.model";
 
 const StudyScheduleService = {
-    async getAll(page: number): Promise<{ schedule: (StudySchedule & { subject_name: string })[]; totalPages: number }> {
+    async getAll(): Promise<{ schedule: (StudySchedule & { subject_name: string })[] }> {
         const client = await pool.connect();
         try {
             await client.query("BEGIN");
-
-            const limit = 20;
-            const offset = (page - 1) * limit;
 
             // Lấy dữ liệu phân trang
             const queryText = `
@@ -18,28 +15,16 @@ const StudyScheduleService = {
             WHERE s.status IN ('pending')
                 AND (s.end_time IS NULL OR s.end_time >= (NOW() + INTERVAL '7 hours'))
             ORDER BY s.start_time DESC
-            LIMIT $1 OFFSET $2
             `;
-            const result = await client.query(queryText, [limit, offset]);
-
-            // Lấy tổng số item
-            const countQuery = `
-                SELECT COUNT(*) AS total
-                FROM study_schedule
-                WHERE status IN ('pending')
-                    AND (end_time IS NULL OR end_time >= (NOW() + INTERVAL '7 hours'))
-                `;
-            const countResult = await client.query(countQuery);
-            const totalItems = parseInt(countResult.rows[0].total, 10);
-            const totalPages = Math.ceil(totalItems / limit);
+            const result = await client.query(queryText);
 
             await client.query("COMMIT");
 
-            return { schedule: result.rows, totalPages };
+            return { schedule: result.rows };
         } catch (error) {
             await client.query("ROLLBACK");
             console.error("Lỗi khi lấy lịch học:", error);
-            return { schedule: [], totalPages: 0 };
+            return { schedule: []};
         } finally {
             client.release();
         }
@@ -107,16 +92,12 @@ const StudyScheduleService = {
         return (result.rowCount ?? 0) > 0;
     },
 
-    async filter(
-            page: number,   
+    async filter( 
             status?: string,
-    ): Promise<{ schedule: (StudySchedule & { subject_name: string })[]; totalPages: number }> {
+    ): Promise<{ schedule: (StudySchedule & { subject_name: string })[]}> {
         const client = await pool.connect();
         try {
             await client.query("BEGIN");
-    
-            const limit = 20;
-            const offset = (page - 1) * limit;
     
             //Danh sách điều kiện
             const where: string[] = [];
@@ -141,30 +122,17 @@ const StudyScheduleService = {
                 LEFT JOIN subject sub ON s.subject_id = sub.subject_id
                 ${whereSQL}
                 ORDER BY s.start_time DESC
-                LIMIT $${params.length + 1} OFFSET $${params.length + 2}
             `;
     
-            const result = await client.query(queryText, [...params, limit, offset]);
+            const result = await client.query(queryText, [...params]);
             
-            // COUNT cho phân trang
-            const countQuery = `
-                SELECT COUNT(*) AS total
-                FROM study_schedule s
-                LEFT JOIN subject sub ON s.subject_id = sub.subject_id
-                ${whereSQL}
-            `;
-            const countResult = await client.query(countQuery, params);
-    
-            const totalItems = parseInt(countResult.rows[0].total, 10);
-            const totalPages = Math.ceil(totalItems / limit);
-    
             await client.query("COMMIT");
     
-            return { schedule: result.rows, totalPages };
+            return { schedule: result.rows };
         } catch (error) {
             await client.query("ROLLBACK");
             console.error("Lỗi khi filter:", error);
-            return { schedule: [], totalPages: 0 };
+            return { schedule: []};
         } finally {
             client.release();
         }
