@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 
 interface StudyScheduleForm {
-    schedule_study_id? : number;
+    schedule_study_id?: number;
     title: string;
     description?: string;
     start_time: string;
@@ -14,6 +14,18 @@ interface StudyScheduleForm {
     status?: "pending" | "in_progress" | "completed";
     target_question: number;
     subject_id?: number;
+}
+
+interface StudySchedule {
+    study_schedule_id: number;
+    title: string;
+    description?: string;
+    start_time: string;
+    end_time: string;
+    status?: string;
+    target_question: number;
+    subject_id: number;
+    subject_name: string
 }
 
 interface Subject {
@@ -31,6 +43,7 @@ interface FormScheduleProps {
     setError?: React.Dispatch<React.SetStateAction<string>>;
     error?: string;
     loading?: boolean;
+    setSchedules: React.Dispatch<React.SetStateAction<StudySchedule[]>>;
 }
 
 export default function FormScheduleStudy({
@@ -42,7 +55,8 @@ export default function FormScheduleStudy({
     setForm,
     error,
     setError,
-    loading
+    loading,
+    setSchedules
 }: FormScheduleProps) {
 
     const [subjects, setSubjects] = useState<Subject[]>([]);
@@ -109,35 +123,67 @@ export default function FormScheduleStudy({
 
     const handleAdd = async (e: React.FormEvent) => {
         e.preventDefault();
-        await fetch(`${API_ARL}/schedule/study/create`, {
+        const res = await fetch(`${API_ARL}/schedule/study/create`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(form)
         })
-        window.location.reload()
+        const schedule = await res.json();
+
+        setSchedules(prev => [...prev, schedule.data]);
+        setIsAdd?.(false)
     };
 
-    const handleSave = async (schedule_study_id? : number) => {
-        const res = await fetch(`${API_ARL}/schedule/study/update/${schedule_study_id}`,{
-            method : "PUT",
-            headers : {
-                "Content-type" : "application/json",
-                Authorization : `Bearer ${token}`
+    const handleSave = async (schedule_study_id?: number) => {
+        const res = await fetch(`${API_ARL}/schedule/study/update/${schedule_study_id}`, {
+            method: "PUT",
+            headers: {
+                "Content-type": "application/json",
+                Authorization: `Bearer ${token}`
             },
-            body : JSON.stringify(form)
+            body: JSON.stringify(form)
         })
+        const schedule = await res.json();
+        setSchedules(prev =>
+            prev.map(p =>
+                p.study_schedule_id === schedule.schedule_study_id 
+                    ? schedule 
+                    : p
+            )
+        );
+        
     };
 
-    const handleRemove = async (schedule_study_id? : number) => {
-        const res = await fetch(`${API_ARL}/schedule/study/remove/${schedule_study_id}`,{
-            method : "DELETE",
-            headers : {
-                "Content-type" : "application/json",
-                Authorization : `Bearer ${token}`
+    
+    function toLocalDatetimeValue(isoString: string) {
+        // Chuyển về object Date
+        const date = new Date(isoString);
+    
+        // Lấy local datetime (UTC+7 của Việt Nam)
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+    
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+    };    
+    
+    const handleRemove = async (schedule_study_id?: number) => {
+        const res = await fetch(`${API_ARL}/schedule/study/remove/${schedule_study_id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-type": "application/json",
+                Authorization: `Bearer ${token}`
             }
         })
+        setSchedules(prev => 
+            prev.filter(p => 
+                p.study_schedule_id !== schedule_study_id
+            )
+        )
     }
     return (
         <div className={styles.container}>
@@ -180,7 +226,7 @@ export default function FormScheduleStudy({
                         className={styles.input}
                         type="datetime-local"
                         name="start_time"
-                        value={form.start_time}
+                        value={toLocalDatetimeValue(form.start_time)}
                         onChange={handleChange}
                     />
                 </label>
@@ -191,7 +237,7 @@ export default function FormScheduleStudy({
                         className={styles.input}
                         type="datetime-local"
                         name="end_time"
-                        value={form.end_time}
+                        value={toLocalDatetimeValue(form.end_time)}
                         onChange={handleChange}
                     />
                 </label>
@@ -211,7 +257,7 @@ export default function FormScheduleStudy({
                     Môn học
                     <select
                         value={form.subject_id ? form.subject_id.toString() : ""}
-                        onChange={(e) => {handleChange}}
+                        onChange={(e) => { handleChange }}
                         className={styles.select}
                         name="subject_id"
                     >
@@ -224,17 +270,17 @@ export default function FormScheduleStudy({
                     </select>
                 </label>
 
-                {isAdd && 
-                <Button onClick={(e) => handleAdd(e)} disabled={loading}>
-                    {loading ? "Đang tạo..." : "Tạo lịch học"}
-                </Button>}
+                {isAdd &&
+                    <Button onClick={(e) => handleAdd(e)} disabled={loading}>
+                        {loading ? "Đang tạo..." : "Tạo lịch học"}
+                    </Button>}
 
                 {isEdit &&
                     <div className={styles.button_edit}>
                         <Button onClick={() => handleSave(form.schedule_study_id)}>
                             Lưu
                         </Button>
-                        <Button onClick={() =>handleRemove(form.schedule_study_id)}>
+                        <Button onClick={() => handleRemove(form.schedule_study_id)}>
                             Xoá
                         </Button>
                     </div>

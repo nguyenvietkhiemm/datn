@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react"
-import Cookies from "js-cookie";
+import React, { useEffect, useState } from "react"
 import FormScheduleStudy from "../form-schedule-study/FormScheduleStudy";
 
 interface StudyScheduleForm {
@@ -14,12 +13,25 @@ interface StudyScheduleForm {
     subject_id?: number;
 }
 
-interface Props {
-    setIsAdd: React.Dispatch<React.SetStateAction<boolean>>;
-    isAdd : boolean
+interface StudySchedule {
+    study_schedule_id: number;
+    title: string;
+    description?: string;
+    start_time: string;
+    end_time: string;
+    status?: string;
+    target_question: number;
+    subject_id: number;
+    subject_name: string
 }
 
-export default function AddScheduleStudy({isAdd, setIsAdd }: Props) {
+interface Props {
+    setIsAdd: React.Dispatch<React.SetStateAction<boolean>>;
+    isAdd : boolean;
+    setSchedules : React.Dispatch<React.SetStateAction<StudySchedule[]>>;
+}
+
+export default function AddScheduleStudy({isAdd, setIsAdd, setSchedules }: Props) {
     const [form, setForm] = useState<StudyScheduleForm>({
         title: "",
         description: "",
@@ -41,6 +53,7 @@ export default function AddScheduleStudy({isAdd, setIsAdd }: Props) {
             error={error}
             setError={setError}
             loading={loading}
+            setSchedules={setSchedules}
         />
     );
 }

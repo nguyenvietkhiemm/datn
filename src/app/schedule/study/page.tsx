@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import styles from "./ScheduleStudy.module.css";
 import Cookies from "js-cookie";
-import Pagination from "@/components/pagination/Pagination";
 import { Button } from "@/components/ui/button";
 import AddScheduleStudy from "@/components/add-schedule-study/AddScheduleStudy";
 import FormScheduleStudy from "@/components/form-schedule-study/FormScheduleStudy";
@@ -18,11 +17,6 @@ interface StudySchedule {
     target_question: number;
     subject_id: number;
     subject_name: string
-}
-
-interface SubjectProp {
-    subject_id: number;
-    subject_name: string;
 }
 
 interface StatusProp {
@@ -45,8 +39,6 @@ export default function ScheduleStudy() {
     const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
     const token = Cookies.get("token");
     const [schedules, setSchedules] = useState<StudySchedule[]>([]);
-    const [totalPages, setTotalPages] = useState(1);
-    const [currentPage, setCurrentPage] = useState<number>(1);
     const [isAdd, setIsAdd] = useState<boolean>(false);
     const [selectedStatus, setSelectedStatus] = useState<string>("pending");
     const [selectSchedule, setSelectSchedule] = useState<({ schedule_study_id: number }[])>([]);
@@ -69,9 +61,9 @@ export default function ScheduleStudy() {
         { name: "Bỏ lỡ", value: "miss" }
     ]
 
-    const fetchSchedules = async (currentPage: number) => {
+    const fetchSchedules = async () => {
         try {
-            const res = await fetch(`${API_URL}/schedule/study?page=${currentPage}`, {
+            const res = await fetch(`${API_URL}/schedule/study`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -81,19 +73,18 @@ export default function ScheduleStudy() {
 
             const scheduleStudy = await res.json();
             setSchedules(scheduleStudy.data.schedule);
-            setTotalPages(scheduleStudy.data.totalPages);
         } catch (err) {
             console.error("Lỗi khi lấy lịch học:", err);
         }
     };
 
     useEffect(() => {
-        fetchSchedules(currentPage);
-    }, [currentPage]);
+        fetchSchedules();
+    }, []);
 
-    const handleFilter = async (currentPage: number, newStatus: string) => {
+    const handleFilter = async (newStatus: string) => {
         try {
-            const res = await fetch(`${API_URL}/schedule/study/filter?page=${currentPage}&status=${newStatus}`, {
+            const res = await fetch(`${API_URL}/schedule/study/filter?status=${newStatus}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "appication/json",
@@ -102,7 +93,6 @@ export default function ScheduleStudy() {
             })
             const scheduleStudy = await res.json();
             setSchedules(scheduleStudy.data.schedule);
-            setTotalPages(scheduleStudy.data.totalPages);
         } catch (error) {
             console.log("error: ", error);
         }
@@ -113,7 +103,7 @@ export default function ScheduleStudy() {
         const time = timePart ? timePart.slice(0, 5) : "00:00";
         const [year, month, day] = datePart.split("-");
         return `${day}/${month}/${year} ${time}`;
-    }
+    };
 
     const handleEdit = (schedule: StudySchedule) => {
         setEditForm({
@@ -151,7 +141,7 @@ export default function ScheduleStudy() {
             body: JSON.stringify({ status: "done" })
         })
     }
-
+    
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>Danh sách lịch học</h1>
@@ -161,9 +151,6 @@ export default function ScheduleStudy() {
                 <div className={styles.btn_add}>
                     <Button onClick={() => setIsAdd(true)}>Tạo lịch học</Button>
                 </div>
-                {/* <div className={styles.search}>
-                    <Search setTotalPage={setTotalPages} currentPage={currentPage} />
-                </div> */}
             </div>
 
             {/* loc */}
@@ -178,7 +165,7 @@ export default function ScheduleStudy() {
                                 const newStatus: string = st.value;
                                 setSelectedStatus(newStatus);
 
-                                await handleFilter(currentPage, newStatus);
+                                await handleFilter( newStatus);
                             }}
 
                         >
@@ -193,7 +180,7 @@ export default function ScheduleStudy() {
             {isAdd && <div className={styles.overlay}>
                 <div className={styles.csvModal}>
                     <div className={styles.csvHeader}>
-                        <AddScheduleStudy isAdd={isAdd} setIsAdd={setIsAdd} />
+                        <AddScheduleStudy isAdd={isAdd} setIsAdd={setIsAdd} setSchedules={setSchedules}/>
                     </div>
                 </div>
             </div>}
@@ -206,7 +193,9 @@ export default function ScheduleStudy() {
                                 form={editForm}
                                 setForm={setEditForm}
                                 setIsEdit={setIsEdit}
-                                isEdit={isEdit} />
+                                isEdit={isEdit}
+                                setSchedules={setSchedules}
+                                 />
                         </div>
                     </div>
                 </div>
@@ -239,9 +228,6 @@ export default function ScheduleStudy() {
                     </li>
                 ))}
             </ul>
-
-            {/* phan trang */}
-            <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} />
         </div>
     );
 }
