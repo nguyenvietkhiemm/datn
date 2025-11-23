@@ -1,0 +1,44 @@
+.container {
+    background: #fff;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+    position: fixed;
+    right: 1rem;
+    top: 10rem;
+    width: 20rem;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.goalItem {
+    margin-bottom: 16px;
+}
+
+.goalHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.subjectName {
+    color: #333;
+}
+
+.progressBox {
+    background-color: #eee;
+    border-radius: 8px;
+    height: 20px;
+    overflow: hidden;
+}
+
+.bar {
+    height: 100%;
+    background-color: #4caf50;
+    transition: width 0.3s ease;
+}

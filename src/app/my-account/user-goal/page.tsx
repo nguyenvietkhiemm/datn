@@ -11,6 +11,7 @@ interface Goal {
     target_score: number;
     deadline: string;
     subject_name: string;
+    current_progress: number;
 }
 
 interface Subject {
