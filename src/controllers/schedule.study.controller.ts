@@ -6,7 +6,7 @@ import { DefaultResponse } from "../utils/safe.execute";
 const StudyScheduleController = {
   async getAll(req: Request, res: Response) {
     const response: DefaultResponse<any> = await safeExecute(async () => {
-      const list = await StudyScheduleService.getAll(Number(req.query.page));
+      const list = await StudyScheduleService.getAll();
       return { status: 200, data: list, message: "Danh sách lịch học" };
     });
     res.status(response.status).json(response);
@@ -52,9 +52,8 @@ const StudyScheduleController = {
 
   async filter(req: Request, res: Response) {
     const response: DefaultResponse<any> = await safeExecute(async () => {
-      const page = Number(req.query.page);
       const status = String(req.query.status);
-      const ok = await StudyScheduleService.filter(page, status);
+      const ok = await StudyScheduleService.filter(status);
       return { status: 200, data: ok, message: "Lọc thành công" };
     });
     res.status(response.status).json(response);
