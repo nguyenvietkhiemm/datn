@@ -65,103 +65,139 @@
     "math": [],
     "images": [
       {
-        "rId": "rId7",
-        "img_rel": "word/media/image1.png",
-        "ext": ".png",
-        "size": 22377,
+        "rIds": [
+          "rId7",
+          "rId8"
+        ],
+        "img_rels": [
+          "word/media/image1.png",
+          "word/media/image2.png"
+        ],
+        "exts": [
+          ".png"
+        ],
+        "sizes": [
+          22377,
+          22377
+        ],
         "sha1": "bb154505b5d9e3944af05c578c080b81b772c2f2",
-        "alt": "Picture 21",
-        "selected": false,
-        "saved_path": null,
-        "reasons": []
-      },
-      {
-        "rId": "rId9",
-        "img_rel": "word/media/image3.png",
-        "ext": ".png",
-        "size": 102413,
-        "sha1": "be28bd5edaa6a238b3066a6b040febc104af2c42",
-        "alt": "Picture 1",
+        "alts": [
+          "Picture 21",
+          "Group 1"
+        ],
         "selected": true,
-        "saved_path": "extracted\\media\\image3.png",
+        "saved_path": "extracted\\media\\image1.png",
+        "rId_to_saved": {
+          "rId7": "extracted\\media\\image1.png",
+          "rId8": "extracted\\media\\image1.png"
+        },
         "reasons": [
-          "auto_select_very_large_global",
+          "duplicate_of_canonical",
+          "reused_existing",
+          "near_question_and_raster",
           "extracted_now"
         ]
       },
       {
-        "rId": "rId11",
-        "img_rel": "word/media/image5.png",
-        "ext": ".png",
-        "size": 63295,
-        "sha1": "8b5bb9bd351070c64bd17a6487503df8c0c62448",
-        "alt": "Picture 1",
-        "selected": false,
-        "saved_path": null,
-        "reasons": []
-      },
-      {
-        "rId": "rId13",
-        "img_rel": "word/media/image7.png",
-        "ext": ".png",
-        "size": 104808,
-        "sha1": "2e41faebf8e8f55eacc176bf36a70b7adb410eff",
-        "alt": "Picture 1",
+        "rIds": [
+          "rId9",
+          "rId10"
+        ],
+        "img_rels": [
+          "word/media/image3.png",
+          "word/media/image4.png"
+        ],
+        "exts": [
+          ".png"
+        ],
+        "sizes": [
+          102413,
+          102413
+        ],
+        "sha1": "be28bd5edaa6a238b3066a6b040febc104af2c42",
+        "alts": [
+          "Picture 1",
+          "Group 4"
+        ],
         "selected": true,
-        "saved_path": "extracted\\media\\image7.png",
+        "saved_path": "extracted\\media\\image3.png",
+        "rId_to_saved": {
+          "rId9": "extracted\\media\\image3.png",
+          "rId10": "extracted\\media\\image3.png"
+        },
         "reasons": [
-          "auto_select_very_large_global",
+          "duplicate_of_canonical",
+          "reused_existing",
+          "near_question_and_raster",
           "extracted_now"
         ]
       },
       {
-        "rId": "rId8",
-        "img_rel": "word/media/image2.png",
-        "ext": ".png",
-        "size": 22377,
-        "sha1": "bb154505b5d9e3944af05c578c080b81b772c2f2",
-        "alt": "Group 1",
-        "selected": false,
-        "saved_path": null,
-        "reasons": []
-      },
-      {
-        "rId": "rId10",
-        "img_rel": "word/media/image4.png",
-        "ext": ".png",
-        "size": 102413,
-        "sha1": "be28bd5edaa6a238b3066a6b040febc104af2c42",
-        "alt": "Group 4",
+        "rIds": [
+          "rId11",
+          "rId12"
+        ],
+        "img_rels": [
+          "word/media/image5.png",
+          "word/media/image6.png"
+        ],
+        "exts": [
+          ".png"
+        ],
+        "sizes": [
+          63295,
+          63295
+        ],
+        "sha1": "8b5bb9bd351070c64bd17a6487503df8c0c62448",
+        "alts": [
+          "Group 5",
+          "Picture 1"
+        ],
         "selected": true,
-        "saved_path": "extracted\\media\\image3.png",
+        "saved_path": "extracted\\media\\image5.png",
+        "rId_to_saved": {
+          "rId11": "extracted\\media\\image5.png",
+          "rId12": "extracted\\media\\image5.png"
+        },
         "reasons": [
-          "auto_select_very_large_global",
-          "duplicate_of_selected"
+          "duplicate_of_canonical",
+          "reused_existing",
+          "near_question_and_raster",
+          "extracted_now"
         ]
       },
       {
-        "rId": "rId12",
-        "img_rel": "word/media/image6.png",
-        "ext": ".png",
-        "size": 63295,
-        "sha1": "8b5bb9bd351070c64bd17a6487503df8c0c62448",
-        "alt": "Group 5",
-        "selected": false,
-        "saved_path": null,
-        "reasons": []
-      },
-      {
-        "rId": "rId14",
-        "img_rel": "word/media/image8.png",
-        "ext": ".png",
-        "size": 104808,
+        "rIds": [
+          "rId13",
+          "rId14"
+        ],
+        "img_rels": [
+          "word/media/image7.png",
+          "word/media/image8.png"
+        ],
+        "exts": [
+          ".png"
+        ],
+        "sizes": [
+          104808,
+          104808
+        ],
         "sha1": "2e41faebf8e8f55eacc176bf36a70b7adb410eff",
-        "alt": "Group 7",
+        "alts": [
+          "Group 7",
+          "Picture 1"
+        ],
         "selected": true,
         "saved_path": "extracted\\media\\image7.png",
+        "rId_to_saved": {
+          "rId13": "extracted\\media\\image7.png",
+          "rId14": "extracted\\media\\image7.png"
+        },
         "reasons": [
-          "auto_select_very_large_global",
-          "duplicate_of_selected"
+          "duplicate_of_canonical",
+          "reused_existing",
+          "near_question_and_raster",
+          "extracted_now"
         ]
       }
     ]
@@ -232,27 +268,53 @@
     "math": [],
     "images": [
       {
-        "rId": "rId15",
-        "img_rel": "word/media/image9.wmf",
-        "ext": ".wmf",
-        "size": 1338,
+        "rIds": [
+          "rId15"
+        ],
+        "img_rels": [
+          "word/media/image9.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          1338
+        ],
         "sha1": "b9edc70cfcf6ab63080c3bf248ebee634f30e807",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId15": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId17",
-        "img_rel": "word/media/image10.wmf",
-        "ext": ".wmf",
-        "size": 1338,
+        "rIds": [
+          "rId17"
+        ],
+        "img_rels": [
+          "word/media/image10.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          1338
+        ],
         "sha1": "c27dddefcd4739112dd2163a0cf9cfe65ca487fd",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId17": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -265,27 +327,53 @@
     "math": [],
     "images": [
       {
-        "rId": "rId19",
-        "img_rel": "word/media/image11.wmf",
-        "ext": ".wmf",
-        "size": 1646,
+        "rIds": [
+          "rId19"
+        ],
+        "img_rels": [
+          "word/media/image11.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          1646
+        ],
         "sha1": "94904ab5e694ea8ad3aab63f4776372c0b5205e0",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId19": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId21",
-        "img_rel": "word/media/image12.wmf",
-        "ext": ".wmf",
-        "size": 1346,
+        "rIds": [
+          "rId21"
+        ],
+        "img_rels": [
+          "word/media/image12.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          1346
+        ],
         "sha1": "610bd1680f28fc0c6d1198b429ca2f861662f74a",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId21": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -298,27 +386,53 @@
     "math": [],
     "images": [
       {
-        "rId": "rId23",
-        "img_rel": "word/media/image13.wmf",
-        "ext": ".wmf",
-        "size": 754,
+        "rIds": [
+          "rId23"
+        ],
+        "img_rels": [
+          "word/media/image13.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          754
+        ],
         "sha1": "cb44f49b886178bb5813674b62c47798528d3951",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId23": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId25",
-        "img_rel": "word/media/image14.wmf",
-        "ext": ".wmf",
-        "size": 1054,
+        "rIds": [
+          "rId25"
+        ],
+        "img_rels": [
+          "word/media/image14.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          1054
+        ],
         "sha1": "6bbca209914d25eaeb0558bed4bfe8052f0e55a8",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId25": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -331,14 +445,27 @@
     "math": [],
     "images": [
       {
-        "rId": "rId27",
-        "img_rel": "word/media/image15.wmf",
-        "ext": ".wmf",
-        "size": 730,
+        "rIds": [
+          "rId27"
+        ],
+        "img_rels": [
+          "word/media/image15.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          730
+        ],
         "sha1": "072480b6fdb1bf785e2c8803356e1070e1880329",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId27": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -351,14 +478,27 @@
     "math": [],
     "images": [
       {
-        "rId": "rId30",
-        "img_rel": "word/media/image16.wmf",
-        "ext": ".wmf",
-        "size": 738,
+        "rIds": [
+          "rId30"
+        ],
+        "img_rels": [
+          "word/media/image16.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          738
+        ],
         "sha1": "d1feca1ce63af29cd5b1d2834db1612af14b9b9a",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId30": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -371,53 +511,105 @@
     "math": [],
     "images": [
       {
-        "rId": "rId32",
-        "img_rel": "word/media/image17.wmf",
-        "ext": ".wmf",
-        "size": 712,
+        "rIds": [
+          "rId32"
+        ],
+        "img_rels": [
+          "word/media/image17.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          712
+        ],
         "sha1": "07055d22edfa49d895e8296c81cdb4635c1f5076",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId32": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId34",
-        "img_rel": "word/media/image18.wmf",
-        "ext": ".wmf",
-        "size": 712,
+        "rIds": [
+          "rId34"
+        ],
+        "img_rels": [
+          "word/media/image18.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          712
+        ],
         "sha1": "885965c1d939a003cf4d7a00e07f287b3b65dbee",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId34": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId36",
-        "img_rel": "word/media/image19.wmf",
-        "ext": ".wmf",
-        "size": 720,
+        "rIds": [
+          "rId36"
+        ],
+        "img_rels": [
+          "word/media/image19.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          720
+        ],
         "sha1": "746b85514c82669845691e2e3b0a48c11252b6eb",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId36": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId38",
-        "img_rel": "word/media/image20.wmf",
-        "ext": ".wmf",
-        "size": 720,
+        "rIds": [
+          "rId38"
+        ],
+        "img_rels": [
+          "word/media/image20.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          720
+        ],
         "sha1": "da58b2438629f869f7d097151032e72facb192b7",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId38": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -478,66 +670,131 @@
     "math": [],
     "images": [
       {
-        "rId": "rId40",
-        "img_rel": "word/media/image21.wmf",
-        "ext": ".wmf",
-        "size": 658,
+        "rIds": [
+          "rId40"
+        ],
+        "img_rels": [
+          "word/media/image21.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          658
+        ],
         "sha1": "05b95b4c2670faefbffc112868056e5651dacbb9",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId40": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId42",
-        "img_rel": "word/media/image22.wmf",
-        "ext": ".wmf",
-        "size": 738,
+        "rIds": [
+          "rId42"
+        ],
+        "img_rels": [
+          "word/media/image22.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          738
+        ],
         "sha1": "b98c5e1b62153fd68765f34a9696a0c6a160382c",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId42": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId44",
-        "img_rel": "word/media/image23.wmf",
-        "ext": ".wmf",
-        "size": 848,
+        "rIds": [
+          "rId44"
+        ],
+        "img_rels": [
+          "word/media/image23.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          848
+        ],
         "sha1": "26dc5d3e96b451b0781753b27bd31da419026075",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId44": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId46",
-        "img_rel": "word/media/image24.wmf",
-        "ext": ".wmf",
-        "size": 874,
+        "rIds": [
+          "rId46"
+        ],
+        "img_rels": [
+          "word/media/image24.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          874
+        ],
         "sha1": "bb44292c5c5e88c3a9a424f09787d6e5f4e84908",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId46": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId48",
-        "img_rel": "word/media/image25.wmf",
-        "ext": ".wmf",
-        "size": 874,
+        "rIds": [
+          "rId48"
+        ],
+        "img_rels": [
+          "word/media/image25.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          874
+        ],
         "sha1": "fb1fca8e6325e328c0fb9e8efbf4a3a3b9ea71b5",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId48": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -586,40 +843,79 @@
     "math": [],
     "images": [
       {
-        "rId": "rId50",
-        "img_rel": "word/media/image26.wmf",
-        "ext": ".wmf",
-        "size": 598,
+        "rIds": [
+          "rId50"
+        ],
+        "img_rels": [
+          "word/media/image26.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          598
+        ],
         "sha1": "6ae61a35413d230c265957c411facf4cc8c53b20",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId50": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId52",
-        "img_rel": "word/media/image27.wmf",
-        "ext": ".wmf",
-        "size": 1206,
+        "rIds": [
+          "rId52"
+        ],
+        "img_rels": [
+          "word/media/image27.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          1206
+        ],
         "sha1": "cbc975be848448efff1429a2a539117b838b40e4",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId52": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId54",
-        "img_rel": "word/media/image28.wmf",
-        "ext": ".wmf",
-        "size": 710,
+        "rIds": [
+          "rId54"
+        ],
+        "img_rels": [
+          "word/media/image28.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          710
+        ],
         "sha1": "ee9aa36ff2b87097c0819eaf8ddc481cd0e70026",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId54": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -632,53 +928,105 @@
     "math": [],
     "images": [
       {
-        "rId": "rId56",
-        "img_rel": "word/media/image29.wmf",
-        "ext": ".wmf",
-        "size": 722,
+        "rIds": [
+          "rId56"
+        ],
+        "img_rels": [
+          "word/media/image29.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          722
+        ],
         "sha1": "3901ae6a5c0e003a4762ee1500cb63fc64ad3fbf",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId56": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId58",
-        "img_rel": "word/media/image30.wmf",
-        "ext": ".wmf",
-        "size": 730,
+        "rIds": [
+          "rId58"
+        ],
+        "img_rels": [
+          "word/media/image30.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          730
+        ],
         "sha1": "cf5687cad98a572b50d297d8a4e220c54198c64f",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId58": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId60",
-        "img_rel": "word/media/image31.wmf",
-        "ext": ".wmf",
-        "size": 722,
+        "rIds": [
+          "rId60"
+        ],
+        "img_rels": [
+          "word/media/image31.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          722
+        ],
         "sha1": "c92c55cecc7b403e9eca0141e69c208ef9b0ad19",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId60": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId62",
-        "img_rel": "word/media/image32.wmf",
-        "ext": ".wmf",
-        "size": 730,
+        "rIds": [
+          "rId62"
+        ],
+        "img_rels": [
+          "word/media/image32.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          730
+        ],
         "sha1": "fe493959276979242477bd1e97c03ab9308edea1",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId62": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -709,14 +1057,25 @@
     "math": [],
     "images": [
       {
-        "rId": "rId64",
-        "img_rel": "word/media/image33.png",
-        "ext": ".png",
-        "size": 17505,
+        "rIds": [
+          "rId64"
+        ],
+        "img_rels": [
+          "word/media/image33.png"
+        ],
+        "exts": [
+          ".png"
+        ],
+        "sizes": [
+          17505
+        ],
         "sha1": "6796b6a8e919874f65f182c6d698929aeba4dfef",
-        "alt": "",
+        "alts": [],
         "selected": true,
         "saved_path": "extracted\\media\\image33.png",
+        "rId_to_saved": {
+          "rId64": "extracted\\media\\image33.png"
+        },
         "reasons": [
           "near_question_and_raster",
           "extracted_now"
@@ -791,40 +1150,79 @@
     "math": [],
     "images": [
       {
-        "rId": "rId65",
-        "img_rel": "word/media/image34.wmf",
-        "ext": ".wmf",
-        "size": 828,
+        "rIds": [
+          "rId65"
+        ],
+        "img_rels": [
+          "word/media/image34.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          828
+        ],
         "sha1": "b3f6f3e9b0322efb1e6d686dd53cb8d992d0ae0e",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId65": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId67",
-        "img_rel": "word/media/image35.wmf",
-        "ext": ".wmf",
-        "size": 842,
+        "rIds": [
+          "rId67"
+        ],
+        "img_rels": [
+          "word/media/image35.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          842
+        ],
         "sha1": "658cdfc7d736cd382372d73b6a115072830174df",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId67": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId69",
-        "img_rel": "word/media/image36.wmf",
-        "ext": ".wmf",
-        "size": 416,
+        "rIds": [
+          "rId69"
+        ],
+        "img_rels": [
+          "word/media/image36.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          416
+        ],
         "sha1": "925f10252953c3874d9c1e2d06dc38ab2ec61b1d",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId69": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -873,14 +1271,25 @@
     "math": [],
     "images": [
       {
-        "rId": "rId71",
-        "img_rel": "word/media/image37.png",
-        "ext": ".png",
-        "size": 34989,
+        "rIds": [
+          "rId71"
+        ],
+        "img_rels": [
+          "word/media/image37.png"
+        ],
+        "exts": [
+          ".png"
+        ],
+        "sizes": [
+          34989
+        ],
         "sha1": "cf50c7d8a6ee4da225e6d732b5b921aa8621375e",
-        "alt": "",
+        "alts": [],
         "selected": true,
         "saved_path": "extracted\\media\\image37.png",
+        "rId_to_saved": {
+          "rId71": "extracted\\media\\image37.png"
+        },
         "reasons": [
           "near_question_and_raster",
           "extracted_now"
@@ -894,70 +1303,160 @@
     "math": [],
     "images": [
       {
-        "rId": "rId72",
-        "img_rel": "word/media/image38.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId72"
+        ],
+        "img_rels": [
+          "word/media/image38.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "64f7958ca668799463166ce06dcec7065e058a88",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId72": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       },
       {
-        "rId": "rId74",
-        "img_rel": "word/media/image39.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId74"
+        ],
+        "img_rels": [
+          "word/media/image39.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "04d90940cff9c4f812e173593b538b6504b8ae62",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId74": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       },
       {
-        "rId": "rId76",
-        "img_rel": "word/media/image40.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId76"
+        ],
+        "img_rels": [
+          "word/media/image40.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "ee53f4e29fbe736cf2848e9827fd1cf5d2ed3449",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId76": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       },
       {
-        "rId": "rId78",
-        "img_rel": "word/media/image41.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId78"
+        ],
+        "img_rels": [
+          "word/media/image41.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "4d7a062757b8e2e0593b808110537163e556d318",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId78": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       },
       {
-        "rId": "rId80",
-        "img_rel": "word/media/image42.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId80"
+        ],
+        "img_rels": [
+          "word/media/image42.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "bb824bc1c6038109a1f02a70168b8b24a1d8c923",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId80": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       },
       {
-        "rId": "rId82",
-        "img_rel": "word/media/image43.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId82"
+        ],
+        "img_rels": [
+          "word/media/image43.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "605e7490cf1abcce8cf6945f46fa8929159f475c",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId82": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       }
     ]
   },
@@ -967,79 +1466,157 @@
     "math": [],
     "images": [
       {
-        "rId": "rId84",
-        "img_rel": "word/media/image44.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId84"
+        ],
+        "img_rels": [
+          "word/media/image44.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "29b75f09a5a829152916f6bc8ee5552bd8bfcc7e",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId84": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId86",
-        "img_rel": "word/media/image45.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId86"
+        ],
+        "img_rels": [
+          "word/media/image45.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "200ee11fcdc290c77b5aeb4c874ffed84fad17d8",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId86": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId88",
-        "img_rel": "word/media/image46.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId88"
+        ],
+        "img_rels": [
+          "word/media/image46.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "ef64994573cf239c824e73f64db612dbecdeb69a",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId88": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId90",
-        "img_rel": "word/media/image47.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId90"
+        ],
+        "img_rels": [
+          "word/media/image47.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "7d44f96ca8da3f330ab9828e17a08ff526208fb3",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId90": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId92",
-        "img_rel": "word/media/image48.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId92"
+        ],
+        "img_rels": [
+          "word/media/image48.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "1b1cbf18028b75eb9aab8313a18c83a78fdf3c90",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId92": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId94",
-        "img_rel": "word/media/image49.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId94"
+        ],
+        "img_rels": [
+          "word/media/image49.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "f8bc67942cdcc1e86c4b64d8cfd99a5301b5c7aa",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId94": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -1052,40 +1629,79 @@
     "math": [],
     "images": [
       {
-        "rId": "rId96",
-        "img_rel": "word/media/image50.wmf",
-        "ext": ".wmf",
-        "size": 870,
+        "rIds": [
+          "rId96"
+        ],
+        "img_rels": [
+          "word/media/image50.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          870
+        ],
         "sha1": "0fe54497389bb9ee4fabce3f4f01eb98293c22d9",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId96": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId98",
-        "img_rel": "word/media/image51.wmf",
-        "ext": ".wmf",
-        "size": 738,
+        "rIds": [
+          "rId98"
+        ],
+        "img_rels": [
+          "word/media/image51.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          738
+        ],
         "sha1": "8470729ed27fecbffc2511af9ec8923552816122",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId98": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId100",
-        "img_rel": "word/media/image52.wmf",
-        "ext": ".wmf",
-        "size": 870,
+        "rIds": [
+          "rId100"
+        ],
+        "img_rels": [
+          "word/media/image52.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          870
+        ],
         "sha1": "ad307c37e8236c2ea825a33e66cc253a922b0c9c",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId100": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -1098,53 +1714,105 @@
     "math": [],
     "images": [
       {
-        "rId": "rId102",
-        "img_rel": "word/media/image53.wmf",
-        "ext": ".wmf",
-        "size": 954,
+        "rIds": [
+          "rId102"
+        ],
+        "img_rels": [
+          "word/media/image53.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          954
+        ],
         "sha1": "b07e5c030a3ba84fd125aacdd9d2d2d262ca94be",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId102": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId104",
-        "img_rel": "word/media/image54.wmf",
-        "ext": ".wmf",
-        "size": 954,
+        "rIds": [
+          "rId104"
+        ],
+        "img_rels": [
+          "word/media/image54.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          954
+        ],
         "sha1": "e7cf4a038cc2a06b61688809bd9b2e4f032e0d32",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId104": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId106",
-        "img_rel": "word/media/image55.wmf",
-        "ext": ".wmf",
-        "size": 962,
+        "rIds": [
+          "rId106"
+        ],
+        "img_rels": [
+          "word/media/image55.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          962
+        ],
         "sha1": "8d78583f19f54533ca34f1f13b742d9e7ac6ea84",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId106": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId108",
-        "img_rel": "word/media/image56.wmf",
-        "ext": ".wmf",
-        "size": 954,
+        "rIds": [
+          "rId108"
+        ],
+        "img_rels": [
+          "word/media/image56.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          954
+        ],
         "sha1": "92b63e13b2a8ee66fc8c388a1a06801a30c9665f",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId108": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -1163,28 +1831,52 @@
     "math": [],
     "images": [
       {
-        "rId": "rId110",
-        "img_rel": "word/media/image57.png",
-        "ext": ".png",
-        "size": 90425,
+        "rIds": [
+          "rId110"
+        ],
+        "img_rels": [
+          "word/media/image57.png"
+        ],
+        "exts": [
+          ".png"
+        ],
+        "sizes": [
+          90425
+        ],
         "sha1": "b1ba3300a182cc3490c7d483c76ee69d91f851f3",
-        "alt": "",
+        "alts": [],
         "selected": true,
         "saved_path": "extracted\\media\\image57.png",
+        "rId_to_saved": {
+          "rId110": "extracted\\media\\image57.png"
+        },
         "reasons": [
           "near_question_and_raster",
           "extracted_now"
         ]
       },
       {
-        "rId": "rId111",
-        "img_rel": "word/media/image58.wmf",
-        "ext": ".wmf",
-        "size": 774,
+        "rIds": [
+          "rId111"
+        ],
+        "img_rels": [
+          "word/media/image58.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          774
+        ],
         "sha1": "e51fde5d636c04186fd1f242eb34e822e8478f3f",
-        "alt": "Picture 1",
+        "alts": [
+          "Picture 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId111": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -1203,15 +1895,30 @@
     "math": [],
     "images": [
       {
-        "rId": "rId113",
-        "img_rel": "word/media/image59.wmf",
-        "ext": ".wmf",
-        "size": 882,
+        "rIds": [
+          "rId113"
+        ],
+        "img_rels": [
+          "word/media/image59.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          882
+        ],
         "sha1": "6fb6ec99dd4a76d29a7028d2f9143d9a6af4c723",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId113": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       }
     ]
   },
@@ -1221,14 +1928,27 @@
     "math": [],
     "images": [
       {
-        "rId": "rId115",
-        "img_rel": "word/media/image60.wmf",
-        "ext": ".wmf",
-        "size": 890,
+        "rIds": [
+          "rId115"
+        ],
+        "img_rels": [
+          "word/media/image60.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          890
+        ],
         "sha1": "baf92d936aeb38025b30f8a50c7b0183db82d0fd",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId115": null
+        },
         "reasons": []
       }
     ]
@@ -1239,26 +1959,56 @@
     "math": [],
     "images": [
       {
-        "rId": "rId117",
-        "img_rel": "word/media/image61.wmf",
-        "ext": ".wmf",
-        "size": 758,
+        "rIds": [
+          "rId117"
+        ],
+        "img_rels": [
+          "word/media/image61.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          758
+        ],
         "sha1": "43f36091d825eea30a95fd7c3cece3855dda00ed",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId117": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       },
       {
-        "rId": "rId119",
-        "img_rel": "word/media/image62.wmf",
-        "ext": ".wmf",
-        "size": 752,
+        "rIds": [
+          "rId119"
+        ],
+        "img_rels": [
+          "word/media/image62.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          752
+        ],
         "sha1": "dbe63de90ce8229be58718e87d4b0997555ec3a7",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId119": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       }
     ]
   },
@@ -1274,28 +2024,50 @@
     "math": [],
     "images": [
       {
-        "rId": "rId121",
-        "img_rel": "word/media/image63.png",
-        "ext": ".png",
-        "size": 148520,
+        "rIds": [
+          "rId121"
+        ],
+        "img_rels": [
+          "word/media/image63.png"
+        ],
+        "exts": [
+          ".png"
+        ],
+        "sizes": [
+          148520
+        ],
         "sha1": "e3bc6d0354863cb7c3eb573da67867a20db04eff",
-        "alt": "",
+        "alts": [],
         "selected": true,
         "saved_path": "extracted\\media\\image63.png",
+        "rId_to_saved": {
+          "rId121": "extracted\\media\\image63.png"
+        },
         "reasons": [
           "near_question_and_raster",
           "extracted_now"
         ]
       },
       {
-        "rId": "rId122",
-        "img_rel": "word/media/image64.png",
-        "ext": ".png",
-        "size": 41672,
+        "rIds": [
+          "rId122"
+        ],
+        "img_rels": [
+          "word/media/image64.png"
+        ],
+        "exts": [
+          ".png"
+        ],
+        "sizes": [
+          41672
+        ],
         "sha1": "34c1d85ef0f1d87cfa2a0f3b73ed4e34cd7c2d5c",
-        "alt": "",
+        "alts": [],
         "selected": true,
         "saved_path": "extracted\\media\\image64.png",
+        "rId_to_saved": {
+          "rId122": "extracted\\media\\image64.png"
+        },
         "reasons": [
           "near_question_and_raster",
           "extracted_now"
@@ -1363,66 +2135,131 @@
     "math": [],
     "images": [
       {
-        "rId": "rId123",
-        "img_rel": "word/media/image65.wmf",
-        "ext": ".wmf",
-        "size": 846,
+        "rIds": [
+          "rId123"
+        ],
+        "img_rels": [
+          "word/media/image65.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          846
+        ],
         "sha1": "ca0bb18d6da4c9ac47f6c59844621b24f2322c03",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId123": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId125",
-        "img_rel": "word/media/image66.wmf",
-        "ext": ".wmf",
-        "size": 854,
+        "rIds": [
+          "rId125"
+        ],
+        "img_rels": [
+          "word/media/image66.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          854
+        ],
         "sha1": "b7708e971c0a607464d40d3d0a39f3f7fbde26b5",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId125": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId127",
-        "img_rel": "word/media/image67.wmf",
-        "ext": ".wmf",
-        "size": 704,
+        "rIds": [
+          "rId127"
+        ],
+        "img_rels": [
+          "word/media/image67.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          704
+        ],
         "sha1": "2db1e004b579d590953973fbfab61ad7c4d90efd",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId127": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId129",
-        "img_rel": "word/media/image68.wmf",
-        "ext": ".wmf",
-        "size": 862,
+        "rIds": [
+          "rId129"
+        ],
+        "img_rels": [
+          "word/media/image68.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          862
+        ],
         "sha1": "7f4a259a4ed40912a3c39449f5ef3ac98f89cc69",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId129": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId131",
-        "img_rel": "word/media/image69.wmf",
-        "ext": ".wmf",
-        "size": 636,
+        "rIds": [
+          "rId131"
+        ],
+        "img_rels": [
+          "word/media/image69.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          636
+        ],
         "sha1": "1f51636c725da62aa3ececff466219b527c3b486",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId131": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -1435,27 +2272,53 @@
     "math": [],
     "images": [
       {
-        "rId": "rId133",
-        "img_rel": "word/media/image70.wmf",
-        "ext": ".wmf",
-        "size": 852,
+        "rIds": [
+          "rId133"
+        ],
+        "img_rels": [
+          "word/media/image70.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          852
+        ],
         "sha1": "7e1e73d561aa7405f7997bfa436daf19813f2bf8",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId133": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId135",
-        "img_rel": "word/media/image71.wmf",
-        "ext": ".wmf",
-        "size": 852,
+        "rIds": [
+          "rId135"
+        ],
+        "img_rels": [
+          "word/media/image71.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          852
+        ],
         "sha1": "700a7ce4988a00c3203d3e2e984cf4fc8689e3e8",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId135": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -1468,26 +2331,56 @@
     "math": [],
     "images": [
       {
-        "rId": "rId137",
-        "img_rel": "word/media/image72.wmf",
-        "ext": ".wmf",
-        "size": 854,
+        "rIds": [
+          "rId137"
+        ],
+        "img_rels": [
+          "word/media/image72.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          854
+        ],
         "sha1": "0e36f3a40ffcb087216a6a207e263ef73c173e9e",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId137": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       },
       {
-        "rId": "rId139",
-        "img_rel": "word/media/image73.wmf",
-        "ext": ".wmf",
-        "size": 642,
+        "rIds": [
+          "rId139"
+        ],
+        "img_rels": [
+          "word/media/image73.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          642
+        ],
         "sha1": "6645782d725c3e0c353b1d7b2b5d27da7bed300a",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId139": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       }
     ]
   },
@@ -1497,15 +2390,30 @@
     "math": [],
     "images": [
       {
-        "rId": "rId141",
-        "img_rel": "word/media/image74.wmf",
-        "ext": ".wmf",
-        "size": 838,
+        "rIds": [
+          "rId141"
+        ],
+        "img_rels": [
+          "word/media/image74.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          838
+        ],
         "sha1": "cd56c15b095a4a81f08dc6f9d46b7b1b1e134a98",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId141": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       }
     ]
   },
@@ -1515,26 +2423,56 @@
     "math": [],
     "images": [
       {
-        "rId": "rId143",
-        "img_rel": "word/media/image75.wmf",
-        "ext": ".wmf",
-        "size": 838,
+        "rIds": [
+          "rId143"
+        ],
+        "img_rels": [
+          "word/media/image75.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          838
+        ],
         "sha1": "37957bdf61c6711bf8d2a07f6f2220907d71bbca",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId143": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       },
       {
-        "rId": "rId145",
-        "img_rel": "word/media/image76.wmf",
-        "ext": ".wmf",
-        "size": 606,
+        "rIds": [
+          "rId145"
+        ],
+        "img_rels": [
+          "word/media/image76.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          606
+        ],
         "sha1": "c53122c80ec5b593d78c9757879c6fca243a57d6",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId145": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       }
     ]
   },
@@ -1563,27 +2501,53 @@
     "math": [],
     "images": [
       {
-        "rId": "rId147",
-        "img_rel": "word/media/image77.wmf",
-        "ext": ".wmf",
-        "size": 736,
+        "rIds": [
+          "rId147"
+        ],
+        "img_rels": [
+          "word/media/image77.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          736
+        ],
         "sha1": "91528578ef381b55b26e4f19f203b4b0d1e99623",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId147": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId149",
-        "img_rel": "word/media/image78.wmf",
-        "ext": ".wmf",
-        "size": 736,
+        "rIds": [
+          "rId149"
+        ],
+        "img_rels": [
+          "word/media/image78.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          736
+        ],
         "sha1": "7e0506fafdc7002150872631115047a438d37ac7",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId149": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -1596,40 +2560,79 @@
     "math": [],
     "images": [
       {
-        "rId": "rId151",
-        "img_rel": "word/media/image79.wmf",
-        "ext": ".wmf",
-        "size": 1072,
+        "rIds": [
+          "rId151"
+        ],
+        "img_rels": [
+          "word/media/image79.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          1072
+        ],
         "sha1": "7a7faf64ef6eaf9d2e339e5a3ff580770afa5d4b",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId151": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId153",
-        "img_rel": "word/media/image80.wmf",
-        "ext": ".wmf",
-        "size": 722,
+        "rIds": [
+          "rId153"
+        ],
+        "img_rels": [
+          "word/media/image80.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          722
+        ],
         "sha1": "048a9281581d09d85cc06c7a9f3d90aa4c20e55a",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId153": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId155",
-        "img_rel": "word/media/image81.wmf",
-        "ext": ".wmf",
-        "size": 1446,
+        "rIds": [
+          "rId155"
+        ],
+        "img_rels": [
+          "word/media/image81.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          1446
+        ],
         "sha1": "4a37b12f030518d9a5850863170c1e1eadad48f9",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId155": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -1642,27 +2645,53 @@
     "math": [],
     "images": [
       {
-        "rId": "rId157",
-        "img_rel": "word/media/image82.wmf",
-        "ext": ".wmf",
-        "size": 836,
+        "rIds": [
+          "rId157"
+        ],
+        "img_rels": [
+          "word/media/image82.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          836
+        ],
         "sha1": "cf4e4ef5076d2259514b03fa249802a9cb6f1a71",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId157": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId159",
-        "img_rel": "word/media/image83.wmf",
-        "ext": ".wmf",
-        "size": 598,
+        "rIds": [
+          "rId159"
+        ],
+        "img_rels": [
+          "word/media/image83.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          598
+        ],
         "sha1": "666db181b7bf82bfdd129e88a1691fdcce058abf",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId159": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -1675,40 +2704,79 @@
     "math": [],
     "images": [
       {
-        "rId": "rId161",
-        "img_rel": "word/media/image84.wmf",
-        "ext": ".wmf",
-        "size": 598,
+        "rIds": [
+          "rId161"
+        ],
+        "img_rels": [
+          "word/media/image84.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          598
+        ],
         "sha1": "1a4071e9a7c8211c8cda815c587dcccc53e7b5cd",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId161": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId163",
-        "img_rel": "word/media/image85.wmf",
-        "ext": ".wmf",
-        "size": 942,
+        "rIds": [
+          "rId163"
+        ],
+        "img_rels": [
+          "word/media/image85.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          942
+        ],
         "sha1": "d61d2698f732e3ddddc6d66c504b4e4990da6a90",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId163": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId165",
-        "img_rel": "word/media/image86.wmf",
-        "ext": ".wmf",
-        "size": 598,
+        "rIds": [
+          "rId165"
+        ],
+        "img_rels": [
+          "word/media/image86.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          598
+        ],
         "sha1": "6437149cde9dfb00433f9d5ae3385ef42330cd48",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId165": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -1721,14 +2789,27 @@
     "math": [],
     "images": [
       {
-        "rId": "rId167",
-        "img_rel": "word/media/image87.wmf",
-        "ext": ".wmf",
-        "size": 846,
+        "rIds": [
+          "rId167"
+        ],
+        "img_rels": [
+          "word/media/image87.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          846
+        ],
         "sha1": "b9c1489efbacf3d0b6ff520aac4f5169af29567c",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId167": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -1747,14 +2828,27 @@
     "math": [],
     "images": [
       {
-        "rId": "rId167",
-        "img_rel": "word/media/image87.wmf",
-        "ext": ".wmf",
-        "size": 846,
+        "rIds": [
+          "rId167"
+        ],
+        "img_rels": [
+          "word/media/image87.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          846
+        ],
         "sha1": "b9c1489efbacf3d0b6ff520aac4f5169af29567c",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId167": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -1833,106 +2927,133 @@
     "math": [],
     "images": [
       {
-        "rId": "rId7",
-        "img_rel": "word/media/image1.png",
-        "ext": ".png",
-        "size": 22377,
+        "rIds": [
+          "rId7",
+          "rId8"
+        ],
+        "img_rels": [
+          "word/media/image1.png",
+          "word/media/image2.png"
+        ],
+        "exts": [
+          ".png"
+        ],
+        "sizes": [
+          22377,
+          22377
+        ],
         "sha1": "bb154505b5d9e3944af05c578c080b81b772c2f2",
-        "alt": "Picture 21",
-        "selected": false,
-        "saved_path": null,
-        "reasons": []
+        "alts": [
+          "Picture 21",
+          "Group 1"
+        ],
+        "selected": true,
+        "saved_path": "extracted\\media\\image1.png",
+        "rId_to_saved": {
+          "rId7": "extracted\\media\\image1.png",
+          "rId8": "extracted\\media\\image1.png"
+        },
+        "reasons": [
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
-        "rId": "rId9",
-        "img_rel": "word/media/image3.png",
-        "ext": ".png",
-        "size": 102413,
+        "rIds": [
+          "rId9",
+          "rId10"
+        ],
+        "img_rels": [
+          "word/media/image3.png",
+          "word/media/image4.png"
+        ],
+        "exts": [
+          ".png"
+        ],
+        "sizes": [
+          102413,
+          102413
+        ],
         "sha1": "be28bd5edaa6a238b3066a6b040febc104af2c42",
-        "alt": "Picture 1",
+        "alts": [
+          "Picture 1",
+          "Group 4"
+        ],
         "selected": true,
         "saved_path": "extracted\\media\\image3.png",
+        "rId_to_saved": {
+          "rId9": "extracted\\media\\image3.png",
+          "rId10": "extracted\\media\\image3.png"
+        },
         "reasons": [
           "auto_select_very_large_global",
-          "duplicate_of_selected",
+          "duplicate_of_canonical",
           "reused_existing"
         ]
       },
       {
-        "rId": "rId11",
-        "img_rel": "word/media/image5.png",
-        "ext": ".png",
-        "size": 63295,
+        "rIds": [
+          "rId11",
+          "rId12"
+        ],
+        "img_rels": [
+          "word/media/image5.png",
+          "word/media/image6.png"
+        ],
+        "exts": [
+          ".png"
+        ],
+        "sizes": [
+          63295,
+          63295
+        ],
         "sha1": "8b5bb9bd351070c64bd17a6487503df8c0c62448",
-        "alt": "Picture 1",
-        "selected": false,
-        "saved_path": null,
-        "reasons": []
+        "alts": [
+          "Group 5",
+          "Picture 1"
+        ],
+        "selected": true,
+        "saved_path": "extracted\\media\\image5.png",
+        "rId_to_saved": {
+          "rId11": "extracted\\media\\image5.png",
+          "rId12": "extracted\\media\\image5.png"
+        },
+        "reasons": [
+          "auto_select_very_large_global",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
-        "rId": "rId13",
-        "img_rel": "word/media/image7.png",
-        "ext": ".png",
-        "size": 104808,
+        "rIds": [
+          "rId13",
+          "rId14"
+        ],
+        "img_rels": [
+          "word/media/image7.png",
+          "word/media/image8.png"
+        ],
+        "exts": [
+          ".png"
+        ],
+        "sizes": [
+          104808,
+          104808
+        ],
         "sha1": "2e41faebf8e8f55eacc176bf36a70b7adb410eff",
-        "alt": "Picture 1",
+        "alts": [
+          "Group 7",
+          "Picture 1"
+        ],
         "selected": true,
         "saved_path": "extracted\\media\\image7.png",
+        "rId_to_saved": {
+          "rId13": "extracted\\media\\image7.png",
+          "rId14": "extracted\\media\\image7.png"
+        },
         "reasons": [
           "auto_select_very_large_global",
-          "duplicate_of_selected",
-          "reused_existing"
-        ]
-      },
-      {
-        "rId": "rId8",
-        "img_rel": "word/media/image2.png",
-        "ext": ".png",
-        "size": 22377,
-        "sha1": "bb154505b5d9e3944af05c578c080b81b772c2f2",
-        "alt": "Group 1",
-        "selected": false,
-        "saved_path": null,
-        "reasons": []
-      },
-      {
-        "rId": "rId10",
-        "img_rel": "word/media/image4.png",
-        "ext": ".png",
-        "size": 102413,
-        "sha1": "be28bd5edaa6a238b3066a6b040febc104af2c42",
-        "alt": "Group 4",
-        "selected": true,
-        "saved_path": "extracted\\media\\image3.png",
-        "reasons": [
-          "auto_select_very_large_global",
-          "duplicate_of_selected",
-          "reused_existing"
-        ]
-      },
-      {
-        "rId": "rId12",
-        "img_rel": "word/media/image6.png",
-        "ext": ".png",
-        "size": 63295,
-        "sha1": "8b5bb9bd351070c64bd17a6487503df8c0c62448",
-        "alt": "Group 5",
-        "selected": false,
-        "saved_path": null,
-        "reasons": []
-      },
-      {
-        "rId": "rId14",
-        "img_rel": "word/media/image8.png",
-        "ext": ".png",
-        "size": 104808,
-        "sha1": "2e41faebf8e8f55eacc176bf36a70b7adb410eff",
-        "alt": "Group 7",
-        "selected": true,
-        "saved_path": "extracted\\media\\image7.png",
-        "reasons": [
-          "auto_select_very_large_global",
-          "duplicate_of_selected",
+          "duplicate_of_canonical",
           "reused_existing"
         ]
       }
@@ -2016,27 +3137,53 @@
     "math": [],
     "images": [
       {
-        "rId": "rId15",
-        "img_rel": "word/media/image9.wmf",
-        "ext": ".wmf",
-        "size": 1338,
+        "rIds": [
+          "rId15"
+        ],
+        "img_rels": [
+          "word/media/image9.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          1338
+        ],
         "sha1": "b9edc70cfcf6ab63080c3bf248ebee634f30e807",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId15": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId17",
-        "img_rel": "word/media/image10.wmf",
-        "ext": ".wmf",
-        "size": 1338,
+        "rIds": [
+          "rId17"
+        ],
+        "img_rels": [
+          "word/media/image10.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          1338
+        ],
         "sha1": "c27dddefcd4739112dd2163a0cf9cfe65ca487fd",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId17": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -2049,26 +3196,56 @@
     "math": [],
     "images": [
       {
-        "rId": "rId19",
-        "img_rel": "word/media/image11.wmf",
-        "ext": ".wmf",
-        "size": 1646,
+        "rIds": [
+          "rId19"
+        ],
+        "img_rels": [
+          "word/media/image11.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          1646
+        ],
         "sha1": "94904ab5e694ea8ad3aab63f4776372c0b5205e0",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId19": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       },
       {
-        "rId": "rId21",
-        "img_rel": "word/media/image12.wmf",
-        "ext": ".wmf",
-        "size": 1346,
+        "rIds": [
+          "rId21"
+        ],
+        "img_rels": [
+          "word/media/image12.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          1346
+        ],
         "sha1": "610bd1680f28fc0c6d1198b429ca2f861662f74a",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId21": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       }
     ]
   },
@@ -2090,27 +3267,53 @@
     "math": [],
     "images": [
       {
-        "rId": "rId23",
-        "img_rel": "word/media/image13.wmf",
-        "ext": ".wmf",
-        "size": 754,
+        "rIds": [
+          "rId23"
+        ],
+        "img_rels": [
+          "word/media/image13.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          754
+        ],
         "sha1": "cb44f49b886178bb5813674b62c47798528d3951",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId23": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId25",
-        "img_rel": "word/media/image14.wmf",
-        "ext": ".wmf",
-        "size": 1054,
+        "rIds": [
+          "rId25"
+        ],
+        "img_rels": [
+          "word/media/image14.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          1054
+        ],
         "sha1": "6bbca209914d25eaeb0558bed4bfe8052f0e55a8",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId25": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -2123,14 +3326,27 @@
     "math": [],
     "images": [
       {
-        "rId": "rId27",
-        "img_rel": "word/media/image15.wmf",
-        "ext": ".wmf",
-        "size": 730,
+        "rIds": [
+          "rId27"
+        ],
+        "img_rels": [
+          "word/media/image15.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          730
+        ],
         "sha1": "072480b6fdb1bf785e2c8803356e1070e1880329",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId27": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -2155,14 +3371,27 @@
     "math": [],
     "images": [
       {
-        "rId": "rId30",
-        "img_rel": "word/media/image16.wmf",
-        "ext": ".wmf",
-        "size": 738,
+        "rIds": [
+          "rId30"
+        ],
+        "img_rels": [
+          "word/media/image16.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          738
+        ],
         "sha1": "d1feca1ce63af29cd5b1d2834db1612af14b9b9a",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId30": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -2175,53 +3404,105 @@
     "math": [],
     "images": [
       {
-        "rId": "rId32",
-        "img_rel": "word/media/image17.wmf",
-        "ext": ".wmf",
-        "size": 712,
+        "rIds": [
+          "rId32"
+        ],
+        "img_rels": [
+          "word/media/image17.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          712
+        ],
         "sha1": "07055d22edfa49d895e8296c81cdb4635c1f5076",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId32": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId34",
-        "img_rel": "word/media/image18.wmf",
-        "ext": ".wmf",
-        "size": 712,
+        "rIds": [
+          "rId34"
+        ],
+        "img_rels": [
+          "word/media/image18.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          712
+        ],
         "sha1": "885965c1d939a003cf4d7a00e07f287b3b65dbee",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId34": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId36",
-        "img_rel": "word/media/image19.wmf",
-        "ext": ".wmf",
-        "size": 720,
+        "rIds": [
+          "rId36"
+        ],
+        "img_rels": [
+          "word/media/image19.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          720
+        ],
         "sha1": "746b85514c82669845691e2e3b0a48c11252b6eb",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId36": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId38",
-        "img_rel": "word/media/image20.wmf",
-        "ext": ".wmf",
-        "size": 720,
+        "rIds": [
+          "rId38"
+        ],
+        "img_rels": [
+          "word/media/image20.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          720
+        ],
         "sha1": "da58b2438629f869f7d097151032e72facb192b7",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId38": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -2318,66 +3599,131 @@
     "math": [],
     "images": [
       {
-        "rId": "rId40",
-        "img_rel": "word/media/image21.wmf",
-        "ext": ".wmf",
-        "size": 658,
+        "rIds": [
+          "rId40"
+        ],
+        "img_rels": [
+          "word/media/image21.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          658
+        ],
         "sha1": "05b95b4c2670faefbffc112868056e5651dacbb9",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId40": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId42",
-        "img_rel": "word/media/image22.wmf",
-        "ext": ".wmf",
-        "size": 738,
+        "rIds": [
+          "rId42"
+        ],
+        "img_rels": [
+          "word/media/image22.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          738
+        ],
         "sha1": "b98c5e1b62153fd68765f34a9696a0c6a160382c",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId42": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId44",
-        "img_rel": "word/media/image23.wmf",
-        "ext": ".wmf",
-        "size": 848,
+        "rIds": [
+          "rId44"
+        ],
+        "img_rels": [
+          "word/media/image23.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          848
+        ],
         "sha1": "26dc5d3e96b451b0781753b27bd31da419026075",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId44": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId46",
-        "img_rel": "word/media/image24.wmf",
-        "ext": ".wmf",
-        "size": 874,
+        "rIds": [
+          "rId46"
+        ],
+        "img_rels": [
+          "word/media/image24.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          874
+        ],
         "sha1": "bb44292c5c5e88c3a9a424f09787d6e5f4e84908",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId46": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId48",
-        "img_rel": "word/media/image25.wmf",
-        "ext": ".wmf",
-        "size": 874,
+        "rIds": [
+          "rId48"
+        ],
+        "img_rels": [
+          "word/media/image25.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          874
+        ],
         "sha1": "fb1fca8e6325e328c0fb9e8efbf4a3a3b9ea71b5",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId48": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -2450,40 +3796,79 @@
     "math": [],
     "images": [
       {
-        "rId": "rId50",
-        "img_rel": "word/media/image26.wmf",
-        "ext": ".wmf",
-        "size": 598,
+        "rIds": [
+          "rId50"
+        ],
+        "img_rels": [
+          "word/media/image26.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          598
+        ],
         "sha1": "6ae61a35413d230c265957c411facf4cc8c53b20",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId50": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId52",
-        "img_rel": "word/media/image27.wmf",
-        "ext": ".wmf",
-        "size": 1206,
+        "rIds": [
+          "rId52"
+        ],
+        "img_rels": [
+          "word/media/image27.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          1206
+        ],
         "sha1": "cbc975be848448efff1429a2a539117b838b40e4",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId52": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId54",
-        "img_rel": "word/media/image28.wmf",
-        "ext": ".wmf",
-        "size": 710,
+        "rIds": [
+          "rId54"
+        ],
+        "img_rels": [
+          "word/media/image28.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          710
+        ],
         "sha1": "ee9aa36ff2b87097c0819eaf8ddc481cd0e70026",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId54": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -2496,53 +3881,105 @@
     "math": [],
     "images": [
       {
-        "rId": "rId56",
-        "img_rel": "word/media/image29.wmf",
-        "ext": ".wmf",
-        "size": 722,
+        "rIds": [
+          "rId56"
+        ],
+        "img_rels": [
+          "word/media/image29.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          722
+        ],
         "sha1": "3901ae6a5c0e003a4762ee1500cb63fc64ad3fbf",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId56": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId58",
-        "img_rel": "word/media/image30.wmf",
-        "ext": ".wmf",
-        "size": 730,
+        "rIds": [
+          "rId58"
+        ],
+        "img_rels": [
+          "word/media/image30.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          730
+        ],
         "sha1": "cf5687cad98a572b50d297d8a4e220c54198c64f",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId58": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId60",
-        "img_rel": "word/media/image31.wmf",
-        "ext": ".wmf",
-        "size": 722,
+        "rIds": [
+          "rId60"
+        ],
+        "img_rels": [
+          "word/media/image31.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          722
+        ],
         "sha1": "c92c55cecc7b403e9eca0141e69c208ef9b0ad19",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId60": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId62",
-        "img_rel": "word/media/image32.wmf",
-        "ext": ".wmf",
-        "size": 730,
+        "rIds": [
+          "rId62"
+        ],
+        "img_rels": [
+          "word/media/image32.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          730
+        ],
         "sha1": "fe493959276979242477bd1e97c03ab9308edea1",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId62": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -2597,17 +4034,28 @@
     "math": [],
     "images": [
       {
-        "rId": "rId64",
-        "img_rel": "word/media/image33.png",
-        "ext": ".png",
-        "size": 17505,
+        "rIds": [
+          "rId64"
+        ],
+        "img_rels": [
+          "word/media/image33.png"
+        ],
+        "exts": [
+          ".png"
+        ],
+        "sizes": [
+          17505
+        ],
         "sha1": "6796b6a8e919874f65f182c6d698929aeba4dfef",
-        "alt": "",
+        "alts": [],
         "selected": true,
         "saved_path": "extracted\\media\\image33.png",
+        "rId_to_saved": {
+          "rId64": "extracted\\media\\image33.png"
+        },
         "reasons": [
+          "duplicate_of_canonical",
           "near_question_and_raster",
-          "duplicate_of_selected",
           "reused_existing"
         ]
       }
@@ -2716,40 +4164,79 @@
     "math": [],
     "images": [
       {
-        "rId": "rId65",
-        "img_rel": "word/media/image34.wmf",
-        "ext": ".wmf",
-        "size": 828,
+        "rIds": [
+          "rId65"
+        ],
+        "img_rels": [
+          "word/media/image34.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          828
+        ],
         "sha1": "b3f6f3e9b0322efb1e6d686dd53cb8d992d0ae0e",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId65": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId67",
-        "img_rel": "word/media/image35.wmf",
-        "ext": ".wmf",
-        "size": 842,
+        "rIds": [
+          "rId67"
+        ],
+        "img_rels": [
+          "word/media/image35.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          842
+        ],
         "sha1": "658cdfc7d736cd382372d73b6a115072830174df",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId67": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId69",
-        "img_rel": "word/media/image36.wmf",
-        "ext": ".wmf",
-        "size": 416,
+        "rIds": [
+          "rId69"
+        ],
+        "img_rels": [
+          "word/media/image36.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          416
+        ],
         "sha1": "925f10252953c3874d9c1e2d06dc38ab2ec61b1d",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId69": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -2822,17 +4309,28 @@
     "math": [],
     "images": [
       {
-        "rId": "rId71",
-        "img_rel": "word/media/image37.png",
-        "ext": ".png",
-        "size": 34989,
+        "rIds": [
+          "rId71"
+        ],
+        "img_rels": [
+          "word/media/image37.png"
+        ],
+        "exts": [
+          ".png"
+        ],
+        "sizes": [
+          34989
+        ],
         "sha1": "cf50c7d8a6ee4da225e6d732b5b921aa8621375e",
-        "alt": "",
+        "alts": [],
         "selected": true,
         "saved_path": "extracted\\media\\image37.png",
+        "rId_to_saved": {
+          "rId71": "extracted\\media\\image37.png"
+        },
         "reasons": [
+          "duplicate_of_canonical",
           "near_question_and_raster",
-          "duplicate_of_selected",
           "reused_existing"
         ]
       }
@@ -2844,70 +4342,160 @@
     "math": [],
     "images": [
       {
-        "rId": "rId72",
-        "img_rel": "word/media/image38.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId72"
+        ],
+        "img_rels": [
+          "word/media/image38.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "64f7958ca668799463166ce06dcec7065e058a88",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId72": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       },
       {
-        "rId": "rId74",
-        "img_rel": "word/media/image39.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId74"
+        ],
+        "img_rels": [
+          "word/media/image39.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "04d90940cff9c4f812e173593b538b6504b8ae62",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId74": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       },
       {
-        "rId": "rId76",
-        "img_rel": "word/media/image40.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId76"
+        ],
+        "img_rels": [
+          "word/media/image40.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "ee53f4e29fbe736cf2848e9827fd1cf5d2ed3449",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId76": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       },
       {
-        "rId": "rId78",
-        "img_rel": "word/media/image41.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId78"
+        ],
+        "img_rels": [
+          "word/media/image41.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "4d7a062757b8e2e0593b808110537163e556d318",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId78": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       },
       {
-        "rId": "rId80",
-        "img_rel": "word/media/image42.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId80"
+        ],
+        "img_rels": [
+          "word/media/image42.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "bb824bc1c6038109a1f02a70168b8b24a1d8c923",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId80": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       },
       {
-        "rId": "rId82",
-        "img_rel": "word/media/image43.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId82"
+        ],
+        "img_rels": [
+          "word/media/image43.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "605e7490cf1abcce8cf6945f46fa8929159f475c",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId82": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       }
     ]
   },
@@ -2917,70 +4505,160 @@
     "math": [],
     "images": [
       {
-        "rId": "rId84",
-        "img_rel": "word/media/image44.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId84"
+        ],
+        "img_rels": [
+          "word/media/image44.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "29b75f09a5a829152916f6bc8ee5552bd8bfcc7e",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId84": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       },
       {
-        "rId": "rId86",
-        "img_rel": "word/media/image45.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId86"
+        ],
+        "img_rels": [
+          "word/media/image45.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "200ee11fcdc290c77b5aeb4c874ffed84fad17d8",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId86": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       },
       {
-        "rId": "rId88",
-        "img_rel": "word/media/image46.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId88"
+        ],
+        "img_rels": [
+          "word/media/image46.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "ef64994573cf239c824e73f64db612dbecdeb69a",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId88": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       },
       {
-        "rId": "rId90",
-        "img_rel": "word/media/image47.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId90"
+        ],
+        "img_rels": [
+          "word/media/image47.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "7d44f96ca8da3f330ab9828e17a08ff526208fb3",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId90": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       },
       {
-        "rId": "rId92",
-        "img_rel": "word/media/image48.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId92"
+        ],
+        "img_rels": [
+          "word/media/image48.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "1b1cbf18028b75eb9aab8313a18c83a78fdf3c90",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId92": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       },
       {
-        "rId": "rId94",
-        "img_rel": "word/media/image49.wmf",
-        "ext": ".wmf",
-        "size": 608,
+        "rIds": [
+          "rId94"
+        ],
+        "img_rels": [
+          "word/media/image49.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          608
+        ],
         "sha1": "f8bc67942cdcc1e86c4b64d8cfd99a5301b5c7aa",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId94": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       }
     ]
   },
@@ -3002,40 +4680,79 @@
     "math": [],
     "images": [
       {
-        "rId": "rId96",
-        "img_rel": "word/media/image50.wmf",
-        "ext": ".wmf",
-        "size": 870,
+        "rIds": [
+          "rId96"
+        ],
+        "img_rels": [
+          "word/media/image50.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          870
+        ],
         "sha1": "0fe54497389bb9ee4fabce3f4f01eb98293c22d9",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId96": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId98",
-        "img_rel": "word/media/image51.wmf",
-        "ext": ".wmf",
-        "size": 738,
+        "rIds": [
+          "rId98"
+        ],
+        "img_rels": [
+          "word/media/image51.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          738
+        ],
         "sha1": "8470729ed27fecbffc2511af9ec8923552816122",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId98": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId100",
-        "img_rel": "word/media/image52.wmf",
-        "ext": ".wmf",
-        "size": 870,
+        "rIds": [
+          "rId100"
+        ],
+        "img_rels": [
+          "word/media/image52.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          870
+        ],
         "sha1": "ad307c37e8236c2ea825a33e66cc253a922b0c9c",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId100": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -3048,53 +4765,105 @@
     "math": [],
     "images": [
       {
-        "rId": "rId102",
-        "img_rel": "word/media/image53.wmf",
-        "ext": ".wmf",
-        "size": 954,
+        "rIds": [
+          "rId102"
+        ],
+        "img_rels": [
+          "word/media/image53.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          954
+        ],
         "sha1": "b07e5c030a3ba84fd125aacdd9d2d2d262ca94be",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId102": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId104",
-        "img_rel": "word/media/image54.wmf",
-        "ext": ".wmf",
-        "size": 954,
+        "rIds": [
+          "rId104"
+        ],
+        "img_rels": [
+          "word/media/image54.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          954
+        ],
         "sha1": "e7cf4a038cc2a06b61688809bd9b2e4f032e0d32",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId104": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId106",
-        "img_rel": "word/media/image55.wmf",
-        "ext": ".wmf",
-        "size": 962,
+        "rIds": [
+          "rId106"
+        ],
+        "img_rels": [
+          "word/media/image55.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          962
+        ],
         "sha1": "8d78583f19f54533ca34f1f13b742d9e7ac6ea84",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId106": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId108",
-        "img_rel": "word/media/image56.wmf",
-        "ext": ".wmf",
-        "size": 954,
+        "rIds": [
+          "rId108"
+        ],
+        "img_rels": [
+          "word/media/image56.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          954
+        ],
         "sha1": "92b63e13b2a8ee66fc8c388a1a06801a30c9665f",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId108": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -3125,29 +4894,53 @@
     "math": [],
     "images": [
       {
-        "rId": "rId110",
-        "img_rel": "word/media/image57.png",
-        "ext": ".png",
-        "size": 90425,
+        "rIds": [
+          "rId110"
+        ],
+        "img_rels": [
+          "word/media/image57.png"
+        ],
+        "exts": [
+          ".png"
+        ],
+        "sizes": [
+          90425
+        ],
         "sha1": "b1ba3300a182cc3490c7d483c76ee69d91f851f3",
-        "alt": "",
+        "alts": [],
         "selected": true,
         "saved_path": "extracted\\media\\image57.png",
+        "rId_to_saved": {
+          "rId110": "extracted\\media\\image57.png"
+        },
         "reasons": [
+          "duplicate_of_canonical",
           "near_question_and_raster",
-          "duplicate_of_selected",
           "reused_existing"
         ]
       },
       {
-        "rId": "rId111",
-        "img_rel": "word/media/image58.wmf",
-        "ext": ".wmf",
-        "size": 774,
+        "rIds": [
+          "rId111"
+        ],
+        "img_rels": [
+          "word/media/image58.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          774
+        ],
         "sha1": "e51fde5d636c04186fd1f242eb34e822e8478f3f",
-        "alt": "Picture 1",
+        "alts": [
+          "Picture 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId111": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -3166,15 +4959,30 @@
     "math": [],
     "images": [
       {
-        "rId": "rId113",
-        "img_rel": "word/media/image59.wmf",
-        "ext": ".wmf",
-        "size": 882,
+        "rIds": [
+          "rId113"
+        ],
+        "img_rels": [
+          "word/media/image59.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          882
+        ],
         "sha1": "6fb6ec99dd4a76d29a7028d2f9143d9a6af4c723",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId113": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       }
     ]
   },
@@ -3184,14 +4992,27 @@
     "math": [],
     "images": [
       {
-        "rId": "rId115",
-        "img_rel": "word/media/image60.wmf",
-        "ext": ".wmf",
-        "size": 890,
+        "rIds": [
+          "rId115"
+        ],
+        "img_rels": [
+          "word/media/image60.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          890
+        ],
         "sha1": "baf92d936aeb38025b30f8a50c7b0183db82d0fd",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId115": null
+        },
         "reasons": []
       }
     ]
@@ -3202,25 +5023,51 @@
     "math": [],
     "images": [
       {
-        "rId": "rId117",
-        "img_rel": "word/media/image61.wmf",
-        "ext": ".wmf",
-        "size": 758,
+        "rIds": [
+          "rId117"
+        ],
+        "img_rels": [
+          "word/media/image61.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          758
+        ],
         "sha1": "43f36091d825eea30a95fd7c3cece3855dda00ed",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId117": null
+        },
         "reasons": []
       },
       {
-        "rId": "rId119",
-        "img_rel": "word/media/image62.wmf",
-        "ext": ".wmf",
-        "size": 752,
+        "rIds": [
+          "rId119"
+        ],
+        "img_rels": [
+          "word/media/image62.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          752
+        ],
         "sha1": "dbe63de90ce8229be58718e87d4b0997555ec3a7",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId119": null
+        },
         "reasons": []
       }
     ]
@@ -3249,15 +5096,30 @@
     "math": [],
     "images": [
       {
-        "rId": "rId223",
-        "img_rel": "word/media/image88.wmf",
-        "ext": ".wmf",
-        "size": 2034,
+        "rIds": [
+          "rId223"
+        ],
+        "img_rels": [
+          "word/media/image88.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          2034
+        ],
         "sha1": "381103a4b2181eab6f2d4190ad914b4093aaa948",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId223": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       }
     ]
   },
@@ -3273,14 +5135,27 @@
     "math": [],
     "images": [
       {
-        "rId": "rId225",
-        "img_rel": "word/media/image89.wmf",
-        "ext": ".wmf",
-        "size": 1572,
+        "rIds": [
+          "rId225"
+        ],
+        "img_rels": [
+          "word/media/image89.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          1572
+        ],
         "sha1": "546989c26ce5932b1472a01fffbbb00dc7e0288d",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId225": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -3299,32 +5174,54 @@
     "math": [],
     "images": [
       {
-        "rId": "rId121",
-        "img_rel": "word/media/image63.png",
-        "ext": ".png",
-        "size": 148520,
+        "rIds": [
+          "rId121"
+        ],
+        "img_rels": [
+          "word/media/image63.png"
+        ],
+        "exts": [
+          ".png"
+        ],
+        "sizes": [
+          148520
+        ],
         "sha1": "e3bc6d0354863cb7c3eb573da67867a20db04eff",
-        "alt": "",
+        "alts": [],
         "selected": true,
         "saved_path": "extracted\\media\\image63.png",
+        "rId_to_saved": {
+          "rId121": "extracted\\media\\image63.png"
+        },
         "reasons": [
+          "duplicate_of_canonical",
           "near_question_and_raster",
-          "duplicate_of_selected",
           "reused_existing"
         ]
       },
       {
-        "rId": "rId122",
-        "img_rel": "word/media/image64.png",
-        "ext": ".png",
-        "size": 41672,
+        "rIds": [
+          "rId122"
+        ],
+        "img_rels": [
+          "word/media/image64.png"
+        ],
+        "exts": [
+          ".png"
+        ],
+        "sizes": [
+          41672
+        ],
         "sha1": "34c1d85ef0f1d87cfa2a0f3b73ed4e34cd7c2d5c",
-        "alt": "",
+        "alts": [],
         "selected": true,
         "saved_path": "extracted\\media\\image64.png",
+        "rId_to_saved": {
+          "rId122": "extracted\\media\\image64.png"
+        },
         "reasons": [
+          "duplicate_of_canonical",
           "near_question_and_raster",
-          "duplicate_of_selected",
           "reused_existing"
         ]
       }
@@ -3384,14 +5281,27 @@
     "math": [],
     "images": [
       {
-        "rId": "rId227",
-        "img_rel": "word/media/image90.wmf",
-        "ext": ".wmf",
-        "size": 2156,
+        "rIds": [
+          "rId227"
+        ],
+        "img_rels": [
+          "word/media/image90.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          2156
+        ],
         "sha1": "c34a3ce90d3589fd7b3e31b173c322c7643cab85",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId227": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -3440,66 +5350,131 @@
     "math": [],
     "images": [
       {
-        "rId": "rId123",
-        "img_rel": "word/media/image65.wmf",
-        "ext": ".wmf",
-        "size": 846,
+        "rIds": [
+          "rId123"
+        ],
+        "img_rels": [
+          "word/media/image65.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          846
+        ],
         "sha1": "ca0bb18d6da4c9ac47f6c59844621b24f2322c03",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId123": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId125",
-        "img_rel": "word/media/image66.wmf",
-        "ext": ".wmf",
-        "size": 854,
+        "rIds": [
+          "rId125"
+        ],
+        "img_rels": [
+          "word/media/image66.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          854
+        ],
         "sha1": "b7708e971c0a607464d40d3d0a39f3f7fbde26b5",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId125": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId127",
-        "img_rel": "word/media/image67.wmf",
-        "ext": ".wmf",
-        "size": 704,
+        "rIds": [
+          "rId127"
+        ],
+        "img_rels": [
+          "word/media/image67.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          704
+        ],
         "sha1": "2db1e004b579d590953973fbfab61ad7c4d90efd",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId127": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId129",
-        "img_rel": "word/media/image68.wmf",
-        "ext": ".wmf",
-        "size": 862,
+        "rIds": [
+          "rId129"
+        ],
+        "img_rels": [
+          "word/media/image68.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          862
+        ],
         "sha1": "7f4a259a4ed40912a3c39449f5ef3ac98f89cc69",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId129": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId131",
-        "img_rel": "word/media/image69.wmf",
-        "ext": ".wmf",
-        "size": 636,
+        "rIds": [
+          "rId131"
+        ],
+        "img_rels": [
+          "word/media/image69.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          636
+        ],
         "sha1": "1f51636c725da62aa3ececff466219b527c3b486",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId131": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -3512,27 +5487,53 @@
     "math": [],
     "images": [
       {
-        "rId": "rId133",
-        "img_rel": "word/media/image70.wmf",
-        "ext": ".wmf",
-        "size": 852,
+        "rIds": [
+          "rId133"
+        ],
+        "img_rels": [
+          "word/media/image70.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          852
+        ],
         "sha1": "7e1e73d561aa7405f7997bfa436daf19813f2bf8",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId133": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId135",
-        "img_rel": "word/media/image71.wmf",
-        "ext": ".wmf",
-        "size": 852,
+        "rIds": [
+          "rId135"
+        ],
+        "img_rels": [
+          "word/media/image71.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          852
+        ],
         "sha1": "700a7ce4988a00c3203d3e2e984cf4fc8689e3e8",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId135": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -3545,26 +5546,56 @@
     "math": [],
     "images": [
       {
-        "rId": "rId137",
-        "img_rel": "word/media/image72.wmf",
-        "ext": ".wmf",
-        "size": 854,
+        "rIds": [
+          "rId137"
+        ],
+        "img_rels": [
+          "word/media/image72.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          854
+        ],
         "sha1": "0e36f3a40ffcb087216a6a207e263ef73c173e9e",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId137": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       },
       {
-        "rId": "rId139",
-        "img_rel": "word/media/image73.wmf",
-        "ext": ".wmf",
-        "size": 642,
+        "rIds": [
+          "rId139"
+        ],
+        "img_rels": [
+          "word/media/image73.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          642
+        ],
         "sha1": "6645782d725c3e0c353b1d7b2b5d27da7bed300a",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId139": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       }
     ]
   },
@@ -3574,15 +5605,30 @@
     "math": [],
     "images": [
       {
-        "rId": "rId141",
-        "img_rel": "word/media/image74.wmf",
-        "ext": ".wmf",
-        "size": 838,
+        "rIds": [
+          "rId141"
+        ],
+        "img_rels": [
+          "word/media/image74.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          838
+        ],
         "sha1": "cd56c15b095a4a81f08dc6f9d46b7b1b1e134a98",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId141": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       }
     ]
   },
@@ -3592,25 +5638,51 @@
     "math": [],
     "images": [
       {
-        "rId": "rId143",
-        "img_rel": "word/media/image75.wmf",
-        "ext": ".wmf",
-        "size": 838,
+        "rIds": [
+          "rId143"
+        ],
+        "img_rels": [
+          "word/media/image75.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          838
+        ],
         "sha1": "37957bdf61c6711bf8d2a07f6f2220907d71bbca",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId143": null
+        },
         "reasons": []
       },
       {
-        "rId": "rId145",
-        "img_rel": "word/media/image76.wmf",
-        "ext": ".wmf",
-        "size": 606,
+        "rIds": [
+          "rId145"
+        ],
+        "img_rels": [
+          "word/media/image76.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          606
+        ],
         "sha1": "c53122c80ec5b593d78c9757879c6fca243a57d6",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId145": null
+        },
         "reasons": []
       }
     ]
@@ -3651,14 +5723,27 @@
     "math": [],
     "images": [
       {
-        "rId": "rId241",
-        "img_rel": "word/media/image91.wmf",
-        "ext": ".wmf",
-        "size": 1734,
+        "rIds": [
+          "rId241"
+        ],
+        "img_rels": [
+          "word/media/image91.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          1734
+        ],
         "sha1": "bbd35f0754d6b13393f54102e3ef6ca6b95c327f",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId241": null
+        },
         "reasons": []
       }
     ]
@@ -3669,14 +5754,27 @@
     "math": [],
     "images": [
       {
-        "rId": "rId243",
-        "img_rel": "word/media/image92.wmf",
-        "ext": ".wmf",
-        "size": 838,
+        "rIds": [
+          "rId243"
+        ],
+        "img_rels": [
+          "word/media/image92.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          838
+        ],
         "sha1": "e0c327798a22a3059cb106deefbbf3167d2d6af9",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId243": null
+        },
         "reasons": []
       }
     ]
@@ -3687,14 +5785,27 @@
     "math": [],
     "images": [
       {
-        "rId": "rId245",
-        "img_rel": "word/media/image93.wmf",
-        "ext": ".wmf",
-        "size": 1620,
+        "rIds": [
+          "rId245"
+        ],
+        "img_rels": [
+          "word/media/image93.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          1620
+        ],
         "sha1": "5faf72957cb4040a8ac7bc43caa529e3c5a312a3",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId245": null
+        },
         "reasons": []
       }
     ]
@@ -3717,15 +5828,30 @@
     "math": [],
     "images": [
       {
-        "rId": "rId247",
-        "img_rel": "word/media/image94.wmf",
-        "ext": ".wmf",
-        "size": 1448,
+        "rIds": [
+          "rId247"
+        ],
+        "img_rels": [
+          "word/media/image94.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          1448
+        ],
         "sha1": "e2119311e6446013d8f715c83749a5b7f95a69d6",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId247": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       }
     ]
   },
@@ -3735,15 +5861,30 @@
     "math": [],
     "images": [
       {
-        "rId": "rId249",
-        "img_rel": "word/media/image95.wmf",
-        "ext": ".wmf",
-        "size": 3036,
+        "rIds": [
+          "rId249"
+        ],
+        "img_rels": [
+          "word/media/image95.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          3036
+        ],
         "sha1": "dfafb30279546b41e9cad0596e105551b642286f",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId249": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       }
     ]
   },
@@ -3814,27 +5955,53 @@
     "math": [],
     "images": [
       {
-        "rId": "rId147",
-        "img_rel": "word/media/image77.wmf",
-        "ext": ".wmf",
-        "size": 736,
+        "rIds": [
+          "rId147"
+        ],
+        "img_rels": [
+          "word/media/image77.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          736
+        ],
         "sha1": "91528578ef381b55b26e4f19f203b4b0d1e99623",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId147": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId149",
-        "img_rel": "word/media/image78.wmf",
-        "ext": ".wmf",
-        "size": 736,
+        "rIds": [
+          "rId149"
+        ],
+        "img_rels": [
+          "word/media/image78.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          736
+        ],
         "sha1": "7e0506fafdc7002150872631115047a438d37ac7",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId149": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -3853,15 +6020,30 @@
     "math": [],
     "images": [
       {
-        "rId": "rId253",
-        "img_rel": "word/media/image96.wmf",
-        "ext": ".wmf",
-        "size": 3978,
+        "rIds": [
+          "rId253"
+        ],
+        "img_rels": [
+          "word/media/image96.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          3978
+        ],
         "sha1": "1ab6278f981d3307ee0d9027263bc7920378639c",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId253": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       }
     ]
   },
@@ -3871,40 +6053,79 @@
     "math": [],
     "images": [
       {
-        "rId": "rId151",
-        "img_rel": "word/media/image79.wmf",
-        "ext": ".wmf",
-        "size": 1072,
+        "rIds": [
+          "rId151"
+        ],
+        "img_rels": [
+          "word/media/image79.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          1072
+        ],
         "sha1": "7a7faf64ef6eaf9d2e339e5a3ff580770afa5d4b",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId151": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId153",
-        "img_rel": "word/media/image80.wmf",
-        "ext": ".wmf",
-        "size": 722,
+        "rIds": [
+          "rId153"
+        ],
+        "img_rels": [
+          "word/media/image80.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          722
+        ],
         "sha1": "048a9281581d09d85cc06c7a9f3d90aa4c20e55a",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId153": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId155",
-        "img_rel": "word/media/image81.wmf",
-        "ext": ".wmf",
-        "size": 1446,
+        "rIds": [
+          "rId155"
+        ],
+        "img_rels": [
+          "word/media/image81.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          1446
+        ],
         "sha1": "4a37b12f030518d9a5850863170c1e1eadad48f9",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId155": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -3917,27 +6138,53 @@
     "math": [],
     "images": [
       {
-        "rId": "rId157",
-        "img_rel": "word/media/image82.wmf",
-        "ext": ".wmf",
-        "size": 836,
+        "rIds": [
+          "rId157"
+        ],
+        "img_rels": [
+          "word/media/image82.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          836
+        ],
         "sha1": "cf4e4ef5076d2259514b03fa249802a9cb6f1a71",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId157": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId159",
-        "img_rel": "word/media/image83.wmf",
-        "ext": ".wmf",
-        "size": 598,
+        "rIds": [
+          "rId159"
+        ],
+        "img_rels": [
+          "word/media/image83.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          598
+        ],
         "sha1": "666db181b7bf82bfdd129e88a1691fdcce058abf",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId159": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -3950,40 +6197,79 @@
     "math": [],
     "images": [
       {
-        "rId": "rId161",
-        "img_rel": "word/media/image84.wmf",
-        "ext": ".wmf",
-        "size": 598,
+        "rIds": [
+          "rId161"
+        ],
+        "img_rels": [
+          "word/media/image84.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          598
+        ],
         "sha1": "1a4071e9a7c8211c8cda815c587dcccc53e7b5cd",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId161": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId163",
-        "img_rel": "word/media/image85.wmf",
-        "ext": ".wmf",
-        "size": 942,
+        "rIds": [
+          "rId163"
+        ],
+        "img_rels": [
+          "word/media/image85.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          942
+        ],
         "sha1": "d61d2698f732e3ddddc6d66c504b4e4990da6a90",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId163": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
       },
       {
-        "rId": "rId165",
-        "img_rel": "word/media/image86.wmf",
-        "ext": ".wmf",
-        "size": 598,
+        "rIds": [
+          "rId165"
+        ],
+        "img_rels": [
+          "word/media/image86.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          598
+        ],
         "sha1": "6437149cde9dfb00433f9d5ae3385ef42330cd48",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId165": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -4002,14 +6288,27 @@
     "math": [],
     "images": [
       {
-        "rId": "rId263",
-        "img_rel": "word/media/image97.wmf",
-        "ext": ".wmf",
-        "size": 992,
+        "rIds": [
+          "rId263"
+        ],
+        "img_rels": [
+          "word/media/image97.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          992
+        ],
         "sha1": "5541f38b9287a5f87b9cc5e5c60e6a43f9a639fc",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId263": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -4022,14 +6321,27 @@
     "math": [],
     "images": [
       {
-        "rId": "rId265",
-        "img_rel": "word/media/image98.wmf",
-        "ext": ".wmf",
-        "size": 1088,
+        "rIds": [
+          "rId265"
+        ],
+        "img_rels": [
+          "word/media/image98.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          1088
+        ],
         "sha1": "2fe7debe9bcb738309721701c934956df775befd",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId265": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -4042,14 +6354,27 @@
     "math": [],
     "images": [
       {
-        "rId": "rId167",
-        "img_rel": "word/media/image87.wmf",
-        "ext": ".wmf",
-        "size": 846,
+        "rIds": [
+          "rId167"
+        ],
+        "img_rels": [
+          "word/media/image87.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          846
+        ],
         "sha1": "b9c1489efbacf3d0b6ff520aac4f5169af29567c",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId167": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -4074,14 +6399,27 @@
     "math": [],
     "images": [
       {
-        "rId": "rId269",
-        "img_rel": "word/media/image99.wmf",
-        "ext": ".wmf",
-        "size": 600,
+        "rIds": [
+          "rId269"
+        ],
+        "img_rels": [
+          "word/media/image99.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          600
+        ],
         "sha1": "4ec66994c803510b05bca70f6ad32d0acf319ddc",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId269": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -4094,14 +6432,27 @@
     "math": [],
     "images": [
       {
-        "rId": "rId167",
-        "img_rel": "word/media/image87.wmf",
-        "ext": ".wmf",
-        "size": 846,
+        "rIds": [
+          "rId167"
+        ],
+        "img_rels": [
+          "word/media/image87.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          846
+        ],
         "sha1": "b9c1489efbacf3d0b6ff520aac4f5169af29567c",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
+        "rId_to_saved": {
+          "rId167": null
+        },
         "reasons": [
           "near_question_but_no_strong_signal"
         ]
@@ -4120,15 +6471,30 @@
     "math": [],
     "images": [
       {
-        "rId": "rId269",
-        "img_rel": "word/media/image99.wmf",
-        "ext": ".wmf",
-        "size": 600,
+        "rIds": [
+          "rId269"
+        ],
+        "img_rels": [
+          "word/media/image99.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          600
+        ],
         "sha1": "4ec66994c803510b05bca70f6ad32d0acf319ddc",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId269": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       }
     ]
   },
@@ -4138,26 +6504,56 @@
     "math": [],
     "images": [
       {
-        "rId": "rId167",
-        "img_rel": "word/media/image87.wmf",
-        "ext": ".wmf",
-        "size": 846,
+        "rIds": [
+          "rId167"
+        ],
+        "img_rels": [
+          "word/media/image87.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          846
+        ],
         "sha1": "b9c1489efbacf3d0b6ff520aac4f5169af29567c",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId167": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       },
       {
-        "rId": "rId269",
-        "img_rel": "word/media/image99.wmf",
-        "ext": ".wmf",
-        "size": 600,
+        "rIds": [
+          "rId269"
+        ],
+        "img_rels": [
+          "word/media/image99.wmf"
+        ],
+        "exts": [
+          ".wmf"
+        ],
+        "sizes": [
+          600
+        ],
         "sha1": "4ec66994c803510b05bca70f6ad32d0acf319ddc",
-        "alt": "Group 1",
+        "alts": [
+          "Group 1"
+        ],
         "selected": false,
         "saved_path": null,
-        "reasons": []
+        "rId_to_saved": {
+          "rId269": null
+        },
+        "reasons": [
+          "near_question_but_no_strong_signal"
+        ]
       }
     ]
   },
