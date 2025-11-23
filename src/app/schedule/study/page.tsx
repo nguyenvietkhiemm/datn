@@ -6,7 +6,6 @@ import Cookies from "js-cookie";
 import Pagination from "@/components/pagination/Pagination";
 import { Button } from "@/components/ui/button";
 import AddScheduleStudy from "@/components/add-schedule-study/AddScheduleStudy";
-import Search from "@/components/search/Search";
 import FormScheduleStudy from "@/components/form-schedule-study/FormScheduleStudy";
 
 interface StudySchedule {

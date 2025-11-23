@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import UserGoal from "@/components/user-goal/page";
 import { Roboto_Slab } from "next/font/google";
 import ClientLayout from "@/lib/ThemeProvider";
 

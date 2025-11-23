@@ -12,7 +12,7 @@ export default function Setting({ onLogout, setShowSetting } : SettingProps) {
     <div className={styles.dropdown}>
       <ul className={styles.menu}>
         <li onClick={() => setShowSetting(false)}><Link href="/schedule/study">Lịch học của tôi</Link></li>
-        <li onClick={() => setShowSetting(false)}><Link href="/profile">Trang cá nhân</Link></li>
+        <li onClick={() => setShowSetting(false)}><Link href="/my-account">Trang cá nhân</Link></li>
         <li onClick={onLogout} className={styles.logout}>Đăng xuất</li>
       </ul>
     </div>

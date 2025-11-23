@@ -67,12 +67,6 @@ export default function FormScheduleStudy({
                 return;
             }
 
-            if (numericOnly === "") {
-                setForm(prev => ({ ...prev, target_question: "" as any }));
-                setError?.("Số câu hỏi mục tiêu không được để trống.")
-                return;
-            }
-
             const num = Number(numericOnly);
 
             if (num === 0) {
@@ -217,12 +211,7 @@ export default function FormScheduleStudy({
                     Môn học
                     <select
                         value={form.subject_id ? form.subject_id.toString() : ""}
-                        onChange={(e) => {
-                            const value = Number(e.target.value);
-                            handleChange({
-                                target: { name: "subject_id", value }
-                            });
-                        }}
+                        onChange={(e) => {handleChange}}
                         className={styles.select}
                         name="subject_id"
                     >
