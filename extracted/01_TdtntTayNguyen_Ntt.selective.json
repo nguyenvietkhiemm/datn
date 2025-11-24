@@ -165,13 +165,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image1.png",
         "rId_to_saved": {
-          "rId7": null
+          "rId7": "extracted\\media\\image1.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -234,13 +236,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image2.png",
         "rId_to_saved": {
-          "rId9": null
+          "rId9": "extracted\\media\\image2.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -267,13 +271,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image3.png",
         "rId_to_saved": {
-          "rId11": null
+          "rId11": "extracted\\media\\image3.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -293,13 +299,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image4.png",
         "rId_to_saved": {
-          "rId13": null
+          "rId13": "extracted\\media\\image4.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -319,13 +327,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image5.png",
         "rId_to_saved": {
-          "rId15": null
+          "rId15": "extracted\\media\\image5.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -345,13 +355,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image6.png",
         "rId_to_saved": {
-          "rId17": null
+          "rId17": "extracted\\media\\image6.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -385,13 +397,13 @@
           "Hình ảnh 22 A diagram of a graph\n\nDescription automatically generated"
         ],
         "selected": true,
-        "saved_path": "extracted\\media\\image7_1.png",
+        "saved_path": "extracted\\media\\image7.png",
         "rId_to_saved": {
-          "rId19": "extracted\\media\\image7_1.png"
+          "rId19": "extracted\\media\\image7.png"
         },
         "reasons": [
-          "has_alt_keyword",
-          "extracted_now"
+          "extracted_now",
+          "has_alt_keyword"
         ]
       }
     ]
@@ -424,13 +436,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image8.png",
         "rId_to_saved": {
-          "rId20": null
+          "rId20": "extracted\\media\\image8.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -450,13 +464,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image9.png",
         "rId_to_saved": {
-          "rId22": null
+          "rId22": "extracted\\media\\image9.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -476,13 +492,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image10.png",
         "rId_to_saved": {
-          "rId24": null
+          "rId24": "extracted\\media\\image10.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -502,13 +520,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image11.png",
         "rId_to_saved": {
-          "rId26": null
+          "rId26": "extracted\\media\\image11.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -535,13 +555,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image12.png",
         "rId_to_saved": {
-          "rId28": null
+          "rId28": "extracted\\media\\image12.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -561,13 +583,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image13.png",
         "rId_to_saved": {
-          "rId30": null
+          "rId30": "extracted\\media\\image13.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -642,13 +666,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image14.png",
         "rId_to_saved": {
-          "rId32": null
+          "rId32": "extracted\\media\\image14.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -675,13 +701,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image15.png",
         "rId_to_saved": {
-          "rId34": null
+          "rId34": "extracted\\media\\image15.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -708,13 +736,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image16.png",
         "rId_to_saved": {
-          "rId36": null
+          "rId36": "extracted\\media\\image16.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -741,13 +771,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image17.png",
         "rId_to_saved": {
-          "rId38": null
+          "rId38": "extracted\\media\\image17.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -767,13 +799,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image18.png",
         "rId_to_saved": {
-          "rId40": null
+          "rId40": "extracted\\media\\image18.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -793,13 +827,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image19.png",
         "rId_to_saved": {
-          "rId42": null
+          "rId42": "extracted\\media\\image19.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -819,13 +855,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image20.png",
         "rId_to_saved": {
-          "rId44": null
+          "rId44": "extracted\\media\\image20.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -845,13 +883,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image21.png",
         "rId_to_saved": {
-          "rId46": null
+          "rId46": "extracted\\media\\image21.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -871,13 +911,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image22.png",
         "rId_to_saved": {
-          "rId48": null
+          "rId48": "extracted\\media\\image22.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -897,13 +939,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image23.png",
         "rId_to_saved": {
-          "rId50": null
+          "rId50": "extracted\\media\\image23.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -930,13 +974,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image24.png",
         "rId_to_saved": {
-          "rId52": null
+          "rId52": "extracted\\media\\image24.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -956,13 +1002,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image25.png",
         "rId_to_saved": {
-          "rId54": null
+          "rId54": "extracted\\media\\image25.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -982,13 +1030,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image26.png",
         "rId_to_saved": {
-          "rId56": null
+          "rId56": "extracted\\media\\image26.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1008,13 +1058,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image27.png",
         "rId_to_saved": {
-          "rId58": null
+          "rId58": "extracted\\media\\image27.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -1041,13 +1093,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image28.png",
         "rId_to_saved": {
-          "rId60": null
+          "rId60": "extracted\\media\\image28.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1067,13 +1121,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image29.png",
         "rId_to_saved": {
-          "rId62": null
+          "rId62": "extracted\\media\\image29.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1093,13 +1149,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image30.png",
         "rId_to_saved": {
-          "rId64": null
+          "rId64": "extracted\\media\\image30.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1119,13 +1177,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image31.png",
         "rId_to_saved": {
-          "rId66": null
+          "rId66": "extracted\\media\\image31.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1145,13 +1205,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image32.png",
         "rId_to_saved": {
-          "rId68": null
+          "rId68": "extracted\\media\\image32.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1171,13 +1233,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image33.png",
         "rId_to_saved": {
-          "rId70": null
+          "rId70": "extracted\\media\\image33.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1197,13 +1261,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image34.png",
         "rId_to_saved": {
-          "rId72": null
+          "rId72": "extracted\\media\\image34.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -1230,13 +1296,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image35.png",
         "rId_to_saved": {
-          "rId74": null
+          "rId74": "extracted\\media\\image35.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1256,13 +1324,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image36.png",
         "rId_to_saved": {
-          "rId76": null
+          "rId76": "extracted\\media\\image36.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1282,13 +1352,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image37.png",
         "rId_to_saved": {
-          "rId78": null
+          "rId78": "extracted\\media\\image37.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1308,13 +1380,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image38.png",
         "rId_to_saved": {
-          "rId80": null
+          "rId80": "extracted\\media\\image38.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -1353,13 +1427,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image39.png",
         "rId_to_saved": {
-          "rId82": null
+          "rId82": "extracted\\media\\image39.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -1398,13 +1474,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image40.png",
         "rId_to_saved": {
-          "rId84": null
+          "rId84": "extracted\\media\\image40.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1424,13 +1502,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image41.png",
         "rId_to_saved": {
-          "rId86": null
+          "rId86": "extracted\\media\\image41.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1450,13 +1530,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image42.png",
         "rId_to_saved": {
-          "rId88": null
+          "rId88": "extracted\\media\\image42.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1476,13 +1558,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image43.png",
         "rId_to_saved": {
-          "rId90": null
+          "rId90": "extracted\\media\\image43.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -1551,13 +1635,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image44.png",
         "rId_to_saved": {
-          "rId92": null
+          "rId92": "extracted\\media\\image44.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1577,13 +1663,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image45.png",
         "rId_to_saved": {
-          "rId94": null
+          "rId94": "extracted\\media\\image45.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1603,13 +1691,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image46.png",
         "rId_to_saved": {
-          "rId96": null
+          "rId96": "extracted\\media\\image46.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -1642,13 +1732,15 @@
         "alts": [
           "Picture 51"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image48.png",
         "rId_to_saved": {
-          "rId100": null
+          "rId100": "extracted\\media\\image48.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1668,13 +1760,15 @@
         "alts": [
           "Picture 52"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image49.png",
         "rId_to_saved": {
-          "rId101": null
+          "rId101": "extracted\\media\\image49.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1694,13 +1788,15 @@
         "alts": [
           "Picture 59"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image47.png",
         "rId_to_saved": {
-          "rId98": null
+          "rId98": "extracted\\media\\image47.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1720,13 +1816,15 @@
         "alts": [
           "Picture 59"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image50.png",
         "rId_to_saved": {
-          "rId102": null
+          "rId102": "extracted\\media\\image50.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1746,13 +1844,15 @@
         "alts": [
           "Picture 59"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image51.png",
         "rId_to_saved": {
-          "rId104": null
+          "rId104": "extracted\\media\\image51.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1772,13 +1872,15 @@
         "alts": [
           "Picture 59"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image52.png",
         "rId_to_saved": {
-          "rId106": null
+          "rId106": "extracted\\media\\image52.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1798,13 +1900,15 @@
         "alts": [
           "Picture 59"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image53.png",
         "rId_to_saved": {
-          "rId108": null
+          "rId108": "extracted\\media\\image53.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1824,13 +1928,15 @@
         "alts": [
           "Picture 59"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image54.png",
         "rId_to_saved": {
-          "rId110": null
+          "rId110": "extracted\\media\\image54.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1850,13 +1956,15 @@
         "alts": [
           "Picture 59"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image55.png",
         "rId_to_saved": {
-          "rId112": null
+          "rId112": "extracted\\media\\image55.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1876,13 +1984,15 @@
         "alts": [
           "Picture 59"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image56.png",
         "rId_to_saved": {
-          "rId114": null
+          "rId114": "extracted\\media\\image56.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1902,13 +2012,15 @@
         "alts": [
           "Picture 59"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image57.png",
         "rId_to_saved": {
-          "rId116": null
+          "rId116": "extracted\\media\\image57.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -2091,13 +2203,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image58.png",
         "rId_to_saved": {
-          "rId118": null
+          "rId118": "extracted\\media\\image58.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -2117,13 +2231,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image59.png",
         "rId_to_saved": {
-          "rId120": null
+          "rId120": "extracted\\media\\image59.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -2143,13 +2259,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image60.png",
         "rId_to_saved": {
-          "rId122": null
+          "rId122": "extracted\\media\\image60.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -2169,13 +2287,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image61.png",
         "rId_to_saved": {
-          "rId124": null
+          "rId124": "extracted\\media\\image61.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -2202,13 +2322,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image62.png",
         "rId_to_saved": {
-          "rId126": null
+          "rId126": "extracted\\media\\image62.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -2235,13 +2357,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image63.png",
         "rId_to_saved": {
-          "rId128": null
+          "rId128": "extracted\\media\\image63.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -2261,13 +2385,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image64.png",
         "rId_to_saved": {
-          "rId130": null
+          "rId130": "extracted\\media\\image64.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -2294,13 +2420,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image65.png",
         "rId_to_saved": {
-          "rId132": null
+          "rId132": "extracted\\media\\image65.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -2320,13 +2448,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image66.png",
         "rId_to_saved": {
-          "rId134": null
+          "rId134": "extracted\\media\\image66.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -2353,13 +2483,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image67.png",
         "rId_to_saved": {
-          "rId136": null
+          "rId136": "extracted\\media\\image67.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -2379,13 +2511,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image68.png",
         "rId_to_saved": {
-          "rId138": null
+          "rId138": "extracted\\media\\image68.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -2412,13 +2546,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image69.png",
         "rId_to_saved": {
-          "rId140": null
+          "rId140": "extracted\\media\\image69.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -2438,13 +2574,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image70.png",
         "rId_to_saved": {
-          "rId142": null
+          "rId142": "extracted\\media\\image70.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -2464,13 +2602,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image71.png",
         "rId_to_saved": {
-          "rId144": null
+          "rId144": "extracted\\media\\image71.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -2490,13 +2630,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image72.png",
         "rId_to_saved": {
-          "rId146": null
+          "rId146": "extracted\\media\\image72.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -2516,13 +2658,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image73.png",
         "rId_to_saved": {
-          "rId148": null
+          "rId148": "extracted\\media\\image73.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -2549,13 +2693,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image74.png",
         "rId_to_saved": {
-          "rId150": null
+          "rId150": "extracted\\media\\image74.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -2575,13 +2721,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image75.png",
         "rId_to_saved": {
-          "rId152": null
+          "rId152": "extracted\\media\\image75.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -2608,13 +2756,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image76.png",
         "rId_to_saved": {
-          "rId154": null
+          "rId154": "extracted\\media\\image76.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -2634,13 +2784,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image77.png",
         "rId_to_saved": {
-          "rId156": null
+          "rId156": "extracted\\media\\image77.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -2667,13 +2819,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image78.png",
         "rId_to_saved": {
-          "rId158": null
+          "rId158": "extracted\\media\\image78.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -2700,13 +2854,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image79.png",
         "rId_to_saved": {
-          "rId160": null
+          "rId160": "extracted\\media\\image79.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -2726,13 +2882,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image80.png",
         "rId_to_saved": {
-          "rId162": null
+          "rId162": "extracted\\media\\image80.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -2777,13 +2935,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image81.png",
         "rId_to_saved": {
-          "rId164": null
+          "rId164": "extracted\\media\\image81.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -2803,13 +2963,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image82.png",
         "rId_to_saved": {
-          "rId166": null
+          "rId166": "extracted\\media\\image82.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -2842,13 +3004,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image83.png",
         "rId_to_saved": {
-          "rId168": null
+          "rId168": "extracted\\media\\image83.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -2868,13 +3032,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image84.png",
         "rId_to_saved": {
-          "rId170": null
+          "rId170": "extracted\\media\\image84.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -2901,13 +3067,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image85.png",
         "rId_to_saved": {
-          "rId172": null
+          "rId172": "extracted\\media\\image85.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -2927,13 +3095,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image86.png",
         "rId_to_saved": {
-          "rId174": null
+          "rId174": "extracted\\media\\image86.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -2953,13 +3123,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image87.png",
         "rId_to_saved": {
-          "rId176": null
+          "rId176": "extracted\\media\\image87.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -2979,13 +3151,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image88.png",
         "rId_to_saved": {
-          "rId178": null
+          "rId178": "extracted\\media\\image88.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -3005,13 +3179,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image89.png",
         "rId_to_saved": {
-          "rId180": null
+          "rId180": "extracted\\media\\image89.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -3031,13 +3207,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image90.png",
         "rId_to_saved": {
-          "rId182": null
+          "rId182": "extracted\\media\\image90.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -3057,13 +3235,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image91.png",
         "rId_to_saved": {
-          "rId184": null
+          "rId184": "extracted\\media\\image91.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -3083,13 +3263,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image92.png",
         "rId_to_saved": {
-          "rId186": null
+          "rId186": "extracted\\media\\image92.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -3109,13 +3291,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image93.png",
         "rId_to_saved": {
-          "rId188": null
+          "rId188": "extracted\\media\\image93.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -3135,13 +3319,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image94.png",
         "rId_to_saved": {
-          "rId190": null
+          "rId190": "extracted\\media\\image94.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -3161,13 +3347,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image95.png",
         "rId_to_saved": {
-          "rId192": null
+          "rId192": "extracted\\media\\image95.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -3187,13 +3375,15 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image96.png",
         "rId_to_saved": {
-          "rId194": null
+          "rId194": "extracted\\media\\image96.png"
         },
         "reasons": [
-          "near_question_but_no_strong_signal"
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -3394,12 +3584,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image1.png",
         "rId_to_saved": {
-          "rId7": null
+          "rId7": "extracted\\media\\image1.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -3491,12 +3685,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image2.png",
         "rId_to_saved": {
-          "rId9": null
+          "rId9": "extracted\\media\\image2.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -3522,12 +3720,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image3.png",
         "rId_to_saved": {
-          "rId11": null
+          "rId11": "extracted\\media\\image3.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -3546,12 +3748,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image4.png",
         "rId_to_saved": {
-          "rId13": null
+          "rId13": "extracted\\media\\image4.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -3570,12 +3776,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image5.png",
         "rId_to_saved": {
-          "rId15": null
+          "rId15": "extracted\\media\\image5.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -3594,12 +3804,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image6.png",
         "rId_to_saved": {
-          "rId17": null
+          "rId17": "extracted\\media\\image6.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -3631,12 +3845,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image97.png",
         "rId_to_saved": {
-          "rId203": null
+          "rId203": "extracted\\media\\image97.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -3669,14 +3887,14 @@
           "Hình ảnh 22 A diagram of a graph\n\nDescription automatically generated"
         ],
         "selected": true,
-        "saved_path": "extracted\\media\\image7_1.png",
+        "saved_path": "extracted\\media\\image7.png",
         "rId_to_saved": {
-          "rId19": "extracted\\media\\image7_1.png"
+          "rId19": "extracted\\media\\image7.png"
         },
         "reasons": [
-          "has_alt_keyword",
+          "reused_existing",
           "duplicate_of_canonical",
-          "reused_existing"
+          "has_alt_keyword"
         ]
       }
     ]
@@ -3709,12 +3927,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image8.png",
         "rId_to_saved": {
-          "rId20": null
+          "rId20": "extracted\\media\\image8.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -3733,12 +3955,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image9.png",
         "rId_to_saved": {
-          "rId22": null
+          "rId22": "extracted\\media\\image9.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -3757,12 +3983,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image10.png",
         "rId_to_saved": {
-          "rId24": null
+          "rId24": "extracted\\media\\image10.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -3781,12 +4011,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image11.png",
         "rId_to_saved": {
-          "rId26": null
+          "rId26": "extracted\\media\\image11.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -3818,12 +4052,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image98.png",
         "rId_to_saved": {
-          "rId209": null
+          "rId209": "extracted\\media\\image98.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -3842,12 +4080,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image99.png",
         "rId_to_saved": {
-          "rId211": null
+          "rId211": "extracted\\media\\image99.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -3866,12 +4108,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image100.png",
         "rId_to_saved": {
-          "rId213": null
+          "rId213": "extracted\\media\\image100.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -3890,12 +4136,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image101.png",
         "rId_to_saved": {
-          "rId215": null
+          "rId215": "extracted\\media\\image101.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -3921,12 +4171,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image12.png",
         "rId_to_saved": {
-          "rId28": null
+          "rId28": "extracted\\media\\image12.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -3945,12 +4199,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image13.png",
         "rId_to_saved": {
-          "rId30": null
+          "rId30": "extracted\\media\\image13.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -4006,12 +4264,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image12.png",
         "rId_to_saved": {
-          "rId28": null
+          "rId28": "extracted\\media\\image12.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -4030,12 +4292,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image13.png",
         "rId_to_saved": {
-          "rId30": null
+          "rId30": "extracted\\media\\image13.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -4085,12 +4351,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image102.png",
         "rId_to_saved": {
-          "rId221": null
+          "rId221": "extracted\\media\\image102.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -4109,12 +4379,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image103.png",
         "rId_to_saved": {
-          "rId223": null
+          "rId223": "extracted\\media\\image103.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -4140,12 +4414,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image104.png",
         "rId_to_saved": {
-          "rId225": null
+          "rId225": "extracted\\media\\image104.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -4164,12 +4442,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image105.png",
         "rId_to_saved": {
-          "rId227": null
+          "rId227": "extracted\\media\\image105.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -4201,12 +4483,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image106.png",
         "rId_to_saved": {
-          "rId229": null
+          "rId229": "extracted\\media\\image106.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -4256,12 +4542,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image107.png",
         "rId_to_saved": {
-          "rId231": null
+          "rId231": "extracted\\media\\image107.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -4293,12 +4583,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image108.png",
         "rId_to_saved": {
-          "rId233": null
+          "rId233": "extracted\\media\\image108.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -4324,12 +4618,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image14.png",
         "rId_to_saved": {
-          "rId32": null
+          "rId32": "extracted\\media\\image14.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -4355,12 +4653,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image15.png",
         "rId_to_saved": {
-          "rId34": null
+          "rId34": "extracted\\media\\image15.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -4386,12 +4688,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image16.png",
         "rId_to_saved": {
-          "rId36": null
+          "rId36": "extracted\\media\\image16.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -4423,12 +4729,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image109.png",
         "rId_to_saved": {
-          "rId238": null
+          "rId238": "extracted\\media\\image109.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -4454,12 +4764,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image110.png",
         "rId_to_saved": {
-          "rId240": null
+          "rId240": "extracted\\media\\image110.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -4478,12 +4792,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image16.png",
         "rId_to_saved": {
-          "rId36": null
+          "rId36": "extracted\\media\\image16.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -4509,12 +4827,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image17.png",
         "rId_to_saved": {
-          "rId38": null
+          "rId38": "extracted\\media\\image17.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -4533,12 +4855,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image18.png",
         "rId_to_saved": {
-          "rId40": null
+          "rId40": "extracted\\media\\image18.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -4557,12 +4883,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image19.png",
         "rId_to_saved": {
-          "rId42": null
+          "rId42": "extracted\\media\\image19.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -4581,12 +4911,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image20.png",
         "rId_to_saved": {
-          "rId44": null
+          "rId44": "extracted\\media\\image20.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -4605,12 +4939,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image21.png",
         "rId_to_saved": {
-          "rId46": null
+          "rId46": "extracted\\media\\image21.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -4629,12 +4967,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image22.png",
         "rId_to_saved": {
-          "rId48": null
+          "rId48": "extracted\\media\\image22.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -4653,12 +4995,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image23.png",
         "rId_to_saved": {
-          "rId50": null
+          "rId50": "extracted\\media\\image23.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -4684,12 +5030,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image24.png",
         "rId_to_saved": {
-          "rId52": null
+          "rId52": "extracted\\media\\image24.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -4708,12 +5058,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image25.png",
         "rId_to_saved": {
-          "rId54": null
+          "rId54": "extracted\\media\\image25.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -4732,12 +5086,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image26.png",
         "rId_to_saved": {
-          "rId56": null
+          "rId56": "extracted\\media\\image26.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -4756,12 +5114,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image27.png",
         "rId_to_saved": {
-          "rId58": null
+          "rId58": "extracted\\media\\image27.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -4803,12 +5165,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image28.png",
         "rId_to_saved": {
-          "rId60": null
+          "rId60": "extracted\\media\\image28.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -4827,12 +5193,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image29.png",
         "rId_to_saved": {
-          "rId62": null
+          "rId62": "extracted\\media\\image29.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -4851,12 +5221,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image30.png",
         "rId_to_saved": {
-          "rId64": null
+          "rId64": "extracted\\media\\image30.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -4875,12 +5249,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image31.png",
         "rId_to_saved": {
-          "rId66": null
+          "rId66": "extracted\\media\\image31.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -4899,12 +5277,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image32.png",
         "rId_to_saved": {
-          "rId68": null
+          "rId68": "extracted\\media\\image32.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -4923,12 +5305,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image33.png",
         "rId_to_saved": {
-          "rId70": null
+          "rId70": "extracted\\media\\image33.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -4947,12 +5333,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image34.png",
         "rId_to_saved": {
-          "rId72": null
+          "rId72": "extracted\\media\\image34.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -4978,12 +5368,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image35.png",
         "rId_to_saved": {
-          "rId74": null
+          "rId74": "extracted\\media\\image35.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -5002,12 +5396,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image36.png",
         "rId_to_saved": {
-          "rId76": null
+          "rId76": "extracted\\media\\image36.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -5026,12 +5424,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image37.png",
         "rId_to_saved": {
-          "rId78": null
+          "rId78": "extracted\\media\\image37.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -5050,12 +5452,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image38.png",
         "rId_to_saved": {
-          "rId80": null
+          "rId80": "extracted\\media\\image38.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -5087,12 +5493,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image111.png",
         "rId_to_saved": {
-          "rId265": null
+          "rId265": "extracted\\media\\image111.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -5118,12 +5528,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image112.png",
         "rId_to_saved": {
-          "rId267": null
+          "rId267": "extracted\\media\\image112.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -5161,12 +5575,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image39.png",
         "rId_to_saved": {
-          "rId82": null
+          "rId82": "extracted\\media\\image39.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -5216,12 +5634,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image113.png",
         "rId_to_saved": {
-          "rId270": null
+          "rId270": "extracted\\media\\image113.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -5247,12 +5669,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image114.png",
         "rId_to_saved": {
-          "rId272": null
+          "rId272": "extracted\\media\\image114.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -5278,12 +5704,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image115.png",
         "rId_to_saved": {
-          "rId274": null
+          "rId274": "extracted\\media\\image115.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -5309,12 +5739,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image116.png",
         "rId_to_saved": {
-          "rId276": null
+          "rId276": "extracted\\media\\image116.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -5340,12 +5774,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image117.png",
         "rId_to_saved": {
-          "rId278": null
+          "rId278": "extracted\\media\\image117.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -5364,12 +5802,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image118.png",
         "rId_to_saved": {
-          "rId280": null
+          "rId280": "extracted\\media\\image118.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -5388,12 +5830,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image119.png",
         "rId_to_saved": {
-          "rId282": null
+          "rId282": "extracted\\media\\image119.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -5419,12 +5865,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image40.png",
         "rId_to_saved": {
-          "rId84": null
+          "rId84": "extracted\\media\\image40.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -5443,12 +5893,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image41.png",
         "rId_to_saved": {
-          "rId86": null
+          "rId86": "extracted\\media\\image41.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -5467,12 +5921,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image42.png",
         "rId_to_saved": {
-          "rId88": null
+          "rId88": "extracted\\media\\image42.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -5491,12 +5949,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image43.png",
         "rId_to_saved": {
-          "rId90": null
+          "rId90": "extracted\\media\\image43.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -5552,12 +6014,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image120.png",
         "rId_to_saved": {
-          "rId288": null
+          "rId288": "extracted\\media\\image120.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -5576,12 +6042,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image121.png",
         "rId_to_saved": {
-          "rId290": null
+          "rId290": "extracted\\media\\image121.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -5607,12 +6077,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image122.png",
         "rId_to_saved": {
-          "rId292": null
+          "rId292": "extracted\\media\\image122.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -5631,12 +6105,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image123.png",
         "rId_to_saved": {
-          "rId294": null
+          "rId294": "extracted\\media\\image123.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -5662,12 +6140,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image124.png",
         "rId_to_saved": {
-          "rId296": null
+          "rId296": "extracted\\media\\image124.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -5686,12 +6168,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image125.png",
         "rId_to_saved": {
-          "rId298": null
+          "rId298": "extracted\\media\\image125.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -5717,12 +6203,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image126.png",
         "rId_to_saved": {
-          "rId300": null
+          "rId300": "extracted\\media\\image126.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -5741,12 +6231,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image127.png",
         "rId_to_saved": {
-          "rId302": null
+          "rId302": "extracted\\media\\image127.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -5772,12 +6266,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image128.png",
         "rId_to_saved": {
-          "rId304": null
+          "rId304": "extracted\\media\\image128.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -5833,12 +6331,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image44.png",
         "rId_to_saved": {
-          "rId92": null
+          "rId92": "extracted\\media\\image44.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -5857,12 +6359,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image45.png",
         "rId_to_saved": {
-          "rId94": null
+          "rId94": "extracted\\media\\image45.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -5881,12 +6387,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image46.png",
         "rId_to_saved": {
-          "rId96": null
+          "rId96": "extracted\\media\\image46.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -5924,12 +6434,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image129.png",
         "rId_to_saved": {
-          "rId309": null
+          "rId309": "extracted\\media\\image129.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -5955,12 +6469,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image130.png",
         "rId_to_saved": {
-          "rId311": null
+          "rId311": "extracted\\media\\image130.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -5979,12 +6497,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image131.png",
         "rId_to_saved": {
-          "rId313": null
+          "rId313": "extracted\\media\\image131.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -6010,12 +6532,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image132.png",
         "rId_to_saved": {
-          "rId315": null
+          "rId315": "extracted\\media\\image132.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -6041,12 +6567,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image133.png",
         "rId_to_saved": {
-          "rId317": null
+          "rId317": "extracted\\media\\image133.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -6072,12 +6602,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image134.png",
         "rId_to_saved": {
-          "rId319": null
+          "rId319": "extracted\\media\\image134.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -6103,12 +6637,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image135.png",
         "rId_to_saved": {
-          "rId321": null
+          "rId321": "extracted\\media\\image135.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -6134,12 +6672,16 @@
         "alts": [
           "Picture 51"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image48.png",
         "rId_to_saved": {
-          "rId100": null
+          "rId100": "extracted\\media\\image48.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -6158,12 +6700,16 @@
         "alts": [
           "Picture 52"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image49.png",
         "rId_to_saved": {
-          "rId101": null
+          "rId101": "extracted\\media\\image49.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -6182,12 +6728,16 @@
         "alts": [
           "Picture 53"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image47.png",
         "rId_to_saved": {
-          "rId98": null
+          "rId98": "extracted\\media\\image47.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -6206,12 +6756,16 @@
         "alts": [
           "Picture 53"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image50.png",
         "rId_to_saved": {
-          "rId102": null
+          "rId102": "extracted\\media\\image50.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -6230,12 +6784,16 @@
         "alts": [
           "Picture 53"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image51.png",
         "rId_to_saved": {
-          "rId104": null
+          "rId104": "extracted\\media\\image51.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -6254,12 +6812,16 @@
         "alts": [
           "Picture 53"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image52.png",
         "rId_to_saved": {
-          "rId106": null
+          "rId106": "extracted\\media\\image52.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -6278,12 +6840,16 @@
         "alts": [
           "Picture 53"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image53.png",
         "rId_to_saved": {
-          "rId108": null
+          "rId108": "extracted\\media\\image53.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -6302,12 +6868,16 @@
         "alts": [
           "Picture 53"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image54.png",
         "rId_to_saved": {
-          "rId110": null
+          "rId110": "extracted\\media\\image54.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -6326,12 +6896,16 @@
         "alts": [
           "Picture 53"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image55.png",
         "rId_to_saved": {
-          "rId112": null
+          "rId112": "extracted\\media\\image55.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -6350,12 +6924,16 @@
         "alts": [
           "Picture 53"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image56.png",
         "rId_to_saved": {
-          "rId114": null
+          "rId114": "extracted\\media\\image56.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -6374,12 +6952,16 @@
         "alts": [
           "Picture 53"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image57.png",
         "rId_to_saved": {
-          "rId116": null
+          "rId116": "extracted\\media\\image57.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -6417,12 +6999,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image136.png",
         "rId_to_saved": {
-          "rId332": null
+          "rId332": "extracted\\media\\image136.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -6448,12 +7034,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image137.png",
         "rId_to_saved": {
-          "rId334": null
+          "rId334": "extracted\\media\\image137.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -6479,12 +7069,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image138.png",
         "rId_to_saved": {
-          "rId336": null
+          "rId336": "extracted\\media\\image138.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -6510,12 +7104,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image139.png",
         "rId_to_saved": {
-          "rId338": null
+          "rId338": "extracted\\media\\image139.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -6534,12 +7132,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image140.png",
         "rId_to_saved": {
-          "rId340": null
+          "rId340": "extracted\\media\\image140.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -6775,12 +7377,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image58.png",
         "rId_to_saved": {
-          "rId118": null
+          "rId118": "extracted\\media\\image58.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -6799,12 +7405,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image59.png",
         "rId_to_saved": {
-          "rId120": null
+          "rId120": "extracted\\media\\image59.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -6823,12 +7433,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image60.png",
         "rId_to_saved": {
-          "rId122": null
+          "rId122": "extracted\\media\\image60.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -6847,12 +7461,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image61.png",
         "rId_to_saved": {
-          "rId124": null
+          "rId124": "extracted\\media\\image61.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -6878,12 +7496,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image62.png",
         "rId_to_saved": {
-          "rId126": null
+          "rId126": "extracted\\media\\image62.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -6909,12 +7531,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image63.png",
         "rId_to_saved": {
-          "rId128": null
+          "rId128": "extracted\\media\\image63.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -6933,12 +7559,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image64.png",
         "rId_to_saved": {
-          "rId130": null
+          "rId130": "extracted\\media\\image64.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -6964,12 +7594,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image65.png",
         "rId_to_saved": {
-          "rId132": null
+          "rId132": "extracted\\media\\image65.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -6988,12 +7622,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image66.png",
         "rId_to_saved": {
-          "rId134": null
+          "rId134": "extracted\\media\\image66.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -7019,12 +7657,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image67.png",
         "rId_to_saved": {
-          "rId136": null
+          "rId136": "extracted\\media\\image67.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -7043,12 +7685,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image68.png",
         "rId_to_saved": {
-          "rId138": null
+          "rId138": "extracted\\media\\image68.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -7086,12 +7732,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image141.png",
         "rId_to_saved": {
-          "rId353": null
+          "rId353": "extracted\\media\\image141.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -7110,12 +7760,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image142.png",
         "rId_to_saved": {
-          "rId355": null
+          "rId355": "extracted\\media\\image142.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -7134,12 +7788,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image143.png",
         "rId_to_saved": {
-          "rId357": null
+          "rId357": "extracted\\media\\image143.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -7165,12 +7823,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image144.png",
         "rId_to_saved": {
-          "rId359": null
+          "rId359": "extracted\\media\\image144.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -7189,12 +7851,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image145.png",
         "rId_to_saved": {
-          "rId361": null
+          "rId361": "extracted\\media\\image145.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -7220,12 +7886,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image146.png",
         "rId_to_saved": {
-          "rId363": null
+          "rId363": "extracted\\media\\image146.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -7251,12 +7921,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image147.png",
         "rId_to_saved": {
-          "rId365": null
+          "rId365": "extracted\\media\\image147.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -7282,12 +7956,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image148.png",
         "rId_to_saved": {
-          "rId367": null
+          "rId367": "extracted\\media\\image148.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -7313,12 +7991,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image149.png",
         "rId_to_saved": {
-          "rId369": null
+          "rId369": "extracted\\media\\image149.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -7350,12 +8032,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image150.png",
         "rId_to_saved": {
-          "rId371": null
+          "rId371": "extracted\\media\\image150.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -7374,12 +8060,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image151.png",
         "rId_to_saved": {
-          "rId373": null
+          "rId373": "extracted\\media\\image151.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -7411,12 +8101,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image152.png",
         "rId_to_saved": {
-          "rId375": null
+          "rId375": "extracted\\media\\image152.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -7435,12 +8129,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image153.png",
         "rId_to_saved": {
-          "rId377": null
+          "rId377": "extracted\\media\\image153.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -7472,12 +8170,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image67.png",
         "rId_to_saved": {
-          "rId136": null
+          "rId136": "extracted\\media\\image67.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -7496,12 +8198,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image154.png",
         "rId_to_saved": {
-          "rId380": null
+          "rId380": "extracted\\media\\image154.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -7527,12 +8233,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image69.png",
         "rId_to_saved": {
-          "rId140": null
+          "rId140": "extracted\\media\\image69.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -7551,12 +8261,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image70.png",
         "rId_to_saved": {
-          "rId142": null
+          "rId142": "extracted\\media\\image70.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -7575,12 +8289,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image71.png",
         "rId_to_saved": {
-          "rId144": null
+          "rId144": "extracted\\media\\image71.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -7599,12 +8317,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image72.png",
         "rId_to_saved": {
-          "rId146": null
+          "rId146": "extracted\\media\\image72.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -7623,12 +8345,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image73.png",
         "rId_to_saved": {
-          "rId148": null
+          "rId148": "extracted\\media\\image73.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -7654,12 +8380,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image74.png",
         "rId_to_saved": {
-          "rId150": null
+          "rId150": "extracted\\media\\image74.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -7678,12 +8408,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image75.png",
         "rId_to_saved": {
-          "rId152": null
+          "rId152": "extracted\\media\\image75.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -7709,12 +8443,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image76.png",
         "rId_to_saved": {
-          "rId154": null
+          "rId154": "extracted\\media\\image76.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -7733,12 +8471,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image77.png",
         "rId_to_saved": {
-          "rId156": null
+          "rId156": "extracted\\media\\image77.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -7764,12 +8506,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image78.png",
         "rId_to_saved": {
-          "rId158": null
+          "rId158": "extracted\\media\\image78.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -7795,12 +8541,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image79.png",
         "rId_to_saved": {
-          "rId160": null
+          "rId160": "extracted\\media\\image79.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -7819,12 +8569,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image80.png",
         "rId_to_saved": {
-          "rId162": null
+          "rId162": "extracted\\media\\image80.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -7880,12 +8634,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image155.png",
         "rId_to_saved": {
-          "rId394": null
+          "rId394": "extracted\\media\\image155.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -7911,12 +8669,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image156.png",
         "rId_to_saved": {
-          "rId396": null
+          "rId396": "extracted\\media\\image156.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -7942,12 +8704,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image157.png",
         "rId_to_saved": {
-          "rId398": null
+          "rId398": "extracted\\media\\image157.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -7985,12 +8751,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image158.png",
         "rId_to_saved": {
-          "rId400": null
+          "rId400": "extracted\\media\\image158.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -8016,12 +8786,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image159.png",
         "rId_to_saved": {
-          "rId402": null
+          "rId402": "extracted\\media\\image159.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -8087,12 +8861,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image160.png",
         "rId_to_saved": {
-          "rId404": null
+          "rId404": "extracted\\media\\image160.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -8118,12 +8896,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image81.png",
         "rId_to_saved": {
-          "rId164": null
+          "rId164": "extracted\\media\\image81.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -8142,12 +8924,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image82.png",
         "rId_to_saved": {
-          "rId166": null
+          "rId166": "extracted\\media\\image82.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -8179,12 +8965,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image161.png",
         "rId_to_saved": {
-          "rId408": null
+          "rId408": "extracted\\media\\image161.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -8228,12 +9018,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image162.png",
         "rId_to_saved": {
-          "rId410": null
+          "rId410": "extracted\\media\\image162.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -8265,12 +9059,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image163.png",
         "rId_to_saved": {
-          "rId412": null
+          "rId412": "extracted\\media\\image163.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -8296,12 +9094,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image83.png",
         "rId_to_saved": {
-          "rId168": null
+          "rId168": "extracted\\media\\image83.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -8320,12 +9122,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image84.png",
         "rId_to_saved": {
-          "rId170": null
+          "rId170": "extracted\\media\\image84.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -8357,12 +9163,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image164.png",
         "rId_to_saved": {
-          "rId416": null
+          "rId416": "extracted\\media\\image164.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -8388,12 +9198,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image165.png",
         "rId_to_saved": {
-          "rId418": null
+          "rId418": "extracted\\media\\image165.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -8419,12 +9233,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image85.png",
         "rId_to_saved": {
-          "rId172": null
+          "rId172": "extracted\\media\\image85.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -8443,12 +9261,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image86.png",
         "rId_to_saved": {
-          "rId174": null
+          "rId174": "extracted\\media\\image86.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -8467,12 +9289,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image87.png",
         "rId_to_saved": {
-          "rId176": null
+          "rId176": "extracted\\media\\image87.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -8491,12 +9317,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image88.png",
         "rId_to_saved": {
-          "rId178": null
+          "rId178": "extracted\\media\\image88.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -8515,12 +9345,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image89.png",
         "rId_to_saved": {
-          "rId180": null
+          "rId180": "extracted\\media\\image89.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -8539,12 +9373,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image90.png",
         "rId_to_saved": {
-          "rId182": null
+          "rId182": "extracted\\media\\image90.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -8563,12 +9401,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image91.png",
         "rId_to_saved": {
-          "rId184": null
+          "rId184": "extracted\\media\\image91.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -8587,12 +9429,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image92.png",
         "rId_to_saved": {
-          "rId186": null
+          "rId186": "extracted\\media\\image92.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -8611,12 +9457,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image93.png",
         "rId_to_saved": {
-          "rId188": null
+          "rId188": "extracted\\media\\image93.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -8635,12 +9485,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image94.png",
         "rId_to_saved": {
-          "rId190": null
+          "rId190": "extracted\\media\\image94.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -8659,12 +9513,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image95.png",
         "rId_to_saved": {
-          "rId192": null
+          "rId192": "extracted\\media\\image95.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       },
       {
         "rIds": [
@@ -8683,12 +9541,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image96.png",
         "rId_to_saved": {
-          "rId194": null
+          "rId194": "extracted\\media\\image96.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "duplicate_of_canonical",
+          "reused_existing"
+        ]
       }
     ]
   },
@@ -8720,12 +9582,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image166.png",
         "rId_to_saved": {
-          "rId432": null
+          "rId432": "extracted\\media\\image166.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -8744,12 +9610,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image167.png",
         "rId_to_saved": {
-          "rId434": null
+          "rId434": "extracted\\media\\image167.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -8768,12 +9638,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image168.png",
         "rId_to_saved": {
-          "rId436": null
+          "rId436": "extracted\\media\\image168.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -8799,12 +9673,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image169.png",
         "rId_to_saved": {
-          "rId438": null
+          "rId438": "extracted\\media\\image169.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -8823,12 +9701,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image170.png",
         "rId_to_saved": {
-          "rId440": null
+          "rId440": "extracted\\media\\image170.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -8847,12 +9729,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image171.png",
         "rId_to_saved": {
-          "rId442": null
+          "rId442": "extracted\\media\\image171.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       },
       {
         "rIds": [
@@ -8871,12 +9757,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image172.png",
         "rId_to_saved": {
-          "rId444": null
+          "rId444": "extracted\\media\\image172.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -8902,12 +9792,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image173.png",
         "rId_to_saved": {
-          "rId446": null
+          "rId446": "extracted\\media\\image173.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },
@@ -8933,12 +9827,16 @@
         "alts": [
           "Line 8"
         ],
-        "selected": false,
-        "saved_path": null,
+        "selected": true,
+        "saved_path": "extracted\\media\\image174.png",
         "rId_to_saved": {
-          "rId448": null
+          "rId448": "extracted\\media\\image174.png"
         },
-        "reasons": []
+        "reasons": [
+          "vector_auto_select",
+          "converted_to_png",
+          "extracted_now"
+        ]
       }
     ]
   },

@@ -1,570 +1,161 @@
 <!doctype html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <title>Viewer .selective.json — Text, OMML -> MathML, Images</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <style>
-    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin: 0; padding: 0; background:#f7f7f7; color:#111 }
-    header { background:#0b5d8c; color:white; padding:14px 16px; display:flex; gap:12px; align-items:center }
-    header h1 { font-size:16px; margin:0 }
-    main { padding:12px; max-width:1200px; margin:0 auto; }
-    .controls { display:flex; gap:8px; flex-wrap:wrap; align-items:center }
-    .controls input[type="text"] { width:420px; padding:6px }
-    .para { background:white; border-radius:6px; padding:10px; margin:10px 0; box-shadow:0 1px 2px rgba(0,0,0,0.06) }
-    .para-index { color:#666; font-size:12px }
-    .para-text { margin:6px 0 8px 0; white-space:pre-wrap }
-    .images-grid { display:flex; gap:12px; flex-wrap:wrap; align-items:flex-start }
-    .img-card { border:1px solid #e1e1e1; padding:6px; border-radius:6px; width:220px; background:#fff; }
-    .img-card img { max-width:100%; height:auto; display:block; background:#eee }
-    .meta { font-size:12px; color:#333; margin-top:6px }
-    .math-block { background:#111; color:#fff; padding:8px; border-radius:6px; font-family:monospace; font-size:12px; overflow:auto; max-height:240px }
-    .small { font-size:12px; color:#666 }
-    .badge { display:inline-block; padding:2px 6px; font-size:11px; border-radius:4px; background:#eee; margin-right:6px }
-    .selected-badge { background:#dff0d8; color:#2c662d }
-    .hidden { display:none }
-    footer { padding:12px; color:#666; font-size:13px; text-align:center }
-    button { padding:6px 8px; border-radius:6px; border:1px solid #bbb; background:white; cursor:pointer }
-    button.primary { background:#0b5d8c; color:white; border-color:#09475f }
-    label.file-input { cursor:pointer; padding:6px 8px; border-radius:6px; background:#fff; border:1px dashed #bbb }
-    .reason { font-size:11px; color:#555; margin-top:6px; white-space:pre-wrap }
-    details > summary { cursor: pointer; padding:4px 0; font-weight:600 }
-  </style>
+<meta charset="utf-8">
+<title>Viewer WMF + MathML</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0; padding:0; background:#f7f7f7; color:#111 }
+header { background:#0b5d8c; color:white; padding:14px 16px; display:flex; align-items:center; }
+header h1 { font-size:16px; margin:0 }
+main { padding:12px; max-width:1200px; margin:0 auto; }
+.controls { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:12px; }
+.controls input[type="text"] { width:400px; padding:6px; }
+.para { background:white; border-radius:6px; padding:10px; margin:10px 0; box-shadow:0 1px 2px rgba(0,0,0,0.06) }
+.para-index { color:#666; font-size:12px }
+.para-text { margin:6px 0 8px 0; white-space:pre-wrap }
+.images-grid { display:flex; gap:12px; flex-wrap:wrap; align-items:flex-start }
+.img-card { border:1px solid #e1e1e1; padding:6px; border-radius:6px; width:220px; background:#fff; display:flex; flex-direction:column; align-items:center; }
+.img-card img, .img-card canvas { max-width:100%; height:auto; display:block; background:#eee; }
+.meta { font-size:12px; color:#333; margin-top:6px; text-align:center; }
+.math-block { background:#111; color:#fff; padding:8px; border-radius:6px; font-family:monospace; font-size:12px; overflow:auto; max-height:240px; }
+.small { font-size:12px; color:#666; }
+.badge { display:inline-block; padding:2px 6px; font-size:11px; border-radius:4px; background:#eee; margin-right:6px; }
+.selected-badge { background:#dff0d8; color:#2c662d; }
+button { padding:6px 8px; border-radius:6px; border:1px solid #bbb; background:white; cursor:pointer; }
+button.primary { background:#0b5d8c; color:white; border-color:#09475f; }
+label.file-input { cursor:pointer; padding:6px 8px; border-radius:6px; background:#fff; border:1px dashed #bbb; }
+</style>
 
-  <!-- MathJax v3 (kéo MathML input + CommonHTML output) -->
-  <script>
-    window.MathJax = {
-      loader: { load: ['input/mml', 'output/chtml'] },
-      startup: { typeset: false } // chúng ta gọi typeset thủ công cho từng khối
-    };
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js"></script>
+<!-- MathJax v3 -->
+<script>
+  window.MathJax = { loader:{load:['input/mml','output/chtml']}, startup:{typeset:false} };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js"></script>
+
+<!-- WMF.js UMD -->
+<script src="https://cdn.jsdelivr.net/npm/wmf@1.0.2/wmf.js"></script>
 </head>
 <body>
-  <header>
-    <h1>Viewer .selective.json — Hiển thị text, OMML → MathML và ảnh</h1>
-    <div class="controls" style="margin-left:auto">
-      <div class="info">Đặt viewer.html trong cây chứa folder "extracted". Chạy HTTP server (python -m http.server) để xem ảnh.</div>
-    </div>
-  </header>
-
-  <main>
-    <div style="display:flex; gap:8px; align-items:center; margin-bottom:10px">
-      <input id="jsonUrl" type="text" placeholder="URL tới selective.json (ví dụ extracted/07_...selective.json)" />
-      <button id="loadUrlBtn" class="primary">Load từ URL</button>
-      <label class="file-input">
-        Chọn JSON...
-        <input id="jsonFile" type="file" accept=".json" style="display:none" />
-      </label>
-      <button id="toggleSelected">Chỉ show selected: OFF</button>
-      <input id="searchInput" type="text" placeholder="Tìm từ khóa trong text / alt / sha1" />
-      <button id="clearBtn">Clear</button>
-      <button id="downloadJsonBtn">Tải JSON đã load</button>
-    </div>
-
-    <div id="stats" class="small"></div>
-
-    <div id="content"></div>
-  </main>
-
-  <footer>
-    OMML sẽ được chuyển sang MathML (cố gắng với các cấu trúc OMML thường gặp: chữ, số, chỉ số trên/dưới). MathML được render bằng MathJax.
-  </footer>
+<header><h1>Viewer WMF + MathML</h1></header>
+<main>
+<div class="controls">
+  <input id="jsonUrl" type="text" placeholder="URL tới selective.json (tùy chọn)">
+  <button id="loadUrlBtn" class="primary">Load từ URL</button>
+  <label class="file-input">
+    Chọn JSON cục bộ...
+    <input id="jsonFile" type="file" accept=".json" style="display:none" />
+  </label>
+  <button id="clearBtn">Clear</button>
+  <div id="stats" class="small" style="margin-left:auto"></div>
+</div>
+<div id="content"></div>
+</main>
 
 <script>
-/*
-  Viewer nâng cấp:
-  - Khi gặp trường 'math' chứa OMML (m:... elements), script sẽ cố gắng convert sang MathML (các trường hợp phổ biến:
-    - m:r > m:t (kí tự/numbers)
-    - m:sSup / m:sSub / m:sSup/m:sup / m:sSub/m:sub
-    - m:sSup/m:sSupPr (bỏ qua định dạng)
-    - m:oMath & m:oMathPara
-  - Sau khi chuyển thành MathML DOM element, gọi MathJax.typesetPromise để render.
-  - Đây không phải là converter OMML toàn diện nhưng xử lý tốt các OMML mẫu thường gặp trong đề (ký hiệu, chỉ số, số mũ).
-*/
+window.addEventListener('load', ()=>{
+const content=document.getElementById('content');
+const stats=document.getElementById('stats');
+const jsonUrlInput=document.getElementById('jsonUrl');
+const loadUrlBtn=document.getElementById('loadUrlBtn');
+const jsonFileInput=document.getElementById('jsonFile');
+const clearBtn=document.getElementById('clearBtn');
 
-/* Utility DOM refs */
-const content = document.getElementById('content');
-const stats = document.getElementById('stats');
-const jsonUrlInput = document.getElementById('jsonUrl');
-const loadUrlBtn = document.getElementById('loadUrlBtn');
-const jsonFileInput = document.getElementById('jsonFile');
-const toggleSelectedBtn = document.getElementById('toggleSelected');
-const searchInput = document.getElementById('searchInput');
-const clearBtn = document.getElementById('clearBtn');
-const downloadJsonBtn = document.getElementById('downloadJsonBtn');
+let currentData=null;
 
-let currentData = null;
-let showOnlySelected = false;
-let currentJsonUrl = null;
+function mk(tag){ return document.createElement(tag); }
+function isWMF(url){ return url.toLowerCase().endsWith('.wmf') || url.toLowerCase().endsWith('.emf'); }
 
-/* Normalize path slashes */
-function normPath(p) {
-  if (!p) return null;
-  return p.replace(/\\\\/g, "/").replace(/\\\\/g, "/").replace(/\\/g, "/");
+async function renderWMF(url, container){
+  if(!window.WMF){ console.error('WMF chưa load xong'); return; }
+  try{
+    const res=await fetch(url); if(!res.ok) throw new Error('Fetch WMF fail: '+res.status);
+    const ab=await res.arrayBuffer();
+    const size=WMF.image_size(ab);
+    const canvas=mk('canvas'); canvas.width=size[0]; canvas.height=size[1];
+    WMF.draw_canvas(ab, canvas);
+    container.appendChild(canvas);
+  }catch(e){
+    console.error('WMF load error',e);
+    const p=mk('div'); p.textContent='Không load được WMF: '+url; container.appendChild(p);
+  }
 }
 
-/* Lấy url ảnh ưu tiên cho một group */
-function chooseImageUrl(group) {
-  let sp = group.saved_path || null;
-  if (sp) return normPath(sp);
-  const rels = group.img_rels || [];
-  if (rels.length) return normPath(rels[0]);
-  return null;
-}
-
-/* ---- OMML -> MathML converter (heuristic, hỗ trợ các cấu trúc phổ biến) ----
-   - input: OMML XML string (ví dụ "<m:oMath>...</m:oMath>")
-   - output: DOM Element <math xmlns="http://www.w3.org/1998/Math/MathML">...</math>
-   Ghi chú: không phải full-featured. Nếu gặp tag không nhận biết, sẽ gói nội dung con vào <mrow>.
-*/
-function ommlToMathML(ommlString) {
-  if (!ommlString || !ommlString.trim()) return null;
-  // Parse OMML
-  const parser = new DOMParser();
-  const xmldoc = parser.parseFromString(ommlString, "application/xml");
-  // nếu parse lỗi, trả null
-  if (!xmldoc || xmldoc.getElementsByTagName("parsererror").length) return null;
-
-  // helper: tạo element MathML with namespace
-  function mk(tag) {
-    return document.createElementNS("http://www.w3.org/1998/Math/MathML", tag);
-  }
-
-  // decide if text is numeric
-  function isNumberToken(s) {
-    if (!s) return false;
-    return /^[0-9]+([.,][0-9]+)?$/.test(s.trim());
-  }
-  // decide if token is operator-like
-  function isOperatorToken(s) {
-    if (!s) return false;
-    return /^[+\-×÷=()·•,:;\\\/\u2212]$/.test(s.trim());
-  }
-
-  // Convert OMML node recursively, return MathML node (Element)
-  function convertNode(node) {
-    if (!node) return null;
-    // if text node containing whitespace/newline => skip
-    if (node.nodeType === Node.TEXT_NODE) {
-      const txt = node.nodeValue.trim();
-      if (!txt) return null;
-      const mn = mk(isNumberToken(txt) ? "mn" : "mi");
-      mn.textContent = txt;
-      return mn;
-    }
-    const local = node.localName || node.nodeName.split(':').pop();
-
-    // handle known OMML constructs
-    if (local === 'oMath' || local === 'oMathPara') {
-      // create <math> root and append children inside an <mrow>
-      const math = mk('math');
-      math.setAttribute('display', 'block');
-      const mrow = mk('mrow');
-      // process element children
-      for (let c of node.childNodes) {
-        const el = convertNode(c);
-        if (el) mrow.appendChild(el);
-      }
-      // if only one child and it's math container, append its children instead
-      math.appendChild(mrow);
-      return math;
-    }
-
-    if (local === 'r') {
-      // run: contains formatting and m:t
-      const mrow = mk('mrow');
-      for (let c of node.childNodes) {
-        const el = convertNode(c);
-        if (el) mrow.appendChild(el);
-      }
-      return mrow;
-    }
-
-    if (local === 't') {
-      const txt = node.textContent || '';
-      const trimmed = txt.replace(/\s+/g, ' ').trim();
-      if (trimmed === '') return null;
-      let tag = isNumberToken(trimmed) ? 'mn' : (isOperatorToken(trimmed) ? 'mo' : 'mi');
-      const e = mk(tag);
-      e.textContent = trimmed;
-      return e;
-    }
-
-    // superscript/subscript patterns (common in OMML)
-    if (local === 'sSup' || local === 'sSub' || local === 'sSupSub' || local === 'sSubSup') {
-      // OMML structure: <m:sSup> <m:e>...</m:e> <m:sup>...</m:sup> </m:sSup>
-      const eElem = Array.from(node.childNodes).find(n => (n.localName||n.nodeName).endsWith('e'));
-      const supElem = Array.from(node.childNodes).find(n => (n.localName||n.nodeName).toLowerCase().includes('sup'));
-      const subElem = Array.from(node.childNodes).find(n => (n.localName||n.nodeName).toLowerCase().includes('sub'));
-      const base = eElem ? wrapChildren(eElem) : mk('mrow');
-      const sup = supElem ? wrapChildren(supElem) : null;
-      const sub = subElem ? wrapChildren(subElem) : null;
-
-      if (sup && sub) {
-        // prefer <msubsup>
-        const ms = mk('msubsup');
-        ms.appendChild(base);
-        ms.appendChild(sub);
-        ms.appendChild(sup);
-        return ms;
-      } else if (sup) {
-        const ms = mk('msup');
-        ms.appendChild(base);
-        ms.appendChild(sup);
-        return ms;
-      } else if (sub) {
-        const ms = mk('msub');
-        ms.appendChild(base);
-        ms.appendChild(sub);
-        return ms;
-      } else {
-        return base;
-      }
-    }
-
-    // some OMML uses <sSup> and inside <e> children may be m:r/m:t or nested constructs
-    // fallback: wrap children sequence into <mrow>
-    return wrapChildren(node);
-  }
-
-  // helper: wrap element children into mrow (convert each child)
-  function wrapChildren(node) {
-    const mrow = mk('mrow');
-    for (let c of node.childNodes) {
-      // skip formatting nodes like rPr, ctrlPr, sSupPr
-      const lname = (c.localName || '').toLowerCase();
-      if (!c) continue;
-      if (c.nodeType === Node.ELEMENT_NODE && (lname === 'rsuppr' || lname === 'sSupPr'.toLowerCase() || lname === 'ctrlpr' || lname === 'rpr' || lname === 'spr' || lname === 'sprpr' )) {
-        continue;
-      }
-      const el = convertNode(c);
-      if (el) {
-        // If el is <math> (root), then append its children instead (avoid nested math)
-        if (el.namespaceURI === 'http://www.w3.org/1998/Math/MathML' && el.localName === 'math') {
-          // append its children into mrow
-          for (let cc of Array.from(el.childNodes)) mrow.appendChild(cc.cloneNode(true));
-        } else {
-          mrow.appendChild(el);
-        }
-      }
-    }
-    // if mrow has single child, return that child directly to avoid unnecessary nesting
-    if (mrow.childNodes.length === 1) return mrow.firstChild;
-    return mrow;
-  }
-
-  // Find first OMML root node(s) (m:oMath or m:oMathPara) in xmldoc
-  // Some math entries in your JSON are strings that already represent the <m:oMath> element.
-  let rootCandidates = [];
-  // If top-level is <m:oMath> or <m:oMathPara>
-  const docElem = xmldoc.documentElement;
-  if (docElem) {
-    const local = (docElem.localName || docElem.nodeName).toLowerCase();
-    if (local === 'omml' || local.endsWith('omath') || local.endsWith('omathpara') || local.endsWith('omathpara')) {
-      rootCandidates.push(docElem);
-    } else {
-      // search for any oMath elements inside
-      const found = xmldoc.getElementsByTagNameNS('*', 'oMath');
-      for (let i = 0; i < found.length; i++) rootCandidates.push(found[i]);
-      const found2 = xmldoc.getElementsByTagNameNS('*', 'oMathPara');
-      for (let i = 0; i < found2.length; i++) rootCandidates.push(found2[i]);
-      // also try any element named 'oMath' without namespace
-      const found3 = xmldoc.getElementsByTagName('m:oMath');
-      for (let i = 0; i < found3.length; i++) rootCandidates.push(found3[i]);
-    }
-  }
-
-  if (!rootCandidates.length) {
-    // fallback: try whole document element conversion
-    const res = convertNode(xmldoc.documentElement);
-    if (res && res.namespaceURI === 'http://www.w3.org/1998/Math/MathML' && res.localName === 'math') return res;
-    // else wrap into math
-    const math = mk('math');
-    math.appendChild(res || mk('mrow'));
-    return math;
-  }
-
-  // if multiple roots, wrap them into a single math element (mrow)
-  const mathRoot = mk('math');
-  mathRoot.setAttribute('display', 'block');
-  const outer = mk('mrow');
-  rootCandidates.forEach(rc => {
-    const conv = convertNode(rc);
-    if (conv) outer.appendChild(conv);
-  });
-  mathRoot.appendChild(outer);
-  return mathRoot;
-}
-
-/* ---- Rendering functions ---- */
-function renderGroupImage(group) {
-  const div = document.createElement('div');
-  div.className = 'img-card';
-  const url = chooseImageUrl(group);
-  if (url) {
-    const img = document.createElement('img');
-    img.src = url;
-    img.alt = group.sha1 || 'image';
-    img.onerror = function() {
-      this.style.opacity = 0.6;
-      this.style.background = '#f5f5f5';
-      this.title = 'Không thể load ảnh từ: ' + url;
-    };
-    div.appendChild(img);
-  } else {
-    const placeholder = document.createElement('div');
-    placeholder.style.height = '100px';
-    placeholder.style.display = 'flex';
-    placeholder.style.alignItems = 'center';
-    placeholder.style.justifyContent = 'center';
-    placeholder.style.background = '#f2f2f2';
-    placeholder.textContent = 'No image';
-    div.appendChild(placeholder);
-  }
-  const meta = document.createElement('div');
-  meta.className = 'meta';
-  const badges = [];
-  if (group.selected) badges.push('<span class="badge selected-badge">SELECTED</span>');
-  if (group.sha1) badges.push('<span class="badge">sha1:'+group.sha1.slice(0,10)+'...</span>');
-  meta.innerHTML = badges.join(' ') + '<div class="small">sizes: ' + (group.sizes ? group.sizes.join(',') : '') + '</div>';
-  const rlist = document.createElement('div');
-  rlist.className = 'small';
-  const rmap = group.rId_to_saved || {};
-  const rIds = group.rIds || [];
-  rlist.innerHTML = rIds.map(r => {
-    const s = rmap[r] || '';
-    return `<div><strong>${r}</strong> → <code style="font-size:11px">${s||'(none)'}</code></div>`;
-  }).join('');
-  const reasons = document.createElement('div');
-  reasons.className = 'reason';
-  reasons.textContent = (group.reasons && group.reasons.length) ? ('Lý do: ' + group.reasons.join('; ')) : '';
+function renderGroupImage(group){
+  const div=mk('div'); div.className='img-card';
+  const url=group.saved_path || (group.img_rels && group.img_rels[0]);
+  if(url){
+    if(isWMF(url)) renderWMF(url,div);
+    else { const img=mk('img'); img.src=url; img.alt=group.sha1||''; img.onerror=()=>{img.style.opacity=0.6; img.style.background='#f5f5f5'; img.title='Không load được: '+url;}; div.appendChild(img); }
+  }else{ const p=mk('div'); p.style.height='100px'; p.textContent='No image'; div.appendChild(p);}
+  const meta=mk('div'); meta.className='meta';
+  const badges=[]; if(group.selected) badges.push('<span class="badge selected-badge">SELECTED</span>');
+  if(group.sha1) badges.push('<span class="badge">sha1:'+group.sha1.slice(0,10)+'…</span>');
+  meta.innerHTML=badges.join('');
   div.appendChild(meta);
-  div.appendChild(rlist);
-  div.appendChild(reasons);
   return div;
 }
 
-function renderMaths(mathArray) {
-  const container = document.createElement('div');
-  for (let i = 0; i < mathArray.length; i++) {
-    const item = mathArray[i];
-    const omml = item.omml || item.mathml || item.ommlString || '';
-    const block = document.createElement('details');
-    const summary = document.createElement('summary');
-    summary.textContent = 'Math #' + (i+1);
-    block.appendChild(summary);
-
-    // try if it's already MathML
-    const trimmed = omml.trim();
-    if (trimmed.startsWith('<math') || trimmed.startsWith('<m:math') || trimmed.startsWith('<math xmlns')) {
-      // directly insert MathML
-      const wrapper = document.createElement('div');
-      try {
-        wrapper.innerHTML = omml;
-      } catch (e) {
-        const pre = document.createElement('pre');
-        pre.className = 'math-block';
-        pre.textContent = omml;
-        wrapper.appendChild(pre);
-      }
-      block.appendChild(wrapper);
-      // ask MathJax to typeset this wrapper
-      // typeset later outside the loop
-    } else {
-      // try OMML -> MathML conversion
-      try {
-        const mathNode = ommlToMathML(omml);
-        if (mathNode) {
-          const holder = document.createElement('div');
-          holder.appendChild(mathNode);
-          block.appendChild(holder);
-        } else {
-          // fallback: show OMML raw
-          const pre = document.createElement('pre');
-          pre.className = 'math-block';
-          pre.textContent = omml;
-          block.appendChild(pre);
-        }
-      } catch (e) {
-        const pre = document.createElement('pre');
-        pre.className = 'math-block';
-        pre.textContent = omml;
-        block.appendChild(pre);
-        console.warn('OMML -> MathML convert error', e);
-      }
+function renderMathML(mathArray){
+  const container=mk('div');
+  mathArray.forEach((item,i)=>{
+    const omml=item.omml||item.mathml||'';
+    const block=mk('details'); const summary=mk('summary'); summary.textContent='Math #'+(i+1); block.appendChild(summary);
+    try{
+      const parser=new DOMParser();
+      const xml=parser.parseFromString(omml,"application/xml");
+      block.appendChild(xml.documentElement);
+      MathJax.typesetPromise([block]);
+    }catch(e){
+      const pre=mk('pre'); pre.className='math-block'; pre.textContent=omml;
+      block.appendChild(pre);
     }
     container.appendChild(block);
-  }
-  // After inserting container into DOM, call MathJax to typeset the MathML nodes
-  // The caller should append container to document, then call typesetMathIn(container)
+  });
   return container;
 }
 
-async function typesetMathIn(node) {
-  // Use MathJax to typeset MathML present under node
-  if (window.MathJax && window.MathJax.startup && window.MathJax.typesetPromise) {
-    try {
-      await window.MathJax.typesetPromise([node]);
-    } catch (e) {
-      console.warn('MathJax typeset error', e);
-    }
-  } else {
-    // fallback: some browsers render MathML natively
-  }
-}
-
-function renderParagraph(paraObj, idx) {
-  const wrapper = document.createElement('div');
-  wrapper.className = 'para';
-  const header = document.createElement('div');
-  header.innerHTML = `<span class="para-index">para_index: ${paraObj.para_index}</span>`;
-  const text = document.createElement('div');
-  text.className = 'para-text';
-  text.textContent = paraObj.text || '';
-  wrapper.appendChild(header);
-  wrapper.appendChild(text);
-
-  // math
-  if (paraObj.math && paraObj.math.length) {
-    const mathLabel = document.createElement('div');
-    mathLabel.innerHTML = '<span class="badge">Math</span>';
-    wrapper.appendChild(mathLabel);
-    const mathNode = renderMaths(paraObj.math);
-    wrapper.appendChild(mathNode);
-    // typeset inserted math
-    typesetMathIn(mathNode);
-  }
-
-  // images
-  if (paraObj.images && paraObj.images.length) {
-    const imgLabel = document.createElement('div');
-    imgLabel.innerHTML = '<span class="badge">Images</span>';
-    wrapper.appendChild(imgLabel);
-    const grid = document.createElement('div');
-    grid.className = 'images-grid';
-    paraObj.images.forEach(group => {
-      if (showOnlySelected && !group.selected) return;
-      const q = (searchInput.value || '').toLowerCase();
-      if (q) {
-        const hay = [
-          paraObj.text || '',
-          (group.sha1||''),
-          (group.alts || []).join(' '),
-          (group.img_rels || []).join(' ')
-        ].join(' ').toLowerCase();
-        if (!hay.includes(q)) return;
-      }
-      grid.appendChild(renderGroupImage(group));
-    });
+function renderParagraph(para){
+  const wrapper=mk('div'); wrapper.className='para';
+  const header=mk('div'); header.innerHTML=`<span class="para-index">para_index: ${para.para_index}</span>`; wrapper.appendChild(header);
+  const text=mk('div'); text.className='para-text'; text.textContent=para.text||''; wrapper.appendChild(text);
+  if(para.math && para.math.length) wrapper.appendChild(renderMathML(para.math));
+  if(para.images && para.images.length){
+    const grid=mk('div'); grid.className='images-grid';
+    para.images.forEach(g=>grid.appendChild(renderGroupImage(g)));
     wrapper.appendChild(grid);
   }
   return wrapper;
 }
 
-function renderAll(data) {
-  content.innerHTML = '';
-  if (!Array.isArray(data)) {
-    content.textContent = 'JSON không phải là mảng paragraphs.';
-    return;
-  }
-  const totalParas = data.length;
-  let totalImages = 0, selectedImages = 0;
-  data.forEach(p => {
-    (p.images||[]).forEach(g => {
-      totalImages++;
-      if (g.selected) selectedImages++;
-    });
-  });
-  stats.textContent = `Paragraphs: ${totalParas} — image groups: ${totalImages} — selected: ${selectedImages}`;
-  data.forEach((p,i) => {
-    const node = renderParagraph(p,i);
-    content.appendChild(node);
-  });
+function renderAll(data){
+  content.innerHTML=''; currentData=data;
+  let totalParas=data.length, totalImages=0, selected=0;
+  data.forEach(p=>(p.images||[]).forEach(g=>{totalImages++; if(g.selected) selected++;}));
+  stats.textContent=`Paragraphs: ${totalParas} — image groups: ${totalImages} — selected: ${selected}`;
+  data.forEach(p=>content.appendChild(renderParagraph(p)));
 }
 
-/* ---- Load JSON handlers ---- */
-async function loadJsonFromUrl(url) {
-  try {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error('Fetch failed: ' + res.status);
-    const data = await res.json();
-    currentData = data;
-    currentJsonUrl = url;
-    renderAll(data);
-  } catch (err) {
-    alert('Lỗi khi fetch JSON: ' + err.message);
-    console.error(err);
-  }
+async function loadJsonFromUrl(url){
+  try{
+    const res=await fetch(url); if(!res.ok) throw new Error('Fetch JSON failed: '+res.status);
+    const data=await res.json(); renderAll(data);
+  }catch(e){ alert('Lỗi fetch JSON: '+e.message); console.error(e); }
 }
 
-function loadJsonFromFile(file) {
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    try {
-      const data = JSON.parse(e.target.result);
-      currentData = data;
-      currentJsonUrl = null;
-      renderAll(data);
-    } catch (err) {
-      alert('Lỗi parse JSON: ' + err.message);
-    }
+jsonFileInput.addEventListener('change', ev=>{
+  const f=ev.target.files && ev.target.files[0]; if(!f) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{ const data=JSON.parse(e.target.result); renderAll(data); }
+    catch(err){ alert('Lỗi parse JSON: '+err.message); }
   };
-  reader.readAsText(file, 'utf-8');
-}
-
-/* ---- UI events ---- */
-loadUrlBtn.addEventListener('click', () => {
-  const url = jsonUrlInput.value.trim();
-  if (!url) { alert('Nhập URL tới selective.json hoặc dùng "Chọn JSON..."'); return; }
-  loadJsonFromUrl(url);
+  reader.readAsText(f,'utf-8');
 });
 
-jsonFileInput.addEventListener('change', (ev) => {
-  const f = ev.target.files && ev.target.files[0];
-  if (f) loadJsonFromFile(f);
+loadUrlBtn.addEventListener('click',()=>{ const url=jsonUrlInput.value.trim(); if(url) loadJsonFromUrl(url); });
+clearBtn.addEventListener('click',()=>{ content.innerHTML=''; stats.textContent=''; currentData=null; jsonUrlInput.value=''; });
 });
-
-toggleSelectedBtn.addEventListener('click', () => {
-  showOnlySelected = !showOnlySelected;
-  toggleSelectedBtn.textContent = 'Chỉ show selected: ' + (showOnlySelected ? 'ON' : 'OFF');
-  if (currentData) renderAll(currentData);
-});
-
-searchInput.addEventListener('input', () => {
-  if (currentData) renderAll(currentData);
-});
-
-clearBtn.addEventListener('click', () => {
-  content.innerHTML = '';
-  stats.textContent = '';
-  currentData = null;
-  jsonUrlInput.value = '';
-  searchInput.value = '';
-});
-
-downloadJsonBtn.addEventListener('click', () => {
-  if (!currentData) { alert('Chưa load JSON'); return; }
-  const blob = new Blob([JSON.stringify(currentData, null, 2)], {type:'application/json'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'selective_viewer_export.json';
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
-});
-
-/* auto-load from ?json= param */
-(function() {
-  const qs = new URLSearchParams(location.search);
-  const jsonParam = qs.get('json');
-  if (jsonParam) {
-    jsonUrlInput.value = jsonParam;
-    loadJsonFromUrl(jsonParam);
-  }
-})();
 </script>
 </body>
 </html>
