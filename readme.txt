@@ -1,0 +1,1 @@
+https://imagemagick.org/archive/binaries/ImageMagick-7.1.2-8-Q16-HDRI-x64-dll.exe
