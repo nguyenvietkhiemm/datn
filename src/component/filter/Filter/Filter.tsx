@@ -45,17 +45,12 @@ interface Document {
 }
 
 interface FilterProps {
-    exams?: Exam[];
-    banks?: BankProps[];
-    documents?: Document[];
-    setFilterExam?: React.Dispatch<React.SetStateAction<Exam[]>>
-    setFilterBank?: React.Dispatch<React.SetStateAction<BankProps[]>>
-    setFilterDocuments?: React.Dispatch<React.SetStateAction<Document[]>>
-    currentPage: number
+    setFilterCondition: (data: any) => void;
+    setSearchKeyword: (data : any) => void
 }
 
 function Filter(
-    { exams = [], setFilterExam, banks = [], setFilterBank, documents = [], setFilterDocuments, currentPage }
+    { setFilterCondition, setSearchKeyword }
         : FilterProps) {
 
     const [topics, setTopics] = useState<Topic[]>([]);
@@ -135,55 +130,30 @@ function Filter(
     )
 
     //ham loc
-    const handleFilter = async () => {
-        let routes = "exams"
-        if (setFilterBank) {
-            routes = "banks"
-        }
-        if (setFilterDocuments) {
-            routes = "documents"
-        }
-
+    const handleFilter = () => {
         let topicIds: number[] = [];
 
         if (selectedSubject === "All") {
-            if(selectedTopic !== "All"){
+            if (selectedTopic !== "All") {
                 topicIds = [Number(selectedTopic)];
-            }else{
+            } else {
                 topicIds = topics.map((t) => t.topic_id);
             }
-        }
-        else {
-            topicIds = topics
+        } else {
+            if (selectedTopic !== "All") {
+                topicIds = [Number(selectedTopic)];
+            } else {
+                topicIds = topics
                 .filter((t) => t.subject_id === selectedSubject)
                 .map((t) => t.topic_id);
-        }
-
-        const topicQuery = topicIds.length > 0 ? topicIds.join(",") : "";
-
-        try {
-
-            const res = await fetch(`${API_URL}/${routes}/filter?topic=${topicQuery}&status=${selectedStatus}&page=${currentPage}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                }
-            })
-
-            const data = await res.json();
-
-            // Cập nhật state tương ứng
-            if (setFilterExam && routes === "exams") {
-                setFilterExam(data.data.data || []);
-            } else if (setFilterBank && routes === "banks") {
-                setFilterBank(data.data.data || []);
-            } else if (setFilterDocuments && routes === "documents") {
-                setFilterDocuments(data.data.data || []);
             }
-        } catch (error) {
-            console.error("Lỗi khi lọc dữ liệu:", error);
         }
+        setSearchKeyword("");
+        setFilterCondition({
+            subject : selectedSubject,
+            topics: topicIds,
+            status : selectedStatus
+        });
     };
 
     return (

@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { Home, Users, BookOpen, Calendar, Settings, Clock } from "lucide-react";
+import { Home, Users, FileText, BookOpen, Settings, Calendar, Clock, Map } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./Sidebar.module.css";
@@ -10,10 +10,10 @@ const navItems = [
   { name: "Bảng điều khiển", href: "/admin/dashboard", icon: Home },
   { name: "Người dùng", href: "/admin/users", icon: Users },
   { name: "Bài thi", href: "/admin/exams", icon: BookOpen },
-  { name: "Tài liệu", href: "/admin/documents", icon: BookOpen },
+  { name: "Tài liệu", href: "/admin/documents", icon: FileText },
   { name: "Câu hỏi", href: "/admin/questions", icon: Settings },
-  { name: "Lịch thi", href: "/admin/schedules", icon: Clock },
-  { name: "Lộ trình", href: "/admin/roadmap", icon: Clock },
+  { name: "Lịch thi", href: "/admin/schedules", icon: Calendar },
+  { name: "Lộ trình", href: "/admin/roadmap", icon: Map },
   { name: "Cài đặt", href: "/admin/settings", icon: Settings },
 ];
 
