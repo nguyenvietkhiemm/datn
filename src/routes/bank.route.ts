@@ -18,18 +18,8 @@ const bankRoute = Router();
  *       500:
  *         description: Lỗi server
  */
-bankRoute.get('/', BankController.getAll);
+bankRoute.get('/', BankController.list);
 
-//search va filter
-bankRoute.get('/search', Authentication.AuthorizeRoles(...ADMIN, ...USER),
-        Authentication.AuthenticateToken,
-        BankController.search
-)
-
-bankRoute.get('/filter', Authentication.AuthorizeRoles(...ADMIN, ...USER),
-        Authentication.AuthenticateToken,
-        BankController.filter
-)
 /**
  * @openapi
  * /banks/{id}:
