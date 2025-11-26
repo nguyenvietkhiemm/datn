@@ -83,8 +83,8 @@ const ExamService = {
     const result = await query("DELETE FROM exam WHERE exam_id = $1", [id]);
     return (result.rowCount ?? 0) > 0;
   },
-  
-  async list(page: number, status: string, searchValue: string, topicIds: number[]): Promise<({exams : Exam[]; totalPages : number}) | []> {
+
+  async list(page: number, searchValue: string, topicIds: number[]): Promise<({ exams: Exam[]; totalPages: number }) | []> {
     const client = await pool.connect();
     try {
       await client.query("BEGIN");
@@ -95,18 +95,14 @@ const ExamService = {
       let conditions = [];
       let params = [];
       let idx = 1;
-      
+
+      // dieu kien loc bai thi 
+      conditions.push(`e.available = true`);
+
       // Search
       if (searchValue.trim() !== "") {
         conditions.push(`(LOWER(e.exam_name) LIKE LOWER($${idx}) OR LOWER(t.title) LIKE LOWER($${idx}))`);
         params.push(`%${searchValue}%`);
-        idx++;
-      }
-
-      // Status
-      if (status !== "All") {
-        conditions.push(`e.available = $${idx}`);
-        params.push(status === "true");
         idx++;
       }
 
@@ -120,27 +116,27 @@ const ExamService = {
       const whereClause = conditions.length ? `WHERE ${conditions.join(" AND ")}` : "";
 
       const queryText = `
-      SELECT 
-        e.exam_name, e.topic_id, e.time_limit, e.exam_id, e.created_at, e.available,
-        t.title,
-        es.start_time, es.end_time
-      FROM exam e
-      JOIN topic t ON e.topic_id = t.topic_id
-      JOIN exam_schedule es ON es.exam_schedule_id = e.exam_schedule_id
-      ${whereClause}
-      ORDER BY e.exam_id DESC
-      LIMIT ${limit} OFFSET ${offset}
-    `;
+          SELECT 
+            e.exam_name, e.topic_id, e.time_limit, e.exam_id, e.created_at, e.available,
+            t.title,
+            es.start_time, es.end_time
+          FROM exam e
+          JOIN topic t ON e.topic_id = t.topic_id
+          JOIN exam_schedule es ON es.exam_schedule_id = e.exam_schedule_id
+          ${whereClause}
+          ORDER BY e.exam_id DESC
+          LIMIT ${limit} OFFSET ${offset}
+        `;
 
       const result = await client.query(queryText, params);
 
       // Count total
       const countQuery = `
-      SELECT COUNT(*) AS total
-      FROM exam e
-      JOIN topic t ON e.topic_id = t.topic_id
-      ${whereClause}
-    `;
+          SELECT COUNT(*) AS total
+          FROM exam e
+          JOIN topic t ON e.topic_id = t.topic_id
+          ${whereClause}
+        `;
 
       const countResult = await client.query(countQuery, params);
 
