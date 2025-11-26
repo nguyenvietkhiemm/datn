@@ -45,18 +45,12 @@ interface Document {
 }
 
 interface FilterProps {
-    exams?: Exam[];
-    banks?: BankProps[];
-    documents?: Document[];
-    setFilterExam?: React.Dispatch<React.SetStateAction<Exam[]>>;
-    setFilterBank?: React.Dispatch<React.SetStateAction<BankProps[]>>;
-    setDocuments?: React.Dispatch<React.SetStateAction<Document[]>>;
-    currentPage: number;
-    setFilterCondition: (data: any) => void
+    setFilterCondition: (data: any) => void;
+    setSearchKeyword: (data: any) => void;
 }
 
 export default function Filter(
-    { exams = [], setFilterExam, banks = [], setFilterBank, documents = [], setDocuments, currentPage, setFilterCondition }
+    { setFilterCondition, setSearchKeyword }
         : FilterProps) {
 
     const [topics, setTopics] = useState<Topic[]>([]);
@@ -138,11 +132,15 @@ export default function Filter(
                 topicIds = topics.map((t) => t.topic_id);
             }
         } else {
-            topicIds = topics
+            if (selectedTopic !== "All") {
+                topicIds = [Number(selectedTopic)];
+            } else {
+                topicIds = topics
                 .filter((t) => t.subject_id === selectedSubject)
                 .map((t) => t.topic_id);
+            }
         }
-
+        setSearchKeyword("");
         setFilterCondition({
             subject : selectedSubject,
             topics: topicIds,

@@ -11,7 +11,11 @@ interface Goal {
     current_progress: number;
 }
 
-export default function CurrentProgress() {
+type currentProp = {
+    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export default function CurrentProgress({ setIsOpen }: currentProp) {
     const [goals, setGoals] = useState<Goal[]>([]);
     const API = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
     const token = Cookies.get("token");
@@ -32,11 +36,18 @@ export default function CurrentProgress() {
         fetchGoals();
     }, []);
 
+    const handleClose = () => {
+        setIsOpen(false)
+    }
+
     if (goals.length === 0) return <p className={styles.noData}>Chưa có tiến độ!</p>;
 
     return (
-        <div className={styles.container}>
-            <h3 className={styles.title}>Tiến độ hiện tại</h3>
+        <>
+            <div className={styles.header}>
+                <h3 className={styles.title}>Tiến độ hiện tại</h3>
+                <span className={styles.arrow} onClick={handleClose}>&gt;</span>
+            </div>
             {goals.map((goal) => (
                 <div key={goal.user_goal_id} className={styles.goalItem}>
                     <div className={styles.goalHeader}>
@@ -51,6 +62,6 @@ export default function CurrentProgress() {
                     </div>
                 </div>
             ))}
-        </div>
+        </>
     );
 }

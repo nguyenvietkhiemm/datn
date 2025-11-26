@@ -1,25 +1,18 @@
 "use client";
 import { useState } from "react";
 import styles from "./Search.module.css";
-import Cookies from "js-cookie";
-
-const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
 
 type SearchProp = {
-  setFilterExam?: (data: any) => void;
-  currentPage: number;
-  setTotalPage: (data: any) => void;
   setSearchKeyword: (data: any) => void;
-  setCurrentPage: (data: any) => void;
+  setFilterCondition: (data: any) => void;
 }
 
-export default function Search({ setFilterExam, setSearchKeyword, setCurrentPage }: SearchProp) {
-  const [searchType, setSearchType] = useState("exams");
+export default function Search({ setSearchKeyword, setFilterCondition }: SearchProp) {
   const [keyword, setKeyword] = useState("");
 
   const handleSearch = () => {
     setSearchKeyword(keyword);
-    setCurrentPage(1);
+    setFilterCondition("");
   };
 
   const handleClear = () => {
@@ -31,7 +24,7 @@ export default function Search({ setFilterExam, setSearchKeyword, setCurrentPage
       <div className={styles.searchBox}>
         <input
           type="text"
-          placeholder="Tìm theo tên hoặc email..."
+          placeholder="Bạn muốn tìm kiếm..."
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
           className={styles.input}

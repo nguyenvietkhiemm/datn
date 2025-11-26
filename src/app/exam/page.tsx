@@ -22,7 +22,6 @@ type Exam = {
 };
 
 export default function ExamList() {
-  const [filterExam, setFilterExam] = useState<Exam[]>([])
   const router = useRouter();
   const exams = useSelector((state: RootState) => state.exam.exams);
   const dispatch = useDispatch();
@@ -37,11 +36,6 @@ export default function ExamList() {
 
     const fetchExam = async () => {
       let url = `${API_URL}/exams?page=${currentPage}`;
-
-      // Filter status
-      if (filterCondition?.status) {
-        url += `&status=${filterCondition.status}`;
-      }
 
       // Filter topics
       if (filterCondition?.topics && filterCondition.topics.length > 0) {
@@ -70,37 +64,29 @@ export default function ExamList() {
     fetchExam();
   }, [currentPage, filterCondition, searchKeyword]);
 
-  useEffect(() => {
-    setFilterExam(exams)
-  }, [exams])
-
   const handleDoExam = (exam_id: number, exam: Exam) => {
     localStorage.setItem("exam", JSON.stringify(exam))
     router.push(`/exam/${exam_id}/do`)
   }
-
+  
   return (
     <div className={styles.container}>
       <h1 className={styles.title}> Danh sách đề thi thử</h1>
 
       <div className={styles.filter_search}>
         <Filter
-          exams={exams}
-          setFilterExam={setFilterExam}
-          currentPage={currentPage}
-          setFilterCondition={setFilterCondition} 
+          setFilterCondition={setFilterCondition}
+          setSearchKeyword={setSearchKeyword}
         />
 
         <Search
-          setFilterExam={setFilterExam}
-          currentPage={currentPage}
-          setTotalPage={setTotalPages}
           setSearchKeyword={setSearchKeyword}
-          setCurrentPage={setCurrentPage} />
+          setFilterCondition={setFilterCondition}
+        />
       </div>
 
       <div className={styles.grid}>
-        {filterExam?.map((exam, index) => (
+        {exams?.map((exam, index) => (
           <div key={index} className={styles.card}>
             <div className={styles.header}>
               <h2 className={styles.examName}>{exam.exam_name}</h2>
@@ -115,7 +101,7 @@ export default function ExamList() {
         ))}
       </div>
 
-      {filterExam?.length === 0 ? (
+      {exams?.length === 0 ? (
         <p className={styles.empty}>Không có đề thi cho chủ đề này.</p>
       ) : (
         <Pagination totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />

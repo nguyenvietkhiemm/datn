@@ -1,32 +1,25 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import CurrentProgress from "@/components/current-progress/page";
+import styles from "./PanelProgress.module.css";
 
 export default function ProgressPanel() {
     const [isOpen, setIsOpen] = useState(false);
-    const panelRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        function handleClickOutside(event: MouseEvent) {
-            if (panelRef.current && !panelRef.current.contains(event.target as Node)) {
-                setIsOpen(false);
-            }
-        }
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
 
     return (
         <>
 
             {isOpen ? (
-                <CurrentProgress />
+                <div className={`${styles.slidePanel} ${isOpen ? styles.open : ""}`}>
+                    <CurrentProgress setIsOpen={setIsOpen} />
+                </div>
             ) : (
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className="fixed top-40 right-5 p-2 bg-white-500 text-black rounded border border-gray-300 cursor-pointer"
+                    className="fixed top-40 right-5 p-2 bg-white-500 text-black rounded border border-gray-300 cursor-pointer flex flex-col items-center justify-center"
                 >
-                    Tiến độ
+                    <span>Tiến</span>
+                    <span>Độ</span>
                 </button>
             )}
         </>

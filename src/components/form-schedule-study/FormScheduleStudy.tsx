@@ -148,29 +148,31 @@ export default function FormScheduleStudy({
         const schedule = await res.json();
         setSchedules(prev =>
             prev.map(p =>
-                p.study_schedule_id === schedule.schedule_study_id 
-                    ? schedule 
+                p.study_schedule_id === schedule.schedule_study_id
+                    ? schedule
                     : p
             )
         );
-        
+        setIsEdit?.(false)
     };
 
-    
+
     function toLocalDatetimeValue(isoString: string) {
-        // Chuyển về object Date
+        if (!isoString) return ""; // tránh lỗi NaN
+
         const date = new Date(isoString);
-    
+        if (isNaN(date.getTime())) return ""; 
+
         // Lấy local datetime (UTC+7 của Việt Nam)
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const day = String(date.getDate()).padStart(2, '0');
         const hours = String(date.getHours()).padStart(2, '0');
         const minutes = String(date.getMinutes()).padStart(2, '0');
-    
+
         return `${year}-${month}-${day}T${hours}:${minutes}`;
-    };    
-    
+    };
+
     const handleRemove = async (schedule_study_id?: number) => {
         const res = await fetch(`${API_ARL}/schedule/study/remove/${schedule_study_id}`, {
             method: "DELETE",
@@ -179,12 +181,14 @@ export default function FormScheduleStudy({
                 Authorization: `Bearer ${token}`
             }
         })
-        setSchedules(prev => 
-            prev.filter(p => 
+        setSchedules(prev =>
+            prev.filter(p =>
                 p.study_schedule_id !== schedule_study_id
             )
         )
+        setIsEdit?.(false)
     }
+
     return (
         <div className={styles.container}>
             <div className={styles.head}>
@@ -256,14 +260,14 @@ export default function FormScheduleStudy({
                 <label className={styles.label}>
                     Môn học
                     <select
-                        value={form.subject_id ? form.subject_id.toString() : ""}
-                        onChange={(e) => { handleChange }}
+                        value={form.subject_id ? form.subject_id : ""}
+                        onChange={(e) => handleChange(e)}
                         className={styles.select}
                         name="subject_id"
                     >
                         <option value="">-- Chọn môn học --</option>
                         {subjects.map((s) => (
-                            <option key={s.subject_id} value={s.subject_id.toString()}>
+                            <option key={s.subject_id} value={s.subject_id}>
                                 {s.subject_name}
                             </option>
                         ))}
@@ -277,10 +281,10 @@ export default function FormScheduleStudy({
 
                 {isEdit &&
                     <div className={styles.button_edit}>
-                        <Button onClick={() => handleSave(form.schedule_study_id)}>
+                        <Button type="button" onClick={() => handleSave(form.schedule_study_id)}>
                             Lưu
                         </Button>
-                        <Button onClick={() => handleRemove(form.schedule_study_id)}>
+                        <Button type="button" onClick={() => handleRemove(form.schedule_study_id)}>
                             Xoá
                         </Button>
                     </div>
