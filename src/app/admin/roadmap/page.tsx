@@ -9,6 +9,7 @@ interface RoadmapStep {
     title: string;
     description: string;
     topic_id: number;
+    topic_name: string;
 }
 
 interface Topic {
@@ -24,7 +25,7 @@ export default function RoadmapEditor() {
     const token = Cookies.get("token");
     const [steps, setSteps] = useState<RoadmapStep[]>([]);
     const [topics, setTopics] = useState<Topic[]>([]);
-    const [selectTopic, setSelectTopic] = useState<number>();
+    const [editId, setEditId] = useState(null);
     const [form, setForm] = useState({
         title: "",
         description: "",
@@ -63,8 +64,6 @@ export default function RoadmapEditor() {
         fetchTopic();
     }, [])
 
-    const [editId, setEditId] = useState(null);
-
     // Thay đổi form
     const handleChange = (e: any) => {
         setForm({
@@ -86,8 +85,19 @@ export default function RoadmapEditor() {
 
     }
     // Xoá bước
-    const deleteStep = (id: any) => {
-        setSteps(steps.filter((s) => s.roadmap_step_id !== id));
+    const deleteStep = async(roadmap_step_id: any) => {
+        try {
+          await fetch(`${API_URL}/roadmap/remove/${roadmap_step_id}`,{
+            method : "DELETE",
+            headers:{
+                "Content-Type" : "application/json",
+                Authorization : `Bearer ${token}`
+            }
+          })  
+        } catch (error) {
+            console.log("error: ", error);
+        }
+        setSteps(steps.filter((s) => s.roadmap_step_id !== roadmap_step_id));
     };
 
     // Chọn sửa
@@ -101,7 +111,19 @@ export default function RoadmapEditor() {
     };
 
     // Lưu sửa
-    const saveEdit = () => {
+    const saveEdit = async() => {
+        try {
+            await fetch(`${API_URL}/roadmap/update/${editId}`,{
+                method:"PATCH",
+                headers:{
+                    "Content-Type" : "application/json",
+                    Authorization : `Bearer ${token}`
+                },
+                body : JSON.stringify(form)
+            })
+        } catch (error) {
+            console.log("error: ", error );
+        }
         setSteps(
             steps.map((s) =>
                 s.roadmap_step_id === editId
@@ -124,30 +146,34 @@ export default function RoadmapEditor() {
             <h2 className={styles.heading}>Quản lý Roadmap</h2>
 
             <div className={styles.form}>
-                <input
+                <textarea
                     name="title"
                     placeholder="Tiêu đề bước..."
                     value={form.title}
                     onChange={handleChange}
-                    className={styles.input}
+                    className={styles.textarea}
                 />
 
-                <input
+                <textarea
                     name="description"
                     placeholder="Mô tả..."
                     value={form.description}
-                    onChange={handleChange}
-                    className={styles.input}
+                    onChange={e => {
+                        handleChange(e)
+                        e.target.style.height = "auto";   
+                        e.target.style.height = e.target.scrollHeight + "px"
+                    }}
+                    className={styles.textarea}
                 />
 
                 <select
                     name="topic_id"
-                    value={selectTopic}
+                    value={form.topic_id}
                     onChange={handleChange}
                     className={styles.selectDropdown}
                 >
                     <option value="">Chọn tiêu đề</option>
-                    {topics.map((t) => (
+                    {topics?.map((t) => (
                         <option key={t.topic_id} value={t.topic_id}>{t.title}</option>
                     ))}
                 </select>
@@ -163,16 +189,37 @@ export default function RoadmapEditor() {
                 )}
             </div>
 
-            <div className={styles.roadmapLine}>
-                {steps.map((step, index) => (
-                    <div key={step.roadmap_step_id} className={styles.roadmapStep}>
-                        <div className={styles.stepCircle}>{index + 1}</div>
-                        <div className={styles.stepContent}>
-                            <h3>{step.title}</h3>
-                            <p>{step.description}</p>
-                        </div>
-                    </div>
-                ))}
+            <div className={styles.tableWrapper}>
+                <table className={styles.table}>
+                    <thead>
+                        <tr>
+                            <th>Bước</th>
+                            <th>Tiêu đề</th>
+                            <th>Mô tả</th>
+                            <th>Topic</th>
+                            <th>Chỉnh sửa</th>
+                            <th>Xoá</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {steps?.map((step, index) => (
+                            <tr key={step.roadmap_step_id}>
+                                <td>{index + 1}</td>
+                                <td>{step.title}</td>
+                                <td>{step.description}</td>
+                                <td>{step.topic_name}</td>
+
+                                <td>
+                                    <span className={styles.edit} onClick={() => startEdit(step)}>...</span>
+                                </td>
+                                <td>
+                                   <span className={styles.remove} onClick={() => deleteStep(step.roadmap_step_id)}>X</span>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </div>
     );
