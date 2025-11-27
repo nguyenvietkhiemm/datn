@@ -6,7 +6,6 @@ const StudyScheduleService = {
         const client = await pool.connect();
         try {
             await client.query("BEGIN");
-
             // Lấy dữ liệu phân trang
             const queryText = `
             SELECT s.*, sub.subject_name

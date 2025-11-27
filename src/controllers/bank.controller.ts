@@ -3,14 +3,21 @@ import { Request, Response } from "express";
 import BankService from "../services/bank.service";
 
 const BankController = {
-    async getAll(req: Request, res: Response) {
+    async list(req: Request, res: Response) {
         const result: DefaultResponse<any> = await safeExecute(async () => {
+            const page = Number(req.query.page) || 1;
+            const searchValue = req.query.search?.toString() || "";
+            const topicIds = req.query.topics
+                ? req.query.topics.toString().split(",").map(Number)
+                : [];
+
             return {
                 status: 200,
-                message: "Lấy danh sách ngân hàng câu hỏi thành công",
-                data: await BankService.getAll(),
+                message: "Lấy danh sách đề thi thành công",
+                data: await BankService.list(page, searchValue, topicIds),
             };
         });
+
         return res.status(result.status).json(result);
     },
 
@@ -69,40 +76,6 @@ const BankController = {
                 data: await BankService.remove(Number(req.params.id)),
             };
         });
-        return res.status(result.status).json(result);
-    },
-
-    async search(req: Request, res: Response) {
-        const result: DefaultResponse<any> = await safeExecute(async () => {
-            return {
-                status: 200,
-                message: "Lấy danh sách ngân hàng câu hỏi thành công",
-                data: await BankService.search(String(req.query.searchValue), Number(req.query.page)),
-            };
-        });
-
-        return res.status(result.status).json(result);
-    },
-
-    async filter(req: Request, res: Response) {
-        const result: DefaultResponse<any> = await safeExecute(async () => {
-            const topicParam = req.query.topic;
-            const status = String(req.query.status);
-            const page = Number(req.query.page);
-
-            let topicIds: number[] = [];
-
-            if (typeof topicParam === "string" && topicParam.length > 0) {
-                topicIds = topicParam.split(",").map(Number);
-            }
-
-            return {
-                status: 200,
-                message: "Lọc ngân hàng câu hỏi thành công",
-                data: await BankService.filter(topicIds, status, page)
-            };
-        });
-
         return res.status(result.status).json(result);
     },
 };

@@ -106,7 +106,7 @@ const ExamService = {
       // Status
       if (status !== "All") {
         conditions.push(`e.available = $${idx}`);
-        params.push(status === "true");
+        params.push(status = `${status}`);
         idx++;
       }
 
@@ -120,27 +120,27 @@ const ExamService = {
       const whereClause = conditions.length ? `WHERE ${conditions.join(" AND ")}` : "";
 
       const queryText = `
-      SELECT 
-        e.exam_name, e.topic_id, e.time_limit, e.exam_id, e.created_at, e.available,
-        t.title,
-        es.start_time, es.end_time
-      FROM exam e
-      JOIN topic t ON e.topic_id = t.topic_id
-      JOIN exam_schedule es ON es.exam_schedule_id = e.exam_schedule_id
-      ${whereClause}
-      ORDER BY e.exam_id DESC
-      LIMIT ${limit} OFFSET ${offset}
-    `;
+          SELECT 
+            e.exam_name, e.topic_id, e.time_limit, e.exam_id, e.created_at, e.available,
+            t.title,
+            es.start_time, es.end_time
+          FROM exam e
+          JOIN topic t ON e.topic_id = t.topic_id
+          JOIN exam_schedule es ON es.exam_schedule_id = e.exam_schedule_id
+          ${whereClause}
+          ORDER BY e.exam_id DESC
+          LIMIT ${limit} OFFSET ${offset}
+        `;
 
       const result = await client.query(queryText, params);
 
       // Count total
       const countQuery = `
-      SELECT COUNT(*) AS total
-      FROM exam e
-      JOIN topic t ON e.topic_id = t.topic_id
-      ${whereClause}
-    `;
+          SELECT COUNT(*) AS total
+          FROM exam e
+          JOIN topic t ON e.topic_id = t.topic_id
+          ${whereClause}
+        `;
 
       const countResult = await client.query(countQuery, params);
 
