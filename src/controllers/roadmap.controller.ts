@@ -63,8 +63,7 @@ const RoadmapController = {
     async update(req: Request, res: Response) {
         const response: DefaultResponse<any> = await safeExecute(async () => {
             const id = Number(req.params.id);
-            const { title, description, topic_id } = req.body;
-
+             const { title, description, topic_id } = req.body;       
             const updated = await RoadmapService.update(id, {
                 title,
                 description,

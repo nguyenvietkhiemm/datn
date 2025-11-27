@@ -23,7 +23,7 @@ roadmapRouter.post("/create",
     RoadmapController.create
 )
 
-roadmapRouter.post("/remove/:id",
+roadmapRouter.delete("/remove/:id",
     Authentication.AuthenticateToken,
     Authentication.AuthorizeRoles(...ADMIN),
     RoadmapController.delete
