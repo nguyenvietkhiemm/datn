@@ -14,7 +14,6 @@ export default function RoadMap() {
 
   // Giả lập gọi API
   useEffect(() => {
-    // TODO: thay bằng fetch(`${API}/roadmap`)
     setSteps([
       {
         roadmap_step_id: 1,
