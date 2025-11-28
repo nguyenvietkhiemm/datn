@@ -11,6 +11,8 @@
   "dependencies": {
     "@next/env": "^15.5.4",
     "@reduxjs/toolkit": "^2.9.0",
+    "chart.js": "^4.5.1",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "docx-preview": "^0.3.7",
     "framer-motion": "^12.23.24",
     "js-cookie": "^3.0.5",
@@ -19,6 +21,7 @@
     "next-themes": "^0.4.6",
     "pdfjs-dist": "^5.4.296",
     "react": "19.1.0",
+    "react-chartjs-2": "^5.3.1",
     "react-dom": "19.1.0",
     "react-pdf": "^10.2.0",
     "react-redux": "^9.2.0"

@@ -1,20 +1,43 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Shuffle, ArrowLeft, ArrowRight } from "lucide-react";
 import styles from "./FlashcardReview.module.css";
+import { useParams } from "next/navigation";
+import Cookies from "js-cookie";
+
+
+interface Flashcard {
+    flashcard_id: number;
+    front: string;
+    back: string;
+}
 
 const FlashcardApp = () => {
-    const cards = [
-        { front: "Understanding", back: "Sự hiểu biết" },
-        { front: "Knowledge", back: "Kiến thức" },
-        { front: "Wisdom", back: "Trí tuệ" },
-        { front: "Learning", back: "Học tập" },
-    ];
-
+    const { id } = useParams();
     const [index, setIndex] = useState(0);
     const [flipped, setFlipped] = useState(false);
-    const [deck, setDeck] = useState(cards);
+    const [deck, setDeck] = useState<Flashcard[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const token = Cookies.get("token");
+            const URL_API = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
+
+            const res = await fetch(`${URL_API}/flashcards/quiz/${id}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            const json = await res.json();
+            const list: Flashcard[] = json.data || [];
+
+            setDeck(list);
+        };
+
+        fetchData();
+    }, [id]);
 
     const nextCard = () => {
         setFlipped(false);

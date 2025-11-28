@@ -24,7 +24,7 @@ export default function FlashcardQuiz() {
       const token = Cookies.get("token");
       const URL_API = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
 
-      const res = await fetch(`${URL_API}/flashcards/review/${id}`, {
+      const res = await fetch(`${URL_API}/flashcards/quiz/${id}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -72,7 +72,7 @@ export default function FlashcardQuiz() {
     const answerCorrect : number[] = [];
     const answerMiss : number[] = [];
     flashcards.forEach((card, index) => {
-      if (answers[index] === card.front) {
+      if (answers[index] === card.back) {
         correct++;
         answerCorrect.push(card.flashcard_id)
       }else if( answers[index] == "IDONTKNOW"){
@@ -85,7 +85,7 @@ export default function FlashcardQuiz() {
       const token = Cookies.get("token");
       const URL_API = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
 
-      const res = await fetch(`${URL_API}/flashcards/review/submit`, {
+      const res = await fetch(`${URL_API}/flashcards/quiz/submit`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -105,12 +105,6 @@ export default function FlashcardQuiz() {
   };
 
   if (flashcards.length === 0) return <p>Đang tải câu hỏi...</p>;
-  console.log({
-    'answers :': answers,
-    'score :': score,
-    'flashcard': flashcards,
-    'option': optionsList
-  });
 
   return (
     <div className={styles.container}>
@@ -130,7 +124,7 @@ export default function FlashcardQuiz() {
                 className={`${styles.option} 
                   ${answers[index] === opt ? styles.selected : ""} 
                   ${submitted
-                    ? opt === card.front
+                    ? opt === card.back
                       ? styles.correct
                       : answers[index] === opt
                         ? styles.wrong
@@ -158,7 +152,7 @@ export default function FlashcardQuiz() {
           {/* Khi nộp bài hoặc chọn “Bạn không biết” thì hiện đáp án */}
           {(submitted || answers[index] === "IDONTKNOW") && (
             <p className={styles.correctAnswer}>
-              Đáp án đúng: <strong>{card.front}</strong>
+              Đáp án đúng: <strong>{card.back}</strong>
             </p>
           )}
         </div>
