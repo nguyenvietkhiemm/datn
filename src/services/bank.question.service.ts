@@ -1,5 +1,5 @@
 import { query } from "../config/database";
-import { BankQuestion } from "../model/bank.question.model";
+import { BankQuestion } from "../models/bank.question.model";
 
 
 export const BankQuestionService = {

@@ -10,16 +10,36 @@ const fileRouter = Router();
 fileRouter.get("/csv",
     Authentication.AuthenticateToken,
     Authentication.AuthorizeRoles(...ADMIN),
-    FileController.getAll);
+    FileController.getAllCsv);
 
 fileRouter.get(
     "/csv/:filename",
     Authentication.AuthenticateToken,
     Authentication.AuthorizeRoles(...ADMIN),
-    FileController.getById
+    FileController.getCsvById
 );
 
 fileRouter.post("/csv/save/:filename",
+    Authentication.AuthenticateToken,
+    Authentication.AuthorizeRoles(...ADMIN),
+    uploadCSV.single("file"),
+    FileController.saveCsv
+);
+
+// GET /documents/json-list
+fileRouter.get("/json",
+    Authentication.AuthenticateToken,
+    Authentication.AuthorizeRoles(...ADMIN),
+    FileController.getAllJson);
+
+fileRouter.get(
+    "/json/:filename",
+    Authentication.AuthenticateToken,
+    Authentication.AuthorizeRoles(...ADMIN),
+    FileController.getJsonById
+);
+
+fileRouter.post("/json/save/:filename",
     Authentication.AuthenticateToken,
     Authentication.AuthorizeRoles(...ADMIN),
     uploadCSV.single("file"),

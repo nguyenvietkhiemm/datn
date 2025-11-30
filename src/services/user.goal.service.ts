@@ -1,5 +1,5 @@
 import { query } from "../config/database"
-import { UserGoal } from "../model/user.goal.models"
+import { UserGoal } from "../models/user.goal.models"
 
 export const UserGoalService = {
     async getAll(userId: number): Promise<UserGoal[]> {
