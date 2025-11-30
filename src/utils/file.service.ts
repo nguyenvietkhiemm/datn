@@ -3,7 +3,7 @@ import Papa from "papaparse";
 /**
  * Kiểu dữ liệu của một dòng trong CSV
  */
-interface CsvFile {
+interface FileInfo {
     id: number;
     name: string;
     url: string;
@@ -15,7 +15,7 @@ interface CsvFile {
  * @param token (optional) Token xác thực
  * @returns Mảng object đại diện cho từng dòng CSV
  */
-export async function fetchCsvContent(fileUrl: string, token?: string): Promise<CsvFile[]> {
+export async function fetchContent(fileUrl: string, token?: string): Promise<FileInfo[]> {
     try {
         console.log(fileUrl);
         
@@ -26,7 +26,7 @@ export async function fetchCsvContent(fileUrl: string, token?: string): Promise<
             },
         });
 
-        if (!res.ok) throw new Error("Không tải được file CSV từ server");
+        if (!res.ok) throw new Error("Không tải được file từ server");
 
         const csvText = await res.json();
 
@@ -44,7 +44,7 @@ export async function fetchCsvContent(fileUrl: string, token?: string): Promise<
  * @param token Token xác thực
  * @returns JSON response từ backend
  */
-export async function uploadCsvFile(uploadUrl: string, file: File, token?: string): Promise<any> {
+export async function uploadFile(uploadUrl: string, file: File, token?: string): Promise<any> {
     const formData = new FormData();
     formData.append("file", file);
 
@@ -57,12 +57,12 @@ export async function uploadCsvFile(uploadUrl: string, file: File, token?: strin
             body: formData,
         });
 
-        if (!res.ok) throw new Error("Upload CSV thất bại");
+        if (!res.ok) throw new Error("Upload File thất bại");
 
         const data = await res.json();
         return data;
     } catch (error) {
-        console.error("Lỗi uploadCsvFile:", error);
+        console.error("Lỗi uploadFile:", error);
         throw error;
     }
 }

@@ -7,7 +7,7 @@ import Image from "next/image";
 import styles from "./Sidebar.module.css";
 
 const navItems = [
-  { name: "Bảng điều khiển", href: "/admin/dashboard", icon: Home },
+  { name: "Dashboard", href: "/admin/dashboard", icon: Home },
   { name: "Người dùng", href: "/admin/users", icon: Users },
   { name: "Bài thi", href: "/admin/exams", icon: BookOpen },
   { name: "Tài liệu", href: "/admin/documents", icon: FileText },
@@ -56,7 +56,7 @@ export default function Sidebar() {
       </div>
 
       <div className={styles.buttonContainer}>
-        <button className={styles.adminButton}>Be Admin</button>
+        <button className={styles.adminButton}>Admin</button>
       </div>
     </aside>
   );

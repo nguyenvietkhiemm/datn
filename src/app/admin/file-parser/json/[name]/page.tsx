@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Cookies from "js-cookie";
 import styles from "./CsvDetailPage.module.css";
-import AutoResizeTextarea from "@/component/csv/autoresize/AutoResizeTextarea";
+import AutoResizeTextarea from "@/component/popup/autoresize/AutoResizeTextarea";
 import { Button } from "@/component/ui/button/Button";
 
 interface JsonAnswer {
@@ -54,7 +54,7 @@ export default function CsvDetailPage() {
     useEffect(() => {
         const loadJson = async () => {
             try {
-                const url = `${process.env.NEXT_PUBLIC_ENDPOINT_BACKEND}/file/json/${name}`;
+                const url = `${process.env.NEXT_PUBLIC_ENDPOINT_BACKEND}/file/csv/${name}`;
                 const res = await fetch(url, {
                     headers: {
                         "Content-Type": "application/json",
@@ -112,7 +112,7 @@ export default function CsvDetailPage() {
 
     const handleSave = async () => {
         try {
-            const url = `${process.env.NEXT_PUBLIC_ENDPOINT_BACKEND}/json/save/${name}`;
+            const url = `${process.env.NEXT_PUBLIC_ENDPOINT_BACKEND}/csv/save/${name}`;
             const res = await fetch(url, {
                 method: "POST",
                 headers: {

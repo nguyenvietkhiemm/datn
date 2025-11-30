@@ -5,9 +5,9 @@ import styles from "./question.module.css";
 import Cookies from "js-cookie";
 import Pagination from "@/component/pagination/Pagination";
 import Search from "@/component/search/Search";
-import { fetchCsvContent, uploadCsvFile } from "@/utils/file.service";
+import { fetchContent, uploadFile } from "@/utils/file.service";
 import { Button } from "@/component/ui/button/Button";
-import CsvList from "@/component/csv/page";
+import FileList from "@/component/popup/FileList";
 import { fetchQuestions } from "@/utils/question.service";
 
 interface Answer {
@@ -25,7 +25,7 @@ interface Question {
     source : string
 }
 
-interface CsvFile {
+interface FileInfo {
     id: number;
     name: string;
     url: string;
@@ -37,8 +37,8 @@ export default function Question() {
     const [loading, setLoading] = useState<boolean>(true);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPage, setTotalPage] = useState<number>(1);
-    const [isCsvList, setIsCsvList] = useState<boolean>(false);
-    const [csvList, setCsvList] = useState<CsvFile[]>([]);
+    const [isFileList, setIsFileList] = useState<boolean>(false);
+    const [fileList, setFileList] = useState<FileInfo[]>([]);
     const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
     const token = Cookies.get("token");
     const csvInputRef = useRef<HTMLInputElement>(null);
@@ -113,9 +113,17 @@ export default function Question() {
     //lay list csv tu server
     const handleFetchCsv = async () => {
         const url = `${API_URL}/file/csv`;
-        const data = await fetchCsvContent(url, token);
-        setCsvList(data)
-        setIsCsvList(true)
+        const data = await fetchContent(url, token);
+        setFileList(data)
+        setIsFileList(true)
+    };
+
+        //lay list csv tu server
+    const handleFetchJson = async () => {
+        const url = `${API_URL}/file/json`;
+        const data = await fetchContent(url, token);
+        setFileList(data)
+        setIsFileList(true)
     };
 
     // Upload CSV từ máy
@@ -125,7 +133,7 @@ export default function Question() {
         if (!file) return;
 
         const url = `${API_URL}/file/csv/save/${file.name}`;
-        const result = await uploadCsvFile(url, file, token);
+        const result = await uploadFile(url, file, token);
         console.log("Kết quả upload:", result);
     };
 
@@ -136,7 +144,7 @@ export default function Question() {
         if (!file) return;
 
         const url = `${API_URL}/file/docx/save/${file.name}`;
-        const result = await uploadCsvFile(url, file, token);
+        const result = await uploadFile(url, file, token);
         console.log("Kết quả upload:", result);
     };
 
@@ -184,6 +192,7 @@ export default function Question() {
                             onClick={() => csvInputRef.current?.click()}>
                             Thêm câu hỏi từ CSV
                         </Button>
+                        
                         <Button
                             variant="primary"
                             size="md"
@@ -191,27 +200,38 @@ export default function Question() {
                         >
                             Danh sách CSV
                         </Button>
+
+                        <Button
+                            variant="primary"
+                            size="md"
+                            onClick={handleFetchJson}
+                        >
+                            Danh sách JSON
+                        </Button>
                     </div>
 
                 </div>
             </div>
 
-            {isCsvList && (
+            {isFileList && (
                 <div className={styles.overlay}>
                     <div className={styles.csvModal}>
                         <div className={styles.csvHeader}>
                             <h2>Danh sách CSV</h2>
                             <button
                                 className={styles.closeBtn}
-                                onClick={() => setIsCsvList(false)}
+                                onClick={() => setIsFileList(false)}
                             >
                                 ✕
                             </button>
                         </div>
-                        <CsvList csvList={csvList} />
+
+                        <FileList fileList={fileList} />
+
                     </div>
                 </div>
             )}
+            
             {/* Bảng danh sách câu hỏi */}
             <table className={styles.table}>
                 <thead>
