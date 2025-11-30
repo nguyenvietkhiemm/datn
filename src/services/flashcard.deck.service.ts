@@ -1,6 +1,6 @@
 import { query } from "../config/database";
-import { FlashcardDeck } from "../model/flashcard.deck.model";
-import { Flashcard } from "../model/flashcard.model";
+import { FlashcardDeck } from "../models/flashcard.deck.model";
+import { Flashcard } from "../models/flashcard.model";
 import pool from "../config/database";
 
 //Flashcard-deck Service

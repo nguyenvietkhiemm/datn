@@ -1,7 +1,7 @@
 import { query } from "../config/database";
 import pool from "../config/database";
-import { Question } from "../model/question.model";
-import { Answer } from "../model/answer.model";
+import { Question } from "../models/question.model";
+import { Answer } from "../models/answer.model";
 
 const QuestionService = {
     async get(question_ids: number[]): Promise<Question[]> {

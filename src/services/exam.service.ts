@@ -1,6 +1,6 @@
-import { Exam } from "../model/exam.model";
+import { Exam } from "../models/exam.model";
 import pool, { query } from "../config/database";
-import { Question } from "../model/question.model";
+import { Question } from "../models/question.model";
 
 const ExamService = {
 

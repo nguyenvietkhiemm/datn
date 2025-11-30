@@ -1,5 +1,5 @@
 import { query } from '../config/database';
-import { User } from '../model/user.model';
+import { User } from '../models/user.model';
 
 const UserService = {
     // Lấy toàn bộ user

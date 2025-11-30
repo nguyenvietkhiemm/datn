@@ -1,6 +1,6 @@
 import { get } from "http";
 import { query } from "../config/database";
-import { Document } from "../model/document.model";
+import { Document } from "../models/document.model";
 import pool from "../config/database";
 
 const DocumentService = {

@@ -1,5 +1,5 @@
 import { query } from "../config/database";
-import { ScheduleExam } from "../model/schedule.exam.model";
+import { ScheduleExam } from "../models/schedule.exam.model";
 
 export const ScheduleExamService = {
         //  Lấy danh sách tất cả lịch thi (có phân trang)

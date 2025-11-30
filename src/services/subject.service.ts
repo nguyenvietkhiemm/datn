@@ -1,5 +1,5 @@
 import pool, { query } from "../config/database";
-import { Subject } from "../model/subject.model";
+import { Subject } from "../models/subject.model";
 
 const SubjectService = {
     async getAll(limit: number = 100, offset: number = 0): Promise<Subject[]> {

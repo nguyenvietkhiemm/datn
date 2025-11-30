@@ -1,6 +1,6 @@
 import { register } from "module";
 import { query } from "../config/database";
-import { User } from "../model/user.model";
+import { User } from "../models/user.model";
 import bcrypt from "bcrypt";
 import CreateToken from "../utils/create.token";
 

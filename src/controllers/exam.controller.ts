@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import safeExecute, { DefaultResponse } from "../utils/safe.execute";
 import ExamService from "../services/exam.service";
-import { Exam } from "../model/exam.model";
+import { Exam } from "../models/exam.model";
 
 const ExamController = {
   async list(req: Request, res: Response) {

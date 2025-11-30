@@ -1,8 +1,8 @@
 import fs from "fs";
 import path from "path";
 import csv from "csv-parser";
-import { Question } from "../model/question.model";
-import { Answer } from "../model/answer.model";
+import { Question } from "../models/question.model";
+import { Answer } from "../models/answer.model";
 
 export async function parseQuestionsFromCSV(filePath: string): Promise<Question[]> {
   const questions: Question[] = [];
