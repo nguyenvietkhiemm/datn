@@ -3,16 +3,16 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Cookies from "js-cookie";
-import styles from "./CsvDetailPage.module.css";
-import AutoResizeTextarea from "@/component/popup/autoresize/AutoResizeTextarea";
+import styles from "./JsonDetailPage.module.css";
+import AutoResizeTextarea from "@/component/textarea/AutoResizeTextarea";
+import QuestionCard from "@/component/card/QuestionCard/QuestionCard";
 import { Button } from "@/component/ui/button/Button";
-import Image from "next/image";
 
 interface JsonAnswer {
     para_index: number;
     text: string;
     math: any[];
-    images: any[];
+    images: string[];
     label: string;
 }
 
@@ -33,7 +33,7 @@ type Change = {
     value: string;
 };
 
-export default function CsvDetailPage() {
+export default function JsonDetailPage() {
     const { name } = useParams();
     const token = Cookies.get("token");
     const [loading, setLoading] = useState(true);
@@ -43,7 +43,6 @@ export default function CsvDetailPage() {
 
     useEffect(() => {
         if (!name) return;
-
         try {
             const saved = localStorage.getItem(`json_diff_${name}`);
             setChanges(saved ? JSON.parse(saved) : []);
@@ -83,7 +82,8 @@ export default function CsvDetailPage() {
         return data;
     };
 
-    const handleEdit = (rowIndex: number, colIndex: number) => setEditCell({ row: rowIndex, col: colIndex });
+    const handleEdit = (rowIndex: number, colIndex: number) =>
+        setEditCell({ row: rowIndex, col: colIndex });
 
     const handleChange = (rowIndex: number, colIndex: number, value: string) => {
         setJsonData(prev => {
@@ -134,62 +134,48 @@ export default function CsvDetailPage() {
     };
 
     if (loading) return <p>Đang tải...</p>;
-
+    console.log("jsonData", jsonData);
     return (
-        
-        <div className={styles.questionContainer}>
-            {jsonData.map((row, rowIndex) => (
-                <div key={rowIndex} className={styles.questionCard}>
+        <div className={styles.container}>
+            <div className={styles.buttonGroup}>
+                <Button onClick={handleSave} variant="primary" size="md">
+                    💾 Lưu thay đổi JSON
+                </Button>
+                <Button onClick={handleReset} variant="primary" size="md">
+                    🔄 Tạo lại JSON gốc
+                </Button>
+            </div>
 
-                    {/* --- CÂU HỎI --- */}
-                    <div
-                        className={`${styles.questionBlock} ${isChanged(rowIndex, -1) ? styles.changed : ""
-                            }`}
-                        onClick={() => handleEdit(rowIndex, -1)}
-                    >
-                        <strong>Câu hỏi:</strong>
+            <div className={styles.questionList}>
+                {jsonData.map((row, rowIndex) => (
+                
+                // component QuestionCard nhé
+                <QuestionCard
+                    key={rowIndex}
+                    question={{
+                        question_id: rowIndex,
+                        question_name: `Câu ${rowIndex + 1}`,
+                        question_content: row.question.text,
+                        available: true,
+                        source: row.question.label,
+                        answers: row.answers.map((a, i) => ({
+                            answer_id: i,
+                            answer_content: a.text,
+                            is_correct: false,
+                            images: a.images,
+                        })),
+                        images: row.question.images,
+                    }}
+                    rowIndex={rowIndex}
+                    editCell={editCell}
+                    setEditCell={setEditCell}
+                    handleChange={handleChange}
+                    isChanged={isChanged}
+                />
 
-                        {editCell?.row === rowIndex && editCell?.col === -1 ? (
-                            <AutoResizeTextarea
-                                value={row.question.text}
-                                onChange={(e) => handleChange(rowIndex, -1, e.target.value)}
-                                autoFocus
-                                setEditCell={setEditCell}
-                            />
-                        ) : (
-                            <p>{row.question.text}</p>
-                        )}
-                    </div>
+                ))}
 
-                    {/* --- CÁC CÂU TRẢ LỜI --- */}
-                    <div className={styles.answerBlock}>
-                        <strong>Đáp án:</strong>
-
-                        {row.answers.map((a, colIndex) => (
-                            <div
-                                key={colIndex}
-                                className={`${styles.answerItem} ${isChanged(rowIndex, colIndex) ? styles.changed : ""
-                                    }`}
-                                onClick={() => handleEdit(rowIndex, colIndex)}
-                            >
-                                {editCell?.row === rowIndex && editCell?.col === colIndex ? (
-                                    <AutoResizeTextarea
-                                        value={a.text}
-                                        onChange={(e) =>
-                                            handleChange(rowIndex, colIndex, e.target.value)
-                                        }
-                                        autoFocus
-                                        setEditCell={setEditCell}
-                                    />
-                                ) : (
-                                    <p>{a.text}</p>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            ))}
+            </div>
         </div>
-
     );
 }

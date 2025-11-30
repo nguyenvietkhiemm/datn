@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Cookies from "js-cookie";
 import styles from "./CsvDetailPage.module.css"
-import AutoResizeTextarea from "@/component/popup/autoresize/AutoResizeTextarea";
+import AutoResizeTextarea from "@/component/textarea/AutoResizeTextarea";
 import { Button } from "@/component/ui/button/Button";
 
 interface CsvRow {

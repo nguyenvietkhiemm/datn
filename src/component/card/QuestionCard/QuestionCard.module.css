@@ -1,0 +1,70 @@
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #e5e7eb;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.content {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.imageGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 12px 0;
+}
+
+.imageWrapper {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+.imageGroupSmall {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.imageWrapperSmall {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+.image {
+    object-fit: cover;
+}
+
+.answerList {
+    margin-top: 20px;
+}
+
+.answerItem {
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #e5e7eb;
+    background: #fafafa;
+}
+
+.correct {
+    border-color: #22c55e;
+    background: #ecfdf5;
+}
+
+.answerText {
+    font-size: 15px;
+}
