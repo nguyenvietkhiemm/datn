@@ -6,7 +6,7 @@ import styles from "./QuestionCreate.module.css";
 import { fetchQuestions } from "@/utils/question.service";
 import Pagination from "@/component/pagination/Pagination";
 import Search from "@/component/search/Search";
-import { fetchCsvContent } from "@/utils/csv";
+import { fetchCsvContent } from "@/utils/file.service";
 import { Button } from "@/component/ui/button/Button";
 import { useSearchParams } from "next/navigation";
 

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { fetchCsvContent } from "@/utils/csv";
+import { fetchCsvContent } from "@/utils/file.service";
 import styles from "./CsvList.module.css";
 import { useRouter } from "next/navigation";
 

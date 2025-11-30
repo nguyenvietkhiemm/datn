@@ -5,7 +5,7 @@ import styles from "./question.module.css";
 import Cookies from "js-cookie";
 import Pagination from "@/component/pagination/Pagination";
 import Search from "@/component/search/Search";
-import { fetchCsvContent, uploadCsvFile } from "@/utils/csv";
+import { fetchCsvContent, uploadCsvFile } from "@/utils/file.service";
 import { Button } from "@/component/ui/button/Button";
 import CsvList from "@/component/csv/page";
 import { fetchQuestions } from "@/utils/question.service";
