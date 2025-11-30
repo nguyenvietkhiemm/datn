@@ -18,6 +18,7 @@ export async function parseQuestionsFromCSV(filePath: string): Promise<Question[
         try {
           const rawQuestion = (row.question || "").trim();
           const rawAnswer = (row.answer || "").trim();
+          const source = (row.source || "").trim();
 
           // Bỏ qua dòng không có nội dung
           if (!rawQuestion || !rawAnswer) return;

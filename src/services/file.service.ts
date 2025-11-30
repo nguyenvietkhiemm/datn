@@ -23,7 +23,10 @@ export function getCsvFilesList(baseUrl: string): CsvFileInfo[] {
         fs.mkdirSync(csvDir, { recursive: true });
     }
 
-    const files = fs.readdirSync(csvDir).filter((f) => f.endsWith(".csv"));
+    const files = fs.readdirSync(csvDir).filter(
+    (f) => f.endsWith(".csv") || f.endsWith(".json")
+    );
+
 
     return files.map((file, index) => ({
         id: index + 1,
@@ -46,7 +49,7 @@ export function getById(filename: string): any[] {
     return records;
 }
 
-// chưa dùng đến
+
 export function saveCsvFile(filename: string, data: any[]) {
     const csvDir = path.join(process.cwd(), "../../data/uploads/csv");
     const filePath = path.join(csvDir, filename);
