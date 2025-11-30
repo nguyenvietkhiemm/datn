@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import styles from "./CsvDetailPage.module.css";
 import AutoResizeTextarea from "@/component/popup/autoresize/AutoResizeTextarea";
 import { Button } from "@/component/ui/button/Button";
+import Image from "next/image";
 
 interface JsonAnswer {
     para_index: number;
@@ -54,7 +55,7 @@ export default function CsvDetailPage() {
     useEffect(() => {
         const loadJson = async () => {
             try {
-                const url = `${process.env.NEXT_PUBLIC_ENDPOINT_BACKEND}/file/csv/${name}`;
+                const url = `${process.env.NEXT_PUBLIC_ENDPOINT_BACKEND}/file/json/${name}`;
                 const res = await fetch(url, {
                     headers: {
                         "Content-Type": "application/json",
@@ -112,7 +113,7 @@ export default function CsvDetailPage() {
 
     const handleSave = async () => {
         try {
-            const url = `${process.env.NEXT_PUBLIC_ENDPOINT_BACKEND}/csv/save/${name}`;
+            const url = `${process.env.NEXT_PUBLIC_ENDPOINT_BACKEND}/json/save/${name}`;
             const res = await fetch(url, {
                 method: "POST",
                 headers: {
@@ -135,56 +136,60 @@ export default function CsvDetailPage() {
     if (loading) return <p>Đang tải...</p>;
 
     return (
-        <div className={styles.csv_container}>
-            <h1 className={styles.title}>Chỉnh sửa JSON #{name}</h1>
+        
+        <div className={styles.questionContainer}>
+            {jsonData.map((row, rowIndex) => (
+                <div key={rowIndex} className={styles.questionCard}>
 
-            <div className={styles.button}>
-                <Button onClick={handleSave} variant="primary" size="md">💾 Lưu thay đổi JSON</Button>
-                <Button onClick={handleReset} variant="primary" size="md">🔄 Tạo lại JSON gốc</Button>
-            </div>
+                    {/* --- CÂU HỎI --- */}
+                    <div
+                        className={`${styles.questionBlock} ${isChanged(rowIndex, -1) ? styles.changed : ""
+                            }`}
+                        onClick={() => handleEdit(rowIndex, -1)}
+                    >
+                        <strong>Câu hỏi:</strong>
 
-            <table className={styles.table}>
-                <tbody>
-                    {jsonData.map((row, rowIndex) => (
-                        <tr key={rowIndex} className={styles.tr}>
-                            <td
-                                className={`${styles.cell} ${isChanged(rowIndex, -1) ? styles.changed : ""}`}
-                                onClick={() => handleEdit(rowIndex, -1)}
+                        {editCell?.row === rowIndex && editCell?.col === -1 ? (
+                            <AutoResizeTextarea
+                                value={row.question.text}
+                                onChange={(e) => handleChange(rowIndex, -1, e.target.value)}
+                                autoFocus
+                                setEditCell={setEditCell}
+                            />
+                        ) : (
+                            <p>{row.question.text}</p>
+                        )}
+                    </div>
+
+                    {/* --- CÁC CÂU TRẢ LỜI --- */}
+                    <div className={styles.answerBlock}>
+                        <strong>Đáp án:</strong>
+
+                        {row.answers.map((a, colIndex) => (
+                            <div
+                                key={colIndex}
+                                className={`${styles.answerItem} ${isChanged(rowIndex, colIndex) ? styles.changed : ""
+                                    }`}
+                                onClick={() => handleEdit(rowIndex, colIndex)}
                             >
-                                {editCell?.row === rowIndex && editCell?.col === -1 ? (
+                                {editCell?.row === rowIndex && editCell?.col === colIndex ? (
                                     <AutoResizeTextarea
-                                        value={row.question.text}
-                                        onChange={e => handleChange(rowIndex, -1, e.target.value)}
+                                        value={a.text}
+                                        onChange={(e) =>
+                                            handleChange(rowIndex, colIndex, e.target.value)
+                                        }
                                         autoFocus
                                         setEditCell={setEditCell}
                                     />
                                 ) : (
-                                    row.question.text
+                                    <p>{a.text}</p>
                                 )}
-                            </td>
-
-                            {row.answers.map((a, colIndex) => (
-                                <td
-                                    key={colIndex}
-                                    className={`${styles.cell} ${isChanged(rowIndex, colIndex) ? styles.changed : ""}`}
-                                    onClick={() => handleEdit(rowIndex, colIndex)}
-                                >
-                                    {editCell?.row === rowIndex && editCell?.col === colIndex ? (
-                                        <AutoResizeTextarea
-                                            value={a.text}
-                                            onChange={e => handleChange(rowIndex, colIndex, e.target.value)}
-                                            autoFocus
-                                            setEditCell={setEditCell}
-                                        />
-                                    ) : (
-                                        a.text
-                                    )}
-                                </td>
-                            ))}
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            ))}
         </div>
+
     );
 }

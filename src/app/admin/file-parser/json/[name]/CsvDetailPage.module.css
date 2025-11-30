@@ -79,3 +79,42 @@
         margin-bottom: 10px;
     }
 }
+
+.questionContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.questionCard {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.questionBlock {
+    padding: 10px;
+    background: #f5f7fa;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+
+.answerBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.answerItem {
+    padding: 10px;
+    background: #fdfdfd;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.changed {
+    background-color: #fff3cd !important;
+}
