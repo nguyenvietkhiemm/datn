@@ -8,11 +8,12 @@ import AutoResizeTextarea from "@/component/textarea/AutoResizeTextarea";
 import QuestionCard from "@/component/card/QuestionCard/QuestionCard";
 import { Button } from "@/component/ui/button/Button";
 
+
 interface JsonAnswer {
     para_index: number;
     text: string;
     math: any[];
-    images: string[];
+    media: any[]; // images
     label: string;
 }
 
@@ -21,17 +22,77 @@ interface JsonQuestion {
         para_index: number;
         text: string;
         math: any[];
-        images: any[];
+        media: any[]; // images
         label: string;
     };
     answers: JsonAnswer[];
 }
+
+function extractQuestionImages(question: JsonQuestion, imagesMap: Record<string, string>) {
+    const list: string[] = [];
+
+    question.question.media?.forEach(img => {
+        const filename = img.saved_path.split(/[/\\]/).pop();
+        if (filename && imagesMap[filename]) {
+            list.push(imagesMap[filename]);
+        }
+    });
+
+    return list;
+}
+
+function extractAnswerImages(answer: JsonAnswer, imagesMap: Record<string, string>) {
+    const list: string[] = [];
+
+    answer.media?.forEach(img => {
+        const filename = img.saved_path.split(/[/\\]/).pop();
+        if (filename && imagesMap[filename]) {
+            list.push(imagesMap[filename]);
+        }
+    });
+
+    return list;
+}
+
 
 type Change = {
     row: number;
     col: number;
     value: string;
 };
+
+function collectImageNames(jsonData: (JsonQuestion | JsonAnswer)[]): string[] {
+    const files = new Set<string>();
+
+    jsonData.forEach(item => {
+        // Nếu là JsonQuestion
+        if ("question" in item && "answers" in item) {
+            item.question.media?.forEach(img => {
+                const filename = img.saved_path.split(/[/\\]/).pop(); // lấy tên file
+                if (filename) files.add(filename);
+            });
+
+            item.answers.forEach(a => {
+                a.media?.forEach(img => {
+                    const filename = img.saved_path.split(/[/\\]/).pop();
+                    if (filename) files.add(filename);
+                });
+            });
+        }
+
+        // Nếu là JsonAnswer
+        else if ("media" in item) {
+            item.media?.forEach(img => {
+                const filename = img.saved_path.split(/[/\\]/).pop();
+                if (filename) files.add(filename);
+            });
+        }
+
+    });
+
+    return Array.from(files);
+}
+
 
 export default function JsonDetailPage() {
     const { name } = useParams();
@@ -40,6 +101,7 @@ export default function JsonDetailPage() {
     const [jsonData, setJsonData] = useState<JsonQuestion[]>([]);
     const [editCell, setEditCell] = useState<{ row: number; col: number } | null>(null);
     const [changes, setChanges] = useState<Change[]>([]);
+    const [images, setImages] = useState<Record<string, string>>({});
 
     useEffect(() => {
         if (!name) return;
@@ -63,16 +125,64 @@ export default function JsonDetailPage() {
                 });
                 const result = await res.json();
                 const data: JsonQuestion[] = result.data || [];
+
                 setJsonData(loadJsonDiff(data));
+
             } catch (err) {
                 console.error("Lỗi tải JSON:", err);
             } finally {
                 setLoading(false);
             }
         };
+
         loadJson();
+
     }, [name, token]);
 
+    // Load images sau khi JSON đã sẵn sàng
+    // Hàm này sẽ hơi lạ vì dùng POST để lấy ảnh
+    useEffect(() => {
+        if (jsonData.length === 0) return;
+
+        async function loadImages() {
+            const filenames = collectImageNames(jsonData);
+
+            if (filenames.length === 0) return;
+
+            try {
+                const url = `${process.env.NEXT_PUBLIC_ENDPOINT_BACKEND}/file/images`;
+
+                const res = await fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({ filesname: filenames }),
+                });
+
+                const result = await res.json();
+
+                // result.data = { filename, mime, data }
+                const mapped: Record<string, string> = {};
+
+                result.data.forEach((file: any) => {
+                    mapped[file.filename] = `data:${file.mime};base64,${file.data}`;
+                });
+
+                console.log("Tệp ảnh đã tải:", mapped);
+
+                setImages(mapped);
+            } catch (err) {
+                console.error("Lỗi tải ảnh:", err);
+            }
+        }
+
+        loadImages();
+
+    }, [jsonData, token]);
+
+    // chỉnh sửa text
     const loadJsonDiff = (data: JsonQuestion[]) => {
         if (!changes) return data;
         changes.forEach(d => {
@@ -81,9 +191,6 @@ export default function JsonDetailPage() {
         });
         return data;
     };
-
-    const handleEdit = (rowIndex: number, colIndex: number) =>
-        setEditCell({ row: rowIndex, col: colIndex });
 
     const handleChange = (rowIndex: number, colIndex: number, value: string) => {
         setJsonData(prev => {
@@ -133,8 +240,10 @@ export default function JsonDetailPage() {
         }
     };
 
+
     if (loading) return <p>Đang tải...</p>;
-    console.log("jsonData", jsonData);
+
+
     return (
         <div className={styles.container}>
             <div className={styles.buttonGroup}>
@@ -148,30 +257,37 @@ export default function JsonDetailPage() {
 
             <div className={styles.questionList}>
                 {jsonData.map((row, rowIndex) => (
-                
-                // component QuestionCard nhé
-                <QuestionCard
-                    key={rowIndex}
-                    question={{
-                        question_id: rowIndex,
-                        question_name: `Câu ${rowIndex + 1}`,
-                        question_content: row.question.text,
-                        available: true,
-                        source: row.question.label,
-                        answers: row.answers.map((a, i) => ({
-                            answer_id: i,
-                            answer_content: a.text,
-                            is_correct: false,
-                            images: a.images,
-                        })),
-                        images: row.question.images,
-                    }}
-                    rowIndex={rowIndex}
-                    editCell={editCell}
-                    setEditCell={setEditCell}
-                    handleChange={handleChange}
-                    isChanged={isChanged}
-                />
+
+                    // component QuestionCard nhé
+<QuestionCard
+    key={rowIndex}
+    question={{
+        question_id: rowIndex,
+        question_name: `Câu ${rowIndex + 1}`,
+        question_content: row.question.text,
+        available: true,
+        source: row.question.label,
+
+        // ⭐ Tách ảnh của question
+        images: extractQuestionImages(row, images),
+
+        // ⭐ Tách ảnh của từng answer
+        answers: row.answers.map((a, i) => ({
+            answer_id: i,
+            answer_content: a.text,
+            is_correct: false,
+            images: extractAnswerImages(a, images),
+        })),
+    }}
+
+    rowIndex={rowIndex}
+    editCell={editCell}
+    setEditCell={setEditCell}
+    handleChange={handleChange}
+    isChanged={isChanged}
+/>
+
+
 
                 ))}
 

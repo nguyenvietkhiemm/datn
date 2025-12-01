@@ -3,12 +3,14 @@
 import Image from "next/image";
 import AutoResizeTextarea from "@/component/textarea/AutoResizeTextarea";
 import styles from "./QuestionCard.module.css";
+// import extractQuestionImages from "@/utils/image.extract";
+// import extractAnswerImages from "@/utils/image.extract";
 
 export interface Answer {
     answer_id: number;
     answer_content: string;
     is_correct: boolean;
-    images: string[];
+    images: string[]; // đã convert thành data:image/... từ parent
 }
 
 export interface Question {
@@ -18,7 +20,7 @@ export interface Question {
     available: boolean;
     answers: Answer[];
     source: string;
-    images: string[];
+    images: string[]; // đã convert thành data:image/... từ parent
 }
 
 interface QuestionCardProps {
@@ -32,7 +34,6 @@ interface QuestionCardProps {
 
 export default function QuestionCard({
     question,
-    
     rowIndex,
     editCell,
     setEditCell,
@@ -109,7 +110,9 @@ export default function QuestionCard({
                                 onBlur={() => setEditCell(null)}
                             />
                         ) : (
-                            <p className={styles.answerText}>{ans.answer_content}</p>
+                            <p className={styles.answerText}>
+                                {ans.answer_content}
+                            </p>
                         )}
 
                         {/* ===== Answer Images ===== */}
