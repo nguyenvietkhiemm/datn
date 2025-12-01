@@ -1,12 +1,15 @@
 import { Request, Response } from "express";
 import safeExecute, { DefaultResponse } from "../utils/safe.execute";
 import {runBertModel} from "../utils/run.bert";
-import { getCsvFilesList, saveCsvFile, getCsvById, getJsonFilesList, getJsonById } from "../services/file.service";
+import { getCsvFilesList, saveCsvFile, getCsvById, getJsonFilesList, getJsonById, getImagesById } from "../services/file.service";
 import path from "path";
 import fs from "fs";
 import { parse } from "csv-parse/sync";
 
 export const FileController = {
+
+    // CSV METHODS
+
     async getAllCsv(req: Request, res: Response) {
         const result = await safeExecute(async (): Promise<DefaultResponse<any>> => {
             const baseUrl = `${req.protocol}://${req.get("host")}`;
@@ -52,6 +55,8 @@ export const FileController = {
         return res.status(result.status).json(result);
     },
 
+    // JSON FILE HANDLERS
+
     async getAllJson(req: Request, res: Response) {
         const result = await safeExecute(async (): Promise<DefaultResponse<any>> => {
             const baseUrl = `${req.protocol}://${req.get("host")}`;
@@ -73,7 +78,7 @@ export const FileController = {
             const records = getJsonById(filename);
             return {
                 status: 200,
-                message: `Nội dung CSV ${filename}`,
+                message: `Nội dung JSON ${filename}`,
                 data: records,
             };
         });
@@ -96,6 +101,8 @@ export const FileController = {
         });
         return res.status(result.status).json(result);
     },
+
+    // DOCX FILE HANDLERS
 
     async saveDocx(req: Request, res: Response) {
         const result = await safeExecute(async () => {
@@ -121,5 +128,21 @@ export const FileController = {
 
         // safeExecute trả về object { status, message, ... } luôn
         return res.status(result.status).json(result);
-    }
+    },
+
+    // IMAGE FILE HANDLERS
+    
+    async getImagesById(req: Request, res: Response) {
+        const result = await safeExecute(async (): Promise<DefaultResponse<any>> => {
+            const filesname = req.body.filesname;
+            const imageFiles = getImagesById(filesname);
+
+            return {
+                status: 200,
+                message: "Danh sách file CSV trên server",
+                data: imageFiles
+            }
+        })
+        return res.status(result.status).json(result)
+    },
 }
