@@ -49,7 +49,6 @@ export function getCsvById(filename: string): any[] {
     return records;
 }
 
-
 export function saveCsvFile(filename: string, data: any[]) {
     const csvDir = path.join(process.cwd(), "../../data/uploads/csv");
     const filePath = path.join(csvDir, filename);
@@ -62,6 +61,8 @@ export function saveCsvFile(filename: string, data: any[]) {
 
     fs.writeFileSync(filePath, csvContent, "utf-8");
 }
+
+
 
 export function getJsonFilesList(baseUrl: string): FileInfo[] {
     // const csvDir = path.join(__dirname, "../../data/uploads/csv");
@@ -100,4 +101,43 @@ export function getJsonById(filename: string): any {
 
     const jsonText = fs.readFileSync(filePath, "utf-8");
     return JSON.parse(jsonText);
+}
+
+
+function getMime(file: string) {
+    const ext = path.extname(file).toLowerCase();
+    if (ext === ".png") return "image/png";
+    if (ext === ".jpg" || ext === ".jpeg") return "image/jpeg";
+    if (ext === ".gif") return "image/gif";
+    return "application/octet-stream";
+}
+
+export function getImagesById(filenames: string[]) {
+    const mediaDir = path.join(__dirname, "../../data/outputs/media");
+
+    if (!fs.existsSync(mediaDir)) {
+        throw new Error("Thư mục MEDIA không tồn tại");
+    }
+
+    const results = [];
+
+    for (const filename of filenames) {
+        const filePath = path.join(mediaDir, filename);
+
+        if (!fs.existsSync(filePath)) {
+            console.warn(`⚠ File không tồn tại: ${filename}`);
+            continue; // skip file missing
+        }
+
+        const buffer = fs.readFileSync(filePath);
+        const base64 = buffer.toString("base64");
+
+        results.push({
+            filename,
+            mime: getMime(filename),
+            data: base64,
+        });
+    }
+
+    return results;
 }

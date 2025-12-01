@@ -20,11 +20,11 @@ app.use(cors());
 // route cho api-docs
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, swaggerOptions));
 
-// routes chung cho tat ca cac api
-app.use('/', routes);
-
 //cho xem tai lieu
 app.use("/resources", express.static(path.join(__dirname, "../resources")));
+
+// routes chung cho tat ca cac api
+app.use('/', routes);
 
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "localhost";

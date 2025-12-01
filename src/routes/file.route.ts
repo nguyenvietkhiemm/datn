@@ -6,7 +6,8 @@ import { Router } from "express";
 
 const fileRouter = Router();
 
-// GET /documents/csv-list
+// CSV FILE HANDLERS
+
 fileRouter.get("/csv",
     Authentication.AuthenticateToken,
     Authentication.AuthorizeRoles(...ADMIN),
@@ -26,7 +27,8 @@ fileRouter.post("/csv/save/:filename",
     FileController.saveCsv
 );
 
-// GET /documents/json-list
+// JSON FILE HANDLERS
+
 fileRouter.get("/json",
     Authentication.AuthenticateToken,
     Authentication.AuthorizeRoles(...ADMIN),
@@ -39,6 +41,7 @@ fileRouter.get(
     FileController.getJsonById
 );
 
+// chưa sửa
 fileRouter.post("/json/save/:filename",
     Authentication.AuthenticateToken,
     Authentication.AuthorizeRoles(...ADMIN),
@@ -46,11 +49,22 @@ fileRouter.post("/json/save/:filename",
     FileController.saveCsv
 );
 
+// DOCX FILE HANDLERS
+
 fileRouter.post("/docx/save/:filename",
     Authentication.AuthenticateToken,
     Authentication.AuthorizeRoles(...ADMIN),
     uploadDOC.single("file"),
     FileController.saveDocx
+);
+
+// IMAGE FILE HANDLERS
+
+fileRouter.post(
+    "/images",
+    Authentication.AuthenticateToken,
+    Authentication.AuthorizeRoles(...ADMIN),
+    FileController.getImagesById
 );
 
 export default fileRouter;

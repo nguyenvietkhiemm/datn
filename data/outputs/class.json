@@ -4,7 +4,7 @@
             "para_index": 10,
             "text": "Câu 1. Quá trình chuyển từ thể rắn sang thể khí gọi là quá trình",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -12,14 +12,14 @@
                 "para_index": 11,
                 "text": "A. thăng hoa.B. nóng chảyC. ngưng tụ.D. đông đặc.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 12,
                 "text": "B. (c)(c)(a)(a)(b)(b)(d)(d)Câu 2. Biển báo nào không phải là biển báo nhận diện nguồn phóng xạ?",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId7",
@@ -163,63 +163,63 @@
                 "para_index": 13,
                 "text": "C. (c)",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 14,
                 "text": "D. (c)",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 15,
                 "text": "E. (a)",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 16,
                 "text": "F. (a)",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 17,
                 "text": "G. (b)",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 18,
                 "text": "H. (b)",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 19,
                 "text": "I. (d)",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 20,
                 "text": "J. (d)",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 25,
                 "text": "A. hình (b).B. hình (c).C. hình (d).D. hình (a).",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -229,7 +229,7 @@
             "para_index": 26,
             "text": "Câu 3. Biểu thức nào sau đây là đúng khi biến đổi nhiệt độ từ thang Celsius sang thang Kelvin",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -237,7 +237,7 @@
                 "para_index": 27,
                 "text": "A.B.",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId15"
@@ -301,7 +301,7 @@
                 "para_index": 28,
                 "text": "C. D.",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId19"
@@ -368,7 +368,7 @@
             "para_index": 29,
             "text": "Câu 4. Một ấm đun nước bằng nhôm có có khối lượng 400 g, chứa 3 lít nước được đun trên bếp. Khi nhận được nhiệt lượng 740 kJ thì ấm đạt đến nhiệt độ. Hỏi nhiệt độ ban đầu của ấm, biết cAl = 880 J/kg. K, .",
             "math": [],
-            "images": [
+            "media": [
                 {
                     "rIds": [
                         "rId23"
@@ -433,7 +433,7 @@
                 "para_index": 30,
                 "text": "A. 8,15 B. 8,15 KC. 22,7D. 22,7 K",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId27"
@@ -472,7 +472,7 @@
             "para_index": 31,
             "text": "Câu 5. Trong quá trình chất khí nhận nhiệt và sinh công thì Q và A trong biểu thức phải có giá trị:",
             "math": [],
-            "images": [
+            "media": [
                 {
                     "rIds": [
                         "rId30"
@@ -509,7 +509,7 @@
                 "para_index": 32,
                 "text": "A.  và B. C. Q > 0 và A < 0D.",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId32"
@@ -632,7 +632,7 @@
             "para_index": 33,
             "text": "Câu 6. Khi ấn pittông từ từ xuống để nén khí trong xilanh, thì thông số nào của khí trong xilanh thay đổi?",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -640,14 +640,14 @@
                 "para_index": 34,
                 "text": "A. Nhiệt độ khí giảmB. Áp suất khí tăng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 35,
                 "text": "C. Áp suất khí giảmD. Khối lượng khí tăng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -657,7 +657,7 @@
             "para_index": 36,
             "text": "Câu 7. Phát biểu nào sau đây là của định luật Charles ?",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -665,28 +665,28 @@
                 "para_index": 37,
                 "text": "A. Ở áp suất không đổi, thể tích của một khối lượng khí xác định tỉ lệ nghịch với nhiệt độ tuyệt đối của nó.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 38,
                 "text": "B. Ở áp suất không đổi, thể tích của một khối lượng khí xác định tỉ lệ thuận với nhiệt độ tuyệt đối của nó.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 39,
                 "text": "C. Ở áp suất không đổi, thể tích của một khối lượng khí xác định tăng khi nhiệt độ tuyệt đối của nó giảm.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 40,
                 "text": "D. Ở áp suất không đổi, thể tích của một khối lượng khí xác định giảm với nhiệt độ tuyệt đối của nó tăng.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -696,7 +696,7 @@
             "para_index": 41,
             "text": "Câu 8. Cho biết khối lượng riêng của không khí ở điều kiện chuẩn (nhiệt độ 273 K, áp suất ) là 1,29 . Trong một căn phòng có thể tích  khi ta tăng nhiệt độ của phòng từ 280 K ở áp suất  đến nhiệt độ 300 K với áp suất  thì khối lượng khí thoát ra khỏi phòng là bao nhiêu ?",
             "math": [],
-            "images": [
+            "media": [
                 {
                     "rIds": [
                         "rId40"
@@ -845,7 +845,7 @@
                 "para_index": 42,
                 "text": "A. 0,36 kg.B. 0,29 kg.C. 0,4 kg.D. 0,25 kg.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -855,7 +855,7 @@
             "para_index": 43,
             "text": "Câu 9. Sóng điện từ là quá trình lan truyền của điện từ trường biến thiên trong không gian. Khi nói về quan hệ giữa điện trường và từ trường của điện từ trường trên thì kết luận nào sau đây là đúng?",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -863,28 +863,28 @@
                 "para_index": 44,
                 "text": "A. Véctơ cường độ điện trường và cảm ứng từ cùng phương và cùng độ lớn.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 45,
                 "text": "B. Tại mỗi điểm của không gian, điện trường và từ trường luôn luôn dao động ngược pha.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 46,
                 "text": "C. Tại mỗi điểm của không gian, điện trường và từ trường luôn luôn dao động lệch pha nhau π/2.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 47,
                 "text": "D. Điện trường và từ trường biến thiên theo thời gian với cùng chu kì.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -894,7 +894,7 @@
             "para_index": 48,
             "text": "Câu 10. Một khung dây dẫn phẳng quay đều với tốc độ góc  quanh một trục cố định nằm trong mặt phẳng khung dây, trong một từ trường đều có vecto cảm ứng từ vuông góc với trục quay của khung. Suất điện động cảm ứng trong khung có biểu thức: (V). Tại thời diểm , vecto pháp tuyến của mặt phẳng khung dây hợp với vecto cảm ứng từ một góc",
             "math": [],
-            "images": [
+            "media": [
                 {
                     "rIds": [
                         "rId50"
@@ -987,7 +987,7 @@
                 "para_index": 49,
                 "text": "A. B. C. D.",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId56"
@@ -1110,7 +1110,7 @@
             "para_index": 50,
             "text": "Câu 11. Một máy biến áp có cuộn sơ cấp gồm 3300 vòng dây. Mắc cuộn sơ cấp vào mạng điện xoay chiều có hiệu điện thế hiệu dụng 220 V thì ở hai đầu cuộn thứ cấp để hở có một hiệu điện thế hiệu dụng 12 V. Bỏ qua hao phí của máy biến áp. Số vòng dây của cuộn thứ cấp bằng",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -1118,7 +1118,7 @@
                 "para_index": 51,
                 "text": "A. 360 vòng.B. 180 vòng.C. 120 vòng.D. 90 vòng.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -1128,7 +1128,7 @@
             "para_index": 52,
             "text": "Câu 12. Trong hình vẽ đoạn dòng điện MN đặt trong mặt phẳng chứa các đường sức từ của một từ trường đều ở các vị trí khác nhau. Độ lớn lực từ tác dụng lên đoạn dòng điện MN trong hình nào bé nhất?",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -1136,7 +1136,7 @@
                 "para_index": 53,
                 "text": "A. ",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId64"
@@ -1169,7 +1169,7 @@
                 "para_index": 54,
                 "text": "A. Hình 4.B. Hình 3.C. Hình 2.D. Hình 1.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -1179,7 +1179,7 @@
             "para_index": 55,
             "text": "Câu 13. Tính chất cơ bản của từ trường là gây ra",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -1187,28 +1187,28 @@
                 "para_index": 56,
                 "text": "A. Sự biến đổi về tính chất điện của môi trường xung quanh.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 57,
                 "text": "B. Lực điện trường tác dụng lên các dòng điện và nam châm đặt trong nó.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 58,
                 "text": "C. Lực hấp dẫn lên các vật đặt trong nó.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 59,
                 "text": "D. Lực từ tác dụng lên nam châm hoặc lên dòng điện đặt trong nó.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -1218,7 +1218,7 @@
             "para_index": 60,
             "text": "Câu 14. Tia nào sau đây có cùng bản chất với tia tử ngoại?",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -1239,7 +1239,7 @@
                         "omml": "<m:oMath xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx2=\"http://schemas.microsoft.com/office/drawing/2015/10/21/chartex\" xmlns:cx3=\"http://schemas.microsoft.com/office/drawing/2016/5/9/chartex\" xmlns:cx4=\"http://schemas.microsoft.com/office/drawing/2016/5/10/chartex\" xmlns:cx5=\"http://schemas.microsoft.com/office/drawing/2016/5/11/chartex\" xmlns:cx6=\"http://schemas.microsoft.com/office/drawing/2016/5/12/chartex\" xmlns:cx7=\"http://schemas.microsoft.com/office/drawing/2016/5/13/chartex\" xmlns:cx8=\"http://schemas.microsoft.com/office/drawing/2016/5/14/chartex\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:aink=\"http://schemas.microsoft.com/office/drawing/2016/ink\" xmlns:am3d=\"http://schemas.microsoft.com/office/drawing/2017/model3d\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:oel=\"http://schemas.microsoft.com/office/2019/extlst\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:w16cex=\"http://schemas.microsoft.com/office/word/2018/wordml/cex\" xmlns:w16cid=\"http://schemas.microsoft.com/office/word/2016/wordml/cid\" xmlns:w16=\"http://schemas.microsoft.com/office/word/2018/wordml\" xmlns:w16du=\"http://schemas.microsoft.com/office/word/2023/wordml/word16du\" xmlns:w16sdtdh=\"http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash\" xmlns:w16se=\"http://schemas.microsoft.com/office/word/2015/wordml/symex\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><m:sSup><m:sSupPr><m:ctrlPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"MS Gothic\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:i/><w:spacing w:val=\"3\"/><w:sz w:val=\"26\"/><w:szCs w:val=\"26\"/><w:shd w:val=\"clear\" w:color=\"auto\" w:fill=\"FFFFFF\"/></w:rPr></m:ctrlPr></m:sSupPr><m:e><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"MS Gothic\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:spacing w:val=\"3\"/><w:sz w:val=\"26\"/><w:szCs w:val=\"26\"/><w:shd w:val=\"clear\" w:color=\"auto\" w:fill=\"FFFFFF\"/></w:rPr><m:t>β</m:t></m:r></m:e><m:sup><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"MS Gothic\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:spacing w:val=\"3\"/><w:sz w:val=\"26\"/><w:szCs w:val=\"26\"/><w:shd w:val=\"clear\" w:color=\"auto\" w:fill=\"FFFFFF\"/><w:lang w:val=\"pt-BR\"/></w:rPr><m:t>-</m:t></m:r></m:sup></m:sSup></m:oMath>"
                     }
                 ],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -1249,7 +1249,7 @@
             "para_index": 62,
             "text": "Câu 15. So với hạt nhân hạt nhân thì hạt nhân , có nhiều hơn",
             "math": [],
-            "images": [
+            "media": [
                 {
                     "rIds": [
                         "rId65"
@@ -1342,14 +1342,14 @@
                 "para_index": 63,
                 "text": "A. 44 neutron và 21 proton.B. 23 neutron và 21 proton.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 64,
                 "text": "C. 44 neutron và 23 proton.D. 23 neutron và 23 proton.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -1359,7 +1359,7 @@
             "para_index": 65,
             "text": "Câu 16. Năng lượng liên kết riêng của hạt nhân có giá trị",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -1367,14 +1367,14 @@
                 "para_index": 66,
                 "text": "A. lớn nhất đối với các hạt nhân nhẹ.B. lớn nhất đối với các hạt nhân nặng.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 67,
                 "text": "C. lớn nhất đối với các hạt nhân trung bình.D. như nhau với mọi hạt nhân.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -1384,7 +1384,7 @@
             "para_index": 68,
             "text": "Câu 17. Chiếu 3 chùm tia thu được từ quá trình phóng xạ hạt nhân lần lượt qua tấm giấy, nhôm và chì như Hình . Các tia 1, tia 2, tia 3 theo thứ tự lần lượt là:",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -1392,7 +1392,7 @@
                 "para_index": 69,
                 "text": "A. ",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId71"
@@ -1425,7 +1425,7 @@
                 "para_index": 70,
                 "text": "A. tia , tia , tia .B. tia , tia , tia .",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId72"
@@ -1601,7 +1601,7 @@
                 "para_index": 71,
                 "text": "C. tia , tia , tia .D. tia , tia , tia .",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId84"
@@ -1780,7 +1780,7 @@
             "para_index": 72,
             "text": "Câu 18. Một ống dây hình trụ dài gồm 1000 vòng dây, diện tích mỗi vòng dây . Ống dây có điện trở , hai đầu nối đoản mạch và được đặt trong từ trường đều có vectơ cảm ứng từ song song với trục của ống dây và có độ lớn tăng đều  Công suất tỏa nhiệt của ống dây là",
             "math": [],
-            "images": [
+            "media": [
                 {
                     "rIds": [
                         "rId96"
@@ -1873,7 +1873,7 @@
                 "para_index": 73,
                 "text": "A.  B.  C.  D.",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId102"
@@ -1996,7 +1996,7 @@
             "para_index": 75,
             "text": "Câu 1. Một trong những bệnh nghề nghiệp của thợ lặn có tỉ lệ gây tử vong và mất sức lao động cao là bệnh giảm áp. Nếu một thợ lặn từ độ sâu 25 m nổi lên mặt nước quá nhanh, Nitơ không vận chuyển kịp đến phổi giải phóng ra ngoài sẽ tích lại trong cơ thể hình thành các bọt khí gây nguy hiểm. Trong các khẳng định sau đây, câu nào đúng, sai. Giả sử sự chênh lệch nhiệt độ là không đáng kể. Cho biết khối lượng riêng của nước là",
             "math": [],
-            "images": [
+            "media": [
                 {
                     "rIds": [
                         "rId110"
@@ -2058,14 +2058,14 @@
                 "para_index": 76,
                 "text": "A. a. Khi nổi lên mặt nước đột ngột và quá nhanh, áp suất giảm đột ngột làm các bọt khí Nitơ nở ra, to dần gây tắc mạch chèn ép các tế bào thần kinh gây liệt, tổn thương các cơ quan…",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 78,
                 "text": "B. b. Áp suất người thợ lặn phải chịu khi ở độ sâu 25m là",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId113"
@@ -2101,7 +2101,7 @@
                 "para_index": 80,
                 "text": "C. c. Khi nổi lên mặt nước áp suất tại mặt nước khi đó bằng áp suất khí quyển",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId115"
@@ -2137,7 +2137,7 @@
                 "para_index": 82,
                 "text": "D. d. Khi ở độ sâu 25 m thể tích của bọt khí Nitơ chiếm , khi lên đến mặt nước thể tích của bọt khí này là",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId117"
@@ -2204,7 +2204,7 @@
             "para_index": 84,
             "text": "Câu 2. Quan sát mô hình loa điện động được mô tả như hình",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -2212,7 +2212,7 @@
                 "para_index": 85,
                 "text": "A. ",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId121"
@@ -2270,28 +2270,28 @@
                 "para_index": 86,
                 "text": "B. a. Khi cho dòng điện không đổi vào hai điểm nối tín hiệu thì loa chỉ phát ra âm với tần số không đổi",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 87,
                 "text": "C. b. Loa hoạt động dựa trên hiện tượng cảm ứng điện từ.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 88,
                 "text": "D. c. Khi có dòng điện chạy qua cuộn dây thì nam châm vĩnh cửu sẽ dao động làm cho màng loa dao động với tần số âm.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 89,
                 "text": "E. d. Nếu nối hai điểm nối tín hiệu vào loa với điện áp biểu diễn như Hình thì tần số âm loa phát ra là 13333 Hz.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -2301,7 +2301,7 @@
             "para_index": 90,
             "text": "Câu 3. Một khối khí đựng trong xilanh có pít-tông. Đốt nóng xilanh trong thời gian đủ dài (trong quá trình đốt pít-tông không dịch chuyển).",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -2309,28 +2309,28 @@
                 "para_index": 91,
                 "text": "A. a. Nhiệt độ khối khí tăng lên.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 92,
                 "text": "B. b. Nội năng của khối khí giảm.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 93,
                 "text": "C. c. Động năng trung bình của phân tử khí tăng.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 94,
                 "text": "D. d. Áp suất khối khí không đổi.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -2340,7 +2340,7 @@
             "para_index": 95,
             "text": "Câu 4. Uranium  có chu kì bán rã là  năm. Khi phóng xạ  Uranium biến thành Thorium  Ban đầu có  Uranium.",
             "math": [],
-            "images": [
+            "media": [
                 {
                     "rIds": [
                         "rId123"
@@ -2489,7 +2489,7 @@
                 "para_index": 96,
                 "text": "A. a. Hạt nhân Thorium  bền hơn hạt nhân Uranium",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId133"
@@ -2553,7 +2553,7 @@
                 "para_index": 97,
                 "text": "B. b. Khối lượng Uranium còn lại sau  năm là",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId137"
@@ -2617,7 +2617,7 @@
                 "para_index": 98,
                 "text": "C. c. Số hạt nhân Uranium còn lại sau  năm là 3,7265.1021 hạt nhân.",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId141"
@@ -2653,7 +2653,7 @@
                 "para_index": 99,
                 "text": "D. d. Tỉ số giữa số hạt nhân Uranium còn lại và số hạt nhân Thorium tạo thành sau năm là",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId143"
@@ -2720,7 +2720,7 @@
             "para_index": 108,
             "text": "Câu 6. Khối lượng hạt được tiêu thụ là bao nhiêu kg? Biết NA = 6,02.1023 .(Kết quả làm tròn đến 4 chữ số có nghĩa).",
             "math": [],
-            "images": [
+            "media": [
                 {
                     "rIds": [
                         "rId167"
@@ -2757,35 +2757,35 @@
                 "para_index": 114,
                 "text": "A. SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐẮK LẮK",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 115,
                 "text": "B. TRƯỜNG THPT CAO BÁ QUÁT",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 116,
                 "text": "C. (Đề thi có 04 trang)",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 118,
                 "text": "D. ĐỀ THI THỬ THPT QUỐC GIA NĂM 2025",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 119,
                 "text": "E. Môn thi: VẬT LÍ KHỐI 12",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -2795,7 +2795,7 @@
             "para_index": 124,
             "text": "Câu 1. Quá trình chuyển từ thể rắn sang thể khí gọi là quá trình",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -2803,28 +2803,28 @@
                 "para_index": 125,
                 "text": "A. thăng hoa.B. nóng chảyC. ngưng tụ.D. đông đặc.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 126,
                 "text": "B. Chọn A",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 127,
                 "text": "C. TPVL  1.1         CĐTD  Biết",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 128,
                 "text": "D. (c)(c)(a)(a)(b)(b)(d)(d)Câu 2. Biển báo nào không phải là biển báo nhận diện nguồn phóng xạ?",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId7",
@@ -2963,77 +2963,77 @@
                 "para_index": 129,
                 "text": "E. (c)",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 130,
                 "text": "F. (c)",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 131,
                 "text": "G. (a)",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 132,
                 "text": "H. (a)",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 133,
                 "text": "I. (b)",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 134,
                 "text": "J. (b)",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 135,
                 "text": "K. (d)",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 136,
                 "text": "L. (d)",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 141,
                 "text": "A. hình (b).B. hình (c).C. hình (d).D. hình (a).",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 142,
                 "text": "N. Chọn A",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 143,
                 "text": "O. TPVL  1.1         CĐTD  Biết",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -3043,7 +3043,7 @@
             "para_index": 144,
             "text": "Câu 3. Biểu thức nào sau đây là đúng khi biến đổi nhiệt độ từ thang Celsius sang thang Kelvin",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -3051,7 +3051,7 @@
                 "para_index": 145,
                 "text": "A.B.",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId15"
@@ -3115,7 +3115,7 @@
                 "para_index": 146,
                 "text": "C. D.",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId19"
@@ -3179,14 +3179,14 @@
                 "para_index": 147,
                 "text": "C. Chọn B",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 148,
                 "text": "D. TPVL  1.1         CĐTD  Biết",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -3196,7 +3196,7 @@
             "para_index": 149,
             "text": "Câu 4. Một ấm đun nước bằng nhôm có có khối lượng 400 g, chứa 3 lít nước được đun trên bếp. Khi nhận được nhiệt lượng 740 kJ thì ấm đạt đến nhiệt độ. Hỏi nhiệt độ ban đầu của ấm, biết cAl = 880 J/kg. K, .",
             "math": [],
-            "images": [
+            "media": [
                 {
                     "rIds": [
                         "rId23"
@@ -3261,7 +3261,7 @@
                 "para_index": 150,
                 "text": "A. 8,15 B. 8,15 KC. 22,7D. 22,7 K",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId27"
@@ -3297,14 +3297,14 @@
                 "para_index": 151,
                 "text": "B. Chọn C",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 152,
                 "text": "C. TPVL   3.1        CĐTD vận dụng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -3314,7 +3314,7 @@
             "para_index": 153,
             "text": "Câu 5. Trong quá trình chất khí nhận nhiệt và sinh công thì Q và A trong biểu thức phải có giá trị:",
             "math": [],
-            "images": [
+            "media": [
                 {
                     "rIds": [
                         "rId30"
@@ -3351,7 +3351,7 @@
                 "para_index": 154,
                 "text": "A.  và B. C.  Q > 0 và A < 0D.",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId32"
@@ -3471,14 +3471,14 @@
                 "para_index": 155,
                 "text": "B. Chọn C",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 156,
                 "text": "C. TPVL  2.1         CĐTD Hiểu",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -3488,7 +3488,7 @@
             "para_index": 157,
             "text": "Câu 6. Khi ấn pittông từ từ xuống để nén khí trong xilanh, thì thông số nào của khí trong xilanh thay đổi?",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -3496,28 +3496,28 @@
                 "para_index": 158,
                 "text": "A. Nhiệt độ khí giảmB. Áp suất khí tăng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 159,
                 "text": "C. Áp suất khí giảmD. Khối lượng khí tăng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 160,
                 "text": "C. Chọn B",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 161,
                 "text": "D. TPVL  2.1         CĐTD Hiểu",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -3527,7 +3527,7 @@
             "para_index": 162,
             "text": "Câu 7. Phát biểu nào sau đây là của định luật Charles ?",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -3535,42 +3535,42 @@
                 "para_index": 163,
                 "text": "A. Ở áp suất không đổi, thể tích của một khối lượng khí xác định tỉ lệ nghịch với nhiệt độ tuyệt đối của nó.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 164,
                 "text": "B. Ở áp suất không đổi, thể tích của một khối lượng khí xác định tỉ lệ thuận với nhiệt độ tuyệt đối của nó.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 165,
                 "text": "C. Ở áp suất không đổi, thể tích của một khối lượng khí xác định tăng khi nhiệt độ tuyệt đối của nó giảm.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 166,
                 "text": "D. Ở áp suất không đổi, thể tích của một khối lượng khí xác định giảm với nhiệt độ tuyệt đối của nó tăng.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 167,
                 "text": "E. Chọn B",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 168,
                 "text": "F. TPVL  1.1         CĐTD biết",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -3580,7 +3580,7 @@
             "para_index": 169,
             "text": "Câu 8. Cho biết khối lượng riêng của không khí ở điều kiện chuẩn (nhiệt độ 273 K, áp suất ) là 1,29 . Trong một căn phòng có thể tích  khi ta tăng nhiệt độ của phòng từ 280 K ở áp suất  đến nhiệt độ 300 K với áp suất  thì khối lượng khí thoát ra khỏi phòng là bao nhiêu ?",
             "math": [],
-            "images": [
+            "media": [
                 {
                     "rIds": [
                         "rId40"
@@ -3729,21 +3729,21 @@
                 "para_index": 170,
                 "text": "A. 0,36 kg.B. 0,29 kg.C. 0,4 kg.D. 0,25 kg.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 171,
                 "text": "B. Chọn D",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 172,
                 "text": "C. TPVL  2.1         CĐTD Hiểu",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -3753,7 +3753,7 @@
             "para_index": 173,
             "text": "Câu 9. Sóng điện từ là quá trình lan truyền của điện từ trường biến thiên trong không gian. Khi nói về quan hệ giữa điện trường và từ trường của điện từ trường trên thì kết luận nào sau đây là đúng?",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -3761,42 +3761,42 @@
                 "para_index": 174,
                 "text": "A. Véctơ cường độ điện trường và cảm ứng từ cùng phương và cùng độ lớn.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 175,
                 "text": "B. Tại mỗi điểm của không gian, điện trường và từ trường luôn luôn dao động ngược pha.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 176,
                 "text": "C. Tại mỗi điểm của không gian, điện trường và từ trường luôn luôn dao động lệch pha nhau π/2.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 177,
                 "text": "D. Điện trường và từ trường biến thiên theo thời gian với cùng chu kì.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 178,
                 "text": "E. Chọn D",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 179,
                 "text": "F. TPVL   2.1        CĐTD Hiểu",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -3806,7 +3806,7 @@
             "para_index": 180,
             "text": "Câu 10. Một khung dây dẫn phẳng quay đều với tốc độ góc  quanh một trục cố định nằm trong mặt phẳng khung dây, trong một từ trường đều có vecto cảm ứng từ vuông góc với trục quay của khung. Suất điện động cảm ứng trong khung có biểu thức: (V). Tại thời diểm , vecto pháp tuyến của mặt phẳng khung dây hợp với vecto cảm ứng từ một góc",
             "math": [],
-            "images": [
+            "media": [
                 {
                     "rIds": [
                         "rId50"
@@ -3899,7 +3899,7 @@
                 "para_index": 181,
                 "text": "A. B. C. D.",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId56"
@@ -4019,14 +4019,14 @@
                 "para_index": 182,
                 "text": "B. Chọn B",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 183,
                 "text": "C. TPVL     2.2      CĐTD Vận dụng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -4036,7 +4036,7 @@
             "para_index": 184,
             "text": "Câu 11. Một máy biến áp có cuộn sơ cấp gồm 3300 vòng dây. Mắc cuộn sơ cấp vào mạng điện xoay chiều có hiệu điện thế hiệu dụng 220 V thì ở hai đầu cuộn thứ cấp để hở có một hiệu điện thế hiệu dụng 12 V. Bỏ qua hao phí của máy biến áp. Số vòng dây của cuộn thứ cấp bằng",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -4044,21 +4044,21 @@
                 "para_index": 185,
                 "text": "A. 360 vòng.B. 180 vòng.C. 120 vòng.D. 90 vòng.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 186,
                 "text": "B. Chọn B",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 187,
                 "text": "C. TPVL   3.1        CĐTD Vận dụng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -4068,7 +4068,7 @@
             "para_index": 188,
             "text": "Câu 12. Trong hình vẽ đoạn dòng điện MN đặt trong mặt phẳng chứa các đường sức từ của một từ trường đều ở các vị trí khác nhau. Độ lớn lực từ tác dụng lên đoạn dòng điện MN trong hình nào bé nhất?",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -4076,7 +4076,7 @@
                 "para_index": 189,
                 "text": "A. ",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId64"
@@ -4110,21 +4110,21 @@
                 "para_index": 190,
                 "text": "A. Hình 4.B. Hình 3.C. Hình 2.D. Hình 1.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 191,
                 "text": "C. Chọn D",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 192,
                 "text": "D. TPVL       2.1    CĐTD Hiểu",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -4134,7 +4134,7 @@
             "para_index": 193,
             "text": "Câu 13. Tính chất cơ bản của từ trường là gây ra",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -4142,42 +4142,42 @@
                 "para_index": 194,
                 "text": "A. Sự biến đổi về tính chất điện của môi trường xung quanh.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 195,
                 "text": "B. Lực điện trường tác dụng lên các dòng điện và nam châm đặt trong nó.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 196,
                 "text": "C. Lực hấp dẫn lên các vật đặt trong nó.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 197,
                 "text": "D. Lực từ tác dụng lên nam châm hoặc lên dòng điện đặt trong nó.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 198,
                 "text": "E. Chọn D",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 199,
                 "text": "F. TPVL   1.1        CĐTD Biết",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -4187,7 +4187,7 @@
             "para_index": 200,
             "text": "Câu 14. Tia nào sau đây có cùng bản chất với tia tử ngoại?",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -4208,21 +4208,21 @@
                         "omml": "<m:oMath xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx2=\"http://schemas.microsoft.com/office/drawing/2015/10/21/chartex\" xmlns:cx3=\"http://schemas.microsoft.com/office/drawing/2016/5/9/chartex\" xmlns:cx4=\"http://schemas.microsoft.com/office/drawing/2016/5/10/chartex\" xmlns:cx5=\"http://schemas.microsoft.com/office/drawing/2016/5/11/chartex\" xmlns:cx6=\"http://schemas.microsoft.com/office/drawing/2016/5/12/chartex\" xmlns:cx7=\"http://schemas.microsoft.com/office/drawing/2016/5/13/chartex\" xmlns:cx8=\"http://schemas.microsoft.com/office/drawing/2016/5/14/chartex\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:aink=\"http://schemas.microsoft.com/office/drawing/2016/ink\" xmlns:am3d=\"http://schemas.microsoft.com/office/drawing/2017/model3d\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:oel=\"http://schemas.microsoft.com/office/2019/extlst\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:w16cex=\"http://schemas.microsoft.com/office/word/2018/wordml/cex\" xmlns:w16cid=\"http://schemas.microsoft.com/office/word/2016/wordml/cid\" xmlns:w16=\"http://schemas.microsoft.com/office/word/2018/wordml\" xmlns:w16du=\"http://schemas.microsoft.com/office/word/2023/wordml/word16du\" xmlns:w16sdtdh=\"http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash\" xmlns:w16se=\"http://schemas.microsoft.com/office/word/2015/wordml/symex\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><m:sSup><m:sSupPr><m:ctrlPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"MS Gothic\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:i/><w:spacing w:val=\"3\"/><w:sz w:val=\"26\"/><w:szCs w:val=\"26\"/><w:shd w:val=\"clear\" w:color=\"auto\" w:fill=\"FFFFFF\"/></w:rPr></m:ctrlPr></m:sSupPr><m:e><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"MS Gothic\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:spacing w:val=\"3\"/><w:sz w:val=\"26\"/><w:szCs w:val=\"26\"/><w:shd w:val=\"clear\" w:color=\"auto\" w:fill=\"FFFFFF\"/></w:rPr><m:t>β</m:t></m:r></m:e><m:sup><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"MS Gothic\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:spacing w:val=\"3\"/><w:sz w:val=\"26\"/><w:szCs w:val=\"26\"/><w:shd w:val=\"clear\" w:color=\"auto\" w:fill=\"FFFFFF\"/><w:lang w:val=\"pt-BR\"/></w:rPr><m:t>-</m:t></m:r></m:sup></m:sSup></m:oMath>"
                     }
                 ],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 202,
                 "text": "B. Chọn A",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 203,
                 "text": "C. TPVL  1.2     CĐTD Hiểu",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -4232,7 +4232,7 @@
             "para_index": 204,
             "text": "Câu 15. So với hạt nhân hạt nhân thì hạt nhân , có nhiều hơn",
             "math": [],
-            "images": [
+            "media": [
                 {
                     "rIds": [
                         "rId65"
@@ -4325,28 +4325,28 @@
                 "para_index": 205,
                 "text": "A. 44 neutron và 21 proton.B. 23 neutron và 21 proton.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 206,
                 "text": "C. 44 neutron và 23 proton.D. 23 neutron và 23 proton.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 207,
                 "text": "C. Chọn B",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 208,
                 "text": "D. TPVL   2.2        CĐTD Hiểu",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -4356,7 +4356,7 @@
             "para_index": 209,
             "text": "Câu 16. Năng lượng liên kết riêng của hạt nhân có giá trị",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -4364,28 +4364,28 @@
                 "para_index": 210,
                 "text": "A. lớn nhất đối với các hạt nhân nhẹ.B. lớn nhất đối với các hạt nhân nặng.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 211,
                 "text": "C. lớn nhất đối với các hạt nhân trung bình.D. như nhau với mọi hạt nhân.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 212,
                 "text": "C. Chọn C",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 213,
                 "text": "D. TPVL   1.1        CĐTD Biết",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -4395,7 +4395,7 @@
             "para_index": 214,
             "text": "Câu 17. Chiếu 3 chùm tia thu được từ quá trình phóng xạ hạt nhân lần lượt qua tấm giấy, nhôm và chì như Hình . Các tia 1, tia 2, tia 3 theo thứ tự lần lượt là:",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -4403,7 +4403,7 @@
                 "para_index": 215,
                 "text": "A. ",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId71"
@@ -4437,7 +4437,7 @@
                 "para_index": 216,
                 "text": "A. tia , tia , tia .B. tia , tia , tia .",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId72"
@@ -4613,7 +4613,7 @@
                 "para_index": 217,
                 "text": "C. tia , tia , tia .D. tia , tia , tia .",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId84"
@@ -4789,14 +4789,14 @@
                 "para_index": 218,
                 "text": "D. Chọn B",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 219,
                 "text": "E. TPVL  2.1         CĐTD Hiểu",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -4806,7 +4806,7 @@
             "para_index": 220,
             "text": "Câu 18. Một ống dây hình trụ dài gồm 1000 vòng dây, diện tích mỗi vòng dây . Ống dây có điện trở , hai đầu nối đoản mạch và được đặt trong từ trường đều có vectơ cảm ứng từ song song với trục của ống dây và có độ lớn tăng đều  Công suất tỏa nhiệt của ống dây là",
             "math": [],
-            "images": [
+            "media": [
                 {
                     "rIds": [
                         "rId96"
@@ -4899,7 +4899,7 @@
                 "para_index": 221,
                 "text": "A.  B.  C.  D.",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId102"
@@ -5019,14 +5019,14 @@
                 "para_index": 222,
                 "text": "B. Chọn D",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 223,
                 "text": "C. TPVL   3.2        CĐTD vận dụng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -5036,7 +5036,7 @@
             "para_index": 225,
             "text": "Câu 1. Một trong những bệnh nghề nghiệp của thợ lặn có tỉ lệ gây tử vong và mất sức lao động cao là bệnh giảm áp. Nếu một thợ lặn từ độ sâu 25 m nổi lên mặt nước quá nhanh, Nitơ không vận chuyển kịp đến phổi giải phóng ra ngoài sẽ tích lại trong cơ thể hình thành các bọt khí gây nguy hiểm. Trong các khẳng định sau đây, câu nào đúng, sai. Giả sử sự chênh lệch nhiệt độ là không đáng kể. Cho biết khối lượng riêng của nước là",
             "math": [],
-            "images": [
+            "media": [
                 {
                     "rIds": [
                         "rId110"
@@ -5099,14 +5099,14 @@
                 "para_index": 226,
                 "text": "A. a) Khi nổi lên mặt nước đột ngột và quá nhanh, áp suất giảm đột ngột làm các bọt khí Nitơ nở ra, to dần gây tắc mạch chèn ép các tế bào thần kinh gây liệt, tổn thương các cơ quan…",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 228,
                 "text": "B. b) Áp suất người thợ lặn phải chịu khi ở độ sâu 25m là",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId113"
@@ -5142,7 +5142,7 @@
                 "para_index": 230,
                 "text": "C. c) Khi nổi lên mặt nước áp suất tại mặt nước khi đó bằng áp suất khí quyển",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId115"
@@ -5178,7 +5178,7 @@
                 "para_index": 232,
                 "text": "D. d) Khi ở độ sâu 25 m thể tích của bọt khí Nitơ chiếm , khi lên đến mặt nước thể tích của bọt khí này là",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId117"
@@ -5242,28 +5242,28 @@
                 "para_index": 235,
                 "text": "E. Đáp số: Đ-S-Đ-Đ",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 236,
                 "text": "F. Giải",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 237,
                 "text": "G. Đúng.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 238,
                 "text": "H. ",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId223"
@@ -5299,14 +5299,14 @@
                 "para_index": 239,
                 "text": "I. Đúng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 240,
                 "text": "J. ",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId225"
@@ -5345,7 +5345,7 @@
             "para_index": 241,
             "text": "Câu 2. Quan sát mô hình loa điện động được mô tả như hình",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -5353,7 +5353,7 @@
                 "para_index": 242,
                 "text": "A. ",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId121"
@@ -5413,63 +5413,63 @@
                 "para_index": 243,
                 "text": "B. a) Khi cho dòng điện không đổi vào hai điểm nối tín hiệu thì loa chỉ phát ra âm với tần số không đổi",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 244,
                 "text": "C. b) Loa hoạt động dựa trên hiện tượng cảm ứng điện từ.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 245,
                 "text": "D. c) Khi có dòng điện chạy qua cuộn dây thì nam châm vĩnh cửu sẽ dao động làm cho màng loa dao động với tần số âm.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 246,
                 "text": "E. d) Nếu nối hai điểm nối tín hiệu vào loa với điện áp biểu diễn như Hình 18.5 thì tần số âm loa phát ra là 13333 Hz.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 247,
                 "text": "F. Giải:",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 248,
                 "text": "G. a) Sai. Khi cho dòng điện không đổi vào hai điểm nối tín hiệu thì loa không kêu, do lực tác dụng lên cuộn dây là lực không đổi nên không làm cho màng loa rung được.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 249,
                 "text": "H. b) Sai. Loa điện hoạt động dựa trên tác dụng từ của nam châm lên ống dây có dòng điện chạy qua.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 250,
                 "text": "I. c) Sai. Khi có dòng điện âm chạy qua cuộn dây, cuộn dây sẽ dao động. Do cuộn dây được nối với màng loa nên các dao động này được truyền ra không khí, tác động vào người nghe.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 251,
                 "text": "J. d) Đúng.",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId227"
@@ -5508,7 +5508,7 @@
             "para_index": 252,
             "text": "Câu 3. Một khối khí đựng trong xilanh có pít-tống. Đốt nóng xilanh trong thời gian đủ dài (trong quá trình đốt pít-tông không dịch chuyển).",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -5516,35 +5516,35 @@
                 "para_index": 253,
                 "text": "A. a.Nhiệt độ khối khí tăng lên.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 254,
                 "text": "B. b. Nội năng của khối khí giảm.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 255,
                 "text": "C. c. Động năng trung bình của phân tử khí tăng.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 256,
                 "text": "D. d. Áp suất khối khí không đổi.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 257,
                 "text": "E. Đáp án a) Đúng; b) Sai; c) Đúng; d) Sai.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -5554,7 +5554,7 @@
             "para_index": 258,
             "text": "Câu 4. Uranium  có chu kì bán rã là  năm. Khi phóng xạ  Uranium biến thành Thorium  Ban đầu có  Uranium.",
             "math": [],
-            "images": [
+            "media": [
                 {
                     "rIds": [
                         "rId123"
@@ -5703,7 +5703,7 @@
                 "para_index": 259,
                 "text": "A. a. Hạt nhân Thorium  bền hơn hạt nhân Uranium",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId133"
@@ -5767,7 +5767,7 @@
                 "para_index": 260,
                 "text": "B. b. Khối lượng Uranium còn lại sau  năm là",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId137"
@@ -5831,7 +5831,7 @@
                 "para_index": 261,
                 "text": "C. c. Số hạt nhân Uranium còn lại sau  năm là 3,7265.1021 hạt nhân.",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId141"
@@ -5867,7 +5867,7 @@
                 "para_index": 262,
                 "text": "D. d. Tỉ số giữa số hạt nhân Uranium còn lại và số hạt nhân Thorium tạo thành sau năm là",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId143"
@@ -5931,42 +5931,42 @@
                 "para_index": 263,
                 "text": "E. Hướng dẫn giải",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 264,
                 "text": "F. a. Phát biểu này đúng.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 265,
                 "text": "G. b. Phát biểu này đúng.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 266,
                 "text": "H. c. Phát biểu này sai.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 267,
                 "text": "I. Số hạt nhân Uranium ban đầu:",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 268,
                 "text": "J. hạt.",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId241"
@@ -6002,7 +6002,7 @@
                 "para_index": 269,
                 "text": "K. Số hạt nhân Uranium còn lại sau  năm:",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId243"
@@ -6038,7 +6038,7 @@
                 "para_index": 270,
                 "text": "L. hạt.",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId245"
@@ -6074,21 +6074,21 @@
                 "para_index": 271,
                 "text": "M. d. Phát biểu này đúng.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 272,
                 "text": "N. Số hạt nhân Thorium có được là do Uranium đã phân rã, do đó",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 273,
                 "text": "O. ",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId247"
@@ -6124,7 +6124,7 @@
                 "para_index": 274,
                 "text": "P. Suy ra",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId249"
@@ -6170,7 +6170,7 @@
                     "omml": "<m:oMath xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx2=\"http://schemas.microsoft.com/office/drawing/2015/10/21/chartex\" xmlns:cx3=\"http://schemas.microsoft.com/office/drawing/2016/5/9/chartex\" xmlns:cx4=\"http://schemas.microsoft.com/office/drawing/2016/5/10/chartex\" xmlns:cx5=\"http://schemas.microsoft.com/office/drawing/2016/5/11/chartex\" xmlns:cx6=\"http://schemas.microsoft.com/office/drawing/2016/5/12/chartex\" xmlns:cx7=\"http://schemas.microsoft.com/office/drawing/2016/5/13/chartex\" xmlns:cx8=\"http://schemas.microsoft.com/office/drawing/2016/5/14/chartex\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:aink=\"http://schemas.microsoft.com/office/drawing/2016/ink\" xmlns:am3d=\"http://schemas.microsoft.com/office/drawing/2017/model3d\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:oel=\"http://schemas.microsoft.com/office/2019/extlst\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:w16cex=\"http://schemas.microsoft.com/office/word/2018/wordml/cex\" xmlns:w16cid=\"http://schemas.microsoft.com/office/word/2016/wordml/cid\" xmlns:w16=\"http://schemas.microsoft.com/office/word/2018/wordml\" xmlns:w16du=\"http://schemas.microsoft.com/office/word/2023/wordml/word16du\" xmlns:w16sdtdh=\"http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash\" xmlns:w16se=\"http://schemas.microsoft.com/office/word/2015/wordml/symex\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><m:sSub><m:sSubPr><m:ctrlPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:i/></w:rPr></m:ctrlPr></m:sSubPr><m:e><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/></w:rPr><m:t>N</m:t></m:r></m:e><m:sub><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/></w:rPr><m:t>A</m:t></m:r></m:sub></m:sSub><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/></w:rPr><m:t xml:space=\"preserve\"> = 6.02 x </m:t></m:r><m:sSup><m:sSupPr><m:ctrlPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:i/></w:rPr></m:ctrlPr></m:sSupPr><m:e><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/></w:rPr><m:t>10</m:t></m:r></m:e><m:sup><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/></w:rPr><m:t>23</m:t></m:r></m:sup></m:sSup><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/></w:rPr><m:t xml:space=\"preserve\"> mo</m:t></m:r><m:sSup><m:sSupPr><m:ctrlPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:i/></w:rPr></m:ctrlPr></m:sSupPr><m:e><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/></w:rPr><m:t>l</m:t></m:r></m:e><m:sup><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/></w:rPr><m:t>-1</m:t></m:r></m:sup></m:sSup></m:oMath>"
                 }
             ],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -6178,7 +6178,7 @@
                 "para_index": 277,
                 "text": "A. Hướng dẫn",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
@@ -6189,7 +6189,7 @@
                         "omml": "<m:oMath xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx2=\"http://schemas.microsoft.com/office/drawing/2015/10/21/chartex\" xmlns:cx3=\"http://schemas.microsoft.com/office/drawing/2016/5/9/chartex\" xmlns:cx4=\"http://schemas.microsoft.com/office/drawing/2016/5/10/chartex\" xmlns:cx5=\"http://schemas.microsoft.com/office/drawing/2016/5/11/chartex\" xmlns:cx6=\"http://schemas.microsoft.com/office/drawing/2016/5/12/chartex\" xmlns:cx7=\"http://schemas.microsoft.com/office/drawing/2016/5/13/chartex\" xmlns:cx8=\"http://schemas.microsoft.com/office/drawing/2016/5/14/chartex\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:aink=\"http://schemas.microsoft.com/office/drawing/2016/ink\" xmlns:am3d=\"http://schemas.microsoft.com/office/drawing/2017/model3d\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:oel=\"http://schemas.microsoft.com/office/2019/extlst\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:w16cex=\"http://schemas.microsoft.com/office/word/2018/wordml/cex\" xmlns:w16cid=\"http://schemas.microsoft.com/office/word/2016/wordml/cid\" xmlns:w16=\"http://schemas.microsoft.com/office/word/2018/wordml\" xmlns:w16du=\"http://schemas.microsoft.com/office/word/2023/wordml/word16du\" xmlns:w16sdtdh=\"http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash\" xmlns:w16se=\"http://schemas.microsoft.com/office/word/2015/wordml/symex\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><m:r><m:rPr><m:sty m:val=\"p\"/></m:rPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/></w:rPr><m:t>L=6.02×</m:t></m:r><m:sSup><m:sSupPr><m:ctrlPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:iCs/><w:color w:val=\"C00000\"/></w:rPr></m:ctrlPr></m:sSupPr><m:e><m:r><m:rPr><m:sty m:val=\"p\"/></m:rPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/></w:rPr><m:t>10</m:t></m:r></m:e><m:sup><m:r><m:rPr><m:sty m:val=\"p\"/></m:rPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/></w:rPr><m:t>23</m:t></m:r></m:sup></m:sSup><m:r><m:rPr><m:sty m:val=\"p\"/></m:rPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/></w:rPr><m:t>×2×</m:t></m:r><m:sSup><m:sSupPr><m:ctrlPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:iCs/><w:color w:val=\"C00000\"/></w:rPr></m:ctrlPr></m:sSupPr><m:e><m:r><m:rPr><m:sty m:val=\"p\"/></m:rPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/></w:rPr><m:t>10</m:t></m:r></m:e><m:sup><m:r><m:rPr><m:sty m:val=\"p\"/></m:rPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/></w:rPr><m:t>-10</m:t></m:r></m:sup></m:sSup><m:r><m:rPr><m:sty m:val=\"p\"/></m:rPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/></w:rPr><m:t> m=1.204×</m:t></m:r><m:sSup><m:sSupPr><m:ctrlPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:iCs/><w:color w:val=\"C00000\"/></w:rPr></m:ctrlPr></m:sSupPr><m:e><m:r><m:rPr><m:sty m:val=\"p\"/></m:rPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/></w:rPr><m:t>10</m:t></m:r></m:e><m:sup><m:r><m:rPr><m:sty m:val=\"p\"/></m:rPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/></w:rPr><m:t>14</m:t></m:r></m:sup></m:sSup><m:r><m:rPr><m:sty m:val=\"p\"/></m:rPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/></w:rPr><m:t>m</m:t></m:r></m:oMath>"
                     }
                 ],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
@@ -6203,7 +6203,7 @@
                         "omml": "<m:oMathPara xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx2=\"http://schemas.microsoft.com/office/drawing/2015/10/21/chartex\" xmlns:cx3=\"http://schemas.microsoft.com/office/drawing/2016/5/9/chartex\" xmlns:cx4=\"http://schemas.microsoft.com/office/drawing/2016/5/10/chartex\" xmlns:cx5=\"http://schemas.microsoft.com/office/drawing/2016/5/11/chartex\" xmlns:cx6=\"http://schemas.microsoft.com/office/drawing/2016/5/12/chartex\" xmlns:cx7=\"http://schemas.microsoft.com/office/drawing/2016/5/13/chartex\" xmlns:cx8=\"http://schemas.microsoft.com/office/drawing/2016/5/14/chartex\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:aink=\"http://schemas.microsoft.com/office/drawing/2016/ink\" xmlns:am3d=\"http://schemas.microsoft.com/office/drawing/2017/model3d\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:oel=\"http://schemas.microsoft.com/office/2019/extlst\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:w16cex=\"http://schemas.microsoft.com/office/word/2018/wordml/cex\" xmlns:w16cid=\"http://schemas.microsoft.com/office/word/2016/wordml/cid\" xmlns:w16=\"http://schemas.microsoft.com/office/word/2018/wordml\" xmlns:w16du=\"http://schemas.microsoft.com/office/word/2023/wordml/word16du\" xmlns:w16sdtdh=\"http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash\" xmlns:w16se=\"http://schemas.microsoft.com/office/word/2015/wordml/symex\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><m:oMath><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr><m:t>Chu vi xích đạo Trái Đất: C=2π×6400×</m:t></m:r><m:sSup><m:sSupPr><m:ctrlPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:i/><w:iCs/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr></m:ctrlPr></m:sSupPr><m:e><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr><m:t>10</m:t></m:r></m:e><m:sup><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr><m:t>3</m:t></m:r></m:sup></m:sSup><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr><m:t> m≈4×</m:t></m:r><m:sSup><m:sSupPr><m:ctrlPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:i/><w:iCs/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr></m:ctrlPr></m:sSupPr><m:e><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr><m:t>10</m:t></m:r></m:e><m:sup><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr><m:t>7</m:t></m:r></m:sup></m:sSup><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr><m:t> m</m:t></m:r></m:oMath></m:oMathPara>"
                     }
                 ],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
@@ -6217,7 +6217,7 @@
                         "omml": "<m:oMathPara xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:cx2=\"http://schemas.microsoft.com/office/drawing/2015/10/21/chartex\" xmlns:cx3=\"http://schemas.microsoft.com/office/drawing/2016/5/9/chartex\" xmlns:cx4=\"http://schemas.microsoft.com/office/drawing/2016/5/10/chartex\" xmlns:cx5=\"http://schemas.microsoft.com/office/drawing/2016/5/11/chartex\" xmlns:cx6=\"http://schemas.microsoft.com/office/drawing/2016/5/12/chartex\" xmlns:cx7=\"http://schemas.microsoft.com/office/drawing/2016/5/13/chartex\" xmlns:cx8=\"http://schemas.microsoft.com/office/drawing/2016/5/14/chartex\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:aink=\"http://schemas.microsoft.com/office/drawing/2016/ink\" xmlns:am3d=\"http://schemas.microsoft.com/office/drawing/2017/model3d\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:oel=\"http://schemas.microsoft.com/office/2019/extlst\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:w16cex=\"http://schemas.microsoft.com/office/word/2018/wordml/cex\" xmlns:w16cid=\"http://schemas.microsoft.com/office/word/2016/wordml/cid\" xmlns:w16=\"http://schemas.microsoft.com/office/word/2018/wordml\" xmlns:w16du=\"http://schemas.microsoft.com/office/word/2023/wordml/word16du\" xmlns:w16sdtdh=\"http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash\" xmlns:w16se=\"http://schemas.microsoft.com/office/word/2015/wordml/symex\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><m:oMath><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr><m:t>Số lần chuỗi bao quanh Trái Đất:</m:t></m:r><m:f><m:fPr><m:ctrlPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:i/><w:iCs/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr></m:ctrlPr></m:fPr><m:num><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr><m:t>L</m:t></m:r></m:num><m:den><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr><m:t>C</m:t></m:r></m:den></m:f><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr><m:t>=1.204×</m:t></m:r><m:f><m:fPr><m:ctrlPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:i/><w:iCs/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr></m:ctrlPr></m:fPr><m:num><m:sSup><m:sSupPr><m:ctrlPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:i/><w:iCs/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr></m:ctrlPr></m:sSupPr><m:e><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr><m:t>10</m:t></m:r></m:e><m:sup><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr><m:t>14</m:t></m:r></m:sup></m:sSup></m:num><m:den><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr><m:t>4×107</m:t></m:r></m:den></m:f><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr><m:t>≈2</m:t></m:r><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:eastAsia=\"vi-VN\"/></w:rPr><m:t>,994</m:t></m:r><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr><m:t>×</m:t></m:r><m:sSup><m:sSupPr><m:ctrlPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:i/><w:iCs/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr></m:ctrlPr></m:sSupPr><m:e><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr><m:t>10</m:t></m:r></m:e><m:sup><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:hAnsi=\"Cambria Math\"/><w:color w:val=\"C00000\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\" w:eastAsia=\"vi-VN\"/></w:rPr><m:t>6</m:t></m:r></m:sup></m:sSup></m:oMath></m:oMathPara>"
                     }
                 ],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -6227,7 +6227,7 @@
             "para_index": 281,
             "text": "Câu 2. Một thợ hàn dùng bình có thể tích 0,075m3  đổ đầy oxy-gen (khối lượng mol 32 g/mol) ở áp suất đo được là 4,01.105 Pa và nhiệt độ . Bình chứa có 1 kẽ hở nhỏ, theo thời gian một phần oxy sẽ rò rỉ ra ngoài. Vào một ngày khi nhiệt độ là , áp suất đo của oxy trong bình là 2,81.105Pa . Khối lượng oxy thoát ra ngoài là bao nhiêu gam",
             "math": [],
-            "images": [
+            "media": [
                 {
                     "rIds": [
                         "rId147"
@@ -6292,14 +6292,14 @@
                 "para_index": 282,
                 "text": "A. Giải",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 283,
                 "text": "B. ",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId253"
@@ -6338,7 +6338,7 @@
             "para_index": 286,
             "text": "Câu 4.  Thời gian để  chuyển động được một vòng là . Tìm (viết kết quả đến hai chữ số sau dấu phẩy thập phân).",
             "math": [],
-            "images": [
+            "media": [
                 {
                     "rIds": [
                         "rId161"
@@ -6431,7 +6431,7 @@
                 "para_index": 287,
                 "text": "A. Đáp án",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -6441,7 +6441,7 @@
             "para_index": 291,
             "text": "Câu 5. Năng lượng phân hạch cần để chuyển hóa thành điện năng là  x.1017 J. Giá trị của x là bao nhiêu? (Kết quả làm tròn đến 3 chữ số có nghĩa).",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -6449,14 +6449,14 @@
                 "para_index": 292,
                 "text": "A. Hướng dẫn giải",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 293,
                 "text": "B. A = (182.107.365.3600).0,3 1,91.1017 J",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId269"
@@ -6495,7 +6495,7 @@
             "para_index": 294,
             "text": "Câu 6. Khối lượng hạt được tiêu thụ là bao nhiêu kg? Biết NA = 6,02.1023 .(Kết quả làm tròn đến 4 chữ số có nghĩa).",
             "math": [],
-            "images": [
+            "media": [
                 {
                     "rIds": [
                         "rId167"
@@ -6532,14 +6532,14 @@
                 "para_index": 295,
                 "text": "A. Hướng dẫn giải",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 296,
                 "text": "B. Số hạt U cần cung cấp là (1,91.1017)/(200.1,6.10-13)5,97.1027 hạt",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId269"
@@ -6575,7 +6575,7 @@
                 "para_index": 297,
                 "text": "C. Khối lượng được tiêu thụ là (5,97.1027.235)/(6,02.1023)2330 kg",
                 "math": [],
-                "images": [
+                "media": [
                     {
                         "rIds": [
                             "rId167"
@@ -6639,14 +6639,14 @@
                 "para_index": 300,
                 "text": "D. BẢNG PHÂN TÍCH CÁC CÂU HỎI TRONG ĐỀ ĐI KÈM VỚI BA THÀNH PHẦN NĂNG LỰC:",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 301,
                 "text": "E. NHẬN THỨC VẬT LÍ, TÌM HIỂU THẾ GIỚI TỰ NHIÊN DƯỚI GÓC ĐỘ VẬT LÍ, VÀ VẬN DỤNG KIẾN THỨC, KĨ NĂNG ĐÃ HỌC. MỖI THÀNH PHẦN SẼ ĐƯỢC PHÂN LOẠI THEO MỨC ĐỘ HIỂU, BIẾT, VÀ VẬN DỤNG.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -6656,7 +6656,7 @@
             "para_index": 302,
             "text": "Câu hỏi",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -6664,28 +6664,28 @@
                 "para_index": 303,
                 "text": "A. Chủ đề",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 304,
                 "text": "B. Bài học theo SGK Vật lý 12 (2018)",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 305,
                 "text": "C. Thành phần năng lực",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 306,
                 "text": "D. Ghi chú",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -6695,7 +6695,7 @@
             "para_index": 307,
             "text": "Câu 1",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -6703,7 +6703,7 @@
                 "para_index": 308,
                 "text": "A. Chuyển thể",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -6713,7 +6713,7 @@
             "para_index": 309,
             "text": "Bài 4: Sự chuyển thể của vật chất",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -6721,14 +6721,14 @@
                 "para_index": 310,
                 "text": "A. Nhận thức vật lí – Hiểu biết",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 311,
                 "text": "B. Hiểu các quá trình chuyển thể cơ bản như nóng chảy, hóa hơi, đông đặc.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -6738,7 +6738,7 @@
             "para_index": 312,
             "text": "Câu 2",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -6746,7 +6746,7 @@
                 "para_index": 313,
                 "text": "A. Biểu tượng nguy hiểm",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -6756,7 +6756,7 @@
             "para_index": 314,
             "text": "Bài 20: Tia phóng xạ và an toàn",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -6764,14 +6764,14 @@
                 "para_index": 315,
                 "text": "A. Tìm hiểu thế giới tự nhiên – Nhận biết",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 316,
                 "text": "B. Nhận biết các biểu tượng cảnh báo nguy hiểm về chất phóng xạ trong tự nhiên và công nghiệp.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -6781,7 +6781,7 @@
             "para_index": 317,
             "text": "Câu 3",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -6789,7 +6789,7 @@
                 "para_index": 318,
                 "text": "A. Nhiệt học",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -6799,7 +6799,7 @@
             "para_index": 319,
             "text": "Bài 3: Phương trình trạng thái",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -6807,14 +6807,14 @@
                 "para_index": 320,
                 "text": "A. Nhận thức vật lí – Vận dụng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 321,
                 "text": "B. Vận dụng kiến thức về nhiệt độ, chuyển đổi đơn vị từ độ C sang độ K.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -6824,7 +6824,7 @@
             "para_index": 322,
             "text": "Câu 4",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -6832,7 +6832,7 @@
                 "para_index": 323,
                 "text": "A. Nhiệt lượng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -6842,7 +6842,7 @@
             "para_index": 324,
             "text": "Bài 3: Phương trình trạng thái",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -6850,14 +6850,14 @@
                 "para_index": 325,
                 "text": "A. Vận dụng kiến thức, kĩ năng đã học – Tính toán",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 326,
                 "text": "B. Tính toán nhiệt lượng tỏa ra từ quá trình làm lạnh, vận dụng kiến thức về nhiệt dung riêng và nhiệt độ.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -6867,7 +6867,7 @@
             "para_index": 327,
             "text": "Câu 5",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -6875,7 +6875,7 @@
                 "para_index": 328,
                 "text": "A. Nội năng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -6885,7 +6885,7 @@
             "para_index": 329,
             "text": "Bài 6: Định luật nhiệt động lực học",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -6893,14 +6893,14 @@
                 "para_index": 330,
                 "text": "A. Nhận thức vật lí – Hiểu biết",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 331,
                 "text": "B. Hiểu về sự thay đổi nội năng khi nhiệt độ vật giảm, áp dụng nguyên lý nhiệt động lực học.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -6910,7 +6910,7 @@
             "para_index": 332,
             "text": "Câu 6",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -6918,7 +6918,7 @@
                 "para_index": 333,
                 "text": "A. Khí lý tưởng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -6928,7 +6928,7 @@
             "para_index": 334,
             "text": "Bài 6: Định luật khí lý tưởng",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -6936,14 +6936,14 @@
                 "para_index": 335,
                 "text": "A. Vận dụng kiến thức, kĩ năng đã học – Tính toán",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 336,
                 "text": "B. Áp dụng định luật khí lý tưởng để giải bài toán về áp suất và thể tích.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -6953,7 +6953,7 @@
             "para_index": 337,
             "text": "Câu 7",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -6961,7 +6961,7 @@
                 "para_index": 338,
                 "text": "A. Định luật Charles",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -6971,7 +6971,7 @@
             "para_index": 339,
             "text": "Bài 7: Định luật Charles",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -6979,14 +6979,14 @@
                 "para_index": 340,
                 "text": "A. Nhận thức vật lí – Hiểu biết",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 341,
                 "text": "B. Hiểu rõ định luật Charles, mối quan hệ giữa thể tích và nhiệt độ trong khí lý tưởng.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -6996,7 +6996,7 @@
             "para_index": 342,
             "text": "Câu 8",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7004,7 +7004,7 @@
                 "para_index": 343,
                 "text": "A. Số mol khí thoát ra",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7014,7 +7014,7 @@
             "para_index": 344,
             "text": "Bài 7: Định luật Charles",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7022,14 +7022,14 @@
                 "para_index": 345,
                 "text": "A. Vận dụng kiến thức, kĩ năng đã học – Tính toán",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 346,
                 "text": "B. Tính phần trăm số mol khí thoát ra khi nhiệt độ thay đổi, vận dụng công thức định luật Charles.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7039,7 +7039,7 @@
             "para_index": 347,
             "text": "Câu 9",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7047,7 +7047,7 @@
                 "para_index": 348,
                 "text": "A. Sóng điện từ",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7057,7 +7057,7 @@
             "para_index": 349,
             "text": "Bài 17: Sóng điện từ",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7065,14 +7065,14 @@
                 "para_index": 350,
                 "text": "A. Tìm hiểu thế giới tự nhiên – Nhận biết",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 351,
                 "text": "B. Nhận biết và mô tả sóng điện từ, mối quan hệ giữa cường độ điện trường và cảm ứng từ.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7082,7 +7082,7 @@
             "para_index": 352,
             "text": "Câu 10",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7090,7 +7090,7 @@
                 "para_index": 353,
                 "text": "A. Dòng điện xoay chiều",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7100,7 +7100,7 @@
             "para_index": 354,
             "text": "Bài 18: Máy phát điện",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7108,14 +7108,14 @@
                 "para_index": 355,
                 "text": "A. Nhận thức vật lí – Vận dụng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 356,
                 "text": "B. Hiểu nguyên lý hoạt động của dòng điện xoay chiều trong khung dây quay đều.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7125,7 +7125,7 @@
             "para_index": 357,
             "text": "Câu 11",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7133,7 +7133,7 @@
                 "para_index": 358,
                 "text": "A. Suất điện động",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7143,7 +7143,7 @@
             "para_index": 359,
             "text": "Bài 18: Máy phát điện",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7151,14 +7151,14 @@
                 "para_index": 360,
                 "text": "A. Vận dụng kiến thức, kĩ năng đã học – Tính toán",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 361,
                 "text": "B. Tính toán suất điện động cực đại trong máy phát điện xoay chiều dựa trên nguyên lý hoạt động.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7168,7 +7168,7 @@
             "para_index": 362,
             "text": "Câu 12",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7176,7 +7176,7 @@
                 "para_index": 363,
                 "text": "A. Lực từ",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7186,7 +7186,7 @@
             "para_index": 364,
             "text": "Bài 16: Lực từ tác dụng lên dòng điện",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7194,14 +7194,14 @@
                 "para_index": 365,
                 "text": "A. Tìm hiểu thế giới tự nhiên – Hiểu biết",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 366,
                 "text": "B. Hiểu lực từ tác dụng lên dòng điện chạy trong các đoạn dây dẫn, dựa trên định luật Ampere.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7211,7 +7211,7 @@
             "para_index": 367,
             "text": "Câu 13",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7219,7 +7219,7 @@
                 "para_index": 368,
                 "text": "A. Từ trường",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7229,7 +7229,7 @@
             "para_index": 369,
             "text": "Bài 15: Từ trường",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7237,14 +7237,14 @@
                 "para_index": 370,
                 "text": "A. Tìm hiểu thế giới tự nhiên – Nhận biết",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 371,
                 "text": "B. Nhận biết các đặc điểm của từ trường, tương tác giữa từ trường và dòng điện.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7254,7 +7254,7 @@
             "para_index": 372,
             "text": "Câu 14",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7262,7 +7262,7 @@
                 "para_index": 373,
                 "text": "A. Sóng âm",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7272,7 +7272,7 @@
             "para_index": 374,
             "text": "Bài 19: Siêu âm và ứng dụng",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7280,14 +7280,14 @@
                 "para_index": 375,
                 "text": "A. Vận dụng kiến thức, kĩ năng đã học – Ứng dụng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 376,
                 "text": "B. Ứng dụng sóng siêu âm trong y học, hiểu cơ chế và tác dụng của siêu âm trong chuẩn đoán bệnh lý.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7297,7 +7297,7 @@
             "para_index": 377,
             "text": "Câu 15",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7305,7 +7305,7 @@
                 "para_index": 378,
                 "text": "A. Cấu trúc hạt nhân",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7315,7 +7315,7 @@
             "para_index": 379,
             "text": "Bài 24: Cấu trúc hạt nhân",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7323,14 +7323,14 @@
                 "para_index": 380,
                 "text": "A. Nhận thức vật lí – Hiểu biết",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 381,
                 "text": "B. Hiểu về số lượng hạt trong hạt nhân, phân biệt số proton, neutron và nucleon.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7340,7 +7340,7 @@
             "para_index": 382,
             "text": "Câu 16",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7348,7 +7348,7 @@
                 "para_index": 383,
                 "text": "A. Độ bền hạt nhân",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7358,7 +7358,7 @@
             "para_index": 384,
             "text": "Bài 25: Năng lượng liên kết hạt nhân",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7366,14 +7366,14 @@
                 "para_index": 385,
                 "text": "A. Tìm hiểu thế giới tự nhiên – Nhận biết",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 386,
                 "text": "B. Nhận biết về năng lượng liên kết và độ bền của hạt nhân, liên hệ với các phản ứng hạt nhân tự nhiên.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7383,7 +7383,7 @@
             "para_index": 387,
             "text": "Câu 17",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7391,7 +7391,7 @@
                 "para_index": 388,
                 "text": "A. Tia phóng xạ",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7401,7 +7401,7 @@
             "para_index": 389,
             "text": "Bài 21: Tính chất tia phóng xạ",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7409,14 +7409,14 @@
                 "para_index": 390,
                 "text": "A. Nhận thức vật lí – Hiểu biết",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 391,
                 "text": "B. Hiểu về tính chất và ứng dụng của tia phóng xạ trong tự nhiên, ảnh hưởng của chúng trong môi trường.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7426,7 +7426,7 @@
             "para_index": 392,
             "text": "Câu 18",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7434,7 +7434,7 @@
                 "para_index": 393,
                 "text": "A. Cảm ứng từ",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7444,7 +7444,7 @@
             "para_index": 394,
             "text": "Bài 23: Cảm ứng từ và từ trường",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7452,21 +7452,21 @@
                 "para_index": 395,
                 "text": "A. Vận dụng kiến thức, kĩ năng đã học – Tính toán",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 396,
                 "text": "B. Tính toán cường độ dòng điện cảm ứng trong cuộn dây dẫn dựa trên sự thay đổi của từ trường xung quanh.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 397,
                 "text": "C. Phân tích thành phần năng lực:",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7476,7 +7476,7 @@
             "para_index": 400,
             "text": "Vận dụng kiến thức, kĩ năng đã học: Đây là thành phần năng lực cao nhất, đòi hỏi học sinh không chỉ hiểu và biết mà còn phải có khả năng vận dụng những kiến thức đã học để giải quyết các bài toán thực tiễn, thực hành các tính toán phức tạp. Ví dụ: tính toán cường độ dòng điện xoay chiều, hoặc tính nhiệt lượng trong các quá trình nhiệt học.",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7484,14 +7484,14 @@
                 "para_index": 401,
                 "text": "A. Phân tích thành phần năng lực (Hiểu, biết, vận dụng)",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 402,
                 "text": "B. Phần 2: Dạng đúng/sai",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7501,7 +7501,7 @@
             "para_index": 403,
             "text": "Câu hỏi",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7509,28 +7509,28 @@
                 "para_index": 404,
                 "text": "A. Chủ đề",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 405,
                 "text": "B. Hiểu",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 406,
                 "text": "C. Biết",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 407,
                 "text": "D. Vận dụng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7540,7 +7540,7 @@
             "para_index": 408,
             "text": "Câu 1",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7548,28 +7548,28 @@
                 "para_index": 409,
                 "text": "A. Khí lý tưởng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 410,
                 "text": "B. Hiểu định luật Boyle",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 411,
                 "text": "C. Biết mối quan hệ giữa áp suất và thể tích",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 412,
                 "text": "D. Vận dụng định luật Boyle để xác định sự thay đổi áp suất hoặc thể tích trong hệ thống khí lý tưởng.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7579,7 +7579,7 @@
             "para_index": 413,
             "text": "Câu 2",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7587,28 +7587,28 @@
                 "para_index": 414,
                 "text": "A. Quang phổ khối",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 415,
                 "text": "B. Hiểu nguyên lý của quang phổ khối",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 416,
                 "text": "C. Biết cách sử dụng để xác định chất",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 417,
                 "text": "D. Xác định chính xác chất qua tỉ số giữa điện tích và khối lượng trong hệ thống phân tích quang phổ khối.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7618,7 +7618,7 @@
             "para_index": 418,
             "text": "Câu 3",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7626,28 +7626,28 @@
                 "para_index": 419,
                 "text": "A. Nội năng và nhiệt độ",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 420,
                 "text": "B. Hiểu mối liên hệ giữa nội năng và nhiệt độ",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 421,
                 "text": "C. Biết nội năng là gì, nhiệt độ ảnh hưởng như thế nào đến nội năng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 422,
                 "text": "D. Vận dụng công thức và kiến thức để giải thích sự thay đổi nội năng trong một quá trình nhiệt động lực học cụ thể.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7657,7 +7657,7 @@
             "para_index": 423,
             "text": "Câu 4",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7665,28 +7665,28 @@
                 "para_index": 424,
                 "text": "A. Phóng xạ trong y học",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 425,
                 "text": "B. Hiểu về chu kỳ bán rã và ứng dụng của phóng xạ",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 426,
                 "text": "C. Biết tính chất của chất phóng xạ và chu kỳ bán rã",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 427,
                 "text": "D. Vận dụng kiến thức về phóng xạ để tính toán lượng chất còn lại sau một khoảng thời gian trong một ứng dụng y học thực tế.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7696,7 +7696,7 @@
             "para_index": 429,
             "text": "Biết: Ở cấp độ này, học sinh cần nhớ và nhận diện các công thức, khái niệm vật lý đã học. Ví dụ, biết rõ định nghĩa về chu kỳ bán rã hoặc biết mối quan hệ giữa điện tích và khối lượng trong quang phổ khối.",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7704,7 +7704,7 @@
                 "para_index": 430,
                 "text": "A. Vận dụng: Phần đúng/sai còn yêu cầu học sinh vận dụng kiến thức để kiểm tra các phát biểu có đúng theo lý thuyết không. Họ phải biết cách ứng dụng định luật, công thức để giải thích hiện tượng hay kết quả của một quá trình vật lý.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7714,7 +7714,7 @@
             "para_index": 432,
             "text": "Câu hỏi",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7722,28 +7722,28 @@
                 "para_index": 433,
                 "text": "A. Chủ đề",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 434,
                 "text": "B. Hiểu",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 435,
                 "text": "C. Biết",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 436,
                 "text": "D. Vận dụng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7753,7 +7753,7 @@
             "para_index": 437,
             "text": "Câu 1",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7761,28 +7761,28 @@
                 "para_index": 438,
                 "text": "A. Phân tử khí trong phổi",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 439,
                 "text": "B. Hiểu định luật khí lý tưởng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 440,
                 "text": "C. Biết cách áp dụng công thức khí lý tưởng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 441,
                 "text": "D. Vận dụng công thức để tính số phân tử khí oxygen trong phổi.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7792,7 +7792,7 @@
             "para_index": 442,
             "text": "Câu 2",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7800,28 +7800,28 @@
                 "para_index": 443,
                 "text": "A. Dung tích phổi khi hít sâu",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 444,
                 "text": "B. Hiểu quá trình hô hấp và các yếu tố liên quan đến khí lý tưởng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 445,
                 "text": "C. Biết tính toán về áp suất, thể tích, nhiệt độ",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 446,
                 "text": "D. Vận dụng định luật khí lý tưởng để tính dung tích phổi khi hít thở sâu, điều chỉnh các thông số như áp suất và thể tích.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7831,7 +7831,7 @@
             "para_index": 447,
             "text": "Câu 3",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7839,28 +7839,28 @@
                 "para_index": 448,
                 "text": "A. Cường độ dòng điện cực đại",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 449,
                 "text": "B. Hiểu nguyên lý dòng điện xoay chiều",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 450,
                 "text": "C. Biết công thức tính cường độ dòng điện cực đại",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 451,
                 "text": "D. Tính toán cường độ dòng điện cực đại trong các tình huống cụ thể.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7870,7 +7870,7 @@
             "para_index": 452,
             "text": "Câu 4",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7878,28 +7878,28 @@
                 "para_index": 453,
                 "text": "A. Lực từ do từ trường Trái Đất",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 454,
                 "text": "B. Hiểu khái niệm từ trường và lực từ",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 455,
                 "text": "C. Biết công thức lực từ trong môi trường có từ trường",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 456,
                 "text": "D. Vận dụng kiến thức về lực từ để tính độ lớn cực đại của lực từ do từ trường Trái Đất.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7909,7 +7909,7 @@
             "para_index": 457,
             "text": "Câu 5",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7917,28 +7917,28 @@
                 "para_index": 458,
                 "text": "A. Phân hạch hạt nhân",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 459,
                 "text": "B. Hiểu phản ứng phân hạch hạt nhân",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 460,
                 "text": "C. Biết cách tính số nguyên tử phân hạch mỗi giây",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 461,
                 "text": "D. Tính số nguyên tử phân hạch mỗi giây trong một lò phản ứng hạt nhân, dựa trên dữ liệu thực tế.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7948,7 +7948,7 @@
             "para_index": 462,
             "text": "Câu 6",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7956,28 +7956,28 @@
                 "para_index": 463,
                 "text": "A. Năng lượng hạt nhân",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 464,
                 "text": "B. Hiểu cách thức hoạt động của lò phản ứng hạt nhân",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 465,
                 "text": "C. Biết công thức và các yếu tố liên quan đến năng lượng hạt nhân",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 466,
                 "text": "D. Vận dụng để tính toán khối lượng và thời gian sử dụng của nhiên liệu hạt nhân trong nhà máy điện.",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -7987,7 +7987,7 @@
             "para_index": 469,
             "text": "Vận dụng: Học sinh phải vận dụng các công thức và kiến thức đã học để giải các bài toán thực tế. Ví dụ, tính toán khối lượng nhiên liệu hạt nhân trong nhà máy điện hoặc số nguyên tử phân hạch trong một giây.",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -7995,7 +7995,7 @@
                 "para_index": 470,
                 "text": "A. Nhận xét tổng quan về thành phần năng lực",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
@@ -8005,7 +8005,7 @@
             "para_index": 473,
             "text": "Vận dụng kiến thức, kĩ năng đã học: Phần bài tập áp dụng đặc biệt nhấn mạnh yếu tố này, vì học sinh cần phải vận dụng công thức, kiến thức đã học vào các bài toán thực tế. Đây là cơ hội để học sinh phát triển khả năng giải quyết vấn đề và ứng dụng kiến thức vào các tình huống cụ thể.",
             "math": [],
-            "images": [],
+            "media": [],
             "label": "question"
         },
         "answers": [
@@ -8013,343 +8013,343 @@
                 "para_index": 475,
                 "text": "A. 4.MA TRẬN NỘI DUNG, NĂNG LỰC VÀ CẤP ĐỘ TƯ DUY CỦA ĐỀ THAM KHẢO",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 476,
                 "text": "B. MÔN: VẬT LÍ",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 477,
                 "text": "C. Chủ đề",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 478,
                 "text": "D. Năng lực vật lí",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 480,
                 "text": "E. Nhận thức vật lí",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 481,
                 "text": "F. Tìm hiểu thế giới tự nhiêndưới góc độ vật lí",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 482,
                 "text": "G. Vận dụng kiến thức,kĩ năng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 484,
                 "text": "H. Cấp độ tư duy",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 485,
                 "text": "I. Cấp độ tư duy",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 486,
                 "text": "J. Cấp độ tư duy",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 488,
                 "text": "K. Biết",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 489,
                 "text": "L. Hiểu",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 490,
                 "text": "M. Vận dụng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 491,
                 "text": "N. Biết",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 492,
                 "text": "O. Hiểu",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 493,
                 "text": "P. Vận dụng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 494,
                 "text": "Q. Vận dụng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 495,
                 "text": "R. Vật lí nhiệt",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 496,
                 "text": "S. 2",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 497,
                 "text": "T. 1",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 499,
                 "text": "U. 2",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 500,
                 "text": "V. 2",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 503,
                 "text": "W. 1",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 504,
                 "text": "X. Khí lí tưởng",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 505,
                 "text": "Y. 2",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 506,
                 "text": "Z. 1",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 508,
                 "text": "[. 2",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 510,
                 "text": "\\. 2",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 511,
                 "text": "]. 2",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 512,
                 "text": "^. Từ trường",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 513,
                 "text": "_. 3",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 514,
                 "text": "`. 5",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 515,
                 "text": "a. 1",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 519,
                 "text": "b. 1",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 520,
                 "text": "c. Vật lí hạt nhân",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 521,
                 "text": "d. 3",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 522,
                 "text": "e. 3",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 527,
                 "text": "f. 4",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 528,
                 "text": "g. Chuyên đề học tập",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 529,
                 "text": "h. 1",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 535,
                 "text": "i. 1",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 536,
                 "text": "j. Tổng số lệnh hỏi",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 537,
                 "text": "k. 12",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 538,
                 "text": "l. 10",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 539,
                 "text": "m. 1",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 540,
                 "text": "n. 4",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 541,
                 "text": "o. 2",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 542,
                 "text": "p. 2",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             },
             {
                 "para_index": 543,
                 "text": "q. 9",
                 "math": [],
-                "images": [],
+                "media": [],
                 "label": "answer"
             }
         ]
