@@ -1,6 +1,6 @@
 import pool, { query } from "../config/database";
-import { Bank } from "../model/bank.model";
-import { Question } from "../model/question.model";
+import { Bank } from "../models/bank.model";
+import { Question } from "../models/question.model";
 
 const BankService = {
     async getById(id: number): Promise<Question[] | null> {

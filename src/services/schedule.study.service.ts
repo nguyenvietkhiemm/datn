@@ -1,5 +1,5 @@
 import pool, { query } from "../config/database";
-import { StudySchedule } from "../model/schedule.study.model";
+import { StudySchedule } from "../models/schedule.study.model";
 
 const StudyScheduleService = {
     async getAll(): Promise<{ schedule: (StudySchedule & { subject_name: string })[] }> {

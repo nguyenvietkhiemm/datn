@@ -1,5 +1,5 @@
 import { query } from "../config/database";
-import { Flashcard } from "../model/flashcard.model";
+import { Flashcard } from "../models/flashcard.model";
 import pool from "../config/database";
 
 // Flashcard Service

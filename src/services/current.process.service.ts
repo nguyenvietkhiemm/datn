@@ -1,4 +1,4 @@
-import { CurrentProgress } from "../model/current.proces.model";
+import { CurrentProgress } from "../models/current.proces.model";
 import { query } from "../config/database"; 
 
 export class CurrentProgressService {

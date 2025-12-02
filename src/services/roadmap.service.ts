@@ -1,4 +1,4 @@
-import { RoadMap } from "../model/roadmap.model";
+import { RoadMap } from "../models/roadmap.model";
 import { query } from "../config/database";
 
 const RoadMapService = {

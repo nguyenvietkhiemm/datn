@@ -1,5 +1,5 @@
 import { query } from "../config/database";
-import { ExamQuestion } from "../model/exam.question.model";
+import { ExamQuestion } from "../models/exam.question.model";
 
 export const ExamQuestionService = {
     async add(selectedQuestions: { exam_id: number; question_id: number }[]) {
