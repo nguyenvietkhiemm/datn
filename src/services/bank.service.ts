@@ -65,9 +65,6 @@ const BankService = {
     },
 
     async list(page: number, searchValue: string, topicIds: number[]): Promise<({ banks: Bank[]; totalPages: number }) | []> {
-        const client = await pool.connect();
-        try {
-            await client.query("BEGIN");
 
             const limit = 12;
             const offset = (page - 1) * limit;
@@ -106,7 +103,7 @@ const BankService = {
                 LIMIT ${limit} OFFSET ${offset}
                 `;
 
-            const result = await client.query(queryText, params);
+            const result = await query(queryText, params);
 
             // Count total
             const countQuery = `
@@ -115,21 +112,11 @@ const BankService = {
                 ${whereClause}
                 `;
 
-            const countResult = await client.query(countQuery, params);
+            const countResult = await query(countQuery, params);
 
             const totalPages = Math.ceil(countResult.rows[0].total / limit);
 
-            await client.query("COMMIT");
-
             return { banks: result.rows, totalPages };
-
-        } catch (error) {
-            await client.query("ROLLBACK");
-            console.error("Lỗi khi lọc bài thi:", error);
-            return [];
-        } finally {
-            client.release();
-        }
     }
 };
 

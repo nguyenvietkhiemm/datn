@@ -33,5 +33,21 @@ export const UserGoalService = {
             [id, userId]
         );
         return true;
+    },
+
+    async markOverTime() {
+        try {
+
+            const row = await query(`
+                UPDATE user_goal
+                SET status = 'miss'
+                WHERE end_time < (NOW() + INTERVAL '7 hours')
+                  AND status != 'done'
+                  AND status != 'miss';
+            `);
+
+        } catch (err) {
+            console.error("Lỗi khi cập nhật lịch quá hạn:", err);
+        }
     }
 };
