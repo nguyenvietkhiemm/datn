@@ -413,13 +413,13 @@ flashcardRouter.delete("/remove/:id",
         FlashcardController.remove);
 
 flashcardRouter.get(
-  "/review/:id",
+  "/quiz/:id",
   Authentication.AuthenticateToken,
   FlashcardController.review
 );
 
 flashcardRouter.patch(
-  "/review/submit",
+  "/quiz/submit",
   Authentication.AuthenticateToken,
   FlashcardController.submit
 );

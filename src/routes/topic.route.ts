@@ -22,7 +22,6 @@ const topicRoute = Router();
  */
 topicRoute.get(
   '/',
-  Authentication.AuthenticateToken,
   TopicController.getAll
 );
 

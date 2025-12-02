@@ -65,7 +65,7 @@ export const FlashcardService = {
     return (result.rowCount ?? 0) > 0;
   },
 
-  async reviewFlashcard(id : number) : Promise<Flashcard[]>{
+  async reviewFlashcard(id : number) : Promise<Flashcard[] | []>{
     const result = await query(
       `
       SELECT * 
@@ -78,7 +78,7 @@ export const FlashcardService = {
       [id]
     )
 
-    return result.rows;
+    return result.rows || [];
   },
 
   async submitFlashcard(answerCorrect : number[], answerMiss : number[]) : Promise<void>{
