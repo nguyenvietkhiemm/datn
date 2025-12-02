@@ -62,8 +62,6 @@ export function saveCsvFile(filename: string, data: any[]) {
     fs.writeFileSync(filePath, csvContent, "utf-8");
 }
 
-
-
 export function getJsonFilesList(baseUrl: string): FileInfo[] {
     // const csvDir = path.join(__dirname, "../../data/uploads/csv");
     const csvDir = path.join(__dirname, "../../data/outputs");
