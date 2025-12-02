@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import safeExecute, { DefaultResponse } from "../utils/safe.execute";
 import { ScheduleExamService } from "../services/schedule.exam.service";
-import { ScheduleExam } from "../model/schedule.exam.model";
+import { ScheduleExam } from "../models/schedule.exam.model";
 
 export const  ScheduleExamController = {
     // ✅ Lấy danh sách tất cả lịch thi

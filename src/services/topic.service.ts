@@ -1,4 +1,4 @@
-import { Topic } from "../model/topic.model";
+import { Topic } from "../models/topic.model";
 import {query} from "../config/database"
 
 const TopicService = {

@@ -1,5 +1,5 @@
 import { query } from '../config/database';
-import { Role } from '../model/role.model';
+import { Role } from '../models/role.model';
 
 const RoleService = {
   async getAll(): Promise<Role[]> {
