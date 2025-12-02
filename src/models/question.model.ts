@@ -7,6 +7,6 @@ export interface Question {
   available: boolean;
   answers?: Answer[];
   source : string;
-  type_question : number;
-  point_question : number
+  type_question?: number;
+  point_question? : number
 }
