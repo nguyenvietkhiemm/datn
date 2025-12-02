@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import safeExecute from "../utils/safe.execute";
-import RoadmapService from "../services/roadmap.sercvice"
+import RoadmapService from "../services/roadmap.service"
 import { DefaultResponse } from "../utils/safe.execute"
 
 const RoadmapController = {
