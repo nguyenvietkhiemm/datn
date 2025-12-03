@@ -1,33 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import styles from "./ExamDetail.module.css"
-import { Button } from "@/component/ui/button/Button";
+import type { Exam, Question } from "@/domain/admin/exams/type";
 import Cookies from "js-cookie";
 import { useParams } from "next/navigation";
-
-type Answer = {
-    answer_id: number;
-    answer_content: string;
-    is_correct: boolean;
-};
-
-type Question = {
-    question_id: number;
-    question_name: string;
-    question_content: string;
-    answers: Answer[];
-};
-
-type Exam = {
-    exam_id: number;
-    exam_name: string;
-    created_at: string;
-    time_limit: number;
-    topic_id: number;
-    exam_schedule_id: number;
-    available: boolean;
-    title: string
-};
 
 export default function ExamDetail() {
     const [questions, setQuestions] = useState<Question[]>([]);

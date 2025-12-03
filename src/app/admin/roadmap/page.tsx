@@ -3,22 +3,7 @@ import { useEffect, useState } from "react";
 import styles from "./Roadmap.module.css";
 import Cookies from "js-cookie";
 import { Button } from "@/component/ui/button/Button";
-
-interface RoadmapStep {
-    roadmap_step_id: number;
-    title: string;
-    description: string;
-    topic_id: number;
-    topic_name: string;
-}
-
-interface Topic {
-    topic_id: number;
-    title: string;
-    description?: string;
-    subject_id?: number | null;
-    created_at: string;
-}
+import { RoadmapStep, Topic } from "@/domain/admin/roadmap/type";
 
 export default function RoadmapEditor() {
     const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;

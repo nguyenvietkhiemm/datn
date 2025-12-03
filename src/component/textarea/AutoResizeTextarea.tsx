@@ -8,7 +8,7 @@ interface AutoResizeTextareaProps {
     onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     autoFocus?: boolean;
     setEditCell?: (cell: { row: number; col: number } | null) => void;
-    onBlur?: () => void; // 🟢 THÊM DÒNG NÀY
+    onBlur?: () => void; 
 }
 
 export default function AutoResizeTextarea({
@@ -16,7 +16,7 @@ export default function AutoResizeTextarea({
     onChange,
     autoFocus = false,
     setEditCell,
-    onBlur, // 🟢 THÊM DÒNG NÀY
+    onBlur, 
 }: AutoResizeTextareaProps) {
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 

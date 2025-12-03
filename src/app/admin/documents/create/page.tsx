@@ -4,17 +4,7 @@ import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import styles from "./DocumentCreate.module.css";
 import { useRouter } from "next/navigation";
-
-type Topic = {
-  topic_id: number;
-  title: string;
-  subject_id?: number;
-};
-
-type Subject = {
-  subject_id: number;
-  subject_name: string;
-};
+import { Topic, Subject } from "@/domain/admin/documents/types";
 
 export default function DocumentCreate() {
   const [title, setTitle] = useState("");

@@ -4,29 +4,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Cookies from "js-cookie";
 import styles from "./Exam.Schedule.Detail.module.css";
-import Filter from "@/component/filter/Filter/Filter";
 import { useRouter } from "next/navigation";
-import Search from "@/component/search/Search";
-
-type ExamSchedule = {
-  exam_schedule_id: number;
-  start_time: string;
-  end_time: string;
-  created_at: string;
-  updated_at: string;
-  exams?: Exam[];
-};
-
-type Exam = {
-  exam_id: number;
-  exam_name: string;
-  created_at: string;
-  time_limit: number;
-  topic_id: number;
-  exam_schedule_id?: number | null;
-  available: boolean;
-  title : string
-};
+import { ExamSchedule, Exam } from "@/domain/admin/schedules/type";
 
 export default function ExamScheduleDetail() {
   const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;

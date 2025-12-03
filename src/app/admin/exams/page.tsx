@@ -7,22 +7,12 @@ import FilterExam from "@/component/filter/Filter/Filter";
 import { useRouter } from "next/navigation";
 import Search from "@/component/search/Search";
 import Pagination from "@/component/pagination/Pagination";
-
-type Exam = {
-  exam_id: number;
-  exam_name: string;
-  created_at: string;
-  time_limit: number;
-  topic_id: number;
-  exam_schedule_id: number;
-  available: boolean;
-  title: string
-};
+import type { Exam } from "@/domain/admin/exams/type";
 
 export default function Exam() {
+  
   const [exams, setExams] = useState<Exam[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filterExam, setFilterExam] = useState<Exam[]>([]);
   const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
@@ -102,7 +92,7 @@ export default function Exam() {
 
       if (!res.ok) throw new Error("Cập nhật thất bại");
 
-      setFilterExam((prev) =>
+      setExams((prev) =>
         prev
           .map((e) =>
             e.exam_id === examId ? { ...e, available } : e
@@ -135,7 +125,7 @@ export default function Exam() {
           {/* filter search */}
           <div className={styles.filter_search}>
             <FilterExam setFilterCondition={setFilterCondition} setSearchKeyword={setSearchKeyword} />
-            <Search setFilterExam={setFilterExam} currentPage={currentPage} setTotalPage={setTotalPages} />
+            <Search setExam={setExams} currentPage={currentPage} setTotalPage={setTotalPages} />
           </div>
         </div>
       </div>
@@ -164,16 +154,18 @@ export default function Exam() {
                   className={exam.available ? styles.active : styles.inactive}
                 >
                   {exam.available ? "Hoạt động" : "Không hoạt động"}
-                  <span
-                    className={styles.editIcon}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleToggleAvailable(exam.exam_id, !exam.available)
-                    }
-                    }
-                  >
-                    ✎
-                  </span>
+                  {exam.available && (
+                    <span
+                      className={styles.editIcon}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleToggleAvailable(exam.exam_id, !exam.available)
+                      }
+                      }
+                    >
+                      ✎
+                    </span>
+                  )}
                 </td>
                 <td>{exam.title}</td>
                 <td>

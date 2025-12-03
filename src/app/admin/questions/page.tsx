@@ -9,27 +9,7 @@ import { fetchContent, uploadFile } from "@/utils/file.service";
 import { Button } from "@/component/ui/button/Button";
 import FileList from "@/component/popup/FileList";
 import { fetchQuestions } from "@/utils/question.service";
-
-interface Answer {
-    answer_id: number;
-    answer_content: string;
-    is_correct: boolean;
-}
-
-interface Question {
-    question_id: number;
-    question_name: string;
-    question_content: string;
-    available: boolean;
-    answers: Answer[];
-    source : string
-}
-
-interface FileInfo {
-    id: number;
-    name: string;
-    url: string;
-}
+import type { Answer, Question, FileInfo } from "@/domain/admin/questions/type";
 
 export default function Question() {
     const [questions, setQuestions] = useState<Question[]>([]);
@@ -118,7 +98,7 @@ export default function Question() {
         setIsFileList(true)
     };
 
-        //lay list csv tu server
+    //lay list json tu server
     const handleFetchJson = async () => {
         const url = `${API_URL}/file/json`;
         const data = await fetchContent(url, token);
@@ -192,7 +172,7 @@ export default function Question() {
                             onClick={() => csvInputRef.current?.click()}>
                             Thêm câu hỏi từ CSV
                         </Button>
-                        
+
                         <Button
                             variant="primary"
                             size="md"
@@ -231,7 +211,7 @@ export default function Question() {
                     </div>
                 </div>
             )}
-            
+
             {/* Bảng danh sách câu hỏi */}
             <table className={styles.table}>
                 <thead>

@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Doughnut } from 'react-chartjs-2'; // 👈 Đổi Pie → Doughnut
+import { Doughnut } from 'react-chartjs-2'; 
 import {
   Chart as ChartJS,
   ArcElement,

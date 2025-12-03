@@ -11,7 +11,6 @@ export default function TokenChecker() {
     const checkToken = () => {
       const token = Cookies.get("token");
       if (!token) return;
-
       try {
         const { exp } = JSON.parse(atob(token.split(".")[1]));
         if (Date.now() >= exp * 1000) {

@@ -4,45 +4,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./Filter.module.css";
 import Cookies from "js-cookie";
 import { Button } from "@/component/ui/button/Button";
-
-interface Topic {
-    topic_id: number;
-    title: string;
-    description?: string;
-    subject_id?: number | null;
-    created_at: string;
-}
-
-interface Subject {
-    subject_id: number;
-    subject_name: string;
-}
-
-type Exam = {
-    exam_id: number;
-    exam_name: string;
-    created_at: string;
-    time_limit: number;
-    topic_id: number;
-    exam_schedule_id: number;
-    available: boolean;
-    title: string
-};
-
-type BankProps = {
-    bank_id: number;
-    description: string;
-    available: boolean;
-    topic_id?: number
-};
-
-interface Document {
-    document_id: number;
-    title: string;
-    link?: string;
-    created_at: string;
-    topic_id?: number
-}
+import { Topic, Subject } from "@/domain/admin/exams/type";
 
 interface FilterProps {
     setFilterCondition: (data: any) => void;

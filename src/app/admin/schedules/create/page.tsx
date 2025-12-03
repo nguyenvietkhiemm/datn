@@ -3,17 +3,13 @@
 import Cookies from "js-cookie";
 import { useState } from "react";
 import styles from "./Exam.Schedule.Create.module.css"; 
-
-type ExamSchedule = {
-  start_time: string;
-  end_time: string;
-};
+import type { ExamScheduleCreate } from "@/domain/admin/schedules/type";
 
 export default function ExamScheduleCreate() {
   const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
   const token = Cookies.get("token");
 
-  const [form, setForm] = useState<ExamSchedule>({
+  const [form, setForm] = useState<ExamScheduleCreate>({
     start_time: "",
     end_time: "",
   });

@@ -2,16 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import styles from "./FilterUser.module.css";
-
-type User = {
-    user_id: number;
-    user_name: string;
-    email: string;
-    birthday: string;
-    created_at: string;
-    available: boolean;
-    role_name: string;
-};
+import type { User } from "@/domain/admin/users/type";
 
 interface FilterUserProps {
     users: User[];

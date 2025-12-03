@@ -7,7 +7,7 @@ const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
 const token = Cookies.get("token");
 
 type SearchProp = {
-  setFilterExam?: (data: any) => void;
+  setExam?: (data: any) => void;
   currentPage: number;
   setTotalPage: (data: any) => void;
   setFilterDoc?: (data: any) => void;
@@ -17,7 +17,7 @@ type SearchProp = {
 
 type SearchType = "exams" | "documents" | "questions" | "banks";
 
-export default function Search({ setFilterExam, setFilterQuestion, setFilterBank, currentPage, setTotalPage, setFilterDoc }: SearchProp) {
+export default function Search({ setExam, setFilterQuestion, setFilterBank, currentPage, setTotalPage, setFilterDoc }: SearchProp) {
   const [searchType, setSearchType] = useState<SearchType>("exams");
   const [keyword, setKeyword] = useState("");
 
@@ -30,7 +30,7 @@ export default function Search({ setFilterExam, setFilterQuestion, setFilterBank
   };
   
   useEffect(() => {
-    if (setFilterExam) {
+    if (setExam) {
       setSearchType("exams")
     }
     if (setFilterBank) {
@@ -74,8 +74,8 @@ export default function Search({ setFilterExam, setFilterQuestion, setFilterBank
       });
       const data = await res.json();
 
-      if (setFilterExam && routes === "exams") {
-        setFilterExam(data.data.data || []);
+      if (setExam && routes === "exams") {
+        setExam(data.data.data || []);
       } else if (setFilterBank && routes === "banks") {
         setFilterBank(data.data.data || []);
       } else if (setFilterDoc && routes === "documents") {

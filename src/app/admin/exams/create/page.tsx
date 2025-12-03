@@ -4,23 +4,7 @@ import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import styles from "./ExamCreate.module.css";
 import { useRouter } from "next/navigation";
-
-type ExamSchedule = {
-  exam_schedule_id: number;
-  start_time: string;
-  end_time: string;
-};
-
-type Topic = {
-  topic_id: number;
-  title: string;
-  subject_id?: number;
-};
-
-type Subject = {
-  subject_id: number;
-  subject_name: string;
-};
+import { ExamSchedule, Topic, Subject } from "@/domain/admin/exams/type";
 
 export default function ExamCreate() {
   const [name, setName] = useState("");

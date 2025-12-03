@@ -4,16 +4,7 @@ import { useEffect, useState } from "react";
 import styles from "./User.module.css";
 import Cookies from "js-cookie";
 import FilterUser from "@/component/filter/FilterUser/FilterUser";
-
-type User = {
-  user_id: number;
-  user_name: string;
-  email: string;
-  birthday: string;
-  created_at: string;
-  available: boolean;
-  role_name: string;
-};
+import type { User } from "@/domain/admin/users/type";
 
 export default function User() {
   const [users, setUsers] = useState<User[]>([]);

@@ -4,15 +4,7 @@ import styles from "./Schedule.module.css";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import FilterSchedule from "@/component/filter/FilterSchedules/FilterSchedules";
-
-// Định nghĩa type cho mỗi lịch thi
-type ExamSchedule = {
-  exam_schedule_id: number;
-  start_time: string;
-  end_time: string;
-  created_at: string;
-  updated_at: string;
-};
+import { ExamSchedule } from "@/domain/admin/schedules/type";
 
 export default function Schedule() {
   const [filterSchedules, setFilterSchedules] = useState<ExamSchedule[]>([]);

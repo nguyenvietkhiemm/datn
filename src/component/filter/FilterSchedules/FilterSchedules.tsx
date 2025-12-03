@@ -2,15 +2,7 @@
 
 import { useState } from "react";
 import styles from "./FilterSchdedules.module.css";
-
-
-type ExamSchedule = {
-    exam_schedule_id: number;
-    start_time: string;
-    end_time: string;
-    created_at: string;
-    updated_at: string;
-};
+import { ExamSchedule } from "@/domain/admin/schedules/type";
 
 interface FilterScheduleProps {
     examSchedules: ExamSchedule[];

@@ -7,16 +7,8 @@ import Filter from "@/component/filter/Filter/Filter";
 import { useRouter } from "next/navigation";
 import Search from "@/component/search/Search";
 import Pagination from "@/component/pagination/Pagination";
-
-type Document = {
-    document_id: number;
-    title: string;
-    link?: string;
-    created_at: string;
-    topic_id?: number;
-    available: boolean;
-    topic_title : string
-};
+import { Document } from "@/domain/admin/documents/types";
+import { DocumentService } from "@/domain/admin/documents/service";
 
 export default function DocumentPage() {
     const [documents, setDocuments] = useState<Document[]>([]);
@@ -31,20 +23,9 @@ export default function DocumentPage() {
     useEffect(() => {
         const fetchDocuments = async () => {
             try {
-                const token = Cookies.get("token");
-                const res = await fetch(`${API_URL}/documents?page=${currentPage}`, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-
-                if (!res.ok) throw new Error("Không thể lấy danh sách tài liệu");
-
-                const data = await res.json();
-                setDocuments(data.data.document);
-                setTotalPage(data.data.last_page || 1);
+                const data = await DocumentService.fetchDocuments(currentPage)
+                setDocuments(data.documents);
+                setTotalPage(data.last_page || 1);
             } catch (err) {
                 console.error(err);
             } finally {
@@ -63,11 +44,7 @@ export default function DocumentPage() {
     // Xoá tài liệu
     const handleDelete = async (docId: number) => {
         try {
-            const token = Cookies.get("token");
-            await fetch(`${API_URL}/documents/remove/${docId}`, {
-                method: "DELETE",
-                headers: { Authorization: `Bearer ${token}` },
-            });
+            await DocumentService.deleteDocument(docId)
             setDocuments((prev) => prev.filter((d) => d.document_id !== docId));
         } catch (err) {
             console.error(err);
@@ -77,17 +54,7 @@ export default function DocumentPage() {
     // Chuyển trạng thái hoạt động
     const handleToggleAvailable = async (docId: number, available: boolean) => {
         try {
-            const token = Cookies.get("token");
-            const res = await fetch(`${API_URL}/documents/setAvailable/${docId}`, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({ available }),
-            });
-
-            if (!res.ok) throw new Error("Cập nhật thất bại");
+            await DocumentService.toggleDocumentAvailable(docId, available)
 
             setDocuments((prev) =>
                 prev.map((d) =>
@@ -122,7 +89,6 @@ export default function DocumentPage() {
 
                     <div className={styles.filter_search}>
                         <Filter
-                            documents={documents as any}
                             setFilterDocuments={setFilterDoc as any}
                             currentPage={currentPage}
                         />

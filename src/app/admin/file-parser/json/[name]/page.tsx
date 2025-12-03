@@ -4,29 +4,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Cookies from "js-cookie";
 import styles from "./JsonDetailPage.module.css";
-import AutoResizeTextarea from "@/component/textarea/AutoResizeTextarea";
 import QuestionCard from "@/component/card/QuestionCard/QuestionCard";
 import { Button } from "@/component/ui/button/Button";
-
-
-interface JsonAnswer {
-    para_index: number;
-    text: string;
-    math: any[];
-    media: any[]; // images
-    label: string;
-}
-
-interface JsonQuestion {
-    question: {
-        para_index: number;
-        text: string;
-        math: any[];
-        media: any[]; // images
-        label: string;
-    };
-    answers: JsonAnswer[];
-}
+import { JsonAnswer, JsonQuestion } from "@/domain/admin/file-parser/type";
 
 function extractQuestionImages(question: JsonQuestion, imagesMap: Record<string, string>) {
     const list: string[] = [];
@@ -259,36 +239,33 @@ export default function JsonDetailPage() {
                 {jsonData.map((row, rowIndex) => (
 
                     // component QuestionCard nhé
-<QuestionCard
-    key={rowIndex}
-    question={{
-        question_id: rowIndex,
-        question_name: `Câu ${rowIndex + 1}`,
-        question_content: row.question.text,
-        available: true,
-        source: row.question.label,
+                    <QuestionCard
+                        key={rowIndex}
+                        question={{
+                            question_id: rowIndex,
+                            question_name: `Câu ${rowIndex + 1}`,
+                            question_content: row.question.text,
+                            available: true,
+                            source: row.question.label,
 
-        // ⭐ Tách ảnh của question
-        images: extractQuestionImages(row, images),
+                            // ⭐ Tách ảnh của question
+                            images: extractQuestionImages(row, images),
 
-        // ⭐ Tách ảnh của từng answer
-        answers: row.answers.map((a, i) => ({
-            answer_id: i,
-            answer_content: a.text,
-            is_correct: false,
-            images: extractAnswerImages(a, images),
-        })),
-    }}
+                            // ⭐ Tách ảnh của từng answer
+                            answers: row.answers.map((a, i) => ({
+                                answer_id: i,
+                                answer_content: a.text,
+                                is_correct: false,
+                                images: extractAnswerImages(a, images),
+                            })),
+                        }}
 
-    rowIndex={rowIndex}
-    editCell={editCell}
-    setEditCell={setEditCell}
-    handleChange={handleChange}
-    isChanged={isChanged}
-/>
-
-
-
+                        rowIndex={rowIndex}
+                        editCell={editCell}
+                        setEditCell={setEditCell}
+                        handleChange={handleChange}
+                        isChanged={isChanged}
+                    />
                 ))}
 
             </div>

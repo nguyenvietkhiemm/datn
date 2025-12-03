@@ -29,7 +29,6 @@ export default function CsvDetailPage() {
     //lay gia tri 
     useEffect(() => {
         if (!name) return;
-
         try {
             const saved = localStorage.getItem(`csv_diff_${name}`);
             setChanges(saved ? JSON.parse(saved) : []);

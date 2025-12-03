@@ -3,25 +3,7 @@
 import Image from "next/image";
 import AutoResizeTextarea from "@/component/textarea/AutoResizeTextarea";
 import styles from "./QuestionCard.module.css";
-// import extractQuestionImages from "@/utils/image.extract";
-// import extractAnswerImages from "@/utils/image.extract";
-
-export interface Answer {
-    answer_id: number;
-    answer_content: string;
-    is_correct: boolean;
-    images: string[]; // đã convert thành data:image/... từ parent
-}
-
-export interface Question {
-    question_id: number;
-    question_name: string;
-    question_content: string;
-    available: boolean;
-    answers: Answer[];
-    source: string;
-    images: string[]; // đã convert thành data:image/... từ parent
-}
+import { Question } from "@/domain/admin/questions/type";
 
 interface QuestionCardProps {
     question: Question;
@@ -69,9 +51,9 @@ export default function QuestionCard({
             </div>
 
             {/* ================= QUESTION IMAGES ================= */}
-            {question.images?.length > 0 && (
+            {question?.images && question.images.length > 0 && (
                 <div className={styles.imageGroup}>
-                    {question.images.map((src, index) => (
+                    {question?.images?.map((src, index) => (
                         <div key={index} className={styles.imageWrapper}>
                             <Image
                                 src={src}
@@ -90,9 +72,8 @@ export default function QuestionCard({
                 {question.answers.map((ans, answerIdx) => (
                     <div
                         key={ans.answer_id}
-                        className={`${styles.answerItem} ${
-                            isChanged(rowIndex, answerIdx) ? styles.changed : ""
-                        } ${ans.is_correct ? styles.correct : ""}`}
+                        className={`${styles.answerItem} ${isChanged(rowIndex, answerIdx) ? styles.changed : ""
+                            } ${ans.is_correct ? styles.correct : ""}`}
                         onClick={(e) => {
                             e.stopPropagation();
                             setEditCell({ row: rowIndex, col: answerIdx });
@@ -100,7 +81,7 @@ export default function QuestionCard({
                     >
                         {/* ===== Answer Content Editable ===== */}
                         {editCell?.row === rowIndex &&
-                        editCell?.col === answerIdx ? (
+                            editCell?.col === answerIdx ? (
                             <AutoResizeTextarea
                                 value={ans.answer_content}
                                 onChange={(e) =>
@@ -116,9 +97,9 @@ export default function QuestionCard({
                         )}
 
                         {/* ===== Answer Images ===== */}
-                        {ans.images?.length > 0 && (
+                        {ans?.images && ans.images?.length > 0 && (
                             <div className={styles.imageGroupSmall}>
-                                {ans.images.map((src, index) => (
+                                {ans.images?.map((src, index) => (
                                     <div key={index} className={styles.imageWrapperSmall}>
                                         <Image
                                             src={src}
