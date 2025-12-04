@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import styles from "./Document.module.css";
-import Cookies from "js-cookie";
 import Filter from "@/component/filter/Filter/Filter";
 import { useRouter } from "next/navigation";
 import Search from "@/component/search/Search";
@@ -14,7 +13,6 @@ export default function DocumentPage() {
     const [documents, setDocuments] = useState<Document[]>([]);
     const [loading, setLoading] = useState(true);
     const [filterDoc, setFilterDoc] = useState<Document[]>([]);
-    const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPage, setTotalPage] = useState<number>(1);
     const router = useRouter();

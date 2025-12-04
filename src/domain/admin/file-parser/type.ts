@@ -16,3 +16,14 @@ export interface JsonQuestion {
     };
     answers: JsonAnswer[];
 }
+
+export type Change = {
+    row: number;
+    col: number;
+    value: string;
+};
+
+export interface Params {
+    [key: string]: string;
+    name: string;
+}

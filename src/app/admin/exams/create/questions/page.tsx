@@ -3,13 +3,13 @@
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import styles from "./QuestionCreate.module.css";
-import { fetchQuestions } from "@/utils/question.service";
+import { QuestionService } from "@/domain/admin/questions/servie";
 import Pagination from "@/component/pagination/Pagination";
 import Search from "@/component/search/Search";
 import { Button } from "@/component/ui/button/Button";
 import { useSearchParams } from "next/navigation";
 import { Question, CsvFile } from "@/domain/admin/exams/type";
-
+import { FileParserService } from "@/domain/admin/file-parser/service";
 export default function QuestionCreate() {
     const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
     const token = Cookies.get("token");
@@ -29,9 +29,9 @@ export default function QuestionCreate() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const data = await fetchQuestions(API_URL!, currentPage, token!);
-                setQuestions(data.data.question);
-                setTotalPage(data.data.totalPages);
+                const data = await QuestionService.fetchQuestions(currentPage);
+                setQuestions(data.questions);
+                setTotalPage(data.last_page);
             } catch (err) {
                 console.error("Lỗi khi fetch question:", err);
             } finally {
@@ -41,7 +41,7 @@ export default function QuestionCreate() {
 
         const handleFetchCsv = async () => {
             const url = `${API_URL}/file/csv`;
-            const data = await fetchCsvContent(url, token);
+            const data = await QuestionService.fetchCsvList();
             setCsvList(data)
         };
 

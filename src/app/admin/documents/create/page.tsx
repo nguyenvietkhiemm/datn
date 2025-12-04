@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import styles from "./DocumentCreate.module.css";
 import { useRouter } from "next/navigation";
-import { Topic, Subject } from "@/domain/admin/documents/types";
+import { Topic, Subject } from "@/domain/admin/topic_subject/type";
+import { TopicSubjectService } from "@/domain/admin/topic_subject/service";
+import { DocumentService } from "@/domain/admin/documents/service";
 
 export default function DocumentCreate() {
   const [title, setTitle] = useState("");
@@ -24,21 +26,11 @@ export default function DocumentCreate() {
   useEffect(() => {
     const fetchAll = async () => {
       try {
-        const headers = {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        };
+        const topicData = await TopicSubjectService.fetchTopics();
+        const subjectData = await TopicSubjectService.fetchSubjects();
 
-        const [topicRes, subjectRes] = await Promise.all([
-          fetch(`${API_URL}/topics`, { headers }),
-          fetch(`${API_URL}/subjects`, { headers }),
-        ]);
-
-        const topicData = await topicRes.json();
-        const subjectData = await subjectRes.json();
-
-        setTopics(topicData.data || []);
-        setSubjects(subjectData.data || []);
+        setTopics(topicData || []);
+        setSubjects(subjectData || []);
       } catch (error) {
         console.error("Lỗi tải dữ liệu:", error);
       }
@@ -55,34 +47,15 @@ export default function DocumentCreate() {
   //  Xử lý submit form
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  
     if (!title || !file || !topicId || !subjectId) {
       alert("Vui lòng điền đầy đủ thông tin và chọn file!");
       return;
     }
-
     try {
-      const formData = new FormData();
-      formData.append("title", title);
-      formData.append("topic_id", topicId.toString());
-      formData.append("file", file);
-
-      const res = await fetch(`${API_URL}/documents/create`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        alert("Tải tài liệu thành công!");
-        router.push("/admin/documents");
-      } else {
-        alert(data.message || "Lỗi khi tải tài liệu!");
-      }
+      await DocumentService.create(title, topicId, file);
+      alert("Tải tài liệu thành công!");
+      router.push("/admin/documents");
     } catch (error) {
       console.error(error);
       alert("Không thể tải tài liệu!");

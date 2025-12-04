@@ -5,11 +5,11 @@ import styles from "./question.module.css";
 import Cookies from "js-cookie";
 import Pagination from "@/component/pagination/Pagination";
 import Search from "@/component/search/Search";
-import { fetchContent, uploadFile } from "@/utils/file.service";
 import { Button } from "@/component/ui/button/Button";
 import FileList from "@/component/popup/FileList";
 import { fetchQuestions } from "@/utils/question.service";
 import type { Answer, Question, FileInfo } from "@/domain/admin/questions/type";
+import { QuestionService } from "@/domain/admin/questions/servie";
 
 export default function Question() {
     const [questions, setQuestions] = useState<Question[]>([]);
@@ -49,83 +49,81 @@ export default function Question() {
     // Xoá câu hỏi
     const handleDelete = async (questionId: number) => {
         try {
-            const token = Cookies.get("token");
-            const res = await fetch(`${API_URL}/questions/remove/${questionId}`, {
-                method: "DELETE",
-                headers: { Authorization: `Bearer ${token}` },
-            });
-
-            if (!res.ok) throw new Error("Xoá thất bại");
-
-            setQuestions((prev) =>
-                prev.filter((q) => q.question_id !== questionId)
-            );
+            await QuestionService.deleteQuestion(questionId);
+            setQuestions((prev) => prev.filter((q) => q.question_id !== questionId));
         } catch (err) {
-            console.error("Lỗi xoá:", err);
+            console.error("Lỗi khi xoá câu hỏi:", err);
         }
     };
 
     // Chuyển trạng thái hiển thị câu hỏi
     const handleToggleAvailable = async (questionId: number, available: boolean) => {
         try {
-            const token = Cookies.get("token");
-            const res = await fetch(`${API_URL}/questions/setAvailable/${questionId}`, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({ available }),
-            });
-
-            if (!res.ok) throw new Error("Cập nhật trạng thái thất bại");
-
+            await QuestionService.toggleQuestionAvailable(questionId, available);
             setQuestions((prev) =>
                 prev.map((q) =>
                     q.question_id === questionId ? { ...q, available } : q
                 )
             );
         } catch (error) {
-            console.error(" Lỗi khi đổi trạng thái:", error);
+            console.error("Lỗi khi đổi trạng thái:", error);
         }
     };
 
     //lay list csv tu server
     const handleFetchCsv = async () => {
-        const url = `${API_URL}/file/csv`;
-        const data = await fetchContent(url, token);
-        setFileList(data)
-        setIsFileList(true)
+        try {
+            const url = `${API_URL}/file/csv`;
+            const data = await QuestionService.fetchContent(url);
+            setFileList(data)
+            setIsFileList(true)
+        } catch (error) {
+            console.error("Lỗi fetchCsvContent:", error);
+            throw error;
+        }
     };
 
     //lay list json tu server
     const handleFetchJson = async () => {
-        const url = `${API_URL}/file/json`;
-        const data = await fetchContent(url, token);
-        setFileList(data)
-        setIsFileList(true)
+        try {
+            const url = `${API_URL}/file/json`;
+            const data = await QuestionService.fetchContent(url);
+            setFileList(data)
+            setIsFileList(true)
+        } catch (error) {
+            console.error("Lỗi fetchCsvContent:", error);
+            throw error;
+        }
     };
 
     // Upload CSV từ máy
     const handleUploadCsv = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
+        try {
+            const file = e.target.files?.[0];
 
-        if (!file) return;
+            if (!file) return;
 
-        const url = `${API_URL}/file/csv/save/${file.name}`;
-        const result = await uploadFile(url, file, token);
-        console.log("Kết quả upload:", result);
+            const url = `${API_URL}/file/csv/save/${file.name}`;
+            const result = await QuestionService.uploadFile(url, file);
+        } catch (error) {
+            console.error("Lỗi uploadFile:", error);
+            throw error;
+        }
     };
 
     // Upload DOCX từ máy
     const handleUploadDocx = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
+        try {
+            const file = e.target.files?.[0];
 
-        if (!file) return;
+            if (!file) return;
 
-        const url = `${API_URL}/file/docx/save/${file.name}`;
-        const result = await uploadFile(url, file, token);
-        console.log("Kết quả upload:", result);
+            const url = `${API_URL}/file/docx/save/${file.name}`;
+            const result = await QuestionService.uploadFile(url, file);
+        } catch (error) {
+            console.error("Lỗi uploadFile:", error);
+            throw error;
+        }
     };
 
     //  Loading

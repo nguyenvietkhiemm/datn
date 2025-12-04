@@ -2,14 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import Cookies from "js-cookie";
+import { ScheduleService } from "@/domain/admin/schedules/service";
 import styles from "./Exam.Schedule.Detail.module.css";
 import { useRouter } from "next/navigation";
-import { ExamSchedule, Exam } from "@/domain/admin/schedules/type";
+import { ExamSchedule } from "@/domain/admin/schedules/type";
+import { Exam } from "@/domain/admin/exams/type";
 
 export default function ExamScheduleDetail() {
-  const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
-  const token = Cookies.get("token");
   const { id } = useParams();
 
   const [schedule, setSchedule] = useState<ExamSchedule | null>(null);
@@ -19,29 +18,23 @@ export default function ExamScheduleDetail() {
 
   // Gọi API lấy chi tiết lịch thi
   useEffect(() => {
-    const fetchScheduleDetail = async () => {
+    if (!id) return;
+
+    const loadDetail = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`${API_URL}/exams/schedule/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        const data = await res.json();
-
-        if (!res.ok) throw new Error(data.message || "Không thể tải chi tiết lịch thi.");
-
-        setSchedule(data.data);
-      } catch (error: any) {
-        setMessage(error.message);
+        const detail = await ScheduleService.fetchScheduleDetail(Number(id));
+        setSchedule(detail);
+      } catch (err: any) {
+        setMessage(err.message);
       } finally {
         setLoading(false);
       }
     };
 
-    if (id) fetchScheduleDetail();
+    loadDetail();
   }, [id]);
+
 
   const detailExam = (id: number, exam: Exam) => {
     localStorage.setItem("exam", JSON.stringify(exam));

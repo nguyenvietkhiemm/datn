@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import styles from "./Schedule.module.css";
-import Cookies from "js-cookie";
+import { ScheduleService } from "@/domain/admin/schedules/service";
 import { useRouter } from "next/navigation";
 import FilterSchedule from "@/component/filter/FilterSchedules/FilterSchedules";
 import { ExamSchedule } from "@/domain/admin/schedules/type";
@@ -10,24 +10,21 @@ export default function Schedule() {
   const [filterSchedules, setFilterSchedules] = useState<ExamSchedule[]>([]);
   const [examSchedules, setExamSchedules] = useState<ExamSchedule[]>([]);
   const router = useRouter();
-  const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
 
   //lấy lịch thi
   useEffect(() => {
-    const token = Cookies.get("token");
-    const fetchdSchedule = async () => {
-      const resExamSchedule = await fetch(`${API_URL}/exams/schedule`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        },
-      })
-      const data = await resExamSchedule.json();
-      setExamSchedules(data.data)
-    }
-    fetchdSchedule();
-  }, [])
+    const loadSchedules = async () => {
+        try {
+            const data = await ScheduleService.fetchSchedules();
+            setExamSchedules(data);
+            setFilterSchedules(data);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    loadSchedules();
+}, []);
 
   useEffect(() => {
     setFilterSchedules(examSchedules)

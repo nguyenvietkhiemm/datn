@@ -43,5 +43,28 @@ export const DocumentService = {
         if (!res.ok) {
             throw new Error("Cập nhật trạng thái thất bại");
         }
-    }
+    },
+
+    async create(title: string, topicId: number, file: File): Promise<void> {
+        const token = getToken();
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("topic_id", topicId.toString());
+        formData.append("file", file);
+
+        const res = await fetch(`${API_URL}/documents/create`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body: formData,
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            throw new Error(data.message || "Lỗi khi tải tài liệu!");
+        }
+        return data;
+    },
 };

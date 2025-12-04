@@ -1,0 +1,12 @@
+export interface Topic {
+    topic_id: number;
+    title: string;
+    description?: string;
+    subject_id?: number | null;
+    created_at: string;
+}
+
+export type Subject = {
+    subject_id: number;
+    subject_name: string;
+};

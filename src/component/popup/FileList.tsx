@@ -17,7 +17,6 @@ export default function FileList({ fileList }: FileListProps) {
     const router = useRouter();
 
     const handleOpenFile = (file: FileInfo) => {
-        console.log("Mở file:", file);
         if (file.name.endsWith(".csv")) {
             router.push(`/admin/file-parser/csv/${encodeURIComponent(file.name)}`);
         } 

@@ -8,9 +8,10 @@ import { useRouter } from "next/navigation";
 import Search from "@/component/search/Search";
 import Pagination from "@/component/pagination/Pagination";
 import type { Exam } from "@/domain/admin/exams/type";
+import { ExamService } from "@/domain/admin/exams/service";
 
 export default function Exam() {
-  
+
   const [exams, setExams] = useState<Exam[]>([]);
   const [loading, setLoading] = useState(true);
   const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
@@ -23,95 +24,52 @@ export default function Exam() {
 
   //  Lấy danh sách bài thi
   useEffect(() => {
-    const token = Cookies.get("token");
-    const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
-
-    const fetchExam = async () => {
-      let url = `${API_URL}/exams?page=${currentPage}`;
-
-      //filter status
-      if (filterCondition?.status) {
-        url += `&status=${filterCondition.status}`
+    const fetchExams = async () => {
+      try {
+        const data = await ExamService.fetchExams(currentPage, filterCondition, searchKeyword);
+        setExams(data.exams);
+        setTotalPages(data.totalPages);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching exams:", error);
       }
-
-      // Filter topics
-      if (filterCondition?.topics && filterCondition.topics.length > 0) {
-        url += `&topics=${filterCondition.topics.join(",")}`;
-      }
-
-      // Search
-      if (searchKeyword.trim().length > 0) {
-        url += `&search=${encodeURIComponent(searchKeyword)}`;
-      }
-
-      const resExam = await fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const data = await resExam.json();
-
-      setExams(data.data.exams);
-      setTotalPages(data.data.totalPages);
-      setLoading(false)
     };
 
-    fetchExam();
+    fetchExams();
   }, [currentPage, filterCondition, searchKeyword]);
 
-
-  // Xoá bài thi
+  //xoa
   const handleDelete = async (examId: number) => {
     try {
-      const token = Cookies.get("token");
-      await fetch(`${API_URL}/exams/remove/${examId}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await ExamService.deleteExam(examId);
       setExams(exams.filter((e) => e.exam_id !== examId));
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error("Error deleting exam:", error);
     }
   };
 
-  // Chuyển trạng thái hoạt động
+  //chuyen trang thai
   const handleToggleAvailable = async (examId: number, available: boolean) => {
     try {
-      const token = Cookies.get("token");
-      const res = await fetch(`${API_URL}/exams/setAvailable/${examId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ available }),
-      });
-
-      if (!res.ok) throw new Error("Cập nhật thất bại");
-
+      await ExamService.toggleExamAvailable(examId, available);
       setExams((prev) =>
-        prev
-          .map((e) =>
-            e.exam_id === examId ? { ...e, available } : e
-          )
-          .filter((e) => {
-            const topicMatch = filterCondition?.topics.includes(e.topic_id);
-            const statusMatch =
-              filterCondition?.status === "All" || filterCondition?.status === e.available.toString();
-            return topicMatch && statusMatch;
-          })
+        prev.map((e) =>
+          e.exam_id === examId ? { ...e, available } : e
+        ).filter((e) => {
+          const topicMatch = filterCondition?.topics.includes(e.topic_id);
+          const statusMatch = filterCondition?.status === "All" || filterCondition?.status === e.available.toString();
+          return topicMatch && statusMatch;
+        })
       );
     } catch (error) {
-      console.log(error);
+      console.error("Error toggling exam availability:", error);
     }
   };
 
+  //xem chi tiet
   const detailExam = (id: number, exam: Exam) => {
     localStorage.setItem("exam", JSON.stringify(exam));
-    router.push(`/admin/exams/detail/${id}`)
+    router.push(`/admin/exams/detail/${id}`);
   };
 
   if (loading) return <p className={styles.loading}>Đang tải danh sách bài thi...</p>;

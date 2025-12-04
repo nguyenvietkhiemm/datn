@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import styles from "./Roadmap.module.css";
 import Cookies from "js-cookie";
 import { Button } from "@/component/ui/button/Button";
-import { RoadmapStep, Topic } from "@/domain/admin/roadmap/type";
+import { RoadmapStep } from "@/domain/admin/roadmap/type";
+import { Topic } from "@/domain/admin/topic_subject/type";
+import { RoadMapService } from "@/domain/admin/roadmap/service";
+import { TopicSubjectService } from "@/domain/admin/topic_subject/service";
 
 export default function RoadmapEditor() {
-    const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
-    const token = Cookies.get("token");
     const [steps, setSteps] = useState<RoadmapStep[]>([]);
     const [topics, setTopics] = useState<Topic[]>([]);
     const [editId, setEditId] = useState(null);
@@ -20,29 +21,13 @@ export default function RoadmapEditor() {
     // lay roadmapco san
     useEffect(() => {
         const fetchRoadmap = async () => {
-            const res = await fetch(`${API_URL}/roadmap`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
-                }
-            })
-
-            const roadmap = await res.json();
-            setSteps(roadmap.data)
+            const roadmap = await RoadMapService.fetchRoadmap();
+            setSteps(roadmap)
         }
 
         const fetchTopic = async () => {
-            const resTopic = await fetch(`${API_URL}/topics`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                }
-            })
-
-            const data = await resTopic.json();
-            setTopics(data.data)
+            const resTopic = await TopicSubjectService.fetchTopics()
+            setTopics(resTopic)
         }
 
         fetchRoadmap();
@@ -59,26 +44,13 @@ export default function RoadmapEditor() {
 
     // Thêm bước
     const handleAdd = async () => {
-        await fetch(`${API_URL}/roadmap/create`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
-            },
-            body: JSON.stringify(form)
-        })
-
+        await RoadMapService.addStep(form)
     }
+
     // Xoá bước
     const deleteStep = async(roadmap_step_id: any) => {
         try {
-          await fetch(`${API_URL}/roadmap/remove/${roadmap_step_id}`,{
-            method : "DELETE",
-            headers:{
-                "Content-Type" : "application/json",
-                Authorization : `Bearer ${token}`
-            }
-          })  
+          await RoadMapService.deleteStep(roadmap_step_id)
         } catch (error) {
             console.log("error: ", error);
         }
@@ -98,14 +70,8 @@ export default function RoadmapEditor() {
     // Lưu sửa
     const saveEdit = async() => {
         try {
-            await fetch(`${API_URL}/roadmap/update/${editId}`,{
-                method:"PATCH",
-                headers:{
-                    "Content-Type" : "application/json",
-                    Authorization : `Bearer ${token}`
-                },
-                body : JSON.stringify(form)
-            })
+            if (editId === null) return;
+            await RoadMapService.updateStep(editId, form)
         } catch (error) {
             console.log("error: ", error );
         }

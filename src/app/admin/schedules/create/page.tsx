@@ -1,14 +1,11 @@
 "use client";
 
-import Cookies from "js-cookie";
+import { ScheduleService } from "@/domain/admin/schedules/service";
 import { useState } from "react";
-import styles from "./Exam.Schedule.Create.module.css"; 
+import styles from "./Exam.Schedule.Create.module.css";
 import type { ExamScheduleCreate } from "@/domain/admin/schedules/type";
 
 export default function ExamScheduleCreate() {
-  const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
-  const token = Cookies.get("token");
-
   const [form, setForm] = useState<ExamScheduleCreate>({
     start_time: "",
     end_time: "",
@@ -25,22 +22,10 @@ export default function ExamScheduleCreate() {
   const handleAddExamSchedule = async () => {
     try {
       setLoading(true);
-
-      const res = await fetch(`${API_URL}/exams/schedule/create`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(form),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) throw new Error(data.message || "Thêm lịch thi thất bại");
+      await ScheduleService.createSchedule(form);
       alert("Thêm lịch thi thành công");
-    } catch (error: any) {
-      alert(error.message);
+    } catch (e: any) {
+      alert(e.message);
     } finally {
       setLoading(false);
     }

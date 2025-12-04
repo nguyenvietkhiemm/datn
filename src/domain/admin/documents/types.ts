@@ -8,13 +8,4 @@ export type Document = {
     topic_title: string
 };
 
-export type Topic = {
-    topic_id: number;
-    title: string;
-    subject_id?: number;
-};
 
-export type Subject = {
-    subject_id: number;
-    subject_name: string;
-};

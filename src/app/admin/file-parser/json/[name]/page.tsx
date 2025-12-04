@@ -6,76 +6,12 @@ import Cookies from "js-cookie";
 import styles from "./JsonDetailPage.module.css";
 import QuestionCard from "@/component/card/QuestionCard/QuestionCard";
 import { Button } from "@/component/ui/button/Button";
-import { JsonAnswer, JsonQuestion } from "@/domain/admin/file-parser/type";
-
-function extractQuestionImages(question: JsonQuestion, imagesMap: Record<string, string>) {
-    const list: string[] = [];
-
-    question.question.media?.forEach(img => {
-        const filename = img.saved_path.split(/[/\\]/).pop();
-        if (filename && imagesMap[filename]) {
-            list.push(imagesMap[filename]);
-        }
-    });
-
-    return list;
-}
-
-function extractAnswerImages(answer: JsonAnswer, imagesMap: Record<string, string>) {
-    const list: string[] = [];
-
-    answer.media?.forEach(img => {
-        const filename = img.saved_path.split(/[/\\]/).pop();
-        if (filename && imagesMap[filename]) {
-            list.push(imagesMap[filename]);
-        }
-    });
-
-    return list;
-}
-
-
-type Change = {
-    row: number;
-    col: number;
-    value: string;
-};
-
-function collectImageNames(jsonData: (JsonQuestion | JsonAnswer)[]): string[] {
-    const files = new Set<string>();
-
-    jsonData.forEach(item => {
-        // Nếu là JsonQuestion
-        if ("question" in item && "answers" in item) {
-            item.question.media?.forEach(img => {
-                const filename = img.saved_path.split(/[/\\]/).pop(); // lấy tên file
-                if (filename) files.add(filename);
-            });
-
-            item.answers.forEach(a => {
-                a.media?.forEach(img => {
-                    const filename = img.saved_path.split(/[/\\]/).pop();
-                    if (filename) files.add(filename);
-                });
-            });
-        }
-
-        // Nếu là JsonAnswer
-        else if ("media" in item) {
-            item.media?.forEach(img => {
-                const filename = img.saved_path.split(/[/\\]/).pop();
-                if (filename) files.add(filename);
-            });
-        }
-
-    });
-
-    return Array.from(files);
-}
-
+import { JsonAnswer, JsonQuestion, Change, Params } from "@/domain/admin/file-parser/type";
+import { FileParserService } from "@/domain/admin/file-parser/service";
+import { FileParserModel } from "@/domain/admin/file-parser/model";
 
 export default function JsonDetailPage() {
-    const { name } = useParams();
+    const { name } = useParams<Params>();
     const token = Cookies.get("token");
     const [loading, setLoading] = useState(true);
     const [jsonData, setJsonData] = useState<JsonQuestion[]>([]);
@@ -83,31 +19,26 @@ export default function JsonDetailPage() {
     const [changes, setChanges] = useState<Change[]>([]);
     const [images, setImages] = useState<Record<string, string>>({});
 
+    // Lấy các thay đổi đã lưu từ localStorage
     useEffect(() => {
         if (!name) return;
-        try {
-            const saved = localStorage.getItem(`json_diff_${name}`);
-            setChanges(saved ? JSON.parse(saved) : []);
-        } catch {
-            setChanges([]);
-        }
+
+        const loadChanges = async () => {
+            const storedChanges = await FileParserService.getStoredChanges(name);
+            setChanges(storedChanges);
+        };
+
+        loadChanges();
     }, [name]);
 
+    // Tải JSON
     useEffect(() => {
         const loadJson = async () => {
+            if (!name || !token) return;
+
             try {
-                const url = `${process.env.NEXT_PUBLIC_ENDPOINT_BACKEND}/file/json/${name}`;
-                const res = await fetch(url, {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-                const result = await res.json();
-                const data: JsonQuestion[] = result.data || [];
-
-                setJsonData(loadJsonDiff(data));
-
+                const data = await FileParserService.loadJson(name, token);
+                setJsonData(data);
             } catch (err) {
                 console.error("Lỗi tải JSON:", err);
             } finally {
@@ -116,53 +47,25 @@ export default function JsonDetailPage() {
         };
 
         loadJson();
-
     }, [name, token]);
 
-    // Load images sau khi JSON đã sẵn sàng
-    // Hàm này sẽ hơi lạ vì dùng POST để lấy ảnh
+    // Tải ảnh sau khi JSON đã được tải xong
     useEffect(() => {
         if (jsonData.length === 0) return;
 
-        async function loadImages() {
-            const filenames = collectImageNames(jsonData);
-
-            if (filenames.length === 0) return;
-
+        const loadImages = async () => {
             try {
-                const url = `${process.env.NEXT_PUBLIC_ENDPOINT_BACKEND}/file/images`;
-
-                const res = await fetch(url, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                    },
-                    body: JSON.stringify({ filesname: filenames }),
-                });
-
-                const result = await res.json();
-
-                // result.data = { filename, mime, data }
-                const mapped: Record<string, string> = {};
-
-                result.data.forEach((file: any) => {
-                    mapped[file.filename] = `data:${file.mime};base64,${file.data}`;
-                });
-
-                console.log("Tệp ảnh đã tải:", mapped);
-
-                setImages(mapped);
+                const mappedImages = await FileParserService.loadImages(jsonData, token);
+                setImages(mappedImages);
             } catch (err) {
                 console.error("Lỗi tải ảnh:", err);
             }
-        }
+        };
 
         loadImages();
-
     }, [jsonData, token]);
 
-    // chỉnh sửa text
+    // Chỉnh sửa text
     const loadJsonDiff = (data: JsonQuestion[]) => {
         if (!changes) return data;
         changes.forEach(d => {
@@ -190,8 +93,7 @@ export default function JsonDetailPage() {
         });
     };
 
-    const isChanged = (rowIndex: number, colIndex: number) =>
-        changes.some(c => c.row === rowIndex && c.col === colIndex);
+    const isChanged = (rowIndex: number, colIndex: number) => changes.some(c => c.row === rowIndex && c.col === colIndex)
 
     const handleReset = () => {
         localStorage.removeItem(`json_diff_${name}`);
@@ -200,17 +102,7 @@ export default function JsonDetailPage() {
 
     const handleSave = async () => {
         try {
-            const url = `${process.env.NEXT_PUBLIC_ENDPOINT_BACKEND}/json/save/${name}`;
-            const res = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(jsonData),
-            });
-            const result = await res.json();
-            if (!res.ok) return alert(`Lỗi khi lưu: ${result.message || result.error}`);
+            await FileParserService.saveJson(name, jsonData, token);
             alert("Lưu JSON thành công!");
             localStorage.removeItem(`json_diff_${name}`);
             window.location.reload();
@@ -219,8 +111,6 @@ export default function JsonDetailPage() {
             alert("Có lỗi xảy ra khi lưu JSON!");
         }
     };
-
-
     if (loading) return <p>Đang tải...</p>;
 
 
@@ -249,14 +139,14 @@ export default function JsonDetailPage() {
                             source: row.question.label,
 
                             // ⭐ Tách ảnh của question
-                            images: extractQuestionImages(row, images),
+                            images: FileParserModel.extractQuestionImages(row, images),
 
                             // ⭐ Tách ảnh của từng answer
                             answers: row.answers.map((a, i) => ({
                                 answer_id: i,
                                 answer_content: a.text,
                                 is_correct: false,
-                                images: extractAnswerImages(a, images),
+                                images: FileParserModel.extractAnswerImages(a, images),
                             })),
                         }}
 
