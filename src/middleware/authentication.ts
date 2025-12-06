@@ -10,6 +10,8 @@ const Authentication = {
     try {
       const authHeader = req.headers["authorization"];
       const token = authHeader && authHeader.split(" ")[1]; // "Bearer <token>"
+      console.log(token);
+      
       if (!token) {
         return res.status(401).json({ message: "No token provided" });
       }
