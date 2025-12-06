@@ -5,16 +5,21 @@ import styles from "./Subject.module.css";
 import { TopicSubjectService } from "@/domain/admin/topic_subject/service";
 import type { Subject } from "@/domain/admin/topic_subject/type";
 import { TopicSubjectModel } from "@/domain/admin/topic_subject/model";
+import { Topic } from "@/domain/admin/topic_subject/type";
 
-export default function SubjectManager() {
+type SubjectProp = {
+    setTopics: React.Dispatch<React.SetStateAction<Topic[]>>;
+}
+
+export default function SubjectManager({ setTopics }: SubjectProp) {
     const [subjects, setSubjects] = useState<Subject[]>([]);
     const [newSubjectName, setNewSubjectName] = useState("");
     const [editingSubjectId, setEditingSubjectId] = useState<number | null>(null);
     const [editSubjectName, setEditSubjectName] = useState("");
-    const [errors, setErrors] = useState<{ 
-        title?: string; 
-        description?: string; 
-        subject_id?: string 
+    const [errors, setErrors] = useState<{
+        title?: string;
+        description?: string;
+        subject_id?: string
     }>({});
 
     useEffect(() => {
@@ -43,7 +48,7 @@ export default function SubjectManager() {
                 },
                 setErrors
             );
-            
+
             if (!isValid) return;
             const result = await TopicSubjectService.createSubject(newSubjectName);
             setSubjects((prev) => [...prev, result]);
@@ -73,6 +78,7 @@ export default function SubjectManager() {
         try {
             await TopicSubjectService.deleteSubject(id);
             setSubjects((prev) => prev.filter((s) => s.subject_id !== id));
+            setTopics((prev) => prev.filter((s) => s.subject_id !== id))
         } catch (error) {
             console.error(error);
         }
@@ -91,7 +97,7 @@ export default function SubjectManager() {
                 />
 
                 {errors.title && <p className={styles.error}>{errors.title}</p>}
-                
+
                 <button onClick={handleCreate}>Thêm Subject</button>
             </div>
 
@@ -105,7 +111,7 @@ export default function SubjectManager() {
                 </thead>
 
                 <tbody>
-                    {subjects.map((s) => (
+                    {subjects?.map((s) => (
                         <tr key={s.subject_id}>
                             <td>{s.subject_id}</td>
 

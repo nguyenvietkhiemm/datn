@@ -6,8 +6,12 @@ import { TopicSubjectService } from "@/domain/admin/topic_subject/service";
 import type { Topic, Subject } from "@/domain/admin/topic_subject/type";
 import { TopicSubjectModel } from "@/domain/admin/topic_subject/model";
 
-export default function TopicManager() {
-    const [topics, setTopics] = useState<Topic[]>([]);
+type TopicProp = {
+    topics: Topic[],
+    setTopics: React.Dispatch<React.SetStateAction<Topic[]>>;
+}
+
+export default function TopicManager({ topics, setTopics }: TopicProp) {
     const [subjects, setSubjects] = useState<Subject[]>([]);
     // Form add topic
     const [newTitle, setNewTitle] = useState("");
@@ -16,10 +20,10 @@ export default function TopicManager() {
     // Editing
     const [editingTopicId, setEditingTopicId] = useState<number | null>(null);
     const [editTopic, setEditTopic] = useState<Partial<Topic>>({});
-    const [errors, setErrors] = useState<{ 
-        title?: string; 
-        description?: string; 
-        subject_id?: string 
+    const [errors, setErrors] = useState<{
+        title?: string;
+        description?: string;
+        subject_id?: string
     }>({});
 
     useEffect(() => {
@@ -52,7 +56,7 @@ export default function TopicManager() {
                 },
                 setErrors
             );
-            
+
             if (!isValid) return;
 
             const topic = await TopicSubjectService.createTopic(
@@ -148,7 +152,7 @@ export default function TopicManager() {
                 </thead>
 
                 <tbody>
-                    {topics.map((t) => (
+                    {topics?.map((t) => (
                         <tr key={t.topic_id}>
                             <td>{t.topic_id}</td>
 
