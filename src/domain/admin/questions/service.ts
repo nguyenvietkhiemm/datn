@@ -1,5 +1,6 @@
-import { Question, Answer, FileInfo } from "./type";
+import { Question, Answer } from "./type";
 import { API_URL, getHeaders, getToken } from "@/lib/service";;
+import { FileInfo } from "./type";
 
 export const QuestionService = {
     async fetchQuestions(page: number): Promise<{ questions: Question[]; last_page: number }> {

@@ -2,16 +2,16 @@
 
 import { useEffect, useState, useRef } from "react";
 import styles from "./question.module.css";
-import Cookies from "js-cookie";
 import Pagination from "@/component/pagination/Pagination";
 import Search from "@/component/search/Search";
 import { Button } from "@/component/ui/button/Button";
 import FileList from "@/component/popup/FileList";
 import type { Answer, Question, FileInfo } from "@/domain/admin/questions/type";
-import { QuestionService } from "@/domain/admin/questions/servie";
+import { QuestionService } from "@/domain/admin/questions/service";
 import QuestionCard from "@/component/card/QuestionCard/QuestionCard";
 import { QuestionModel } from "@/domain/admin/questions/model";
-import { Change } from "@/domain/admin/file-parser/type";
+import { Change } from "@/domain/admin/file/file-parser/type";
+import { FileService } from "@/domain/admin/file/service";
 
 export default function Question() {
     const [questions, setQuestions] = useState<Question[]>([]);
@@ -109,7 +109,7 @@ export default function Question() {
             if (!file) return;
 
             const url = `${API_URL}/file/csv/save/${file.name}`;
-            const result = await QuestionService.uploadFile(url, file);
+            const result = await FileService.uploadFile(url, file);
         } catch (error) {
             console.error("Lỗi uploadFile:", error);
             throw error;
@@ -124,7 +124,7 @@ export default function Question() {
             if (!file) return;
 
             const url = `${API_URL}/file/docx/save/${file.name}`;
-            const result = await QuestionService.uploadFile(url, file);
+            const result = await FileService.uploadFile(url, file);
         } catch (error) {
             console.error("Lỗi uploadFile:", error);
             throw error;
