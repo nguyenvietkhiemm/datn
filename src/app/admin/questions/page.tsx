@@ -7,7 +7,7 @@ import Pagination from "@/component/pagination/Pagination";
 import Search from "@/component/search/Search";
 import { Button } from "@/component/ui/button/Button";
 import FileList from "@/component/popup/FileList";
-import { fetchQuestions } from "@/utils/question.service";
+// import { fetchQuestions } from "@/utils/question.service";
 import type { Answer, Question} from "@/domain/admin/questions/type";
 import type { FileInfo } from "@/domain/admin/file/type";
 import { QuestionService } from "@/domain/admin/questions/service";
@@ -31,9 +31,9 @@ export default function Question() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const data = await fetchQuestions(API_URL!, currentPage, token!);
-                setQuestions(data.data.question);
-                setTotalPage(data.data.totalPages);
+                const data = await QuestionService.fetchQuestions(currentPage);
+                setQuestions(data.questions);
+                setTotalPage(data.last_page);
             } catch (err) {
                 console.error("Lỗi khi fetch question:", err);
             } finally {
