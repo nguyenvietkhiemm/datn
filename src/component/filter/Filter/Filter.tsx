@@ -4,11 +4,11 @@ import React, { useState, useEffect } from "react";
 import styles from "./Filter.module.css";
 import Cookies from "js-cookie";
 import { Button } from "@/component/ui/button/Button";
-import { Topic, Subject } from "@/domain/admin/exams/type";
+import { Topic, Subject } from "@/domain/admin/topic_subject/type";
 
 interface FilterProps {
-    setFilterCondition: (data: any) => void;
-    setSearchKeyword: (data : any) => void
+    setFilterCondition?: (data: any) => void;
+    setSearchKeyword?: (data : any) => void
 }
 
 function Filter(
@@ -21,8 +21,6 @@ function Filter(
     const [selectedTopic, setSelectedTopic] = useState<number | "All">("All");
     const [showFilter, setShowFilter] = useState<boolean>(false);
     const [selectedStatus, setSelectedStatus] = useState<string>("All");
-    const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
-    const token = Cookies.get("token")
     const Status = [
         { label: 'Tất cả', value: "All" },
         { label: "Hoạt động", value: "true" },
@@ -110,8 +108,8 @@ function Filter(
                 .map((t) => t.topic_id);
             }
         }
-        setSearchKeyword("");
-        setFilterCondition({
+        setSearchKeyword?.("");
+        setFilterCondition?.({
             subject : selectedSubject,
             topics: topicIds,
             status : selectedStatus

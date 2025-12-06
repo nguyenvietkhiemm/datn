@@ -7,9 +7,11 @@ import Pagination from "@/component/pagination/Pagination";
 import Search from "@/component/search/Search";
 import { Button } from "@/component/ui/button/Button";
 import FileList from "@/component/popup/FileList";
-import { fetchQuestions } from "@/utils/question.service";
 import type { Answer, Question, FileInfo } from "@/domain/admin/questions/type";
 import { QuestionService } from "@/domain/admin/questions/servie";
+import QuestionCard from "@/component/card/QuestionCard/QuestionCard";
+import { QuestionModel } from "@/domain/admin/questions/model";
+import { Change } from "@/domain/admin/file-parser/type";
 
 export default function Question() {
     const [questions, setQuestions] = useState<Question[]>([]);
@@ -20,18 +22,21 @@ export default function Question() {
     const [isFileList, setIsFileList] = useState<boolean>(false);
     const [fileList, setFileList] = useState<FileInfo[]>([]);
     const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
-    const token = Cookies.get("token");
+    const [filterCondition, setFilterCondition] = useState<any>(null);
+    const [searchKeyword, setSearchKeyword] = useState<string>("");
     const csvInputRef = useRef<HTMLInputElement>(null);
     const docxInputRef = useRef<HTMLInputElement>(null);
+    const [changes, setChanges] = useState<Change[]>([]);
+    const [editCell, setEditCell] = useState<{ row: number; col: number } | null>(null);
 
     // Lấy danh sách câu hỏi
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const data = await fetchQuestions(API_URL!, currentPage, token!);
-                setQuestions(data.data.question);
-                setTotalPage(data.data.totalPages);
+                const data = await QuestionService.fetchQuestions(currentPage)
+                setQuestions(data.questions);
+                setTotalPage(data.last_page);
             } catch (err) {
                 console.error("Lỗi khi fetch question:", err);
             } finally {
@@ -41,6 +46,7 @@ export default function Question() {
 
         fetchData();
     }, [currentPage]);
+
     //Lọc các câu hỏi đang hoạt động (optional)
     useEffect(() => {
         setFilterQuestion(questions?.filter((q) => q.available === true));
@@ -70,24 +76,23 @@ export default function Question() {
         }
     };
 
-    //lay list csv tu server
-    const handleFetchCsv = async () => {
-        try {
-            const url = `${API_URL}/file/csv`;
-            const data = await QuestionService.fetchContent(url);
-            setFileList(data)
-            setIsFileList(true)
-        } catch (error) {
-            console.error("Lỗi fetchCsvContent:", error);
-            throw error;
-        }
-    };
+    //lay list json tu server
+    // const handleFetchCsv = async () => {
+    //     try {
+    //         const url = `${API_URL}/file/csv`;
+    //         const data = await QuestionService.fetchContent(url);
+    //         setFileList(data)
+    //         setIsFileList(true)
+    //     } catch (error) {
+    //         console.error("Lỗi fetchCsvContent:", error);
+    //         throw error;
+    //     }
+    // };
 
     //lay list json tu server
     const handleFetchJson = async () => {
         try {
-            const url = `${API_URL}/file/json`;
-            const data = await QuestionService.fetchContent(url);
+            const data = await QuestionService.fetchContent();
             setFileList(data)
             setIsFileList(true)
         } catch (error) {
@@ -126,6 +131,26 @@ export default function Question() {
         }
     };
 
+    //change
+    const handleChange = (rowIndex: number, colIndex: number, value: string) => {
+        setQuestions(prev => {
+            const updated = [...prev];
+            if (colIndex === -1) updated[rowIndex].question_content = value;
+            else updated[rowIndex].answers[colIndex].answer_content = value;
+            return updated;
+        });
+
+        setChanges(prev => {
+            const updated = [...prev];
+            const existing = updated.find(c => c.row === rowIndex && c.col === colIndex);
+            if (existing) existing.value = value;
+            else updated.push({ row: rowIndex, col: colIndex, value });
+            localStorage.setItem(`json_diff_${name}`, JSON.stringify(updated));
+            return updated;
+        });
+    };
+
+    const isChanged = (rowIndex: number, colIndex: number) => changes.some(c => c.row === rowIndex && c.col === colIndex)
     //  Loading
     if (loading)
         return <p className={styles.loading}>Đang tải danh sách câu hỏi...</p>;
@@ -135,7 +160,7 @@ export default function Question() {
             <div className={styles.header}>
                 <h1 className={styles.title}>Quản lý câu hỏi</h1>
                 <div className={styles.actions}>
-                    <Search setFilterQuestion={setFilterQuestion} currentPage={currentPage} setTotalPage={setTotalPage} />
+                    <Search setSearchKeyword={setSearchKeyword} />
 
                     <div className={styles.csv}>
                         <input
@@ -171,13 +196,13 @@ export default function Question() {
                             Thêm câu hỏi từ CSV
                         </Button>
 
-                        <Button
+                        {/* <Button
                             variant="primary"
                             size="md"
                             onClick={handleFetchCsv}
                         >
                             Danh sách CSV
-                        </Button>
+                        </Button> */}
 
                         <Button
                             variant="primary"
@@ -211,61 +236,28 @@ export default function Question() {
             )}
 
             {/* Bảng danh sách câu hỏi */}
-            <table className={styles.table}>
-                <thead>
-                    <tr>
-                        <th>STT</th>
-                        <th>Dạng câu hỏi</th>
-                        <th>Nội dung</th>
-                        <th>Đáp án</th>
-                        <th>Trạng thái</th>
-                        <th>Xóa</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {filterQuestion?.length > 0 ? (
-                        filterQuestion.map((q, index) => (
-                            <tr key={q.question_id}>
-                                <td>{index + 1}</td>
-                                <td>{q.question_name}</td>
-                                <td>{q.question_content}</td>
-                                <td>
-                                    <ul className={styles.answers}>
-                                        {q.answers.map((a) => (
-                                            <li key={a.answer_id}>
-                                                {a.answer_content}{" "}
-                                                {a.is_correct && <strong>(✔)</strong>}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </td>
-                                <td
-                                    className={q.available ? styles.active : styles.inactive}
-                                    onClick={() =>
-                                        handleToggleAvailable(q.question_id, !q.available)
-                                    }
-                                >
-                                    {q.available ? "Hoạt động" : "Ẩn"}
-                                </td>
-                                <td>
-                                    <button
-                                        className={styles.delBtn}
-                                        onClick={() => handleDelete(q.question_id)}
-                                    >
-                                        X
-                                    </button>
-                                </td>
-                            </tr>
-                        ))
-                    ) : (
-                        <tr>
-                            <td colSpan={6} className={styles.empty}>
-                                Không có câu hỏi nào
-                            </td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
+            <div className={styles.questionList}>
+                {questions?.map((row, rowIndex) => (
+                    <QuestionCard
+                        key={row.question_id}
+                        question={{
+                            ...row,
+                            images: QuestionModel.normalizeImages(row.images),
+                            answers: row.answers.map(ans => ({
+                                ...ans,
+                                images: QuestionModel.normalizeImages(ans.images)
+                            }))
+                        }}
+                        rowIndex={rowIndex}
+                        editCell={editCell}
+                        setEditCell={setEditCell}
+                        handleChange={handleChange}
+                        isChanged={isChanged}
+                        handleDelete={handleDelete}
+                        handleToggleAvailable={handleToggleAvailable}
+                    />
+                ))}
+            </div>
 
             {/* Phân trang */}
             <Pagination

@@ -15,6 +15,8 @@ export default function DocumentPage() {
     const [filterDoc, setFilterDoc] = useState<Document[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPage, setTotalPage] = useState<number>(1);
+    const [filterCondition, setFilterCondition] = useState<any>(null);
+    const [searchKeyword, setSearchKeyword] = useState<string>("");
     const router = useRouter();
 
     // Lấy danh sách tài liệu
@@ -87,8 +89,8 @@ export default function DocumentPage() {
 
                     <div className={styles.filter_search}>
                         <Filter
-                            setFilterDocuments={setFilterDoc as any}
-                            currentPage={currentPage}
+                            setFilterCondition={setFilterCondition}
+                            setSearchKeyword={setSearchKeyword}
                         />
                         <Search
                             setFilterDoc={setFilterDoc as any}

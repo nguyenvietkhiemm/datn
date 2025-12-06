@@ -64,11 +64,11 @@ export const QuestionService = {
         return data.data as FileInfo[]; // Trả về danh sách tệp CSV
     },
 
-    async fetchContent(fileUrl: string): Promise<FileInfo[]> {
+    async fetchContent(): Promise<FileInfo[]> {
         const token = getToken();
         if (!token) throw new Error("Token không tồn tại");
-
-        const res = await fetch(fileUrl, {
+        const url = `${API_URL}/file/json`;
+        const res = await fetch(url, {
             method: "GET",
             headers: getHeaders(token),
         });
@@ -93,5 +93,5 @@ export const QuestionService = {
 
         const data = await res.json();
         return data;
-    }
+    },
 }

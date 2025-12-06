@@ -23,7 +23,7 @@ export default function QuestionCreate() {
     const [selectedQuestions, setSelectedQuestions] = useState<{ exam_id: number, question_id: number }[]>([]);
     const searchParams = useSearchParams();
     const examId = Number(searchParams.get("exam_id"));
-    const type = searchParams.get("type");
+    const [searchWork, setSearchKeyword] = useState<string>("");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -47,7 +47,9 @@ export default function QuestionCreate() {
 
         fetchData();
         handleFetchCsv();
-    }, [currentPage]);
+    }, []);
+
+    
 
     //Lọc các câu hỏi đang hoạt động (optional)
     useEffect(() => {
@@ -114,7 +116,7 @@ export default function QuestionCreate() {
 
             {/* loc */}
             <div className={styles.action}>
-                <Search setFilterQuestion={setFilterQuestion} currentPage={currentPage} setTotalPage={setTotalPage} />
+                <Search setSearchKeyword={setSearchKeyword}/>
                 {/* Dropdown select */}
                 <select
                     value={selectedOption}

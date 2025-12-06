@@ -83,7 +83,7 @@ export default function Exam() {
           {/* filter search */}
           <div className={styles.filter_search}>
             <FilterExam setFilterCondition={setFilterCondition} setSearchKeyword={setSearchKeyword} />
-            <Search setExam={setExams} currentPage={currentPage} setTotalPage={setTotalPages} />
+            <Search setSearchKeyword={setSearchKeyword} setFilterCondition={setFilterCondition} />
           </div>
         </div>
       </div>

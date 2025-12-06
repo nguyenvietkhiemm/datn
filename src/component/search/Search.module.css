@@ -1,7 +1,7 @@
 .filter {
     display: flex;
     gap: 1rem;
-    width: 700px;
+    width: 100%;
     margin-top: 1rem;
 }
 
@@ -45,3 +45,4 @@
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
+

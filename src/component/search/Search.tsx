@@ -1,97 +1,19 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./Search.module.css";
-import Cookies from "js-cookie";
-
-const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
-const token = Cookies.get("token");
 
 type SearchProp = {
-  setExam?: (data: any) => void;
-  currentPage: number;
-  setTotalPage: (data: any) => void;
-  setFilterDoc?: (data: any) => void;
-  setFilterQuestion?: (data: any) => void;
-  setFilterBank?: (data: any) => void;
-};
+  setSearchKeyword?: (data: any) => void;
+  setFilterCondition?: (data: any) => void;
+}
 
-type SearchType = "exams" | "documents" | "questions" | "banks";
-
-export default function Search({ setExam, setFilterQuestion, setFilterBank, currentPage, setTotalPage, setFilterDoc }: SearchProp) {
-  const [searchType, setSearchType] = useState<SearchType>("exams");
+export default function Search({ setSearchKeyword, setFilterCondition }: SearchProp) {
   const [keyword, setKeyword] = useState("");
 
-
-  const placeholderMap: Record<SearchType, string> = {
-    exams: "Tìm theo tên đề thi, tiêu đề...",
-    documents: "Tìm theo tên tài liệu...",
-    questions: "Tìm theo nội dung, dạng câu hỏi, và câu trả lời",
-    banks: "Tìm theo ngân hàng câu hỏi...",
+  const handleSearch = () => {
+    setSearchKeyword?.(keyword);
+    setFilterCondition?.("");
   };
-  
-  useEffect(() => {
-    if (setExam) {
-      setSearchType("exams")
-    }
-    if (setFilterBank) {
-      setSearchType("banks");
-    }
-    if (setFilterDoc) {
-      setSearchType("documents");
-    }
-    if (setFilterQuestion) {
-      setSearchType("questions");
-    }
-
-  }
-    , []);
-
-  const handleSearch = async () => {
-    let routes = "exams"
-    if (setFilterBank) {
-      routes = "banks";
-    }
-    if (setFilterDoc) {
-      routes = "documents"
-    }
-    if (setFilterQuestion) {
-      routes = "questions"
-    }
-
-    try {
-      if (!keyword.trim()) {
-        return;
-      }
-      const url = `${API_URL}/${searchType}/search?searchValue=${encodeURIComponent(
-        keyword
-      )}&page=${currentPage}`;
-      const res = await fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        }
-      });
-      const data = await res.json();
-
-      if (setExam && routes === "exams") {
-        setExam(data.data.data || []);
-      } else if (setFilterBank && routes === "banks") {
-        setFilterBank(data.data.data || []);
-      } else if (setFilterDoc && routes === "documents") {
-        setFilterDoc(data.data.data || []);
-      } else if (setFilterQuestion && routes === "questions") {
-        setFilterQuestion(data.data.data || [])
-      }
-    } catch (err) {
-      console.error("Lỗi khi tìm kiếm:", err);
-    }
-  };
-
-  //hiển thị placeholder
-  const placeholder = [
-    ""
-  ]
 
   const handleClear = () => {
     setKeyword("");
@@ -102,7 +24,7 @@ export default function Search({ setExam, setFilterQuestion, setFilterBank, curr
       <div className={styles.searchBox}>
         <input
           type="text"
-          placeholder={placeholderMap[searchType]}
+          placeholder="Bạn muốn tìm kiếm..."
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
           className={styles.input}

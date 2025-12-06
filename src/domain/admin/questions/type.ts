@@ -12,7 +12,9 @@ export interface Question {
     available: boolean;
     answers: Answer[];
     images?: string[];
-    source: string
+    source: string;
+    type_question?: number;
+    point_type? : number
 }
 
 export interface FileInfo {

@@ -12,6 +12,8 @@ interface QuestionCardProps {
     setEditCell: (cell: { row: number; col: number } | null) => void;
     handleChange: (rowIndex: number, colIndex: number, value: string) => void;
     isChanged: (rowIndex: number, colIndex: number) => boolean;
+    handleDelete?: (questionId: number) => void;
+    handleToggleAvailable?: (questionId: number, available: boolean) => void;
 }
 
 export default function QuestionCard({
@@ -21,12 +23,44 @@ export default function QuestionCard({
     setEditCell,
     handleChange,
     isChanged,
+    handleDelete,
+    handleToggleAvailable
 }: QuestionCardProps) {
     return (
         <div className={styles.card}>
 
             {/* ================= QUESTION TITLE ================= */}
             <h2 className={styles.title}>{question.question_name}</h2>
+
+            <div className={styles.actions}>
+                {/* Toggle Available */}
+                {handleToggleAvailable && (
+                    <button
+                        className={question.available ? styles.active : styles.inactive}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            handleToggleAvailable(question.question_id, !question.available);
+                        }}
+                    >
+                        {question.available ? "hoạt động" : "Không hoạt động"}
+                    </button>
+                )}
+
+                {/* Delete */}
+                {handleDelete && (
+                    <button
+                        className={styles.deleteBtn}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            if (confirm("Bạn có chắc muốn xoá câu hỏi này?")) {
+                                handleDelete(question.question_id);
+                            }
+                        }}
+                    >
+                        Xoá
+                    </button>
+                )}
+            </div>
 
             {/* ================= QUESTION CONTENT (editable) ================= */}
             <div
@@ -104,8 +138,9 @@ export default function QuestionCard({
                                         <Image
                                             src={src}
                                             alt={`answer-img-${index}`}
-                                            width={200}
-                                            height={150}
+                                            width={300}
+                                            height={0}
+                                            style={{ height: "auto" }}
                                             className={styles.image}
                                         />
                                     </div>

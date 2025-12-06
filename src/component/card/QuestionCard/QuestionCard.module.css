@@ -12,6 +12,32 @@
     margin-bottom: 8px;
 }
 
+.actions {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 10px;
+    justify-content: flex-end;
+}
+
+.active {
+    color: #16a34a;
+    font-weight: 600;
+}
+
+.inactive {
+    color: #dc2626;
+    font-weight: 600;
+}
+
+.deleteBtn {
+    padding: 6px 10px;
+    background: #ff4d4f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
 .content {
     font-size: 16px;
     margin-bottom: 12px;

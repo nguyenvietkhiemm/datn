@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import styles from "./ExamCreate.module.css";
 import { useRouter } from "next/navigation";
-import { ExamSchedule, Topic, Subject } from "@/domain/admin/exams/type";
+import { ExamSchedule } from "@/domain/admin/schedules/type";
+import { Topic, Subject } from "@/domain/admin/topic_subject/type";
+import { ExamService } from "@/domain/admin/exams/service";
 
 export default function ExamCreate() {
   const [name, setName] = useState("");
@@ -12,13 +14,11 @@ export default function ExamCreate() {
   const [topicId, setTopicId] = useState<number | null>(null);
   const [subjectId, setSubjectId] = useState<number | null>(null);
   const [scheduleId, setScheduleId] = useState<number | null>(null);
-
   const [examSchedules, setExamSchedules] = useState<ExamSchedule[]>([]);
   const [topics, setTopics] = useState<Topic[]>([]);
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [filterTopic, setFilterTopic] = useState<Topic[]>([]);
   const router = useRouter();
-
   const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
   const token = Cookies.get("token");
 
@@ -55,39 +55,28 @@ export default function ExamCreate() {
   //  Submit form tạo bài thi
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  
     if (!name || !timeLimit || !topicId || !subjectId || !scheduleId) {
       alert("Vui lòng điền đầy đủ thông tin!");
       return;
     }
-
+  
     try {
-      const res = await fetch(`${API_URL}/exams/create`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          exam_name: name,
-          time_limit: Number(timeLimit),
-          topic_id: topicId,
-          subject_id: subjectId,
-          exam_schedule_id: scheduleId,
-        }),
+      const data = await ExamService.createExam({
+        exam_name: name,
+        time_limit: Number(timeLimit),
+        topic_id: topicId,
+        subject_id: subjectId,
+        exam_schedule_id: scheduleId,
       });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        alert("Tạo bài thi thành công!");
-      } else {
-        alert(data.message || "Lỗi khi tạo bài thi!");
-      }
-    
-      router.push(`/admin/exams/create/questions?exam_id=${data.data.exam_id}&type=${subjectId}`);
-    } catch (error) {
-      alert("Không thể tạo bài thi!");
+  
+      alert("Tạo bài thi thành công!");
+      
+      router.push(
+        `/admin/exams/create/questions?exam_id=${data.data.exam_id}&type=${subjectId}`
+      );
+    } catch (error: any) {
+      alert(error.message || "Không thể tạo bài thi!");
     }
   };
 

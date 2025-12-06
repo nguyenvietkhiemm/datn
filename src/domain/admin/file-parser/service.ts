@@ -17,10 +17,7 @@ export const FileParserService = {
     async loadJson(name: string, token?: string) {
         const url = `${API_URL}/file/json/${name}`;
         const res = await fetch(url, {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
+            headers: getHeaders(token)
         });
         const result = await res.json();
         return result.data || [];
@@ -34,10 +31,7 @@ export const FileParserService = {
         const url = `${API_URL}/file/images`;
         const res = await fetch(url, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
+            headers: getHeaders(token),
             body: JSON.stringify({ filesname: filenames }),
         });
 
@@ -56,10 +50,7 @@ export const FileParserService = {
         const url = `${API_URL}/json/save/${name}`;
         const res = await fetch(url, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
+            headers: getHeaders(token),
             body: JSON.stringify(jsonData),
         });
 

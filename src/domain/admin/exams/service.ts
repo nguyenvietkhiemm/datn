@@ -1,5 +1,6 @@
 import { getHeaders, getToken, API_URL } from "@/lib/service";
 import { Exam } from "./type";
+import { FilterSearch } from "@/lib/service";
 
 export const ExamService = {
   // Fetch Exams
@@ -7,22 +8,9 @@ export const ExamService = {
     const token = getToken();
     let url = `${API_URL}/exams?page=${page}`;
 
-    // Filter status
-    if (filterCondition?.status) {
-      url += `&status=${filterCondition.status}`;
-    }
+    const link = FilterSearch(filterCondition, searchKeyword, url)
 
-    // Filter topics
-    if (filterCondition?.topics && filterCondition.topics.length > 0) {
-      url += `&topics=${filterCondition.topics.join(",")}`;
-    }
-
-    // Search
-    if (searchKeyword.trim().length > 0) {
-      url += `&search=${encodeURIComponent(searchKeyword)}`;
-    }
-
-    const resExam = await fetch(url, {
+    const resExam = await fetch(link, {
       method: "GET",
       headers: getHeaders(token),
     });
@@ -71,5 +59,29 @@ export const ExamService = {
     }
 
     return res.json();
+  },
+
+  async createExam(payload: {
+    exam_name: string;
+    time_limit: number;
+    topic_id: number;
+    subject_id: number;
+    exam_schedule_id: number;
+  }) {
+    const token = getToken();
+
+    const res = await fetch(`${API_URL}/exams/create`, {
+      method: "POST",
+      headers: getHeaders(token),
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.message || "Lỗi khi tạo bài thi!");
+    }
+
+    return data;
   },
 };
