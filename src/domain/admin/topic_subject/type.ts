@@ -9,4 +9,10 @@ export interface Topic {
 export type Subject = {
     subject_id: number;
     subject_name: string;
-};
+}
+
+export interface ValidationRules {
+    title?: boolean;
+    description?: boolean;
+    subject?: boolean;
+}

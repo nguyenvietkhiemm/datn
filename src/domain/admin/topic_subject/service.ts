@@ -53,4 +53,67 @@ export const TopicSubjectService = {
             throw error;
         }
     },
+
+    async createTopic(title: string, description?: string, subject_id?: number): Promise<Topic> {
+        const res = await fetch(`${API_URL}/topics/create`, {
+            method: "POST",
+            headers: getHeaders(getToken()),
+            body: JSON.stringify({ title, description, subject_id })
+        });
+
+        if (!res.ok) throw new Error("Tạo Topic thất bại");
+
+        return (await res.json()).data;
+    },
+
+    async createSubject(name: string): Promise<Subject> {
+        const res = await fetch(`${API_URL}/subjects/create`, {
+            method: "POST",
+            headers: getHeaders(getToken()),
+            body: JSON.stringify({ subject_name: name }),
+        });
+
+        if (!res.ok) throw new Error("Tạo Subject thất bại");
+        return (await res.json()).data;
+    },
+
+    async deleteTopic(id: number): Promise<void> {
+        const res = await fetch(`${API_URL}/topics/remove/${id}`, {
+            method: "DELETE",
+            headers: getHeaders(getToken()),
+        });
+
+        if (!res.ok) throw new Error("Xoá Topic thất bại");
+    },
+
+    async deleteSubject(id: number): Promise<void> {
+        const res = await fetch(`${API_URL}/subjects/remove/${id}`, {
+            method: "DELETE",
+            headers: getHeaders(getToken()),
+        });
+
+        if (!res.ok) throw new Error("Xoá Subject thất bại");
+    },
+
+    async updateSubject(id: number, subject_name: string): Promise<Subject> {
+        const res = await fetch(`${API_URL}/subjects/update/${id}`, {
+            method: "PATCH",
+            headers: getHeaders(getToken()),
+            body: JSON.stringify({ subject_name })
+        });
+        if (!res.ok) throw new Error("Sửa Subject thất bại");
+        return (await res.json()).data;
+    },
+
+    async updateTopic(id: number, payload: Partial<Topic>): Promise<Topic> {
+        const res = await fetch(`${API_URL}/topics/update/${id}`, {
+            method: "PATCH",
+            headers: getHeaders(getToken()),
+            body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) throw new Error("Sửa Topic thất bại");
+
+        return (await res.json()).data;
+    },
 }

@@ -30,7 +30,7 @@ export default function QuestionCard({
         <div className={styles.card}>
 
             {/* ================= QUESTION TITLE ================= */}
-            <h2 className={styles.title}>{question.question_name}</h2>
+            <h2 className={styles.title}>{`Câu ${rowIndex + 1}`}</h2>
 
             <div className={styles.actions}>
                 {/* Toggle Available */}

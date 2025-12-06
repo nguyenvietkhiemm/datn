@@ -1,0 +1,129 @@
+/* ========================= SECTION ========================= */
+
+.section {
+    margin-bottom: 40px;
+    background: #fff;
+    padding: 18px;
+    border-radius: 10px;
+    border: 1px solid #e6e6e6;
+}
+
+.sectionTitle {
+    margin-bottom: 16px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* ========================= FORM ========================= */
+
+.formRow {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 20px;
+}
+
+.formRow input,
+.formRow select {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.buttonPrimary {
+    padding: 8px 14px;
+    background: #4a8fff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.buttonPrimary:hover {
+    opacity: 0.9;
+}
+
+.inputError {
+    border: 1px solid red !important;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* ========================= TABLE ========================= */
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.table th,
+.table td {
+    border: 1px solid #e2e2e2;
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.table th {
+    background: #fafafa;
+    font-weight: 600;
+}
+
+.table tr:nth-child(even) {
+    background: #fafafa;
+}
+
+/* ========================= ACTION BUTTONS ========================= */
+
+.editBtn,
+.deleteBtn,
+.saveBtn,
+.cancelBtn {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    margin-right: 6px;
+}
+
+.editBtn {
+    background: #ffd000;
+}
+
+.deleteBtn {
+    background: #ff4d4f;
+    color: white;
+}
+
+.saveBtn {
+    background: #4caf50;
+    color: white;
+}
+
+.cancelBtn {
+    background: #999;
+    color: white;
+}
+
+.editBtn:hover,
+.deleteBtn:hover,
+.saveBtn:hover,
+.cancelBtn:hover {
+    opacity: 0.9;
+}
+
+/* ========================= INLINE INPUT ========================= */
+
+.inlineInput {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+}

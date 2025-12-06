@@ -246,7 +246,11 @@ CREATE INDEX idx_user_email ON user_account(email);
 CREATE INDEX idx_document_topic ON document(topic_id);
 CREATE INDEX idx_question_embedding_present ON question(question_id) WHERE embedding IS NOT NULL;
 CREATE INDEX idx_document_embedding_present ON document(document_id) WHERE embedding IS NOT NULL;
+AlTER TABLE public.question
+ADD COLUMN image JSON
 
+AlTER TABLE public.answer
+ADD COLUMN image JSON
 -- pgvector index (ivfflat) ví dụ cho document
 -- Chạy sau khi có đủ dữ liệu và tuning parameter lists
 -- CREATE INDEX ON document USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);

@@ -14,7 +14,7 @@ const navItems = [
   { name: "Câu hỏi", href: "/admin/questions", icon: Settings },
   { name: "Lịch thi", href: "/admin/schedules", icon: Calendar },
   { name: "Lộ trình", href: "/admin/roadmap", icon: Map },
-  { name: "Cài đặt", href: "/admin/settings", icon: Settings },
+  { name: "Môn học và Tiêu đề", href: "/admin/topic_subject", icon: Settings },
 ];
 
 export default function Sidebar() {

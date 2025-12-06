@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import styles from "./Roadmap.module.css";
-import Cookies from "js-cookie";
 import { Button } from "@/component/ui/button/Button";
 import { RoadmapStep } from "@/domain/admin/roadmap/type";
 import { Topic } from "@/domain/admin/topic_subject/type";

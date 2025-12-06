@@ -76,7 +76,7 @@ export default function Question() {
         }
     };
 
-    //lay list json tu server
+    //lay list tu server
     // const handleFetchCsv = async () => {
     //     try {
     //         const url = `${API_URL}/file/csv`;
@@ -101,20 +101,20 @@ export default function Question() {
         }
     };
 
-    // Upload CSV từ máy
-    const handleUploadCsv = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        try {
-            const file = e.target.files?.[0];
+    // Upload Json từ máy
+    // const handleUploadCsv = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     try {
+    //         const file = e.target.files?.[0];
 
-            if (!file) return;
+    //         if (!file) return;
 
-            const url = `${API_URL}/file/csv/save/${file.name}`;
-            const result = await FileService.uploadFile(url, file);
-        } catch (error) {
-            console.error("Lỗi uploadFile:", error);
-            throw error;
-        }
-    };
+    //         const url = `${API_URL}/file/csv/save/${file.name}`;
+    //         const result = await FileService.uploadFile(url, file);
+    //     } catch (error) {
+    //         console.error("Lỗi uploadFile:", error);
+    //         throw error;
+    //     }
+    // };
 
     // Upload DOCX từ máy
     const handleUploadDocx = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -179,14 +179,13 @@ export default function Question() {
                         </Button>
                     </div>
 
-                    {/* Upload CSV */}
                     <div className={styles.csv}>
-                        <input
+                        {/* <input
                             type="file"
                             accept=".csv"
                             ref={csvInputRef}
                             style={{ display: "none" }}
-                            onChange={handleUploadCsv}
+                            onChange={hande}
                         />
 
                         <Button
@@ -194,14 +193,6 @@ export default function Question() {
                             size="md"
                             onClick={() => csvInputRef.current?.click()}>
                             Thêm câu hỏi từ CSV
-                        </Button>
-
-                        {/* <Button
-                            variant="primary"
-                            size="md"
-                            onClick={handleFetchCsv}
-                        >
-                            Danh sách CSV
                         </Button> */}
 
                         <Button

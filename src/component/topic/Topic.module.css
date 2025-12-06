@@ -1,0 +1,141 @@
+/* ========================= SECTION ========================= */
+
+.section {
+    margin-bottom: 50px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e6e6e6;
+}
+
+.sectionTitle {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+/* ========================= FORM ========================= */
+
+.formRow {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 20px;
+}
+
+.formRow input,
+.formRow select {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.formRow button {
+    padding: 8px 14px;
+    background: #4a8fff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.buttonPrimary {
+    padding: 8px 16px;
+    background: #4a8fff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.buttonPrimary:hover {
+    opacity: 0.9;
+}
+
+.inputError {
+    border: 1px solid red !important;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+}
+.inputError {
+    border: 1px solid red !important;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* ========================= TABLE ========================= */
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    border: 1px solid #e2e2e2;
+    padding: 10px 12px;
+    text-align: left;
+}
+
+.table th {
+    background: #fafafa;
+    font-weight: 600;
+}
+
+/* ========================= ACTION BUTTONS ========================= */
+
+.editBtn,
+.deleteBtn,
+.saveBtn,
+.cancelBtn {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    margin-right: 6px;
+}
+
+.editBtn {
+    background: #ffd000;
+}
+
+.deleteBtn {
+    background: #ff4d4f;
+    color: white;
+}
+
+.saveBtn {
+    background: #4caf50;
+    color: white;
+}
+
+.cancelBtn {
+    background: #999;
+    color: white;
+}
+
+.editBtn:hover,
+.deleteBtn:hover,
+.saveBtn:hover,
+.cancelBtn:hover {
+    opacity: 0.9;
+}
+
+/* ========================= INLINE INPUT ========================= */
+
+.inlineInput,
+.inlineSelect {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+}

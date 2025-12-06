@@ -1,0 +1,84 @@
+.container {
+    padding: 20px;
+}
+
+.pageTitle {
+    font-size: 26px;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+.section {
+    margin-bottom: 50px;
+}
+
+.formRow {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.formRow input,
+.formRow select {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.formRow button {
+    padding: 8px 14px;
+    background: #4a8fff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    border: 1px solid #e2e2e2;
+    padding: 10px;
+    text-align: left;
+}
+
+.editBtn {
+    background: #ffd000;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    margin-right: 6px;
+    cursor: pointer;
+}
+
+.deleteBtn {
+    background: #ff4d4f;
+    color: white;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.saveBtn {
+    background: #4caf50;
+    color: white;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    margin-right: 6px;
+    cursor: pointer;
+}
+
+.cancelBtn {
+    background: #999;
+    color: white;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
