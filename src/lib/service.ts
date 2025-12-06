@@ -4,11 +4,18 @@ export function getToken() {
     return Cookies.get("token")
 }
 
-export function getHeaders(token?: string) {
-    return {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
+export function getHeaders(token?: string, is_json: boolean = true) {
+    const headers: Record<string, string> = {};
+
+    if (is_json) {
+        headers["Content-Type"] = "application/json";
     }
+
+    if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    return headers;
 }
 
 export const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND
