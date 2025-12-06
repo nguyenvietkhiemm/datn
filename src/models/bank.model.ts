@@ -7,3 +7,8 @@ export interface Bank {
     questions?: Question[];
     available: boolean;
 }
+
+export type DoBank = {
+    question_id : number;
+    user_answer : (string | number)[];
+}
