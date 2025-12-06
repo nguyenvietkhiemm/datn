@@ -9,7 +9,7 @@ import Search from "@/component/search/Search";
 import { Button } from "@/component/ui/button/Button";
 import { useSearchParams } from "next/navigation";
 import { Question, CsvFile } from "@/domain/admin/exams/type";
-import { FileParserService } from "@/domain/admin/file-parser/service";
+import { FileParserService } from "@/domain/admin/file/file-parser/service";
 export default function QuestionCreate() {
     const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
     const token = Cookies.get("token");

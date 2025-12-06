@@ -8,8 +8,10 @@ import Search from "@/component/search/Search";
 import { Button } from "@/component/ui/button/Button";
 import FileList from "@/component/popup/FileList";
 import { fetchQuestions } from "@/utils/question.service";
-import type { Answer, Question, FileInfo } from "@/domain/admin/questions/type";
+import type { Answer, Question} from "@/domain/admin/questions/type";
+import type { FileInfo } from "@/domain/admin/file/type";
 import { QuestionService } from "@/domain/admin/questions/service";
+import { FileService } from "@/domain/admin/file/service";
 
 export default function Question() {
     const [questions, setQuestions] = useState<Question[]>([]);
@@ -41,7 +43,7 @@ export default function Question() {
 
         fetchData();
     }, [currentPage]);
-    
+
     //Lọc các câu hỏi đang hoạt động (optional)
     useEffect(() => {
         setFilterQuestion(questions?.filter((q) => q.available === true));
@@ -75,7 +77,7 @@ export default function Question() {
     const handleFetchCsv = async () => {
         try {
             const url = `${API_URL}/file/csv`;
-            const data = await QuestionService.fetchContent(url);
+            const data = await FileService.fetchContent(url);
             setFileList(data)
             setIsFileList(true)
         } catch (error) {
@@ -88,7 +90,7 @@ export default function Question() {
     const handleFetchJson = async () => {
         try {
             const url = `${API_URL}/file/json`;
-            const data = await QuestionService.fetchContent(url);
+            const data = await FileService.fetchContent(url);
             setFileList(data)
             setIsFileList(true)
         } catch (error) {
@@ -105,7 +107,7 @@ export default function Question() {
             if (!file) return;
 
             const url = `${API_URL}/file/csv/save/${file.name}`;
-            const result = await QuestionService.uploadFile(url, file);
+            const result = await FileService.uploadFile(url, file);
         } catch (error) {
             console.error("Lỗi uploadFile:", error);
             throw error;
@@ -120,7 +122,7 @@ export default function Question() {
             if (!file) return;
 
             const url = `${API_URL}/file/docx/save/${file.name}`;
-            const result = await QuestionService.uploadFile(url, file);
+            const result = await FileService.uploadFile(url, file);
         } catch (error) {
             console.error("Lỗi uploadFile:", error);
             throw error;

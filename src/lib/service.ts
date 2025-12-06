@@ -10,4 +10,5 @@ export function getHeaders (token? : string){
         "Authorization" : `Bearer ${token}`
     }
 }
+
 export const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND

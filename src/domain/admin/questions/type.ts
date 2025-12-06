@@ -14,9 +14,3 @@ export interface Question {
     images?: string[];
     source: string
 }
-
-export interface FileInfo {
-    id: number;
-    name: string;
-    url: string;
-}

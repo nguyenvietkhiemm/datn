@@ -6,9 +6,9 @@ import Cookies from "js-cookie";
 import styles from "./JsonDetailPage.module.css";
 import QuestionCard from "@/component/card/QuestionCard/QuestionCard";
 import { Button } from "@/component/ui/button/Button";
-import { JsonAnswer, JsonQuestion, Change, Params } from "@/domain/admin/file-parser/type";
-import { FileParserService } from "@/domain/admin/file-parser/service";
-import { FileParserModel } from "@/domain/admin/file-parser/model";
+import { JsonAnswer, JsonQuestion, Change, Params } from "@/domain/admin/file/file-parser/type";
+import { FileParserService } from "@/domain/admin/file/file-parser/service";
+import { FileParserModel } from "@/domain/admin/file/file-parser/model";
 
 export default function JsonDetailPage() {
     const { name } = useParams<Params>();
