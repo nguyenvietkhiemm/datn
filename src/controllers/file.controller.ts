@@ -2,9 +2,6 @@ import { Request, Response } from "express";
 import safeExecute, { DefaultResponse } from "../utils/safe.execute";
 import {runBertModel} from "../utils/run.bert";
 import { getCsvFilesList, saveCsvFile, getCsvById, getJsonFilesList, getJsonById, getImagesById } from "../services/file.service";
-import path from "path";
-import fs from "fs";
-import { parse } from "csv-parse/sync";
 
 export const FileController = {
 
