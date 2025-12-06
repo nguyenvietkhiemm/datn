@@ -257,6 +257,16 @@ CREATE TABLE IF NOT EXISTS question_bank (
     bank_id INT,
     PRIMARY KEY (question_id, bank_id),
     FOREIGN KEY (question_id) REFERENCES question(question_id) ON DELETE CASCADE,
+    FOREIGN KEY (bank_id
+    ) REFERENCES exam(bank_id
+    ) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS question_bank (
+    question_id INT,
+    bank_id INT,
+    PRIMARY KEY (question_id, bank_id),
+    FOREIGN KEY (question_id) REFERENCES question(question_id) ON DELETE CASCADE,
     FOREIGN KEY (bank_id) REFERENCES bank(bank_id) ON DELETE CASCADE
 );
 
@@ -346,3 +356,9 @@ ADD COLUMN image JSON
 
 AlTER TABLE public.answer
 ADD COLUMN image JSON
+
+ALTER TABLE public.bank
+ADD COLUMN time_limit INT
+
+ALTER TABLE public.question
+ADD COLUMN type_question INT

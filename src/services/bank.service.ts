@@ -1,5 +1,5 @@
 import pool, { query } from "../config/database";
-import { Bank } from "../models/bank.model";
+import { Bank, DoBank } from "../models/bank.model";
 import { Question } from "../models/question.model";
 
 const BankService = {
@@ -50,6 +50,112 @@ const BankService = {
         return result.rows[0] || null;
     },
 
+    async submit(bank_id: number, do_bank: DoBank[], subject_type: number):
+        Promise<{ score: number, score_1: number, score_2: number, score_3: number }> {
+
+        const client = await pool.connect();
+
+        try {
+            await client.query("BEGIN");
+
+            const sql = `
+                SELECT 
+                    q.question_id,
+                    q.type_question,
+                    a.answer_id,
+                    a.answer_content,
+                    a.is_correct
+                FROM question_bank qb
+                JOIN question q ON q.question_id = qb.question_id
+                JOIN answer a ON a.question_id = q.question_id
+                WHERE qb.bank_id = $1
+                ORDER BY q.question_id;
+                `;
+
+            const { rows } = await client.query(sql, [bank_id]);
+
+            // Gom dữ liệu thành dạng:
+            // question_id → { type_question, correctAnswers[] }
+            const map = new Map<number, {
+                type_question: number;
+                correct_answers: number[];
+                correct_text?: string; 
+            }>();
+
+            for (const r of rows) {
+                if (!map.has(r.question_id)) {
+                    map.set(r.question_id, {
+                        type_question: r.type_question,
+                        correct_answers: [],
+                        correct_text: undefined
+                    });
+                }
+                const current = map.get(r.question_id)!;
+
+                if (r.is_correct && r.type_question !== 3) {
+                    current.correct_answers.push(r.answer_id);
+                }
+
+                if (r.type_question === 3 && r.is_correct) {
+                    current.correct_text = r.answer_content; 
+                }
+            }
+
+            //diem tong
+            let score = 0;
+            //diem tung phan
+            let score_1 = 0;
+            let score_2 = 0;
+            let score_3 = 0;
+
+            for (const user of do_bank) {
+                const info = map.get(user.question_id);
+                if (!info) continue;
+
+                const { type_question, correct_answers } = info;
+
+                // ==== Trắc nghiệm ====
+                if (type_question === 1) {
+                    if (user.user_answer[0] == correct_answers[0]) {
+                        score += 0.25
+                    }
+                }
+                else if (type_question === 2) {
+                    const correct = user.user_answer.filter(a => correct_answers.includes(Number(a))).length;
+                    if (correct === 1) {
+                        score_2 += 0.1
+                    } else if (correct === 2) {
+                        score_2 += 0.25
+                    } else if (correct === 3) {
+                        score_2 += 0.5
+                    } else score_2 += 1
+                }
+                else {
+                    const correct_text = correct_answers[0];
+                    const user_text = user.user_answer[0];
+                    if((String(user_text).trim().toLowerCase() === String(correct_text).trim().toLowerCase())){
+                        if (subject_type === 1) {
+                            score_3 += 0.5
+                        } else {
+                            score_3 += 0.25
+                        }
+                    }
+                }
+            }
+            score = score_1 + score_2 + score_3
+
+            await client.query("COMMIT");
+
+            return { score, score_1, score_2, score_3 };
+
+        } catch (error) {
+            await client.query("ROLLBACK");
+            throw error;
+        } finally {
+            client.release();
+        }
+    },
+
     async setAvailable(id: number, available: boolean): Promise<boolean> {
         const result = await query(
             "UPDATE bank SET available = $1 WHERE bank_id = $2",
@@ -66,33 +172,33 @@ const BankService = {
 
     async list(page: number, searchValue: string, topicIds: number[]): Promise<({ banks: Bank[]; totalPages: number }) | []> {
 
-            const limit = 12;
-            const offset = (page - 1) * limit;
+        const limit = 12;
+        const offset = (page - 1) * limit;
 
-            let conditions = [];
-            let params = [];
-            let idx = 1;
+        let conditions = [];
+        let params = [];
+        let idx = 1;
 
-            // dieu kien loc bai luyen tap 
-            conditions.push(`b.available = true`);
+        // dieu kien loc bai luyen tap 
+        conditions.push(`b.available = true`);
 
-            // Search
-            if (searchValue.trim() !== "") {
-                conditions.push(`(LOWER(b.description) LIKE LOWER($${idx}))`);
-                params.push(`%${searchValue}%`);
-                idx++;
-            }
+        // Search
+        if (searchValue.trim() !== "") {
+            conditions.push(`(LOWER(b.description) LIKE LOWER($${idx}))`);
+            params.push(`%${searchValue}%`);
+            idx++;
+        }
 
-            // Topic filter
-            if (topicIds.length > 0) {
-                conditions.push(`b.topic_id = ANY($${idx})`);
-                params.push(topicIds);
-                idx++;
-            }
+        // Topic filter
+        if (topicIds.length > 0) {
+            conditions.push(`b.topic_id = ANY($${idx})`);
+            params.push(topicIds);
+            idx++;
+        }
 
-            const whereClause = conditions.length ? `WHERE ${conditions.join(" AND ")}` : "";
+        const whereClause = conditions.length ? `WHERE ${conditions.join(" AND ")}` : "";
 
-            const queryText = `
+        const queryText = `
                 SELECT 
                     b.*,
                     t.title
@@ -103,20 +209,20 @@ const BankService = {
                 LIMIT ${limit} OFFSET ${offset}
                 `;
 
-            const result = await query(queryText, params);
+        const result = await query(queryText, params);
 
-            // Count total
-            const countQuery = `
+        // Count total
+        const countQuery = `
                 SELECT COUNT(*) AS total
                 FROM bank b
                 ${whereClause}
                 `;
 
-            const countResult = await query(countQuery, params);
+        const countResult = await query(countQuery, params);
 
-            const totalPages = Math.ceil(countResult.rows[0].total / limit);
+        const totalPages = Math.ceil(countResult.rows[0].total / limit);
 
-            return { banks: result.rows, totalPages };
+        return { banks: result.rows, totalPages };
     }
 };
 
