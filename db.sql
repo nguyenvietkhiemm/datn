@@ -341,3 +341,8 @@ CREATE INDEX IF NOT EXISTS idx_user_goal_user ON user_goal(user_id);
 ALTER TABLE question ALTER COLUMN question_name TYPE VARCHAR(1000);
 ALTER TABLE question ALTER COLUMN question_content TYPE VARCHAR(10000);
 ALTER TABLE answer ALTER COLUMN answer_content TYPE VARCHAR(10000);
+AlTER TABLE public.question
+ADD COLUMN image JSON
+
+AlTER TABLE public.answer
+ADD COLUMN image JSON
