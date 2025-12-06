@@ -61,7 +61,7 @@ topicRoute.get(
 topicRoute.post(
   '/create',
   Authentication.AuthenticateToken,
-  Authentication.AuthorizeRoles(...ADMIN), // chỉ admin được tạo
+  Authentication.AuthorizeRoles(...ADMIN), 
   TopicController.create
 );
 
