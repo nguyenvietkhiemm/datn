@@ -6,7 +6,8 @@ import Pagination from "@/component/pagination/Pagination";
 import Search from "@/component/search/Search";
 import { Button } from "@/component/ui/button/Button";
 import FileList from "@/component/popup/FileList";
-import type { Answer, Question, FileInfo } from "@/domain/admin/questions/type";
+import type { Answer, Question } from "@/domain/admin/questions/type";
+import type { FileInfo } from "@/domain/admin/file/type";
 import { QuestionService } from "@/domain/admin/questions/service";
 import QuestionCard from "@/component/card/QuestionCard/QuestionCard";
 import { QuestionModel } from "@/domain/admin/questions/model";
@@ -76,23 +77,14 @@ export default function Question() {
         }
     };
 
-    //lay list json tu server
-    // const handleFetchCsv = async () => {
-    //     try {
-    //         const url = `${API_URL}/file/csv`;
-    //         const data = await QuestionService.fetchContent(url);
-    //         setFileList(data)
-    //         setIsFileList(true)
-    //     } catch (error) {
-    //         console.error("Lỗi fetchCsvContent:", error);
-    //         throw error;
-    //     }
-    // };
-
-    //lay list json tu server
+    // lay list json tu server
     const handleFetchJson = async () => {
         try {
-            const data = await QuestionService.fetchContent();
+            const url = `${API_URL}/file/json`;
+            console.log("FileService =", FileService);
+
+            const data = await FileService.fetchFileList(url);
+
             setFileList(data)
             setIsFileList(true)
         } catch (error) {
@@ -196,14 +188,6 @@ export default function Question() {
                             Thêm câu hỏi từ CSV
                         </Button>
 
-                        {/* <Button
-                            variant="primary"
-                            size="md"
-                            onClick={handleFetchCsv}
-                        >
-                            Danh sách CSV
-                        </Button> */}
-
                         <Button
                             variant="primary"
                             size="md"
@@ -215,6 +199,8 @@ export default function Question() {
 
                 </div>
             </div>
+
+
 
             {isFileList && (
                 <div className={styles.overlay}>
@@ -234,6 +220,8 @@ export default function Question() {
                     </div>
                 </div>
             )}
+
+
 
             {/* Bảng danh sách câu hỏi */}
             <div className={styles.questionList}>
