@@ -9,7 +9,7 @@ import { Button } from "@/component/ui/button/Button";
 import FileList from "@/component/popup/FileList";
 import { fetchQuestions } from "@/utils/question.service";
 import type { Answer, Question, FileInfo } from "@/domain/admin/questions/type";
-import { QuestionService } from "@/domain/admin/questions/servie";
+import { QuestionService } from "@/domain/admin/questions/service";
 
 export default function Question() {
     const [questions, setQuestions] = useState<Question[]>([]);
@@ -41,6 +41,7 @@ export default function Question() {
 
         fetchData();
     }, [currentPage]);
+    
     //Lọc các câu hỏi đang hoạt động (optional)
     useEffect(() => {
         setFilterQuestion(questions?.filter((q) => q.available === true));

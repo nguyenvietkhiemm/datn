@@ -73,10 +73,13 @@ export const QuestionService = {
             headers: getHeaders(token),
         });
 
-        if (!res.ok) throw new Error("Không tải được file từ server");
+        if (!res.ok) {
+            const errorText = await res.text(); // đọc nội dung lỗi từ server
+            throw new Error(`Không tải được file từ server: ${errorText}`);
+        }
 
-        const csvText = await res.json();
-        return csvText.data as FileInfo[];
+        const fileList = await res.json();
+        return fileList.data as FileInfo[];
     },
 
     async uploadFile(uploadUrl: string, file: File): Promise<any> {

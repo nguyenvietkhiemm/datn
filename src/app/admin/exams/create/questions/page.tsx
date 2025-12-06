@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import styles from "./QuestionCreate.module.css";
-import { QuestionService } from "@/domain/admin/questions/servie";
+import { QuestionService } from "@/domain/admin/questions/service";
 import Pagination from "@/component/pagination/Pagination";
 import Search from "@/component/search/Search";
 import { Button } from "@/component/ui/button/Button";

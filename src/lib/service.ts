@@ -7,7 +7,7 @@ export function getToken (){
 export function getHeaders (token? : string){
     return {
         "Content-Type" : "application/json",
-        "Authoration" : `Bearer ${token}`
+        "Authorization" : `Bearer ${token}`
     }
 }
 export const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND
