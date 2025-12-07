@@ -50,7 +50,7 @@ const BankService = {
         return result.rows[0] || null;
     },
 
-    async submit(bank_id: number, do_bank: DoBank[], subject_type: number):
+    async submit(bank_id: number, user_id: number, do_bank: DoBank[], subject_type: number):
         Promise<{ score: number, score_1: number, score_2: number, score_3: number }> {
 
         const client = await pool.connect();
@@ -79,7 +79,7 @@ const BankService = {
             const map = new Map<number, {
                 type_question: number;
                 correct_answers: number[];
-                correct_text?: string; 
+                correct_text?: string;
             }>();
 
             for (const r of rows) {
@@ -94,10 +94,11 @@ const BankService = {
 
                 if (r.is_correct && r.type_question !== 3) {
                     current.correct_answers.push(r.answer_id);
+
                 }
 
                 if (r.type_question === 3 && r.is_correct) {
-                    current.correct_text = r.answer_content; 
+                    current.correct_text = r.answer_content;
                 }
             }
 
@@ -114,12 +115,17 @@ const BankService = {
 
                 const { type_question, correct_answers } = info;
 
-                // ==== Trắc nghiệm ====
+                // ==== Trắc nghiệm loai 1 đáp án ====
                 if (type_question === 1) {
                     if (user.user_answer[0] == correct_answers[0]) {
                         score += 0.25
                     }
+                    await client.query(`
+                        INSERT INTO user_bank_answer (bank_id, user_id, answer_id)
+                        VALUES ($1, $2, $3)
+                    `, [bank_id, user_id, user.user_answer[0]]);
                 }
+                // ==== Trắc nghiệm loai nhiều đáp án ====
                 else if (type_question === 2) {
                     const correct = user.user_answer.filter(a => correct_answers.includes(Number(a))).length;
                     if (correct === 1) {
@@ -129,20 +135,37 @@ const BankService = {
                     } else if (correct === 3) {
                         score_2 += 0.5
                     } else score_2 += 1
+
+                    for (const ansId of user.user_answer) {
+                        if (!isNaN(Number(ansId))) {
+                            await client.query(`
+                                INSERT INTO user_bank_answer (bank_id, user_id, answer_id)
+                                VALUES ($1, $2, $3)
+                            `, [bank_id, user_id, ansId]);
+                        }
+                    }
                 }
+                // ==== Tự luận đáp án ====
                 else {
                     const correct_text = correct_answers[0];
                     const user_text = user.user_answer[0];
-                    if((String(user_text).trim().toLowerCase() === String(correct_text).trim().toLowerCase())){
+                    if ((String(user_text).trim().toLowerCase() === String(correct_text).trim().toLowerCase())) {
                         if (subject_type === 1) {
                             score_3 += 0.5
                         } else {
                             score_3 += 0.25
                         }
                     }
+                    await client.query(`
+                        INSERT INTO user_bank_answer (bank_id, user_id, user_answer_text)
+                        VALUES ($1, $2, $3)
+                    `, [bank_id, user_id, user.user_answer[0]]);
                 }
             }
             score = score_1 + score_2 + score_3
+
+            //luu CAU tra loi
+
 
             await client.query("COMMIT");
 

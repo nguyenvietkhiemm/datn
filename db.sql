@@ -362,3 +362,6 @@ ADD COLUMN time_limit INT
 
 ALTER TABLE public.question
 ADD COLUMN type_question INT
+
+ALTER TABLE user_bank_answer
+ADD COLUMN user_answer_text TEXT;
