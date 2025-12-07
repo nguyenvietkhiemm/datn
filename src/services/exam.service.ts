@@ -116,12 +116,18 @@ const ExamService = {
     const whereClause = conditions.length ? `WHERE ${conditions.join(" AND ")}` : "";
     const queryText = `
           SELECT 
-            e.exam_name, e.topic_id, e.time_limit, e.exam_id, e.created_at, e.available,
-            t.title,
-            es.start_time, es.end_time
+            e.exam_name, e.topic_id, e.time_limit, e.exam_id, e.created_at, e.available, e.description,
+            t.title AS topic_name,
+            es.start_time, es.end_time,
+            COALESCE(c.total_contestants, 0) AS contestant_count
           FROM exam e
           JOIN topic t ON e.topic_id = t.topic_id
           JOIN exam_schedule es ON es.exam_schedule_id = e.exam_schedule_id
+          LEFT JOIN (
+            SELECT exam_id, COUNT(*) AS total_contestants
+            FROM contestants
+            GROUP BY exam_id
+          ) c ON c.exam_id = e.exam_id
           ${whereClause}
           ORDER BY e.exam_id DESC
           LIMIT ${limit} OFFSET ${offset}
