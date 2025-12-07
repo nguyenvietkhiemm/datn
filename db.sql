@@ -365,3 +365,12 @@ ADD COLUMN type_question INT
 
 ALTER TABLE user_bank_answer
 ADD COLUMN user_answer_text TEXT;
+
+CREATE TABLE contestants(
+contestants_id SERIAL PRIMARY KEY,
+exam_id int,
+FOREIGN KEY (exam_id) REFERENCES exam(exam_id) ON DELETE CASCADE
+)
+
+ALTEr TABLE exam 
+ADD COLUMN description VARCHAR(200)
