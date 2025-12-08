@@ -12,7 +12,6 @@ export interface Exam {
 }
 
 export interface DoExam {
-    question_id: number;
-    user_answer: number;
-    user_answer_content?: string
+    question_id : number;
+    user_answer : (string | number)[];
 }

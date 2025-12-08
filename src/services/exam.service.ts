@@ -150,34 +150,148 @@ const ExamService = {
     return { exams: result.rows, totalPages };
   },
 
-  // async submit(exam_id: number, do_exam: DoExam[]): Promise<{ score: number, correct_count: number }> {
-  //   const client = await pool.connect();
-  //   try {
-  //     await client.query("BEGIN");
+  async submit(
+    exam_id: number,
+    user_id: number,
+    do_exam: DoExam[],
+    subject_type: number
+  ): Promise<{ score: number; correct_count: number }> {
+    const client = await pool.connect();
+  
+    try {
+      await client.query("BEGIN");
+  
+      // 1. Lấy toàn bộ câu hỏi + đáp án đúng
+      const sql = `
+        SELECT 
+          q.question_id,
+          q.type_question,
+          a.answer_id,
+          a.answer_content,
+          a.is_correct
+        FROM question_exam qe
+        JOIN question q ON q.question_id = qe.question_id
+        JOIN answer a ON a.question_id = q.question_id
+        WHERE qe.exam_id = $1
+        ORDER BY q.question_id ASC
+      `;
+  
+      const { rows } = await client.query(sql, [exam_id]);
+  
+      // Map dữ liệu
+      const map = new Map<
+        number,
+        {
+          type_question: number;
+          correct_answers: number[];
+          correct_text?: string;
+        }
+      >();
+  
+      for (const r of rows) {
+        if (!map.has(r.question_id)) {
+          map.set(r.question_id, {
+            type_question: r.type_question,
+            correct_answers: [],
+            correct_text: undefined
+          });
+        }
+  
+        const current = map.get(r.question_id)!;
+  
+        // TH trắc nghiệm (loại 1 & 2)
+        if (r.is_correct && r.type_question !== 3) {
+          current.correct_answers.push(r.answer_id);
+        }
+  
+        // TH tự luận
+        if (r.type_question === 3 && r.is_correct) {
+          current.correct_text = r.answer_content;
+        }
+      }
+  
+      // ======== CHẤM ĐIỂM ==========
+      let score = 0;
+      let correct_count = 0;
+  
+      for (const user of do_exam) {
+        const info = map.get(user.question_id);
+        if (!info) continue;
+  
+        const { type_question, correct_answers, correct_text } = info;
+  
+        // ==== Loại 1: Trắc nghiệm 1 đáp án ====
+        if (type_question === 1) {
+          if (user.user_answer[0] == correct_answers[0]) {
+            score += 0.25
+          }
+  
+          await client.query(
+            `INSERT INTO user_exam_answer (exam_id, user_id, answer_id)
+             VALUES ($1, $2, $3)`,
+            [exam_id, user_id, user.user_answer[0]]
+          );
+        }
+  
+        // ==== Loại 2: Trắc nghiệm nhiều đáp án ====
+        else if (type_question === 2) {
+          const correctSelected = user.user_answer.filter(a =>
+            correct_answers.includes(Number(a))
+          ).length;
+          const correct = user.user_answer.filter(a => correct_answers.includes(Number(a))).length;
+          if (correct === 1) {
+              score += 0.1
+          } else if (correct === 2) {
+              score += 0.25
+          } else if (correct === 3) {
+              score += 0.5
+          } else score += 1;
+  
+          for (const ans of user.user_answer) {
+            if (!isNaN(Number(ans))) {
+              await client.query(
+                `INSERT INTO user_exam_answer (exam_id, user_id, answer_id)
+                 VALUES ($1, $2, $3)`,
+                [exam_id, user_id, ans]
+              );
+            }
+          }
+        }
+  
+        // ==== Loại 3: Tự luận ====
+        else if (type_question === 3) {
+          const correct_text = correct_answers[0];
+          const user_text = user.user_answer[0];
+          if ((String(user_text).trim().toLowerCase() === String(correct_text).trim().toLowerCase())) {
+              if (subject_type === 1) {
+                  score += 0.5
+              } else {
+                  score += 0.25
+              }
+          }
+  
+          await client.query(
+            `INSERT INTO user_exam_answer (exam_id, user_id, user_answer_text)
+             VALUES ($1, $2, $3)`,
+            [exam_id, user_id, user.user_answer[0]]
+          );
+        }
+      }
+  
+      await client.query("COMMIT");
+  
+      return { score, correct_count };
+    } catch (error) {
+      await client.query("ROLLBACK");
+      throw error;
+    } finally {
+      client.release();
+    }
+  },
 
-  //     //lay dap an dung
-  //     const query_answer_correct = `
-  //                   SELECT q.type_question, q.point_question, a.answer_content, a.is_correct
-  //                   FROM question exam e
-  //                   JOIN question_exam qe ON e.exam_id = qe.exam_id
-  //                   JOIN question q ON q.question_id = qe.question_id
-  //                   JOIN answer a ON a.question_id = q.question_id
-  //                   WHERE answer_id =$1
-  //                   ODER BY q.question_id DESC
-  //                   `
-  //     const {rows : answer_correct} = await client.query(query_answer_correct, [exam_id])
+  async rank(){
 
-  //     const correctMap = new Map<number, number>();
-  //     const pointMap = new Map<number, number>(); 
-  //     const typeMap = new Map<number, number>();
-
-  //   } catch (error) {
-  //     console.log(error);
-  //     client.query("ROLLBACK")
-  //   } finally{
-  //     client.query("COMMIT")
-  //   }
-  // },
+  },
 
   async markOverTime() {
     try {
