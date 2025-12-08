@@ -13,11 +13,10 @@ import morgan from 'morgan';
 
 const app = express();
 
-
+app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
-app.use(cors());
 // route cho api-docs
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, swaggerOptions));
 
@@ -33,6 +32,8 @@ const HOST = process.env.HOST || "localhost";
 app.listen(PORT, () => {
   console.log(`Server running on http://${HOST}:${PORT}`);
   console.log(`Swagger docs at http://${HOST}:${PORT}/api-docs`);
+
+
   nodeCron.schedule('*/1 * * * *', async () => {
     // chay 1 phut 1 lan de test
     console.log('--- Bắt đầu tác vụ Cron: Kiểm tra và đánh dấu quá hạn ---');
@@ -40,4 +41,6 @@ app.listen(PORT, () => {
     await ExamService.markOverTime();
     console.log('--- Kết thúc tác vụ Cron ---');
   });
+
+
 });
