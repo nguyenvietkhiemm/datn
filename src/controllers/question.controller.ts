@@ -3,7 +3,7 @@ import QuestionService from '../services/question.service';
 import safeExecute, { DefaultResponse } from "../utils/safe.execute";
 import path from "path";
 import fs from "fs";
-import {parseQuestionsFromCSV} from '../utils/parse.csv';
+import { parseQuestionsFromCSV } from '../utils/parse.csv';
 import { parse } from "csv-parse/sync";
 import { stringify } from "csv-stringify/sync";
 
@@ -41,18 +41,18 @@ const QuestionController = {
     res.status(response.status).json(response);
   },
 
-    async createByCsv(req: Request, res: Response) {
+  async createByCsv(req: Request, res: Response) {
     const response: DefaultResponse<any> = await safeExecute(async () => {
       const { filename } = req.params;
       const csvDir = path.join(process.cwd(), "data/final");
       const filePath = path.join(csvDir, filename);
-      
+
       if (!fs.existsSync(csvDir)) {
-          fs.mkdirSync(csvDir, { recursive: true });
+        fs.mkdirSync(csvDir, { recursive: true });
       }
 
       const questions = await parseQuestionsFromCSV(filePath);
-      
+
       const created = await QuestionService.create(questions);
 
       return {
@@ -117,10 +117,10 @@ const QuestionController = {
     return res.status(result.status).json(result);
   },
 
-  async filterQuestion(req: Request, res: Response){
-    const result : DefaultResponse<any> = await safeExecute(async () => {
+  async filterQuestion(req: Request, res: Response) {
+    const result: DefaultResponse<any> = await safeExecute(async () => {
       return {
-        status : 200,
+        status: 200,
         message: "Lấy danh sách câu hỏi thành công",
         data: await QuestionService.filterQuestions(
           String(req.query?.question_name),

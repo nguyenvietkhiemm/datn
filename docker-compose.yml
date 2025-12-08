@@ -25,7 +25,7 @@ services:
       - postgres
 
   redis:
-    image: redis/redis-stack-server:latest
+    image: redis/redis-stack:latest
     container_name: redis-stack
     ports:
       - "6379:6379"     
@@ -37,3 +37,4 @@ services:
 
 volumes:
   postgres_data:
+  redis_data:

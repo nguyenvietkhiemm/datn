@@ -6,27 +6,6 @@ import { Router } from "express";
 
 const fileRouter = Router();
 
-// CSV FILE HANDLERS
-
-fileRouter.get("/csv",
-    Authentication.AuthenticateToken,
-    Authentication.AuthorizeRoles(...ADMIN),
-    FileController.getAllCsv);
-
-fileRouter.get(
-    "/csv/:filename",
-    Authentication.AuthenticateToken,
-    Authentication.AuthorizeRoles(...ADMIN),
-    FileController.getCsvById
-);
-
-fileRouter.post("/csv/save/:filename",
-    Authentication.AuthenticateToken,
-    Authentication.AuthorizeRoles(...ADMIN),
-    uploadCSV.single("file"),
-    FileController.saveCsv
-);
-
 // JSON FILE HANDLERS
 
 fileRouter.get("/json",
@@ -42,12 +21,12 @@ fileRouter.get(
 );
 
 // chưa sửa
-fileRouter.post("/json/save/:filename",
-    Authentication.AuthenticateToken,
-    Authentication.AuthorizeRoles(...ADMIN),
-    uploadCSV.single("file"),
-    FileController.saveCsv
-);
+// fileRouter.post("/json/save/:filename",
+//     Authentication.AuthenticateToken,
+//     Authentication.AuthorizeRoles(...ADMIN),
+//     uploadCSV.single("file"),
+//     FileController.saveCsv
+// );
 
 // DOCX FILE HANDLERS
 
