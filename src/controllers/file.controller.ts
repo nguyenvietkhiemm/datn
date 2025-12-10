@@ -90,7 +90,7 @@ export const FileController = {
 
             return {
                 status: 200,
-                message: "Danh sách file CSV trên server",
+                message: "Danh sách file image trên server",
                 data: imageFiles
             }
         })
