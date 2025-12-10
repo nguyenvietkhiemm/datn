@@ -183,6 +183,11 @@ examRoute.delete(
  */
 examRoute.get('/', ExamController.list);
 
+examRoute.get("/:id/ranking", ExamController.getExamRanking);
+
+// GET lịch sử làm bài của 1 user
+examRoute.get("/user/:user_id/exam-history", ExamController.getUserExamHistory);
+
 // //Tìm kiếm và lọc
 // examRoute.get(`/search`,
 //         Authentication.AuthenticateToken,

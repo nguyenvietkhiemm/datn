@@ -10,6 +10,7 @@ import ExamService from './services/exam.service';
 import swaggerUi from 'swagger-ui-express';
 import {specs, swaggerOptions} from './config/swagger.jsdoc';
 import morgan from 'morgan';
+import {redis} from "./config/redis"
 
 const app = express();
 
@@ -32,7 +33,10 @@ const HOST = process.env.HOST || "localhost";
 app.listen(PORT, () => {
   console.log(`Server running on http://${HOST}:${PORT}`);
   console.log(`Swagger docs at http://${HOST}:${PORT}/api-docs`);
-
+  // ket oi rediss
+  redis.ping()
+  .then((res) => console.log("Redis connected:", res))
+  .catch((err) => console.error("Redis connection failed:", err));
 
   nodeCron.schedule('*/1 * * * *', async () => {
     // chay 1 phut 1 lan de test

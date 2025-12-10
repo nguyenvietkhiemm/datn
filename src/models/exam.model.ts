@@ -5,10 +5,11 @@ export interface Exam {
     exam_name: string;
     create_at: Date;
     questions?: Question[];
-    time_limit: number; // in minutes
+    time_limit: number; 
     topic_id: number;
     exam_schedule_id: number;
-    available: boolean
+    available: boolean;
+    subject_name? : string
 }
 
 export interface DoExam {

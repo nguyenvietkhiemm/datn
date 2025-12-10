@@ -9,5 +9,4 @@ export interface Question {
   source? : string;
   image? : string;
   type_question?: number;
-  point_question? : number
 }
