@@ -374,3 +374,5 @@ FOREIGN KEY (exam_id) REFERENCES exam(exam_id) ON DELETE CASCADE
 
 ALTEr TABLE exam 
 ADD COLUMN description VARCHAR(200)
+
+ALTER TABLE subject ADD COLUMN subject_type INT DEFAULT 1;

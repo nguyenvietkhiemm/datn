@@ -1,6 +1,7 @@
 import { Exam, DoExam } from "../models/exam.model"
 import pool, { query } from "../config/database";
 import { Question } from "../models/question.model"
+import {redis} from "../config/redis";
 
 const ExamService = {
 
@@ -119,10 +120,12 @@ const ExamService = {
             e.exam_name, e.topic_id, e.time_limit, e.exam_id, e.created_at, e.available, e.description,
             t.title AS topic_name,
             es.start_time, es.end_time,
+            sj.subject_type,
             COALESCE(c.total_contestants, 0) AS contestant_count
           FROM exam e
           JOIN topic t ON e.topic_id = t.topic_id
           JOIN exam_schedule es ON es.exam_schedule_id = e.exam_schedule_id
+          JOIN subject sj ON sj.subject_id = topic_id
           LEFT JOIN (
             SELECT exam_id, COUNT(*) AS total_contestants
             FROM contestants
@@ -154,6 +157,7 @@ const ExamService = {
     exam_id: number,
     user_id: number,
     do_exam: DoExam[],
+    time_test : number,
     subject_type: number
   ): Promise<{ score: number; correct_count: number }> {
     const client = await pool.connect();
@@ -277,7 +281,28 @@ const ExamService = {
           );
         }
       }
-  
+      
+      //tinh gia tri de luu xep hang redis
+      const final_score = score * 1000000000 - time_test
+      //su dung Zset cho xep hang
+      await redis.zadd(
+        `exam:${exam_id}:ranking`,
+        "GT",  
+        final_score,
+        user_id.toString()
+      );
+
+      // su dung list cho lich su lambai
+      await redis.lpush(
+        `user:${user_id}:exam_history`,
+        JSON.stringify({
+          exam_id: exam_id,
+          score: score,
+          time_test: time_test,
+          submitted_at: Date.now()
+        })
+      );
+
       await client.query("COMMIT");
   
       return { score, correct_count };
@@ -289,9 +314,87 @@ const ExamService = {
     }
   },
 
-  async rank(){
+  async getExamRanking(exam_id: number): Promise<{
+    user_id: number;
+    final_score: number;
+  }[]> {
+    try {
+      const limit = 10;
+  
+      const data = await redis.zrevrange(
+        `exam:${exam_id}:ranking`,
+        0,
+        limit - 1,
+        "WITHSCORES"
+      );
+  
+      const rank: {
+        user_id: number;
+        final_score: number;
+      }[] = [];
+  
+      for (let i = 0; i < data.length; i += 2) {
+        rank.push({
+          user_id: Number(data[i]),
+          final_score: Number(data[i + 1]),
+        });
+      }
+  
+      return rank;
+  
+    } catch (err) {
+      console.error("Lỗi lấy xếp hạng", err);
+      return [];
+    }
+  },  
 
-  },
+  async getUserExamHistory(
+    user_id: number
+  ): Promise<{
+    user_id: number;
+    history: {
+      exam_id: number;
+      score: number;
+      time_test: number;
+      submitted_at: Date;
+    }[];
+  }> {
+    try {
+      const list = await redis.lrange(`user:${user_id}:exam_history`, 0, -1);
+  
+      if (!list || list.length === 0) {
+        return {
+          user_id,
+          history: []
+        };
+      }
+  
+      const history = list.map(item => {
+        try {
+          const parsed = JSON.parse(item);
+  
+          // Convert submitted_at sang kiểu Date nếu là string
+          if (parsed.submitted_at) {
+            parsed.submitted_at = new Date(parsed.submitted_at);
+          }
+  
+          return parsed;
+        } catch (e) {
+          console.error("Lỗi parse lịch sử làm bài:", e, item);
+          return null;
+        }
+      }).filter(Boolean);
+  
+      return {
+        user_id,
+        history
+      };
+  
+    } catch (err) {
+      console.error("Lỗi lấy lịch sử làm bài:", err);
+      throw new Error("Không thể lấy lịch sử làm bài");
+    }
+  },  
 
   async markOverTime() {
     try {

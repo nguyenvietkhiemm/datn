@@ -12,7 +12,7 @@ const ExamController = {
       const topicIds = req.query.topics
         ? req.query.topics.toString().split(",").map(Number)
         : [];
-      
+
       return {
         status: 200,
         message: "Lấy danh sách đề thi thành công",
@@ -87,38 +87,98 @@ const ExamController = {
     return res.status(result.status).json(result);
   },
 
-  // async search(req: Request, res: Response) {
-  //   const result: DefaultResponse<any> = await safeExecute(async () => {
-  //     return {
-  //       status: 200,
-  //       message: "Lấy danh sách đề thi thành công",
-  //       data: await ExamService.search(String(req.query.searchValue), Number(req.query.page)),
-  //     };
-  //   });
+  async submit(req: Request, res: Response) {
+    const result: DefaultResponse<any> = await safeExecute(async () => {
+      const { exam_id, subject_type, time_test } = req.query;
+      const user_id = req.user?.user_id;
+      const { do_exam } = req.body
 
-  //   return res.status(result.status).json(result);
-  // },
+      if (!exam_id || !subject_type || !time_test) {
+        return {
+          status: 400,
+          message: "Thiếu tham số exam_id, subject_type hoặc time_test",
+          data: null
+        };
+      }
+  
+      if (!user_id) {
+        return {
+          status: 401,
+          message: "Không xác thực được người dùng",
+          data: null
+        };
+      }
+  
+      if (!do_exam || !Array.isArray(do_exam)) {
+        return {
+          status: 400,
+          message: "Dữ liệu do_exam không hợp lệ",
+          data: null
+        };
+      }
+      
+      return {
+        status: 204,
+        message: "Nộp đè thi thành công",
+        data: await ExamService.submit(Number(exam_id),
+          Number(user_id), do_exam, Number(time_test), Number(subject_type)
+        )
+      }
+    });
 
-  // async filter(req: Request, res: Response) {
-  //   const result: DefaultResponse<any> = await safeExecute(async () => {
-  //     const topicParam = req.query.topic;
-  //     const status = String(req.query.status);
-  //     const page = Number(req.query.page);
+    return res.status(result.status).json(result);
+  },
 
-  //     let topicIds: number[] = [];
+  async getExamRanking(req: Request, res: Response) {
+    const result: DefaultResponse<any> = await safeExecute(async () => {
+      const { exam_id } = req.params;
 
-  //     if (typeof topicParam === "string" && topicParam.length > 0) {
-  //       topicIds = topicParam.split(",").map(Number);
-  //     }
+      if (!exam_id) {
+        return {
+          status: 400,
+          message: "Thiếu exam_id",
+          data: null
+        };
+      }
 
-  //     return {
-  //       status: 200,
-  //       message: "Lọc bài thi thành công",
-  //       data: await ExamService.filter(topicIds, status, page)
-  //     };
-  //   })
-  //   return res.status(result.status).json(result);
-  // }
+      const ranking = await ExamService.getExamRanking(Number(exam_id));
+
+      return {
+        status: 200,
+        message: "Lấy bảng xếp hạng thành công",
+        data: {
+          exam_id: Number(exam_id),
+          ranking
+        }
+      };
+    });
+
+    return res.status(result.status).json(result);
+  },
+
+  async getUserExamHistory(req: Request, res: Response) {
+    const result: DefaultResponse<any> = await safeExecute(async () => {
+      const { user_id } = req.params;
+
+      if (!user_id) {
+        return {
+          status: 400,
+          message: "Thiếu user_id",
+          data: null
+        };
+      }
+
+      const data = await ExamService.getUserExamHistory(Number(user_id));
+
+      return {
+        status: 200,
+        message: "Lấy lịch sử làm bài thành công",
+        data
+      };
+    });
+
+    return res.status(result.status).json(result);
+  }
 };
 
 export default ExamController;
