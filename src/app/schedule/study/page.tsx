@@ -146,12 +146,10 @@ export default function ScheduleStudy() {
         <div className={styles.container}>
             <h1 className={styles.title}>Danh sách lịch học</h1>
 
-            {/* them lich hoc va tim kiem*/}
-            <div className={styles.add_search}>
+            {/* them lich hoc va tim kiem*/}       
                 <div className={styles.btn_add}>
                     <Button onClick={() => setIsAdd(true)}>Tạo lịch học</Button>
                 </div>
-            </div>
 
             {/* loc */}
             <div className={styles.filter}>

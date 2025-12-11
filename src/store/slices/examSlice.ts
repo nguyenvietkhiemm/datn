@@ -8,7 +8,10 @@ type Exam = {
   created_at: string;
   topic_id : number;
   start_time : string;
-  end_time : string
+  end_time : string;
+  description : string;
+  contestant_count : number;
+  topic_name : string
 };
 
 type ExamState = {

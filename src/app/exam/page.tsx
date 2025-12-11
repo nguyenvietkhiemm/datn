@@ -6,20 +6,11 @@ import Filter from "@/components/filter/Filter";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { setExams } from "@/store/slices/examSlice";
-import Cookies from "js-cookie";
 import Pagination from "@/components/pagination/Pagination";
 import Search from "@/components/search/Search";
-
-type Exam = {
-  exam_id: number;
-  exam_name: string;
-  created_at: string;
-  time_limit: number;
-  topic_id: number;
-  exam_schedule_id?: number;
-  start_time: string;
-  end_time: string
-};
+import { Users, CalendarCheck } from "lucide-react";
+import {Exam} from "../../../domain/exam/type"
+import { ExamService } from "../../../domain/exam/service";
 
 export default function ExamList() {
   const router = useRouter();
@@ -31,44 +22,23 @@ export default function ExamList() {
   const [searchKeyword, setSearchKeyword] = useState<string>("");
 
   useEffect(() => {
-    const token = Cookies.get("token");
-    const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
+    const fetchExamList = async () => {
+      const data = await ExamService.getList(currentPage, filterCondition, searchKeyword);
 
-    const fetchExam = async () => {
-      let url = `${API_URL}/exams?page=${currentPage}`;
-
-      // Filter topics
-      if (filterCondition?.topics && filterCondition.topics.length > 0) {
-        url += `&topics=${filterCondition.topics.join(",")}`;
+      if (data?.data?.exams) {
+        dispatch(setExams(data.data.exams));
+        setTotalPages(data.data.totalPages);
       }
-
-      // Search
-      if (searchKeyword.trim().length > 0) {
-        url += `&search=${encodeURIComponent(searchKeyword)}`;
-      }
-
-      const resExam = await fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const data = await resExam.json();
-
-      dispatch(setExams(data.data.exams));
-      setTotalPages(data.data.totalPages);
     };
 
-    fetchExam();
-  }, [currentPage, filterCondition, searchKeyword]);
+    fetchExamList();
+  }, [currentPage, filterCondition, searchKeyword])
 
-  const handleDoExam = (exam_id: number, exam: Exam) => {
+  const handleReviewExam = (exam_id: number, exam: Exam) => {
     localStorage.setItem("exam", JSON.stringify(exam))
-    router.push(`/exam/${exam_id}/do`)
+    router.push(`/exam/${exam_id}/review`)
   }
-  
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}> Danh sách đề thi thử</h1>
@@ -87,16 +57,53 @@ export default function ExamList() {
 
       <div className={styles.grid}>
         {exams?.map((exam, index) => (
-          <div key={index} className={styles.card}>
-            <div className={styles.header}>
-              <h2 className={styles.examName}>{exam.exam_name}</h2>
+          <div
+            key={index}
+            className={styles.card}
+            onClick={() => handleReviewExam(exam.exam_id, exam)}
+          >
+            <div className={styles.left_area}>
+              <div className={styles.header}>
+                <h2 className={styles.examName}>{exam.exam_name}</h2>
+                <p className={styles.desc}>
+                  {exam.description}
+                </p>
+                <div className={styles.top_user}>
+                  {/* sau này có thể hiển thị top 3 thí sinh */}
+                </div>
+
+              </div>
+
+              <div className={styles.info}>
+                <div className={styles.time}>
+                  <span>
+                    ⏱ Thời gian làm bài: {exam.time_limit} phút
+                  </span>
+                </div>
+                <div className={styles.tags}>
+                  <span className={styles.tag}>{exam.topic_name}</span>
+                </div>
+              </div>
             </div>
-            <p className={styles.date}>
-              <span>📅 Bắt đầu: {new Date(exam.start_time).toLocaleString("vi-VN")}</span>
-              <span>📅 Kết thúc: {new Date(exam.end_time).toLocaleString("vi-VN")}</span>
-            </p>
-            <p className={styles.time}>⏱ Thời gian làm bài: {exam.time_limit} phút</p>
-            <button onClick={() => handleDoExam(exam.exam_id, exam)} className={styles.button}>Bắt đầu thi</button>
+
+            <div className={styles.right_area}>
+              <p className={styles.stats}>
+                <Users size={16} />
+                <span> {exam.contestant_count} người đã tham gia</span>
+              </p>
+
+              <div className={styles.date}>
+                <div className={styles.dateRow}>
+                  <CalendarCheck size={16} />
+                  <span>Kết thúc: {new Date(exam.end_time).toLocaleString("vi-VN")}</span>
+                </div>
+
+                <div className={styles.dateRow}>
+                  <CalendarCheck size={16} />
+                  <span>Bắt đầu: {new Date(exam.start_time).toLocaleString("vi-VN")}</span>
+                </div>
+              </div>
+            </div>
           </div>
         ))}
       </div>

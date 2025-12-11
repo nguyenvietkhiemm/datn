@@ -1,7 +1,7 @@
 .container {
     min-height: 100vh;
     padding: 24px;
-    max-width: 1000px;
+    max-width: 80%;
     margin: 0 auto;
 }
 
@@ -48,9 +48,9 @@
 
 /* Lưới đề thi */
 .grid {
-    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
-    gap: 2rem;
-    display: grid
+    display: flex;
+    flex-direction: column;
+    gap: 2rem
 }
 
 .card {
@@ -62,6 +62,9 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     height: 14rem;
     overflow: hidden;
+    display: grid;
+    grid-template-columns: auto 300px;
+    gap: 10px;
 }
 
 .card:hover {
@@ -69,57 +72,103 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
+.left_area {
+    display: grid;
+    grid-template-columns: 530px auto;
+    gap: 1rem;
+}
+
 .header {
-    position: absolute;
-    top: 1rem;
-    left: 1.5rem;
-    right: 1.5rem;
-}
-
-.examName {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #111827;
-    line-height: 1.4;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.date {
-    position: absolute;
-    top: 5rem;
-    left: 1.5rem;
-    font-size: 0.9rem;
-    color: #4b5563;
     display: flex;
     flex-direction: column;
 }
 
-.time {
-    color: #4b5563;
-    font-size: .9rem;
-    position: absolute;
-    bottom: 3.5rem;
-    left: 1.5rem;
+.examName {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-.button {
-    color: rgb(255, 255, 255);
-    cursor: pointer;
-    font-weight: 500;
-    position: absolute;
-    bottom: 0.5rem;
-    left: 1.5rem;
-    background-color: white;
-    color: #0070f3;
-    border: 1px solid #0070f3;
-    border-radius: 8px;
-    padding: 8px 14px;
+.desc {
+    font-size: 16px;
+    margin-top: 5px;
+    color: #444;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
+.top-users {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.user {
+    display: grid;
+    grid-template-columns: 48px auto;
+    gap: 8px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.time span {
+    font-size: 16px;
+    color: #555;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tag {
+    background: #E5E7EB;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: #555;
+    border-radius: 6px;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.right_area {
+    font-size: 16px;
+    color: #888;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.stats {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.date {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.dateRow {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
 
 .empty {
     text-align: center;

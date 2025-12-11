@@ -1,0 +1,84 @@
+.container {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 24px;
+}
+
+.myRankBox {
+    padding: 14px 20px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #b2cfff, #dce8ff);
+    border: 1px solid #aac4ff;
+    margin-bottom: 20px;
+}
+
+.myRankTitle {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.rankList {
+    margin-top: 10px;
+}
+
+.rankItem {
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background: #fff;
+    border: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: 0.2s;
+}
+
+.rankItem:hover {
+    background: #f7f7f7;
+}
+
+.rankNumber {
+    font-size: 20px;
+    font-weight: bold;
+    color: #4c5bff;
+    min-width: 40px;
+    text-align: center;
+}
+
+.rankContent {
+    flex: 1;
+}
+
+.score {
+    font-weight: bold;
+    color: #333;
+}
+
+.empty {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+.top1 {
+    border: 2px solid gold;
+    background: #fff9da;
+}
+
+.top2 {
+    border: 2px solid silver;
+    background: #f3f3f3;
+}
+
+.top3 {
+    border: 2px solid #cd7f32;
+    background: #fff3e6;
+}
