@@ -89,7 +89,7 @@ const ExamController = {
 
   async submit(req: Request, res: Response) {
     const result: DefaultResponse<any> = await safeExecute(async () => {
-      const { exam_id, subject_type, time_test } = req.query;
+      const { exam_id, subject_type, time_test, user_name } = req.query;
       const user_id = req.user?.user_id;
       const { do_exam } = req.body
 
@@ -109,7 +109,7 @@ const ExamController = {
         };
       }
   
-      if (!do_exam || !Array.isArray(do_exam)) {
+      if (!Array.isArray(do_exam)) {
         return {
           status: 400,
           message: "Dữ liệu do_exam không hợp lệ",
@@ -118,36 +118,36 @@ const ExamController = {
       }
       
       return {
-        status: 204,
+        status: 200,
         message: "Nộp đè thi thành công",
         data: await ExamService.submit(Number(exam_id),
-          Number(user_id), do_exam, Number(time_test), Number(subject_type)
+          Number(user_id), do_exam, Number(time_test), Number(subject_type),
+          user_name
         )
       }
     });
-
     return res.status(result.status).json(result);
   },
 
   async getExamRanking(req: Request, res: Response) {
     const result: DefaultResponse<any> = await safeExecute(async () => {
-      const { exam_id } = req.params;
+      const { id } = req.params;
+      const user_id = req?.user?.user_id
 
-      if (!exam_id) {
+      if (!id) {
         return {
           status: 400,
           message: "Thiếu exam_id",
           data: null
         };
       }
-
-      const ranking = await ExamService.getExamRanking(Number(exam_id));
+      
+      const ranking = await ExamService.getExamRanking(Number(id), Number(user_id));
 
       return {
         status: 200,
         message: "Lấy bảng xếp hạng thành công",
         data: {
-          exam_id: Number(exam_id),
           ranking
         }
       };

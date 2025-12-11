@@ -125,7 +125,7 @@ const ExamService = {
           FROM exam e
           JOIN topic t ON e.topic_id = t.topic_id
           JOIN exam_schedule es ON es.exam_schedule_id = e.exam_schedule_id
-          JOIN subject sj ON sj.subject_id = topic_id
+          JOIN subject sj ON sj.subject_id = t.subject_id
           LEFT JOIN (
             SELECT exam_id, COUNT(*) AS total_contestants
             FROM contestants
@@ -158,29 +158,32 @@ const ExamService = {
     user_id: number,
     do_exam: DoExam[],
     time_test : number,
-    subject_type: number
-  ): Promise<{ score: number; correct_count: number }> {
+    subject_type: number,
+    user_name : string
+  ): Promise<{ score: number }> {
     const client = await pool.connect();
   
     try {
       await client.query("BEGIN");
-  
+
+      console.log(do_exam);
+      
       // 1. Lấy toàn bộ câu hỏi + đáp án đúng
       const sql = `
         SELECT 
           q.question_id,
           q.type_question,
           a.answer_id,
-          a.answer_content,
-          a.is_correct
+          a.answer_content
         FROM question_exam qe
         JOIN question q ON q.question_id = qe.question_id
         JOIN answer a ON a.question_id = q.question_id
-        WHERE qe.exam_id = $1
+        WHERE qe.exam_id = $1 AND a.is_correct = true
         ORDER BY q.question_id ASC
       `;
   
       const { rows } = await client.query(sql, [exam_id]);
+      console.log(rows);
   
       // Map dữ liệu
       const map = new Map<
@@ -204,16 +207,17 @@ const ExamService = {
         const current = map.get(r.question_id)!;
   
         // TH trắc nghiệm (loại 1 & 2)
-        if (r.is_correct && r.type_question !== 3) {
+        if (r.type_question !== 3) {
           current.correct_answers.push(r.answer_id);
         }
   
         // TH tự luận
-        if (r.type_question === 3 && r.is_correct) {
+        if (r.type_question === 3) {
           current.correct_text = r.answer_content;
         }
       }
-  
+      console.log(map);
+      
       // ======== CHẤM ĐIỂM ==========
       let score = 0;
       let correct_count = 0;
@@ -281,6 +285,7 @@ const ExamService = {
           );
         }
       }
+      console.log(score);
       
       //tinh gia tri de luu xep hang redis
       const final_score = score * 1000000000 - time_test
@@ -289,7 +294,8 @@ const ExamService = {
         `exam:${exam_id}:ranking`,
         "GT",  
         final_score,
-        user_id.toString()
+        user_id.toString(),
+        user_name.toString()
       );
 
       // su dung list cho lich su lambai
@@ -305,7 +311,7 @@ const ExamService = {
 
       await client.query("COMMIT");
   
-      return { score, correct_count };
+      return { score};
     } catch (error) {
       await client.query("ROLLBACK");
       throw error;
@@ -314,13 +320,20 @@ const ExamService = {
     }
   },
 
-  async getExamRanking(exam_id: number): Promise<{
+  async getExamRanking(exam_id: number, user_id : number): Promise<{rank :{
     user_id: number;
     final_score: number;
-  }[]> {
+  }[],
+  my_rank : {
+    rank : number,
+    final_score : number
+  }| null
+  }> {
     try {
+
       const limit = 10;
-  
+
+      //lay bang xep hang chung
       const data = await redis.zrevrange(
         `exam:${exam_id}:ranking`,
         0,
@@ -339,12 +352,32 @@ const ExamService = {
           final_score: Number(data[i + 1]),
         });
       }
+
+      //lay bang xep hang cua ban than
+      const myRankIndex = await redis.zrevrank(
+        `exam:${exam_id}:ranking`,
+        user_id.toString()
+      );
+      
+      const myScore = await redis.zscore(
+        `exam:${exam_id}:ranking`,
+        user_id.toString()
+      );
+      
+      let myRank = null;
+      
+      if (myRankIndex !== null) {
+        myRank = {
+          rank: myRankIndex + 1, 
+          final_score: Number(myScore)
+        };
+      }
   
-      return rank;
+      return {rank : rank, my_rank : myRank};
   
     } catch (err) {
       console.error("Lỗi lấy xếp hạng", err);
-      return [];
+      return {rank : [], my_rank : null};
     }
   },  
 

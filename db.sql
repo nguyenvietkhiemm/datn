@@ -361,7 +361,7 @@ ALTER TABLE public.bank
 ADD COLUMN time_limit INT
 
 ALTER TABLE public.question
-ADD COLUMN type_question INT
+ADD COLUMN type_question INT DEFAULT 1
 
 ALTER TABLE user_bank_answer
 ADD COLUMN user_answer_text TEXT;
@@ -376,3 +376,8 @@ ALTEr TABLE exam
 ADD COLUMN description VARCHAR(200)
 
 ALTER TABLE subject ADD COLUMN subject_type INT DEFAULT 1;
+ALTER TABLE public.user_exam_answer
+ADD COLUMN answer_id INT 
+
+ALTER TABLE public.user_exam_answer
+ADD COLUMN user_answer_text TEXT DEFAULT "" 
