@@ -171,7 +171,9 @@ examRoute.delete(
 
 
 // GET lịch sử làm bài của 1 user
-examRoute.get("/user/:user_id/exam-history", ExamController.getUserExamHistory);
+examRoute.get("/user/:user_name/exam-history",
+        Authentication.AuthenticateToken,
+        ExamController.getUserExamHistory);
 examRoute.post("/submit",
         Authentication.AuthenticateToken,
         ExamController.submit

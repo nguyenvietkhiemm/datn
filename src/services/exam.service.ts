@@ -143,7 +143,7 @@ const ExamService = {
     // Lấy top 3 của mỗi exam
     const examsWithTop3 = await Promise.all(
       exams.map(async (exam) => {
-        
+
         // Lấy top 3 từ ZSET
         const top3Raw = await redis.zrevrange(
           `exam:${exam.exam_id}:ranking`,
@@ -151,19 +151,19 @@ const ExamService = {
           2,
           "WITHSCORES"
         );
-    
+
         const top3 = [];
-    
+
         // Duyệt theo cặp (member, score)
         for (let i = 0; i < top3Raw.length; i += 2) {
           const member = JSON.parse(top3Raw[i]); // { user_id, user_name }
           const final_score = Number(top3Raw[i + 1]);
-    
+
           // Lấy điểm thật + thời gian thật từ HASH
           const detail = await redis.hgetall(
             `exam:${exam.exam_id}:user:${member.user_id}`
           );
-    
+
           top3.push({
             user_id: Number(member.user_id),
             user_name: member.user_name,
@@ -172,7 +172,7 @@ const ExamService = {
             final_score
           });
         }
-    
+
         return {
           ...exam,
           top3,
@@ -224,7 +224,6 @@ const ExamService = {
       `;
 
       const { rows } = await client.query(sql, [exam_id]);
-      console.log(rows);
 
       // Map dữ liệu
       const map = new Map<
@@ -325,9 +324,22 @@ const ExamService = {
         }
       }
 
+      //them so nguoi tham gia
+      const checkConQuery = `
+        SELECT * FROM contestants
+        WHERE user_id=$1 AND exam_id=$2
+        `
+      const checkCon = await client.query(checkConQuery, [user_id, exam_id])
+      if (checkCon.rows.length === 0) {
+        await client.query(
+          `INSERT INTO contestants (user_id, exam_id) VALUES ($1, $2)`,
+          [user_id, exam_id]
+        );
+      }
+
       //tinh gia tri de luu xep hang redis
       const final_score = score * 1000000000 - time_test
-      const member = JSON.stringify({user_id, user_name})
+      const member = JSON.stringify({ user_id, user_name })
       //su dung Zset cho xep hang
       await redis.zadd(
         `exam:${exam_id}:ranking`,
@@ -388,7 +400,7 @@ const ExamService = {
   }> {
     try {
       const limit = 10;
-  
+
       //  LẤY TOP 10 TỪ ZSET
       const data = await redis.zrevrange(
         `exam:${exam_id}:ranking`,
@@ -396,18 +408,18 @@ const ExamService = {
         limit - 1,
         "WITHSCORES"
       );
-  
+
       const rank = [];
-  
+
       for (let i = 0; i < data.length; i += 2) {
-        const member = JSON.parse(data[i]); 
+        const member = JSON.parse(data[i]);
         const final_score = Number(data[i + 1]);
-  
+
         //  LẤY ĐIỂM THẬT TỪ HASH
         const detail = await redis.hgetall(
           `exam:${exam_id}:user:${member.user_id}`
         );
-  
+
         rank.push({
           user_id: member.user_id,
           user_name: member.user_name,
@@ -416,27 +428,27 @@ const ExamService = {
           final_score
         });
       }
-  
+
       // 3LẤY RANK CỦA CHÍNH NGƯỜI DÙNG
       const memberKey = JSON.stringify({ user_id, user_name });
-  
+
       const myRankIndex = await redis.zrevrank(
         `exam:${exam_id}:ranking`,
         memberKey
       );
-  
+
       const myFinalScore = await redis.zscore(
         `exam:${exam_id}:ranking`,
         memberKey
       );
-  
+
       let myRank = null;
-  
+
       if (myRankIndex !== null && myFinalScore !== null) {
         const detail = await redis.hgetall(
           `exam:${exam_id}:user:${user_id}`
         );
-  
+
         myRank = {
           rank: myRankIndex + 1,
           score: Number(detail.score || 0),
@@ -444,9 +456,9 @@ const ExamService = {
           final_score: Number(myFinalScore)
         };
       }
-  
+
       return { rank, my_rank: myRank };
-  
+
     } catch (err) {
       console.error("Lỗi lấy xếp hạng", err);
       return { rank: [], my_rank: null };
@@ -454,7 +466,7 @@ const ExamService = {
   },
 
   async getUserExamHistory(
-    user_id: number
+    user_id : number
   ): Promise<{
     user_id: number;
     history: {
@@ -465,8 +477,8 @@ const ExamService = {
     }[];
   }> {
     try {
+      
       const list = await redis.lrange(`user:${user_id}:exam_history`, 0, -1);
-
       if (!list || list.length === 0) {
         return {
           user_id,

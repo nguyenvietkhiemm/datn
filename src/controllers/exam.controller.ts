@@ -159,18 +159,9 @@ const ExamController = {
 
   async getUserExamHistory(req: Request, res: Response) {
     const result: DefaultResponse<any> = await safeExecute(async () => {
-      const { user_id } = req.params;
-
-      if (!user_id) {
-        return {
-          status: 400,
-          message: "Thiếu user_id",
-          data: null
-        };
-      }
+      const user_id = req?.user?.user_id
 
       const data = await ExamService.getUserExamHistory(Number(user_id));
-
       return {
         status: 200,
         message: "Lấy lịch sử làm bài thành công",
