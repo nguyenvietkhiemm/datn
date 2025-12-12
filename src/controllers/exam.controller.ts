@@ -122,7 +122,7 @@ const ExamController = {
         message: "Nộp đè thi thành công",
         data: await ExamService.submit(Number(exam_id),
           Number(user_id), do_exam, Number(time_test), Number(subject_type),
-          user_name
+          String(user_name)
         )
       }
     });
@@ -133,6 +133,7 @@ const ExamController = {
     const result: DefaultResponse<any> = await safeExecute(async () => {
       const { id } = req.params;
       const user_id = req?.user?.user_id
+      const {user_name} = req.query;
 
       if (!id) {
         return {
@@ -142,7 +143,7 @@ const ExamController = {
         };
       }
       
-      const ranking = await ExamService.getExamRanking(Number(id), Number(user_id));
+      const ranking = await ExamService.getExamRanking(Number(id), Number(user_id), String(user_name));
 
       return {
         status: 200,
