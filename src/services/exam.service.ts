@@ -1,7 +1,7 @@
 import { Exam, DoExam } from "../models/exam.model"
 import pool, { query } from "../config/database";
 import { Question } from "../models/question.model"
-import {redis} from "../config/redis";
+import { redis } from "../config/redis";
 
 const ExamService = {
 
@@ -138,6 +138,48 @@ const ExamService = {
 
     const result = await query(queryText, params);
 
+    const exams = result.rows;
+
+    // Lấy top 3 của mỗi exam
+    const examsWithTop3 = await Promise.all(
+      exams.map(async (exam) => {
+        
+        // Lấy top 3 từ ZSET
+        const top3Raw = await redis.zrevrange(
+          `exam:${exam.exam_id}:ranking`,
+          0,
+          2,
+          "WITHSCORES"
+        );
+    
+        const top3 = [];
+    
+        // Duyệt theo cặp (member, score)
+        for (let i = 0; i < top3Raw.length; i += 2) {
+          const member = JSON.parse(top3Raw[i]); // { user_id, user_name }
+          const final_score = Number(top3Raw[i + 1]);
+    
+          // Lấy điểm thật + thời gian thật từ HASH
+          const detail = await redis.hgetall(
+            `exam:${exam.exam_id}:user:${member.user_id}`
+          );
+    
+          top3.push({
+            user_id: Number(member.user_id),
+            user_name: member.user_name,
+            score: Number(detail.score || 0),
+            time_test: Number(detail.time_test || 0),
+            final_score
+          });
+        }
+    
+        return {
+          ...exam,
+          top3,
+        };
+      })
+    );
+
     // Count total
     const countQuery = `
           SELECT COUNT(*) AS total
@@ -150,24 +192,23 @@ const ExamService = {
     const countResult = await query(countQuery, params);
 
     const totalPages = Math.ceil(countResult.rows[0].total / limit);
-    return { exams: result.rows, totalPages };
+
+    return { exams: examsWithTop3, totalPages };
   },
 
   async submit(
     exam_id: number,
     user_id: number,
     do_exam: DoExam[],
-    time_test : number,
+    time_test: number,
     subject_type: number,
-    user_name : string
+    user_name: string
   ): Promise<{ score: number }> {
     const client = await pool.connect();
-  
+
     try {
       await client.query("BEGIN");
 
-      console.log(do_exam);
-      
       // 1. Lấy toàn bộ câu hỏi + đáp án đúng
       const sql = `
         SELECT 
@@ -181,10 +222,10 @@ const ExamService = {
         WHERE qe.exam_id = $1 AND a.is_correct = true
         ORDER BY q.question_id ASC
       `;
-  
+
       const { rows } = await client.query(sql, [exam_id]);
       console.log(rows);
-  
+
       // Map dữ liệu
       const map = new Map<
         number,
@@ -194,7 +235,7 @@ const ExamService = {
           correct_text?: string;
         }
       >();
-  
+
       for (const r of rows) {
         if (!map.has(r.question_id)) {
           map.set(r.question_id, {
@@ -203,44 +244,42 @@ const ExamService = {
             correct_text: undefined
           });
         }
-  
+
         const current = map.get(r.question_id)!;
-  
+
         // TH trắc nghiệm (loại 1 & 2)
         if (r.type_question !== 3) {
           current.correct_answers.push(r.answer_id);
         }
-  
+
         // TH tự luận
         if (r.type_question === 3) {
           current.correct_text = r.answer_content;
         }
       }
-      console.log(map);
-      
+
       // ======== CHẤM ĐIỂM ==========
       let score = 0;
-      let correct_count = 0;
-  
+
       for (const user of do_exam) {
         const info = map.get(user.question_id);
         if (!info) continue;
-  
+
         const { type_question, correct_answers, correct_text } = info;
-  
+
         // ==== Loại 1: Trắc nghiệm 1 đáp án ====
         if (type_question === 1) {
           if (user.user_answer[0] == correct_answers[0]) {
             score += 0.25
           }
-  
+
           await client.query(
             `INSERT INTO user_exam_answer (exam_id, user_id, answer_id)
              VALUES ($1, $2, $3)`,
             [exam_id, user_id, user.user_answer[0]]
           );
         }
-  
+
         // ==== Loại 2: Trắc nghiệm nhiều đáp án ====
         else if (type_question === 2) {
           const correctSelected = user.user_answer.filter(a =>
@@ -248,13 +287,13 @@ const ExamService = {
           ).length;
           const correct = user.user_answer.filter(a => correct_answers.includes(Number(a))).length;
           if (correct === 1) {
-              score += 0.1
+            score += 0.1
           } else if (correct === 2) {
-              score += 0.25
+            score += 0.25
           } else if (correct === 3) {
-              score += 0.5
+            score += 0.5
           } else score += 1;
-  
+
           for (const ans of user.user_answer) {
             if (!isNaN(Number(ans))) {
               await client.query(
@@ -265,19 +304,19 @@ const ExamService = {
             }
           }
         }
-  
+
         // ==== Loại 3: Tự luận ====
         else if (type_question === 3) {
           const correct_text = correct_answers[0];
           const user_text = user.user_answer[0];
           if ((String(user_text).trim().toLowerCase() === String(correct_text).trim().toLowerCase())) {
-              if (subject_type === 1) {
-                  score += 0.5
-              } else {
-                  score += 0.25
-              }
+            if (subject_type === 1) {
+              score += 0.5
+            } else {
+              score += 0.25
+            }
           }
-  
+
           await client.query(
             `INSERT INTO user_exam_answer (exam_id, user_id, user_answer_text)
              VALUES ($1, $2, $3)`,
@@ -285,17 +324,25 @@ const ExamService = {
           );
         }
       }
-      console.log(score);
-      
+
       //tinh gia tri de luu xep hang redis
       const final_score = score * 1000000000 - time_test
+      const member = JSON.stringify({user_id, user_name})
       //su dung Zset cho xep hang
       await redis.zadd(
         `exam:${exam_id}:ranking`,
-        "GT",  
+        "GT",
         final_score,
-        user_id.toString(),
-        user_name.toString()
+        member
+      );
+
+      //luu diem va tg lam bai
+      await redis.hset(
+        `exam:${exam_id}:user:${user_id}`,
+        "score",
+        score.toString(),
+        "time_test",
+        time_test.toString(),
       );
 
       // su dung list cho lich su lambai
@@ -310,8 +357,8 @@ const ExamService = {
       );
 
       await client.query("COMMIT");
-  
-      return { score};
+
+      return { score };
     } catch (error) {
       await client.query("ROLLBACK");
       throw error;
@@ -320,20 +367,29 @@ const ExamService = {
     }
   },
 
-  async getExamRanking(exam_id: number, user_id : number): Promise<{rank :{
-    user_id: number;
-    final_score: number;
-  }[],
-  my_rank : {
-    rank : number,
-    final_score : number
-  }| null
+  async getExamRanking(
+    exam_id: number,
+    user_id: number,
+    user_name: string
+  ): Promise<{
+    rank: {
+      user_id: number;
+      user_name: string;
+      score: number;
+      time_test: number;
+      final_score: number;
+    }[],
+    my_rank: {
+      rank: number,
+      score: number,
+      time_test: number,
+      final_score: number
+    } | null
   }> {
     try {
-
       const limit = 10;
-
-      //lay bang xep hang chung
+  
+      //  LẤY TOP 10 TỪ ZSET
       const data = await redis.zrevrange(
         `exam:${exam_id}:ranking`,
         0,
@@ -341,45 +397,61 @@ const ExamService = {
         "WITHSCORES"
       );
   
-      const rank: {
-        user_id: number;
-        final_score: number;
-      }[] = [];
+      const rank = [];
   
       for (let i = 0; i < data.length; i += 2) {
+        const member = JSON.parse(data[i]); 
+        const final_score = Number(data[i + 1]);
+  
+        //  LẤY ĐIỂM THẬT TỪ HASH
+        const detail = await redis.hgetall(
+          `exam:${exam_id}:user:${member.user_id}`
+        );
+  
         rank.push({
-          user_id: Number(data[i]),
-          final_score: Number(data[i + 1]),
+          user_id: member.user_id,
+          user_name: member.user_name,
+          score: Number(detail.score || 0),
+          time_test: Number(detail.time_test || 0),
+          final_score
         });
       }
-
-      //lay bang xep hang cua ban than
+  
+      // 3LẤY RANK CỦA CHÍNH NGƯỜI DÙNG
+      const memberKey = JSON.stringify({ user_id, user_name });
+  
       const myRankIndex = await redis.zrevrank(
         `exam:${exam_id}:ranking`,
-        user_id.toString()
+        memberKey
       );
-      
-      const myScore = await redis.zscore(
+  
+      const myFinalScore = await redis.zscore(
         `exam:${exam_id}:ranking`,
-        user_id.toString()
+        memberKey
       );
-      
+  
       let myRank = null;
-      
-      if (myRankIndex !== null) {
+  
+      if (myRankIndex !== null && myFinalScore !== null) {
+        const detail = await redis.hgetall(
+          `exam:${exam_id}:user:${user_id}`
+        );
+  
         myRank = {
-          rank: myRankIndex + 1, 
-          final_score: Number(myScore)
+          rank: myRankIndex + 1,
+          score: Number(detail.score || 0),
+          time_test: Number(detail.time_test || 0),
+          final_score: Number(myFinalScore)
         };
       }
   
-      return {rank : rank, my_rank : myRank};
+      return { rank, my_rank: myRank };
   
     } catch (err) {
       console.error("Lỗi lấy xếp hạng", err);
-      return {rank : [], my_rank : null};
+      return { rank: [], my_rank: null };
     }
-  },  
+  },
 
   async getUserExamHistory(
     user_id: number
@@ -394,40 +466,40 @@ const ExamService = {
   }> {
     try {
       const list = await redis.lrange(`user:${user_id}:exam_history`, 0, -1);
-  
+
       if (!list || list.length === 0) {
         return {
           user_id,
           history: []
         };
       }
-  
+
       const history = list.map(item => {
         try {
           const parsed = JSON.parse(item);
-  
+
           // Convert submitted_at sang kiểu Date nếu là string
           if (parsed.submitted_at) {
             parsed.submitted_at = new Date(parsed.submitted_at);
           }
-  
+
           return parsed;
         } catch (e) {
           console.error("Lỗi parse lịch sử làm bài:", e, item);
           return null;
         }
       }).filter(Boolean);
-  
+
       return {
         user_id,
         history
       };
-  
+
     } catch (err) {
       console.error("Lỗi lấy lịch sử làm bài:", err);
       throw new Error("Không thể lấy lịch sử làm bài");
     }
-  },  
+  },
 
   async markOverTime() {
     try {
