@@ -369,6 +369,8 @@ ADD COLUMN user_answer_text TEXT;
 CREATE TABLE contestants(
 contestants_id SERIAL PRIMARY KEY,
 exam_id int,
+user_id int,
+
 FOREIGN KEY (exam_id) REFERENCES exam(exam_id) ON DELETE CASCADE
 )
 
