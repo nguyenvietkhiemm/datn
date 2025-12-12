@@ -1,5 +1,3 @@
-import { number } from "framer-motion";
-
 export type Exam = {
   exam_id: number;
   exam_name: string;
@@ -10,28 +8,39 @@ export type Exam = {
   end_time?: string;
   description?: string;
   topic_name?: string;
-  subject_type: number
+  subject_type: number;
+  contestant_count? : number;
+  top3 : {
+    user_id : number,
+    user_name : string,
+    time_test : number
+  }[]
 };
 
 export interface DoExams {
-  question_id : number;
-  user_answer : (string | number)[];
+  question_id: number;
+  user_answer: (string | number)[];
 };
 
 export type ResultExams = {
-  score : number
+  score: number
 }
 
 export type RankProp = {
-  exam_id : number
+  exam_id: number
 }
 
 export type Rank = {
-  user_id : number,
-  final_score : number
+  user_id: number;
+  user_name: string;
+  score: number;
+  time_test: number;
+  final_score: number;
 }
 
 export interface myRank {
-  rank : number,
-  final_score : number
+  rank: number,
+  final_score: number,
+  score: number,
+  time_test: number
 }

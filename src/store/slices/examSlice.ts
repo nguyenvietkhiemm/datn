@@ -1,18 +1,6 @@
 "use client";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-type Exam = {
-  exam_id: number;
-  exam_name: string;
-  time_limit: number;
-  created_at: string;
-  topic_id : number;
-  start_time : string;
-  end_time : string;
-  description : string;
-  contestant_count : number;
-  topic_name : string
-};
+import { Exam } from "../../../domain/exam/type";
 
 type ExamState = {
   exams: Exam[];

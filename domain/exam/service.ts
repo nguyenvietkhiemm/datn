@@ -38,11 +38,12 @@ export const ExamService = {
         do_exam: {
             question_id: number;
             user_answer: (number | string)[]
-        }[]
+        }[],
+        user_name: string
     ) {
         const token = getToken();
 
-        const url = `${API_URL}/exams/submit?exam_id=${exam_id}&subject_type=${subject_type}&time_test=${used_time}`;
+        const url = `${API_URL}/exams/submit?exam_id=${exam_id}&subject_type=${subject_type}&time_test=${used_time}&user_name=${user_name}`;
 
         const res = await fetch(url, {
             method: "POST",
@@ -53,9 +54,9 @@ export const ExamService = {
         return await res.json();
     },
 
-    async getRanking(exam_id: number) {
+    async getRanking(exam_id: number, user_name: string) {
 
-        const res = await fetch(`${API_URL}/exams/${exam_id}/ranking`, {
+        const res = await fetch(`${API_URL}/exams/${exam_id}/ranking?user_name=${user_name}`, {
             method: "GET",
             headers: getHeaders(getToken())
         }
@@ -63,9 +64,15 @@ export const ExamService = {
         return await res.json();
     },
 
-    // Lấy lịch sử làm bài theo user
-    async getUserHistory(user_id: number) {
-        const res = await fetch(`${API_URL}/exams/user/${user_id}/exam-history`);
+    async getExamHistory(user_name : string) {
+        const token = getToken();
+        const url = `${API_URL}/exams/user/${user_name}/exam-history`;
+
+        const res = await fetch(url, {
+            method: "GET",
+            headers: getHeaders(token)
+        });
+
         return await res.json();
     }
 };

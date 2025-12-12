@@ -9,7 +9,7 @@ import { setExams } from "@/store/slices/examSlice";
 import Pagination from "@/components/pagination/Pagination";
 import Search from "@/components/search/Search";
 import { Users, CalendarCheck } from "lucide-react";
-import {Exam} from "../../../domain/exam/type"
+import { Exam } from "../../../domain/exam/type"
 import { ExamService } from "../../../domain/exam/service";
 
 export default function ExamList() {
@@ -69,8 +69,22 @@ export default function ExamList() {
                   {exam.description}
                 </p>
                 <div className={styles.top_user}>
-                  {/* sau này có thể hiển thị top 3 thí sinh */}
+                  {exam.top3 && exam.top3.length > 0 ? (
+                    exam.top3.map((u, idx) => (
+                      <div key={idx} className={styles.top_item}>
+                        <span className={styles.medal}>
+                          {idx === 0 ? "🥇" : idx === 1 ? "🥈" : "🥉"}
+                        </span>
+                        <span className={styles.user_name}>
+                          {u?.user_name || "Ẩn danh"}
+                        </span>
+                      </div>
+                    ))
+                  ) : (
+                    <span className={styles.no_top}>Chưa có xếp hạng</span>
+                  )}
                 </div>
+
 
               </div>
 
@@ -95,12 +109,16 @@ export default function ExamList() {
               <div className={styles.date}>
                 <div className={styles.dateRow}>
                   <CalendarCheck size={16} />
-                  <span>Kết thúc: {new Date(exam.end_time).toLocaleString("vi-VN")}</span>
+                  <span>Kết thúc: {exam.end_time
+                    ? new Date(exam.end_time).toLocaleString("vi-VN")
+                    : "Chưa có"}</span>
                 </div>
 
                 <div className={styles.dateRow}>
                   <CalendarCheck size={16} />
-                  <span>Bắt đầu: {new Date(exam.start_time).toLocaleString("vi-VN")}</span>
+                  <span>Bắt đầu: {exam.start_time
+                    ? new Date(exam.start_time).toLocaleString("vi-VN")
+                    : "Chưa có"}</span>
                 </div>
               </div>
             </div>

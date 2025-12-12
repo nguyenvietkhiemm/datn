@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useParams } from "next/navigation";
 import { ExamService } from "../../../../../domain/exam/service";
 import { Answer, Question } from "../../../../../domain/question-answer/model";
-import {Exam} from "../../../../../domain/exam/type"
+import { Exam } from "../../../../../domain/exam/type"
 import ResultExam from "../result/page";
 
 export default function DoExam() {
@@ -14,8 +14,8 @@ export default function DoExam() {
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [exam, setExam] = useState<Exam>();
-  const [score, setScore] = useState<number >(0);
-  const user_name = JSON.parse(localStorage.getItem("user_name") || "null");
+  const [score, setScore] = useState<number>(0);
+  const user_name = localStorage.getItem("user_name") || "null";
   const params = useParams();
   const id = Number(params.id);
 
@@ -56,10 +56,10 @@ export default function DoExam() {
       ? exam.time_limit * 60 * 1000 - timeLeft! * 1000
       : timeLeft! * 1000;
 
-    const result = await ExamService.submit(id, exam.subject_type, used_time, do_exam);
+    const result = await ExamService.submit(id, Number(exam!.subject_type), used_time, do_exam, user_name);
 
-    if (result?.data?.final_score !== undefined) {
-      setScore(result.data.final_score);
+    if (result?.data?.score !== undefined) {
+      setScore(result.data.score);
     }
 
     setSubmitted(true);
@@ -101,12 +101,12 @@ export default function DoExam() {
           <h2>{exam?.exam_name}</h2>
         </div>
 
-        <div className={styles.exam_body}>
-          {/* LEFT */}
-          <div className={styles.leftPanel}>
-            {submitted ? (
-              <ResultExam score={score}/>
-            ) : (
+        {submitted ? (
+          <ResultExam score={score} />
+        ) : (
+          <div className={styles.exam_body}>
+            {/* LEFT */}
+            <div className={styles.leftPanel}>
               <div>
                 {questions.length > 0 ? (
                   questions.map((q, i) => (
@@ -139,39 +139,39 @@ export default function DoExam() {
                   <>Không có câu hỏi nào</>
                 )}
               </div>
-            )}
-          </div>
+            </div>
 
-          {/* RIGHT */}
-          <div className={styles.rightPanel}>
-            <div className={styles.topSection}>
-              <div className={styles.timer}>
-                ⏱ {timeLeft !== null ? formatTime(timeLeft) : "Đang tải..."}
+            {/* RIGHT */}
+            <div className={styles.rightPanel}>
+              <div className={styles.topSection}>
+                <div className={styles.timer}>
+                  ⏱ {timeLeft !== null ? formatTime(timeLeft) : "Đang tải..."}
+                </div>
+
+                <Button variant="outline" onClick={handleSubmitExam}>
+                  Nộp bài
+                </Button>
               </div>
 
-              <Button variant="outline" onClick={handleSubmitExam}>
-                Nộp bài
-              </Button>
-            </div>
-
-            <div className={styles.grid}>
-              {questions.map((q, i) => (
-                <button
-                  key={q.question_id}
-                  className={`${styles.numButton} ${answers[q.question_id] ? styles.answered : ""
-                    }`}
-                  onClick={() =>
-                    document
-                      .getElementById(`q-${q.question_id}`)
-                      ?.scrollIntoView({ behavior: "smooth" })
-                  }
-                >
-                  {i + 1}
-                </button>
-              ))}
+              <div className={styles.grid}>
+                {questions.map((q, i) => (
+                  <button
+                    key={q.question_id}
+                    className={`${styles.numButton} ${answers[q.question_id] ? styles.answered : ""
+                      }`}
+                    onClick={() =>
+                      document
+                        .getElementById(`q-${q.question_id}`)
+                        ?.scrollIntoView({ behavior: "smooth" })
+                    }
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

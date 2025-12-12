@@ -110,6 +110,39 @@
     gap: 20px;
 }
 
+.top_user {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.top_item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #444;
+    font-weight: 500;
+}
+
+.medal {
+    font-size: 18px;
+}
+
+.user_name {
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.no_top {
+    font-size: 13px;
+    color: #777;
+    font-style: italic;
+}
+
 .user {
     display: grid;
     grid-template-columns: 48px auto;
