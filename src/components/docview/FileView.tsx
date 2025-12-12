@@ -1,8 +1,16 @@
 "use client";
 import React, { useState } from "react";
 import DocxViewer from "./DocView";
-import PDFViewer from "./PDFView";
+// import PDFViewer from "./PDFView";
+
 import { Maximize2, Minimize2, ZoomIn, ZoomOut, RefreshCw, Download } from "lucide-react";
+
+import dynamic from "next/dynamic";
+
+// ❗ FIX: React-pdf MUST be dynamically imported on client side only
+const PDFViewer = dynamic(() => import("./PDFView"), {
+  ssr: false,
+});
 
 interface FileViewerProps {
   link: string;

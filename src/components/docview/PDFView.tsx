@@ -13,7 +13,7 @@ export default function PDFViewer({ link, zoom = 1 }: { link: string; zoom?: num
     <div
       className="flex flex-col items-center w-full overflow-y-auto"
       style={{
-        backgroundColor: "#7f7f7f", // nền ngoài
+        backgroundColor: "#7f7f7f",
         padding: "40px 0",
         height: "80vh",
       }}
@@ -29,7 +29,7 @@ export default function PDFViewer({ link, zoom = 1 }: { link: string; zoom?: num
             style={{
               backgroundColor: "white",
               boxShadow: "4px 4px 4px rgba(0,0,0,0.15)",
-              marginBottom: "24px", // 🟢 khoảng cách giữa các trang
+              marginBottom: "24px",
               borderRadius: "4px",
               transform: `scale(${zoom})`,
               transformOrigin: "top center",
