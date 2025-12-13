@@ -359,9 +359,8 @@ const ExamService = {
 
       // su dung list cho lich su lambai
       await redis.lpush(
-        `user:${user_id}:exam_history`,
+        `user:${user_id}:exam:${exam_id}:exam_history`,
         JSON.stringify({
-          exam_id: exam_id,
           score: score,
           time_test: time_test,
           submitted_at: Date.now()
@@ -466,11 +465,12 @@ const ExamService = {
   },
 
   async getUserExamHistory(
-    user_id : number
+    user_id : number,
+    exam_id : number
   ): Promise<{
     user_id: number;
+    exam_id: number;
     history: {
-      exam_id: number;
       score: number;
       time_test: number;
       submitted_at: Date;
@@ -478,10 +478,11 @@ const ExamService = {
   }> {
     try {
       
-      const list = await redis.lrange(`user:${user_id}:exam_history`, 0, -1);
+      const list = await redis.lrange(`user:${user_id}:exam:${exam_id}:exam_history`, 0, -1);
       if (!list || list.length === 0) {
         return {
           user_id,
+          exam_id,
           history: []
         };
       }
@@ -504,6 +505,7 @@ const ExamService = {
 
       return {
         user_id,
+        exam_id,
         history
       };
 
