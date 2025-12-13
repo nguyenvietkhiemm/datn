@@ -1,13 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import DocxViewer from "./DocView";
+// import styles from "./FileView.module.css";
 // import PDFViewer from "./PDFView";
 
 import { Maximize2, Minimize2, ZoomIn, ZoomOut, RefreshCw, Download } from "lucide-react";
-
 import dynamic from "next/dynamic";
 
-// ❗ FIX: React-pdf MUST be dynamically imported on client side only
 const PDFViewer = dynamic(() => import("./PDFView"), {
   ssr: false,
 });
@@ -42,7 +41,7 @@ export default function FileViewer({ link }: FileViewerProps) {
     <div className="border rounded-lg overflow-hidden bg-gray-100">
       {/* Toolbar */}
       <div className="flex justify-between items-center bg-gray-800 text-white p-2">
-        <span>📄 Xem tài liệu ({ext?.toUpperCase()})</span>
+        <span>Xem tài liệu ({ext?.toUpperCase()})</span>
         <div className="flex gap-3 items-center">
           <button onClick={zoomOut}><ZoomOut size={18} /></button>
           <button onClick={zoomIn}><ZoomIn size={18} /></button>
