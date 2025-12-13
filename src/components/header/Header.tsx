@@ -9,15 +9,39 @@ import Setting from "../setting/Setting";
 import styles from "./Header.module.css";
 import Image from "next/image";
 
+import { usePathname } from "next/navigation";
+
 export default function Header() {
   const [showSetting, setShowSetting] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const [userName, setUserName] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [hideHeader, setHideHeader] = useState(false);
 
   const userRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const dispatch = useDispatch();
+
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
+  useEffect(() => {
+    if (!isHome) {
+      setHideHeader(false);
+      return;
+    }
+
+    const sliderHeight = window.innerHeight;
+
+    const handleScroll = () => {
+      setHideHeader(window.scrollY < 4);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isHome]);
+
 
   useEffect(() => {
     setIsClient(true);
@@ -44,15 +68,18 @@ export default function Header() {
   }, []);
 
   const listNavbar = [
-    { name: "Cuộc thi", href: "/exam" },
+    { name: "Thi thử", href: "/exam" },
     { name: "Luyện tập", href: "/practice" },
-    { name: "Thẻ ghi nhớ", href: "/flashcards" },
+    { name: "Flashcard", href: "/flashcards" },
     { name: "Lộ trình", href: "/roadmap" },
     { name: "Tài liệu", href: "/document" },
   ];
 
   return (
-    <header className={styles.header}>
+    <header
+      className={`${styles.header} ${hideHeader ? styles.hidden : styles.visible
+        }`}
+    >
       <div className={styles.container}>
         <div className={styles.left}>
           <Link href="/" className={styles.logo}>
@@ -66,7 +93,7 @@ export default function Header() {
               />
             </span>
             <p className={styles.logoText}>
-              LÒ LUYỆN <span>ONLINE</span>
+              LÒ LUYỆN <span>Online</span>
             </p>
           </Link>
         </div>
@@ -86,7 +113,7 @@ export default function Header() {
               >
                 {userName?.[0] || "Tài khoản"}
               </div>
-              {showSetting && <Setting onLogout={handleLogout} setShowSetting={setShowSetting}/>}
+              {showSetting && <Setting onLogout={handleLogout} setShowSetting={setShowSetting} />}
             </div>
           ) : (
             <div className={styles.auth}>
