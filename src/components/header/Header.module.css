@@ -12,8 +12,8 @@
     font-family: var(--font-heading);
 
      /* ✨ mượt */
-    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-                opacity 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.2s ease;
     will-change: transform, opacity;
 }
 

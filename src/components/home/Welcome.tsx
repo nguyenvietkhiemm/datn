@@ -7,7 +7,8 @@ import Link from "next/link";
 
 export default function LandingPage() {
   return (
-    <main className="bg-white text-gray-800 font-sans">
+    // chỉ riêng trang home mới có margin-top âm để kéo header lên trên
+    <main className="bg-white text-gray-800 font-sans mt-[-80px]">
       {/* ================= HERO ================= */}
       <section id='hero' className="relative min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 text-white overflow-hidden flex items-center justify-center px-6 text-center">
 

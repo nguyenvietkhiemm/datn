@@ -31,8 +31,6 @@ export default function Header() {
       return;
     }
 
-    const sliderHeight = window.innerHeight;
-
     const handleScroll = () => {
       setHideHeader(window.scrollY < 4);
     };

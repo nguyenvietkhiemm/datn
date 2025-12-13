@@ -14,15 +14,12 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             <ReduxProvider>
                 <div className="flex flex-col min-h-screen">
                     <Header />
-
-                    <main className="flex-1">
+                    <main className="flex-1 min-h-screen pt-[80px]">
                         <TokenChecker />
                         {children}
                     </main>
-
                     <Footer />
                 </div>
-
             </ReduxProvider>
         </ThemeProvider>
     );
