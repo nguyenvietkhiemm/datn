@@ -36,7 +36,7 @@ export default function ExamList() {
 
   const handleReviewExam = (exam_id: number, exam: Exam) => {
     localStorage.setItem("exam", JSON.stringify(exam))
-    router.push(`/exam/${exam_id}/review`)
+    router.push(`/exam/${exam_id}/review/rank`)
   }
 
   return (

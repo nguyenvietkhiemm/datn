@@ -64,9 +64,9 @@ export const ExamService = {
         return await res.json();
     },
 
-    async getExamHistory(user_name : string) {
+    async getExamHistory(user_name : string, exam_id : number) {
         const token = getToken();
-        const url = `${API_URL}/exams/user/${user_name}/exam-history`;
+        const url = `${API_URL}/exams/user/${user_name}/exam-history?exam_id=${exam_id}`;
 
         const res = await fetch(url, {
             method: "GET",
