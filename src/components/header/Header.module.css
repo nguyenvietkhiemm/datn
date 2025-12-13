@@ -10,7 +10,23 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     z-index: 1000;
     font-family: var(--font-heading);
+
+     /* ✨ mượt */
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.2s ease;
+    will-change: transform, opacity;
 }
+
+.hidden {
+  transform: translate3d(0, -100%, 0);
+  opacity: 0;
+}
+
+.visible {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+
 
 .container {
     width: 100%;
@@ -60,7 +76,7 @@
 .logoText span {
     font-size: 0.8em;
     /* nhỏ hơn chữ chính */
-    color: #0070f3;
+    color: #014491;
     /* đổi màu nếu muốn */
     letter-spacing: 1px;
 }

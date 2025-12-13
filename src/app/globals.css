@@ -16,7 +16,7 @@
 /* 🟦 Chế độ sáng / tối */
 html.light,
 body.light {
-  background-color: #ffffff;
+  background-color: #0f172a;
   color: #000000;
 }
 
@@ -72,4 +72,34 @@ h6,
 .docx span,
 .docx div {
   font-family: inherit !important;
+}
+
+/* Width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track (background) */
+::-webkit-scrollbar-track {
+  background: #0f172a; /* slate-900 */
+}
+
+/* Thumb (cục kéo) */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    #1e40af,
+    #3730a3
+  );
+  border-radius: 999px;
+  border: 2px solid #0f172a;
+}
+
+/* Hover */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    #2563eb,
+    #4338ca
+  );
 }

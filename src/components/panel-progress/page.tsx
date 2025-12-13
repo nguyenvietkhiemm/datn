@@ -1,27 +1,46 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import CurrentProgress from "@/components/current-progress/page";
 import styles from "./PanelProgress.module.css";
+import { BarChart2, X } from "lucide-react";
 
 export default function ProgressPanel() {
-    const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-    return (
-        <>
+  return (
+    <>
+      {/* Overlay */}
+      {isOpen && (
+        <div
+          className={styles.overlay}
+          onClick={() => setIsOpen(false)}
+        />
+      )}
 
-            {isOpen ? (
-                <div className={`${styles.slidePanel} ${isOpen ? styles.open : ""}`}>
-                    <CurrentProgress setIsOpen={setIsOpen} />
-                </div>
-            ) : (
-                <button
-                    onClick={() => setIsOpen(!isOpen)}
-                    className="fixed top-40 right-5 p-2 bg-white-500 text-black rounded border border-gray-300 cursor-pointer flex flex-col items-center justify-center"
-                >
-                    <span>Tiến</span>
-                    <span>Độ</span>
-                </button>
-            )}
-        </>
-    );
+      {/* Slide Panel */}
+      <div
+        className={`${styles.slidePanel} ${isOpen ? styles.open : ""}`}
+      >
+        <button
+          className={styles.closeBtn}
+          onClick={() => setIsOpen(false)}
+        >
+          <X size={20} />
+        </button>
+
+        <CurrentProgress setIsOpen={setIsOpen} />
+      </div>
+
+      {/* Floating Toggle */}
+      {!isOpen && (
+        <button
+          onClick={() => setIsOpen(true)}
+          className={styles.floatingBtn}
+        >
+          <BarChart2 size={18} />
+          <span>Tiến độ</span>
+        </button>
+      )}
+    </>
+  );
 }
