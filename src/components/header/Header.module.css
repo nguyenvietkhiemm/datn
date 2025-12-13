@@ -106,7 +106,7 @@
 }
 
 .navItem:hover {
-    color: #0070f3;
+    color: #1e40af;
 }
 
 .navItem::after {
@@ -116,7 +116,7 @@
     left: 0;
     width: 0;
     height: 2px;
-    background-color: #0070f3;
+    background-color: #1e40af;
     transition: width 0.3s ease;
 }
 
@@ -129,7 +129,7 @@
 }
 
 .avatar {
-    background-color: #0070f3;
+    background-color: #1e40af;
     color: white;
     border-radius: 50%;
     width: 40px;
