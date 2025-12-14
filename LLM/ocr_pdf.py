@@ -55,7 +55,7 @@ def read_pdf_smart(file_path):
 
     pdf.close()
 
-    cpu_use = max(1, mp.cpu_count() - 1 )
+    cpu_use = max(1, mp.cpu_count() - 3)
     print(f"CPU sử dụng: {cpu_use}")
 
     with mp.Pool(cpu_use) as pool:
