@@ -1,4 +1,4 @@
-import { Exam, DoExam } from "../models/exam.model"
+import { Exam, DoExam, UserAnswerGrouped, AnswerCorrectGrouped } from "../models/exam.model"
 import pool, { query } from "../config/database";
 import { Question } from "../models/question.model"
 import { redis } from "../config/redis";
@@ -203,38 +203,34 @@ const ExamService = {
     time_test: number,
     subject_type: number,
     user_name: string
-  ): Promise<{ score: number }> {
+  ): Promise<{ score: number; history_exam_id: number }> {
     const client = await pool.connect();
 
     try {
       await client.query("BEGIN");
 
-      // 1. Lấy toàn bộ câu hỏi + đáp án đúng
-      const sql = `
-        SELECT 
-          q.question_id,
-          q.type_question,
-          a.answer_id,
-          a.answer_content
+      //  Insert contestants (1 lần duy nhất)
+      await client.query(
+        `INSERT INTO contestants (user_id, exam_id)
+         VALUES ($1, $2)
+         ON CONFLICT DO NOTHING`,
+        [user_id, exam_id]
+      );
+
+      //  Lấy đáp án đúng
+      const { rows } = await client.query(
+        `
+        SELECT q.question_id, q.type_question, a.answer_id, a.answer_content
         FROM question_exam qe
         JOIN question q ON q.question_id = qe.question_id
         JOIN answer a ON a.question_id = q.question_id
         WHERE qe.exam_id = $1 AND a.is_correct = true
-        ORDER BY q.question_id ASC
-      `;
+        `,
+        [exam_id]
+      );
 
-      const { rows } = await client.query(sql, [exam_id]);
-
-      // Map dữ liệu
-      const map = new Map<
-        number,
-        {
-          type_question: number;
-          correct_answers: number[];
-          correct_text?: string;
-        }
-      >();
-
+      // Map đáp án
+      const map = new Map<number, any>();
       for (const r of rows) {
         if (!map.has(r.question_id)) {
           map.set(r.question_id, {
@@ -243,136 +239,95 @@ const ExamService = {
             correct_text: undefined
           });
         }
-
-        const current = map.get(r.question_id)!;
-
-        // TH trắc nghiệm (loại 1 & 2)
-        if (r.type_question !== 3) {
-          current.correct_answers.push(r.answer_id);
-        }
-
-        // TH tự luận
-        if (r.type_question === 3) {
-          current.correct_text = r.answer_content;
-        }
+        const cur = map.get(r.question_id);
+        r.type_question === 3
+          ? (cur.correct_text = r.answer_content)
+          : cur.correct_answers.push(r.answer_id);
       }
 
-      // ======== CHẤM ĐIỂM ==========
+      //  Chấm điểm
       let score = 0;
-
       for (const user of do_exam) {
         const info = map.get(user.question_id);
         if (!info) continue;
 
-        const { type_question, correct_answers, correct_text } = info;
-
-        // ==== Loại 1: Trắc nghiệm 1 đáp án ====
-        if (type_question === 1) {
-          if (user.user_answer[0] == correct_answers[0]) {
-            score += 0.25
-          }
-
-          await client.query(
-            `INSERT INTO user_exam_answer (exam_id, user_id, answer_id)
-             VALUES ($1, $2, $3)`,
-            [exam_id, user_id, user.user_answer[0]]
-          );
+        if (info.type_question === 1 &&
+          user.user_answer[0] == info.correct_answers[0]) {
+          score += 0.25;
         }
-
-        // ==== Loại 2: Trắc nghiệm nhiều đáp án ====
-        else if (type_question === 2) {
-          const correctSelected = user.user_answer.filter(a =>
-            correct_answers.includes(Number(a))
-          ).length;
-          const correct = user.user_answer.filter(a => correct_answers.includes(Number(a))).length;
-          if (correct === 1) {
-            score += 0.1
-          } else if (correct === 2) {
-            score += 0.25
-          } else if (correct === 3) {
-            score += 0.5
-          } else score += 1;
-
-          for (const ans of user.user_answer) {
-            if (!isNaN(Number(ans))) {
-              await client.query(
-                `INSERT INTO user_exam_answer (exam_id, user_id, answer_id)
-                 VALUES ($1, $2, $3)`,
-                [exam_id, user_id, ans]
-              );
-            }
-          }
+        else if (info.type_question === 2) {
+          const correct = user.user_answer.filter(
+            a => info.correct_answers.includes(Number(a))).length;
+          if (correct === 1) { score += 0.1 }
+          else if (correct === 2) { score += 0.25 }
+          else if (correct === 3) { score += 0.5 }
+          else score += 1;
         }
-
-        // ==== Loại 3: Tự luận ====
-        else if (type_question === 3) {
-          const correct_text = correct_answers[0];
-          const user_text = user.user_answer[0];
-          if ((String(user_text).trim().toLowerCase() === String(correct_text).trim().toLowerCase())) {
-            if (subject_type === 1) {
-              score += 0.5
-            } else {
-              score += 0.25
-            }
-          }
-
-          await client.query(
-            `INSERT INTO user_exam_answer (exam_id, user_id, user_answer_text)
-             VALUES ($1, $2, $3)`,
-            [exam_id, user_id, user.user_answer[0]]
-          );
+        if (info.type_question === 3 &&
+          String(user.user_answer[0]).trim().toLowerCase() ===
+          String(info.correct_text).trim().toLowerCase()) {
+          score += subject_type === 1 ? 0.5 : 0.25;
         }
       }
 
-      //them so nguoi tham gia
-      const checkConQuery = `
-        SELECT * FROM contestants
-        WHERE user_id=$1 AND exam_id=$2
+      // Insert history_exam (SAU khi có score)
+      const historyResult = await client.query(
         `
-      const checkCon = await client.query(checkConQuery, [user_id, exam_id])
-      if (checkCon.rows.length === 0) {
-        await client.query(
-          `INSERT INTO contestants (user_id, exam_id) VALUES ($1, $2)`,
-          [user_id, exam_id]
-        );
+        INSERT INTO history_exam (user_id, exam_id, score, time_test)
+        VALUES ($1, $2, $3, $4)
+        RETURNING history_exam_id
+        `,
+        [user_id, exam_id, score, time_test]
+      );
+
+      const history_exam_id = historyResult.rows[0].history_exam_id;
+
+      // Insert user_exam_answer
+      for (const user of do_exam) {
+        for (const ans of user.user_answer) {
+          await client.query(
+            `
+            INSERT INTO user_exam_answer
+            (history_exam_id, exam_id, user_id, question_id, answer_id, user_answer_text)
+            VALUES ($1, $2, $3, $4, $5, $6)
+            `,
+            [
+              history_exam_id,
+              exam_id,
+              user_id,
+              user.question_id,
+              Number(ans),
+              isNaN(Number(ans)) ? ans : null
+            ]
+          );
+        }
       }
 
-      //tinh gia tri de luu xep hang redis
-      const final_score = score * 1000000000 - time_test
-      const member = JSON.stringify({ user_id, user_name })
-      //su dung Zset cho xep hang
+      // Redis ranking
+      const final_score = score * 1e9 - time_test;
       await redis.zadd(
         `exam:${exam_id}:ranking`,
         "GT",
         final_score,
-        member
+        JSON.stringify({ user_id, user_name })
       );
 
-      //luu diem va tg lam bai
       await redis.hset(
         `exam:${exam_id}:user:${user_id}`,
         "score",
         score.toString(),
         "time_test",
         time_test.toString(),
-      );
-
-      // su dung list cho lich su lambai
-      await redis.lpush(
-        `user:${user_id}:exam:${exam_id}:exam_history`,
-        JSON.stringify({
-          score: score,
-          time_test: time_test,
-          submitted_at: Date.now()
-        })
+        "history_exam_id",
+        history_exam_id.toString()
       );
 
       await client.query("COMMIT");
+      return { score, history_exam_id };
 
-      return { score };
-    } catch (error) {
+    } catch (err) {
       await client.query("ROLLBACK");
-      throw error;
+      throw err;
     } finally {
       client.release();
     }
@@ -394,7 +349,6 @@ const ExamService = {
       rank: number,
       score: number,
       time_test: number,
-      final_score: number
     } | null
   }> {
     try {
@@ -452,7 +406,6 @@ const ExamService = {
           rank: myRankIndex + 1,
           score: Number(detail.score || 0),
           time_test: Number(detail.time_test || 0),
-          final_score: Number(myFinalScore)
         };
       }
 
@@ -464,9 +417,9 @@ const ExamService = {
     }
   },
 
-  async getUserExamHistory(
-    user_id : number,
-    exam_id : number
+  async getUserListExamHistory(
+    user_id: number,
+    exam_id: number
   ): Promise<{
     user_id: number;
     exam_id: number;
@@ -477,9 +430,9 @@ const ExamService = {
     }[];
   }> {
     try {
-      
-      const list = await redis.lrange(`user:${user_id}:exam:${exam_id}:exam_history`, 0, -1);
-      if (!list || list.length === 0) {
+      const listQuery = `SELECT * FROM history_exam WHERE user_id=$1 AND exam_id=$2`
+      const list = await query(listQuery, [user_id, exam_id])
+      if (!list || list.rows.length === 0) {
         return {
           user_id,
           exam_id,
@@ -487,32 +440,110 @@ const ExamService = {
         };
       }
 
-      const history = list.map(item => {
-        try {
-          const parsed = JSON.parse(item);
-
-          // Convert submitted_at sang kiểu Date nếu là string
-          if (parsed.submitted_at) {
-            parsed.submitted_at = new Date(parsed.submitted_at);
-          }
-
-          return parsed;
-        } catch (e) {
-          console.error("Lỗi parse lịch sử làm bài:", e, item);
-          return null;
-        }
-      }).filter(Boolean);
-
       return {
         user_id,
         exam_id,
-        history
+        history: list.rows
       };
 
     } catch (err) {
       console.error("Lỗi lấy lịch sử làm bài:", err);
       throw new Error("Không thể lấy lịch sử làm bài");
     }
+  },
+
+  async getUserAnswer(
+    history_exam_id: number,
+    exam_id: number
+  ): Promise<{
+    user_answer: UserAnswerGrouped[];
+    score: number | null;
+    answer_correct: AnswerCorrectGrouped[];
+  }> {
+  
+    /* ===== ĐÁP ÁN ĐÚNG (GROUP BY question_id + question_content) ===== */
+    const correctSql = `
+      SELECT
+        q.question_id,
+        q.question_content,
+        q.type_question,
+        json_agg(
+          json_build_object(
+            'answer_id', a.answer_id,
+            'answer_content', a.answer_content
+          )
+        ) AS correct_answers
+      FROM exam e
+      JOIN question_exam qb ON e.exam_id = qb.exam_id
+      JOIN question q ON qb.question_id = q.question_id
+      JOIN answer a ON q.question_id = a.question_id
+      WHERE e.exam_id = $1
+        AND a.is_correct = true
+      GROUP BY q.question_id, q.question_content
+      ORDER BY q.question_id;
+    `;
+  
+    const correctResult = await pool.query(correctSql, [exam_id]);
+  
+    /* ===== ĐÁP ÁN USER ===== */
+    const userSql = `
+      SELECT question_id, answer_id, user_answer_text
+      FROM user_exam_answer
+      WHERE history_exam_id = $1
+      ORDER BY question_id;
+    `;
+  
+    const userResult = await pool.query(userSql, [history_exam_id]);
+  
+    const userMap = new Map<number, UserAnswerGrouped>();
+  
+    for (const row of userResult.rows) {
+      const { question_id, answer_id, user_answer_text } = row;
+  
+      if (!userMap.has(question_id)) {
+        userMap.set(question_id, {
+          question_id,
+          answer_id: [],
+          user_answer_text: null
+        });
+      }
+  
+      const item = userMap.get(question_id)!;
+  
+      if (answer_id !== null) {
+        item.answer_id.push(answer_id);
+      }
+  
+      if (user_answer_text !== null) {
+        item.user_answer_text = user_answer_text;
+      }
+    }
+  
+    /* ===== SCORE ===== */
+    const scoreResult = await pool.query(
+      `SELECT score FROM history_exam WHERE history_exam_id = $1`,
+      [history_exam_id]
+    );
+  
+    const score = scoreResult.rows[0]?.score ?? null;
+  
+    return {
+      user_answer: Array.from(userMap.values()),
+      score,
+      answer_correct: correctResult.rows
+    };
+  },  
+
+  async checkDoExam(
+    exam_id: number,
+    user_id: number
+  ): Promise<{ check: boolean }> {
+
+    const hasDone = await redis.exists(
+      `exam:${exam_id}:user:${user_id}`
+    );
+
+    return { check: !hasDone };
   },
 
   async markOverTime() {
