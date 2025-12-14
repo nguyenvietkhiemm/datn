@@ -178,6 +178,18 @@ examRoute.post("/submit",
         Authentication.AuthenticateToken,
         ExamController.submit
 )
+examRoute.get("/user/user-answer",
+        Authentication.AuthenticateToken,
+        ExamController.getUserAnswer)
+examRoute.get("/check/do/user",
+        Authentication.AuthenticateToken,
+        ExamController.checkDoExam
+)
+
+examRoute.get("/user-answer",
+        Authentication.AuthenticateToken,
+        ExamController.getUserAnswer
+)
 
 /**
  * @openapi
@@ -225,7 +237,7 @@ examRoute.get("/:id/ranking", Authentication.AuthenticateToken, ExamController.g
  *       500:
  *         description: Lỗi server
  */
-examRoute.get('/:id', ExamController.getById);
+examRoute.get('/:id', Authentication.AuthenticateToken, ExamController.getById);
 
 /**
  * @openapi

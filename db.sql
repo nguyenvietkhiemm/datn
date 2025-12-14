@@ -383,3 +383,24 @@ ADD COLUMN answer_id INT
 
 ALTER TABLE public.user_exam_answer
 ADD COLUMN user_answer_text TEXT DEFAULT "" 
+
+CREATE TABLE history_exam(
+history_exam_id SERIAL PRIMARY KEY,
+  exam_id INT NOT NULL,
+  user_id INT NOT NULL
+)
+
+ALTER TABLE public.user_exam_answer ADD COLUMN history_exam_id INT
+
+ALTER TABLE user_exam_answer
+ADD CONSTRAINT fk_user_exam_answer_history
+FOREIGN KEY (history_exam_id)
+REFERENCES history_exam(history_exam_id)
+ON DELETE CASCADE;
+
+ALTER TABLE public.history_exam
+ADD COLUMN score DECIMAL(4,2),
+ADD COLUMN time_test VARCHAR(5)
+
+ALTER TABLE history_exam
+ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
