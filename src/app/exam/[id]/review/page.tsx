@@ -3,6 +3,7 @@ import styles from "./Review.module.css"
 import { useParams, useRouter, usePathname } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { ExamService } from "../../../../../domain/exam/service"
 
 export default function ReviewExam({
     children,
@@ -23,7 +24,12 @@ export default function ReviewExam({
 
     const activeTab = getActiveTab();
 
-    const handleDoExam = (exam_id: number) => {
+    const handleDoExam = async (exam_id: number) => {
+        const checkDoExam = await ExamService.checkDoExam(exam_id);
+    if(checkDoExam.data.check === false){
+      alert("Bạn đã làm bài rồi");
+      return
+    }
         router.push(`/exam/${exam_id}/do`);
     };
 

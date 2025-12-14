@@ -29,6 +29,7 @@
     padding: 14px 18px;
     background: #f8f8f8;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 .examId {

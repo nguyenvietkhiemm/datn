@@ -2,11 +2,10 @@
 import React, { useState, useEffect } from "react";
 import styles from "./DoExam.module.css";
 import { Button } from "@/components/ui/button";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { ExamService } from "../../../../../domain/exam/service";
-import { Answer, Question } from "../../../../../domain/question-answer/model";
+import { Question } from "../../../../../domain/question-answer/type";
 import { Exam } from "../../../../../domain/exam/type"
-import ResultExam from "../result/page";
 
 export default function DoExam() {
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -14,16 +13,15 @@ export default function DoExam() {
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [exam, setExam] = useState<Exam>();
-  const [score, setScore] = useState<number>(0);
   const user_name = localStorage.getItem("user_name") || "null";
   const params = useParams();
   const id = Number(params.id);
+  const router = useRouter();
 
   // Lấy dữ liệu đề thi + câu hỏi
   useEffect(() => {
     const loadExamDetail = async () => {
       const result = await ExamService.getExamDetail(id);
-
       if (Array.isArray(result.data)) {
         setQuestions(result.data);
       } else {
@@ -57,12 +55,9 @@ export default function DoExam() {
       : timeLeft! * 1000;
 
     const result = await ExamService.submit(id, Number(exam!.subject_type), used_time, do_exam, user_name);
-
-    if (result?.data?.score !== undefined) {
-      setScore(result.data.score);
-    }
-
+    const history_exam_id = result?.data?.history_exam_id
     setSubmitted(true);
+    router.push(`/exam/${exam?.exam_id}/result/${history_exam_id}`)
   };
 
   // Countdown
@@ -100,10 +95,6 @@ export default function DoExam() {
         <div className={styles.exam_header}>
           <h2>{exam?.exam_name}</h2>
         </div>
-
-        {submitted ? (
-          <ResultExam score={score} />
-        ) : (
           <div className={styles.exam_body}>
             {/* LEFT */}
             <div className={styles.leftPanel}>
@@ -171,7 +162,6 @@ export default function DoExam() {
               </div>
             </div>
           </div>
-        )}
       </div>
     </div>
   );

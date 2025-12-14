@@ -34,7 +34,7 @@ export default function ExamList() {
     fetchExamList();
   }, [currentPage, filterCondition, searchKeyword])
 
-  const handleReviewExam = (exam_id: number, exam: Exam) => {
+  const handleReviewExam = async (exam_id: number, exam: Exam) => {
     localStorage.setItem("exam", JSON.stringify(exam))
     router.push(`/exam/${exam_id}/review/rank`)
   }

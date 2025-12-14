@@ -40,7 +40,6 @@ export type Rank = {
 
 export interface myRank {
   rank: number,
-  final_score: number,
   score: number,
   time_test: number
 }

@@ -1,84 +1,105 @@
 .container {
-    width: 100%;
-    max-width: 720px;
-    margin: 0 auto;
     padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 24px;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
+/* ===== HẠNG CỦA BẠN ===== */
 .myRankBox {
-    padding: 14px 20px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #b2cfff, #dce8ff);
-    border: 1px solid #aac4ff;
-    margin-bottom: 20px;
+    background: linear-gradient(135deg, #eef2ff, #ffffff);
+    border: 2px solid #4f46e5;
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-bottom: 28px;
 }
 
 .myRankTitle {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 700;
+    color: #4338ca;
+    margin-bottom: 12px;
+}
+
+.myRankRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
     margin-bottom: 6px;
 }
 
-.rankList {
-    margin-top: 10px;
+.myRankRow span {
+    color: #555;
 }
 
+.myRankRow b {
+    color: #111;
+}
+
+/* ===== EMPTY ===== */
+.empty {
+    text-align: center;
+    color: #888;
+    font-style: italic;
+    margin-top: 30px;
+}
+
+/* ===== LIST ===== */
+.rankList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* ===== ITEM ===== */
 .rankItem {
-    padding: 12px 16px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    background: #fff;
-    border: 1px solid #eee;
     display: flex;
     align-items: center;
-    gap: 14px;
-    transition: 0.2s;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 12px 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
-.rankItem:hover {
-    background: #f7f7f7;
-}
-
+/* ===== SỐ THỨ HẠNG ===== */
 .rankNumber {
     font-size: 20px;
-    font-weight: bold;
-    color: #4c5bff;
-    min-width: 40px;
+    font-weight: 700;
+    width: 50px;
     text-align: center;
-}
-
-.rankContent {
-    flex: 1;
-}
-
-.score {
-    font-weight: bold;
     color: #333;
 }
 
-.empty {
-    text-align: center;
-    padding: 20px;
-    color: #666;
+/* ===== CONTENT ===== */
+.rankContent {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 14px;
 }
 
-.top1 {
-    border: 2px solid gold;
-    background: #fff9da;
+.rankContent b {
+    color: #333;
 }
 
-.top2 {
-    border: 2px solid silver;
-    background: #f3f3f3;
+/* ===== TOP 3 (OPTIONAL) ===== */
+.rankItem:nth-child(1) {
+    border-left: 6px solid #facc15;
+    /* gold */
 }
 
-.top3 {
-    border: 2px solid #cd7f32;
-    background: #fff3e6;
+.rankItem:nth-child(2) {
+    border-left: 6px solid #cbd5e1;
+    /* silver */
+}
+
+.rankItem:nth-child(3) {
+    border-left: 6px solid #f59e0b;
+    /* bronze */
 }

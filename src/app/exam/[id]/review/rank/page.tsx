@@ -1,19 +1,20 @@
 "use client";
 import { useEffect, useState } from "react";
 import { ExamService } from "../../../../../../domain/exam/service";
-import { Rank, RankProp, myRank } from "../../../../../../domain/exam/type";
+import { Rank, myRank } from "../../../../../../domain/exam/type";
 import styles from "./Rank.module.css";
 import ReviewExam from "../page";
 import { useParams } from "next/navigation";
+import { ExamModel } from "../../../../../../domain/exam/model";
 
 export default function Ranking() {
   const params = useParams();
   const exam_id = Number(params.id);
   const [ranking, setRanking] = useState<Rank[]>([]);
   const [myRank, setMyRank] = useState<myRank | null>(null);
-  const user_name = localStorage.getItem("user_name");
 
   useEffect(() => {
+    const user_name = localStorage.getItem("user_name");
     async function load() {
       const result = await ExamService.getRanking(exam_id, String(user_name));
 
@@ -33,8 +34,22 @@ export default function Ranking() {
         {/* Hạng của bạn */}
         {myRank && (
           <div className={styles.myRankBox}>
-            <div className={styles.myRankTitle}>Hạng của bạn: #{myRank.rank}</div>
-            <div>Điểm: <b>{myRank.final_score}</b></div>
+            <div className={styles.myRankTitle}>Thành tích của bạn</div>
+
+            <div className={styles.myRankRow}>
+              <span>Hạng:</span>
+              <b>#{myRank.rank}</b>
+            </div>
+
+            <div className={styles.myRankRow}>
+              <span>Điểm:</span>
+              <b>{myRank.score}</b>
+            </div>
+
+            <div className={styles.myRankRow}>
+              <span>Thời gian:</span>
+              <b>{ExamModel.formatTime(myRank.time_test)}</b>
+            </div>
           </div>
         )}
 
@@ -42,18 +57,14 @@ export default function Ranking() {
         {ranking.length === 0 && <p className={styles.empty}>Chưa có ai thi bài này</p>}
 
         <div className={styles.rankList}>
-          {ranking?.map((item: any, index) => (
-            <div
-              key={index}
-              className={`${styles.rankItem} ${index === 0 ? styles.top1 :
-                  index === 1 ? styles.top2 :
-                    index === 2 ? styles.top3 : ""
-                }`}
-            >
+          {ranking.map((item, index) => (
+            <div key={index} className={styles.rankItem}>
               <div className={styles.rankNumber}>#{index + 1}</div>
+
               <div className={styles.rankContent}>
-                <div>User Name: {item.user_name}</div>
-                <div className={styles.score}>Điểm: {item.score}</div>
+                <div><b>User:</b> {item.user_name}</div>
+                <div><b>Score:</b> {item.score}</div>
+                <div><b>Time:</b> {ExamModel.formatTime(item.time_test)}</div>
               </div>
             </div>
           ))}

@@ -3,15 +3,18 @@ import { useEffect, useState } from "react";
 import styles from "./ExamHistory.module.css";
 import { ExamService } from "../../../../../../domain/exam/service";
 import ReviewExam from "../page";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { formatVNDateTime } from "../../../../../../lib/model";
 
 export default function ExamHistory() {
   const [history, setHistory] = useState<any[]>([]);
-  const user_name = localStorage.getItem("user_name");
+  const router = useRouter();
   const param = useParams();
   const exam_id = Number(param.id);
 
   useEffect(() => {
+    const user_name = localStorage.getItem("user_name");
+
     async function load() {
       if (!user_name) return;
 
@@ -24,6 +27,10 @@ export default function ExamHistory() {
     load();
   }, []);
 
+  const handleResult = (history_exam_id : number) => {
+    router.push(`/exam/${exam_id}/result/${history_exam_id}`)
+  }
+
   return (
     <ReviewExam>
       <div className={styles.container}>
@@ -34,10 +41,10 @@ export default function ExamHistory() {
         )}
 
         <div className={styles.list}>
-          {history.map((item, index) => (
-            <div key={index} className={styles.card}>
+          {history?.map((item, index) => (
+            <div key={index} className={styles.card} onClick={() => handleResult(item.history_exam_id)}>
               <div className={styles.left}>
-                <div className={styles.examId}>Đề thi: #{item.exam_id}</div>
+                {/* <div className={styles.examId}>Đề thi: #{item.exam_id}</div> */}
                 <div className={styles.score}>
                   Điểm: <b>{item.score}</b>
                 </div>
@@ -48,7 +55,7 @@ export default function ExamHistory() {
 
               <div className={styles.right}>
                 <div className={styles.date}>
-                  {new Date(item.submitted_at).toLocaleString("vi-VN")}
+                  {formatVNDateTime(item.created_at)}
                 </div>
               </div>
             </div>

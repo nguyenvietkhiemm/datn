@@ -74,5 +74,28 @@ export const ExamService = {
         });
 
         return await res.json();
+    },
+
+    async checkDoExam(exam_id : number){
+        const token = getToken();
+        const url = `${API_URL}/exams/check/do/user?exam_id=${exam_id}`;
+
+        const res = await fetch(url, {
+            method: "GET",
+            headers: getHeaders(token)
+        });
+
+        return await res.json();
+    },
+
+    async getUserAnswer(history_exam_id : number, exam_id : number){
+        const token = getToken();
+        const res = await fetch(`${API_URL}/exams/user-answer?exam_id=${exam_id}&history_exam_id=${history_exam_id}`,
+            {
+                method : "GET",
+                headers : getHeaders(token)
+            }
+        )
+        return res.json()
     }
 };

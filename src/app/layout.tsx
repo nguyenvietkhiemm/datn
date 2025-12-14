@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Roboto_Slab } from "next/font/google";
-import ClientLayout from "@/lib/ThemeProvider";
+import ClientLayout from "../../lib/ThemeProvider";
 import ProgressPanel from "@/components/panel-progress/page";
 
 const robotoSlab = Roboto_Slab({
