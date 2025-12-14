@@ -25,7 +25,7 @@ export default function Question() {
     const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
     const [filterCondition, setFilterCondition] = useState<any>(null);
     const [searchKeyword, setSearchKeyword] = useState<string>("");
-    const csvInputRef = useRef<HTMLInputElement>(null);
+    const jsonInputRef = useRef<HTMLInputElement>(null);
     const docxInputRef = useRef<HTMLInputElement>(null);
     const [changes, setChanges] = useState<Change[]>([]);
     const [editCell, setEditCell] = useState<{ row: number; col: number } | null>(null);
@@ -80,32 +80,30 @@ export default function Question() {
     const handleFetchJson = async () => {
         try {
             const url = `${API_URL}/file/json`;
-            console.log("FileService =", FileService);
-
             const data = await FileService.fetchFileList(url);
 
             setFileList(data)
             setIsFileList(true)
         } catch (error) {
-            console.error("Lỗi fetchCsvContent:", error);
+            console.error("Lỗi fetchjsonContent:", error);
             throw error;
         }
     };
 
-    // Upload Json từ máy
-    // const handleUploadCsv = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     try {
-    //         const file = e.target.files?.[0];
+    // Upload json từ máy
+    const handleUploadjson = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        try {
+            const file = e.target.files?.[0];
 
-    //         if (!file) return;
+            if (!file) throw new Error("No file");
 
-    //         const url = `${API_URL}/file/csv/save/${file.name}`;
-    //         const result = await FileService.uploadFile(url, file);
-    //     } catch (error) {
-    //         console.error("Lỗi uploadFile:", error);
-    //         throw error;
-    //     }
-    // };
+            const url = `${API_URL}/file/json/save/${file.name}`;
+            const result = await FileService.uploadFile(url, file);
+        } catch (error) {
+            console.error("Lỗi uploadFile:", error);
+            throw error;
+        }
+    };
 
     // Upload DOCX từ máy
     const handleUploadDocx = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -153,7 +151,7 @@ export default function Question() {
                 <div className={styles.actions}>
                     <Search setSearchKeyword={setSearchKeyword} />
 
-                    <div className={styles.csv}>
+                    <div className={styles.json}>
                         <input
                             type="file"
                             accept=".docx"
@@ -170,28 +168,29 @@ export default function Question() {
                         </Button>
                     </div>
 
-                    <div className={styles.csv}>
-                        {/* <input
+                    {/* Upload json */}
+                    <div className={styles.json}>
+                        <input
                             type="file"
-                            accept=".csv"
-                            ref={csvInputRef}
+                            accept=".json"
+                            ref={jsonInputRef}
                             style={{ display: "none" }}
-                            onChange={hande}
+                            onChange={handleUploadjson}
                         />
 
                         <Button
                             variant="primary"
                             size="md"
-                            onClick={() => csvInputRef.current?.click()}>
-                            Thêm câu hỏi từ CSV
-                        </Button> */}
+                            onClick={() => jsonInputRef.current?.click()}>
+                            Thêm câu hỏi từ Json
+                        </Button>
 
                         <Button
                             variant="primary"
                             size="md"
                             onClick={handleFetchJson}
                         >
-                            Danh sách JSON
+                            Danh sách Json
                         </Button>
                     </div>
 
@@ -202,9 +201,9 @@ export default function Question() {
 
             {isFileList && (
                 <div className={styles.overlay}>
-                    <div className={styles.csvModal}>
-                        <div className={styles.csvHeader}>
-                            <h2>Danh sách CSV</h2>
+                    <div className={styles.jsonModal}>
+                        <div className={styles.jsonHeader}>
+                            <h2>Danh sách json</h2>
                             <button
                                 className={styles.closeBtn}
                                 onClick={() => setIsFileList(false)}

@@ -5,7 +5,7 @@ export const FileParserModel = {
     extractQuestionImages(question: JsonQuestion, imagesMap: Record<string, string>): string[] {
         const list: string[] = [];
 
-        question.question.media?.forEach(img => {
+        question.question.images?.forEach(img => {
             const filename = img.saved_path.split(/[/\\]/).pop();
             if (filename && imagesMap[filename]) {
                 list.push(imagesMap[filename]);
@@ -19,7 +19,7 @@ export const FileParserModel = {
     extractAnswerImages(answer: JsonAnswer, imagesMap: Record<string, string>): string[] {
         const list: string[] = [];
 
-        answer.media?.forEach(img => {
+        answer.images?.forEach(img => {
             const filename = img.saved_path.split(/[/\\]/).pop();
             if (filename && imagesMap[filename]) {
                 list.push(imagesMap[filename]);
@@ -36,13 +36,13 @@ export const FileParserModel = {
         jsonData.forEach(item => {
             // Nếu là JsonQuestion
             if ("question" in item && "answers" in item) {
-                item.question.media?.forEach(img => {
+                item.question.images?.forEach(img => {
                     const filename = img.saved_path.split(/[/\\]/).pop(); // lấy tên file
                     if (filename) files.add(filename);
                 });
 
                 item.answers.forEach(a => {
-                    a.media?.forEach(img => {
+                    a.images?.forEach(img => {
                         const filename = img.saved_path.split(/[/\\]/).pop();
                         if (filename) files.add(filename);
                     });
@@ -50,8 +50,8 @@ export const FileParserModel = {
             }
 
             // Nếu là JsonAnswer
-            else if ("media" in item) {
-                item.media?.forEach(img => {
+            else if ("images" in item) {
+                item.images?.forEach(img => {
                     const filename = img.saved_path.split(/[/\\]/).pop();
                     if (filename) files.add(filename);
                 });

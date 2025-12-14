@@ -51,6 +51,7 @@ export default function JsonDetailPage() {
 
     // Tải ảnh sau khi JSON đã được tải xong
     useEffect(() => {
+        console.log("JSON Data changed, loading images...", jsonData);
         if (jsonData.length === 0) return;
 
         const loadImages = async () => {
