@@ -8,7 +8,7 @@ def get_conn():
         host="localhost",
         database="postgres",
         user="postgres",
-        password="123456"
+        password="12345"
     )
     register_vector(conn)
     return conn
