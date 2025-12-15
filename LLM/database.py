@@ -56,3 +56,25 @@ def save_to_db(docs):
     conn.commit()
     cur.close()
     conn.close()
+
+def search_chunks(query_vector, top_k=5):
+    conn = get_conn()
+    cur = conn.cursor()
+
+    cur.execute("""
+        SELECT
+            title,
+            text,
+            link,
+            embedding <=> %s::vector AS score
+        FROM chunk
+        ORDER BY embedding <=> %s::vector
+        LIMIT %s
+    """, (query_vector, query_vector, top_k))
+
+    rows = cur.fetchall()
+    cur.close()
+    conn.close()
+    return rows
+
+

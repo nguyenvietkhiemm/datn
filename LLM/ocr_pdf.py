@@ -1,5 +1,3 @@
-# ocr_pdf.py
-
 import os
 import fitz
 import pytesseract

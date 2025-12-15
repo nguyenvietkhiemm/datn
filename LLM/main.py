@@ -1,4 +1,3 @@
-# main.py
 from vectorizer import load_documents, create_embeddings
 from database import save_to_db
 
