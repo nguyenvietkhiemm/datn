@@ -9,6 +9,7 @@ export interface Exam {
     topic_id: number;
     exam_schedule_id: number;
     available: boolean;
+    description: string;
     subject_name?: string
 }
 

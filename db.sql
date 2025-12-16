@@ -404,3 +404,30 @@ ADD COLUMN time_test VARCHAR(5)
 
 ALTER TABLE history_exam
 ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+CREATE TABLE history_bank(
+history_bank_id SERIAL PRIMARY KEY,
+  bank_id INT NOT NULL,
+  user_id INT NOT NULL,
+  score DECIMAL(4,2),
+  time_test VARCHAR(5),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+)
+
+ALTER TABLE public.user_bank_answer ADD COLUMN history_bank_id INT
+
+ALTER TABLE user_bank_answer
+ADD CONSTRAINT fk_user_bank_answer_history
+FOREIGN KEY (history_bank_id)
+REFERENCES history_exam(history_bank_id)
+ON DELETE CASCADE;
+
+ALTER TABLE public.user_bank_answer
+ADD COLUMN user_answer_text TEXT DEFAULT "" 
+
+CREATE TABLE image_question(
+  image_question_id INT SERIAL PRIMARY KEY,
+  image_link TEXT,
+  question_id INT,
+  FOREIGN KEY (question_id) REFERENCES question(question_id) ON DELETE CASCADE
+)

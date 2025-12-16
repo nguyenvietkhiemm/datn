@@ -178,9 +178,7 @@ examRoute.post("/submit",
         Authentication.AuthenticateToken,
         ExamController.submit
 )
-examRoute.get("/user/user-answer",
-        Authentication.AuthenticateToken,
-        ExamController.getUserAnswer)
+
 examRoute.get("/check/do/user",
         Authentication.AuthenticateToken,
         ExamController.checkDoExam

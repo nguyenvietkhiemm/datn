@@ -1,12 +1,24 @@
-import { Answer } from "./answer.model";
+import { Answer, CreateAnswerInput } from "./answer.model";
 
 export interface Question {
   question_id: number;
   question_name: string;
   question_content: string;
-  available: boolean;
-  answers?: Answer[];
+  available?: boolean;
+  answers: Answer[];
   source? : string;
-  image? : string;
   type_question?: number;
+  images?: []
 }
+
+
+export type CreateQuestionPayload = {
+  question_name: string;
+  question_content: string;
+  available?: boolean;
+  source?: string;
+  type_question?: number;
+  point_type?: number;
+  images?: [];
+  answers: CreateAnswerInput[];
+};

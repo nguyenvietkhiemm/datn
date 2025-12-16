@@ -5,3 +5,9 @@ export interface Answer {
         is_correct: boolean;
         image?: string
 }
+
+export type CreateAnswerInput = {
+        answer_content: string;
+        is_correct: boolean;
+        images?: string[];
+};

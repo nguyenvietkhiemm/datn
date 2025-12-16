@@ -1,7 +1,7 @@
 import pool, { query } from "../config/database";
 import { Bank, DoBank } from "../models/bank.model";
 import { Question } from "../models/question.model";
-
+import { UserAnswerGrouped, AnswerCorrectGrouped } from "../models/bank.question.model";
 const BankService = {
     async getById(id: number): Promise<Question[] | null> {
         const queryText = `
@@ -11,26 +11,36 @@ const BankService = {
           JOIN question q ON qb.question_id = q.question_id
           WHERE b.bank_id = $1
         `;
+
         const result = await query(queryText, [id]);
         if (!result.rows.length) return null;
 
         // Lấy danh sách question_id
-        const questionIds = result.rows.map(q => q.question_id);
+        const questionIds = result.rows.map((q) => q.question_id);
+
+        //Lấy danh sách answer theo question
         const ansRes = await query(
-            'SELECT * FROM answer WHERE question_id = ANY($1)',
+            `
+            SELECT answer_id, question_id, answer_content
+            FROM answer
+            WHERE question_id = ANY($1)
+          `,
             [questionIds]
         );
 
         // Gom answer theo question_id
         const answerMap = ansRes.rows.reduce((acc, ans) => {
-            (acc[ans.question_id] ||= []).push(ans);
+            if (!acc[ans.question_id]) {
+                acc[ans.question_id] = [];
+            }
+            acc[ans.question_id].push(ans);
             return acc;
         }, {} as Record<number, any[]>);
 
-        // Gắn answers vào từng question
-        const questions = result.rows.map(q => ({
+        //  Gắn answers vào question
+        const questions = result.rows.map((q) => ({
             ...q,
-            answers: answerMap[q.question_id] || []
+            answers: answerMap[q.question_id] || [],
         }));
 
         return questions as Question[];
@@ -50,38 +60,33 @@ const BankService = {
         return result.rows[0] || null;
     },
 
-    async submit(bank_id: number, user_id: number, do_bank: DoBank[], subject_type: number):
-        Promise<{ score: number, score_1: number, score_2: number, score_3: number }> {
-
+    async submit(
+        bank_id: number,
+        user_id: number,
+        do_bank: DoBank[],
+        time_test: number,
+        subject_type: number,
+        user_name: string
+    ): Promise<{ score: number; history_bank_id: number }> {
         const client = await pool.connect();
 
         try {
             await client.query("BEGIN");
 
-            const sql = `
-                SELECT 
-                    q.question_id,
-                    q.type_question,
-                    a.answer_id,
-                    a.answer_content,
-                    a.is_correct
-                FROM question_bank qb
-                JOIN question q ON q.question_id = qb.question_id
-                JOIN answer a ON a.question_id = q.question_id
-                WHERE qb.bank_id = $1
-                ORDER BY q.question_id;
-                `;
+            //  Lấy đáp án đúng
+            const { rows } = await client.query(
+                `
+            SELECT q.question_id, q.type_question, a.answer_id, a.answer_content
+            FROM question_exam qe
+            JOIN question q ON q.question_id = qe.question_id
+            JOIN answer a ON a.question_id = q.question_id
+            WHERE qe.exam_id = $1 AND a.is_correct = true
+            `,
+                [bank_id]
+            );
 
-            const { rows } = await client.query(sql, [bank_id]);
-
-            // Gom dữ liệu thành dạng:
-            // question_id → { type_question, correctAnswers[] }
-            const map = new Map<number, {
-                type_question: number;
-                correct_answers: number[];
-                correct_text?: string;
-            }>();
-
+            // Map đáp án
+            const map = new Map<number, any>();
             for (const r of rows) {
                 if (!map.has(r.question_id)) {
                     map.set(r.question_id, {
@@ -90,93 +95,197 @@ const BankService = {
                         correct_text: undefined
                     });
                 }
-                const current = map.get(r.question_id)!;
-
-                if (r.is_correct && r.type_question !== 3) {
-                    current.correct_answers.push(r.answer_id);
-
-                }
-
-                if (r.type_question === 3 && r.is_correct) {
-                    current.correct_text = r.answer_content;
-                }
+                const cur = map.get(r.question_id);
+                r.type_question === 3
+                    ? (cur.correct_text = r.answer_content)
+                    : cur.correct_answers.push(r.answer_id);
             }
 
-            //diem tong
+            //  Chấm điểm
             let score = 0;
-            //diem tung phan
-            let score_1 = 0;
-            let score_2 = 0;
-            let score_3 = 0;
-
             for (const user of do_bank) {
                 const info = map.get(user.question_id);
                 if (!info) continue;
 
-                const { type_question, correct_answers } = info;
-
-                // ==== Trắc nghiệm loai 1 đáp án ====
-                if (type_question === 1) {
-                    if (user.user_answer[0] == correct_answers[0]) {
-                        score += 0.25
-                    }
-                    await client.query(`
-                        INSERT INTO user_bank_answer (bank_id, user_id, answer_id)
-                        VALUES ($1, $2, $3)
-                    `, [bank_id, user_id, user.user_answer[0]]);
+                if (info.type_question === 1 &&
+                    user.user_answer[0] == info.correct_answers[0]) {
+                    score += 0.25;
                 }
-                // ==== Trắc nghiệm loai nhiều đáp án ====
-                else if (type_question === 2) {
-                    const correct = user.user_answer.filter(a => correct_answers.includes(Number(a))).length;
-                    if (correct === 1) {
-                        score_2 += 0.1
-                    } else if (correct === 2) {
-                        score_2 += 0.25
-                    } else if (correct === 3) {
-                        score_2 += 0.5
-                    } else score_2 += 1
-
-                    for (const ansId of user.user_answer) {
-                        if (!isNaN(Number(ansId))) {
-                            await client.query(`
-                                INSERT INTO user_bank_answer (bank_id, user_id, answer_id)
-                                VALUES ($1, $2, $3)
-                            `, [bank_id, user_id, ansId]);
-                        }
-                    }
+                else if (info.type_question === 2) {
+                    const correct = user.user_answer.filter(
+                        a => info.correct_answers.includes(Number(a))).length;
+                    if (correct === 1) { score += 0.1 }
+                    else if (correct === 2) { score += 0.25 }
+                    else if (correct === 3) { score += 0.5 }
+                    else score += 1;
                 }
-                // ==== Tự luận đáp án ====
-                else {
-                    const correct_text = correct_answers[0];
-                    const user_text = user.user_answer[0];
-                    if ((String(user_text).trim().toLowerCase() === String(correct_text).trim().toLowerCase())) {
-                        if (subject_type === 1) {
-                            score_3 += 0.5
-                        } else {
-                            score_3 += 0.25
-                        }
-                    }
-                    await client.query(`
-                        INSERT INTO user_bank_answer (bank_id, user_id, user_answer_text)
-                        VALUES ($1, $2, $3)
-                    `, [bank_id, user_id, user.user_answer[0]]);
+                if (info.type_question === 3 &&
+                    String(user.user_answer[0]).trim().toLowerCase() ===
+                    String(info.correct_text).trim().toLowerCase()) {
+                    score += subject_type === 1 ? 0.5 : 0.25;
                 }
             }
-            score = score_1 + score_2 + score_3
 
-            //luu CAU tra loi
+            // Insert history_exam (SAU khi có score)
+            const historyResult = await client.query(
+                `
+            INSERT INTO history_bank (user_id, bank_id, score, time_test)
+            VALUES ($1, $2, $3, $4)
+            RETURNING history_bank_id
+            `,
+                [user_id, bank_id, score, time_test]
+            );
 
+            const history_bank_id = historyResult.rows[0].history_bank_id;
+
+            // Insert user_exam_answer
+            for (const user of do_bank) {
+                for (const ans of user.user_answer) {
+                    await client.query(
+                        `
+                INSERT INTO user_bank_answer
+                (history_bank_id, bank_id, user_id, question_id, answer_id, user_answer_text)
+                VALUES ($1, $2, $3, $4, $5, $6)
+                `,
+                        [
+                            history_bank_id,
+                            bank_id,
+                            user_id,
+                            user.question_id,
+                            Number(ans),
+                            isNaN(Number(ans)) ? ans : null
+                        ]
+                    );
+                }
+            }
 
             await client.query("COMMIT");
+            return { score, history_bank_id };
 
-            return { score, score_1, score_2, score_3 };
-
-        } catch (error) {
+        } catch (err) {
             await client.query("ROLLBACK");
-            throw error;
+            throw err;
         } finally {
             client.release();
         }
+    },
+
+    async getUserListBankHistory(
+        bank_id: number
+    ): Promise<{
+        bank_id: number;
+        history: {
+            score: number;
+            time_test: number;
+            created_at: Date;
+        }[];
+    }> {
+        try {
+            const listQuery =
+                `SELECT hb.score, hb.time_test, hb.created_at, u.user_name
+                    FROM history_bank hb
+                    JOIN "user" u ON u.user_id = hb.user_id
+                    WHERE bank_id=$1
+                    ORDER BY history_bank_id DESC`
+            const list = await query(listQuery, [bank_id])
+            if (!list || list.rows.length === 0) {
+                return {
+                    bank_id,
+                    history: []
+                };
+            }
+
+            return {
+                bank_id,
+                history: list.rows
+            };
+
+        } catch (err) {
+            console.error("Lỗi lấy lịch sử làm bài:", err);
+            throw new Error("Không thể lấy lịch sử làm bài");
+        }
+    },
+
+    async getUserAnswer(
+        history_bank_id: number,
+        bank_id: number
+    ): Promise<{
+        user_answer: UserAnswerGrouped[];
+        score: number | null;
+        answer_correct: AnswerCorrectGrouped[];
+    }> {
+
+        /* ===== ĐÁP ÁN ĐÚNG (GROUP BY question_id + question_content) ===== */
+        const correctSql = `
+          SELECT
+            q.question_id,
+            q.question_content,
+            q.type_question,
+            json_agg(
+              json_build_object(
+                'answer_id', a.answer_id,
+                'answer_content', a.answer_content
+              )
+            ) AS correct_answers
+          FROM bank b
+          JOIN question_bank qb ON b.bank_id = qb.bank_id
+          JOIN question q ON qb.question_id = q.question_id
+          JOIN answer a ON q.question_id = a.question_id
+          WHERE b.bank_id = $1
+            AND a.is_correct = true
+          GROUP BY q.question_id, q.question_content
+          ORDER BY q.question_id;
+        `;
+
+        const correctResult = await pool.query(correctSql, [bank_id]);
+
+        /* ===== ĐÁP ÁN USER ===== */
+        const userSql = `
+          SELECT question_id, answer_id, user_answer_text
+          FROM user_bank_answer
+          WHERE history_bank_id = $1
+          ORDER BY question_id;
+        `;
+
+        const userResult = await pool.query(userSql, [history_bank_id]);
+
+        const userMap = new Map<number, UserAnswerGrouped>();
+
+        for (const row of userResult.rows) {
+            const { question_id, answer_id, user_answer_text } = row;
+
+            if (!userMap.has(question_id)) {
+                userMap.set(question_id, {
+                    question_id,
+                    answer_id: [],
+                    user_answer_text: null
+                });
+            }
+
+            const item = userMap.get(question_id)!;
+
+            if (answer_id !== null) {
+                item.answer_id.push(answer_id);
+            }
+
+            if (user_answer_text !== null) {
+                item.user_answer_text = user_answer_text;
+            }
+        }
+
+        /* ===== SCORE ===== */
+        const scoreResult = await pool.query(
+            `SELECT score FROM history_bank WHERE history_bank_id = $1`,
+            [history_bank_id]
+        );
+
+        const score = scoreResult.rows[0]?.score ?? null;
+
+        return {
+            user_answer: Array.from(userMap.values()),
+            score,
+            answer_correct: correctResult.rows
+        };
     },
 
     async setAvailable(id: number, available: boolean): Promise<boolean> {

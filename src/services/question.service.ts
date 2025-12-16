@@ -1,6 +1,6 @@
 import { query } from "../config/database";
 import pool from "../config/database";
-import { Question } from "../models/question.model";
+import { Question, CreateQuestionPayload } from "../models/question.model";
 import { Answer } from "../models/answer.model";
 
 const QuestionService = {
@@ -9,163 +9,185 @@ const QuestionService = {
             return [];
         }
 
-        const queryText = `SELECT * FROM question 
+        const queryText = `SELECT q.* 
+                            FROM question q 
                             WHERE question_id = ANY($1) AND available = true`;
         const result = await query(queryText, [question_ids]);
         return result.rows;
     },
 
-    async getAll(page: number, available?: boolean): Promise<{ question: Question[]; totalPages: number } | []> {
+    async getAll(
+        page: number,
+        available: boolean,
+        type_question: number
+    ): Promise<{ question: Question[]; totalPages: number }> {
         const limit = 12;
         const offset = (page - 1) * limit;
 
-        // Xây dựng câu query chính
-        let queryText = `
-            SELECT 
-              q.*,
-              COALESCE(
-                json_agg(
+        const params: any[] = [];
+        let paramIndex = 1;
+
+        let whereClause = `WHERE 1=1`;
+
+        if (available !== undefined) {
+            whereClause += ` AND q.available = $${paramIndex}`;
+            params.push(available);
+            paramIndex++;
+        }
+
+        if (type_question !== undefined) {
+            whereClause += ` AND q.type_question = $${paramIndex}`;
+            params.push(type_question);
+            paramIndex++;
+        }
+
+        // ===== QUERY CHÍNH =====
+        const queryText = `
+          SELECT
+            q.*,
+      
+            -- ANSWERS
+            COALESCE(
+              (
+                SELECT json_agg(
                   json_build_object(
                     'answer_id', a.answer_id,
                     'answer_content', a.answer_content,
                     'is_correct', a.is_correct,
                     'image', a.image
                   )
-                ) FILTER (WHERE a.answer_id IS NOT NULL), '[]'
-              ) AS answers
-            FROM question q
-            LEFT JOIN answer a ON q.question_id = a.question_id
-            WHERE q.available = true
-          `;
-
-        const params: any[] = [];
-        let whereClause = "";
-        let paramIndex = 1;
-
-        if (available !== undefined) {
-            whereClause = ` WHERE q.available = $${paramIndex}`;
-            params.push(available);
-            paramIndex++;
-        }
-
-        queryText += `${whereClause}
-            GROUP BY q.question_id
-            ORDER BY q.question_id DESC
-            LIMIT $${paramIndex} OFFSET $${paramIndex + 1};
-          `;
+                )
+                FROM answer a
+                WHERE a.question_id = q.question_id
+              ),
+              '[]'
+            ) AS answers,
+      
+            -- IMAGES
+            COALESCE(
+              (
+                SELECT json_agg(iq.image_link)
+                FROM image_question iq
+                WHERE iq.question_id = q.question_id
+              ),
+              '[]'
+            ) AS images
+      
+          FROM question q
+          ${whereClause}
+          ORDER BY q.question_id DESC
+          LIMIT $${paramIndex} OFFSET $${paramIndex + 1};
+        `;
 
         params.push(limit, offset);
 
-        // Truy vấn dữ liệu chính
         const result = await query(queryText, params);
 
-        // Đếm tổng số bản ghi để tính totalPages
-        let countQuery = `SELECT COUNT(*) as total FROM question`;
-        const countParams: any[] = [];
+        // ===== QUERY COUNT =====
+        const countQuery = `
+          SELECT COUNT(*) AS total
+          FROM question q
+          ${whereClause}
+        `;
 
-        if (available !== undefined) {
-            countQuery += ` WHERE available = $1`;
-            countParams.push(available);
-        }
+        const countResult = await query(
+            countQuery,
+            params.slice(0, paramIndex - 1)
+        );
 
-        const countResult = await query(countQuery, countParams);
-
-        const totalItems = parseInt(countResult.rows[0].total, 10);
+        const totalItems = Number(countResult.rows[0].total);
         const totalPages = Math.ceil(totalItems / limit);
 
-        await query("COMMIT");
-
-        return { question: result.rows, totalPages };
+        return {
+            question: result.rows,
+            totalPages,
+        };
     },
 
-    async create(questions: Question[]): Promise<Question[]> {
+    async create(payload: CreateQuestionPayload): Promise<Question> {
         const client = await pool.connect();
-        const createdQuestions: Question[] = [];
 
         try {
-            await client.query('BEGIN');
+            await client.query("BEGIN");
 
-            for (const qa of questions) {
+            /* ================= QUESTION ================= */
+            const qRes = await client.query(
+                `
+            INSERT INTO question (
+              question_content,
+              type_question,
+              source,
+              available
+            )
+            VALUES ($1, $2, $3, $4)
+            RETURNING *
+            `,
+                [
+                    payload.question_content,
+                    payload.type_question ?? 1,
+                    payload.source ?? "",
+                    payload.available ?? true,
+                ]
+            );
 
-                // Build fields và values dynamic
-                const fields = ["question_name", "question_content"];
-                const values : any[] = [qa.question_name, qa.question_content];
-                const placeholders = ["$1", "$2"];
-                let index = 3;
 
-                if (qa.type_question !== undefined) {
-                    fields.push("type_question");
-                    values.push(qa.type_question);
-                    placeholders.push(`$${index++}`);
+            const question: Question = {
+                ...qRes.rows[0],
+                answers: [],
+                images: [],
+            };
+
+            const questionId = question.question_id;
+
+            /* ================= QUESTION IMAGES ================= */
+            if (payload.images?.length) {
+                for (const img of payload.images) {
+                    await client.query(
+                        `
+                INSERT INTO image_question (question_id, image_link)
+                VALUES ($1, $2)
+                `,
+                        [questionId, img]
+                    );
                 }
 
-                if (qa.source !== undefined) {
-                    fields.push("source");
-                    values.push(qa.source);
-                    placeholders.push(`$${index++}`);
-                }
-
-                if (qa.point_question !== undefined) {
-                    fields.push("point_type");
-                    values.push(qa.point_question);
-                    placeholders.push(`$${index++}`);
-                }
-
-                if (qa.image !== undefined) {
-                    fields.push("image");
-                    values.push(qa.image);
-                    placeholders.push(`$${index++}`);
-                }
-
-                const insertQuestionQuery = `
-                    INSERT INTO question (${fields.join(", ")})
-                    VALUES (${placeholders.join(", ")})
-                    RETURNING *
-                `;
-
-                const qRes = await client.query(insertQuestionQuery, values);
-                const newQuestion: Question = qRes.rows[0];
-                newQuestion.answers = [];
-
-                // Insert answers
-                if (qa.answers && qa.answers.length > 0) {
-                    for (const ans of qa.answers) {
-                
-                        const aFields = ["question_id", "answer_content", "is_correct"];
-                        const aPlaceholders = ["$1", "$2", "$3"];
-                        const aValues: any[] = [
-                            newQuestion.question_id,
-                            ans.answer_content,
-                            ans.is_correct
-                        ];
-                
-                        let aIndex = 4;
-                
-                        // Nếu có image thì insert thêm
-                        if (ans.image !== undefined) {
-                            aFields.push("image");
-                            aValues.push(ans.image);
-                            aPlaceholders.push(`$${aIndex++}`);
-                        }
-                
-                        const insertAnswerQuery = `
-                            INSERT INTO answer (${aFields.join(", ")})
-                            VALUES (${aPlaceholders.join(", ")})
-                            RETURNING *
-                        `;
-                
-                        const aRes = await client.query(insertAnswerQuery, aValues);
-                        newQuestion.answers.push(aRes.rows[0]);
-                    }
-                }
-                
-                createdQuestions.push(newQuestion);
+                question.images = payload.images;
             }
 
-            await client.query('COMMIT');
-            return createdQuestions;
+            /* ================= ANSWERS ================= */
+            if (payload.answers?.length) {
+                for (const ans of payload.answers) {
+                    const aRes = await client.query(
+                        `
+                INSERT INTO answer (
+                  question_id,
+                  answer_content,
+                  is_correct
+                )
+                VALUES ($1, $2, $3)
+                RETURNING *
+                `,
+                        [
+                            questionId,
+                            ans.answer_content,
+                            ans.is_correct,
+                        ]
+                    );
+
+                    question.answers.push({
+                        ...aRes.rows[0],
+                        images: [],
+                    });
+                }
+            }
+            console.log("hoan thanh");
+            
+
+            await client.query("COMMIT");
+            return question;
+
         } catch (err) {
-            await client.query('ROLLBACK');
+            await client.query("ROLLBACK");
             throw err;
         } finally {
             client.release();
