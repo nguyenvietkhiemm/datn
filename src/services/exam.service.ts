@@ -42,8 +42,8 @@ const ExamService = {
 
   async create(data: Exam): Promise<Exam> {
     const queryText = `
-      INSERT INTO exam (exam_name, topic_id, time_limit, exam_schedule_id)
-      VALUES ($1, $2, $3, $4)
+      INSERT INTO exam (exam_name, topic_id, time_limit, exam_schedule_id, description)
+      VALUES ($1, $2, $3, $4, $5)
       RETURNING *
     `;
     const result = await query(queryText, [
@@ -51,6 +51,7 @@ const ExamService = {
       data.topic_id,
       data.time_limit,
       data.exam_schedule_id,
+      data.description
     ]);
     return result.rows[0];
   },
@@ -418,30 +419,31 @@ const ExamService = {
   },
 
   async getUserListExamHistory(
-    user_id: number,
     exam_id: number
   ): Promise<{
-    user_id: number;
     exam_id: number;
     history: {
       score: number;
       time_test: number;
-      submitted_at: Date;
+      created_at: Date;
     }[];
   }> {
     try {
-      const listQuery = `SELECT * FROM history_exam WHERE user_id=$1 AND exam_id=$2`
-      const list = await query(listQuery, [user_id, exam_id])
+      const listQuery = 
+      `SELECT he.score, he.time_test, he.created_at, u.user_name
+      FROM history_exam he
+      JOIN "user" u ON u.user_id = he.user_id
+      WHERE exam_id=$1
+      ORDER BY history_exam_id DESC`
+      const list = await query(listQuery, [ exam_id])
       if (!list || list.rows.length === 0) {
         return {
-          user_id,
           exam_id,
           history: []
         };
       }
 
       return {
-        user_id,
         exam_id,
         history: list.rows
       };
@@ -560,7 +562,6 @@ const ExamService = {
       console.error("Lỗi khi cập nhật lịch quá hạn:", err);
     }
   }
-
 };
 
 export default ExamService;

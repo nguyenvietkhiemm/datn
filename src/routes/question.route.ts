@@ -223,11 +223,11 @@ questionRoute.patch('/setAvailable/:id',
  *       500:
  *         description: Lỗi server
  */
-questionRoute.post(
-  '/create/csv/:filename',
-  Authentication.AuthenticateToken,
-  Authentication.AuthorizeRoles(...ADMIN),
-  QuestionController.createByCsv
-);
+// questionRoute.post(
+//   '/create/csv/:filename',
+//   Authentication.AuthenticateToken,
+//   Authentication.AuthorizeRoles(...ADMIN),
+//   QuestionController.createByCsv
+// );
 
 export default questionRoute;

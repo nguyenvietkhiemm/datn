@@ -20,6 +20,18 @@ const bankRoute = Router();
  */
 bankRoute.get('/', BankController.list);
 
+bankRoute.get("/user/:user_name/exam-history",
+        Authentication.AuthenticateToken,
+        BankController.getUserBankHistory);
+bankRoute.post("/submit",
+        Authentication.AuthenticateToken,
+        BankController.submit
+)
+bankRoute.get("/user-answer",
+        Authentication.AuthenticateToken,
+        BankController.getUserAnswer
+)
+
 /**
  * @openapi
  * /banks/{id}:

@@ -18,7 +18,7 @@ const QuestionController = {
       return {
         status: 200,
         message: "Lấy danh sách câu hỏi thành công",
-        data: await QuestionService.getAll(Number(req.query.page))
+        data: await QuestionService.getAll(Number(req.query.page), Boolean(req.query.available), Number(req.query.type_question))
       } as DefaultResponse<any>;
     });
 
@@ -27,33 +27,9 @@ const QuestionController = {
 
   async create(req: Request, res: Response) {
     const response: DefaultResponse<any> = await safeExecute(async () => {
-      const { questions } = req.body;
-
-      const created = await QuestionService.create(questions);
-
-      return {
-        status: 201,
-        message: "Tạo câu hỏi thành công",
-        data: created
-      } as DefaultResponse<any>;
-    });
-
-    res.status(response.status).json(response);
-  },
-
-  async createByCsv(req: Request, res: Response) {
-    const response: DefaultResponse<any> = await safeExecute(async () => {
-      const { filename } = req.params;
-      const csvDir = path.join(process.cwd(), "data/final");
-      const filePath = path.join(csvDir, filename);
-
-      if (!fs.existsSync(csvDir)) {
-        fs.mkdirSync(csvDir, { recursive: true });
-      }
-
-      const questions = await parseQuestionsFromCSV(filePath);
-
-      const created = await QuestionService.create(questions);
+      const  payload  = req.body;
+      
+      const created = await QuestionService.create(payload);
 
       return {
         status: 201,
@@ -64,6 +40,30 @@ const QuestionController = {
 
     res.status(response.status).json(response);
   },
+
+  // async createByCsv(req: Request, res: Response) {
+  //   const response: DefaultResponse<any> = await safeExecute(async () => {
+  //     const { filename } = req.params;
+  //     const csvDir = path.join(process.cwd(), "data/final");
+  //     const filePath = path.join(csvDir, filename);
+
+  //     if (!fs.existsSync(csvDir)) {
+  //       fs.mkdirSync(csvDir, { recursive: true });
+  //     }
+
+  //     const questions = await parseQuestionsFromCSV(filePath);
+
+  //     const created = await QuestionService.create(questions);
+
+  //     return {
+  //       status: 201,
+  //       message: "Tạo câu hỏi thành công",
+  //       data: created
+  //     } as DefaultResponse<any>;
+  //   });
+
+  //   res.status(response.status).json(response);
+  // },
 
   async update(req: Request, res: Response) {
     const response: DefaultResponse<any> = await safeExecute(async () => {
