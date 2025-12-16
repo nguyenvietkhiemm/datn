@@ -1,8 +1,6 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import styles from "./Exam.module.css";
-import Cookies from "js-cookie";
 import FilterExam from "@/component/filter/Filter/Filter";
 import { useRouter } from "next/navigation";
 import Search from "@/component/search/Search";

@@ -63,6 +63,7 @@ export const ExamService = {
 
   async createExam(payload: {
     exam_name: string;
+    description: string;
     time_limit: number;
     topic_id: number;
     subject_id: number;

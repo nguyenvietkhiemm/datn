@@ -8,18 +8,18 @@ import Pagination from "@/component/pagination/Pagination";
 import Search from "@/component/search/Search";
 import { Button } from "@/component/ui/button/Button";
 import { useSearchParams } from "next/navigation";
-import { Question, CsvFile } from "@/domain/admin/exams/type";
-import { FileParserService } from "@/domain/admin/file/file-parser/service";
+import { Question } from "@/domain/admin/questions/type";
+
 export default function QuestionCreate() {
     const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
     const token = Cookies.get("token");
     const [questions, setQuestions] = useState<Question[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPage, setTotalPage] = useState<number>(1);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [available, setAvaible] = useState<boolean>(true);
+    const [type_question, setTypeQuestion] = useState<number>(1);
     const [filterQuestion, setFilterQuestion] = useState<Question[]>([]);
-    const [selectedOption, setSelectedOption] = useState<string>("");
-    const [csvList, setCsvList] = useState<CsvFile[]>([]);
+    // const [csvList, setCsvList] = useState<CsvFile[]>([]);
     const [selectedQuestions, setSelectedQuestions] = useState<{ exam_id: number, question_id: number }[]>([]);
     const searchParams = useSearchParams();
     const examId = Number(searchParams.get("exam_id"));
@@ -27,26 +27,23 @@ export default function QuestionCreate() {
 
     useEffect(() => {
         const fetchData = async () => {
-            setLoading(true);
             try {
-                const data = await QuestionService.fetchQuestions(currentPage);
+                const data = await QuestionService.fetchQuestions(currentPage, available, type_question);
                 setQuestions(data.questions);
                 setTotalPage(data.last_page);
             } catch (err) {
                 console.error("Lỗi khi fetch question:", err);
-            } finally {
-                setLoading(false);
             }
         };
 
-        const handleFetchCsv = async () => {
-            const url = `${API_URL}/file/csv`;
-            const data = await QuestionService.fetchCsvList();
-            setCsvList(data)
-        };
+        // const handleFetchCsv = async () => {
+        //     const url = `${API_URL}/file/csv`;
+        //     const data = await QuestionService.fetchCsvList();
+        //     setCsvList(data)
+        // };
 
         fetchData();
-        handleFetchCsv();
+        // handleFetchCsv();
     }, []);
 
     
@@ -112,13 +109,13 @@ export default function QuestionCreate() {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>Tạo câu hỏi</h1>
+            <h1 className={styles.title}>Tạo câu hỏi cho bài thi</h1>
 
             {/* loc */}
             <div className={styles.action}>
                 <Search setSearchKeyword={setSearchKeyword}/>
                 {/* Dropdown select */}
-                <select
+                {/* <select
                     value={selectedOption}
                     onChange={async (e) => {
                         const value = (e.target as HTMLSelectElement).value;
@@ -132,7 +129,7 @@ export default function QuestionCreate() {
                         <option key={csv.id} value={csv.name}>{csv.name}</option>
                     ))}
 
-                </select>
+                </select> */}
                 {/* reset */}
                 <div className={styles.button}><Button onClick={() => handleReset()}>Đặt lại</Button></div>
 
@@ -145,7 +142,6 @@ export default function QuestionCreate() {
                 <thead>
                     <tr>
                         <th>STT</th>
-                        <th>Dạng câu hỏi</th>
                         <th>Nội dung</th>
                         <th>Đáp án</th>
                         <th>Chọn câu hỏi</th>
@@ -156,7 +152,6 @@ export default function QuestionCreate() {
                         filterQuestion.map((q, index) => (
                             <tr key={q.question_id}>
                                 <td>{index + 1}</td>
-                                <td>{q.question_name}</td>
                                 <td>{q.question_content}</td>
                                 <td>
                                     <ul className={styles.answers}>
@@ -189,7 +184,6 @@ export default function QuestionCreate() {
 
             {/* phan trang */}
             <Pagination totalPages={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage} />
-
         </div>
     );
 }

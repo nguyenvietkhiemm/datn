@@ -13,12 +13,15 @@ import QuestionCard from "@/component/card/QuestionCard/QuestionCard";
 import { QuestionModel } from "@/domain/admin/questions/model";
 import { Change } from "@/domain/admin/file/file-parser/type";
 import { FileService } from "@/domain/admin/file/service";
+import { useRouter } from "next/navigation";
 
 export default function Question() {
     const [questions, setQuestions] = useState<Question[]>([]);
     const [filterQuestion, setFilterQuestion] = useState<Question[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [currentPage, setCurrentPage] = useState<number>(1);
+    const [available, setAvaible] = useState<boolean>(true);
+    const [type_question, setTypeQuestion] = useState<number>(1);
     const [totalPage, setTotalPage] = useState<number>(1);
     const [isFileList, setIsFileList] = useState<boolean>(false);
     const [fileList, setFileList] = useState<FileInfo[]>([]);
@@ -29,13 +32,14 @@ export default function Question() {
     const docxInputRef = useRef<HTMLInputElement>(null);
     const [changes, setChanges] = useState<Change[]>([]);
     const [editCell, setEditCell] = useState<{ row: number; col: number } | null>(null);
+    const router = useRouter();
 
     // Lấy danh sách câu hỏi
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const data = await QuestionService.fetchQuestions(currentPage)
+                const data = await QuestionService.fetchQuestions(currentPage, available, type_question)
                 setQuestions(data.questions);
                 setTotalPage(data.last_page);
             } catch (err) {
@@ -46,11 +50,11 @@ export default function Question() {
         };
 
         fetchData();
-    }, [currentPage]);
+    }, [currentPage, available, type_question]);
 
     //Lọc các câu hỏi đang hoạt động (optional)
     useEffect(() => {
-        setFilterQuestion(questions?.filter((q) => q.available === true));
+        setFilterQuestion(questions);
     }, [questions]);
 
     // Xoá câu hỏi
@@ -113,7 +117,7 @@ export default function Question() {
             if (!file) return;
 
             const url = `${API_URL}/file/docx/save/${file.name}`;
-            const result = await FileService.uploadFile(url, file);
+            await FileService.uploadFile(url, file);
         } catch (error) {
             console.error("Lỗi uploadFile:", error);
             throw error;
@@ -194,10 +198,58 @@ export default function Question() {
                         </Button>
                     </div>
 
+                    <div className={styles.json}>
+                        <Button
+                            variant="primary"
+                            size="md"
+                            onClick={() => router.push(`/admin/questions/create`)}
+                        >
+                            + Thêm câu hỏi
+                        </Button>
+                    </div>
+
+                </div>
+                <div className={styles.filterType}>
+                    <label>
+                        <input
+                            type="radio"
+                            name="type_question"
+                            checked={type_question === 1}
+                            onChange={() => {
+                                setCurrentPage(1);
+                                setTypeQuestion(1);
+                            }}
+                        />
+                        1 đáp án
+                    </label>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="type_question"
+                            checked={type_question === 2}
+                            onChange={() => {
+                                setCurrentPage(1);
+                                setTypeQuestion(2);
+                            }}
+                        />
+                        Nhiều đáp án
+                    </label>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="type_question"
+                            checked={type_question === 4}
+                            onChange={() => {
+                                setCurrentPage(1);
+                                setTypeQuestion(4);
+                            }}
+                        />
+                        Tự luận
+                    </label>
                 </div>
             </div>
-
-
 
             {isFileList && (
                 <div className={styles.overlay}>

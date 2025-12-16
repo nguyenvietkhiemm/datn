@@ -36,6 +36,15 @@
     transition: border-color 0.2s;
 }
 
+.textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    font-size: 14px;
+}
+
 .input:focus,
 .select:focus {
     border-color: #0070f3;
