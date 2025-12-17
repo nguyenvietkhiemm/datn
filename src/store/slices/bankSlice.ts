@@ -1,16 +1,9 @@
 "use client"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-
-type Bank = {
-    bank_id: number;
-    description: string;
-    topic_id?: number;
-    available : boolean
-};
-
+import { BankProps } from "../../../domain/bank/type";
 
 type BankState = {
-    banks : Bank[]    
+    banks : BankProps[]    
 }
 
 const initialState : BankState = {
@@ -21,7 +14,7 @@ const bankSlice = createSlice({
     name : "bank",
     initialState,
     reducers : {
-        setBank(state, action : PayloadAction<Bank[]>){
+        setBank(state, action : PayloadAction<BankProps[]>){
             state.banks = action.payload
         },
 

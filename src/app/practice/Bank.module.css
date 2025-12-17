@@ -83,6 +83,12 @@
     top: 1.5rem;
 }
 
+.time {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 16px;
+}
+
 .button {
     color: rgb(255, 255, 255);
     cursor: pointer;

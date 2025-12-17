@@ -44,7 +44,7 @@ export default function ExamHistory() {
           {history?.map((item, index) => (
             <div key={index} className={styles.card} onClick={() => handleResult(item.history_exam_id)}>
               <div className={styles.left}>
-                {/* <div className={styles.examId}>Đề thi: #{item.exam_id}</div> */}
+                <div className={styles.user_name}>{item.user_name}</div>
                 <div className={styles.score}>
                   Điểm: <b>{item.score}</b>
                 </div>

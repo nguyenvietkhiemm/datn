@@ -10,7 +10,7 @@ export default function ResultEssay({ q, index, userText }: ResultEssayProp) {
 
     return (
         <div
-            key={q.question_id}
+            key={index}
             className={`${styles.questionCard} ${styles.essay}`}
         >
             <div className={styles.questionHeader}>

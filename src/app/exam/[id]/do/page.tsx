@@ -6,7 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 import { ExamService } from "../../../../../domain/exam/service";
 import { Question } from "../../../../../domain/question-answer/type";
 import { Exam } from "../../../../../domain/exam/type"
-
+import { formatTime } from "../../../../../lib/model";
 export default function DoExam() {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [answers, setAnswers] = useState<{ [key: number]: number }>({});
@@ -81,12 +81,6 @@ export default function DoExam() {
   // Chọn đáp án
   const handleSelect = (questionId: number, answerId: number) => {
     setAnswers((prev) => ({ ...prev, [questionId]: answerId }));
-  };
-
-  const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60);
-    const s = seconds % 60;
-    return `${m}:${s.toString().padStart(2, "0")}`;
   };
 
   return (

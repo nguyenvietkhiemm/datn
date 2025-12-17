@@ -12,7 +12,7 @@ export default function ResultMultipleChoice({ q, userSelectedIds, isCorrect, in
 
     return (
         <div
-            key={q.question_id}
+            key={index}
             className={`${styles.questionCard} ${userSelectedIds.length === 0
                 ? styles.unanswered
                 : isCorrect

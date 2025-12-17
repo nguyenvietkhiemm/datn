@@ -1,0 +1,69 @@
+import { getToken, getHeaders, API_URL } from "../../lib/service";
+
+export interface FetchBankParams {
+    page?: number;
+    topics?: number[];
+    search?: string;
+}
+
+export const BankService = {
+    async fetchBank(params: FetchBankParams) {
+        const { page = 1, topics, search } = params;
+
+        const token = getToken()
+        let url = `${API_URL}/banks?page=${page}`;
+
+        if (topics && topics.length > 0) {
+            url += `&topics=${topics.join(",")}`;
+        }
+
+        if (search && search.trim().length > 0) {
+            url += `&search=${encodeURIComponent(search)}`;
+        }
+
+        const res = await fetch(url, {
+            method: "GET",
+            headers: getHeaders(token), 
+        });
+
+        if (!res.ok) {
+            throw new Error("Không thể lấy danh sách ngân hàng");
+        }
+
+        return res.json();
+    },
+
+    async geDetailBank(bank_id : number){
+        const token = getToken();
+
+        const res = await fetch(`${API_URL}/banks/${bank_id}`, {
+            method: "GET",
+            headers: getHeaders(token)
+        });
+
+        return await res.json();
+    },
+
+    async submitDoBank(
+        bank_id: number,
+        subject_type: number,
+        used_time: number,
+        do_bank: {
+            question_id: number;
+            user_answer: (number | string)[]
+        }[],
+        user_name: string
+    ) {
+        const token = getToken();
+
+        const url = `${API_URL}/banks/submit?bank_id=${bank_id}&subject_type=${subject_type}&time_test=${used_time}&user_name=${user_name}`;
+
+        const res = await fetch(url, {
+            method: "POST",
+            headers: getHeaders(token),
+            body: JSON.stringify({ do_bank })
+        });
+
+        return await res.json();
+    },
+};

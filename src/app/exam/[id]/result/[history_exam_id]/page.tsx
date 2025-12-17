@@ -83,12 +83,6 @@ export default function ResultExam() {
           )
         })}
       </div>
-
-      <div className={styles.action}>
-        <Button onClick={() => window.location.reload()}>
-          Làm lại
-        </Button>
-      </div>
     </div>
   );
 }
