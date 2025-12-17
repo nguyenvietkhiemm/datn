@@ -385,8 +385,8 @@
           "rId16": "D:\\_code\\DATN\\BE\\data\\outputs\\media\\image5.png"
         },
         "reasons": [
-          "has_alt_keyword",
-          "extracted_now"
+          "extracted_now",
+          "has_alt_keyword"
         ]
       }
     ]
@@ -492,8 +492,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -533,8 +533,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -812,8 +812,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -925,8 +925,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -971,8 +971,8 @@
           "rId28": "D:\\_code\\DATN\\BE\\data\\outputs\\media\\image12.png"
         },
         "reasons": [
-          "reused_existing",
           "vector_auto_select",
+          "reused_existing",
           "duplicate_of_canonical"
         ]
       }
@@ -1006,8 +1006,8 @@
           "rId28": "D:\\_code\\DATN\\BE\\data\\outputs\\media\\image12.png"
         },
         "reasons": [
-          "reused_existing",
           "vector_auto_select",
+          "reused_existing",
           "duplicate_of_canonical"
         ]
       }
@@ -1054,8 +1054,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1082,8 +1082,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1110,8 +1110,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1138,8 +1138,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1166,8 +1166,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -1201,8 +1201,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -1236,8 +1236,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1264,8 +1264,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1292,8 +1292,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -1327,8 +1327,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -1362,8 +1362,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -1390,8 +1390,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -1425,8 +1425,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -1508,8 +1508,8 @@
         },
         "reasons": [
           "near_question_and_raster",
-          "duplicate_of_canonical",
-          "reused_existing"
+          "reused_existing",
+          "duplicate_of_canonical"
         ]
       }
     ]
@@ -1673,8 +1673,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -1744,8 +1744,8 @@
         },
         "reasons": [
           "near_question_and_raster",
-          "duplicate_of_canonical",
-          "reused_existing"
+          "reused_existing",
+          "duplicate_of_canonical"
         ]
       }
     ]
@@ -1803,8 +1803,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -1910,8 +1910,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -2130,9 +2130,9 @@
           "rId16": "D:\\_code\\DATN\\BE\\data\\outputs\\media\\image5.png"
         },
         "reasons": [
-          "has_alt_keyword",
           "duplicate_of_canonical",
-          "reused_existing"
+          "reused_existing",
+          "has_alt_keyword"
         ]
       }
     ]
@@ -2202,8 +2202,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -2362,8 +2362,8 @@
           "rId18": "D:\\_code\\DATN\\BE\\data\\outputs\\media\\image6.png"
         },
         "reasons": [
-          "reused_existing",
           "vector_auto_select",
+          "reused_existing",
           "duplicate_of_canonical"
         ]
       }
@@ -2415,8 +2415,8 @@
           "rId18": "D:\\_code\\DATN\\BE\\data\\outputs\\media\\image6.png"
         },
         "reasons": [
-          "reused_existing",
           "vector_auto_select",
+          "reused_existing",
           "duplicate_of_canonical"
         ]
       }
@@ -2469,8 +2469,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -2766,8 +2766,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -2819,8 +2819,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -2854,8 +2854,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -2936,8 +2936,8 @@
           "rId26": "D:\\_code\\DATN\\BE\\data\\outputs\\media\\image11.png"
         },
         "reasons": [
-          "reused_existing",
           "vector_auto_select",
+          "reused_existing",
           "duplicate_of_canonical"
         ]
       }
@@ -3014,8 +3014,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -3073,8 +3073,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -3270,8 +3270,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -3298,8 +3298,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -3351,8 +3351,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -3404,8 +3404,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -3445,8 +3445,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -3503,8 +3503,8 @@
           "rId33": "D:\\_code\\DATN\\BE\\data\\outputs\\media\\image13.png"
         },
         "reasons": [
-          "reused_existing",
           "vector_auto_select",
+          "reused_existing",
           "duplicate_of_canonical"
         ]
       },
@@ -3531,8 +3531,8 @@
           "rId35": "D:\\_code\\DATN\\BE\\data\\outputs\\media\\image14.png"
         },
         "reasons": [
-          "reused_existing",
           "vector_auto_select",
+          "reused_existing",
           "duplicate_of_canonical"
         ]
       },
@@ -3559,8 +3559,8 @@
           "rId37": "D:\\_code\\DATN\\BE\\data\\outputs\\media\\image15.png"
         },
         "reasons": [
-          "reused_existing",
           "vector_auto_select",
+          "reused_existing",
           "duplicate_of_canonical"
         ]
       },
@@ -3587,8 +3587,8 @@
           "rId39": "D:\\_code\\DATN\\BE\\data\\outputs\\media\\image16.png"
         },
         "reasons": [
-          "reused_existing",
           "vector_auto_select",
+          "reused_existing",
           "duplicate_of_canonical"
         ]
       },
@@ -3615,8 +3615,8 @@
           "rId41": "D:\\_code\\DATN\\BE\\data\\outputs\\media\\image17.png"
         },
         "reasons": [
-          "reused_existing",
           "vector_auto_select",
+          "reused_existing",
           "duplicate_of_canonical"
         ]
       }
@@ -3657,8 +3657,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -3692,8 +3692,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -3720,8 +3720,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -3748,8 +3748,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -3776,8 +3776,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -3804,8 +3804,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -3832,8 +3832,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -3884,8 +3884,8 @@
           "rId43": "D:\\_code\\DATN\\BE\\data\\outputs\\media\\image18.png"
         },
         "reasons": [
-          "reused_existing",
           "vector_auto_select",
+          "reused_existing",
           "duplicate_of_canonical"
         ]
       }
@@ -3949,8 +3949,8 @@
           "rId45": "D:\\_code\\DATN\\BE\\data\\outputs\\media\\image19.png"
         },
         "reasons": [
-          "reused_existing",
           "vector_auto_select",
+          "reused_existing",
           "duplicate_of_canonical"
         ]
       },
@@ -3977,8 +3977,8 @@
           "rId47": "D:\\_code\\DATN\\BE\\data\\outputs\\media\\image20.png"
         },
         "reasons": [
-          "reused_existing",
           "vector_auto_select",
+          "reused_existing",
           "duplicate_of_canonical"
         ]
       },
@@ -4005,8 +4005,8 @@
           "rId49": "D:\\_code\\DATN\\BE\\data\\outputs\\media\\image21.png"
         },
         "reasons": [
-          "reused_existing",
           "vector_auto_select",
+          "reused_existing",
           "duplicate_of_canonical"
         ]
       }
@@ -4040,8 +4040,8 @@
           "rId51": "D:\\_code\\DATN\\BE\\data\\outputs\\media\\image22.png"
         },
         "reasons": [
-          "reused_existing",
           "vector_auto_select",
+          "reused_existing",
           "duplicate_of_canonical"
         ]
       }
@@ -4082,8 +4082,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -4117,8 +4117,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -4169,8 +4169,8 @@
           "rId53": "D:\\_code\\DATN\\BE\\data\\outputs\\media\\image23.png"
         },
         "reasons": [
-          "reused_existing",
           "vector_auto_select",
+          "reused_existing",
           "duplicate_of_canonical"
         ]
       },
@@ -4197,8 +4197,8 @@
           "rId55": "D:\\_code\\DATN\\BE\\data\\outputs\\media\\image24.png"
         },
         "reasons": [
-          "reused_existing",
           "vector_auto_select",
+          "reused_existing",
           "duplicate_of_canonical"
         ]
       }
@@ -4239,8 +4239,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -4274,8 +4274,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -4309,8 +4309,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -4344,8 +4344,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       },
       {
@@ -4372,8 +4372,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -4407,8 +4407,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
@@ -4459,8 +4459,8 @@
           "rId57": "D:\\_code\\DATN\\BE\\data\\outputs\\media\\image25.png"
         },
         "reasons": [
-          "reused_existing",
           "vector_auto_select",
+          "reused_existing",
           "duplicate_of_canonical"
         ]
       }
@@ -4519,8 +4519,8 @@
         },
         "reasons": [
           "vector_auto_select",
-          "extracted_now",
-          "converted_to_png"
+          "converted_to_png",
+          "extracted_now"
         ]
       }
     ]
