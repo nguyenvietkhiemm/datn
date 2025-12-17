@@ -279,6 +279,8 @@ CREATE TABLE IF NOT EXISTS user_bank_answer (
     FOREIGN KEY (bank_id) REFERENCES bank(bank_id) ON DELETE SET NULL,
     FOREIGN KEY (user_id) REFERENCES "user"(user_id) ON DELETE CASCADE,
     FOREIGN KEY (answer_id) REFERENCES answer(answer_id) ON DELETE SET NULL
+<<<<<<< HEAD
+=======
 );
 
 -- Add available columns if not exists (safe)
@@ -291,6 +293,161 @@ BEGIN
     ALTER TABLE "user" ADD COLUMN available BOOLEAN DEFAULT true;
   END IF;
 
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name='document' AND column_name='available'
+  ) THEN
+    ALTER TABLE document ADD COLUMN available BOOLEAN DEFAULT true;
+  END IF;
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name='subject' AND column_name='available'
+  ) THEN
+    ALTER TABLE subject ADD COLUMN available BOOLEAN DEFAULT true;
+  END IF;
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name='exam' AND column_name='available'
+  ) THEN
+    ALTER TABLE exam ADD COLUMN available BOOLEAN DEFAULT true;
+  END IF;
+
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name='question' AND column_name='available'
+  ) THEN
+    ALTER TABLE question ADD COLUMN available BOOLEAN DEFAULT true;
+  END IF;
+
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name='question' AND column_name='source'
+  ) THEN
+    ALTER TABLE question ADD COLUMN source VARCHAR(50);
+  END IF;
+
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name='bank' AND column_name='available'
+  ) THEN
+    ALTER TABLE bank ADD COLUMN available BOOLEAN DEFAULT true;
+  END IF;
+END$$;
+
+-- Indexes
+CREATE INDEX IF NOT EXISTS idx_topic_subject ON topic(subject_id);
+CREATE INDEX IF NOT EXISTS idx_document_topic ON document(topic_id);
+CREATE INDEX IF NOT EXISTS idx_document_history_user ON document_history(user_id);
+CREATE INDEX IF NOT EXISTS idx_document_history_document ON document_history(document_id);
+CREATE INDEX IF NOT EXISTS idx_chat_history_user ON chat_history(user_id);
+CREATE INDEX IF NOT EXISTS idx_answer_question ON answer(question_id);
+CREATE INDEX IF NOT EXISTS idx_question_exam_exam ON question_exam(exam_id);
+CREATE INDEX IF NOT EXISTS idx_bank_topic ON bank(topic_id);
+CREATE INDEX IF NOT EXISTS idx_user_goal_user ON user_goal(user_id);
+
+-- Optional: pgvector ANN index examples (run after you inserted vectors and tuned lists)
+-- CREATE INDEX IF NOT EXISTS idx_document_embedding ON document USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
+-- CREATE INDEX IF NOT EXISTS idx_chat_history_embedding ON chat_history USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
+-- CREATE INDEX IF NOT EXISTS idx_question_embedding ON question USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
+
+ALTER TABLE question ALTER COLUMN question_name TYPE VARCHAR(1000);
+ALTER TABLE question ALTER COLUMN question_content TYPE VARCHAR(10000);
+ALTER TABLE answer ALTER COLUMN answer_content TYPE VARCHAR(10000);
+
+AAlTER TABLE public.question
+ADD COLUMN image JSON;
+
+AlTER TABLE public.answer
+ADD COLUMN image JSON;
+
+ALTER TABLE public.bank
+ADD COLUMN time_limit INT;
+
+ALTER TABLE public.question
+ADD COLUMN type_question INT DEFAULT 1;
+
+ALTER TABLE user_bank_answer
+ADD COLUMN user_answer_text TEXT;
+
+CREATE TABLE contestants(
+contestants_id SERIAL PRIMARY KEY,
+exam_id int,
+user_id int,
+
+FOREIGN KEY (exam_id) REFERENCES exam(exam_id) ON DELETE CASCADE
+);
+
+ALTEr TABLE exam 
+ADD COLUMN description VARCHAR(200)
+
+ALTER TABLE subject ADD COLUMN subject_type INT DEFAULT 1;
+ALTER TABLE public.user_exam_answer
+ADD COLUMN answer_id INT ;
+
+ALTER TABLE public.user_exam_answer
+ADD COLUMN user_answer_text TEXT DEFAULT '';
+
+
+CREATE TABLE history_exam(
+history_exam_id SERIAL PRIMARY KEY,
+  exam_id INT NOT NULL,
+  user_id INT NOT NULL
+);
+
+ALTER TABLE public.user_exam_answer ADD COLUMN history_exam_id INT;
+
+ALTER TABLE user_exam_answer
+ADD CONSTRAINT fk_user_exam_answer_history
+FOREIGN KEY (history_exam_id)
+REFERENCES history_exam(history_exam_id)
+ON DELETE CASCADE;
+
+ALTER TABLE public.history_exam
+ADD COLUMN score DECIMAL(4,2),
+ADD COLUMN time_test VARCHAR(5);
+
+ALTER TABLE history_exam
+ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+CREATE TABLE history_bank(
+history_bank_id SERIAL PRIMARY KEY,
+  bank_id INT NOT NULL,
+  user_id INT NOT NULL,
+  score DECIMAL(4,2),
+  time_test VARCHAR(5),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE public.user_bank_answer ADD COLUMN history_bank_id INT;
+
+ALTER TABLE user_bank_answer
+ADD CONSTRAINT fk_user_bank_answer_history
+FOREIGN KEY (history_bank_id)
+REFERENCES history_bank(history_bank_id)
+ON DELETE CASCADE;
+
+ALTER TABLE public.user_bank_answer
+ADD COLUMN user_answer_text TEXT DEFAULT '';
+
+CREATE TABLE image_question (
+  image_question_id SERIAL PRIMARY KEY,
+  image_link TEXT,
+  question_id INT,
+  FOREIGN KEY (question_id) REFERENCES question(question_id) ON DELETE CASCADE
+>>>>>>> 1cdebd9ae89ec926031b4c3b22101595d8827e60
+);
+
+-- Add available columns if not exists (safe)
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name='user' AND column_name='available'
+  ) THEN
+    ALTER TABLE "user" ADD COLUMN available BOOLEAN DEFAULT true;
+  END IF;
+
+<<<<<<< HEAD
   IF NOT EXISTS (
     SELECT 1 FROM information_schema.columns 
     WHERE table_name='document' AND column_name='available'
@@ -438,3 +595,14 @@ CREATE TABLE image_answer(
   answer_id INT,
   FOREIGN KEY (answer_id) REFERENCES answer(answer_id) ON DELETE CASCADE
 )
+=======
+CREATE TABLE IF NOT EXISTS chunk (
+    chunk_id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    text TEXT,
+    link VARCHAR(250),
+    embedding vector(384),
+    document_id INT,
+    FOREIGN KEY (document_id) REFERENCES document(document_id) ON DELETE CASCADE
+);
+>>>>>>> 1cdebd9ae89ec926031b4c3b22101595d8827e60

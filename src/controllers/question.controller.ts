@@ -28,7 +28,10 @@ const QuestionController = {
   async create(req: Request, res: Response) {
     const response: DefaultResponse<any> = await safeExecute(async () => {
       const  payload  = req.body;
+<<<<<<< HEAD
       console.log(payload);
+=======
+>>>>>>> 1cdebd9ae89ec926031b4c3b22101595d8827e60
       
       const created = await QuestionService.create(payload);
 
@@ -133,6 +136,7 @@ const QuestionController = {
     })
 
     return res.status(result.status).json(result);
+<<<<<<< HEAD
   },
 
   async uploadQuestionImages (req: Request, res: Response) {
@@ -183,6 +187,8 @@ const QuestionController = {
         message: "Upload question images failed",
       });
     }
+=======
+>>>>>>> 1cdebd9ae89ec926031b4c3b22101595d8827e60
   }
 };
 

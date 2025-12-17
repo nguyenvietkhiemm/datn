@@ -2,7 +2,10 @@ import { Router } from 'express';
 import QuestionController from '../controllers/question.controller';
 import Authentication from '../middleware/authentication';
 import { ADMIN } from "../config/permission";
+<<<<<<< HEAD
 import { uploadAnswerImage, uploadQuestionImage } from '../utils/upload';
+=======
+>>>>>>> 1cdebd9ae89ec926031b4c3b22101595d8827e60
 
 const questionRoute = Router();
 
@@ -202,6 +205,7 @@ questionRoute.patch('/setAvailable/:id',
         Authentication.AuthorizeRoles(...ADMIN),
         QuestionController.setAvailable);
 
+<<<<<<< HEAD
 questionRoute.post(
         "/images",
         uploadQuestionImage.array("images", 10),
@@ -214,6 +218,8 @@ questionRoute.post(
         QuestionController.uploadAnswerImages
 );
 
+=======
+>>>>>>> 1cdebd9ae89ec926031b4c3b22101595d8827e60
 /**
  * @openapi
  * /questions/create/csv/{filename}:

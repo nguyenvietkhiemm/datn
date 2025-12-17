@@ -109,8 +109,12 @@ const QuestionService = {
 
         try {
             await client.query("BEGIN");
+<<<<<<< HEAD
             // console.log(payload);
             
+=======
+
+>>>>>>> 1cdebd9ae89ec926031b4c3b22101595d8827e60
             /* ================= QUESTION ================= */
             const qRes = await client.query(
                 `
