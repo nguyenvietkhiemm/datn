@@ -4,6 +4,7 @@ import Image from "next/image";
 import AutoResizeTextarea from "@/component/textarea/AutoResizeTextarea";
 import styles from "./QuestionCard.module.css";
 import { Question } from "@/domain/admin/questions/type";
+import { API_URL } from "@/lib/service";
 
 interface QuestionCardProps {
     question: Question;
@@ -26,6 +27,7 @@ export default function QuestionCard({
     handleDelete,
     handleToggleAvailable
 }: QuestionCardProps) {
+    
     return (
         <div className={styles.card}>
 
@@ -89,8 +91,8 @@ export default function QuestionCard({
                 <div className={styles.imageGroup}>
                     {question?.images?.map((src, index) => (
                         <div key={index} className={styles.imageWrapper}>
-                            <Image
-                                src={src}
+                            <img
+                                src={`${API_URL}${src}`}
                                 alt={`question-img-${index}`}
                                 width={300}
                                 height={200}

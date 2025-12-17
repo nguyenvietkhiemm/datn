@@ -3,7 +3,6 @@ import { API_URL, getHeaders, getToken } from "@/lib/service";
 
 export const QuestionService = {
     async fetchQuestions(page: number, available: boolean, type_question: number): Promise<{ questions: Question[]; last_page: number }> {
-        console.log(available);
 
         const token = getToken(); // Lấy token từ cookie hoặc localStorage
         const res = await fetch(
@@ -72,20 +71,40 @@ export const QuestionService = {
         return; // Không cần trả về gì
     },
 
-    async uploadQuestionImages(files: File[]): Promise<string[]> {
-        const token = getToken()
-
+    async uploadQuestionImages(
+        files: (File | string)[]
+    ): Promise<string[]> {
+    
+        const token = getToken();
         const formData = new FormData();
-        files.forEach(file => formData.append("files", file));
-
-        const res = await fetch(`${API_URL}/upload/images`, {
-            method: "POST",
-            headers: getHeaders(token),
-            body: formData,
+    
+        const existedUrls: string[] = [];
+    
+        files.forEach(file => {
+            if (file instanceof File) {
+                formData.append("images", file);
+            } else {
+                existedUrls.push(file);
+            }
         });
-
-        const data = await res.json();
-        return data.urls; // ["img1.png", "img2.png"]
-    }
-
+        
+        let uploadedUrls: string[] = [];
+    
+        if (formData.has("images")) {
+            const res = await fetch(`${API_URL}/questions/images`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                body: formData,
+            });
+    
+            const data = await res.json();
+            uploadedUrls = data;
+            console.log(uploadedUrls);
+                
+        }
+    
+        return [...existedUrls, ...uploadedUrls];
+    }    
 }

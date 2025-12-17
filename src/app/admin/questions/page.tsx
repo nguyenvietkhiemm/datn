@@ -279,7 +279,7 @@ export default function Question() {
                         key={row.question_id}
                         question={{
                             ...row,
-                            images: QuestionModel.normalizeImages(row.images),
+                            images: row.images,
                             answers: row.answers.map(ans => ({
                                 ...ans,
                                 images: QuestionModel.normalizeImages(ans.images)

@@ -17,7 +17,7 @@ export default function QuestionCreate() {
     const [form, setForm] = useState<QuestionForm>({
         question_content: "",
         available: true,
-        source: "admin",
+        source: "",
         type_question: 1, // 1: MC, 2: True/False, 3: Essay
     });
 
@@ -28,7 +28,7 @@ export default function QuestionCreate() {
     ]);
 
     /* ===== QUESTION IMAGES ===== */
-    const [questionImages, setQuestionImages] = useState<File[]>([]);
+    const [questionImages, setQuestionImages] = useState<File[] | string[]>([]);
 
     /* ===== HELPERS ===== */
     const updateForm = (key: keyof QuestionForm, value: any) => {

@@ -11,14 +11,14 @@ export interface Question {
     available: boolean;
     answers: Answer[];
     images?: string[];
-    source: string;
+    source?: string;
+    newImages? : File[];
     type_question?: number;
-    point_type?: number
 }
 
 export type CreateQuestionPayload =
     Omit<Question, "question_id" | "answers" | "images"> & {
-        answers: Omit<Answer, "answer_id" | "images">[];
+        answers: Omit<Answer, "answer_id">[];
         images?: string[];
     };
 
@@ -30,3 +30,4 @@ export type QuestionForm = {
     source: string;
     type_question: number;
 };
+
