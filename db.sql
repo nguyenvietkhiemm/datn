@@ -351,17 +351,18 @@ CREATE INDEX IF NOT EXISTS idx_user_goal_user ON user_goal(user_id);
 ALTER TABLE question ALTER COLUMN question_name TYPE VARCHAR(1000);
 ALTER TABLE question ALTER COLUMN question_content TYPE VARCHAR(10000);
 ALTER TABLE answer ALTER COLUMN answer_content TYPE VARCHAR(10000);
-AlTER TABLE public.question
-ADD COLUMN image JSON
+
+AAlTER TABLE public.question
+ADD COLUMN image JSON;
 
 AlTER TABLE public.answer
-ADD COLUMN image JSON
+ADD COLUMN image JSON;
 
 ALTER TABLE public.bank
-ADD COLUMN time_limit INT
+ADD COLUMN time_limit INT;
 
 ALTER TABLE public.question
-ADD COLUMN type_question INT DEFAULT 1
+ADD COLUMN type_question INT DEFAULT 1;
 
 ALTER TABLE user_bank_answer
 ADD COLUMN user_answer_text TEXT;
@@ -372,25 +373,26 @@ exam_id int,
 user_id int,
 
 FOREIGN KEY (exam_id) REFERENCES exam(exam_id) ON DELETE CASCADE
-)
+);
 
 ALTEr TABLE exam 
 ADD COLUMN description VARCHAR(200)
 
 ALTER TABLE subject ADD COLUMN subject_type INT DEFAULT 1;
 ALTER TABLE public.user_exam_answer
-ADD COLUMN answer_id INT 
+ADD COLUMN answer_id INT ;
 
 ALTER TABLE public.user_exam_answer
-ADD COLUMN user_answer_text TEXT DEFAULT "" 
+ADD COLUMN user_answer_text TEXT DEFAULT '';
+
 
 CREATE TABLE history_exam(
 history_exam_id SERIAL PRIMARY KEY,
   exam_id INT NOT NULL,
   user_id INT NOT NULL
-)
+);
 
-ALTER TABLE public.user_exam_answer ADD COLUMN history_exam_id INT
+ALTER TABLE public.user_exam_answer ADD COLUMN history_exam_id INT;
 
 ALTER TABLE user_exam_answer
 ADD CONSTRAINT fk_user_exam_answer_history
@@ -400,7 +402,7 @@ ON DELETE CASCADE;
 
 ALTER TABLE public.history_exam
 ADD COLUMN score DECIMAL(4,2),
-ADD COLUMN time_test VARCHAR(5)
+ADD COLUMN time_test VARCHAR(5);
 
 ALTER TABLE history_exam
 ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
@@ -411,26 +413,27 @@ history_bank_id SERIAL PRIMARY KEY,
   user_id INT NOT NULL,
   score DECIMAL(4,2),
   time_test VARCHAR(5),
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
-)
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
-ALTER TABLE public.user_bank_answer ADD COLUMN history_bank_id INT
+ALTER TABLE public.user_bank_answer ADD COLUMN history_bank_id INT;
 
 ALTER TABLE user_bank_answer
 ADD CONSTRAINT fk_user_bank_answer_history
 FOREIGN KEY (history_bank_id)
-REFERENCES history_exam(history_bank_id)
+REFERENCES history_bank(history_bank_id)
 ON DELETE CASCADE;
 
 ALTER TABLE public.user_bank_answer
-ADD COLUMN user_answer_text TEXT DEFAULT "" 
+ADD COLUMN user_answer_text TEXT DEFAULT '';
 
-CREATE TABLE image_question(
-  image_question_id INT SERIAL PRIMARY KEY,
+CREATE TABLE image_question (
+  image_question_id SERIAL PRIMARY KEY,
   image_link TEXT,
   question_id INT,
   FOREIGN KEY (question_id) REFERENCES question(question_id) ON DELETE CASCADE
-)
+);
+
 
 CREATE TABLE IF NOT EXISTS chunk (
     chunk_id SERIAL PRIMARY KEY,
