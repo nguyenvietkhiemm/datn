@@ -8,7 +8,7 @@ async function runBertModel(docxFilePath: string) {
         "../../venv/Scripts/python.exe"
     );
 
-    const pyScript = path.join(__dirname, "../../microservice/__init__.py");
+    const pyScript = path.join(__dirname, "../../microservice/bert/__init__.py");
 
 //     const outputCsv = docxFilePath.replace(/\.docx$/i, ".csv");
 

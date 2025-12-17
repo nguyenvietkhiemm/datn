@@ -67,3 +67,20 @@ git lfs install
 git clone https://huggingface.co/alittledaisy/microservice
 ```
 
+PDF → detect text
+   ├── Nếu có text → PyMuPDF get_text() cực nhanh
+   └── Nếu scan:
+           PyMuPDF render từng trang → queue → pool OCR worker
+               Worker:
+                   nhận ảnh → chạy Tesseract → trả kết quả
+           Gom text → trả kết quả
+
+
+# Install the Hugging Face CLI
+powershell -ExecutionPolicy ByPass -c "irm https://hf.co/cli/install.ps1 | iex"
+
+# (optional) Login with your Hugging Face credentials
+hf auth login
+
+# Push your model files
+hf upload alittledaisy/microservice . 

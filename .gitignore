@@ -32,3 +32,7 @@ microservice
 __note__.txt
 /__note__.txt
 ./__note__.txt
+
+.env
+/.env
+./.env
