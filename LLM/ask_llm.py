@@ -1,18 +1,6 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
 from vectorizer import embed_text
 from database import search_chunks
 from request_llm import ask_llm
-
-app = FastAPI()
-
-class AskRequest(BaseModel):
-    question: str
-
-@app.post("/ask")
-def ask(req: AskRequest):
-    return run_pipeline(req.question)
-
 
 def run_pipeline(question: str):
     query_vec = embed_text(question)
