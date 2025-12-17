@@ -27,8 +27,8 @@ app.use("/resources", express.static(path.join(__dirname, "../resources")));
 // routes chung cho tat ca cac api
 app.use('/', routes);
 
-const PORT = process.env.PORT || 3000;
-const HOST = process.env.HOST || "localhost";
+const PORT = process.env.PORT ;
+const HOST = process.env.HOST ;
 
 app.listen(PORT, () => {
   console.log(`Server running on http://${HOST}:${PORT}`);

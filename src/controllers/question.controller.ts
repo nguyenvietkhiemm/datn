@@ -28,6 +28,7 @@ const QuestionController = {
   async create(req: Request, res: Response) {
     const response: DefaultResponse<any> = await safeExecute(async () => {
       const  payload  = req.body;
+      console.log(payload);
       
       const created = await QuestionService.create(payload);
 
@@ -132,6 +133,56 @@ const QuestionController = {
     })
 
     return res.status(result.status).json(result);
+  },
+
+  async uploadQuestionImages (req: Request, res: Response) {
+    try {
+      // multer đã xử lý upload trước đó
+      if (!req.files || !(req.files instanceof Array)) {
+        return res.status(400).json({
+          message: "No images uploaded",
+        });
+      }
+  
+      const files = req.files as Express.Multer.File[];
+  
+      // Tạo link public cho FE
+      const imageLinks = files.map(
+        (file) => `/resources/images/questions/${file.filename}`
+      );
+  
+      return res.json(imageLinks);
+    } catch (error) {
+      console.error("Upload question images error:", error);
+      return res.status(500).json({
+        message: "Upload question images failed",
+      });
+    }
+  },
+
+  async uploadAnswerImages (req: Request, res: Response) {
+    try {
+      // multer đã xử lý upload trước đó
+      if (!req.files || !(req.files instanceof Array)) {
+        return res.status(400).json({
+          message: "No images uploaded",
+        });
+      }
+  
+      const files = req.files as Express.Multer.File[];
+  
+      // Tạo link public cho FE
+      const imageLinks = files.map(
+        (file) => `/resources/images/answers/${file.filename}`
+      );
+  
+      return res.json(imageLinks);
+    } catch (error) {
+      console.error("Upload question images error:", error);
+      return res.status(500).json({
+        message: "Upload question images failed",
+      });
+    }
   }
 };
 
