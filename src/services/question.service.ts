@@ -109,7 +109,8 @@ const QuestionService = {
 
         try {
             await client.query("BEGIN");
-
+            // console.log(payload);
+            
             /* ================= QUESTION ================= */
             const qRes = await client.query(
                 `

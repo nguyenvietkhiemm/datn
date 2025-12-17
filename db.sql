@@ -419,15 +419,22 @@ ALTER TABLE public.user_bank_answer ADD COLUMN history_bank_id INT
 ALTER TABLE user_bank_answer
 ADD CONSTRAINT fk_user_bank_answer_history
 FOREIGN KEY (history_bank_id)
-REFERENCES history_exam(history_bank_id)
+REFERENCES history_bank(history_bank_id)
 ON DELETE CASCADE;
 
 ALTER TABLE public.user_bank_answer
 ADD COLUMN user_answer_text TEXT DEFAULT "" 
 
 CREATE TABLE image_question(
-  image_question_id INT SERIAL PRIMARY KEY,
+  image_question_id  SERIAL PRIMARY KEY,
   image_link TEXT,
   question_id INT,
   FOREIGN KEY (question_id) REFERENCES question(question_id) ON DELETE CASCADE
+)
+
+CREATE TABLE image_answer(
+  image_answer_id  SERIAL PRIMARY KEY,
+  image_link TEXT,
+  answer_id INT,
+  FOREIGN KEY (answer_id) REFERENCES answer(answer_id) ON DELETE CASCADE
 )

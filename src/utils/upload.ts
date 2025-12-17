@@ -28,6 +28,36 @@ const docResourceStorage = multer.diskStorage({
   filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname.replace(/\s+/g, "_")),
 });
 
+//image question
+const imageQuestionStorange = multer.diskStorage({
+  destination: (_req, _file, cb) => {
+    cb(null, path.join(__dirname, "../../resources/images/questions"));
+  },
+  filename: (_req, file, cb) => {
+    const uniqueName = Date.now() + "_" + file.originalname;
+    cb(null, uniqueName);
+  },
+})
+
+//image question
+const imageAnswerStorange = multer.diskStorage({
+  destination: (_req, _file, cb) => {
+    cb(null, path.join(__dirname, "../../resources/images/answers"));
+  },
+  filename: (_req, file, cb) => {
+    const uniqueName = Date.now() + "_" + file.originalname;
+    cb(null, uniqueName);
+  },
+})
+
+const imageFileFilter: multer.Options["fileFilter"] = (_req, file, cb) => {
+  if (!file.mimetype.startsWith("image/")) {
+    cb(new Error("Only image files allowed"));
+    return;
+  }
+  cb(null, true);
+};
+
 // Bộ lọc loại file
 const csvFilter = (req: any, file: Express.Multer.File, cb: any) => {
   if (path.extname(file.originalname).toLowerCase() === ".csv") cb(null, true);
@@ -51,6 +81,18 @@ const docResourceFilter = (req: any, file: Express.Multer.File, cb: any) => {
 // Export hai instance riêng
 export const uploadCSV = multer({ storage: csvStorage, fileFilter: csvFilter });
 export const uploadDOC = multer({ storage: docStorage, fileFilter: docFilter });
+
+export const uploadQuestionImage = multer({
+  storage: imageQuestionStorange,
+  fileFilter: imageFileFilter,
+  limits: { fileSize: 5 * 1024 * 1024 },
+});
+
+export const uploadAnswerImage = multer({
+  storage: imageAnswerStorange,
+  fileFilter: imageFileFilter,
+  limits: { fileSize: 5 * 1024 * 1024 },
+});
 
 export const uploadDOCResource = multer({ storage: docResourceStorage, fileFilter: docResourceFilter });
 
