@@ -431,3 +431,13 @@ CREATE TABLE image_question(
   question_id INT,
   FOREIGN KEY (question_id) REFERENCES question(question_id) ON DELETE CASCADE
 )
+
+CREATE TABLE IF NOT EXISTS chunk (
+    chunk_id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    text TEXT,
+    link VARCHAR(250),
+    embedding vector(384),
+    document_id INT,
+    FOREIGN KEY (document_id) REFERENCES document(document_id) ON DELETE CASCADE
+);
