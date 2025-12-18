@@ -23,17 +23,17 @@ const questionRoute = Router();
 questionRoute.get('/', QuestionController.getAll);
 
 //tìm kiếm question
-questionRoute.get("/search",
-        Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(...ADMIN),
-        QuestionController.searchQuestions);
+// questionRoute.get("/search",
+//         Authentication.AuthenticateToken,
+//         Authentication.AuthorizeRoles(...ADMIN),
+//         QuestionController.searchQuestions);
 
 //filter question
-questionRoute.get("/filter",
-        Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(...ADMIN),
-        QuestionController.filterQuestion
-);
+// questionRoute.get("/filter",
+//         Authentication.AuthenticateToken,
+//         Authentication.AuthorizeRoles(...ADMIN),
+//         QuestionController.filterQuestion
+// );
 
 //
 /**

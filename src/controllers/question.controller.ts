@@ -15,13 +15,33 @@ const QuestionController = {
 
   async getAll(req: Request, res: Response) {
     const response: DefaultResponse<any> = await safeExecute(async () => {
+      const page = Number(req.query.page) || 1;
+  
+      const status =
+        typeof req.query.status === "string"
+          ? req.query.status
+          : "All";
+  
+      const searchValue =
+        typeof req.query.searchValue === "string"
+          ? req.query.searchValue
+          : "";
+  
+      const type_question = Number(req.query.type_question)
+
+  
       return {
         status: 200,
         message: "Lấy danh sách câu hỏi thành công",
-        data: await QuestionService.getAll(Number(req.query.page), Boolean(req.query.available), Number(req.query.type_question))
+        data: await QuestionService.getAll(
+          page,
+          status,
+          searchValue,
+          type_question
+        ),
       } as DefaultResponse<any>;
     });
-
+  
     res.status(response.status).json(response);
   },
 
@@ -102,37 +122,37 @@ const QuestionController = {
     res.status(response.status).json(response);
   },
 
-  async searchQuestions(req: Request, res: Response) {
-    const result: DefaultResponse<any> = await safeExecute(async () => {
-      return {
-        status: 200,
-        message: "Lấy danh sách câu hỏi thành công",
-        data: await QuestionService.searchQuestions(
-          String(req.query.searchValue),
-          Number(req.query.page)
-        ),
-      };
-    });
+  // async searchQuestions(req: Request, res: Response) {
+  //   const result: DefaultResponse<any> = await safeExecute(async () => {
+  //     return {
+  //       status: 200,
+  //       message: "Lấy danh sách câu hỏi thành công",
+  //       data: await QuestionService.searchQuestions(
+  //         String(req.query.searchValue),
+  //         Number(req.query.page)
+  //       ),
+  //     };
+  //   });
 
-    return res.status(result.status).json(result);
-  },
+  //   return res.status(result.status).json(result);
+  // },
 
-  async filterQuestion(req: Request, res: Response) {
-    const result: DefaultResponse<any> = await safeExecute(async () => {
-      return {
-        status: 200,
-        message: "Lấy danh sách câu hỏi thành công",
-        data: await QuestionService.filterQuestions(
-          String(req.query?.question_name),
-          String(req.query?.source),
-          String(req.query?.status),
-          Number(req.query.page)
-        ),
-      }
-    })
+  // async filterQuestion(req: Request, res: Response) {
+  //   const result: DefaultResponse<any> = await safeExecute(async () => {
+  //     return {
+  //       status: 200,
+  //       message: "Lấy danh sách câu hỏi thành công",
+  //       data: await QuestionService.filterQuestions(
+  //         String(req.query?.question_name),
+  //         String(req.query?.source),
+  //         String(req.query?.status),
+  //         Number(req.query.page)
+  //       ),
+  //     }
+  //   })
 
-    return res.status(result.status).json(result);
-  },
+  //   return res.status(result.status).json(result);
+  // },
 
   async uploadQuestionImages (req: Request, res: Response) {
     try {

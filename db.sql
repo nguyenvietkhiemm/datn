@@ -279,8 +279,6 @@ CREATE TABLE IF NOT EXISTS user_bank_answer (
     FOREIGN KEY (bank_id) REFERENCES bank(bank_id) ON DELETE SET NULL,
     FOREIGN KEY (user_id) REFERENCES "user"(user_id) ON DELETE CASCADE,
     FOREIGN KEY (answer_id) REFERENCES answer(answer_id) ON DELETE SET NULL
-<<<<<<< HEAD
-=======
 );
 
 -- Add available columns if not exists (safe)
@@ -434,7 +432,6 @@ CREATE TABLE image_question (
   image_link TEXT,
   question_id INT,
   FOREIGN KEY (question_id) REFERENCES question(question_id) ON DELETE CASCADE
->>>>>>> 1cdebd9ae89ec926031b4c3b22101595d8827e60
 );
 
 -- Add available columns if not exists (safe)
@@ -447,7 +444,7 @@ BEGIN
     ALTER TABLE "user" ADD COLUMN available BOOLEAN DEFAULT true;
   END IF;
 
-<<<<<<< HEAD
+
   IF NOT EXISTS (
     SELECT 1 FROM information_schema.columns 
     WHERE table_name='document' AND column_name='available'
@@ -595,7 +592,7 @@ CREATE TABLE image_answer(
   answer_id INT,
   FOREIGN KEY (answer_id) REFERENCES answer(answer_id) ON DELETE CASCADE
 )
-=======
+
 CREATE TABLE IF NOT EXISTS chunk (
     chunk_id SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
@@ -605,4 +602,4 @@ CREATE TABLE IF NOT EXISTS chunk (
     document_id INT,
     FOREIGN KEY (document_id) REFERENCES document(document_id) ON DELETE CASCADE
 );
->>>>>>> 1cdebd9ae89ec926031b4c3b22101595d8827e60
+
