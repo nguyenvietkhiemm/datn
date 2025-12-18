@@ -28,7 +28,6 @@ const docResourceStorage = multer.diskStorage({
   filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname.replace(/\s+/g, "_")),
 });
 
-<<<<<<< HEAD
 //image question
 const imageQuestionStorange = multer.diskStorage({
   destination: (_req, _file, cb) => {
@@ -59,8 +58,6 @@ const imageFileFilter: multer.Options["fileFilter"] = (_req, file, cb) => {
   cb(null, true);
 };
 
-=======
->>>>>>> 1cdebd9ae89ec926031b4c3b22101595d8827e60
 // Bộ lọc loại file
 const csvFilter = (req: any, file: Express.Multer.File, cb: any) => {
   if (path.extname(file.originalname).toLowerCase() === ".csv") cb(null, true);
@@ -85,7 +82,6 @@ const docResourceFilter = (req: any, file: Express.Multer.File, cb: any) => {
 export const uploadCSV = multer({ storage: csvStorage, fileFilter: csvFilter });
 export const uploadDOC = multer({ storage: docStorage, fileFilter: docFilter });
 
-<<<<<<< HEAD
 export const uploadQuestionImage = multer({
   storage: imageQuestionStorange,
   fileFilter: imageFileFilter,
@@ -98,7 +94,5 @@ export const uploadAnswerImage = multer({
   limits: { fileSize: 5 * 1024 * 1024 },
 });
 
-=======
->>>>>>> 1cdebd9ae89ec926031b4c3b22101595d8827e60
 export const uploadDOCResource = multer({ storage: docResourceStorage, fileFilter: docResourceFilter });
 
