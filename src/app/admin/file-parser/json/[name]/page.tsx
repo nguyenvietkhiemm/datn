@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Cookies from "js-cookie";
 import styles from "./JsonDetailPage.module.css";
-import QuestionCard from "@/component/card/QuestionCard/QuestionCard";
 import { Button } from "@/component/ui/button/Button";
-import { JsonAnswer, JsonQuestion, Change, Params } from "@/domain/admin/file/file-parser/type";
+import { JsonAnswer, JsonQuestion, Change, Params, ChangeValue } from "@/domain/admin/file/file-parser/type";
 import { FileParserService } from "@/domain/admin/file/file-parser/service";
 import { FileParserModel } from "@/domain/admin/file/file-parser/model";
 import QuestionCreate from "@/component/questionCreate/page";
 import { QuestionService } from "@/domain/admin/questions/service";
+import { QuestionModel } from "@/domain/admin/questions/model";
 
 export default function JsonDetailPage() {
     const { name } = useParams<Params>();
@@ -20,16 +20,6 @@ export default function JsonDetailPage() {
     const [editCell, setEditCell] = useState<{ row: number; col: number } | null>(null);
     const [changes, setChanges] = useState<Change[]>([]);
     const [images, setImages] = useState<Record<string, string>>({});
-    type ChangeValue =
-    | string
-    | number
-    | boolean
-    | null
-    | File[]
-    | {
-          answerIndex: number;
-          imageIndex: number;
-      };
 
     // Lấy các thay đổi đã lưu từ localStorage
     useEffect(() => {
@@ -95,23 +85,24 @@ export default function JsonDetailPage() {
         return data;
     };
 
-    const handleChange = (rowIndex: number, colIndex: number, value: ChangeValue) => {
+    const handleChange = (rowIndex: number, type_change: number, value: ChangeValue) => {
         setJsonData(prev => {
             const updated = [...prev];
 
-            if (colIndex === -5) {
+            if (type_change === -5) {
+                // xoa cau hoi
                 return updated.filter((_, index) => index !== rowIndex);
             }
 
-            if (colIndex === -1) {
-                //thay doi noi dung
+            if (type_change === -1) {
+                //thay doi noi dung cau hoi
                 updated[rowIndex].question.text = value as string;
             }
-            else if (colIndex === -2) {
+            else if (type_change === -2) {
                 //doi type_question
                 updated[rowIndex].question.type_question = value as number;
             }
-            else if (colIndex === -3) {
+            else if (type_change === -3) {
                 //them cau tra loi
                 updated[rowIndex] = {
                     ...updated[rowIndex],
@@ -124,7 +115,7 @@ export default function JsonDetailPage() {
                     ],
                 };
             }
-            else if (colIndex === -4) {
+            else if (type_change === -4) {
                 //xoa cau tra loi
                 const removeIndex = value as number;
                 updated[rowIndex] = {
@@ -134,40 +125,84 @@ export default function JsonDetailPage() {
                     ),
                 };
             }
-            else if (colIndex === -6) {
-                //them anh
+            else if (type_change === -6) {
+                //them anh cho cau hoi
                 const files = value as File[];
-            
+
                 updated[rowIndex] = {
                     ...updated[rowIndex],
                     question: {
                         ...updated[rowIndex].question,
-                        newImages: files, 
+                        newImages: files,
                     },
                 };
             }
-            else if (colIndex === -7) {
-                //xoa anh cua cau tra loi
+            else if (type_change === -7) {
+                //xoa anh cua cu cau tra loi 
                 const { answerIndex, imageIndex } = value as {
                     answerIndex: number;
                     imageIndex: number;
                 };
-            
+
                 updated[rowIndex] = {
                     ...updated[rowIndex],
                     answers: updated[rowIndex].answers.map((a, i) =>
                         i === answerIndex
                             ? {
-                                  ...a,
-                                  images: a.images?.filter((_, idx) => idx !== imageIndex),
-                              }
+                                ...a,
+                                images: a.images?.filter((_, idx) => idx !== imageIndex),
+                            }
                             : a
                     ),
                 };
             }
-            else if (colIndex >= 1000) {
+            else if (type_change === -8) {
+                // thêm ảnh cho câu trả lời
+                const { answerIndex, files } = value as {
+                    answerIndex: number;
+                    files: File[];
+                };
+
+                updated[rowIndex] = {
+                    ...updated[rowIndex],
+                    answers: updated[rowIndex].answers.map((a, i) =>
+                        i === answerIndex
+                            ? {
+                                ...a,
+                                newImages: files,
+                            }
+                            : a
+                    ),
+                };
+            }
+            else if (type_change === - 9) {
+                // sửa text đáp án
+                const { answerIndex, value_change } = value as {
+                    answerIndex: number;
+                    value_change: string
+                }
+                
+                updated[rowIndex].answers[answerIndex].text = value_change;
+            }
+            else if (type_change === -10) {
+                //xoa anh cua moi cau tra loi 
+                const answerIndex = value as number;
+
+                updated[rowIndex] = {
+                    ...updated[rowIndex],
+                    answers: updated[rowIndex].answers.map((a, i) =>
+                        i === answerIndex
+                            ? {
+                                ...a,
+                                newImages : []
+                            }
+                            : a
+                    ),
+                };
+            }
+            else {
                 //tao cau tra loi dung
-                const ansIndex = colIndex - 1000;
+                const ansIndex = type_change - 1000;
                 const type = updated[rowIndex].question.type_question ?? 1;
 
                 updated[rowIndex] = {
@@ -186,11 +221,6 @@ export default function JsonDetailPage() {
                         }
                     }),
                 };
-            }
-
-            // sửa text đáp án
-            else {
-                updated[rowIndex].answers[colIndex].text = value as string;
             }
 
             return updated;
@@ -227,36 +257,10 @@ export default function JsonDetailPage() {
 
     const handleSubmitQuestionToBE = async (row: JsonQuestion) => {
         try {
-            /* ===== 1. Ảnh cũ ===== */
-            const oldImages = FileParserModel.extractQuestionImages(row, images);
-            
-            /* ===== 2. Ảnh mới ===== */
-            let newImageLinks: string[] = [];
-            if (row.question.newImages && row.question.newImages.length > 0) { 
-                newImageLinks = await QuestionService.uploadQuestionImages(
-                    row.question.newImages
-                );
-            }
-            console.log("tiep tuc")
-            /* ===== 3. Gộp ảnh ===== */
-            const finalImages = [...oldImages, ...newImageLinks];
-    
-            /* ===== 4. Payload ===== */
-            const payload = {
-                question_content: row.question.text,
-                available: true,
-                source: row.question.label ?? "json",
-                type_question: row.question.type_question,
-                images: finalImages,
-                answers: row.answers.map(a => ({
-                    answer_content: a.text,
-                    is_correct: a.is_correct,
-                    images: FileParserModel.extractAnswerImages(a, images) || undefined,
-                })),
-            };
-    
+            const payload = await QuestionModel.buildPayload(row, images)
+
             await QuestionService.createQuestionWithAnswers(payload);
-    
+
             alert("Đã lưu câu hỏi vào hệ thống!");
         } catch (err) {
             console.error("Submit question failed:", err);
@@ -311,13 +315,14 @@ export default function JsonDetailPage() {
                                 type_question: row.question.type_question,
                                 //  Tách ảnh của question
                                 images: FileParserModel.extractQuestionImages(row, images),
-                                newImages : row.question.newImages,
+                                newImages: row.question.newImages,
                                 //  Tách ảnh của từng answer
                                 answers: row.answers.map((a, i) => ({
                                     answer_id: i,
                                     answer_content: a.text,
                                     is_correct: a.is_correct,
                                     images: FileParserModel.extractAnswerImages(a, images),
+                                    newImages: a.newImages
                                 })),
                             }}
                             rowIndex={rowIndex}

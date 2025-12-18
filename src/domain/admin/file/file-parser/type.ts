@@ -4,7 +4,8 @@ export interface JsonAnswer {
     math?: any[];
     images?: any[]; // images
     label?: string;
-    is_correct : boolean
+    is_correct: boolean;
+    newImages?: File[];
 }
 
 export interface JsonQuestion {
@@ -30,3 +31,28 @@ export interface Params {
     [key: string]: string;
     name: string;
 }
+
+export type RemoveAnswerImageValue = {
+    answerIndex: number;
+    imageIndex: number;
+};
+
+export type AddAnswerImageValue = {
+    answerIndex: number;
+    files: File[];
+};
+
+export type ChangeAnswerValue = {
+    answerIndex : number;
+    value_change : string
+}
+
+export type ChangeValue =
+  | string
+  | number
+  | boolean
+  | null
+  | File[]
+  | RemoveAnswerImageValue
+  | AddAnswerImageValue
+  | ChangeAnswerValue

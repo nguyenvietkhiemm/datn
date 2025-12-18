@@ -20,7 +20,7 @@ export default function Question() {
     const [filterQuestion, setFilterQuestion] = useState<Question[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const [available, setAvaible] = useState<boolean>(true);
+    const [available, setAvaible] = useState<string>("All");
     const [type_question, setTypeQuestion] = useState<number>(1);
     const [totalPage, setTotalPage] = useState<number>(1);
     const [isFileList, setIsFileList] = useState<boolean>(false);
@@ -31,7 +31,7 @@ export default function Question() {
     const jsonInputRef = useRef<HTMLInputElement>(null);
     const docxInputRef = useRef<HTMLInputElement>(null);
     const [changes, setChanges] = useState<Change[]>([]);
-    const [editCell, setEditCell] = useState<{ row: number; col: number } | null>(null);
+
     const router = useRouter();
 
     // Lấy danh sách câu hỏi
@@ -50,7 +50,7 @@ export default function Question() {
         };
 
         fetchData();
-    }, [currentPage, available, type_question]);
+    }, [currentPage, available, type_question, searchKeyword]);
 
     //Lọc các câu hỏi đang hoạt động (optional)
     useEffect(() => {
@@ -153,102 +153,95 @@ export default function Question() {
             <div className={styles.header}>
                 <h1 className={styles.title}>Quản lý câu hỏi</h1>
                 <div className={styles.actions}>
-                    <Search setSearchKeyword={setSearchKeyword} />
-
-                    <div className={styles.json}>
-                        <input
-                            type="file"
-                            accept=".docx"
-                            ref={docxInputRef}
-                            style={{ display: "none" }}
-                            onChange={handleUploadDocx}
-                        />
-
-                        <Button
-                            variant="primary"
-                            size="md"
-                            onClick={() => docxInputRef.current?.click()}>
-                            Thêm câu hỏi từ DOCX
-                        </Button>
+                    <div className={styles.search}>
+                        <Search setSearchKeyword={setSearchKeyword} setFilterCondition={setFilterCondition} typeSearch={"question"} />
                     </div>
 
-                    {/* Upload json */}
-                    <div className={styles.json}>
-                        <input
-                            type="file"
-                            accept=".json"
-                            ref={jsonInputRef}
-                            style={{ display: "none" }}
-                            onChange={handleUploadjson}
-                        />
-
-                        <Button
-                            variant="primary"
-                            size="md"
-                            onClick={() => jsonInputRef.current?.click()}>
-                            Thêm câu hỏi từ Json
-                        </Button>
-
-                        <Button
-                            variant="primary"
-                            size="md"
-                            onClick={handleFetchJson}
-                        >
-                            Danh sách Json
-                        </Button>
-                    </div>
-
-                    <div className={styles.json}>
-                        <Button
-                            variant="primary"
-                            size="md"
-                            onClick={() => router.push(`/admin/questions/create`)}
-                        >
-                            + Thêm câu hỏi
-                        </Button>
+                    <div className={styles.button}>
+                        <div className={styles.json}>
+                            <input
+                                type="file"
+                                accept=".docx"
+                                ref={docxInputRef}
+                                style={{ display: "none" }}
+                                onChange={handleUploadDocx}
+                            />
+                            <Button
+                                variant="primary"
+                                size="md"
+                                onClick={() => docxInputRef.current?.click()}>
+                                Thêm câu hỏi từ DOCX
+                            </Button>
+                        </div>
+                        {/* Upload json */}
+                        <div className={styles.json}>
+                            {/* <input
+                                type="file"
+                                accept=".json"
+                                ref={jsonInputRef}
+                                style={{ display: "none" }}
+                                onChange={handleUploadjson}
+                            />
+                            <Button
+                                variant="primary"
+                                size="md"
+                                onClick={() => jsonInputRef.current?.click()}>
+                                Thêm câu hỏi từ Json
+                            </Button> */}
+                            <Button
+                                variant="primary"
+                                size="md"
+                                onClick={handleFetchJson}
+                            >
+                                Danh sách Json
+                            </Button>
+                        </div>
+                        <div className={styles.json}>
+                            <Button
+                                variant="primary"
+                                size="md"
+                                onClick={() => router.push(`/admin/questions/create`)}
+                            >
+                                + Thêm câu hỏi
+                            </Button>
+                        </div>
                     </div>
 
                 </div>
                 <div className={styles.filterType}>
-                    <label>
-                        <input
-                            type="radio"
-                            name="type_question"
-                            checked={type_question === 1}
-                            onChange={() => {
+                    <div>
+                        <select
+                            value={type_question}
+                            onChange={(e) => {
                                 setCurrentPage(1);
-                                setTypeQuestion(1);
+                                const value = e.target.value;
+                                setTypeQuestion(value ? Number(value) : 0);
                             }}
-                        />
-                        1 đáp án
-                    </label>
+                            className={styles.select}
+                        >
+                            <option value="0">Tất cả loại câu hỏi</option>
+                            <option value="1">1 đáp án</option>
+                            <option value="2">Nhiều đáp án</option>
+                            <option value="3">Tự luận</option>
+                        </select>
+                    </div>
 
-                    <label>
-                        <input
-                            type="radio"
-                            name="type_question"
-                            checked={type_question === 2}
-                            onChange={() => {
+                    <div>
+                        <select
+                            value={available}
+                            onChange={(e) => {
                                 setCurrentPage(1);
-                                setTypeQuestion(2);
+                                setAvaible(e.target.value);
                             }}
-                        />
-                        Nhiều đáp án
-                    </label>
-
-                    <label>
-                        <input
-                            type="radio"
-                            name="type_question"
-                            checked={type_question === 4}
-                            onChange={() => {
-                                setCurrentPage(1);
-                                setTypeQuestion(4);
-                            }}
-                        />
-                        Tự luận
-                    </label>
+                            className={styles.select}
+                        >
+                            <option value="All">Tất cả trạng thái</option>
+                            <option value="true">Hoạt động</option>
+                            <option value="false">Ngừng</option>
+                        </select>
+                    </div>
                 </div>
+
             </div>
 
             {isFileList && (
@@ -286,10 +279,6 @@ export default function Question() {
                             }))
                         }}
                         rowIndex={rowIndex}
-                        editCell={editCell}
-                        setEditCell={setEditCell}
-                        handleChange={handleChange}
-                        isChanged={isChanged}
                         handleDelete={handleDelete}
                         handleToggleAvailable={handleToggleAvailable}
                     />

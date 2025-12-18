@@ -6,9 +6,9 @@ import styles from "./QuestionCreate.module.css";
 import { Button } from "@/component/ui/button/Button";
 import { QuestionService } from "@/domain/admin/questions/service";
 import type { AnswerForm, QuestionForm } from "@/domain/admin/questions/type";
-import MultipleChoiceAnswers from "@/component/createQuestion/MultipleChoiceAnswers";
-import EssayAnswer from "@/component/createQuestion/EssayAnswer";
-import SingleChoice from "@/component/createQuestion/SingleChoice";
+import MultipleChoiceAnswers from "@/component/createQuestionJson/MultipleChoiceAnswers";
+import EssayAnswer from "@/component/createQuestionJson/EssayAnswer";
+import SingleChoice from "@/component/createQuestionJson/SingleChoice";
 
 export default function QuestionCreate() {
     const router = useRouter();
@@ -24,7 +24,6 @@ export default function QuestionCreate() {
     /* ===== ANSWERS ===== */
     const [answers, setAnswers] = useState<AnswerForm[]>([
         { answer_content: "", is_correct: false },
-        { answer_content: "", is_correct: false },
     ]);
 
     /* ===== QUESTION IMAGES ===== */
@@ -37,16 +36,7 @@ export default function QuestionCreate() {
 
     /* ===== RESET ANSWERS WHEN TYPE CHANGES ===== */
     useEffect(() => {
-        if (form.type_question === 1) {
-            setAnswers([
-                { answer_content: "", is_correct: false },
-                { answer_content: "", is_correct: false },
-                { answer_content: "", is_correct: false },
-                { answer_content: "", is_correct: false },
-            ]);
-        }
-
-        if (form.type_question === 2) {
+        if (form.type_question !== 3) {
             setAnswers([
                 { answer_content: "", is_correct: false },
                 { answer_content: "", is_correct: false },
@@ -56,7 +46,9 @@ export default function QuestionCreate() {
         }
 
         if (form.type_question === 3) {
-            setAnswers([]);
+            setAnswers([
+                { answer_content: "", is_correct: true },
+            ]);
         }
     }, [form.type_question]);
 
@@ -78,6 +70,12 @@ export default function QuestionCreate() {
                 return;
             }
         }
+        else {
+            if (!answers[0]?.answer_content.trim()) {
+                alert("Vui lòng nhập đáp án tự luận");
+                return;
+            }
+        }
 
         try {
             // Upload images
@@ -90,7 +88,7 @@ export default function QuestionCreate() {
             await QuestionService.createQuestionWithAnswers({
                 ...form,
                 images: imageLinks,
-                answers: form.type_question === 3 ? [] : answers,
+                answers: answers,
             });
 
             alert("Tạo câu hỏi thành công!");
@@ -131,7 +129,7 @@ export default function QuestionCreate() {
                 {questionImages.map((img, i) => (
                     <img
                         key={i}
-                        src={URL.createObjectURL(img)}
+                        src={URL.createObjectURL(img as Blob)}
                         className={styles.preview}
                         alt="preview"
                     />
@@ -178,7 +176,9 @@ export default function QuestionCreate() {
                 <SingleChoice answers={answers} setAnswers={setAnswers} />
             )}
 
-            {form.type_question === 3 && <EssayAnswer />}
+            {form.type_question === 3 && (
+                <EssayAnswer answers={answers} setAnswers={setAnswers} />
+            )}
 
             {/* ACTIONS */}
             <div className={styles.actions}>

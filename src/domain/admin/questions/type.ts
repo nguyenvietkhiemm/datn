@@ -3,6 +3,7 @@ export interface Answer {
     answer_content: string;
     images?: string[];
     is_correct: boolean;
+    newImages?: File[];
 }
 
 export interface Question {

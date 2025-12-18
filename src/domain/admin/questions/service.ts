@@ -2,7 +2,7 @@ import { Question, Answer, CreateQuestionPayload } from "./type";
 import { API_URL, getHeaders, getToken } from "@/lib/service";
 
 export const QuestionService = {
-    async fetchQuestions(page: number, available: boolean, type_question: number): Promise<{ questions: Question[]; last_page: number }> {
+    async fetchQuestions(page: number, available: string, type_question: number): Promise<{ questions: Question[]; last_page: number }> {
 
         const token = getToken(); // Lấy token từ cookie hoặc localStorage
         const res = await fetch(
@@ -74,12 +74,12 @@ export const QuestionService = {
     async uploadQuestionImages(
         files: (File | string)[]
     ): Promise<string[]> {
-    
+
         const token = getToken();
         const formData = new FormData();
-    
+
         const existedUrls: string[] = [];
-    
+
         files.forEach(file => {
             if (file instanceof File) {
                 formData.append("images", file);
@@ -87,9 +87,9 @@ export const QuestionService = {
                 existedUrls.push(file);
             }
         });
-        
+
         let uploadedUrls: string[] = [];
-    
+
         if (formData.has("images")) {
             const res = await fetch(`${API_URL}/questions/images`, {
                 method: "POST",
@@ -98,13 +98,13 @@ export const QuestionService = {
                 },
                 body: formData,
             });
-    
+
             const data = await res.json();
             uploadedUrls = data;
             console.log(uploadedUrls);
-                
+
         }
-    
+
         return [...existedUrls, ...uploadedUrls];
-    }    
+    },
 }

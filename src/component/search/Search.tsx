@@ -2,12 +2,25 @@
 import { useState } from "react";
 import styles from "./Search.module.css";
 
-type SearchProp = {
-  setSearchKeyword?: (data: any) => void;
-  setFilterCondition?: (data: any) => void;
-}
+type SearchType = "question" | "user" | "exam";
 
-export default function Search({ setSearchKeyword, setFilterCondition }: SearchProp) {
+type SearchProp = {
+  setSearchKeyword?: (data: string) => void;
+  setFilterCondition?: (data: string) => void;
+  typeSearch: SearchType;
+};
+
+const PLACEHOLDER_MAP: Record<SearchType, string> = {
+  question: "Tìm theo nội dung câu hỏi...",
+  user: "Tìm theo tên hoặc email người dùng...",
+  exam: "Tìm theo tên đề thi...",
+};
+
+export default function Search({
+  setSearchKeyword,
+  setFilterCondition,
+  typeSearch,
+}: SearchProp) {
   const [keyword, setKeyword] = useState("");
 
   const handleSearch = () => {
@@ -17,6 +30,7 @@ export default function Search({ setSearchKeyword, setFilterCondition }: SearchP
 
   const handleClear = () => {
     setKeyword("");
+    setSearchKeyword?.("");
   };
 
   return (
@@ -24,21 +38,20 @@ export default function Search({ setSearchKeyword, setFilterCondition }: SearchP
       <div className={styles.searchBox}>
         <input
           type="text"
-          placeholder="Bạn muốn tìm kiếm..."
+          placeholder={PLACEHOLDER_MAP[typeSearch]}
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
           className={styles.input}
           onKeyDown={(e) => e.key === "Enter" && handleSearch()}
         />
 
-        {/* Nút xoá (chỉ hiện khi có từ khoá) */}
         {keyword && (
           <button className={styles.clearBtn} onClick={handleClear}>
-            ❌
+            X
           </button>
         )}
       </div>
-      {/* Nút tìm kiếm */}
+
       <button className={styles.searchBtn} onClick={handleSearch}>
         Tìm kiếm
       </button>

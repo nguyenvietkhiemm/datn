@@ -9,10 +9,6 @@ import { API_URL } from "@/lib/service";
 interface QuestionCardProps {
     question: Question;
     rowIndex: number;
-    editCell: { row: number; col: number } | null;
-    setEditCell: (cell: { row: number; col: number } | null) => void;
-    handleChange: (rowIndex: number, colIndex: number, value: string) => void;
-    isChanged: (rowIndex: number, colIndex: number) => boolean;
     handleDelete?: (questionId: number) => void;
     handleToggleAvailable?: (questionId: number, available: boolean) => void;
 }
@@ -20,14 +16,12 @@ interface QuestionCardProps {
 export default function QuestionCard({
     question,
     rowIndex,
-    editCell,
-    setEditCell,
-    handleChange,
-    isChanged,
     handleDelete,
     handleToggleAvailable
 }: QuestionCardProps) {
-    
+
+    const answerLabel = (index: number) => String.fromCharCode(65 + index);
+
     return (
         <div className={styles.card}>
 
@@ -66,24 +60,9 @@ export default function QuestionCard({
 
             {/* ================= QUESTION CONTENT (editable) ================= */}
             <div
-                className={`${styles.content} ${isChanged(rowIndex, -1) ? styles.changed : ""}`}
-                onClick={(e) => {
-                    e.stopPropagation();
-                    setEditCell({ row: rowIndex, col: -1 });
-                }}
+                className={styles.content}
             >
-                {editCell?.row === rowIndex && editCell?.col === -1 ? (
-                    <AutoResizeTextarea
-                        value={question.question_content}
-                        onChange={(e) =>
-                            handleChange(rowIndex, -1, e.target.value)
-                        }
-                        autoFocus
-                        onBlur={() => setEditCell(null)}
-                    />
-                ) : (
-                    <p>{question.question_content}</p>
-                )}
+                <p>{question.question_content}</p>
             </div>
 
             {/* ================= QUESTION IMAGES ================= */}
@@ -108,37 +87,23 @@ export default function QuestionCard({
                 {question.answers.map((ans, answerIdx) => (
                     <div
                         key={ans.answer_id}
-                        className={`${styles.answerItem} ${isChanged(rowIndex, answerIdx) ? styles.changed : ""
-                            } ${ans.is_correct ? styles.correct : ""}`}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            setEditCell({ row: rowIndex, col: answerIdx });
-                        }}
+                        className={styles.answerItem}
                     >
-                        {/* ===== Answer Content Editable ===== */}
-                        {editCell?.row === rowIndex &&
-                            editCell?.col === answerIdx ? (
-                            <AutoResizeTextarea
-                                value={ans.answer_content}
-                                onChange={(e) =>
-                                    handleChange(rowIndex, answerIdx, e.target.value)
-                                }
-                                autoFocus
-                                onBlur={() => setEditCell(null)}
-                            />
-                        ) : (
-                            <p className={styles.answerText}>
-                                {ans.answer_content}
-                            </p>
-                        )}
+                        <span className={styles.answerLabel}>
+                            {answerLabel(answerIdx)}.
+                        </span>
+
+                        <p className={styles.answerText}>
+                            {ans.answer_content}
+                        </p>
 
                         {/* ===== Answer Images ===== */}
                         {ans?.images && ans.images?.length > 0 && (
                             <div className={styles.imageGroupSmall}>
                                 {ans.images?.map((src, index) => (
                                     <div key={index} className={styles.imageWrapperSmall}>
-                                        <Image
-                                            src={src}
+                                        <img
+                                            src={`${API_URL}${src}`}
                                             alt={`answer-img-${index}`}
                                             width={300}
                                             height={0}

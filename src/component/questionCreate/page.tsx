@@ -3,24 +3,14 @@
 import styles from "./QuestionCreate.module.css";
 import type { Question } from "@/domain/admin/questions/type";
 import Image from "next/image";
-
-type ChangeValue =
-    | string
-    | number
-    | boolean
-    | null
-    | File[]
-    | {
-        answerIndex: number;
-        imageIndex: number;
-    };
+import { ChangeValue } from "@/domain/admin/file/file-parser/type";
 
 interface QuestionCardProps {
     question: Omit<Question, "question_id">;
     rowIndex: number;
     editCell: { row: number; col: number } | null;
     setEditCell: (cell: { row: number; col: number } | null) => void;
-    handleChange: (rowIndex: number, colIndex: number, value: ChangeValue) => void;
+    handleChange: (rowIndex: number, type_change: number, value: ChangeValue) => void;
     isChanged: (rowIndex: number, colIndex: number) => boolean;
 }
 
@@ -80,7 +70,7 @@ export default function QuestionCardEditor({
                 <div className={styles.previewWrap}>
                     {question?.newImages?.map((file, index) => {
                         const previewUrl = URL.createObjectURL(file);
-                        
+
                         return (
                             <div key={index} className={styles.imageWrapperSmall}>
                                 <img
@@ -89,18 +79,6 @@ export default function QuestionCardEditor({
                                     className={styles.preview}
                                     onLoad={() => URL.revokeObjectURL(previewUrl)}
                                 />
-                      
-                                <button
-                                    className={styles.removeBtn}
-                                    onClick={() =>
-                                        handleChange(rowIndex, -7, {
-                                            answerIndex: -1,
-                                            imageIndex: index,
-                                        })
-                                    }
-                                >
-                                    ✕
-                                </button>
                             </div>
                         );
                     })}
@@ -179,7 +157,10 @@ export default function QuestionCardEditor({
                             className={`${styles.input} ${styles.changed}`}
                             value={ans.answer_content}
                             onChange={(e) =>
-                                handleChange(rowIndex, colIndex, e.target.value)
+                                handleChange(rowIndex, -9, {
+                                    answerIndex: colIndex,
+                                    value_change: e.target.value
+                                })
                             }
                             onBlur={() => setEditCell(null)}
                             autoFocus
@@ -200,7 +181,7 @@ export default function QuestionCardEditor({
                     )}
 
                     {ans.is_correct && (
-                        <span className={styles.correct}>✔</span>
+                        <p className={styles.correct}>✔</p>
                     )}
 
                     {Array.isArray(ans.images) && ans?.images?.length > 0 && (
@@ -217,7 +198,10 @@ export default function QuestionCardEditor({
                                     />
                                     <button
                                         className={styles.addBtn}
-                                        onClick={() => handleChange(rowIndex, -4, index)}
+                                        onClick={() => handleChange(rowIndex, -7, {
+                                            answerIndex: colIndex,
+                                            imageIndex: index
+                                        })}
                                     >
                                         x
                                     </button>
@@ -225,7 +209,55 @@ export default function QuestionCardEditor({
                             ))}
                         </div>
                     )}
+
+                    {Array.isArray(ans.newImages) && ans.newImages.length > 0 && (
+                        <div className={styles.previewWrap}>
+                            {ans?.newImages?.map((file, index) => {
+                                const previewUrl = URL.createObjectURL(file);
+
+                                return (
+                                    <div key={index} className={styles.imageWrapperSmall}>
+                                        <img
+                                            src={previewUrl}
+                                            alt={`preview-${index}`}
+                                            className={styles.preview}
+                                            onLoad={() => URL.revokeObjectURL(previewUrl)}
+                                        />
+                                        <button
+                                            className={styles.addBtn}
+                                            onClick={() => handleChange(rowIndex, -10, colIndex)}
+                                        >
+                                            x
+                                        </button>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    )}
+
+                    <div className={styles.input}>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            multiple
+                            onChange={(e) => {
+                                if (!e.target.files) return;
+                                handleChange(rowIndex, -8, {
+                                    answerIndex: colIndex,
+                                    files: Array.from(e.target.files),
+                                });
+                            }}
+                        />
+                    </div>
+
+                    <button
+                        className={styles.addBtn}
+                        onClick={() => handleChange(rowIndex, -4, colIndex)}
+                    >
+                        x
+                    </button>
                 </div>
+
             ))}
             <button
                 className={styles.addBtn}
