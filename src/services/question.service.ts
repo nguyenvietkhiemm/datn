@@ -18,8 +18,9 @@ const QuestionService = {
 
     async getAll(
         page: number,
-        available: boolean,
-        type_question: number
+        status: string,
+        searchValue: string,
+        type_question?: number
     ): Promise<{ question: Question[]; totalPages: number }> {
         const limit = 12;
         const offset = (page - 1) * limit;
@@ -29,15 +30,27 @@ const QuestionService = {
 
         let whereClause = `WHERE 1=1`;
 
-        if (available !== undefined) {
+        // ===== FILTER STATUS =====
+        if (status && status !== "All") {
             whereClause += ` AND q.available = $${paramIndex}`;
-            params.push(available);
+            params.push(status === "true");
             paramIndex++;
         }
 
-        if (type_question !== undefined) {
+        // ===== FILTER TYPE QUESTION =====
+        if (type_question !== 0) {
             whereClause += ` AND q.type_question = $${paramIndex}`;
             params.push(type_question);
+            paramIndex++;
+        }
+
+        // ===== SEARCH =====
+        if (searchValue && searchValue.trim() !== "") {
+            whereClause += `
+            AND (q.question_content ILIKE $${paramIndex}
+            )
+          `;
+            params.push(`%${searchValue}%`);
             paramIndex++;
         }
 
@@ -54,7 +67,15 @@ const QuestionService = {
                     'answer_id', a.answer_id,
                     'answer_content', a.answer_content,
                     'is_correct', a.is_correct,
-                    'image', a.image
+                    'images',
+                        COALESCE(
+                        (
+                            SELECT json_agg(ia.image_link)
+                            FROM image_answer ia
+                            WHERE ia.answer_id = a.answer_id
+                        ),
+                        '[]'
+                        )
                   )
                 )
                 FROM answer a
@@ -158,14 +179,14 @@ const QuestionService = {
                 for (const ans of payload.answers) {
                     const aRes = await client.query(
                         `
-                INSERT INTO answer (
-                  question_id,
-                  answer_content,
-                  is_correct
-                )
-                VALUES ($1, $2, $3)
-                RETURNING *
-                `,
+                    INSERT INTO answer (
+                    question_id,
+                    answer_content,
+                    is_correct
+                    )
+                    VALUES ($1, $2, $3)
+                    RETURNING *
+                    `,
                         [
                             questionId,
                             ans.answer_content,
@@ -173,14 +194,30 @@ const QuestionService = {
                         ]
                     );
 
-                    question.answers.push({
+                    const answer = {
                         ...aRes.rows[0],
-                        images: [],
-                    });
+                        images: [] as string[],
+                    };
+
+                    const answerId = answer.answer_id;
+
+                    /* --- Insert answer images --- */
+                    if (ans.images?.length) {
+                        for (const img of ans.images) {
+                            await client.query(
+                                `
+                                INSERT INTO image_answer (answer_id, image_link)
+                                VALUES ($1, $2)
+                                `,
+                                [answerId, img]
+                            );
+                        }
+                        answer.images = ans.images;
+                    }
+
+                    question.answers.push(answer);
                 }
             }
-            console.log("hoan thanh");
-            
 
             await client.query("COMMIT");
             return question;
@@ -314,182 +351,182 @@ const QuestionService = {
         }
     },
 
-    async searchQuestions(
-        searchValue: string,
-        page: number
-    ): Promise<{ data: Question[]; totalPages: number } | []> {
-        const client = await pool.connect();
-        try {
-            await client.query("BEGIN");
+    // async searchQuestions(
+    //     searchValue: string,
+    //     page: number
+    // ): Promise<{ data: Question[]; totalPages: number } | []> {
+    //     const client = await pool.connect();
+    //     try {
+    //         await client.query("BEGIN");
 
-            const limit = 12;
-            const offset = (page - 1) * limit;
-            const keyword = `%${searchValue}%`;
+    //         const limit = 12;
+    //         const offset = (page - 1) * limit;
+    //         const keyword = `%${searchValue}%`;
 
-            // Lấy questions + answers
-            const queryText = `
-            SELECT 
-              q.question_id,
-              q.question_name,
-              q.question_content,
-              q.available,
-              a.answer_id,
-              a.answer_content,
-              a.is_correct
-            FROM question q
-            LEFT JOIN answer a ON a.question_id = q.question_id
-            WHERE LOWER(q.question_name) LIKE LOWER($1)
-            OR LOWER(q.question_content) LIKE LOWER($1)
-            ORDER BY q.question_id DESC
-            LIMIT $2 OFFSET $3
-          `;
+    //         // Lấy questions + answers
+    //         const queryText = `
+    //         SELECT 
+    //           q.question_id,
+    //           q.question_name,
+    //           q.question_content,
+    //           q.available,
+    //           a.answer_id,
+    //           a.answer_content,
+    //           a.is_correct
+    //         FROM question q
+    //         LEFT JOIN answer a ON a.question_id = q.question_id
+    //         WHERE LOWER(q.question_name) LIKE LOWER($1)
+    //         OR LOWER(q.question_content) LIKE LOWER($1)
+    //         ORDER BY q.question_id DESC
+    //         LIMIT $2 OFFSET $3
+    //       `;
 
-            const result = await client.query(queryText, [keyword, limit, offset]);
+    //         const result = await client.query(queryText, [keyword, limit, offset]);
 
-            // Đếm tổng số question (không đếm answer)
-            const countResult = await client.query(
-                `
-            SELECT COUNT(*) as total
-            FROM question q
-            WHERE LOWER(q.question_name) LIKE LOWER($1)
-               OR LOWER(q.question_content) LIKE LOWER($1)
-            `,
-                [keyword]
-            );
+    //         // Đếm tổng số question (không đếm answer)
+    //         const countResult = await client.query(
+    //             `
+    //         SELECT COUNT(*) as total
+    //         FROM question q
+    //         WHERE LOWER(q.question_name) LIKE LOWER($1)
+    //            OR LOWER(q.question_content) LIKE LOWER($1)
+    //         `,
+    //             [keyword]
+    //         );
 
-            const totalItems = parseInt(countResult.rows[0].total, 10);
-            const totalPages = Math.ceil(totalItems / limit);
+    //         const totalItems = parseInt(countResult.rows[0].total, 10);
+    //         const totalPages = Math.ceil(totalItems / limit);
 
-            // Gom dữ liệu answers vào từng question
-            const questionsMap: Record<number, Question> = {};
-            result.rows.forEach((row) => {
-                if (!questionsMap[row.question_id]) {
-                    questionsMap[row.question_id] = {
-                        question_id: row.question_id,
-                        question_name: row.question_name,
-                        question_content: row.question_content,
-                        available: row.available,
-                        source: row.source,
-                        answers: [],
-                    };
-                }
-                if (row.answer_id) {
-                    questionsMap[row.question_id].answers?.push({
-                        answer_id: row.answer_id,
-                        answer_content: row.answer_content,
-                        question_id: row.question_id,
-                        is_correct: row.is_correct,
-                    });
-                }
-            });
+    //         // Gom dữ liệu answers vào từng question
+    //         const questionsMap: Record<number, Question> = {};
+    //         result.rows.forEach((row) => {
+    //             if (!questionsMap[row.question_id]) {
+    //                 questionsMap[row.question_id] = {
+    //                     question_id: row.question_id,
+    //                     question_name: row.question_name,
+    //                     question_content: row.question_content,
+    //                     available: row.available,
+    //                     source: row.source,
+    //                     answers: [],
+    //                 };
+    //             }
+    //             if (row.answer_id) {
+    //                 questionsMap[row.question_id].answers?.push({
+    //                     answer_id: row.answer_id,
+    //                     answer_content: row.answer_content,
+    //                     question_id: row.question_id,
+    //                     is_correct: row.is_correct,
+    //                 });
+    //             }
+    //         });
 
-            await client.query("COMMIT");
+    //         await client.query("COMMIT");
 
-            return { data: Object.values(questionsMap), totalPages };
-        } catch (error) {
-            console.error("Lỗi khi lấy câu hỏi:", error);
-            return [];
-        } finally {
-            client.release();
-        }
-    },
+    //         return { data: Object.values(questionsMap), totalPages };
+    //     } catch (error) {
+    //         console.error("Lỗi khi lấy câu hỏi:", error);
+    //         return [];
+    //     } finally {
+    //         client.release();
+    //     }
+    // },
 
-    async filterQuestions(
-        question_name: string,
-        source: string,
-        status: string,
-        page: number
-    ): Promise<{ questions: Question[]; totalPages: number } | []> {
-        const client = await pool.connect();
+    // async filterQuestions(
+    //     question_name: string,
+    //     source: string,
+    //     status: string,
+    //     page: number
+    // ): Promise<{ questions: Question[]; totalPages: number } | []> {
+    //     const client = await pool.connect();
 
-        try {
-            await client.query("BEGIN");
+    //     try {
+    //         await client.query("BEGIN");
 
-            const limit = 12;
-            const offset = (page - 1) * limit;
+    //         const limit = 12;
+    //         const offset = (page - 1) * limit;
 
-            const isAvailable = status === "All" ? [true, false] : [status === "true"];
-            const params: any[] = [isAvailable];
-            let queryText = `
-                SELECT
-                  q.question_id,
-                  q.question_name,
-                  q.question_content,
-                  q.available,
-                  q.source,
-                  a.answer_id,
-                  a.answer_content,
-                  a.is_correct
-                FROM question q
-                LEFT JOIN answer a ON a.question_id = q.question_id
-                WHERE q.available = ANY($1)
-                
-            `;
+    //         const isAvailable = status === "All" ? [true, false] : [status === "true"];
+    //         const params: any[] = [isAvailable];
+    //         let queryText = `
+    //             SELECT
+    //               q.question_id,
+    //               q.question_name,
+    //               q.question_content,
+    //               q.available,
+    //               q.source,
+    //               a.answer_id,
+    //               a.answer_content,
+    //               a.is_correct
+    //             FROM question q
+    //             LEFT JOIN answer a ON a.question_id = q.question_id
+    //             WHERE q.available = ANY($1)
 
-            // Nếu có question_name, có source thì tìm theo source
-            if (question_name) {
-                params.push(`%${question_name}%`);
-                queryText += ` AND q.question_name ILIKE $${params.length}`;
-            }
+    //         `;
 
-            if (source) {
-                params.push(source);
-                queryText += ` AND q.source = $${params.length}`;
-            }
+    //         // Nếu có question_name, có source thì tìm theo source
+    //         if (question_name) {
+    //             params.push(`%${question_name}%`);
+    //             queryText += ` AND q.question_name ILIKE $${params.length}`;
+    //         }
 
-            params.push(limit, offset);
-            queryText += ` ORDER BY q.question_id DESC LIMIT $${params.length - 1} OFFSET $${params.length}`;
+    //         if (source) {
+    //             params.push(source);
+    //             queryText += ` AND q.source = $${params.length}`;
+    //         }
 
-            const result = await client.query(queryText, params);
+    //         params.push(limit, offset);
+    //         queryText += ` ORDER BY q.question_id DESC LIMIT $${params.length - 1} OFFSET $${params.length}`;
 
-            // Count tổng question
-            const countParams: any[] = [isAvailable];
-            let countQuery = `SELECT COUNT(*) AS total FROM question q WHERE q.available = ANY($1)`;
-            if (question_name && question_name.trim() !== "") {
-                countParams.push(`%${question_name}%`);
-                countQuery += ` AND q.question_name ILIKE $${countParams.length}`;
-            }
+    //         const result = await client.query(queryText, params);
 
-            if (source && source !== "All") {
-                countParams.push(source);
-                countQuery += ` AND q.source = $${countParams.length}`;
-            }
-            const countResult = await client.query(countQuery, countParams);
-            const totalItems = parseInt(countResult.rows[0].total, 10);
-            const totalPages = Math.ceil(totalItems / limit);
+    //         // Count tổng question
+    //         const countParams: any[] = [isAvailable];
+    //         let countQuery = `SELECT COUNT(*) AS total FROM question q WHERE q.available = ANY($1)`;
+    //         if (question_name && question_name.trim() !== "") {
+    //             countParams.push(`%${question_name}%`);
+    //             countQuery += ` AND q.question_name ILIKE $${countParams.length}`;
+    //         }
 
-            const questionsMap: Record<number, Question> = {};
-            result.rows.forEach((row) => {
-                if (!questionsMap[row.question_id]) {
-                    questionsMap[row.question_id] = {
-                        question_id: row.question_id,
-                        question_name: row.question_name,
-                        question_content: row.question_content,
-                        available: row.available,
-                        source: row.source || "",
-                        answers: [],
-                    };
-                }
-                if (row.answer_id) {
-                    questionsMap[row.question_id].answers?.push({
-                        answer_id: row.answer_id,
-                        answer_content: row.answer_content,
-                        question_id: row.question_id,
-                        is_correct: row.is_correct,
-                    });
-                }
-            });
+    //         if (source && source !== "All") {
+    //             countParams.push(source);
+    //             countQuery += ` AND q.source = $${countParams.length}`;
+    //         }
+    //         const countResult = await client.query(countQuery, countParams);
+    //         const totalItems = parseInt(countResult.rows[0].total, 10);
+    //         const totalPages = Math.ceil(totalItems / limit);
 
-            await client.query("COMMIT");
-            return { questions: Object.values(questionsMap), totalPages };
-        } catch (error) {
-            await client.query("ROLLBACK");
-            console.error("Lỗi khi lọc câu hỏi:", error);
-            return { questions: [], totalPages: 0 };
-        } finally {
-            client.release();
-        }
-    }
+    //         const questionsMap: Record<number, Question> = {};
+    //         result.rows.forEach((row) => {
+    //             if (!questionsMap[row.question_id]) {
+    //                 questionsMap[row.question_id] = {
+    //                     question_id: row.question_id,
+    //                     question_name: row.question_name,
+    //                     question_content: row.question_content,
+    //                     available: row.available,
+    //                     source: row.source || "",
+    //                     answers: [],
+    //                 };
+    //             }
+    //             if (row.answer_id) {
+    //                 questionsMap[row.question_id].answers?.push({
+    //                     answer_id: row.answer_id,
+    //                     answer_content: row.answer_content,
+    //                     question_id: row.question_id,
+    //                     is_correct: row.is_correct,
+    //                 });
+    //             }
+    //         });
+
+    //         await client.query("COMMIT");
+    //         return { questions: Object.values(questionsMap), totalPages };
+    //     } catch (error) {
+    //         await client.query("ROLLBACK");
+    //         console.error("Lỗi khi lọc câu hỏi:", error);
+    //         return { questions: [], totalPages: 0 };
+    //     } finally {
+    //         client.release();
+    //     }
+    // }
 };
 
 export default QuestionService;
