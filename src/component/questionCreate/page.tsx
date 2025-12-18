@@ -96,7 +96,7 @@ export default function QuestionCardEditor({
                             })}
                         </div>
                     )}
-                    
+
                     <div className={styles.input}>
                         <input
                             type="file"
@@ -160,7 +160,7 @@ export default function QuestionCardEditor({
                         />
                         {editCell?.row === rowIndex &&
                             editCell.col === colIndex ? (
-                            <input
+                            <textarea
                                 className={`${styles.input} ${styles.changed}`}
                                 value={ans.answer_content}
                                 onChange={(e) =>
@@ -173,18 +173,13 @@ export default function QuestionCardEditor({
                                 autoFocus
                             />
                         ) : (
-                            <span
-                                className={
-                                    isChanged(rowIndex, colIndex)
-                                        ? styles.changed
-                                        : ""
-                                }
-                                onClick={() =>
-                                    setEditCell({ row: rowIndex, col: colIndex })
-                                }
-                            >
-                                {ans.answer_content}
-                            </span>
+                            <p
+                            className={`${styles.text} ${isChanged(rowIndex, colIndex) ? styles.changed : ""
+                                }`}
+                            onClick={() => setEditCell({ row: rowIndex, col: colIndex })}
+                        >
+                           {ans.answer_content}
+                        </p>
                         )}
                         {ans.is_correct && (
                             <p className={styles.correct}>✔</p>
