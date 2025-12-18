@@ -6,6 +6,16 @@
     padding: 16px 18px;
     margin-bottom: 20px;
 }
+.container_question{
+    display: flex;
+    flex-direction: column;
+    gap : 10 px
+}
+.container_answer{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
 /* ===== LABEL ===== */
 .label {
@@ -49,11 +59,11 @@
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
-    margin-top: 8px;
+    margin: 8px 0;
 }
 
 .imageWrapperSmall {
-    position: relative;
+    display: flex;
     width: 90px;
     height: 90px;
 }
@@ -64,20 +74,6 @@
     object-fit: cover;
     border-radius: 6px;
     border: 1px solid #ddd;
-}
-
-.removeBtn {
-    position: absolute;
-    top: -6px;
-    right: -6px;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    border: none;
-    background: #ff4d4f;
-    color: #fff;
-    cursor: pointer;
-    font-size: 12px;
 }
 
 /* ===== INPUT ===== */
@@ -164,7 +160,7 @@
 
 /* ===== ADD ANSWER BUTTON ===== */
 .addBtn {
-    margin-top: 10px;
+    margin: 10px 0;
     padding: 8px 12px;
     border-radius: 6px;
     border: 1px dashed #9ca3af;

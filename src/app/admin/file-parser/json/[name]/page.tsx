@@ -181,7 +181,7 @@ export default function JsonDetailPage() {
                     answerIndex: number;
                     value_change: string
                 }
-                
+
                 updated[rowIndex].answers[answerIndex].text = value_change;
             }
             else if (type_change === -10) {
@@ -194,12 +194,34 @@ export default function JsonDetailPage() {
                         i === answerIndex
                             ? {
                                 ...a,
-                                newImages : []
+                                newImages: []
                             }
                             : a
                     ),
                 };
+            } else if (type_change === -11) {
+                //xoa anh cu cua cau hoi
+                const imageIndex = value as number;
+                const image = FileParserModel.extractQuestionImages(updated[rowIndex], images)
+                updated[rowIndex] = {
+                    ...updated[rowIndex],
+                    question: {
+                        ...updated[rowIndex].question,
+                        images: image.filter((__, i) => i !== imageIndex)
+                    }
+                }
+            } else if (type_change === -12) {
+                //xoa anh moi cua cau hoi
+                const imageIndex = value as number;
+                updated[rowIndex] = {
+                    ...updated[rowIndex],
+                    question: {
+                        ...updated[rowIndex].question,
+                        newImages: updated[rowIndex].question.newImages?.filter((__, i) => i !== imageIndex)
+                    }
+                }
             }
+
             else {
                 //tao cau tra loi dung
                 const ansIndex = type_change - 1000;
