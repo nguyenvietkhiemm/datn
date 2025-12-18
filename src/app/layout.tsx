@@ -3,6 +3,7 @@ import "./globals.css";
 import { Roboto_Slab } from "next/font/google";
 import ClientLayout from "../../lib/ThemeProvider";
 import ProgressPanel from "@/components/panel-progress/page";
+import MiniChat from "@/components/chat-mini/page";
 
 const robotoSlab = Roboto_Slab({
   subsets: ["latin"],
@@ -29,6 +30,7 @@ export default function RootLayout({
       <body className="antialiased font-body">
         <ClientLayout>
           {children}
+          <MiniChat/>
           <ProgressPanel/>
         </ClientLayout>
       </body>
