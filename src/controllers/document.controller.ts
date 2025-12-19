@@ -1,6 +1,7 @@
 import DocumentService from "../services/document.service";
 import safeExecute, { DefaultResponse } from "../utils/safe.execute";
 import { Request, Response } from "express";
+import path from "path";
 
 const DocumentController = {
   async getAll(req: Request, res: Response) {
@@ -19,9 +20,11 @@ const DocumentController = {
     const result: DefaultResponse<any> = await safeExecute(async () => {
       if (!req.file) throw new Error("Không có file được tải lên");
 
-      const file = req.file
-      const filePath = req.file.path;
-      const fileLink = `${process.env.BACKEND_URL}/resources/docx_file/${req.file.filename}`;
+      // const file = req.file
+      // const filePath = req.file.path;
+      const ext = path.extname(req.file.filename).toLowerCase();
+      const resourceDir = ext === ".pdf" ? "pdf_file" : "docx_file";
+      const fileLink = `resources/${resourceDir}/${req.file.filename}`;
       const document = await DocumentService.create(req.body, fileLink);
 
       return {
