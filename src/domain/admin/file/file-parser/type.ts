@@ -38,8 +38,8 @@ export type RemoveAnswerImageValue = {
 };
 
 export type AddAnswerImageValue = {
-    answerIndex: number;
-    files: File[];
+    answerIndex: number | undefined;
+    imagePath: string;
 };
 
 export type ChangeAnswerValue = {

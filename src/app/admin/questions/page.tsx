@@ -84,6 +84,7 @@ export default function Question() {
     const handleFetchJson = async () => {
         try {
             const url = `${API_URL}/file/json`;
+            console.log(url)
             const data = await FileService.fetchFileList(url);
 
             setFileList(data)
@@ -124,27 +125,6 @@ export default function Question() {
         }
     };
 
-    //change
-    const handleChange = (rowIndex: number, colIndex: number, value: string) => {
-        setQuestions(prev => {
-            const updated = [...prev];
-            if (colIndex === -1) updated[rowIndex].question_content = value;
-            else updated[rowIndex].answers[colIndex].answer_content = value;
-            return updated;
-        });
-
-        setChanges(prev => {
-            const updated = [...prev];
-            const existing = updated.find(c => c.row === rowIndex && c.col === colIndex);
-            if (existing) existing.value = value;
-            else updated.push({ row: rowIndex, col: colIndex, value });
-            localStorage.setItem(`json_diff_${name}`, JSON.stringify(updated));
-            return updated;
-        });
-    };
-
-    const isChanged = (rowIndex: number, colIndex: number) => changes.some(c => c.row === rowIndex && c.col === colIndex)
-    //  Loading
     if (loading)
         return <p className={styles.loading}>Đang tải danh sách câu hỏi...</p>;
 
@@ -269,7 +249,7 @@ export default function Question() {
             <div className={styles.questionList}>
                 {questions?.map((row, rowIndex) => (
                     <QuestionCard
-                        key={row.question_id}
+                        key={rowIndex}
                         question={{
                             ...row,
                             images: row.images,

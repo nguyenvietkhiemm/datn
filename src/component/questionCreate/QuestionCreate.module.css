@@ -27,6 +27,11 @@
     margin-top: 14px;
 }
 
+.action_question{
+    display:  flex;
+    gap :  2rem
+}
+
 /* ===== QUESTION TEXT ===== */
 .text {
     padding: 10px 12px;
@@ -78,17 +83,20 @@
 }
 
 /* ===== INPUT ===== */
-.input {
-    max-width: 100%;
-    padding: 8px 10px;
+.addBtn {
+    margin: 10px 0;
+    padding: 8px 12px;
     border-radius: 6px;
-    border: 1px solid #d1d5db;
+    border: 1px dashed #9ca3af;
+    background: #f9fafb;
     font-size: 14px;
+    cursor: pointer;
+    color: #374151;
 }
 
-.input:focus {
-    border-color: #2563eb;
-    outline: none;
+.addBtn:hover {
+    background: #f3f4f6;
+    border-color: #6b7280;
 }
 
 
@@ -147,20 +155,21 @@
 .previewWrap {
     display: flex;
     gap: 8px;
-    margin-top: 8px;
     flex-wrap: wrap;
+    margin: 8px 3rem 0;
 }
+
 
 .preview {
     width: 90px;
     height: 90px;
     object-fit: cover;
     border-radius: 6px;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #1a1b1d;
 }
 
-/* ===== ADD ANSWER BUTTON ===== */
-.addBtn {
+/* ===== Remove ANSWER BUTTON ===== */
+.removeBtn {
     margin: 10px 0;
     padding: 8px 12px;
     border-radius: 6px;
@@ -171,7 +180,7 @@
     color: #374151;
 }
 
-.addBtn:hover {
+.removeBtn:hover {
     background: #f3f4f6;
     border-color: #6b7280;
 }

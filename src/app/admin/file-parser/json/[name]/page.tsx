@@ -19,7 +19,6 @@ export default function JsonDetailPage() {
     const [jsonData, setJsonData] = useState<JsonQuestion[]>([]);
     const [editCell, setEditCell] = useState<{ row: number; col: number } | null>(null);
     const [changes, setChanges] = useState<Change[]>([]);
-    const [images, setImages] = useState<Record<string, string>>({});
 
     // Lấy các thay đổi đã lưu từ localStorage
     useEffect(() => {
@@ -48,23 +47,6 @@ export default function JsonDetailPage() {
 
         loadJson();
     }, [name, token]);
-
-    // Tải ảnh sau khi JSON đã được tải xong
-    useEffect(() => {
-        // console.log("JSON Data changed, loading images...", jsonData);
-        if (jsonData.length === 0) return;
-
-        const loadImages = async () => {
-            try {
-                const mappedImages = await FileParserService.loadImages(jsonData, token);
-                setImages(mappedImages);
-            } catch (err) {
-                console.error("Lỗi tải ảnh:", err);
-            }
-        };
-
-        loadImages();
-    }, [jsonData]);
 
     // Chỉnh sửa text
     const loadJsonDiff = (data: JsonQuestion[]) => {
@@ -127,13 +109,14 @@ export default function JsonDetailPage() {
             }
             else if (type_change === -6) {
                 //them anh cho cau hoi
-                const files = value as File[];
+                const imagePath = value as string;
+                const currentImages = updated[rowIndex].question.images || [];
 
                 updated[rowIndex] = {
                     ...updated[rowIndex],
                     question: {
                         ...updated[rowIndex].question,
-                        newImages: files,
+                        images: [...currentImages, imagePath],
                     },
                 };
             }
@@ -158,9 +141,9 @@ export default function JsonDetailPage() {
             }
             else if (type_change === -8) {
                 // thêm ảnh cho câu trả lời
-                const { answerIndex, files } = value as {
+                const { answerIndex, imagePath } = value as {
                     answerIndex: number;
-                    files: File[];
+                    imagePath: string;
                 };
 
                 updated[rowIndex] = {
@@ -169,7 +152,7 @@ export default function JsonDetailPage() {
                         i === answerIndex
                             ? {
                                 ...a,
-                                newImages: files,
+                                images: [...(a.images || []), imagePath],
                             }
                             : a
                     ),
@@ -184,44 +167,18 @@ export default function JsonDetailPage() {
 
                 updated[rowIndex].answers[answerIndex].text = value_change;
             }
-            else if (type_change === -10) {
-                //xoa anh cua moi cau tra loi 
-                const answerIndex = value as number;
-
-                updated[rowIndex] = {
-                    ...updated[rowIndex],
-                    answers: updated[rowIndex].answers.map((a, i) =>
-                        i === answerIndex
-                            ? {
-                                ...a,
-                                newImages: []
-                            }
-                            : a
-                    ),
-                };
-            } else if (type_change === -11) {
+            else if (type_change === -11) {
                 //xoa anh cu cua cau hoi
-                const imageIndex = value as number;
-                const image = FileParserModel.extractQuestionImages(updated[rowIndex], images)
-                updated[rowIndex] = {
-                    ...updated[rowIndex],
-                    question: {
-                        ...updated[rowIndex].question,
-                        images: image.filter((__, i) => i !== imageIndex)
-                    }
-                }
-            } else if (type_change === -12) {
-                //xoa anh moi cua cau hoi
-                const imageIndex = value as number;
-                updated[rowIndex] = {
-                    ...updated[rowIndex],
-                    question: {
-                        ...updated[rowIndex].question,
-                        newImages: updated[rowIndex].question.newImages?.filter((__, i) => i !== imageIndex)
-                    }
-                }
+                // const imageIndex = value as number;
+                // const image = FileParserModel.extractQuestionImages(updated[rowIndex], images)
+                // updated[rowIndex] = {
+                //     ...updated[rowIndex],
+                //     question: {
+                //         ...updated[rowIndex].question,
+                //         images: image.filter((__, i) => i !== imageIndex)
+                //     }
+                // }
             }
-
             else {
                 //tao cau tra loi dung
                 const ansIndex = type_change - 1000;
@@ -278,16 +235,16 @@ export default function JsonDetailPage() {
     };
 
     const handleSubmitQuestionToBE = async (row: JsonQuestion) => {
-        try {
-            const payload = await QuestionModel.buildPayload(row, images)
+        // try {
+        //     const payload = await QuestionModel.buildPayload(row, images)
 
-            await QuestionService.createQuestionWithAnswers(payload);
+        //     await QuestionService.createQuestionWithAnswers(payload);
 
-            alert("Đã lưu câu hỏi vào hệ thống!");
-        } catch (err) {
-            console.error("Submit question failed:", err);
-            alert("Lỗi khi lưu câu hỏi");
-        }
+        //     alert("Đã lưu câu hỏi vào hệ thống!");
+        // } catch (err) {
+        //     console.error("Submit question failed:", err);
+        //     alert("Lỗi khi lưu câu hỏi");
+        // }
     };
 
     const handleSubmitAll = async () => {
@@ -336,14 +293,14 @@ export default function JsonDetailPage() {
                                 source: row.question.label,
                                 type_question: row.question.type_question,
                                 //  Tách ảnh của question
-                                images: FileParserModel.extractQuestionImages(row, images),
+                                images: row.question.images,
                                 newImages: row.question.newImages,
                                 //  Tách ảnh của từng answer
                                 answers: row.answers.map((a, i) => ({
                                     answer_id: i,
                                     answer_content: a.text,
                                     is_correct: a.is_correct,
-                                    images: FileParserModel.extractAnswerImages(a, images),
+                                    images:a.images,
                                     newImages: a.newImages
                                 })),
                             }}

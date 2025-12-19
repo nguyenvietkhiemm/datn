@@ -1,14 +1,19 @@
 import { JsonAnswer, JsonQuestion } from "./type";
 
 export const FileParserModel = {
-        // Hàm trích xuất các hình ảnh từ câu hỏi
+    // Hàm trích xuất các hình ảnh từ câu hỏi
     extractQuestionImages(question: JsonQuestion, imagesMap: Record<string, string>): string[] {
         const list: string[] = [];
 
         question.question.images?.forEach(img => {
-            const filename = img.saved_path.split(/[/\\]/).pop();
-            if (filename && imagesMap[filename]) {
-                list.push(imagesMap[filename]);
+            if (img.saved_path) {
+                const filename = img.saved_path.split(/[/\\]/).pop();
+                if (filename && imagesMap[filename]) {
+                    list.push(imagesMap[filename]);
+                }
+            }
+            else {
+                list.push(img)
             }
         });
 
@@ -20,9 +25,14 @@ export const FileParserModel = {
         const list: string[] = [];
 
         answer.images?.forEach(img => {
-            const filename = img.saved_path.split(/[/\\]/).pop();
-            if (filename && imagesMap[filename]) {
-                list.push(imagesMap[filename]);
+            if (img.saved_path) {
+                const filename = img.saved_path.split(/[/\\]/).pop();
+                if (filename && imagesMap[filename]) {
+                    list.push(imagesMap[filename]);
+                }
+            }
+            else {
+                list.push(img)
             }
         });
 

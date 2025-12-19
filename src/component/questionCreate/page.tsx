@@ -2,8 +2,10 @@
 
 import styles from "./QuestionCreate.module.css";
 import type { Question } from "@/domain/admin/questions/type";
-import Image from "next/image";
 import { ChangeValue } from "@/domain/admin/file/file-parser/type";
+import { useState } from "react";
+import ListImageQuestion from "./ListImageQuestion/ListImageQuestion";
+import ImageManagePanel from "./ImagePanelEdit/ImagePanelEdit";
 
 interface QuestionCardProps {
     question: Omit<Question, "question_id">;
@@ -13,6 +15,11 @@ interface QuestionCardProps {
     handleChange: (rowIndex: number, type_change: number, value: ChangeValue) => void;
     isChanged: (rowIndex: number, colIndex: number) => boolean;
 }
+
+type ImagePanelEditState = {
+    type_add: 1 | 2 | 0;
+    answerIndex: number | null;
+};
 
 export default function QuestionCardEditor({
     question,
@@ -24,12 +31,12 @@ export default function QuestionCardEditor({
 }: QuestionCardProps) {
 
     const currentType = question.type_question ?? 1;
-    // console.log(
-    //     question.answers.map((a, i) => ({
-    //       answer: i,
-    //       images: a.images,
-    //     }))
-    //   );      
+    const [isEditImage, setIsEditImage] = useState<boolean>(false);
+    const [imagePanelEdit, setImagePanelEdit] =
+        useState<ImagePanelEditState>({
+            type_add: 0,
+            answerIndex: null,
+        });
 
     return (
         <div className={styles.container}>
@@ -57,63 +64,33 @@ export default function QuestionCardEditor({
                         </p>
                     )}
                     {/* QUESTION IMAGES */}
-                    {Array.isArray(question.images) && question.images.length > 0 && (
-                        <div className={styles.previewWrap}>
-                            {question.images.map((img, i) => (
-                                <div >
-                                    <img key={i} src={img} className={styles.preview} />
-                                    <button
-                                        className={styles.addBtn}
-                                        onClick={() => handleChange(rowIndex, -11, i)}
-                                    >
-                                        x
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                    {/* PREVIEW ẢNH MỚI (CHƯA UPLOAD) */}
-                    {Array.isArray(question.newImages) && question.newImages.length > 0 && (
-                        <div className={styles.previewWrap}>
-                            {question?.newImages?.map((file, index) => {
-                                const previewUrl = URL.createObjectURL(file);
-                                return (
-                                    <div key={index} className={styles.imageWrapperSmall}>
-                                        <img
-                                            src={previewUrl}
-                                            alt={`preview-${index}`}
-                                            className={styles.preview}
-                                            onLoad={() => URL.revokeObjectURL(previewUrl)}
-                                        />
-                                        <button
-                                            className={styles.addBtn}
-                                            onClick={() => handleChange(rowIndex, -12, index)}
-                                        >
-                                            x
-                                        </button>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    )}
+                    <ListImageQuestion
+                        rowIndex={rowIndex}
+                        imagesQuestion={question.images}
+                        handleChange={handleChange}
+                    />
 
-                    <div className={styles.input}>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            multiple
-                            onChange={(e) => {
-                                if (!e.target.files) return;
-                                handleChange(rowIndex, -6, Array.from(e.target.files));
+                    <div className={styles.action_question}>
+                        <button
+                            className={styles.addBtn}
+                            onClick={() => {
+                                setIsEditImage(true);
+                                setImagePanelEdit({
+                                    type_add: 1,
+                                    answerIndex: null,
+                                });
                             }}
-                        />
+                        >
+                            + Ảnh
+                        </button>
+
+                        <button
+                            className={styles.removeBtn}
+                            onClick={() => handleChange(rowIndex, -5, true)}
+                        >
+                            x
+                        </button>
                     </div>
-                    <button
-                        className={styles.addBtn}
-                        onClick={() => handleChange(rowIndex, -5, true)}
-                    >
-                        x
-                    </button>
                 </div>
                 <label className={styles.label}>Loại câu hỏi</label>
                 {/* type_question */}
@@ -174,80 +151,37 @@ export default function QuestionCardEditor({
                             />
                         ) : (
                             <p
-                            className={`${styles.text} ${isChanged(rowIndex, colIndex) ? styles.changed : ""
-                                }`}
-                            onClick={() => setEditCell({ row: rowIndex, col: colIndex })}
-                        >
-                           {ans.answer_content}
-                        </p>
+                                className={`${styles.text} ${isChanged(rowIndex, colIndex) ? styles.changed : ""
+                                    }`}
+                                onClick={() => setEditCell({ row: rowIndex, col: colIndex })}
+                            >
+                                {ans.answer_content}
+                            </p>
                         )}
                         {ans.is_correct && (
                             <p className={styles.correct}>✔</p>
                         )}
-                        {Array.isArray(ans.images) && ans?.images?.length > 0 && (
-                            <div className={styles.previewWrap}>
-                                {ans.images?.map((src, index) => (
-                                    <div key={index} className={styles.imageWrapperSmall}>
-                                        <Image
-                                            src={src}
-                                            alt={`answer-img-${index}`}
-                                            width={300}
-                                            height={0}
-                                            style={{ height: "auto" }}
-                                            className={styles.image}
-                                        />
-                                        <button
-                                            className={styles.addBtn}
-                                            onClick={() => handleChange(rowIndex, -7, {
-                                                answerIndex: colIndex,
-                                                imageIndex: index
-                                            })}
-                                        >
-                                            x
-                                        </button>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                        {Array.isArray(ans.newImages) && ans.newImages.length > 0 && (
-                            <div className={styles.previewWrap}>
-                                {ans?.newImages?.map((file, index) => {
-                                    const previewUrl = URL.createObjectURL(file);
-                                    return (
-                                        <div key={index} className={styles.imageWrapperSmall}>
-                                            <img
-                                                src={previewUrl}
-                                                alt={`preview-${index}`}
-                                                className={styles.preview}
-                                                onLoad={() => URL.revokeObjectURL(previewUrl)}
-                                            />
-                                            <button
-                                                className={styles.addBtn}
-                                                onClick={() => handleChange(rowIndex, -10, colIndex)}
-                                            >
-                                                x
-                                            </button>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        )}
-                        <div className={styles.input}>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                multiple
-                                onChange={(e) => {
-                                    if (!e.target.files) return;
-                                    handleChange(rowIndex, -8, {
-                                        answerIndex: colIndex,
-                                        files: Array.from(e.target.files),
-                                    });
-                                }}
-                            />
-                        </div>
+                        <ListImageQuestion
+                            rowIndex={rowIndex}
+                            imagesAnswer={ans.images}
+                            answerIndex={colIndex}
+                            handleChange={handleChange}
+                        />
                         <button
                             className={styles.addBtn}
+                            onClick={() => {
+                                setIsEditImage(true);
+                                setImagePanelEdit({
+                                    type_add: 2,
+                                    answerIndex: colIndex,
+                                });
+                            }}
+                        >
+                            + Ảnh
+                        </button>
+
+                        <button
+                            className={styles.removeBtn}
                             onClick={() => handleChange(rowIndex, -4, colIndex)}
                         >
                             x
@@ -255,6 +189,19 @@ export default function QuestionCardEditor({
                     </div>
                 ))}
             </div>
+
+            {isEditImage && (
+                <ImageManagePanel
+                    rowIndex={rowIndex}
+                    questionImages={question.images}
+                    answers={question.answers}
+                    handleChange={handleChange}
+                    onClose={() => setIsEditImage(false)}
+                    type_add={imagePanelEdit.type_add}
+                    answerIndex={imagePanelEdit.answerIndex ?? undefined}
+                />
+            )}
+
             <button
                 className={styles.addBtn}
                 onClick={() => handleChange(rowIndex, -3, null)}

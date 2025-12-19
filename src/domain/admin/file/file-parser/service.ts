@@ -23,28 +23,8 @@ export const FileParserService = {
         return result.data || [];
     },
 
-    async loadImages(jsonData: JsonQuestion[], token?: string) {
-        const filenames = FileParserModel.collectImageNames(jsonData);
 
-        if (filenames.length === 0) return {};
-
-        const url = `${API_URL}/file/images`;
-        const res = await fetch(url, {
-            method: "POST",
-            headers: getHeaders(token),
-            body: JSON.stringify({ filesname: filenames }),
-        });
-
-        const result = await res.json();
-
-        // result.data = { filename, mime, data }
-        const mapped: Record<string, string> = {};
-        result.data.forEach((file: any) => {
-            mapped[file.filename] = `data:${file.mime};base64,${file.data}`;
-        });
-
-        return mapped;
-    },
+    getImageUrl (filename: string) {return `${API_URL}/file/images/${filename}`;},
 
     async saveJson(name: string, jsonData: JsonQuestion[], token?: string) {
         const url = `${API_URL}/json/save/${name}`;
