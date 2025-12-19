@@ -1,99 +1,187 @@
 import { Request, Response } from "express";
 import safeExecute, { DefaultResponse } from "../utils/safe.execute";
-import {runBertModel} from "../utils/run.bert";
-import { getJsonFilesList, getJsonById, getImagesById } from "../services/file.service";
+import { FileService } from "../services/file.service";
+import { runBertModel } from "../utils/run.bert";
+import path from "path";
+import fs from "fs";
+import { normalizeImages } from "../utils/helper";
 
 export const FileController = {
 
-    // JSON FILE HANDLERS
-
+    // ===== JSON =====
     async getAllJson(req: Request, res: Response) {
         const result = await safeExecute(async (): Promise<DefaultResponse<any>> => {
             const baseUrl = `${req.protocol}://${req.get("host")}`;
-
-            const csvFiles = getJsonFilesList(baseUrl);
+            const files = FileService.getJsonFilesList();
 
             return {
                 status: 200,
-                message: "Danh sách file CSV trên server",
-                data: csvFiles
-            }
-        })
-        return res.status(result.status).json(result)
+                message: "Danh sách file JSON",
+                data: files.map((name, index) => ({
+                    id: index + 1,
+                    name,
+                    url: `${baseUrl}/files/json/${name}`,
+                })),
+            };
+        });
+
+        return res.status(result.status).json(result);
     },
 
     async getJsonById(req: Request, res: Response) {
         const result = await safeExecute(async () => {
             const { filename } = req.params;
-            const records = getJsonById(filename);
+
+            const data = FileService.getJsonById(filename);
+
+            const normalized = Array.isArray(data)
+                ? data.map((item: any) => ({
+                    ...item,
+                    question: {
+                        ...item.question,
+                        images: normalizeImages(item.question?.images),
+                    },
+                    answers: Array.isArray(item.answers)
+                        ? item.answers.map((ans: any) => ({
+                            ...ans,
+                            images: normalizeImages(ans.images),
+                        }))
+                        : [],
+                }))
+                : data;
+
             return {
                 status: 200,
                 message: `Nội dung JSON ${filename}`,
-                data: records,
+                data: normalized,
             };
         });
+
         return res.status(result.status).json(result);
     },
 
-    async saveJson(req: Request, res: Response) {
-        const result = await safeExecute(async () => {
-            const { filename } = req.params;
-            const data = req.body;
-            console.log("Dữ liệu nhận được để lưu CSV:", data);
-            if (!Array.isArray(data)) throw new Error("Dữ liệu phải là mảng object");
-
-            // saveCsvFile(filename, data);
-
-            return {
-                status: 200,
-                message: `Lưu CSV ${filename} thành công!`,
-            };
-        });
-        return res.status(result.status).json(result);
-    },
-
-    // DOCX FILE HANDLERS
-
+    // ===== DOCX =====
     async saveDocx(req: Request, res: Response) {
         const result = await safeExecute(async () => {
-            if (!req.file) {
-                throw new Error("Chưa upload file DOCX"); // safeExecute sẽ catch
-            }
+            if (!req.file) throw new Error("NO_DOCX_FILE");
 
-            const filename = req.file.filename;   // string
-            const filePath = req.file.path;   // string
-
-            console.log("File DOCX đã upload:", filename);
-            console.log("RUN BERT...\n");
-
-            const bertOutput = await runBertModel(filePath);
-
-            console.log("BERT:", bertOutput);
+            const bertOutput = await runBertModel(req.file.path);
 
             return {
                 status: 200,
-                message: `Lưu DOCX ${filename} thành công!`,
+                message: "Xử lý DOCX thành công",
                 bertOutput,
             };
         });
 
-        // safeExecute trả về object { status, message, ... } luôn
         return res.status(result.status).json(result);
     },
 
-    // IMAGE FILE HANDLERS
-    
+    async getImagesInfo(req: Request, res: Response) {
+        const result = await safeExecute(
+            async (): Promise<DefaultResponse<any>> => {
+                const { filenames } = req.body;
+                const baseUrl = `${req.protocol}://${req.get("host")}`;
+
+                if (!Array.isArray(filenames)) {
+                    return {
+                        status: 400,
+                        message: "filenames must be an array",
+                        data: null,
+                    };
+                }
+
+                const images = FileService.getImagesInfo(filenames);
+
+                return {
+                    status: 200,
+                    message: "Danh sách image",
+                    data: images.map(img => ({
+                        filename: img.filename,
+                        url: `${baseUrl}/images/${img.filename}`,
+                    })),
+                };
+            }
+        );
+
+        return res.status(result.status).json(result);
+    },
+
+    // ===== IMAGE METADATA =====
     async getImagesById(req: Request, res: Response) {
         const result = await safeExecute(async (): Promise<DefaultResponse<any>> => {
-            const filesname = req.body.filesname;
-            const imageFiles = getImagesById(filesname);
+            const { filesname } = req.body;
+            const baseUrl = `${req.protocol}://${req.get("host")}`;
+
+            const images = FileService.getImagesInfo(filesname);
 
             return {
                 status: 200,
-                message: "Danh sách file image trên server",
-                data: imageFiles
-            }
-        })
-        return res.status(result.status).json(result)
+                message: "Danh sách image",
+                data: images.map(img => ({
+                    filename: img.filename,
+                    url: `${baseUrl}/files/images/${img.filename}`,
+                })),
+            };
+        });
+
+        return res.status(result.status).json(result);
     },
-}
+
+    // ===== IMAGE STREAM =====
+    async streamImage(req: Request, res: Response) {
+        try {
+            const { filename } = req.params;
+            const { stream, mime } = FileService.getImageStream(filename);
+
+            res.setHeader("Content-Type", mime);
+            stream.pipe(res);
+        } catch (err: any) {
+            if (err.message === "IMAGE_NOT_FOUND") {
+                return res.status(404).json({ message: "Image not found" });
+            }
+            return res.status(500).json({ message: "Internal server error" });
+        }
+    },
+
+    async uploadImage(req: Request, res: Response) {
+        const result = await safeExecute(
+            async (): Promise<DefaultResponse<any>> => {
+                const file = req.file as any;
+
+                if (!file) {
+                    return {
+                        status: 400,
+                        message: "Image duplicated or not provided",
+                        data: null,
+                    };
+                }
+
+                const uploadDir = path.join(
+                    __dirname,
+                    "../../data/outputs/media"
+                );
+
+                if (!fs.existsSync(uploadDir)) {
+                    fs.mkdirSync(uploadDir, { recursive: true });
+                }
+
+                const filePath = path.join(uploadDir, file.hashName);
+
+                // lưu file thật sự
+                fs.writeFileSync(filePath, file.buffer);
+
+                return {
+                    status: 200,
+                    message: "Upload image thành công",
+                    data: {
+                        filename: file.hashName,
+                        url: `/images/${file.hashName}`,
+                    },
+                };
+            }
+        );
+
+        return res.status(result.status).json(result);
+    },
+};

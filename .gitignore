@@ -1,41 +1,49 @@
+# ======================
 # Node.js
+# ======================
 node_modules/
-npm-debug.log
-dist
-.dist
-./dist
-dist/*
-.dist/*
-./dist/*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Python
-__pycache__/
-*.pyc
+# build output
+dist/
+.build/
+.next/
 
-# IDE
+# ======================
+# Environment
+# ======================
+.env
+
+# ======================
+# IDE / Editor
+# ======================
 .vscode/
 .idea/
 
+# ======================
 # OS
+# ======================
 .DS_Store
 Thumbs.db
 
+# ======================
+# Python (nếu có tool extract)
+# ======================
+__pycache__/
+*.pyc
+venv/
 
-venv
-/venv
-./venv
+# ======================
+# Generated data (QUAN TRỌNG)
+# ======================
+data/outputs/
+resources/images/
+uploads/
+media/
 
-microservice
-/microservice
-./microservice
-
+# ======================
+# Notes / temp
+# ======================
 __note__.txt
-/__note__.txt
-./__note__.txt
-<<<<<<< HEAD
-=======
-
-.env
-/.env
-./.env
->>>>>>> 1cdebd9ae89ec926031b4c3b22101595d8827e60

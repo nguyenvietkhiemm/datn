@@ -1,49 +1,26 @@
-import { FileController } from "../controllers/file.controller";
-import Authentication from "../middleware/authentication";
-import { ADMIN } from "../config/permission";
-import { uploadCSV, uploadDOC } from '../utils/upload';
 import { Router } from "express";
+import { FileController } from "../controllers/file.controller";
+import { uploadImage } from "../utils/upload";
 
-const fileRouter = Router();
+const router = Router();
 
-// JSON FILE HANDLERS
-
-fileRouter.get("/json",
-    Authentication.AuthenticateToken,
-    Authentication.AuthorizeRoles(...ADMIN),
-    FileController.getAllJson);
-
-fileRouter.get(
-    "/json/:filename",
-    Authentication.AuthenticateToken,
-    Authentication.AuthorizeRoles(...ADMIN),
-    FileController.getJsonById
-);
-
-// chưa sửa
-// fileRouter.post("/json/save/:filename",
-//     Authentication.AuthenticateToken,
-//     Authentication.AuthorizeRoles(...ADMIN),
-//     uploadCSV.single("file"),
-//     FileController.saveCsv
-// );
-
-// DOCX FILE HANDLERS
-
-fileRouter.post("/docx/save/:filename",
-    Authentication.AuthenticateToken,
-    Authentication.AuthorizeRoles(...ADMIN),
-    uploadDOC.single("file"),
-    FileController.saveDocx
-);
-
-// IMAGE FILE HANDLERS
-
-fileRouter.post(
-    "/images",
-    Authentication.AuthenticateToken,
-    Authentication.AuthorizeRoles(...ADMIN),
-    FileController.getImagesById
-);
-
-export default fileRouter;
+router.get("/json", FileController.getAllJson);
+router.get("/json/:filename", FileController.getJsonById);
+router.post(
+    "/images/info",
+    FileController.getImagesInfo
+  );
+  
+  // stream ảnh (FE đọc được)
+  router.get(
+    "/images/:filename",
+    FileController.streamImage
+  );
+  
+  // upload ảnh (hash – không trùng)
+  router.post(
+    "/images/upload",
+    uploadImage.single("image"),
+    FileController.uploadImage
+  );
+export default router;

@@ -1,88 +1,65 @@
 import fs from "fs";
 import path from "path";
-import { parse } from "csv-parse/sync";
-import { stringify } from "csv-stringify/sync";
+import pool from "../config/database";
 
-export interface FileInfo {
-    id: number;
-    name: string;
-    url: string;
+export interface ImageInfo {
+    filename: string;
 }
 
-export function getJsonFilesList(baseUrl: string): FileInfo[] {
-    // const csvDir = path.join(__dirname, "../../data/uploads/csv");
-    const csvDir = path.join(__dirname, "../../data/outputs");
+export class FileService {
+    private static outputDir = path.join(__dirname, "../../data/outputs");
+    private static mediaDir = path.join(__dirname, "../../data/outputs/media");
 
-    console.log("Đường dẫn thư mục CSV:", csvDir);
-
-    if (!fs.existsSync(csvDir)) {
-        console.warn(" Thư mục uploads/csv chưa tồn tại, tạo mới...");
-        fs.mkdirSync(csvDir, { recursive: true });
-    }
-
-    const files = fs.readdirSync(csvDir).filter(
-    (f) => f.endsWith(".json")
-    );
-
-
-    return files.map((file, index) => ({
-        id: index + 1,
-        name: file,
-        // url: `${baseUrl}/data/uploads/csv/${file}`,
-        url: `${baseUrl}/data/outputs/${file}`,
-    }));
-}
-
-export function getJsonById(filename: string): any {
-    const jsonDir = path.join(__dirname, "../../data/outputs");
-    if (!fs.existsSync(jsonDir)) { 
-        throw new Error("Thư mục JSON không tồn tại"); 
-    }
-
-    const filePath = path.join(jsonDir, filename);
-    if (!fs.existsSync(filePath)) { 
-        throw new Error("File không tồn tại"); 
-    }
-
-    const jsonText = fs.readFileSync(filePath, "utf-8");
-    return JSON.parse(jsonText);
-}
-
-
-function getMime(file: string) {
-    const ext = path.extname(file).toLowerCase();
-    if (ext === ".png") return "image/png";
-    if (ext === ".jpg" || ext === ".jpeg") return "image/jpeg";
-    if (ext === ".gif") return "image/gif";
-    return "application/octet-stream";
-}
-
-export function getImagesById(filenames: string[]) {
-    const mediaDir = path.join(__dirname, "../../data/outputs/media");
-
-    if (!fs.existsSync(mediaDir)) {
-        throw new Error("Thư mục MEDIA không tồn tại");
-    }
-
-    const results = [];
-
-    for (const filename of filenames) {
-        const filePath = path.join(mediaDir, filename);
-
-        if (!fs.existsSync(filePath)) {
-            console.warn(`⚠ File không tồn tại: ${filename}`);
-            continue; // skip file missing
+    // ===== JSON =====
+    static getJsonFilesList(): string[] {
+        if (!fs.existsSync(this.outputDir)) {
+            fs.mkdirSync(this.outputDir, { recursive: true });
         }
 
-        const buffer = fs.readFileSync(filePath);
-        const base64 = buffer.toString("base64");
-
-        results.push({
-            filename,
-            mime: getMime(filename),
-            data: base64,
-        });
+        return fs.readdirSync(this.outputDir).filter(f => f.endsWith(".json"));
     }
 
-    return results;
+    static getJsonById(filename: string): any {
+        const filePath = path.join(this.outputDir, filename);
+
+        if (!fs.existsSync(filePath)) {
+            throw new Error("FILE_NOT_FOUND");
+        }
+
+        return JSON.parse(fs.readFileSync(filePath, "utf-8"));
+    }
+
+    // ===== IMAGE METADATA =====
+    static getImagesInfo(filenames: string[]): ImageInfo[] {
+        if (!fs.existsSync(this.mediaDir)) {
+            throw new Error("MEDIA_DIR_NOT_FOUND");
+        }
+
+        return filenames
+            .filter(name => fs.existsSync(path.join(this.mediaDir, name)))
+            .map(filename => ({ filename }));
+    }
+
+    // ===== IMAGE STREAM =====
+    static getImageStream(filename: string) {
+        const filePath = path.join(this.mediaDir, filename);
+
+        if (!fs.existsSync(filePath)) {
+            throw new Error("IMAGE_NOT_FOUND");
+        }
+
+        return {
+            stream: fs.createReadStream(filePath),
+            mime: this.getMime(filename),
+        };
+    }
+
+    private static getMime(file: string) {
+        const ext = path.extname(file).toLowerCase();
+        if (ext === ".png") return "image/png";
+        if (ext === ".jpg" || ext === ".jpeg") return "image/jpeg";
+        if (ext === ".gif") return "image/gif";
+        return "application/octet-stream";
+    }
+
 }
