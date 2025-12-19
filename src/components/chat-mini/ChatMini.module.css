@@ -15,14 +15,15 @@
 .chatBox {
     position: fixed;
     bottom: 20px;
-    right: 20px;
-    width: 320px;
-    height: 420px;
+    right: 24px;
+    width: 520px;          /* 👈 rộng hơn */
+    height: 600px;         /* 👈 cao hơn */
     background: #fff;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
+    z-index: 1000;
 }
 
 .header {
@@ -61,16 +62,16 @@
     line-height: 1.4;
 }
 
-.bot {
-    align-self: flex-start;
-    background: #e5e7eb;
-    color: #000;
-}
-
 .user {
-    align-self: flex-end;
     background: #2563eb;
     color: #fff;
+    align-self: flex-end;
+}
+
+.bot {
+    background: #e5e7eb;
+    color: #111827;
+    align-self: flex-start;
 }
 
 .inputBox {
@@ -95,3 +96,67 @@
     padding: 0 12px;
     cursor: pointer;
 }
+
+.sources {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #374151;
+}
+
+.sourcesTitle {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.sources ul {
+    padding-left: 16px;
+}
+
+.sources li {
+    list-style: disc;
+}
+
+.messageWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+}
+
+/* ===== SOURCE PANEL ===== */
+.sourcePanel {
+    margin-left: 12px;
+    margin-top: 6px;
+    background: #f9fafb;
+    border-left: 3px solid #6366f1;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    max-width: 90%;
+}
+
+.sourceHeader {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #4338ca;
+}
+
+.sourceItem {
+    margin-bottom: 8px;
+}
+
+.sourceItem:last-child {
+    margin-bottom: 0;
+}
+
+.sourceFile {
+    font-weight: 500;
+    color: #111827;
+}
+
+.sourcePreview {
+    margin-top: 4px;
+    color: #4b5563;
+    line-height: 1.4;
+    font-style: italic;
+}
+
