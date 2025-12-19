@@ -2,8 +2,7 @@ import { Router } from 'express';
 import QuestionController from '../controllers/question.controller';
 import Authentication from '../middleware/authentication';
 import { ADMIN } from "../config/permission";
-import { uploadAnswerImage, uploadQuestionImage } from '../utils/upload';
-
+import { uploadImage } from '../utils/upload';
 
 const questionRoute = Router();
 
@@ -202,18 +201,6 @@ questionRoute.patch('/setAvailable/:id',
         Authentication.AuthenticateToken,
         Authentication.AuthorizeRoles(...ADMIN),
         QuestionController.setAvailable);
-
-questionRoute.post(
-        "/images",
-        uploadQuestionImage.array("images", 10),
-        QuestionController.uploadQuestionImages
-);
-
-questionRoute.post(
-        "/answers/:id/images",
-        uploadAnswerImage.array("images", 10),
-        QuestionController.uploadAnswerImages
-);
 
 /**
  * @openapi

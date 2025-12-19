@@ -21,9 +21,6 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 // route cho api-docs
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, swaggerOptions));
 
-//cho xem tai lieu
-app.use("/resources", express.static(path.join(__dirname, "../resources")));
-
 // routes chung cho tat ca cac api
 app.use('/', routes);
 

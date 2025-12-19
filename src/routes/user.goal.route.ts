@@ -2,22 +2,25 @@ import { Router } from "express";
 import { UserGoalController } from "../controllers/user.goal.controller";
 import  Authentication  from "../middleware/authentication"
 
-export const UserGoalRoute = Router();
+const userGoalRoute = Router();
 
-UserGoalRoute.get(
+userGoalRoute.get(
     "/",
     Authentication.AuthenticateToken,
     UserGoalController.getAll
 );
 
-UserGoalRoute.post(
+userGoalRoute.post(
     "/create",
     Authentication.AuthenticateToken,
     UserGoalController.create
 );
 
-UserGoalRoute.delete(
+userGoalRoute.delete(
     "/delete/:id",
     Authentication.AuthenticateToken,
     UserGoalController.delete
 );
+
+
+export default userGoalRoute;
