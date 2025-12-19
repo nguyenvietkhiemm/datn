@@ -16,6 +16,7 @@
   "dependencies": {
     "@types/cors": "^2.8.19",
     "@types/morgan": "^1.9.10",
+    "axios": "^1.13.2",
     "bcrypt": "^6.0.0",
     "body-parser": "^2.2.0",
     "child_process": "^1.0.2",
