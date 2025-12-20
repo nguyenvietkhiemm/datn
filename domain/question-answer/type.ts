@@ -2,6 +2,7 @@ export type Answer = {
     answer_id: number;
     answer_content: string;
     is_correct: boolean;
+    images : []
 };
 
 export type Question = {
@@ -9,16 +10,19 @@ export type Question = {
     question_name: string;
     question_content: string;
     answers: Answer[];
-    type_question: number
+    type_question: number;
+    images : [];
 };
 
 export type ReviewQuestion = {
     question_id: number;
     question_content: string;
     type_question: number;
+    images? : [];
     correct_answers: {
         answer_id: number;
         answer_content: string;
+        images: []
     }[];
 };
 

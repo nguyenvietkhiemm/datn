@@ -1,6 +1,7 @@
 "use client"
 import { ReviewQuestion, UserAnswerMap } from "../../../domain/question-answer/type"
 import styles from "./ResultMultiple.module.css"
+import { ImagePreview } from "../ImageReview/page"
 
 type ResultMultipleChoiceProp = {
     q: ReviewQuestion,
@@ -27,6 +28,11 @@ export default function ResultMultipleChoice({ q, userSelectedIds, isCorrect, in
                 <span className={styles.questionText}>
                     {q.question_content}
                 </span>
+                {q.images?.map((src, index) => (
+                    <div key={`a-${index}`} className={styles.imageWrapperSmall}>
+                        <ImagePreview filename={src} />
+                    </div>
+                ))}
             </div>
 
             {/* Đáp án bạn chọn */}

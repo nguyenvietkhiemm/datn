@@ -1,0 +1,82 @@
+/* ===== QUESTION CARD ===== */
+.questionCard {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 16px 18px;
+    border-left: 6px solid transparent;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
+/* ===== STATUS ===== */
+.correct {
+    border-left-color: #22c55e;
+    background: #f0fdf4;
+}
+
+.wrong {
+    border-left-color: #ef4444;
+    background: #fef2f2;
+}
+
+.unanswered {
+    border-left-color: #9ca3af;
+    background: #f9fafb;
+}
+
+/* ===== QUESTION HEADER ===== */
+.questionHeader {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.questionIndex {
+    font-weight: 700;
+    color: #2563eb;
+}
+
+.questionText {
+    font-size: 15px;
+    color: #111827;
+}
+
+/* ===== ANSWER ROW ===== */
+.answerRow {
+    display: flex;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+.label {
+    min-width: 130px;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.value {
+    color: #111827;
+}
+
+.correctValue {
+    color: #16a34a;
+    font-weight: 600;
+}
+
+/* ===== RESULT TAG ===== */
+.resultTag {
+    margin-top: 10px;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.correct .resultTag {
+    color: #16a34a;
+}
+
+.wrong .resultTag {
+    color: #dc2626;
+}
+
+.unanswered .resultTag {
+    color: #6b7280;
+}
