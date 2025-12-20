@@ -6,32 +6,29 @@ import Pagination from "@/component/pagination/Pagination";
 import Search from "@/component/search/Search";
 import { Button } from "@/component/ui/button/Button";
 import FileList from "@/component/popup/FileList";
-import type { Answer, Question } from "@/domain/admin/questions/type";
+import type { Answer, Question, QuestionQuery } from "@/domain/admin/questions/type";
 import type { FileInfo } from "@/domain/admin/file/type";
 import { QuestionService } from "@/domain/admin/questions/service";
 import QuestionCard from "@/component/card/QuestionCard/QuestionCard";
 import { QuestionModel } from "@/domain/admin/questions/model";
-import { Change } from "@/domain/admin/file/file-parser/type";
 import { FileService } from "@/domain/admin/file/service";
 import { useRouter } from "next/navigation";
 
 export default function Question() {
     const [questions, setQuestions] = useState<Question[]>([]);
-    const [filterQuestion, setFilterQuestion] = useState<Question[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const [available, setAvaible] = useState<string>("All");
-    const [type_question, setTypeQuestion] = useState<number>(1);
     const [totalPage, setTotalPage] = useState<number>(1);
     const [isFileList, setIsFileList] = useState<boolean>(false);
     const [fileList, setFileList] = useState<FileInfo[]>([]);
     const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
     const [filterCondition, setFilterCondition] = useState<any>(null);
-    const [searchKeyword, setSearchKeyword] = useState<string>("");
-    const jsonInputRef = useRef<HTMLInputElement>(null);
     const docxInputRef = useRef<HTMLInputElement>(null);
-    const [changes, setChanges] = useState<Change[]>([]);
-
+    const [query, setQuery] = useState<QuestionQuery>({
+        page: 1,
+        available: "All",
+        type_question: 0,
+        keyword: "",
+    });
     const router = useRouter();
 
     // Lấy danh sách câu hỏi
@@ -39,7 +36,7 @@ export default function Question() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const data = await QuestionService.fetchQuestions(currentPage, available, type_question)
+                const data = await QuestionService.fetchQuestions(query);
                 setQuestions(data.questions);
                 setTotalPage(data.last_page);
             } catch (err) {
@@ -50,12 +47,8 @@ export default function Question() {
         };
 
         fetchData();
-    }, [currentPage, available, type_question, searchKeyword]);
+    }, [query]);
 
-    //Lọc các câu hỏi đang hoạt động (optional)
-    useEffect(() => {
-        setFilterQuestion(questions);
-    }, [questions]);
 
     // Xoá câu hỏi
     const handleDelete = async (questionId: number) => {
@@ -125,8 +118,20 @@ export default function Question() {
         }
     };
 
-    if (loading)
-        return <p className={styles.loading}>Đang tải danh sách câu hỏi...</p>;
+    const handleChangePage = (page: number) => {
+        setQuery(prev => ({
+            ...prev,
+            page,
+        }));
+    };
+
+    const handleChangeSearch = (searchKeyword: string) => {
+        setQuery(prev => ({
+            ...prev,
+            keyword : searchKeyword
+        }))
+    }
+
 
     return (
         <div className={styles.container}>
@@ -134,7 +139,7 @@ export default function Question() {
                 <h1 className={styles.title}>Quản lý câu hỏi</h1>
                 <div className={styles.actions}>
                     <div className={styles.search}>
-                        <Search setSearchKeyword={setSearchKeyword} setFilterCondition={setFilterCondition} typeSearch={"question"} />
+                        <Search setSearchKeyword={handleChangeSearch} typeSearch={"question"} />
                     </div>
 
                     <div className={styles.button}>
@@ -191,11 +196,13 @@ export default function Question() {
                 <div className={styles.filterType}>
                     <div>
                         <select
-                            value={type_question}
+                            value={query.type_question}
                             onChange={(e) => {
-                                setCurrentPage(1);
-                                const value = e.target.value;
-                                setTypeQuestion(value ? Number(value) : 0);
+                                setQuery(prev => ({
+                                    ...prev,
+                                    page: 1,
+                                    type_question: Number(e.target.value),
+                                }));
                             }}
                             className={styles.select}
                         >
@@ -208,10 +215,13 @@ export default function Question() {
 
                     <div>
                         <select
-                            value={available}
+                            value={query.available}
                             onChange={(e) => {
-                                setCurrentPage(1);
-                                setAvaible(e.target.value);
+                                setQuery(prev => ({
+                                    ...prev,
+                                    page: 1,
+                                    available: String(e.target.value),
+                                }));
                             }}
                             className={styles.select}
                         >
@@ -268,8 +278,8 @@ export default function Question() {
             {/* Phân trang */}
             <Pagination
                 totalPages={totalPage}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
+                currentPage={query.page}
+                setCurrentPage={handleChangePage}
             />
         </div>
     );

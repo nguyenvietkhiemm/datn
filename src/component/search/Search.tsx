@@ -6,7 +6,6 @@ type SearchType = "question" | "user" | "exam" | "documnet";
 
 type SearchProp = {
   setSearchKeyword?: (data: string) => void;
-  setFilterCondition?: (data: string) => void;
   typeSearch: SearchType;
 };
 
@@ -19,14 +18,12 @@ const PLACEHOLDER_MAP: Record<SearchType, string> = {
 
 export default function Search({
   setSearchKeyword,
-  setFilterCondition,
   typeSearch,
 }: SearchProp) {
   const [keyword, setKeyword] = useState("");
 
   const handleSearch = () => {
     setSearchKeyword?.(keyword);
-    setFilterCondition?.("");
   };
 
   const handleClear = () => {

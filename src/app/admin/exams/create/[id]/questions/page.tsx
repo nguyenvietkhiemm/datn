@@ -5,48 +5,49 @@ import Cookies from "js-cookie";
 import styles from "./QuestionCreate.module.css";
 import { QuestionService } from "@/domain/admin/questions/service";
 import Pagination from "@/component/pagination/Pagination";
-import Search from "@/component/search/Search";
 import { Button } from "@/component/ui/button/Button";
-import { useSearchParams } from "next/navigation";
-import { Question } from "@/domain/admin/questions/type";
+import  {useParams} from "next/navigation";
+import { Question, QuestionQuery } from "@/domain/admin/questions/type";
+import { API_URL } from "@/lib/service";
+import Search from "@/component/search/Search";
 
-export default function QuestionCreate() {
-    const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
+export default function ExamQuestionCreate() {
+
     const token = Cookies.get("token");
     const [questions, setQuestions] = useState<Question[]>([]);
-    const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPage, setTotalPage] = useState<number>(1);
-    const [available, setAvaible] = useState<boolean>(true);
-    const [type_question, setTypeQuestion] = useState<number>(1);
     const [filterQuestion, setFilterQuestion] = useState<Question[]>([]);
-    // const [csvList, setCsvList] = useState<CsvFile[]>([]);
     const [selectedQuestions, setSelectedQuestions] = useState<{ exam_id: number, question_id: number }[]>([]);
-    const searchParams = useSearchParams();
-    const examId = Number(searchParams.get("exam_id"));
-    const [searchWork, setSearchKeyword] = useState<string>("");
+    const params = useParams();
+    const examId = Number(params.id);
+
+    const [searchKeyword, setSearchKeyword] = useState<string>("");;
+    const [query, setQuery] = useState<QuestionQuery>({
+        page: 1,
+        available: "All",
+        type_question: 0,
+        keyword: "",
+    });
+
+    const handleChangePage = (page: number) => {
+        setQuery(prev => ({
+            ...prev,
+            page,
+        }));
+    };
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await QuestionService.fetchQuestions(currentPage, available, type_question);
+                const data = await QuestionService.fetchQuestions(query);
                 setQuestions(data.questions);
                 setTotalPage(data.last_page);
             } catch (err) {
                 console.error("Lỗi khi fetch question:", err);
             }
         };
-
-        // const handleFetchCsv = async () => {
-        //     const url = `${API_URL}/file/csv`;
-        //     const data = await QuestionService.fetchCsvList();
-        //     setCsvList(data)
-        // };
-
         fetchData();
-        // handleFetchCsv();
-    }, []);
-
-    
+    }, [query]);
 
     //Lọc các câu hỏi đang hoạt động (optional)
     useEffect(() => {
@@ -55,7 +56,7 @@ export default function QuestionCreate() {
 
     const handleFilter = async (source: string) => {
         try {
-            const res = await fetch(`${API_URL}/questions/filter?source=${source}&page=${currentPage}`, {
+            const res = await fetch(`${API_URL}/questions/filter?source=${source}&page=${query.page}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -93,15 +94,15 @@ export default function QuestionCreate() {
 
     const handleCretaeExamQuestion = async () => {
         try {
-            const res = await fetch(`${API_URL}/exams/questions/add`,{
-                method : "POST",
-                headers : {
-                    "Content-Type" : "application/json",
-                    Authorization : `Bearer ${token}`
+            const res = await fetch(`${API_URL}/exams/questions/add`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
                 },
-                body : JSON.stringify({ selectedQuestions })
+                body: JSON.stringify({ selectedQuestions })
             })
-            
+
         } catch (error) {
             console.error("error:", error);
         }
@@ -113,23 +114,6 @@ export default function QuestionCreate() {
 
             {/* loc */}
             <div className={styles.action}>
-                <Search setSearchKeyword={setSearchKeyword}/>
-                {/* Dropdown select */}
-                {/* <select
-                    value={selectedOption}
-                    onChange={async (e) => {
-                        const value = (e.target as HTMLSelectElement).value;
-                        setSelectedOption(value);
-                        await handleFilter(value);
-                    }}
-                    className={styles.selectDropdown}
-                >
-                    <option value="">Chọn nguồn câu hỏi</option>
-                    {csvList.map((csv) => (
-                        <option key={csv.id} value={csv.name}>{csv.name}</option>
-                    ))}
-
-                </select> */}
                 {/* reset */}
                 <div className={styles.button}><Button onClick={() => handleReset()}>Đặt lại</Button></div>
 
@@ -137,6 +121,31 @@ export default function QuestionCreate() {
                 <div className={styles.button}><Button onClick={() => handleCretaeExamQuestion()}>Hoàn thành</Button></div>
 
             </div>
+
+            <div className={styles.filterType}>
+                <div>
+                    <select
+                        onChange={(e) => {
+                            setQuery(prev => ({
+                                ...prev,
+                                page: 1,
+                                type_question: Number(e.target.value),
+                            }));
+                        }}
+                        className={styles.select}
+                    >
+                        <option value="0">Tất cả loại câu hỏi</option>
+                        <option value="1">1 đáp án</option>
+                        <option value="2">Nhiều đáp án</option>
+                        <option value="3">Tự luận</option>
+                    </select>
+                </div>
+            </div>
+
+            <div className={styles.search}>
+                <Search setSearchKeyword={setSearchKeyword} typeSearch={"question"} />
+            </div>
+
             {/* Bảng danh sách câu hỏi */}
             <table className={styles.table}>
                 <thead>
@@ -183,7 +192,11 @@ export default function QuestionCreate() {
             </table>
 
             {/* phan trang */}
-            <Pagination totalPages={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+            <Pagination
+                totalPages={totalPage}
+                currentPage={query.page}
+                setCurrentPage={handleChangePage}
+            />
         </div>
     );
 }

@@ -1,12 +1,18 @@
-import { Question, Answer, CreateQuestionPayload } from "./type";
+import { Question, Answer, CreateQuestionPayload, QuestionQuery } from "./type";
 import { API_URL, getHeaders, getToken } from "@/lib/service";
 
 export const QuestionService = {
-    async fetchQuestions(page: number, available: string, type_question: number): Promise<{ questions: Question[]; last_page: number }> {
+    async fetchQuestions(query: QuestionQuery): Promise<{ questions: Question[]; last_page: number }> {
 
-        const token = getToken(); // Lấy token từ cookie hoặc localStorage
+        const token = getToken();
+        const params = new URLSearchParams({
+            page: query.page.toString(),
+            available: query.available,
+            type_question: query.type_question.toString(),
+            keyword: query.keyword,
+        });
         const res = await fetch(
-            `${API_URL}/questions?page=${page}&available=${available}&type_question=${type_question}`,
+            `${API_URL}/questions?${params.toString()}`,
             {
                 method: "GET",
                 headers: getHeaders(token),

@@ -13,7 +13,7 @@ export interface Question {
     answers: Answer[];
     images?: string[];
     source?: string;
-    newImages? : File[];
+    newImages?: File[];
     type_question?: number;
 }
 
@@ -32,3 +32,10 @@ export type QuestionForm = {
     type_question: number;
 };
 
+export type QuestionQuery = {
+    page: number;
+    available: string;
+    type_question: number;
+    keyword: string;
+    filters?: any;
+};
