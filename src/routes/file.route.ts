@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { FileController } from "../controllers/file.controller";
 import { uploadImage } from "../utils/upload";
+import Authentication from "../middleware/authentication";
 
 const router = Router();
 
