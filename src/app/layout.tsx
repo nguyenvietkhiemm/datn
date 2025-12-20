@@ -5,39 +5,21 @@ import ProgressPanel from "@/components/panel-progress/page";
 import MiniChat from "@/components/chat-mini/page";
 import localFont from "next/font/local";
 
-const robotoSlab = localFont({
+const inter = localFont({
   src: [
-    { path: "../assets/RobotoSlab-Regular.ttf", weight: "400" },
-    { path: "../assets/RobotoSlab-Medium.ttf", weight: "500" },
-    { path: "../assets/RobotoSlab-Bold.ttf", weight: "700" },
+    { path: "../assets/Inter_18pt-Regular.ttf", weight: "400" },
+    { path: "../assets/Inter_18pt-Medium.ttf", weight: "500" },
+    { path: "../assets/Inter_18pt-SemiBold.ttf", weight: "600" },
   ],
-  variable: "--font-roboto-slab",
+  variable: "--font-body",
   display: "swap",
 });
 
-const poppins = localFont({
-  src: [
-    { path: "../assets/Poppins-Regular.ttf", weight: "400" },
-    { path: "../assets/Poppins-Medium.ttf", weight: "500" },
-  ],
-  variable: "--font-body",
-});
-
-// const inter = localFont({
-//   src: [
-//     { path: "../assets/Inter_18pt-Regular.ttf", weight: "400" },
-//     { path: "../assets/Inter_18pt-Medium.ttf", weight: "500" },
-//     { path: "../assets/Inter_18pt-SemiBold.ttf", weight: "600" },
-//     { path: "../assets/Inter_18pt-Bold.ttf", weight: "700" },
-//   ],
-//   variable: "--font-header",
-//   display: "swap",
-// });
-
-const openSans = localFont({
+const RobotoSlab = localFont({
   src : [
-    {path : "../assets/OpenSans-Regular.ttf", weight : "400"},
-    {path : "../assets/OpenSans-Medium.ttf", weight : "500"}
+    { path: "../assets/RobotoSlab-Regular.ttf", weight: "400" },
+    { path: "../assets/RobotoSlab-Medium.ttf", weight: "500" },
+    { path: "../assets/RobotoSlab-Bold.ttf", weight: "700" },
   ],
   variable: "--font-heading",
 })
@@ -50,7 +32,7 @@ export default function RootLayout({
   return (
     <html
       lang="vi"
-      className={`${robotoSlab.variable} ${poppins.variable} ${openSans.variable}`}
+      className={`${inter.variable} ${RobotoSlab.variable}`}
     >
       <body className="antialiased font-body">
         <ClientLayout>
