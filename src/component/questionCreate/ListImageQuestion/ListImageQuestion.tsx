@@ -7,11 +7,9 @@ import { FileParserService } from "@/domain/admin/file/file-parser/service";
 
 type ListImageQuestionProps = {
   rowIndex: number;
-
   // images
   imagesQuestion?: string[];
   imagesAnswer?: string[];
-
   // chỉ dùng cho answer
   answerIndex?: number;
 
@@ -65,9 +63,9 @@ export default function ListImageQuestion({
       {/* ===== ANSWER IMAGES ===== */}
       {imagesAnswer.map((src, index) => (
         <div key={`a-${index}`} className={styles.imageWrapperSmall}>
-          <Image
-            src={src}
-            alt={`answer-img-${index}`}
+          <img
+            src={FileParserService.getImageUrl(src)}
+            alt={FileParserService.getImageUrl(src)}
             width={300}
             height={0}
             style={{ height: "auto" }}
