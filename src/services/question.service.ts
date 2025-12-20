@@ -47,9 +47,9 @@ const QuestionService = {
         // ===== SEARCH =====
         if (searchValue && searchValue.trim() !== "") {
             whereClause += `
-            AND (q.question_content ILIKE $${paramIndex}
-            )
-          `;
+                AND unaccent(lower(q.question_content))
+                    ILIKE '%' || unaccent(lower($${paramIndex})) || '%'
+                `;
             params.push(`%${searchValue}%`);
             paramIndex++;
         }
