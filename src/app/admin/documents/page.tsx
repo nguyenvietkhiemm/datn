@@ -93,9 +93,9 @@ export default function DocumentPage() {
                             setSearchKeyword={setSearchKeyword}
                         />
                         <Search
-                            setFilterDoc={setFilterDoc as any}
-                            currentPage={currentPage}
-                            setTotalPage={setTotalPage}
+                            setSearchKeyword={setSearchKeyword}
+                            setFilterCondition={setFilterCondition}
+                            typeSearch="documnet"
                         />
                     </div>
                 </div>

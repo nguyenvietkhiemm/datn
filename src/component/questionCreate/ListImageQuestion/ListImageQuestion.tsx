@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "./ListImageQuestion.module.css";
 import { ChangeValue } from "@/domain/admin/file/file-parser/type";
 import { FileParserService } from "@/domain/admin/file/file-parser/service";
-
+import { ImagePreview } from "../ImageReview/page";
 type ListImageQuestionProps = {
   rowIndex: number;
   // images
@@ -41,14 +41,7 @@ export default function ListImageQuestion({
       {/* ===== QUESTION IMAGES ===== */}
       {imagesQuestion.map((src, index) => (
         <div key={`q-${index}`} className={styles.imageWrapperSmall}>
-          <img
-            src={FileParserService.getImageUrl(src)}
-            alt={`question-img-${index}`}
-            width={300}
-            height={0}
-            style={{ height: "auto" }}
-            className={styles.image}
-          />
+          <ImagePreview filename={src}/>
           <button
             className={styles.removeBtn}
             onClick={() =>
@@ -63,14 +56,7 @@ export default function ListImageQuestion({
       {/* ===== ANSWER IMAGES ===== */}
       {imagesAnswer.map((src, index) => (
         <div key={`a-${index}`} className={styles.imageWrapperSmall}>
-          <img
-            src={FileParserService.getImageUrl(src)}
-            alt={FileParserService.getImageUrl(src)}
-            width={300}
-            height={0}
-            style={{ height: "auto" }}
-            className={styles.image}
-          />
+           <ImagePreview filename={src}/>
           <button
             className={styles.removeBtn}
             onClick={() => {
