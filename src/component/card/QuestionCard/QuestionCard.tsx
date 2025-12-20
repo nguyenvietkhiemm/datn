@@ -6,7 +6,7 @@ import styles from "./QuestionCard.module.css";
 import { Question } from "@/domain/admin/questions/type";
 import { API_URL } from "@/lib/service";
 import { FileParserService } from "@/domain/admin/file/file-parser/service";
-
+import { ImagePreview } from "@/component/questionCreate/ImageReview/page";
 interface QuestionCardProps {
     question: Question;
     rowIndex: number;
@@ -71,13 +71,7 @@ export default function QuestionCard({
                 <div className={styles.imageGroup}>
                     {question?.images?.map((src, index) => (
                         <div key={index} className={styles.imageWrapper}>
-                            <img
-                                src={FileParserService.getImageUrl(src)}
-                                alt={`question-img-${index}`}
-                                width={300}
-                                height={200}
-                                className={styles.image}
-                            />
+                            <ImagePreview filename={src}/>
                         </div>
                     ))}
                 </div>
@@ -103,14 +97,7 @@ export default function QuestionCard({
                             <div className={styles.imageGroupSmall}>
                                 {ans.images?.map((src, index) => (
                                     <div key={index} className={styles.imageWrapperSmall}>
-                                        <img
-                                            src={FileParserService.getImageUrl(src)}
-                                            alt={`answer-img-${index}`}
-                                            width={300}
-                                            height={0}
-                                            style={{ height: "auto" }}
-                                            className={styles.image}
-                                        />
+                                        <ImagePreview filename={src}/>
                                     </div>
                                 ))}
                             </div>

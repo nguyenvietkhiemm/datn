@@ -1,7 +1,6 @@
 import { JsonAnswer, JsonQuestion } from "./type";
-import {  API_URL, getHeaders } from "@/lib/service";
 import { FileParserModel } from "./model";
-
+import { API_URL, getToken, getHeaders } from "@/lib/service";
 export const FileParserService = {
     // Hàm trích xuất các hình ảnh từ câu hỏi
 
@@ -23,8 +22,17 @@ export const FileParserService = {
         return result.data || [];
     },
 
+    async getImageUrl(filename: string): Promise<string> {
+        const res = await fetch(
+            `${API_URL}/file/images/signed/${filename}`,
+            {
+                headers: getHeaders(getToken())
+            }
+        );
 
-    getImageUrl (filename: string) {return `${API_URL}/file/images/${filename}`;},
+        const json = await res.json();
+        return json.data.url; 
+    },
 
     async saveJson(name: string, jsonData: JsonQuestion[], token?: string) {
         const url = `${API_URL}/json/save/${name}`;

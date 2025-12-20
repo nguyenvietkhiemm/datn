@@ -2,7 +2,7 @@
 import { useState } from "react";
 import styles from "./Search.module.css";
 
-type SearchType = "question" | "user" | "exam";
+type SearchType = "question" | "user" | "exam" | "document";
 
 type SearchProp = {
   setSearchKeyword?: (data: string) => void;
@@ -14,6 +14,7 @@ const PLACEHOLDER_MAP: Record<SearchType, string> = {
   question: "Tìm theo nội dung câu hỏi...",
   user: "Tìm theo tên hoặc email người dùng...",
   exam: "Tìm theo tên đề thi...",
+  document: "TÌm theo tên tài liệu..."
 };
 
 export default function Search({
