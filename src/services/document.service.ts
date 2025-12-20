@@ -3,40 +3,50 @@ import { Document } from "../models/document.model";
 import pool from "../config/database";
 
 const DocumentService = {
-    async getAll(page: number = 1): Promise<{ document: Document[]; totalPages: number } | []> {
-        const limit = 12;
-        const offset = (page - 1) * limit;
+    async getAll(
+        page: number = 1
+    ): Promise<{ document: Document[]; totalPages: number }> {
 
-        // Lấy danh sách document kèm tên topic
+        const limit = 12;
+
+        // ✅ sanitize page
+        const safePage =
+            Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
+
+        const offset = (safePage - 1) * limit;
+
         const queryText = `
-            SELECT 
-              d.document_id,
-              d.title,
-              d.link,
-              d.topic_id,
-              d.available,
-              d.embedding,
-              d.created_at,
-              t.title AS topic_title
-            FROM document d
-            JOIN topic t ON d.topic_id = t.topic_id
-            WHERE d.available = true
-            ORDER BY d.document_id DESC
-            LIMIT $1 OFFSET $2
-          `;
+                SELECT 
+                d.document_id,
+                d.title,
+                d.link,
+                d.topic_id,
+                d.available,
+                d.embedding,
+                d.created_at,
+                t.title AS topic_title
+                FROM document d
+                JOIN topic t ON d.topic_id = t.topic_id
+                WHERE d.available = true
+                ORDER BY d.document_id DESC
+                LIMIT $1 OFFSET $2
+            `;
 
         const result = await query(queryText, [limit, offset]);
 
-        // Đếm tổng số document
         const countResult = await query(
-            "SELECT COUNT(*) as total FROM document WHERE available = true"
+            `SELECT COUNT(*)::int AS total FROM document WHERE available = true`
         );
 
-        const totalItems = parseInt(countResult.rows[0].total, 10);
+        const totalItems = countResult.rows[0].total;
         const totalPages = Math.ceil(totalItems / limit);
 
-        return { document: result.rows, totalPages };
+        return {
+            document: result.rows,
+            totalPages,
+        };
     },
+
 
     async create(document: Document, fileLink: string): Promise<Document | null> {
 

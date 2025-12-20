@@ -73,4 +73,62 @@ microserviceRoute.post(
 );
 
 
+/**
+ * @openapi
+ * /microservice/llm/vectorize:
+ *   post:
+ *     summary: Vectorize danh sách tài liệu (PDF/DOCX) cho RAG
+ *     tags:
+ *       - LLM
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - file_paths
+ *             properties:
+ *               file_paths:
+ *                 type: array
+ *                 description: Danh sách đường dẫn file trên server để vector hóa
+ *                 items:
+ *                   type: string
+ *                   example: "/resources/docx_file/36_Thpt-Cumgar.docx"
+ *     responses:
+ *       200:
+ *         description: Vectorize thành công
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: number
+ *                   example: 200
+ *                 message:
+ *                   type: string
+ *                   example: Vectorization completed
+ *                 data:
+ *                   type: object
+ *                   nullable: true
+ *       202:
+ *         description: Job vectorize đã được nhận (xử lý async)
+ *       400:
+ *         description: Request không hợp lệ
+ *       401:
+ *         description: Không có quyền truy cập
+ *       500:
+ *         description: Lỗi server
+ */
+
+microserviceRoute.post(
+    "/llm/vectorize",
+    Authentication.AuthenticateToken,
+    MicroserviceController.vectorize
+);
+
 export default microserviceRoute;
+

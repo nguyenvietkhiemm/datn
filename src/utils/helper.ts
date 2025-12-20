@@ -1,4 +1,5 @@
 import path from "path";
+import slugify from "slugify";
 import crypto from "crypto";
 
 const IMAGE_SECRET = process.env.IMAGE_SIGN_SECRET || "image-secret";
@@ -14,6 +15,21 @@ export function normalizeImages(images: any[]): string[] {
             return null;
         })
         .filter(Boolean) as string[];
+}
+
+
+
+export function sanitizeFilename(originalName: string) {
+    const ext = path.extname(originalName);
+    const base = path.basename(originalName, ext);
+
+    const safeBase = slugify(base, {
+        lower: false,
+        strict: true,   // ❗ remove all special chars
+        locale: "vi",
+    });
+
+    return `${Date.now()}-${safeBase}${ext}`;
 }
 
 export function signImage(filename: string, exp: number) {

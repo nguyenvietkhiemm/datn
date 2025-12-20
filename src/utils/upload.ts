@@ -2,6 +2,7 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import crypto from "crypto";
+import { sanitizeFilename } from "./helper";
 
 /* =========================
  * PATH CONFIG
@@ -26,8 +27,7 @@ const pdfDirResource = path.join(__dirname, "../../resources/pdf_file");
 const docStorage = multer.diskStorage({
   destination: (_req, _file, cb) => cb(null, docDataDir),
   filename: (_req, file, cb) => {
-    const safeName = file.originalname.replace(/\s+/g, "_");
-    cb(null, `${Date.now()}-${safeName}`);
+    cb(null, sanitizeFilename(file.originalname));
   },
 });
 
@@ -47,8 +47,7 @@ export const docResourceStorage = multer.diskStorage({
   },
 
   filename: (_req, file, cb) => {
-    const safeName = file.originalname.replace(/\s+/g, "_");
-    cb(null, `${Date.now()}-${safeName}`);
+    cb(null, sanitizeFilename(file.originalname));
   },
 });
 
@@ -125,5 +124,3 @@ export const uploadDOCResource = multer({
   storage: docResourceStorage,
   fileFilter: docResourceFilter,
 });
-
-
