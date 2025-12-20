@@ -66,6 +66,7 @@ export default function ResultExam() {
 
             return (
               <ResultMultipleChoice
+                key={index}
                 q={q}
                 userSelectedIds={userSelectedIds}
                 isCorrect={isCorrect}
@@ -79,7 +80,7 @@ export default function ResultExam() {
           const userText = userData?.user_answer_text;
 
           return (
-            <ResultEssay q={q} index={index} userText={userText}/>
+            <ResultEssay q={q} index={index} userText={userText} />
           )
         })}
       </div>

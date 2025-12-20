@@ -7,10 +7,9 @@
   --background: #ffffff;
   --foreground: #171717;
 
-  /* Font family variables */
-  --font-header: Arial, Helvetica, sans-serif;
-  --font-heading: "Roboto Slab", serif;
-  --font-body: "Poppins", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-header: var(--font-header);
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
 }
 
 /* 🟦 Chế độ sáng / tối */
