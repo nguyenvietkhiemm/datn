@@ -24,6 +24,14 @@ const RobotoSlab = localFont({
   variable: "--font-heading",
 })
 
+
+
+export const metadata:Metadata = {
+  title: "Lò luyện Online",
+  description: "Mô tả website",
+};
+
+
 export default function RootLayout({
   children,
 }: {
