@@ -1,492 +1,333 @@
+-- Merged & ordered schema (ensure dependencies created before dependent tables)
+-- Date: 2025-12-20
+-- Notes:
+--  - This script assumes pgvector is available on the server.
+--  - Enums and extension are created first.
+--  - Tables are ordered so referenced tables/types exist before being used in foreign keys.
+--  - Indexes created at the end.
+
+-- 1) Extension
 CREATE EXTENSION IF NOT EXISTS vector;
 
+-- 2) ENUM types (create only if not exists)
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'flashcard_status') THEN
+    CREATE TYPE flashcard_status AS ENUM ('pending','done','miss');
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'roadmap_status') THEN
+    CREATE TYPE roadmap_status AS ENUM ('pending','done','skip','in_process');
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'study_status') THEN
+    CREATE TYPE study_status AS ENUM ('pending','done','miss');
+  END IF;
+END$$;
 
--- Roles
+-- 3) Roles
 CREATE TABLE IF NOT EXISTS role (
-    role_id SERIAL PRIMARY KEY,
-    role_name VARCHAR(50) NOT NULL UNIQUE
+  role_id SERIAL PRIMARY KEY,
+  role_name VARCHAR(50) NOT NULL UNIQUE
 );
 
--- seed roles
 INSERT INTO role (role_id, role_name)
 VALUES (1, 'USER'), (2, 'ADMIN')
 ON CONFLICT (role_id) DO NOTHING;
 
--- Users
+-- 4) Users (depends on role)
 CREATE TABLE IF NOT EXISTS "user" (
-    user_id SERIAL PRIMARY KEY,
-    user_name VARCHAR(100) NOT NULL,
-    email VARCHAR(200) UNIQUE,
-    password_hash VARCHAR(200),
-    birthday DATE,
-    created_at TIMESTAMPTZ DEFAULT now(),
-    role_id INT DEFAULT 1,
-    FOREIGN KEY (role_id) REFERENCES role(role_id)
+  user_id SERIAL PRIMARY KEY,
+  user_name VARCHAR(100) NOT NULL,
+  email VARCHAR(200) UNIQUE,
+  password_hash VARCHAR(200),
+  birthday DATE,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  updated_at TIMESTAMPTZ,
+  role_id INT DEFAULT 1 REFERENCES role(role_id) ON DELETE SET NULL,
+  available BOOLEAN DEFAULT true
 );
 
--- User update history
+-- 5) User update / history (depends on "user")
 CREATE TABLE IF NOT EXISTS user_update (
-    user_update_id SERIAL PRIMARY KEY,
-    user_name VARCHAR(100),
-    email VARCHAR(200),
-    password_hash VARCHAR(200),
-    birthday DATE,
-    created_at TIMESTAMPTZ DEFAULT now(),
-    role_id INT,
-    updated_by INT, -- người thực hiện update
-    user_id INT,
-    FOREIGN KEY (user_id) REFERENCES "user"(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (updated_by) REFERENCES "user"(user_id) ON DELETE SET NULL
+  user_update_id SERIAL PRIMARY KEY,
+  user_id INT REFERENCES "user"(user_id) ON DELETE CASCADE,
+  user_name VARCHAR(100),
+  email VARCHAR(200),
+  password_hash VARCHAR(200),
+  birthday DATE,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  updated_by INT REFERENCES "user"(user_id) ON DELETE SET NULL
 );
 
--- Subjects & topics
+-- 6) Subjects
 CREATE TABLE IF NOT EXISTS subject (
-    subject_id SERIAL PRIMARY KEY,
-    subject_name VARCHAR(50) NOT NULL
+  subject_id SERIAL PRIMARY KEY,
+  subject_name VARCHAR(100) NOT NULL,
+  subject_type INT DEFAULT 1,
+  available BOOLEAN DEFAULT true
 );
 
+-- 7) Topics (depends on subject)
 CREATE TABLE IF NOT EXISTS topic (
-    topic_id SERIAL PRIMARY KEY,
-    title TEXT NOT NULL,
-    description TEXT,
-    subject_id INT,
-    FOREIGN KEY (subject_id) REFERENCES subject(subject_id) ON DELETE SET NULL
+  topic_id SERIAL PRIMARY KEY,
+  title TEXT,
+  description TEXT,
+  subject_id INT REFERENCES subject(subject_id) ON DELETE SET NULL
 );
 
--- Roadmap steps + user mapping
+-- 8) Roadmap steps (depends on topic)
 CREATE TABLE IF NOT EXISTS roadmap_step (
-    roadmap_step_id SERIAL PRIMARY KEY,
-    title VARCHAR(100) NOT NULL,
-    description TEXT,
-    topic_id INT,
-    FOREIGN KEY (topic_id) REFERENCES topic(topic_id) ON DELETE SET NULL
+  roadmap_step_id SERIAL PRIMARY KEY,
+  title VARCHAR(200) NOT NULL,
+  description TEXT,
+  topic_id INT REFERENCES topic(topic_id) ON DELETE SET NULL
 );
 
--- Note: consider renaming 'in process' -> 'in_process' if using programmatic enums.
-DO $$
-BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'roadmap_status') THEN
-    CREATE TYPE roadmap_status AS ENUM ('pending', 'done', 'skip', 'in process');
-  END IF;
-END$$;
-
-CREATE TABLE IF NOT EXISTS user_roadmap_step (
-    user_roadmap_step_id SERIAL PRIMARY KEY,
-    status roadmap_status DEFAULT 'pending',
-    roadmap_step_id INT,
-    user_id INT,
-    FOREIGN KEY (roadmap_step_id) REFERENCES roadmap_step(roadmap_step_id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES "user"(user_id) ON DELETE CASCADE
-);
-
--- Documents
+-- 9) Documents (depends on topic)
 CREATE TABLE IF NOT EXISTS document (
-    document_id SERIAL PRIMARY KEY,
-    title TEXT NOT NULL,
-    link VARCHAR(250),
-    embedding vector(768),
-    created_at TIMESTAMPTZ DEFAULT now(),
-    topic_id INT,
-    FOREIGN KEY (topic_id) REFERENCES topic(topic_id) ON DELETE SET NULL
+  document_id SERIAL PRIMARY KEY,
+  title TEXT NOT NULL,
+  description TEXT,
+  link VARCHAR(500),
+  embedding vector(1536),
+  created_at TIMESTAMPTZ DEFAULT now(),
+  topic_id INT REFERENCES topic(topic_id) ON DELETE SET NULL,
+  available BOOLEAN DEFAULT true
 );
 
-CREATE TABLE IF NOT EXISTS roadmap_step_document (
-    roadmap_step_id INT NOT NULL,
-    document_id INT NOT NULL,
-    PRIMARY KEY (roadmap_step_id, document_id),
-    FOREIGN KEY (roadmap_step_id) REFERENCES roadmap_step(roadmap_step_id) ON DELETE CASCADE,
-    FOREIGN KEY (document_id) REFERENCES document(document_id) ON DELETE CASCADE
-);
-
+-- 10) Document history (depends on document and user)
 CREATE TABLE IF NOT EXISTS document_history (
-    document_history_id SERIAL PRIMARY KEY,
-    start_time TIMESTAMPTZ,
-    end_time TIMESTAMPTZ,
-    user_id INT,
-    document_id INT,
-    created_at TIMESTAMPTZ DEFAULT now(),
-    FOREIGN KEY (user_id) REFERENCES "user"(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (document_id) REFERENCES document(document_id) ON DELETE CASCADE
+  document_history_id SERIAL PRIMARY KEY,
+  start_time TIMESTAMPTZ,
+  end_time TIMESTAMPTZ,
+  user_id INT REFERENCES "user"(user_id) ON DELETE CASCADE,
+  document_id INT REFERENCES document(document_id) ON DELETE CASCADE,
+  created_at TIMESTAMPTZ DEFAULT now()
 );
 
--- Study schedule
-DO $$
-BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'study_status') THEN
-    CREATE TYPE study_status AS ENUM ('pending', 'done', 'miss');
-  END IF;
-END$$;
-
-CREATE TABLE IF NOT EXISTS study_schedule (
-    study_schedule_id SERIAL PRIMARY KEY,
-    title VARCHAR(500) NOT NULL,
-    description TEXT,
-    start_time TIMESTAMPTZ,
-    end_time TIMESTAMPTZ,
-    status study_status DEFAULT 'pending',
-    target_question INT,
-    created_at TIMESTAMPTZ DEFAULT now(),
-    update_at TIMESTAMPTZ DEFAULT now(),
-    subject_id INT,
-    FOREIGN KEY (subject_id) REFERENCES subject(subject_id) ON DELETE SET NULL
+-- 11) Chunk (depends on document)
+CREATE TABLE IF NOT EXISTS chunk (
+  chunk_id SERIAL PRIMARY KEY,
+  title TEXT NOT NULL,
+  text TEXT,
+  link VARCHAR(250),
+  embedding vector(384),
+  document_id INT REFERENCES document(document_id) ON DELETE CASCADE
 );
 
-DO $$
-BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'flashcard_status') THEN
-    CREATE TYPE flashcard_status AS ENUM ('pending', 'done', 'miss');
-  END IF;
-END$$;
+-- 12) Roadmap step <-> document mapping (depends on roadmap_step and document)
+CREATE TABLE IF NOT EXISTS roadmap_step_document (
+  roadmap_step_id INT NOT NULL,
+  document_id INT NOT NULL,
+  PRIMARY KEY (roadmap_step_id, document_id),
+  FOREIGN KEY (roadmap_step_id) REFERENCES roadmap_step(roadmap_step_id) ON DELETE CASCADE,
+  FOREIGN KEY (document_id) REFERENCES document(document_id) ON DELETE CASCADE
+);
 
--- Flashcards
+-- 13) User roadmap step (depends on roadmap_step and user)
+CREATE TABLE IF NOT EXISTS user_roadmap_step (
+  user_roadmap_step_id SERIAL PRIMARY KEY,
+  status roadmap_status DEFAULT 'pending',
+  roadmap_step_id INT REFERENCES roadmap_step(roadmap_step_id) ON DELETE CASCADE,
+  user_id INT REFERENCES "user"(user_id) ON DELETE CASCADE
+);
+
+-- 14) Flashcard deck (depends on user)
 CREATE TABLE IF NOT EXISTS flashcard_deck (
-    flashcard_deck_id SERIAL PRIMARY KEY,
-    title VARCHAR(500) NOT NULL,
-    description TEXT,
-    created_at TIMESTAMPTZ DEFAULT now(),
-    user_id INT,
-    FOREIGN KEY (user_id) REFERENCES "user"(user_id) ON DELETE CASCADE
+  flashcard_deck_id SERIAL PRIMARY KEY,
+  title VARCHAR(500) NOT NULL,
+  description TEXT,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  last_reviewed TIMESTAMPTZ,
+  user_id INT REFERENCES "user"(user_id) ON DELETE CASCADE
 );
 
+-- 15) Flashcard (depends on flashcard_deck)
 CREATE TABLE IF NOT EXISTS flashcard (
-    flashcard_id SERIAL PRIMARY KEY,
-    front TEXT NOT NULL,
-    back TEXT,
-    example TEXT DEFAULT"",
-    created_at TIMESTAMPTZ DEFAULT now(),
-    status flashcard_status DEFAULT 'pending',
-    flashcard_deck_id INT,
-    FOREIGN KEY (flashcard_deck_id) REFERENCES flashcard_deck(flashcard_deck_id) ON DELETE CASCADE
+  flashcard_id SERIAL PRIMARY KEY,
+  front TEXT NOT NULL,
+  back TEXT,
+  example TEXT DEFAULT '',
+  created_at TIMESTAMPTZ DEFAULT now(),
+  status flashcard_status DEFAULT 'pending',
+  flashcard_deck_id INT REFERENCES flashcard_deck(flashcard_deck_id) ON DELETE CASCADE
 );
 
-
-
--- Chat history
-CREATE TABLE IF NOT EXISTS chat_history (
-    chat_history_id SERIAL PRIMARY KEY,
-    is_user BOOLEAN,
-    message TEXT,
-    embedding vector(768),
-    created_at TIMESTAMPTZ DEFAULT now(),
-    user_id INT,
-    FOREIGN KEY (user_id) REFERENCES "user"(user_id) ON DELETE CASCADE
+-- 16) Study schedule (depends on user and subject)
+CREATE TABLE IF NOT EXISTS study_schedule (
+  study_schedule_id SERIAL PRIMARY KEY,
+  title VARCHAR(500) NOT NULL,
+  description TEXT,
+  start_time TIMESTAMPTZ,
+  end_time TIMESTAMPTZ,
+  status study_status DEFAULT 'pending',
+  target_question INT,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  update_at TIMESTAMPTZ DEFAULT now(),
+  user_id INT REFERENCES "user"(user_id),
+  subject_id INT REFERENCES subject(subject_id) ON DELETE SET NULL
 );
 
--- Progress & goals
-CREATE TABLE IF NOT EXISTS current_progress (
-    current_progress_id SERIAL PRIMARY KEY,
-    current_progress DECIMAL(4,2),
-    created_at TIMESTAMPTZ DEFAULT now(),
-    user_id INT,
-    FOREIGN KEY (user_id) REFERENCES "user"(user_id) ON DELETE CASCADE
-);
-
+-- 17) User goal (depends on user and subject)
 CREATE TABLE IF NOT EXISTS user_goal (
-    user_goal_id SERIAL PRIMARY KEY,
-    target_score DECIMAL(4,2),
-    deadline TIMESTAMPTZ,
-    user_id INT,
-    subject_id INT,
-    FOREIGN KEY (user_id) REFERENCES "user"(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (subject_id) REFERENCES subject(subject_id) ON DELETE SET NULL
+  user_goal_id SERIAL PRIMARY KEY,
+  target_score DECIMAL(5,2),
+  deadline TIMESTAMPTZ,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  user_id INT REFERENCES "user"(user_id) ON DELETE CASCADE,
+  subject_id INT REFERENCES subject(subject_id) ON DELETE SET NULL
 );
 
--- Exams
-CREATE TABLE IF NOT EXISTS exam_schedule (
-    exam_schedule_id SERIAL PRIMARY KEY,
-    start_time TIMESTAMPTZ,
-    end_time TIMESTAMPTZ,
-    created_at TIMESTAMPTZ DEFAULT now(),
-    updated_at TIMESTAMPTZ DEFAULT now()
+-- 18) Current progress (depends on user and optionally user_goal)
+CREATE TABLE IF NOT EXISTS current_progress (
+  current_progress_id SERIAL PRIMARY KEY,
+  current_progress DECIMAL(5,2),
+  created_at TIMESTAMPTZ DEFAULT now(),
+  user_id INT REFERENCES "user"(user_id) ON DELETE CASCADE,
+  user_goal_id INT REFERENCES user_goal(user_goal_id)
 );
 
-CREATE TABLE IF NOT EXISTS exam (
-    exam_id SERIAL PRIMARY KEY,
-    exam_name VARCHAR(100) NOT NULL,
-    created_at TIMESTAMPTZ DEFAULT now(),
-    time_limit INT,
-    topic_id INT,
-    exam_schedule_id INT,
-    FOREIGN KEY (topic_id) REFERENCES topic(topic_id) ON DELETE SET NULL,
-    FOREIGN KEY (exam_schedule_id) REFERENCES exam_schedule(exam_schedule_id) ON DELETE SET NULL
-);
-
-CREATE TABLE IF NOT EXISTS user_exam_answer (
-    user_exam_answer_id SERIAL PRIMARY KEY,
-    score DECIMAL(4,2),
-    created_at TIMESTAMPTZ DEFAULT now(),
-    user_id INT,
-    exam_id INT,
-    FOREIGN KEY (user_id) REFERENCES "user"(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (exam_id) REFERENCES exam(exam_id) ON DELETE CASCADE
-);
-
--- Questions & answers
-CREATE TABLE IF NOT EXISTS question (
-    question_id SERIAL PRIMARY KEY,
-    question_name VARCHAR() NOT NULL,
-    question_content TEXT
-);
-
-CREATE TABLE IF NOT EXISTS answer (
-    answer_id SERIAL PRIMARY KEY,
-    question_id INT NOT NULL,
-    answer_content TEXT NOT NULL,
-    is_correct BOOLEAN DEFAULT FALSE,
-    FOREIGN KEY (question_id) REFERENCES question(question_id) ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS question_exam (
-    question_id INT,
-    exam_id INT,
-    PRIMARY KEY (question_id, exam_id),
-    FOREIGN KEY (question_id) REFERENCES question(question_id) ON DELETE CASCADE,
-    FOREIGN KEY (exam_id) REFERENCES exam(exam_id) ON DELETE CASCADE
-);
-
--- Bank & mappings
+-- 19) Bank (depends on topic)
 CREATE TABLE IF NOT EXISTS bank (
-    bank_id SERIAL PRIMARY KEY,
-    description VARCHAR(200),
-    topic_id INT,
-    FOREIGN KEY (topic_id) REFERENCES topic(topic_id) ON DELETE SET NULL
+  bank_id SERIAL PRIMARY KEY,
+  description VARCHAR(500),
+  topic_id INT REFERENCES topic(topic_id) ON DELETE SET NULL,
+  time_limit INT,
+  available BOOLEAN DEFAULT true
 );
 
+-- 20) Question (standalone)
+CREATE TABLE IF NOT EXISTS question (
+  question_id SERIAL PRIMARY KEY,
+  question_name VARCHAR(1000),
+  question_content VARCHAR(10000),
+  embedding vector(1536),
+  image JSON,
+  type_question INT DEFAULT 1,
+  source VARCHAR(50),
+  available BOOLEAN DEFAULT true
+);
+
+-- 21) Answer (depends on question)
+CREATE TABLE IF NOT EXISTS answer (
+  answer_id SERIAL PRIMARY KEY,
+  question_id INT NOT NULL REFERENCES question(question_id) ON DELETE CASCADE,
+  answer_content VARCHAR(10000) NOT NULL,
+  is_correct BOOLEAN DEFAULT FALSE,
+  image JSON
+);
+
+-- 22) question_bank (depends on question and bank)
 CREATE TABLE IF NOT EXISTS question_bank (
-    question_id INT,
-    bank_id INT,
-    PRIMARY KEY (question_id, bank_id),
-    FOREIGN KEY (question_id) REFERENCES question(question_id) ON DELETE CASCADE,
-    FOREIGN KEY (bank_id
-    ) REFERENCES exam(bank_id
-    ) ON DELETE CASCADE
+  question_id INT NOT NULL REFERENCES question(question_id) ON DELETE CASCADE,
+  bank_id INT NOT NULL REFERENCES bank(bank_id) ON DELETE CASCADE,
+  PRIMARY KEY (question_id, bank_id)
 );
 
-CREATE TABLE IF NOT EXISTS question_bank (
-    question_id INT,
-    bank_id INT,
-    PRIMARY KEY (question_id, bank_id),
-    FOREIGN KEY (question_id) REFERENCES question(question_id) ON DELETE CASCADE,
-    FOREIGN KEY (bank_id) REFERENCES bank(bank_id) ON DELETE CASCADE
+-- 23) Exam schedule
+CREATE TABLE IF NOT EXISTS exam_schedule (
+  exam_schedule_id SERIAL PRIMARY KEY,
+  start_time TIMESTAMPTZ,
+  end_time TIMESTAMPTZ,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  updated_at TIMESTAMPTZ DEFAULT now()
 );
 
-CREATE TABLE IF NOT EXISTS user_bank_answer (
-    user_bank_answer_id SERIAL PRIMARY KEY,
-    created_at TIMESTAMPTZ DEFAULT now(),
-    bank_id INT,
-    user_id INT,
-    answer_id INT,
-    FOREIGN KEY (bank_id) REFERENCES bank(bank_id) ON DELETE SET NULL,
-    FOREIGN KEY (user_id) REFERENCES "user"(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (answer_id) REFERENCES answer(answer_id) ON DELETE SET NULL
+-- 24) Exam (depends on topic and exam_schedule)
+CREATE TABLE IF NOT EXISTS exam (
+  exam_id SERIAL PRIMARY KEY,
+  exam_name VARCHAR(200) NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  time_limit INT, -- minutes
+  topic_id INT REFERENCES topic(topic_id) ON DELETE SET NULL,
+  exam_schedule_id INT REFERENCES exam_schedule(exam_schedule_id) ON DELETE SET NULL,
+  description VARCHAR(200),
+  available BOOLEAN DEFAULT true
 );
 
--- Add available columns if not exists (safe)
-DO $$
-BEGIN
-  IF NOT EXISTS (
-    SELECT 1 FROM information_schema.columns 
-    WHERE table_name='user' AND column_name='available'
-  ) THEN
-    ALTER TABLE "user" ADD COLUMN available BOOLEAN DEFAULT true;
-  END IF;
-
-  IF NOT EXISTS (
-    SELECT 1 FROM information_schema.columns 
-    WHERE table_name='document' AND column_name='available'
-  ) THEN
-    ALTER TABLE document ADD COLUMN available BOOLEAN DEFAULT true;
-  END IF;
-  IF NOT EXISTS (
-    SELECT 1 FROM information_schema.columns 
-    WHERE table_name='subject' AND column_name='available'
-  ) THEN
-    ALTER TABLE subject ADD COLUMN available BOOLEAN DEFAULT true;
-  END IF;
-  IF NOT EXISTS (
-    SELECT 1 FROM information_schema.columns 
-    WHERE table_name='exam' AND column_name='available'
-  ) THEN
-    ALTER TABLE exam ADD COLUMN available BOOLEAN DEFAULT true;
-  END IF;
-
-  IF NOT EXISTS (
-    SELECT 1 FROM information_schema.columns 
-    WHERE table_name='question' AND column_name='available'
-  ) THEN
-    ALTER TABLE question ADD COLUMN available BOOLEAN DEFAULT true;
-  END IF;
-
-  IF NOT EXISTS (
-    SELECT 1 FROM information_schema.columns 
-    WHERE table_name='question' AND column_name='source'
-  ) THEN
-    ALTER TABLE question ADD COLUMN source VARCHAR(50);
-  END IF;
-
-  IF NOT EXISTS (
-    SELECT 1 FROM information_schema.columns 
-    WHERE table_name='bank' AND column_name='available'
-  ) THEN
-    ALTER TABLE bank ADD COLUMN available BOOLEAN DEFAULT true;
-  END IF;
-END$$;
-
--- Indexes
-CREATE INDEX IF NOT EXISTS idx_topic_subject ON topic(subject_id);
-CREATE INDEX IF NOT EXISTS idx_document_topic ON document(topic_id);
-CREATE INDEX IF NOT EXISTS idx_document_history_user ON document_history(user_id);
-CREATE INDEX IF NOT EXISTS idx_document_history_document ON document_history(document_id);
-CREATE INDEX IF NOT EXISTS idx_chat_history_user ON chat_history(user_id);
-CREATE INDEX IF NOT EXISTS idx_answer_question ON answer(question_id);
-CREATE INDEX IF NOT EXISTS idx_question_exam_exam ON question_exam(exam_id);
-CREATE INDEX IF NOT EXISTS idx_bank_topic ON bank(topic_id);
-CREATE INDEX IF NOT EXISTS idx_user_goal_user ON user_goal(user_id);
-
--- Optional: pgvector ANN index examples (run after you inserted vectors and tuned lists)
--- CREATE INDEX IF NOT EXISTS idx_document_embedding ON document USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
--- CREATE INDEX IF NOT EXISTS idx_chat_history_embedding ON chat_history USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
--- CREATE INDEX IF NOT EXISTS idx_question_embedding ON question USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
-
-ALTER TABLE question ALTER COLUMN question_name TYPE VARCHAR(1000);
-ALTER TABLE question ALTER COLUMN question_content TYPE VARCHAR(10000);
-ALTER TABLE answer ALTER COLUMN answer_content TYPE VARCHAR(10000);
-
-AAlTER TABLE public.question
-ADD COLUMN image JSON;
-
-AlTER TABLE public.answer
-ADD COLUMN image JSON;
-
-ALTER TABLE public.bank
-ADD COLUMN time_limit INT;
-
-ALTER TABLE public.question
-ADD COLUMN type_question INT DEFAULT 1;
-
-ALTER TABLE user_bank_answer
-ADD COLUMN user_answer_text TEXT;
-
-CREATE TABLE contestants(
-contestants_id SERIAL PRIMARY KEY,
-exam_id int,
-user_id int,
-
-FOREIGN KEY (exam_id) REFERENCES exam(exam_id) ON DELETE CASCADE
+-- 25) Contestants (depends on exam and user)
+CREATE TABLE IF NOT EXISTS contestants (
+  contestants_id SERIAL PRIMARY KEY,
+  exam_id INT REFERENCES exam(exam_id) ON DELETE CASCADE,
+  user_id INT REFERENCES "user"(user_id) ON DELETE CASCADE
 );
 
-ALTEr TABLE exam 
-ADD COLUMN description VARCHAR(200)
-
-ALTER TABLE subject ADD COLUMN subject_type INT DEFAULT 1;
-ALTER TABLE public.user_exam_answer
-ADD COLUMN answer_id INT ;
-
-ALTER TABLE public.user_exam_answer
-ADD COLUMN user_answer_text TEXT DEFAULT '';
-
-
-CREATE TABLE history_exam(
-history_exam_id SERIAL PRIMARY KEY,
-  exam_id INT NOT NULL,
-  user_id INT NOT NULL
-);
-
-ALTER TABLE public.user_exam_answer ADD COLUMN history_exam_id INT;
-
-ALTER TABLE user_exam_answer
-ADD CONSTRAINT fk_user_exam_answer_history
-FOREIGN KEY (history_exam_id)
-REFERENCES history_exam(history_exam_id)
-ON DELETE CASCADE;
-
-ALTER TABLE public.history_exam
-ADD COLUMN score DECIMAL(4,2),
-ADD COLUMN time_test VARCHAR(5);
-
-ALTER TABLE history_exam
-ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
-
-CREATE TABLE history_bank(
-history_bank_id SERIAL PRIMARY KEY,
-  bank_id INT NOT NULL,
-  user_id INT NOT NULL,
+-- 26) history_exam (depends on exam and user)
+CREATE TABLE IF NOT EXISTS history_exam (
+  history_exam_id SERIAL PRIMARY KEY,
+  exam_id INT NOT NULL REFERENCES exam(exam_id) ON DELETE CASCADE,
+  user_id INT NOT NULL REFERENCES "user"(user_id) ON DELETE CASCADE,
   score DECIMAL(4,2),
   time_test VARCHAR(5),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-ALTER TABLE public.user_bank_answer ADD COLUMN history_bank_id INT;
-
-ALTER TABLE user_bank_answer
-ADD CONSTRAINT fk_user_bank_answer_history
-FOREIGN KEY (history_bank_id)
-REFERENCES history_bank(history_bank_id)
-ON DELETE CASCADE;
-
-ALTER TABLE public.user_bank_answer
-ADD COLUMN user_answer_text TEXT DEFAULT '';
-
-CREATE TABLE image_question (
-  image_question_id SERIAL PRIMARY KEY,
-  image_link TEXT,
-  question_id INT,
-  FOREIGN KEY (question_id) REFERENCES question(question_id) ON DELETE CASCADE
+-- 27) history_bank (depends on bank and user)
+CREATE TABLE IF NOT EXISTS history_bank (
+  history_bank_id SERIAL PRIMARY KEY,
+  bank_id INT NOT NULL REFERENCES bank(bank_id) ON DELETE CASCADE,
+  user_id INT NOT NULL REFERENCES "user"(user_id) ON DELETE CASCADE,
+  score DECIMAL(4,2),
+  time_test VARCHAR(5),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Add available columns if not exists (safe)
-DO $$
-BEGIN
-  IF NOT EXISTS (
-    SELECT 1 FROM information_schema.columns 
-    WHERE table_name='user' AND column_name='available'
-  ) THEN
-    ALTER TABLE "user" ADD COLUMN available BOOLEAN DEFAULT true;
-  END IF;
+-- 28) user_exam_answer (depends on user, exam, history_exam)
+CREATE TABLE IF NOT EXISTS user_exam_answer (
+  user_exam_answer_id SERIAL PRIMARY KEY,
+  score DECIMAL(5,2),
+  created_at TIMESTAMPTZ DEFAULT now(),
+  user_id INT REFERENCES "user"(user_id) ON DELETE CASCADE,
+  exam_id INT REFERENCES exam(exam_id) ON DELETE CASCADE,
+  answer_id INT, -- optional pointer to chosen answer
+  user_answer_text TEXT DEFAULT '',
+  history_exam_id INT,
+  CONSTRAINT fk_user_exam_answer_history FOREIGN KEY (history_exam_id) REFERENCES history_exam(history_exam_id) ON DELETE CASCADE
+);
 
+-- 29) user_bank_answer (depends on bank, user, answer, history_bank)
+CREATE TABLE IF NOT EXISTS user_bank_answer (
+  user_bank_answer_id SERIAL PRIMARY KEY,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  bank_id INT REFERENCES bank(bank_id) ON DELETE SET NULL,
+  user_id INT REFERENCES "user"(user_id) ON DELETE CASCADE,
+  answer_id INT REFERENCES answer(answer_id) ON DELETE SET NULL,
+  user_answer_text TEXT DEFAULT '',
+  history_bank_id INT,
+  CONSTRAINT fk_user_bank_answer_history FOREIGN KEY (history_bank_id) REFERENCES history_bank(history_bank_id) ON DELETE CASCADE
+);
 
-  IF NOT EXISTS (
-    SELECT 1 FROM information_schema.columns 
-    WHERE table_name='document' AND column_name='available'
-  ) THEN
-    ALTER TABLE document ADD COLUMN available BOOLEAN DEFAULT true;
-  END IF;
-  IF NOT EXISTS (
-    SELECT 1 FROM information_schema.columns 
-    WHERE table_name='subject' AND column_name='available'
-  ) THEN
-    ALTER TABLE subject ADD COLUMN available BOOLEAN DEFAULT true;
-  END IF;
-  IF NOT EXISTS (
-    SELECT 1 FROM information_schema.columns 
-    WHERE table_name='exam' AND column_name='available'
-  ) THEN
-    ALTER TABLE exam ADD COLUMN available BOOLEAN DEFAULT true;
-  END IF;
+-- 30) question_exam mapping (depends on question and exam)
+CREATE TABLE IF NOT EXISTS question_exam (
+  question_id INT NOT NULL REFERENCES question(question_id) ON DELETE CASCADE,
+  exam_id INT NOT NULL REFERENCES exam(exam_id) ON DELETE CASCADE,
+  PRIMARY KEY (question_id, exam_id)
+);
 
-  IF NOT EXISTS (
-    SELECT 1 FROM information_schema.columns 
-    WHERE table_name='question' AND column_name='available'
-  ) THEN
-    ALTER TABLE question ADD COLUMN available BOOLEAN DEFAULT true;
-  END IF;
+-- 31) Chat history (depends on user)
+CREATE TABLE IF NOT EXISTS chat_history (
+  chat_history_id SERIAL PRIMARY KEY,
+  user_id INT REFERENCES "user"(user_id) ON DELETE CASCADE,
+  is_user BOOLEAN,
+  role VARCHAR(20), -- 'user','assistant','system'
+  message TEXT,
+  embedding vector(1536),
+  created_at TIMESTAMPTZ DEFAULT now()
+);
 
-  IF NOT EXISTS (
-    SELECT 1 FROM information_schema.columns 
-    WHERE table_name='question' AND column_name='source'
-  ) THEN
-    ALTER TABLE question ADD COLUMN source VARCHAR(50);
-  END IF;
+-- 32) Image tables (depend on question/answer)
+CREATE TABLE IF NOT EXISTS image_question (
+  image_question_id SERIAL PRIMARY KEY,
+  image_link TEXT,
+  question_id INT REFERENCES question(question_id) ON DELETE CASCADE
+);
 
-  IF NOT EXISTS (
-    SELECT 1 FROM information_schema.columns 
-    WHERE table_name='bank' AND column_name='available'
-  ) THEN
-    ALTER TABLE bank ADD COLUMN available BOOLEAN DEFAULT true;
-  END IF;
-END$$;
+CREATE TABLE IF NOT EXISTS image_answer (
+  image_answer_id SERIAL PRIMARY KEY,
+  image_link TEXT,
+  answer_id INT REFERENCES answer(answer_id) ON DELETE CASCADE
+);
 
--- Indexes
+-- 33) Indexes (created after tables)
 CREATE INDEX IF NOT EXISTS idx_topic_subject ON topic(subject_id);
 CREATE INDEX IF NOT EXISTS idx_document_topic ON document(topic_id);
 CREATE INDEX IF NOT EXISTS idx_document_history_user ON document_history(user_id);
@@ -496,110 +337,12 @@ CREATE INDEX IF NOT EXISTS idx_answer_question ON answer(question_id);
 CREATE INDEX IF NOT EXISTS idx_question_exam_exam ON question_exam(exam_id);
 CREATE INDEX IF NOT EXISTS idx_bank_topic ON bank(topic_id);
 CREATE INDEX IF NOT EXISTS idx_user_goal_user ON user_goal(user_id);
+CREATE INDEX IF NOT EXISTS idx_user_email ON "user"(email);
 
--- Optional: pgvector ANN index examples (run after you inserted vectors and tuned lists)
+-- Optional pgvector ANN index suggestions (create these AFTER you have vectors and tested tuning lists):
 -- CREATE INDEX IF NOT EXISTS idx_document_embedding ON document USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
--- CREATE INDEX IF NOT EXISTS idx_chat_history_embedding ON chat_history USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
 -- CREATE INDEX IF NOT EXISTS idx_question_embedding ON question USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
+-- CREATE INDEX IF NOT EXISTS idx_chat_history_embedding ON chat_history USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
+-- CREATE INDEX IF NOT EXISTS idx_chunk_embedding ON chunk USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
 
-ALTER TABLE question ALTER COLUMN question_name TYPE VARCHAR(1000);
-ALTER TABLE question ALTER COLUMN question_content TYPE VARCHAR(10000);
-ALTER TABLE answer ALTER COLUMN answer_content TYPE VARCHAR(10000);
-AlTER TABLE public.question
-ADD COLUMN image JSON
-
-AlTER TABLE public.answer
-ADD COLUMN image JSON
-
-ALTER TABLE public.bank
-ADD COLUMN time_limit INT
-
-ALTER TABLE public.question
-ADD COLUMN type_question INT DEFAULT 1
-
-ALTER TABLE user_bank_answer
-ADD COLUMN user_answer_text TEXT;
-
-CREATE TABLE contestants(
-contestants_id SERIAL PRIMARY KEY,
-exam_id int,
-user_id int,
-
-FOREIGN KEY (exam_id) REFERENCES exam(exam_id) ON DELETE CASCADE
-)
-
-ALTEr TABLE exam 
-ADD COLUMN description VARCHAR(200)
-
-ALTER TABLE subject ADD COLUMN subject_type INT DEFAULT 1;
-ALTER TABLE public.user_exam_answer
-ADD COLUMN answer_id INT 
-
-ALTER TABLE public.user_exam_answer
-ADD COLUMN user_answer_text TEXT DEFAULT "" 
-
-CREATE TABLE history_exam(
-history_exam_id SERIAL PRIMARY KEY,
-  exam_id INT NOT NULL,
-  user_id INT NOT NULL
-)
-
-ALTER TABLE public.user_exam_answer ADD COLUMN history_exam_id INT
-
-ALTER TABLE user_exam_answer
-ADD CONSTRAINT fk_user_exam_answer_history
-FOREIGN KEY (history_exam_id)
-REFERENCES history_exam(history_exam_id)
-ON DELETE CASCADE;
-
-ALTER TABLE public.history_exam
-ADD COLUMN score DECIMAL(4,2),
-ADD COLUMN time_test VARCHAR(5)
-
-ALTER TABLE history_exam
-ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
-
-CREATE TABLE history_bank(
-history_bank_id SERIAL PRIMARY KEY,
-  bank_id INT NOT NULL,
-  user_id INT NOT NULL,
-  score DECIMAL(4,2),
-  time_test VARCHAR(5),
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
-)
-
-ALTER TABLE public.user_bank_answer ADD COLUMN history_bank_id INT
-
-ALTER TABLE user_bank_answer
-ADD CONSTRAINT fk_user_bank_answer_history
-FOREIGN KEY (history_bank_id)
-REFERENCES history_bank(history_bank_id)
-ON DELETE CASCADE;
-
-ALTER TABLE public.user_bank_answer
-ADD COLUMN user_answer_text TEXT DEFAULT "" 
-
-CREATE TABLE image_question(
-  image_question_id  SERIAL PRIMARY KEY,
-  image_link TEXT,
-  question_id INT,
-  FOREIGN KEY (question_id) REFERENCES question(question_id) ON DELETE CASCADE
-)
-
-CREATE TABLE image_answer(
-  image_answer_id  SERIAL PRIMARY KEY,
-  image_link TEXT,
-  answer_id INT,
-  FOREIGN KEY (answer_id) REFERENCES answer(answer_id) ON DELETE CASCADE
-)
-
-CREATE TABLE IF NOT EXISTS chunk (
-    chunk_id SERIAL PRIMARY KEY,
-    title TEXT NOT NULL,
-    text TEXT,
-    link VARCHAR(250),
-    embedding vector(384),
-    document_id INT,
-    FOREIGN KEY (document_id) REFERENCES document(document_id) ON DELETE CASCADE
-);
-
+-- End of ordered merged schema
