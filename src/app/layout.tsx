@@ -11,7 +11,7 @@ const robotoSlab = localFont({
     { path: "../assets/RobotoSlab-Medium.ttf", weight: "500" },
     { path: "../assets/RobotoSlab-Bold.ttf", weight: "700" },
   ],
-  variable: "--font-roboto-slab",
+  variable: "--font-heading",
   display: "swap",
 });
 
@@ -34,13 +34,13 @@ const poppins = localFont({
 //   display: "swap",
 // });
 
-const openSans = localFont({
-  src : [
-    {path : "../assets/OpenSans-Regular.ttf", weight : "400"},
-    {path : "../assets/OpenSans-Medium.ttf", weight : "500"}
-  ],
-  variable: "--font-heading",
-})
+// const openSans = localFont({
+//   src : [
+//     {path : "../assets/OpenSans-Regular.ttf", weight : "400"},
+//     {path : "../assets/OpenSans-Medium.ttf", weight : "500"}
+//   ],
+//   variable: "--font-heading",
+// })
 
 export default function RootLayout({
   children,
@@ -50,7 +50,7 @@ export default function RootLayout({
   return (
     <html
       lang="vi"
-      className={`${robotoSlab.variable} ${poppins.variable} ${openSans.variable}`}
+      className={`${robotoSlab.variable} ${poppins.variable} `}
     >
       <body className="antialiased font-body">
         <ClientLayout>
