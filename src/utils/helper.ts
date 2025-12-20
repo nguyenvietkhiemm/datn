@@ -1,4 +1,5 @@
 import path from "path";
+import slugify from "slugify";
 
 export function normalizeImages(images: any[]): string[] {
     if (!Array.isArray(images)) return [];
@@ -11,4 +12,19 @@ export function normalizeImages(images: any[]): string[] {
             return null;
         })
         .filter(Boolean) as string[];
+}
+
+
+
+export function sanitizeFilename(originalName: string) {
+  const ext = path.extname(originalName);
+  const base = path.basename(originalName, ext);
+
+  const safeBase = slugify(base, {
+    lower: false,
+    strict: true,   // ❗ remove all special chars
+    locale: "vi",
+  });
+
+  return `${Date.now()}-${safeBase}${ext}`;
 }
