@@ -3,82 +3,127 @@ import path from "path";
 import fs from "fs";
 import crypto from "crypto";
 
-const csvDir = path.join(__dirname, "../../data/uploads/csv");
-const docDir = path.join(__dirname, "../../data/uploads/docx");
+/* =========================
+ * PATH CONFIG
+ * ========================= */
+const docDataDir     = path.join(__dirname, "../../data/uploads/docx");
+const imageOutputDir = path.join(__dirname, "../../data/outputs/media");
 const docDirResource = path.join(__dirname, "../../resources/docx_file");
+const pdfDirResource = path.join(__dirname, "../../resources/pdf_file");
 
-[csvDir, docDir].forEach(dir => {
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+/* =========================
+ * INIT FOLDERS
+ * ========================= */
+[docDataDir, docDirResource, pdfDirResource, imageOutputDir].forEach((dir) => {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
 });
 
-// Storage CSV
-const csvStorage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, csvDir),
-  filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname.replace(/\s+/g, "_")),
-});
-
-// Storage DOC/DOCX/PDF data
+/* =========================
+ * DOC STORAGE
+ * ========================= */
 const docStorage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, docDir),
-  filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname.replace(/\s+/g, "_")),
+  destination: (_req, _file, cb) => cb(null, docDataDir),
+  filename: (_req, file, cb) => {
+    const safeName = file.originalname.replace(/\s+/g, "_");
+    cb(null, `${Date.now()}-${safeName}`);
+  },
 });
 
-// Storage DOC/DOCX/PDF
-const docResourceStorage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, docDirResource),
-  filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname.replace(/\s+/g, "_")),
+/* =========================
+ * DOC RESOURCE STORAGE
+ * ========================= */
+export const docResourceStorage = multer.diskStorage({
+  destination: (_req, file, cb) => {
+    const ext = path.extname(file.originalname).toLowerCase();
+
+    if (ext === ".pdf") {
+      return cb(null, pdfDirResource);
+    }
+
+    // mặc định docx
+    cb(null, docDirResource);
+  },
+
+  filename: (_req, file, cb) => {
+    const safeName = file.originalname.replace(/\s+/g, "_");
+    cb(null, `${Date.now()}-${safeName}`);
+  },
 });
 
-
-// Bộ lọc loại file
-const csvFilter = (req: any, file: Express.Multer.File, cb: any) => {
-  if (path.extname(file.originalname).toLowerCase() === ".csv") cb(null, true);
-  else cb(new Error("Chỉ chấp nhận file CSV"));
-};
-
-const docFilter = (req: any, file: Express.Multer.File, cb: any) => {
-  const allowed = [".doc", ".docx"];
+/* =========================
+ * FILE FILTERS
+ * ========================= */
+const docFilter = (
+  _req: any,
+  file: Express.Multer.File,
+  cb: multer.FileFilterCallback
+) => {
+  const allowedExt = [".doc", ".docx"];
   const ext = path.extname(file.originalname).toLowerCase();
-  if (allowed.includes(ext)) cb(null, true);
-  else cb(new Error("Chỉ chấp nhận file DOC, DOCX hoặc PDF"));
+
+  if (allowedExt.includes(ext)) {
+    cb(null, true);
+  } else {
+    cb(new Error("Chỉ chấp nhận file DOC hoặc DOCX"));
+  }
 };
 
-const docResourceFilter = (req: any, file: Express.Multer.File, cb: any) => {
-  const allowed = [".doc", ".docx", ".pdf"];
+const docResourceFilter = (
+  _req: any,
+  file: Express.Multer.File,
+  cb: multer.FileFilterCallback
+) => {
+  const allowedExt = [".docx", ".pdf"];
   const ext = path.extname(file.originalname).toLowerCase();
-  if (allowed.includes(ext)) cb(null, true);
-  else cb(new Error("Chỉ chấp nhận file DOC, DOCX hoặc PDF"));
+
+  if (allowedExt.includes(ext)) {
+    cb(null, true);
+  } else {
+    cb(new Error("Chỉ chấp nhận file DOCX hoặc PDF"));
+  }
 };
 
-// Export hai instance riêng
-export const uploadCSV = multer({ storage: csvStorage, fileFilter: csvFilter });
-export const uploadDOC = multer({ storage: docStorage, fileFilter: docFilter });
-
-export const uploadDOCResource = multer({ storage: docResourceStorage, fileFilter: docResourceFilter });
-
-//image question
-const uploadDir = path.join(__dirname, "../../data/outputs/media");
-
-const storage = multer.memoryStorage();
+/* =========================
+ * IMAGE UPLOAD (DEDUP BY HASH)
+ * ========================= */
+const imageStorage = multer.memoryStorage();
 
 export const uploadImage = multer({
-  storage,
+  storage: imageStorage,
   fileFilter: (_req, file, cb) => {
     const hash = crypto
       .createHash("md5")
       .update(file.buffer)
       .digest("hex");
 
-    const filePath = path.join(uploadDir, hash + path.extname(file.originalname));
+    const ext = path.extname(file.originalname);
+    const fileName = `${hash}${ext}`;
+    const filePath = path.join(imageOutputDir, fileName);
 
+    // File đã tồn tại → bỏ qua
     if (fs.existsSync(filePath)) {
       return cb(null, false);
     }
 
-    // gắn lại thông tin để lưu sau
-    (file as any).hashName = hash + path.extname(file.originalname);
+    // Gắn tên file hash để xử lý sau
+    (file as any).hashName = fileName;
     cb(null, true);
-    
-  }
+  },
 });
+
+/* =========================
+ * EXPORT UPLOADERS
+ * ========================= */
+export const uploadDOC = multer({
+  storage: docStorage,
+  fileFilter: docFilter,
+});
+
+export const uploadDOCResource = multer({
+  storage: docResourceStorage,
+  fileFilter: docResourceFilter,
+});
+
 
