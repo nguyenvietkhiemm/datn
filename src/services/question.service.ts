@@ -43,7 +43,7 @@ const QuestionService = {
             params.push(type_question);
             paramIndex++;
         }
-
+        
         // ===== SEARCH =====
         if (searchValue && searchValue.trim() !== "") {
             whereClause += `
