@@ -92,11 +92,13 @@ export default function DocumentPage() {
                             setFilterCondition={setFilterCondition}
                             setSearchKeyword={setSearchKeyword}
                         />
+
                         <Search
                             setSearchKeyword={setSearchKeyword}
                             setFilterCondition={setFilterCondition}
-                            typeSearch="documnet"
+                            typeSearch="document"
                         />
+
                     </div>
                 </div>
             </div>
