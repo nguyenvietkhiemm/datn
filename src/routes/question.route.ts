@@ -202,33 +202,6 @@ questionRoute.patch('/setAvailable/:id',
         Authentication.AuthorizeRoles(...ADMIN),
         QuestionController.setAvailable);
 
-/**
- * @openapi
- * /questions/create/csv/{filename}:
- *   post:
- *     summary: Import câu hỏi từ file CSV (Yêu cầu admin)
- *     tags:
- *       - Question
- *     parameters:
- *       - name: filename
- *         in: path
- *         required: true
- *         schema:
- *           type: string
- *         description: Tên file CSV (đã được upload trước)
- *     responses:
- *       201:
- *         description: Import câu hỏi thành công
- *       400:
- *         description: File CSV không hợp lệ hoặc không tồn tại
- *       500:
- *         description: Lỗi server
- */
-// questionRoute.post(
-//   '/create/csv/:filename',
-//   Authentication.AuthenticateToken,
-//   Authentication.AuthorizeRoles(...ADMIN),
-//   QuestionController.createByCsv
-// );
+
 
 export default questionRoute;
