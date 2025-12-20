@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import styles from "./ListImageQuestion.module.css";
 import { ChangeValue } from "@/domain/admin/file/file-parser/type";
 import { FileParserService } from "@/domain/admin/file/file-parser/service";
@@ -7,9 +8,11 @@ import { FileParserService } from "@/domain/admin/file/file-parser/service";
 type ListImageQuestionProps = {
   rowIndex: number;
 
+  // images
   imagesQuestion?: string[];
   imagesAnswer?: string[];
 
+  // chỉ dùng cho answer
   answerIndex?: number;
 
   handleChange: (
@@ -26,28 +29,33 @@ export default function ListImageQuestion({
   answerIndex,
   handleChange,
 }: ListImageQuestionProps) {
+  // không có ảnh nào thì không render
   if (
-    imagesQuestion.length === 0 &&
-    imagesAnswer.length === 0
+    (!imagesQuestion || imagesQuestion.length === 0) &&
+    (!imagesAnswer || imagesAnswer.length === 0)
   ) {
     return null;
   }
+  
 
   return (
     <div className={styles.previewWrap}>
       {/* ===== QUESTION IMAGES ===== */}
-      {imagesQuestion.map((filename, index) => (
+      {imagesQuestion.map((src, index) => (
         <div key={`q-${index}`} className={styles.imageWrapperSmall}>
           <img
-            src={FileParserService.getImageUrl(filename)}
+            src={FileParserService.getImageUrl(src)}
             alt={`question-img-${index}`}
-            style={{ width: 300, height: "auto" }}
+            width={300}
+            height={0}
+            style={{ height: "auto" }}
             className={styles.image}
-            loading="lazy"
           />
           <button
             className={styles.removeBtn}
-            onClick={() => handleChange(rowIndex, -11, index)}
+            onClick={() =>
+              handleChange(rowIndex, -11, index)
+            }
           >
             x
           </button>
@@ -55,14 +63,15 @@ export default function ListImageQuestion({
       ))}
 
       {/* ===== ANSWER IMAGES ===== */}
-      {imagesAnswer.map((filename, index) => (
+      {imagesAnswer.map((src, index) => (
         <div key={`a-${index}`} className={styles.imageWrapperSmall}>
-          <img
-            src={FileParserService.getImageUrl(filename)}
+          <Image
+            src={src}
             alt={`answer-img-${index}`}
-            style={{ width: 300, height: "auto" }}
+            width={300}
+            height={0}
+            style={{ height: "auto" }}
             className={styles.image}
-            loading="lazy"
           />
           <button
             className={styles.removeBtn}

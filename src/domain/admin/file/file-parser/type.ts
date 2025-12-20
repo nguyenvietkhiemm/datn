@@ -5,7 +5,6 @@ export interface JsonAnswer {
     images?: any[]; // images
     label?: string;
     is_correct: boolean;
-    newImages?: File[];
 }
 
 export interface JsonQuestion {
@@ -16,7 +15,6 @@ export interface JsonQuestion {
         math: any[];
         images: any[]; // images
         label: string;
-        newImages?: File[];
     };
     answers: JsonAnswer[];
 }

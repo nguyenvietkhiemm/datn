@@ -235,16 +235,16 @@ export default function JsonDetailPage() {
     };
 
     const handleSubmitQuestionToBE = async (row: JsonQuestion) => {
-        // try {
-        //     const payload = await QuestionModel.buildPayload(row, images)
+        try {
+            const payload = await QuestionModel.buildPayload(row);
 
-        //     await QuestionService.createQuestionWithAnswers(payload);
+            await QuestionService.createQuestionWithAnswers(payload);
 
-        //     alert("Đã lưu câu hỏi vào hệ thống!");
-        // } catch (err) {
-        //     console.error("Submit question failed:", err);
-        //     alert("Lỗi khi lưu câu hỏi");
-        // }
+            alert("Đã lưu câu hỏi vào hệ thống!");
+        } catch (err) {
+            console.error("Submit question failed:", err);
+            alert("Lỗi khi lưu câu hỏi");
+        }
     };
 
     const handleSubmitAll = async () => {
@@ -294,14 +294,12 @@ export default function JsonDetailPage() {
                                 type_question: row.question.type_question,
                                 //  Tách ảnh của question
                                 images: row.question.images,
-                                newImages: row.question.newImages,
                                 //  Tách ảnh của từng answer
                                 answers: row.answers.map((a, i) => ({
                                     answer_id: i,
                                     answer_content: a.text,
                                     is_correct: a.is_correct,
                                     images:a.images,
-                                    newImages: a.newImages
                                 })),
                             }}
                             rowIndex={rowIndex}

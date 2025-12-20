@@ -5,6 +5,7 @@ import AutoResizeTextarea from "@/component/textarea/AutoResizeTextarea";
 import styles from "./QuestionCard.module.css";
 import { Question } from "@/domain/admin/questions/type";
 import { API_URL } from "@/lib/service";
+import { FileParserService } from "@/domain/admin/file/file-parser/service";
 
 interface QuestionCardProps {
     question: Question;
@@ -71,7 +72,7 @@ export default function QuestionCard({
                     {question?.images?.map((src, index) => (
                         <div key={index} className={styles.imageWrapper}>
                             <img
-                                src={`${API_URL}${src}`}
+                                src={FileParserService.getImageUrl(src)}
                                 alt={`question-img-${index}`}
                                 width={300}
                                 height={200}
@@ -103,7 +104,7 @@ export default function QuestionCard({
                                 {ans.images?.map((src, index) => (
                                     <div key={index} className={styles.imageWrapperSmall}>
                                         <img
-                                            src={`${API_URL}${src}`}
+                                            src={FileParserService.getImageUrl(src)}
                                             alt={`answer-img-${index}`}
                                             width={300}
                                             height={0}

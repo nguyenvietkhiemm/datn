@@ -3,6 +3,7 @@
 import Image from "next/image";
 import styles from "./ImagePanelEdit.module.css";
 import { ChangeValue } from "@/domain/admin/file/file-parser/type";
+import { FileParserService } from "@/domain/admin/file/file-parser/service";
 
 type ImageManagePanelProps = {
     rowIndex: number;
@@ -44,7 +45,7 @@ export default function ImageManagePanel({
                     {questionImages.length === 0 && <p>Không có ảnh</p>}
                     {questionImages.map((img, i) => (
                         <div key={`q-${i}`} className={styles.imageItem}>
-                            <Image src={img} alt="" width={120} height={0} />
+                            <img src={FileParserService.getImageUrl(img)} alt="" width={120} height={0} />
                             <button
                                 className={styles.addBtn}
                                 onClick={() => {
@@ -75,7 +76,7 @@ export default function ImageManagePanel({
                                     key={`a-${ansIndex}-${imgIndex}`}
                                     className={styles.imageItem}
                                 >
-                                    <Image src={img} alt="" width={120} height={0} />
+                                    <img src={FileParserService.getImageUrl(img)} alt="" width={120} height={0} />
                                     <button
                                         className={styles.addBtn}
                                         onClick={() => {
