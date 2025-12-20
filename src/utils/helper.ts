@@ -1,4 +1,7 @@
 import path from "path";
+import crypto from "crypto";
+
+const IMAGE_SECRET = process.env.IMAGE_SIGN_SECRET || "image-secret";
 
 export function normalizeImages(images: any[]): string[] {
     if (!Array.isArray(images)) return [];
@@ -13,10 +16,6 @@ export function normalizeImages(images: any[]): string[] {
         .filter(Boolean) as string[];
 }
 
-import crypto from "crypto";
-
-const IMAGE_SECRET = process.env.IMAGE_SIGN_SECRET || "image-secret";
-
 export function signImage(filename: string, exp: number) {
     const data = `${filename}:${exp}`;
     const sig = crypto
@@ -28,6 +27,7 @@ export function signImage(filename: string, exp: number) {
 }
 
 export function verifyImage(filename: string, exp: number, sig: string) {
+    if (Date.now() > exp * 1000) return false;
     const expected = signImage(filename, exp);
     return expected === sig;
 }

@@ -39,7 +39,7 @@ export class FileService {
             .filter(name => fs.existsSync(path.join(this.mediaDir, name)))
             .map(filename => ({ filename }));
     }
-
+    
     // ===== IMAGE STREAM =====
     static getImageStream(filename: string) {
         const filePath = path.join(this.mediaDir, filename);
@@ -54,12 +54,12 @@ export class FileService {
         };
     }
 
-    private static getMime(file: string) {
-        const ext = path.extname(file).toLowerCase();
+    private static getMime(filename: string): string {
+        const ext = path.extname(filename).toLowerCase();
         if (ext === ".png") return "image/png";
         if (ext === ".jpg" || ext === ".jpeg") return "image/jpeg";
         if (ext === ".gif") return "image/gif";
+        if (ext === ".webp") return "image/webp";
         return "application/octet-stream";
     }
-
 }

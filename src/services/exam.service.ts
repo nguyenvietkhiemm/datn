@@ -423,6 +423,7 @@ const ExamService = {
   ): Promise<{
     exam_id: number;
     history: {
+      hsitory_exam_id: number;
       score: number;
       time_test: number;
       created_at: Date;
@@ -430,7 +431,7 @@ const ExamService = {
   }> {
     try {
       const listQuery = 
-      `SELECT he.score, he.time_test, he.created_at, u.user_name
+      `SELECT he.history_exam_id, he.score, he.time_test, he.created_at, u.user_name
       FROM history_exam he
       JOIN "user" u ON u.user_id = he.user_id
       WHERE exam_id=$1
@@ -545,7 +546,7 @@ const ExamService = {
       `exam:${exam_id}:user:${user_id}`
     );
 
-    return { check: !hasDone };
+    return { check: true };
   },
 
   async markOverTime() {
