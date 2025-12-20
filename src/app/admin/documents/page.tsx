@@ -92,11 +92,11 @@ export default function DocumentPage() {
                             setFilterCondition={setFilterCondition}
                             setSearchKeyword={setSearchKeyword}
                         />
-                        <Search
+                        {/* <Search
                             setFilterDoc={setFilterDoc as any}
                             currentPage={currentPage}
                             setTotalPage={setTotalPage}
-                        />
+                        /> */}
                     </div>
                 </div>
             </div>

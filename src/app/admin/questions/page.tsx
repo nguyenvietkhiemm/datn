@@ -155,19 +155,7 @@ export default function Question() {
                         </div>
                         {/* Upload json */}
                         <div className={styles.json}>
-                            {/* <input
-                                type="file"
-                                accept=".json"
-                                ref={jsonInputRef}
-                                style={{ display: "none" }}
-                                onChange={handleUploadjson}
-                            />
-                            <Button
-                                variant="primary"
-                                size="md"
-                                onClick={() => jsonInputRef.current?.click()}>
-                                Thêm câu hỏi từ Json
-                            </Button> */}
+
                             <Button
                                 variant="primary"
                                 size="md"
@@ -176,6 +164,7 @@ export default function Question() {
                                 Danh sách Json
                             </Button>
                         </div>
+                        
                         <div className={styles.json}>
                             <Button
                                 variant="primary"
