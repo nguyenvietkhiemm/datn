@@ -1,21 +1,31 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { Home, Users, FileText, BookOpen, Settings, Calendar, Clock, Map } from "lucide-react";
+import {
+  LayoutDashboard,
+  Users,
+  Trophy,
+  Layers,
+  Tags,
+  HelpCircle,
+  CalendarClock,
+  FileText,
+  Route,
+} from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./Sidebar.module.css";
 
 const navItems = [
-  { name: "Dashboard", href: "/admin/dashboard", icon: Home },
+  { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
   { name: "Người dùng", href: "/admin/users", icon: Users },
-  { name: "Cuộc thi", href: "/admin/exams", icon: BookOpen },
+  { name: "Cuộc thi", href: "/admin/exams", icon: Trophy },
+  { name: "Bài luyện tập", href: "/admin/bank", icon: Layers },
+  { name: "Môn học và Tiêu đề", href: "/admin/topic_subject", icon: Tags },
+  { name: "Câu hỏi", href: "/admin/questions", icon: HelpCircle },
+  { name: "Lịch thi", href: "/admin/schedules", icon: CalendarClock },
   { name: "Tài liệu", href: "/admin/documents", icon: FileText },
-  { name: "Bài luyện tập ", href: "/admin/bank", icon: FileText },
-  { name: "Câu hỏi", href: "/admin/questions", icon: Settings },
-  { name: "Lịch thi", href: "/admin/schedules", icon: Calendar },
-  { name: "Lộ trình", href: "/admin/roadmap", icon: Map },
-  { name: "Môn học và Tiêu đề", href: "/admin/topic_subject", icon: Settings },
+  { name: "Lộ trình", href: "/admin/roadmap", icon: Route },
 ];
 
 export default function Sidebar() {
