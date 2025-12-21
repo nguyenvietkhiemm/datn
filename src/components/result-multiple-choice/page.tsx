@@ -51,11 +51,11 @@ export default function ResultMultipleChoice({ q, userSelectedIds, isCorrect, in
             {/* Đáp án đúng */}
             <div className={styles.answerRow}>
                 <span className={styles.label}>Đáp án đúng:</span>
-                <span className={styles.correctValue}>
+                {/* <span className={styles.correctValue}>
                     {q.correct_answers
                         .map(a => a.answer_content)
                         .join(", ")}
-                </span>
+                </span> */}
                 {q.correct_answers?.map((a, i) => (
                     <div key={`correct-${i}`}>
                         <p>{a.answer_content}</p>
