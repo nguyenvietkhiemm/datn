@@ -7,7 +7,8 @@ const DocumentService = {
         page: number = 1,
         status: string = "All",
         searchValue: string = "",
-        topicIds: number[] = []
+        topicIds: number | "All",
+        subject_id: number | "All"
     ): Promise<{ data: Document[]; totalPages: number }> {
 
         const limit = 12;
@@ -20,29 +21,36 @@ const DocumentService = {
         let params: any[] = [];
         let idx = 1;
 
-        /* ===== STATUS ===== */
-        if (status.toLowerCase() !== "All") {
-            conditions.push(`d.available = $${idx}`);
-            params.push(status === "true");
-            idx++;
-        }
-
-        /* ===== SEARCH ===== */
+        // Search
         if (searchValue.trim() !== "") {
             conditions.push(`
             (
-              unaccent(LOWER(d.title)) LIKE unaccent(LOWER($${idx}))
-              OR unaccent(LOWER(t.title)) LIKE unaccent(LOWER($${idx}))
-            )
-          `);
+                unaccent(LOWER(d.title)) LIKE unaccent(LOWER($${idx}))
+                OR unaccent(LOWER(t.title)) LIKE unaccent(LOWER($${idx}))
+              )
+        `);
             params.push(`%${searchValue}%`);
             idx++;
         }
 
-        /* ===== TOPIC FILTER ===== */
-        if (topicIds.length > 0) {
-            conditions.push(`d.topic_id = ANY($${idx}::int[])`);
+        // Status
+        if (status !== "All") {
+            conditions.push(`d.available = $${idx}`);
+            params.push(status);
+            idx++;
+        }
+
+        // Topic filter
+        if (topicIds !== "All") {
+            conditions.push(`d.topic_id = ($${idx})`);
             params.push(topicIds);
+            idx++;
+        }
+
+        //subject
+        if (subject_id !== "All") {
+            conditions.push(`sj.subject_id = ($${idx})`);
+            params.push(subject_id);
             idx++;
         }
 
@@ -61,6 +69,7 @@ const DocumentService = {
             t.title AS topic_title
           FROM document d
           LEFT JOIN topic t ON d.topic_id = t.topic_id
+          JOIN subject sj ON sj.subject_id = t.subject_id
           ${whereClause}
           ORDER BY d.document_id DESC
           LIMIT $${idx} OFFSET $${idx + 1}
@@ -73,6 +82,7 @@ const DocumentService = {
           SELECT COUNT(*)::int AS total
           FROM document d
           LEFT JOIN topic t ON d.topic_id = t.topic_id
+          JOIN subject sj ON sj.subject_id = t.subject_id
           ${whereClause}
         `;
 
