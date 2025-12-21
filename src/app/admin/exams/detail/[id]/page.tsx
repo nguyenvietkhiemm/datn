@@ -38,20 +38,9 @@ export default function ExamDetail() {
         fetchExamId()
     }, [id]);
 
-    useEffect(() => {
-        const storedExam = localStorage.getItem("exam");
-        if (storedExam) {
-            setExam(JSON.parse(storedExam));
-        }
-
-        return () => {
-            localStorage.removeItem("exam");
-        };
-    }, []);
-
-    const handleSelect = (questionId: number, answerId: number) => {
-        setAnswers({ ...answers, [questionId]: answerId });
-    };
+    // const handleSelect = (questionId: number, answerId: number) => {
+    //     setAnswers({ ...answers, [questionId]: answerId });
+    // };
 
     const scrollToQuestion = (questionId: number) => {
         questionRefs.current[questionId]?.scrollIntoView({
@@ -88,13 +77,13 @@ export default function ExamDetail() {
                                 <div className={styles.answers}>
                                     {q.answers.map((a) => (
                                         <label key={a.answer_id} className={styles.option}>
-                                            <input
+                                            {/* <input
                                                 type="radio"
                                                 name={`q-${q.question_id}`}
                                                 value={a.answer_id}
                                                 checked={answers[q.question_id] === a.answer_id}
                                                 onChange={() => handleSelect(q.question_id, a.answer_id)}
-                                            />
+                                            /> */}
                                             {a.answer_content}
                                             {a.images?.map((src, index) => (
                                                 <div key={`a-${index}`} className={styles.imageWrapperSmall}>

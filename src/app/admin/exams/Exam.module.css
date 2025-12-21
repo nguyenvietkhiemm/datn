@@ -140,6 +140,10 @@
   cursor: pointer;
 }
 
+.detailBtn{
+  cursor: pointer;
+}
+
 /* ---------- Loading ---------- */
 .loading {
   text-align: center;

@@ -9,8 +9,9 @@ import styles from "./Sidebar.module.css";
 const navItems = [
   { name: "Dashboard", href: "/admin/dashboard", icon: Home },
   { name: "Người dùng", href: "/admin/users", icon: Users },
-  { name: "Bài thi", href: "/admin/exams", icon: BookOpen },
+  { name: "Cuộc thi", href: "/admin/exams", icon: BookOpen },
   { name: "Tài liệu", href: "/admin/documents", icon: FileText },
+  { name: "Bài luyện tập ", href: "/admin/bank", icon: FileText },
   { name: "Câu hỏi", href: "/admin/questions", icon: Settings },
   { name: "Lịch thi", href: "/admin/schedules", icon: Calendar },
   { name: "Lộ trình", href: "/admin/roadmap", icon: Map },

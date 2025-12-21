@@ -83,7 +83,7 @@ export default function Exam() {
       ...prev,
       subject_id:
         filter.subject !== "All" ? filter.subject : undefined,
-      topic_ids:  filter.topic !== "All" ? filter.topic : undefined,
+      topic_ids: filter.topic !== "All" ? filter.topic : undefined,
       status:
         filter.status !== "All" ? filter.status : undefined,
     }))
@@ -97,7 +97,7 @@ export default function Exam() {
   if (loading) return <p className={styles.loading}>Đang tải danh sách bài thi...</p>;
 
   console.log(query);
-  
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -137,16 +137,17 @@ export default function Exam() {
         <tbody>
           {exams?.length > 0 ? (
             exams?.map((exam, index) => (
-              <tr key={exam.exam_id} onClick={() => detailExam(exam.exam_id, exam)}>
+              <tr key={exam.exam_id}>
                 <td>{index + 1}</td>
-                <td>{exam.exam_name}</td>
+                <td className={styles.detailBtn}
+                  onClick={() => detailExam(exam.exam_id, exam)}>{exam.exam_name}</td>
                 <td>{exam.time_limit}</td>
                 <td>{new Date(exam.created_at).toLocaleDateString("vi-VN")}</td>
                 <td
                   className={exam.available ? styles.active : styles.inactive}
                 >
                   {exam.available ? "Hoạt động" : "Không hoạt động"}
-                  {exam.available && (
+                  {
                     <span
                       className={styles.editIcon}
                       onClick={(e) => {
@@ -157,9 +158,9 @@ export default function Exam() {
                     >
                       ✎
                     </span>
-                  )}
+                  }
                 </td>
-                <td>{exam.title}</td>
+                <td>{exam.topic_name}</td>
                 <td>
                   <button
                     className={styles.delBtn}

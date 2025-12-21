@@ -1,5 +1,3 @@
-import { Topic, Subject } from "../topic_subject/type";
-
 export type Exam = {
     exam_id: number;
     exam_name: string;
@@ -8,7 +6,8 @@ export type Exam = {
     topic_id: number;
     exam_schedule_id: number;
     available: boolean;
-    title: string
+    title: string;
+    topic_name: string
 };
 
 export interface CsvFile {

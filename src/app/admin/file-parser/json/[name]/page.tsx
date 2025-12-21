@@ -237,7 +237,8 @@ export default function JsonDetailPage() {
     const handleSubmitQuestionToBE = async (row: JsonQuestion) => {
         try {
             const payload = await QuestionModel.buildPayload(row);
-
+            const check = row.answers.some((a) =>  a.is_correct === true)
+            if(!check) alert("Vui long chon cau tra loi dung")
             await QuestionService.createQuestionWithAnswers(payload);
 
             alert("Đã lưu câu hỏi vào hệ thống!");

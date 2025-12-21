@@ -1,11 +1,8 @@
 "use client";
 
-import Image from "next/image";
-import AutoResizeTextarea from "@/component/textarea/AutoResizeTextarea";
 import styles from "./QuestionCard.module.css";
 import { Question } from "@/domain/admin/questions/type";
-import { API_URL } from "@/lib/service";
-import { FileParserService } from "@/domain/admin/file/file-parser/service";
+import { answerLabel } from "@/lib/model";
 import { ImagePreview } from "@/component/questionCreate/ImageReview/page";
 interface QuestionCardProps {
     question: Question;
@@ -20,8 +17,6 @@ export default function QuestionCard({
     handleDelete,
     handleToggleAvailable
 }: QuestionCardProps) {
-
-    const answerLabel = (index: number) => String.fromCharCode(65 + index);
 
     return (
         <div className={styles.card}>
