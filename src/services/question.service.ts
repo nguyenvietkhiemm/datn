@@ -33,7 +33,7 @@ const QuestionService = {
         // ===== FILTER STATUS =====
         if (status && status !== "All") {
             whereClause += ` AND q.available = $${paramIndex}`;
-            params.push(status === "true");
+            params.push(status === status);
             paramIndex++;
         }
 
@@ -177,6 +177,7 @@ const QuestionService = {
             /* ================= ANSWERS ================= */
             if (payload.answers?.length) {
                 for (const ans of payload.answers) {
+                    
                     const aRes = await client.query(
                         `
                     INSERT INTO answer (

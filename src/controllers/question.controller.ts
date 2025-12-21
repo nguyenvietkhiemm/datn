@@ -21,17 +21,8 @@ const QuestionController = {
   async getAll(req: Request, res: Response) {
     const response: DefaultResponse<any> = await safeExecute(async () => {
       const page = Number(req.query.page) || 1;
-  
-      const status =
-        typeof req.query.available === "string"
-          ? req.query.available
-          : "All";
-  
-      const searchValue =
-        typeof req.query.keyword === "string"
-          ? req.query.keyword
-          : "";
-  
+      const status = req.query.available?.toString() || "All";
+      const searchValue =  req.query.keyword?.toString() || "";
       const type_question = Number(req.query.type_question)
   
       return {

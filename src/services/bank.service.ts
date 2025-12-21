@@ -3,47 +3,150 @@ import { Bank, DoBank } from "../models/bank.model";
 import { Question } from "../models/question.model";
 import { UserAnswerGrouped, AnswerCorrectGrouped } from "../models/bank.question.model";
 const BankService = {
-    async getById(id: number): Promise<Question[] | null> {
+    async getById(bankId: number): Promise<Question[] | null> {
         const queryText = `
-          SELECT q.*
+          SELECT
+            q.*,
+      
+            -- images của question
+            COALESCE(
+              (
+                SELECT json_agg(iq.image_link)
+                FROM image_question iq
+                WHERE iq.question_id = q.question_id
+              ),
+              '[]'
+            ) AS images,
+      
+            -- answers
+            COALESCE(
+              (
+                SELECT json_agg(
+                  json_build_object(
+                    'answer_id', a.answer_id,
+                    'question_id', a.question_id,
+                    'answer_content', a.answer_content,
+                    'is_correct', a.is_correct,
+      
+                    -- image của answer
+                    'images',
+                    COALESCE(
+                      (
+                        SELECT json_agg(ia.image_link)
+                        FROM image_answer ia
+                        WHERE ia.answer_id = a.answer_id
+                      ),
+                      '[]'
+                    )
+                  )
+                )
+                FROM answer a
+                WHERE a.question_id = q.question_id
+              ),
+              '[]'
+            ) AS answers
+      
           FROM bank b
           JOIN question_bank qb ON b.bank_id = qb.bank_id
           JOIN question q ON qb.question_id = q.question_id
           WHERE b.bank_id = $1
+          ORDER BY qb.question_id ASC
         `;
 
-        const result = await query(queryText, [id]);
+        const result = await query(queryText, [bankId]);
+
         if (!result.rows.length) return null;
 
-        // Lấy danh sách question_id
-        const questionIds = result.rows.map((q) => q.question_id);
+        return result.rows as Question[];
+    },
 
-        //Lấy danh sách answer theo question
-        const ansRes = await query(
-            `
-            SELECT answer_id, question_id, answer_content
-            FROM answer
-            WHERE question_id = ANY($1)
-          `,
-            [questionIds]
-        );
+    async listBank(
+        page: number,
+        status: string,
+        searchValue: string,
+        topicIds: number | "All",
+        subject_id: number | "All"
+    ): Promise<{ banks: Bank[]; totalPages: number }> {
 
-        // Gom answer theo question_id
-        const answerMap = ansRes.rows.reduce((acc, ans) => {
-            if (!acc[ans.question_id]) {
-                acc[ans.question_id] = [];
-            }
-            acc[ans.question_id].push(ans);
-            return acc;
-        }, {} as Record<number, any[]>);
+        const limit = 12;
+        const offset = (page - 1) * limit;
 
-        //  Gắn answers vào question
-        const questions = result.rows.map((q) => ({
-            ...q,
-            answers: answerMap[q.question_id] || [],
-        }));
+        const conditions: string[] = [];
+        const params: any[] = [];
+        let idx = 1;
 
-        return questions as Question[];
+        // Search (bank description + topic title)
+        if (searchValue.trim()) {
+            conditions.push(`
+            (
+              unaccent(lower(b.description)) LIKE unaccent(lower($${idx}))
+              OR
+              unaccent(lower(t.title)) LIKE unaccent(lower($${idx}))
+            )
+          `);
+            params.push(`%${searchValue}%`);
+            idx++;
+        }
+
+        // Status
+        if (status !== "All") {
+            conditions.push(`b.available = $${idx}`);
+            params.push(status === "true");
+            idx++;
+        }
+
+        // Topic (CHỈ 1 topic)
+        if (topicIds !== "All") {
+            conditions.push(`b.topic_id = $${idx}`);
+            params.push(topicIds);
+            idx++;
+        }
+
+        // Subject
+        if (subject_id !== "All") {
+            conditions.push(`sj.subject_id = $${idx}`);
+            params.push(subject_id);
+            idx++;
+        }
+
+        const whereClause = conditions.length
+            ? `WHERE ${conditions.join(" AND ")}`
+            : "";
+
+        // Query data
+        const dataQuery = `
+          SELECT
+            b.bank_id,
+            b.description,
+            b.topic_id,
+            b.available,
+            t.title AS topic_name
+          FROM bank b
+          JOIN topic t ON b.topic_id = t.topic_id
+          JOIN subject sj ON sj.subject_id = t.subject_id
+          ${whereClause}
+          ORDER BY b.bank_id DESC
+          LIMIT ${limit} OFFSET ${offset}
+        `;
+
+        // Count
+        const countQuery = `
+          SELECT COUNT(*) AS total
+          FROM bank b
+          JOIN topic t ON b.topic_id = t.topic_id
+          JOIN subject sj ON sj.subject_id = t.subject_id
+          ${whereClause}
+        `;
+
+        const [dataResult, countResult] = await Promise.all([
+            query(dataQuery, params),
+            query(countQuery, params),
+        ]);
+
+        return {
+            banks: dataResult.rows,
+            totalPages: Math.ceil(Number(countResult.rows[0].total) / limit),
+        };
     },
 
     async create(bank: Bank): Promise<Bank> {
