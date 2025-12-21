@@ -42,7 +42,7 @@ const Authentication = {
     return (req: Request, res: Response, next: NextFunction) => {
       try {
         const user_role = (req as any).user?.role_id;
-
+        
         if (!user_role) {
           return res.status(401).json({ message: "Unauthorized" });
         }

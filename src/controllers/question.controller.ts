@@ -8,27 +8,31 @@ import { parse } from "csv-parse/sync";
 import { stringify } from "csv-stringify/sync";
 
 const QuestionController = {
-  // async get(req: Request, res: Response) {
-  //   const questions = await QuestionService.get();
-  //   res.json(questions);
-  // },
 
+  async removeVietnameseTones(str: string) {
+    return str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/đ/g, "d")
+      .replace(/Đ/g, "D")
+      .toLowerCase();
+  },
+  
   async getAll(req: Request, res: Response) {
     const response: DefaultResponse<any> = await safeExecute(async () => {
       const page = Number(req.query.page) || 1;
   
       const status =
-        typeof req.query.status === "string"
-          ? req.query.status
+        typeof req.query.available === "string"
+          ? req.query.available
           : "All";
   
       const searchValue =
-        typeof req.query.searchValue === "string"
-          ? req.query.searchValue
+        typeof req.query.keyword === "string"
+          ? req.query.keyword
           : "";
   
       const type_question = Number(req.query.type_question)
-
   
       return {
         status: 200,
@@ -61,30 +65,6 @@ const QuestionController = {
     res.status(response.status).json(response);
   },
 
-  // async createByCsv(req: Request, res: Response) {
-  //   const response: DefaultResponse<any> = await safeExecute(async () => {
-  //     const { filename } = req.params;
-  //     const csvDir = path.join(process.cwd(), "data/final");
-  //     const filePath = path.join(csvDir, filename);
-
-  //     if (!fs.existsSync(csvDir)) {
-  //       fs.mkdirSync(csvDir, { recursive: true });
-  //     }
-
-  //     const questions = await parseQuestionsFromCSV(filePath);
-
-  //     const created = await QuestionService.create(questions);
-
-  //     return {
-  //       status: 201,
-  //       message: "Tạo câu hỏi thành công",
-  //       data: created
-  //     } as DefaultResponse<any>;
-  //   });
-
-  //   res.status(response.status).json(response);
-  // },
-
   async update(req: Request, res: Response) {
     const response: DefaultResponse<any> = await safeExecute(async () => {
       return {
@@ -98,7 +78,6 @@ const QuestionController = {
   },
 
   async setAvailable(req: Request, res: Response) {
-    console.log(req.body);
     const response: DefaultResponse<any> = await safeExecute(async () => {
       return {
         status: 202,
@@ -121,38 +100,6 @@ const QuestionController = {
 
     res.status(response.status).json(response);
   },
-
-  // async searchQuestions(req: Request, res: Response) {
-  //   const result: DefaultResponse<any> = await safeExecute(async () => {
-  //     return {
-  //       status: 200,
-  //       message: "Lấy danh sách câu hỏi thành công",
-  //       data: await QuestionService.searchQuestions(
-  //         String(req.query.searchValue),
-  //         Number(req.query.page)
-  //       ),
-  //     };
-  //   });
-
-  //   return res.status(result.status).json(result);
-  // },
-
-  // async filterQuestion(req: Request, res: Response) {
-  //   const result: DefaultResponse<any> = await safeExecute(async () => {
-  //     return {
-  //       status: 200,
-  //       message: "Lấy danh sách câu hỏi thành công",
-  //       data: await QuestionService.filterQuestions(
-  //         String(req.query?.question_name),
-  //         String(req.query?.source),
-  //         String(req.query?.status),
-  //         Number(req.query.page)
-  //       ),
-  //     }
-  //   })
-
-  //   return res.status(result.status).json(result);
-  // },
 
   async uploadQuestionImages (req: Request, res: Response) {
     try {

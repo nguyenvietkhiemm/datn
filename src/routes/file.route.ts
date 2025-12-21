@@ -2,7 +2,7 @@ import { Router } from "express";
 import { FileController } from "../controllers/file.controller";
 import { uploadImage } from "../utils/upload";
 import Authentication from "../middleware/authentication";
-import { uploadDOCResource } from '../utils/upload';
+import { uploadDOC } from '../utils/upload';
 import { ADMIN } from "../config/permission";
 
 
@@ -38,7 +38,7 @@ router.post(
 router.post("/docx/save/:filename",
   Authentication.AuthenticateToken,
   Authentication.AuthorizeRoles(...ADMIN),
-  uploadDOCResource.single("file"),
+  uploadDOC.single("file"),
   FileController.saveDocx
 );
 

@@ -13,10 +13,10 @@ export interface Exam {
     subject_name?: string
 }
 
-export interface DoExam {
+export type DoExam = {
     question_id: number;
-    user_answer: (string | number)[];
-}
+    user_answer: (number | string)[];
+};
 
 export type UserAnswerGrouped = {
     question_id: number;

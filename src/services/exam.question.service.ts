@@ -4,8 +4,9 @@ import { ExamQuestion } from "../models/exam.question.model";
 export const ExamQuestionService = {
     async add(selectedQuestions: { exam_id: number; question_id: number }[]) {
         const results = [];
-
+        
         for (const q of selectedQuestions) {
+            
             const res = await query(
                 `INSERT INTO question_exam (exam_id, question_id)
                  VALUES ($1, $2)

@@ -5,39 +5,61 @@ import { redis } from "../config/redis";
 
 const ExamService = {
 
-  async getById(id: number): Promise<Question[] | null> {
+  async getById(examId: number): Promise<Question[] | null> {
     const queryText = `
-          SELECT q.*
-          FROM exam b
-          JOIN question_exam qb ON b.exam_id = qb.exam_id
-          JOIN question q ON qb.question_id = q.question_id
-          WHERE b.exam_id = $1
-        `;
-    const result = await query(queryText, [id]);
+      SELECT
+        q.*,
+  
+        -- images của question
+        COALESCE(
+          (
+            SELECT json_agg(iq.image_link)
+            FROM image_question iq
+            WHERE iq.question_id = q.question_id
+          ),
+          '[]'
+        ) AS images,
+  
+        -- answers
+        COALESCE(
+          (
+            SELECT json_agg(
+              json_build_object(
+                'answer_id', a.answer_id,
+                'question_id', a.question_id,
+                'answer_content', a.answer_content,
+                'is_correct', a.is_correct,
+  
+                -- image của answer
+                'images',
+                COALESCE(
+                  (
+                      SELECT json_agg(ia.image_link)
+                      FROM image_answer ia
+                      WHERE ia.answer_id = a.answer_id
+                  ),
+                  '[]'
+                )
+              )
+            )
+            FROM answer a
+            WHERE a.question_id = q.question_id
+          ),
+          '[]'
+        ) AS answers
+  
+      FROM exam e
+      JOIN question_exam qe ON e.exam_id = qe.exam_id
+      JOIN question q ON qe.question_id = q.question_id
+      WHERE e.exam_id = $1
+      ORDER BY qe.question_id ASC
+    `;
+
+    const result = await query(queryText, [examId]);
+
     if (!result.rows.length) return null;
 
-    // Lấy danh sách question_id
-    const questionIds = result.rows.map((q) => q.question_id);
-
-    //lay danh sach cau tra loi
-    const ansRes = await query(
-      "SELECT answer_id, question_id, answer_content FROM answer WHERE question_id = ANY($1)",
-      [questionIds]
-    );
-
-    // Gom answer theo question_id
-    const answerMap = ansRes.rows.reduce((acc, ans) => {
-      (acc[ans.question_id] ||= []).push(ans);
-      return acc;
-    }, {} as Record<number, any[]>);
-
-    // Gắn answers vào từng question
-    const questions = result.rows.map((q) => ({
-      ...q,
-      answers: answerMap[q.question_id] || [],
-    }));
-
-    return questions as Question[];
+    return result.rows as Question[];
   },
 
   async create(data: Exam): Promise<Exam> {
@@ -93,13 +115,19 @@ const ExamService = {
     let conditions = [];
     let params = [];
     let idx = 1;
-
+    
     // Search
     if (searchValue.trim() !== "") {
-      conditions.push(`(LOWER(e.exam_name) LIKE LOWER($${idx}) OR LOWER(t.title) LIKE LOWER($${idx}))`);
+      conditions.push(`
+        (
+          unaccent(lower(e.exam_name)) LIKE unaccent(lower($${idx}))
+          OR
+          unaccent(lower(t.title)) LIKE unaccent(lower($${idx}))
+        )
+      `);
       params.push(`%${searchValue}%`);
       idx++;
-    }
+    }    
 
     // Status
     if (status !== "All") {
@@ -250,24 +278,40 @@ const ExamService = {
       let score = 0;
       for (const user of do_exam) {
         const info = map.get(user.question_id);
-        if (!info) continue;
+        if (!info || !user.user_answer || user.user_answer.length === 0) continue;
 
-        if (info.type_question === 1 &&
-          user.user_answer[0] == info.correct_answers[0]) {
-          score += 0.25;
+        /* ===== TYPE 1 ===== */
+        if (info.type_question === 1) {
+          if (Number(user.user_answer[0]) === info.correct_answers[0]) {
+            score += 0.25;
+          }
         }
+
+        /* ===== TYPE 2 ===== */
         else if (info.type_question === 2) {
-          const correct = user.user_answer.filter(
-            a => info.correct_answers.includes(Number(a))).length;
-          if (correct === 1) { score += 0.1 }
-          else if (correct === 2) { score += 0.25 }
-          else if (correct === 3) { score += 0.5 }
-          else score += 1;
+          const correctCount = user.user_answer.filter(a =>
+            info.correct_answers.includes(Number(a))
+          ).length;
+
+          if (correctCount === info.correct_answers.length) score += 1;
+          else if (correctCount === 3) score += 0.5;
+          else if (correctCount === 2) score += 0.25;
+          else if (correctCount === 1) score += 0.1;
         }
-        if (info.type_question === 3 &&
-          String(user.user_answer[0]).trim().toLowerCase() ===
-          String(info.correct_text).trim().toLowerCase()) {
-          score += subject_type === 1 ? 0.5 : 0.25;
+
+        /* ===== TYPE 3 ===== */
+        else if (info.type_question === 3) {
+          const userText = String(user.user_answer[0] || "")
+            .trim()
+            .toLowerCase();
+
+          const correctText = String(info.correct_text || "")
+            .trim()
+            .toLowerCase();
+
+          if (userText && userText === correctText) {
+            score += subject_type === 1 ? 0.5 : 0.25;
+          }
         }
       }
 
@@ -286,6 +330,7 @@ const ExamService = {
       // Insert user_exam_answer
       for (const user of do_exam) {
         for (const ans of user.user_answer) {
+          const isEssay = isNaN(Number(ans));
           await client.query(
             `
             INSERT INTO user_exam_answer
@@ -297,8 +342,8 @@ const ExamService = {
               exam_id,
               user_id,
               user.question_id,
-              Number(ans),
-              isNaN(Number(ans)) ? ans : null
+              isEssay ? null : Number(ans),
+              isEssay ? String(ans) : null
             ]
           );
         }
@@ -430,13 +475,13 @@ const ExamService = {
     }[];
   }> {
     try {
-      const listQuery = 
-      `SELECT he.history_exam_id, he.score, he.time_test, he.created_at, u.user_name
+      const listQuery =
+        `SELECT he.history_exam_id, he.score, he.time_test, he.created_at, u.user_name
       FROM history_exam he
       JOIN "user" u ON u.user_id = he.user_id
       WHERE exam_id=$1
       ORDER BY history_exam_id DESC`
-      const list = await query(listQuery, [ exam_id])
+      const list = await query(listQuery, [exam_id])
       if (!list || list.rows.length === 0) {
         return {
           exam_id,
@@ -463,46 +508,70 @@ const ExamService = {
     score: number | null;
     answer_correct: AnswerCorrectGrouped[];
   }> {
-  
-    /* ===== ĐÁP ÁN ĐÚNG (GROUP BY question_id + question_content) ===== */
+
+    /* ================= ĐÁP ÁN ĐÚNG + ẢNH ================= */
     const correctSql = `
       SELECT
         q.question_id,
         q.question_content,
         q.type_question,
+  
+        -- IMAGE QUESTION
+        COALESCE(
+          (
+            SELECT json_agg(iq.image_link)
+            FROM image_question iq
+            WHERE iq.question_id = q.question_id
+          ),
+          '[]'
+        ) AS images,
+  
+        -- CORRECT ANSWERS
         json_agg(
           json_build_object(
             'answer_id', a.answer_id,
-            'answer_content', a.answer_content
+            'answer_content', a.answer_content,
+  
+            -- IMAGE ANSWER (1 ảnh / đáp án)
+            'images',
+            COALESCE(
+              (
+                  SELECT json_agg(ia.image_link)
+                  FROM image_answer ia
+                  WHERE ia.answer_id = a.answer_id
+              ),
+              '[]'
+              )
           )
         ) AS correct_answers
+  
       FROM exam e
-      JOIN question_exam qb ON e.exam_id = qb.exam_id
-      JOIN question q ON qb.question_id = q.question_id
+      JOIN question_exam qe ON e.exam_id = qe.exam_id
+      JOIN question q ON qe.question_id = q.question_id
       JOIN answer a ON q.question_id = a.question_id
       WHERE e.exam_id = $1
         AND a.is_correct = true
-      GROUP BY q.question_id, q.question_content
+      GROUP BY q.question_id, q.question_content, q.type_question
       ORDER BY q.question_id;
     `;
-  
+
     const correctResult = await pool.query(correctSql, [exam_id]);
-  
-    /* ===== ĐÁP ÁN USER ===== */
+
+    /* ================= ĐÁP ÁN USER ================= */
     const userSql = `
       SELECT question_id, answer_id, user_answer_text
       FROM user_exam_answer
       WHERE history_exam_id = $1
       ORDER BY question_id;
     `;
-  
+
     const userResult = await pool.query(userSql, [history_exam_id]);
-  
+
     const userMap = new Map<number, UserAnswerGrouped>();
-  
+
     for (const row of userResult.rows) {
       const { question_id, answer_id, user_answer_text } = row;
-  
+
       if (!userMap.has(question_id)) {
         userMap.set(question_id, {
           question_id,
@@ -510,32 +579,32 @@ const ExamService = {
           user_answer_text: null
         });
       }
-  
+
       const item = userMap.get(question_id)!;
-  
+
       if (answer_id !== null) {
         item.answer_id.push(answer_id);
       }
-  
+
       if (user_answer_text !== null) {
         item.user_answer_text = user_answer_text;
       }
     }
-  
-    /* ===== SCORE ===== */
+
+    /* ================= SCORE ================= */
     const scoreResult = await pool.query(
       `SELECT score FROM history_exam WHERE history_exam_id = $1`,
       [history_exam_id]
     );
-  
+
     const score = scoreResult.rows[0]?.score ?? null;
-  
+
     return {
       user_answer: Array.from(userMap.values()),
       score,
       answer_correct: correctResult.rows
     };
-  },  
+  },
 
   async checkDoExam(
     exam_id: number,

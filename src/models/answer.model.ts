@@ -3,7 +3,7 @@ export interface Answer {
         question_id: number;
         answer_content: string;
         is_correct: boolean;
-        image?: string
+        images?: string
 }
 
 export type CreateAnswerInput = {

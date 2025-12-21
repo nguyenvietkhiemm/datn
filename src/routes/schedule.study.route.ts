@@ -7,6 +7,7 @@ const scheduleStudyRouter = Router();
 scheduleStudyRouter.get("/",
     Authentication.AuthenticateToken,
     StudyScheduleController.getAll);
+    
 scheduleStudyRouter.get("/filter",
     Authentication.AuthenticateToken,
     StudyScheduleController.filter);

@@ -6,7 +6,6 @@ const IMAGE_SECRET = process.env.IMAGE_SIGN_SECRET || "image-secret";
 
 export function normalizeImages(images: any[]): string[] {
     if (!Array.isArray(images)) return [];
-
     return images
         .map(img => {
             if (typeof img?.saved_path === "string") {
