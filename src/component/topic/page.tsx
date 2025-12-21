@@ -1,102 +1,58 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./Topic.module.css";
-import { TopicSubjectService } from "@/domain/admin/topic_subject/service";
 import type { Topic, Subject } from "@/domain/admin/topic_subject/type";
 import { TopicSubjectModel } from "@/domain/admin/topic_subject/model";
 
-type TopicProp = {
-    topics: Topic[],
-    setTopics: React.Dispatch<React.SetStateAction<Topic[]>>;
-}
+type Props = {
+    topics: Topic[];
+    subjects: Subject[];
+    onCreate: (t: Partial<Topic>) => void;
+    onUpdate: (id: number, t: Partial<Topic>) => void;
+    onDelete: (id: number) => void;
+};
 
-export default function TopicManager({ topics, setTopics }: TopicProp) {
-    const [subjects, setSubjects] = useState<Subject[]>([]);
-    // Form add topic
+export default function TopicManager({
+    topics,
+    subjects,
+    onCreate,
+    onUpdate,
+    onDelete,
+}: Props) {
     const [newTitle, setNewTitle] = useState("");
     const [newDesc, setNewDesc] = useState("");
-    const [newSubject, setNewSubject] = useState<number | null>(null);
-    // Editing
-    const [editingTopicId, setEditingTopicId] = useState<number | null>(null);
+    const [newSubject, setNewSubject] = useState<number | undefined>(undefined);
+    const [editingId, setEditingId] = useState<number | null>(null);
     const [editTopic, setEditTopic] = useState<Partial<Topic>>({});
-    const [errors, setErrors] = useState<{
-        title?: string;
-        description?: string;
-        subject_id?: string
-    }>({});
+    const [errors, setErrors] = useState<any>({});
 
-    useEffect(() => {
-        loadAll();
-    }, []);
+    const handleCreate = () => {
+        const valid = TopicSubjectModel.validate(
+            {
+                title: newTitle,
+                description: newDesc,
+                subject_id: newSubject,
+            },
+            {
+                title: true,
+                description: true,
+                subject: true,
+            },
+            setErrors
+        );
 
-    const loadAll = async () => {
-        try {
-            const topicData = await TopicSubjectService.fetchTopics();
-            const subjectData = await TopicSubjectService.fetchSubjects();
-            setTopics(topicData);
-            setSubjects(subjectData);
-        } catch (error) {
-            console.error(error);
-        }
-    };
+        if (!valid) return;
 
-    const handleCreate = async () => {
-        try {
-            const isValid = TopicSubjectModel.validate(
-                {
-                    title: newTitle,
-                    description: newDesc,
-                    subject_id: newSubject,
-                },
-                {
-                    title: true,
-                    description: true,
-                    subject: true,
-                },
-                setErrors
-            );
+        onCreate({
+            title: newTitle,
+            description: newDesc,
+            subject_id: newSubject,
+        });
 
-            if (!isValid) return;
-
-            const topic = await TopicSubjectService.createTopic(
-                newTitle,
-                newDesc,
-                newSubject ?? undefined
-            );
-
-            setTopics((prev) => [...prev, topic]);
-            setNewTitle("");
-            setNewDesc("");
-            setNewSubject(null);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    const handleSave = async (id: number) => {
-        try {
-            const updated = await TopicSubjectService.updateTopic(id, editTopic);
-
-            setTopics((prev) =>
-                prev.map((t) => (t.topic_id === id ? { ...t, ...updated } : t))
-            );
-
-            setEditingTopicId(null);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    const handleDelete = async (id: number) => {
-        if (!confirm("Xoá topic?")) return;
-
-        try {
-            await TopicSubjectService.deleteTopic(id);
-            setTopics((prev) => prev.filter((t) => t.topic_id !== id));
-        } catch (error) {
-            console.error(error);
-        }
+        setNewTitle("");
+        setNewDesc("");
+        setNewSubject(undefined);
     };
 
     return (
@@ -106,7 +62,6 @@ export default function TopicManager({ topics, setTopics }: TopicProp) {
             {/* FORM ADD */}
             <div className={styles.formRow}>
                 <input
-                    type="text"
                     placeholder="Tiêu đề..."
                     value={newTitle}
                     onChange={(e) => setNewTitle(e.target.value)}
@@ -114,29 +69,31 @@ export default function TopicManager({ topics, setTopics }: TopicProp) {
                 {errors.title && <p className={styles.error}>{errors.title}</p>}
 
                 <input
-                    type="text"
                     placeholder="Mô tả..."
                     value={newDesc}
                     onChange={(e) => setNewDesc(e.target.value)}
                 />
-                {errors.description && <p className={styles.error}>{errors.description}</p>}
+                {errors.description && (
+                    <p className={styles.error}>{errors.description}</p>
+                )}
 
                 <select
                     value={newSubject ?? ""}
                     onChange={(e) =>
-                        setNewSubject(e.target.value ? Number(e.target.value) : null)
+                        setNewSubject(
+                            e.target.value ? Number(e.target.value) : undefined
+                        )
                     }
                 >
                     <option value="">— Subject —</option>
                     {subjects.map((s) => (
-                        <option value={s.subject_id} key={s.subject_id}>
+                        <option key={s.subject_id} value={s.subject_id}>
                             {s.subject_name}
                         </option>
                     ))}
                 </select>
-                {errors.subject_id && <p className={styles.error}>{errors.subject_id}</p>}
 
-                <button onClick={handleCreate}>Thêm Topic</button>
+                <button onClick={handleCreate}>Thêm</button>
             </div>
 
             {/* TABLE */}
@@ -152,20 +109,16 @@ export default function TopicManager({ topics, setTopics }: TopicProp) {
                 </thead>
 
                 <tbody>
-                    {topics?.map((t) => (
+                    {topics.map((t) => (
                         <tr key={t.topic_id}>
                             <td>{t.topic_id}</td>
 
-                            {/* TITLE */}
                             <td>
-                                {editingTopicId === t.topic_id ? (
+                                {editingId === t.topic_id ? (
                                     <input
                                         value={editTopic.title ?? ""}
                                         onChange={(e) =>
-                                            setEditTopic((prev) => ({
-                                                ...prev,
-                                                title: e.target.value
-                                            }))
+                                            setEditTopic((p) => ({ ...p, title: e.target.value }))
                                         }
                                     />
                                 ) : (
@@ -173,15 +126,14 @@ export default function TopicManager({ topics, setTopics }: TopicProp) {
                                 )}
                             </td>
 
-                            {/* DESCRIPTION */}
                             <td>
-                                {editingTopicId === t.topic_id ? (
+                                {editingId === t.topic_id ? (
                                     <input
                                         value={editTopic.description ?? ""}
                                         onChange={(e) =>
-                                            setEditTopic((prev) => ({
-                                                ...prev,
-                                                description: e.target.value
+                                            setEditTopic((p) => ({
+                                                ...p,
+                                                description: e.target.value,
                                             }))
                                         }
                                     />
@@ -190,17 +142,14 @@ export default function TopicManager({ topics, setTopics }: TopicProp) {
                                 )}
                             </td>
 
-                            {/* SUBJECT SELECT */}
                             <td>
-                                {editingTopicId === t.topic_id ? (
+                                {editingId === t.topic_id ? (
                                     <select
                                         value={editTopic.subject_id ?? ""}
                                         onChange={(e) =>
-                                            setEditTopic((prev) => ({
-                                                ...prev,
-                                                subject_id: e.target.value
-                                                    ? Number(e.target.value)
-                                                    : null
+                                            setEditTopic((p) => ({
+                                                ...p,
+                                                subject_id: Number(e.target.value),
                                             }))
                                         }
                                     >
@@ -218,12 +167,21 @@ export default function TopicManager({ topics, setTopics }: TopicProp) {
                             </td>
 
                             <td>
-                                {editingTopicId === t.topic_id ? (
+                                {editingId === t.topic_id ? (
                                     <>
-                                        <button className={styles.saveBtn} onClick={() => handleSave(t.topic_id)}>
+                                        <button
+                                            className={styles.saveBtn}
+                                            onClick={() => {
+                                                onUpdate(t.topic_id, editTopic);
+                                                setEditingId(null);
+                                            }}
+                                        >
                                             Lưu
                                         </button>
-                                        <button className={styles.cancelBtn} onClick={() => setEditingTopicId(null)}>
+                                        <button
+                                            className={styles.cancelBtn}
+                                            onClick={() => setEditingId(null)}
+                                        >
                                             Huỷ
                                         </button>
                                     </>
@@ -232,20 +190,17 @@ export default function TopicManager({ topics, setTopics }: TopicProp) {
                                         <button
                                             className={styles.editBtn}
                                             onClick={() => {
-                                                setEditingTopicId(t.topic_id);
-                                                setEditTopic({
-                                                    title: t.title,
-                                                    description: t.description,
-                                                    subject_id: t.subject_id
-                                                });
+                                                setEditingId(t.topic_id);
+                                                setEditTopic(t);
                                             }}
                                         >
                                             Sửa
                                         </button>
-
                                         <button
                                             className={styles.deleteBtn}
-                                            onClick={() => handleDelete(t.topic_id)}
+                                            onClick={() => {
+                                                if (confirm("Xoá topic?")) onDelete(t.topic_id);
+                                            }}
                                         >
                                             Xoá
                                         </button>

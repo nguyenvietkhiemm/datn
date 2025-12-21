@@ -29,6 +29,15 @@
     border-radius: 6px;
 }
 
+.formRow button {
+    padding: 8px 14px;
+    background: #4a8fff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
 .buttonPrimary {
     padding: 8px 14px;
     background: #4a8fff;

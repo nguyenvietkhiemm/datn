@@ -107,7 +107,7 @@ export default function BankCreate() {
       alert("Tạo ngân hàng câu hỏi thành công!");
 
       router.push(
-        `/admin/bank/create/${res.data.bank_id}/questions`
+        `/admin/bank`
       );
     } catch (err: any) {
       alert(err.message || "Không thể tạo ngân hàng!");

@@ -1,87 +1,38 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./Subject.module.css";
-import { TopicSubjectService } from "@/domain/admin/topic_subject/service";
 import type { Subject } from "@/domain/admin/topic_subject/type";
 import { TopicSubjectModel } from "@/domain/admin/topic_subject/model";
-import { Topic } from "@/domain/admin/topic_subject/type";
 
-type SubjectProp = {
-    setTopics: React.Dispatch<React.SetStateAction<Topic[]>>;
-}
+type Props = {
+    subjects: Subject[];
+    onCreate: (name: string) => void;
+    onUpdate: (id: number, name: string) => void;
+    onDelete: (id: number) => void;
+};
 
-export default function SubjectManager({ setTopics }: SubjectProp) {
-    const [subjects, setSubjects] = useState<Subject[]>([]);
-    const [newSubjectName, setNewSubjectName] = useState("");
-    const [editingSubjectId, setEditingSubjectId] = useState<number | null>(null);
-    const [editSubjectName, setEditSubjectName] = useState("");
-    const [errors, setErrors] = useState<{
-        title?: string;
-        description?: string;
-        subject_id?: string
-    }>({});
+export default function SubjectManager({
+    subjects,
+    onCreate,
+    onUpdate,
+    onDelete,
+}: Props) {
+    const [newName, setNewName] = useState("");
+    const [editingId, setEditingId] = useState<number | null>(null);
+    const [editName, setEditName] = useState("");
+    const [errors, setErrors] = useState<{ title?: string }>({});
 
-    useEffect(() => {
-        loadSubjects();
-    }, []);
+    const handleCreate = () => {
+        const valid = TopicSubjectModel.validate(
+            { title: newName },
+            { title: true },
+            setErrors
+        );
+        if (!valid) return;
 
-    const loadSubjects = async () => {
-        try {
-            const data = await TopicSubjectService.fetchSubjects();
-            setSubjects(data);
-        } catch (error) {
-            console.error("Failed load subjects:", error);
-        }
-    };
-
-    const handleCreate = async () => {
-        try {
-            const isValid = TopicSubjectModel.validate(
-                {
-                    title: newSubjectName,
-                },
-                {
-                    title: true,
-                    description: false,
-                    subject: false,
-                },
-                setErrors
-            );
-
-            if (!isValid) return;
-            const result = await TopicSubjectService.createSubject(newSubjectName);
-            setSubjects((prev) => [...prev, result]);
-            setNewSubjectName("");
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    const handleSave = async (id: number) => {
-        try {
-            await TopicSubjectService.updateSubject(id, editSubjectName);
-            setSubjects((prev) =>
-                prev.map((s) =>
-                    s.subject_id === id ? { ...s, subject_name: editSubjectName } : s
-                )
-            );
-            setEditingSubjectId(null);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    const handleDelete = async (id: number) => {
-        if (!confirm("Xoá subject?")) return;
-
-        try {
-            await TopicSubjectService.deleteSubject(id);
-            setSubjects((prev) => prev.filter((s) => s.subject_id !== id));
-            setTopics((prev) => prev.filter((s) => s.subject_id !== id))
-        } catch (error) {
-            console.error(error);
-        }
+        onCreate(newName);
+        setNewName("");
     };
 
     return (
@@ -90,15 +41,12 @@ export default function SubjectManager({ setTopics }: SubjectProp) {
 
             <div className={styles.formRow}>
                 <input
-                    type="text"
-                    value={newSubjectName}
                     placeholder="Tên subject..."
-                    onChange={(e) => setNewSubjectName(e.target.value)}
+                    value={newName}
+                    onChange={(e) => setNewName(e.target.value)}
                 />
-
                 {errors.title && <p className={styles.error}>{errors.title}</p>}
-
-                <button onClick={handleCreate}>Thêm Subject</button>
+                <button onClick={handleCreate}>Thêm</button>
             </div>
 
             <table className={styles.table}>
@@ -109,17 +57,16 @@ export default function SubjectManager({ setTopics }: SubjectProp) {
                         <th>Hành động</th>
                     </tr>
                 </thead>
-
                 <tbody>
-                    {subjects?.map((s) => (
+                    {subjects.map((s) => (
                         <tr key={s.subject_id}>
                             <td>{s.subject_id}</td>
 
                             <td>
-                                {editingSubjectId === s.subject_id ? (
+                                {editingId === s.subject_id ? (
                                     <input
-                                        value={editSubjectName}
-                                        onChange={(e) => setEditSubjectName(e.target.value)}
+                                        value={editName}
+                                        onChange={(e) => setEditName(e.target.value)}
                                     />
                                 ) : (
                                     s.subject_name
@@ -127,17 +74,20 @@ export default function SubjectManager({ setTopics }: SubjectProp) {
                             </td>
 
                             <td>
-                                {editingSubjectId === s.subject_id ? (
+                                {editingId === s.subject_id ? (
                                     <>
                                         <button
                                             className={styles.saveBtn}
-                                            onClick={() => handleSave(s.subject_id)}
+                                            onClick={() => {
+                                                onUpdate(s.subject_id, editName);
+                                                setEditingId(null);
+                                            }}
                                         >
                                             Lưu
                                         </button>
                                         <button
                                             className={styles.cancelBtn}
-                                            onClick={() => setEditingSubjectId(null)}
+                                            onClick={() => setEditingId(null)}
                                         >
                                             Huỷ
                                         </button>
@@ -147,15 +97,17 @@ export default function SubjectManager({ setTopics }: SubjectProp) {
                                         <button
                                             className={styles.editBtn}
                                             onClick={() => {
-                                                setEditingSubjectId(s.subject_id);
-                                                setEditSubjectName(s.subject_name);
+                                                setEditingId(s.subject_id);
+                                                setEditName(s.subject_name);
                                             }}
                                         >
                                             Sửa
                                         </button>
                                         <button
                                             className={styles.deleteBtn}
-                                            onClick={() => handleDelete(s.subject_id)}
+                                            onClick={() => {
+                                                if (confirm("Xoá subject?")) onDelete(s.subject_id);
+                                            }}
                                         >
                                             Xoá
                                         </button>

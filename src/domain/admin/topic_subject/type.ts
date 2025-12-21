@@ -2,7 +2,7 @@ export interface Topic {
     topic_id: number;
     title: string;
     description?: string;
-    subject_id?: number | null;
+    subject_id?: number | undefined;
     created_at: string;
 }
 
