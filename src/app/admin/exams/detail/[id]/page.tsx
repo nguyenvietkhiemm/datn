@@ -1,9 +1,11 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./ExamDetail.module.css"
-import type { Exam, Question } from "@/domain/admin/exams/type";
+import type { Exam } from "@/domain/admin/exams/type";
+import { Question } from "@/domain/admin/questions/type";
 import Cookies from "js-cookie";
 import { useParams } from "next/navigation";
+import { ImagePreview } from "@/component/questionCreate/ImageReview/page";
 
 export default function ExamDetail() {
     const [questions, setQuestions] = useState<Question[]>([]);
@@ -11,6 +13,7 @@ export default function ExamDetail() {
     const [exam, setExam] = useState<Exam>();
     const params = useParams();
     const id = params.id;
+    const questionRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
     //dữ liệu câu hỏi
     useEffect(() => {
@@ -28,7 +31,7 @@ export default function ExamDetail() {
             if (Array.isArray(data.data)) {
                 setQuestions(data.data);
             } else {
-                setQuestions([]); 
+                setQuestions([]);
             }
         }
 
@@ -50,6 +53,13 @@ export default function ExamDetail() {
         setAnswers({ ...answers, [questionId]: answerId });
     };
 
+    const scrollToQuestion = (questionId: number) => {
+        questionRefs.current[questionId]?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+        });
+    };
+
     return (
         <div className={styles.exam_container}>
             {/* Header */}
@@ -62,9 +72,18 @@ export default function ExamDetail() {
                 <div className={styles.leftPanel}>
                     {questions.length > 0 ? (
                         questions?.map((q, i) => (
-                            <div key={q.question_id} className={styles.questionBox}>
+                            <div key={q.question_id} className={styles.questionBox} ref={(el) => {
+                                questionRefs.current[q.question_id] = el;
+                            }}>
                                 <p className={styles.questionText}>
                                     <strong>{i + 1}.</strong> {q.question_content}
+                                    <div key={`q-${i}`} className={styles.imageWrapperSmall}>
+                                        {q.images?.map((src, index) => (
+                                            <div key={`q-${index}`} className={styles.imageWrapperSmall}>
+                                                <ImagePreview filename={src} />
+                                            </div>
+                                        ))}
+                                    </div>
                                 </p>
                                 <div className={styles.answers}>
                                     {q.answers.map((a) => (
@@ -77,6 +96,11 @@ export default function ExamDetail() {
                                                 onChange={() => handleSelect(q.question_id, a.answer_id)}
                                             />
                                             {a.answer_content}
+                                            {a.images?.map((src, index) => (
+                                                <div key={`a-${index}`} className={styles.imageWrapperSmall}>
+                                                    <ImagePreview filename={src} />
+                                                </div>
+                                            ))}
                                         </label>
                                     ))}
                                 </div>
@@ -100,11 +124,7 @@ export default function ExamDetail() {
                                 key={q.question_id}
                                 className={`${styles.numButton} ${answers[q.question_id] ? styles.answered : ""
                                     }`}
-                                onClick={() => {
-                                    document
-                                        .getElementById(`q-${q.question_id}`)
-                                        ?.scrollIntoView({ behavior: "smooth" });
-                                }}
+                                    onClick={() => scrollToQuestion(q.question_id)}
                             >
                                 {i + 1}
                             </button>

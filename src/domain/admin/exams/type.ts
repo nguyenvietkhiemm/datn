@@ -1,4 +1,4 @@
-import { Answer } from "../questions/type";
+
 
 export type Exam = {
     exam_id: number;
@@ -10,16 +10,6 @@ export type Exam = {
     available: boolean;
     title: string
 };
-
-export interface Question {
-    question_id: number;
-    question_name: string;
-    question_content: string;
-    image_question: string;
-    available: boolean;
-    answers: Answer[];
-    sourrce?: string
-}
 
 export interface CsvFile {
     id: number;
