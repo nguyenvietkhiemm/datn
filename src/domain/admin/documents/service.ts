@@ -1,10 +1,35 @@
 import { getHeaders, getToken, API_URL } from "@/lib/service";
-import { Document } from "./types";
+import { Document, DocumnetQuery } from "./types";
 
 export const DocumentService = {
-    async fetchDocuments(page: number) {
+    async fetchDocuments(query: DocumnetQuery) {
         const token = getToken();
-        const res = await fetch(`${API_URL}/documents?page=${page}`, {
+
+        const params = new URLSearchParams();
+
+        // bắt buộc
+        params.append("page", query.page.toString());
+
+        // optional
+        if (query.searchKeyword) {
+            params.append("keyword", query.searchKeyword);
+        }
+
+        if (query.subject_id) {
+            params.append("subject_id", query.subject_id.toString());
+        }
+
+        if (query.topic_ids?.length) {
+            query.topic_ids.forEach(id =>
+                params.append("topic_ids[]", id.toString())
+            );
+        }
+        console.log(params.toString());
+        
+        if (query.status) {
+            params.append("available", query.status);
+        }
+        const res = await fetch(`${API_URL}/documents?${params.toString()}`, {
             method: "GET",
             headers: getHeaders(token),
         });

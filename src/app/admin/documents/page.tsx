@@ -6,7 +6,7 @@ import Filter from "@/component/filter/Filter/Filter";
 import { useRouter } from "next/navigation";
 import Search from "@/component/search/Search";
 import Pagination from "@/component/pagination/Pagination";
-import { Document } from "@/domain/admin/documents/types";
+import { Document, DocumnetQuery } from "@/domain/admin/documents/types";
 import { DocumentService } from "@/domain/admin/documents/service";
 
 export default function DocumentPage() {
@@ -15,15 +15,24 @@ export default function DocumentPage() {
     const [filterDoc, setFilterDoc] = useState<Document[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPage, setTotalPage] = useState<number>(1);
-    const [filterCondition, setFilterCondition] = useState<any>(null);
-    const [searchKeyword, setSearchKeyword] = useState<string>("");
+    const [query, setQuery] = useState<DocumnetQuery>({
+        page: 1,
+        searchKeyword: "",
+    });
+    const [filterUI, setFilterUI] = useState({
+        subject: "All" as number | "All",
+        topic: "All" as number | "All",
+        status: "All" as string,
+    });
     const router = useRouter();
+
+    console.log(query);
 
     // Lấy danh sách tài liệu
     useEffect(() => {
         const fetchDocuments = async () => {
             try {
-                const data = await DocumentService.fetchDocuments(currentPage)
+                const data = await DocumentService.fetchDocuments(query)
                 setDocuments(data.documents);
                 setTotalPage(data.last_page || 1);
             } catch (err) {
@@ -34,7 +43,7 @@ export default function DocumentPage() {
         };
 
         fetchDocuments();
-    }, [currentPage]);
+    }, [query]);
 
     // Lọc tài liệu đang hoạt động
     useEffect(() => {
@@ -66,6 +75,24 @@ export default function DocumentPage() {
         }
     };
 
+    const handleChngeSearch = (keyword: string) => {
+        setQuery(prev => ({
+            ...prev,
+            page: 1,
+            searchKeyword: keyword,
+        }))
+    }
+
+    const handleChangeFilter = (filter: any) => {
+        setQuery(prev => ({
+            ...prev,
+            subject_id:
+                filter.subject !== "All" ? filter.subject : undefined,
+            topic_ids: filter.topic?.length ? filter.topic : undefined,
+            status:
+                filter.status !== "All" ? filter.status : undefined,
+        }))
+    }
     // Xem chi tiết tài liệu
     const detailDocument = (id: number, document: Document) => {
         localStorage.setItem("document", JSON.stringify(document));
@@ -89,16 +116,17 @@ export default function DocumentPage() {
 
                     <div className={styles.filter_search}>
                         <Filter
-                            setFilterCondition={setFilterCondition}
-                            setSearchKeyword={setSearchKeyword}
+                            value={filterUI}
+                            onApply={(filter) => {
+                                setFilterUI(filter)
+                                handleChangeFilter(filter)
+                            }}
                         />
-
                         <Search
-                            setSearchKeyword={setSearchKeyword}
-                            setFilterCondition={setFilterCondition}
+                            searchKeyword={query.searchKeyword}
+                            setSearchKeyword={handleChngeSearch}
                             typeSearch="document"
                         />
-
                     </div>
                 </div>
             </div>

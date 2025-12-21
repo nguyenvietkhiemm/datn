@@ -83,7 +83,7 @@ export default function Exam() {
       ...prev,
       subject_id:
         filter.subject !== "All" ? filter.subject : undefined,
-      topic_ids: filter.topics?.length ? filter.topics : undefined,
+      topic_ids:  filter.topic !== "All" ? filter.topic : undefined,
       status:
         filter.status !== "All" ? filter.status : undefined,
     }))
@@ -96,6 +96,8 @@ export default function Exam() {
 
   if (loading) return <p className={styles.loading}>Đang tải danh sách bài thi...</p>;
 
+  console.log(query);
+  
   return (
     <div className={styles.container}>
       <div className={styles.header}>

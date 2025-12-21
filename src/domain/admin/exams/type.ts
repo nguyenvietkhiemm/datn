@@ -1,4 +1,4 @@
-
+import { Topic, Subject } from "../topic_subject/type";
 
 export type Exam = {
     exam_id: number;
@@ -21,6 +21,6 @@ export interface ExamQuery {
     page: number;
     searchKeyword: string;
     subject_id?: number;
-    topic_ids?: number[];
+    topic_ids?: number;
     status?: "true" | "false" | "All";
 }

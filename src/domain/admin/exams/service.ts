@@ -1,12 +1,12 @@
 import { getHeaders, getToken, API_URL } from "@/lib/service";
 import { Exam, ExamQuery } from "./type";
-import { FilterSearch } from "@/lib/service";
 
 export const ExamService = {
   // Fetch Exams
   async fetchExams(query: ExamQuery) {
     const token = getToken();
-
+    console.log(query);
+    
     const params = new URLSearchParams();
 
     // bắt buộc
@@ -21,16 +21,16 @@ export const ExamService = {
       params.append("subject_id", query.subject_id.toString());
     }
 
-    if (query.topic_ids?.length) {
-      query.topic_ids.forEach(id =>
-        params.append("topic_ids[]", id.toString())
-      );
+    if (query.topic_ids) {
+        params.append("topic_ids", query.topic_ids.toString())
     }
 
     if (query.status) {
       params.append("available", query.status);
     }
 
+    console.log(params.toString());
+    
     const res = await fetch(
       `${API_URL}/exams?${params.toString()}`,
       {
