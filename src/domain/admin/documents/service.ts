@@ -38,8 +38,8 @@ export const DocumentService = {
 
         const data = await res.json();
         return {
-            documents: data.data.document as Document[],
-            last_page: data.data.last_page as number,
+            documents: data.data.data as Document[],
+            last_page: data.data.totalPages as number,
         };
     },
 

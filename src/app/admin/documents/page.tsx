@@ -43,11 +43,6 @@ export default function DocumentPage() {
         fetchDocuments();
     }, [query]);
 
-    // Lọc tài liệu đang hoạt động
-    useEffect(() => {
-        setFilterDoc(documents?.filter((d) => d.available === true));
-    }, [documents]);
-
     // Xoá tài liệu
     const handleDelete = async (docId: number) => {
         try {
@@ -143,8 +138,8 @@ export default function DocumentPage() {
                     </tr>
                 </thead>
                 <tbody>
-                    {filterDoc?.length > 0 ? (
-                        filterDoc.map((doc, index) => (
+                    {documents?.length > 0 ? (
+                        documents.map((doc, index) => (
                             <tr
                                 key={doc.document_id}
                                 onClick={() => detailDocument(doc.document_id, doc)}
