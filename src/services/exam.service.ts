@@ -108,14 +108,19 @@ const ExamService = {
     return (result.rowCount ?? 0) > 0;
   },
 
-  async list(page: number, status: string, searchValue: string, topicIds: number[]): Promise<({ exams: Exam[]; totalPages: number }) | []> {
+  async list(page: number,
+    status: string,
+    searchValue: string,
+    topicIds: number | "All",
+    subject_id: number | "All"
+  ): Promise<({ exams: Exam[]; totalPages: number }) | []> {
     const limit = 12;
     const offset = (page - 1) * limit;
 
     let conditions = [];
     let params = [];
     let idx = 1;
-    
+
     // Search
     if (searchValue.trim() !== "") {
       conditions.push(`
@@ -127,7 +132,7 @@ const ExamService = {
       `);
       params.push(`%${searchValue}%`);
       idx++;
-    }    
+    }
 
     // Status
     if (status !== "All") {
@@ -137,9 +142,16 @@ const ExamService = {
     }
 
     // Topic filter
-    if (topicIds.length > 0) {
-      conditions.push(`e.topic_id = ANY($${idx})`);
+    if (topicIds !== "All") {
+      conditions.push(`e.topic_id = ($${idx})`);
       params.push(topicIds);
+      idx++;
+    }
+
+    //subject
+    if(subject_id !== "All"){
+      conditions.push(`sj.subject_id = ($${idx})`);
+      params.push(subject_id);
       idx++;
     }
 
@@ -215,6 +227,7 @@ const ExamService = {
           FROM exam e
           JOIN topic t ON e.topic_id = t.topic_id
           JOIN exam_schedule es ON es.exam_schedule_id = e.exam_schedule_id
+          JOIN subject sj ON sj.subject_id = t.subject_id
           ${whereClause}
         `;
 

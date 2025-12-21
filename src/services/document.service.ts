@@ -4,49 +4,87 @@ import pool from "../config/database";
 
 const DocumentService = {
     async getAll(
-        page: number = 1
-    ): Promise<{ document: Document[]; totalPages: number }> {
+        page: number = 1,
+        status: string = "All",
+        searchValue: string = "",
+        topicIds: number[] = []
+    ): Promise<{ data: Document[]; totalPages: number }> {
 
         const limit = 12;
 
-        // ✅ sanitize page
-        const safePage =
-            Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
-
+        // sanitize page
+        const safePage = Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
         const offset = (safePage - 1) * limit;
 
+        let conditions: string[] = [];
+        let params: any[] = [];
+        let idx = 1;
+
+        /* ===== STATUS ===== */
+        if (status.toLowerCase() !== "All") {
+            conditions.push(`d.available = $${idx}`);
+            params.push(status === "true");
+            idx++;
+        }
+
+        /* ===== SEARCH ===== */
+        if (searchValue.trim() !== "") {
+            conditions.push(`
+            (
+              unaccent(LOWER(d.title)) LIKE unaccent(LOWER($${idx}))
+              OR unaccent(LOWER(t.title)) LIKE unaccent(LOWER($${idx}))
+            )
+          `);
+            params.push(`%${searchValue}%`);
+            idx++;
+        }
+
+        /* ===== TOPIC FILTER ===== */
+        if (topicIds.length > 0) {
+            conditions.push(`d.topic_id = ANY($${idx}::int[])`);
+            params.push(topicIds);
+            idx++;
+        }
+
+        const whereClause =
+            conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
+
+        /* ===== MAIN QUERY ===== */
         const queryText = `
-                SELECT 
-                d.document_id,
-                d.title,
-                d.link,
-                d.topic_id,
-                d.available,
-                d.embedding,
-                d.created_at,
-                t.title AS topic_title
-                FROM document d
-                JOIN topic t ON d.topic_id = t.topic_id
-                WHERE d.available = true
-                ORDER BY d.document_id DESC
-                LIMIT $1 OFFSET $2
-            `;
+          SELECT
+            d.document_id,
+            d.title,
+            d.link,
+            d.topic_id,
+            d.available,
+            d.created_at,
+            t.title AS topic_title
+          FROM document d
+          LEFT JOIN topic t ON d.topic_id = t.topic_id
+          ${whereClause}
+          ORDER BY d.document_id DESC
+          LIMIT $${idx} OFFSET $${idx + 1}
+        `;
 
-        const result = await query(queryText, [limit, offset]);
+        const result = await query(queryText, [...params, limit, offset]);
 
-        const countResult = await query(
-            `SELECT COUNT(*)::int AS total FROM document WHERE available = true`
-        );
+        /* ===== COUNT QUERY ===== */
+        const countQuery = `
+          SELECT COUNT(*)::int AS total
+          FROM document d
+          LEFT JOIN topic t ON d.topic_id = t.topic_id
+          ${whereClause}
+        `;
 
+        const countResult = await query(countQuery, params);
         const totalItems = countResult.rows[0].total;
         const totalPages = Math.ceil(totalItems / limit);
 
         return {
-            document: result.rows,
+            data: result.rows,
             totalPages,
         };
     },
-
 
     async create(document: Document, fileLink: string): Promise<Document | null> {
 
@@ -112,85 +150,5 @@ const DocumentService = {
         await query('DELETE FROM document WHERE document_id = $1', [id]);
     },
 
-    async search(searchValue: string, page: number): Promise<{ data: Document[]; totalPages: number } | []> {
-
-        const limit = 12;
-        const offset = (page - 1) * limit;
-        const keyword = `%${searchValue}%`;
-
-        const queryText = `
-                SELECT 
-                d.document_id, d.title, d.link, d.created_at, d.available 
-                t.topic_id, t.title AS topic_title
-                FROM document d
-                LEFT JOIN topic t ON d.topic_id = t.topic_id
-                WHERE LOWER(d.title) LIKE LOWER($1)
-                OR LOWER(t.title) LIKE LOWER($1)
-                ORDER BY d.document_id DESC
-                LIMIT $2 OFFSET $3
-            `;
-
-        const result = await query(queryText, [keyword, limit, offset]);
-
-        const countResult = await query(
-            `
-                SELECT COUNT(*) AS total
-                FROM document d
-                LEFT JOIN topic t ON d.topic_id = t.topic_id
-                WHERE LOWER(d.title) LIKE LOWER($1)
-                OR LOWER(t.title) LIKE LOWER($1)
-                `,
-            [keyword]
-        );
-
-        const totalItems = parseInt(countResult.rows[0].total, 10);
-        const totalPages = Math.ceil(totalItems / limit);
-        return { data: result.rows, totalPages };
-    },
-
-    async filter(topicIds: number[], status: string, page: number): Promise<{ data: Document[]; totalPages: number } | []> {
-
-        const limit = 12;
-        const offset = (page - 1) * limit;
-
-        // ✅ Xử lý trạng thái hoạt động
-        let isAvailable: boolean[] = [];
-        if (status.toLowerCase() === "all") {
-            isAvailable = [true, false];
-        } else {
-            isAvailable = [status === "true"];
-        }
-
-        // Câu truy vấn chính
-        const queryText = `
-            SELECT 
-              d.document_id, d.title, d.link, d.created_at, d.available,
-              t.topic_id, t.title AS topic_title
-            FROM document d
-            LEFT JOIN topic t ON d.topic_id = t.topic_id
-            WHERE d.available = ANY($1::boolean[])
-              AND ($2::int[] IS NULL OR d.topic_id = ANY($2))
-            ORDER BY d.document_id DESC
-            LIMIT $3 OFFSET $4
-          `;
-
-        const result = await query(queryText, [isAvailable, topicIds.length ? topicIds : null, limit, offset]);
-
-        //  Đếm tổng số kết quả
-        const countResult = await query(
-            `
-            SELECT COUNT(*) AS total
-            FROM document
-            WHERE available = ANY($1::boolean[])
-              AND ($2::int[] IS NULL OR topic_id = ANY($2))
-            `,
-            [isAvailable, topicIds.length ? topicIds : null]
-        );
-
-        const totalItems = parseInt(countResult.rows[0].total, 10);
-        const totalPages = Math.ceil(totalItems / limit);
-
-        return { data: result.rows, totalPages };
-    }
 }
 export default DocumentService;
