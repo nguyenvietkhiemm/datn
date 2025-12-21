@@ -21,15 +21,6 @@ const documentRoute = Router();
 documentRoute.get('/', DocumentController.getAll);
 
 //search và filter
-documentRoute.get('/search', Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(...ADMIN, ...USER),
-        DocumentController.search
-)
-
-documentRoute.get('/filter', Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(...ADMIN, ...USER),
-        DocumentController.filter
-)
 /**
  * @openapi
  * /documents/create:

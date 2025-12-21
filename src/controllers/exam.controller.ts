@@ -9,14 +9,17 @@ const ExamController = {
       const page = Number(req.query.page) || 1;
       const status = req.query.available?.toString() || "All";
       const searchValue = req.query.keyword?.toString() || "";
-      const topicIds = req.query.topics
-        ? req.query.topics.toString().split(",").map(Number)
-        : [];
-
+      const topicIds = req.query.topic_ids
+        ? Number(req.query.topic_ids)
+        : "All";
+        
+      const subject_id = req.query.subject_id
+        ? Number(req.query.subject_id)
+        : "All"
       return {
         status: 200,
         message: "Lấy danh sách đề thi thành công",
-        data: await ExamService.list(page, status, searchValue, topicIds),
+        data: await ExamService.list(page, status, searchValue, topicIds, subject_id),
       };
     });
 
@@ -100,7 +103,7 @@ const ExamController = {
           data: null
         };
       }
-  
+
       if (!user_id) {
         return {
           status: 401,
@@ -108,7 +111,7 @@ const ExamController = {
           data: null
         };
       }
-  
+
       if (!Array.isArray(do_exam)) {
         return {
           status: 400,
@@ -116,7 +119,7 @@ const ExamController = {
           data: null
         };
       }
-      
+
       return {
         status: 200,
         message: "Nộp đè thi thành công",
@@ -133,7 +136,7 @@ const ExamController = {
     const result: DefaultResponse<any> = await safeExecute(async () => {
       const { id } = req.params;
       const user_id = req?.user?.user_id
-      const {user_name} = req.query;
+      const { user_name } = req.query;
 
       if (!id) {
         return {
@@ -142,7 +145,7 @@ const ExamController = {
           data: null
         };
       }
-      
+
       const ranking = await ExamService.getExamRanking(Number(id), Number(user_id), String(user_name));
 
       return {
@@ -160,9 +163,9 @@ const ExamController = {
   async getUserExamHistory(req: Request, res: Response) {
     const result: DefaultResponse<any> = await safeExecute(async () => {
       const user_id = req?.user?.user_id;
-      const {exam_id} = req.query;
+      const { exam_id } = req.query;
 
-      const data = await ExamService.getUserListExamHistory( Number(exam_id));
+      const data = await ExamService.getUserListExamHistory(Number(exam_id));
       return {
         status: 200,
         message: "Lấy lịch sử làm bài thành công",
@@ -173,9 +176,9 @@ const ExamController = {
     return res.status(result.status).json(result);
   },
 
-  async  getUserAnswer(req: Request, res: Response) {
-    const result : DefaultResponse<any> = await safeExecute(async () => {
-      const {history_exam_id, exam_id} = req.query
+  async getUserAnswer(req: Request, res: Response) {
+    const result: DefaultResponse<any> = await safeExecute(async () => {
+      const { history_exam_id, exam_id } = req.query
       const data = await ExamService.getUserAnswer(Number(history_exam_id), Number(exam_id));
       return {
         status: 200,
@@ -191,7 +194,7 @@ const ExamController = {
     const result: DefaultResponse<any> = await safeExecute(async () => {
       const user_id = req.user?.user_id;
       const { exam_id } = req.query;
-  
+
       if (!user_id || !exam_id) {
         return {
           status: 400,
@@ -199,21 +202,21 @@ const ExamController = {
           data: null
         };
       }
-  
+
       const data = await ExamService.checkDoExam(
         Number(exam_id),
         Number(user_id)
       );
-  
+
       return {
         status: 200,
         message: "Kiểm tra trạng thái làm bài thành công",
         data
       };
     });
-  
+
     return res.status(result.status).json(result);
-  }  
+  }
 };
 
 export default ExamController;
