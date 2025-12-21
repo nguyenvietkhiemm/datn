@@ -26,8 +26,6 @@ export default function DocumentPage() {
     });
     const router = useRouter();
 
-    console.log(query);
-
     // Lấy danh sách tài liệu
     useEffect(() => {
         const fetchDocuments = async () => {
@@ -88,11 +86,12 @@ export default function DocumentPage() {
             ...prev,
             subject_id:
                 filter.subject !== "All" ? filter.subject : undefined,
-            topic_ids: filter.topic?.length ? filter.topic : undefined,
+            topic_ids: filter.topic !== "All" ? filter.topic : undefined,
             status:
                 filter.status !== "All" ? filter.status : undefined,
         }))
     }
+
     // Xem chi tiết tài liệu
     const detailDocument = (id: number, document: Document) => {
         localStorage.setItem("document", JSON.stringify(document));
@@ -208,8 +207,10 @@ export default function DocumentPage() {
 
             <Pagination
                 totalPages={totalPage}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
+                currentPage={query.page}
+                setCurrentPage={(page: number) =>
+                    setQuery(prev => ({ ...prev, page }))
+                }
             />
         </div>
     );

@@ -28,8 +28,6 @@ export const ExamService = {
     if (query.status) {
       params.append("available", query.status);
     }
-
-    console.log(params.toString());
     
     const res = await fetch(
       `${API_URL}/exams?${params.toString()}`,

@@ -19,16 +19,14 @@ export const DocumentService = {
             params.append("subject_id", query.subject_id.toString());
         }
 
-        if (query.topic_ids?.length) {
-            query.topic_ids.forEach(id =>
-                params.append("topic_ids[]", id.toString())
-            );
+        if (query.topic_ids) {
+            params.append("topic_ids", query.topic_ids.toString())
         }
-        console.log(params.toString());
-        
+
         if (query.status) {
             params.append("available", query.status);
         }
+
         const res = await fetch(`${API_URL}/documents?${params.toString()}`, {
             method: "GET",
             headers: getHeaders(token),
