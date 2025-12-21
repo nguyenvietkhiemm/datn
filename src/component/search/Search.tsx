@@ -5,6 +5,7 @@ import styles from "./Search.module.css";
 type SearchType = "question" | "user" | "exam" | "document";
 
 type SearchProp = {
+  searchKeyword: string;
   setSearchKeyword?: (data: string) => void;
   typeSearch: SearchType;
 };
@@ -17,10 +18,11 @@ const PLACEHOLDER_MAP: Record<SearchType, string> = {
 };
 
 export default function Search({
+  searchKeyword,
   setSearchKeyword,
   typeSearch,
 }: SearchProp) {
-  const [keyword, setKeyword] = useState("");
+  const [keyword, setKeyword] = useState(searchKeyword);
 
   const handleSearch = () => {
     setSearchKeyword?.(keyword);

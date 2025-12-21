@@ -5,18 +5,23 @@ import FilterExam from "@/component/filter/Filter/Filter";
 import { useRouter } from "next/navigation";
 import Search from "@/component/search/Search";
 import Pagination from "@/component/pagination/Pagination";
-import type { Exam } from "@/domain/admin/exams/type";
+import type { Exam, ExamQuery } from "@/domain/admin/exams/type";
 import { ExamService } from "@/domain/admin/exams/service";
 
 export default function Exam() {
 
   const [exams, setExams] = useState<Exam[]>([]);
   const [loading, setLoading] = useState(true);
-  const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
-  const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
-  const [filterCondition, setFilterCondition] = useState<any>(null);
-  const [searchKeyword, setSearchKeyword] = useState<string>("");
+  const [query, setQuery] = useState<ExamQuery>({
+    page: 1,
+    searchKeyword: "",
+  });
+  const [filterUI, setFilterUI] = useState({
+    subject: "All" as number | "All",
+    topic: "All" as number | "All",
+    status: "All" as string,
+  });
 
   const router = useRouter();
 
@@ -24,17 +29,21 @@ export default function Exam() {
   useEffect(() => {
     const fetchExams = async () => {
       try {
-        const data = await ExamService.fetchExams(currentPage, filterCondition, searchKeyword);
+        setLoading(true);
+
+        const data = await ExamService.fetchExams(query);
+
         setExams(data.exams);
         setTotalPages(data.totalPages);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching exams:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchExams();
-  }, [currentPage, filterCondition, searchKeyword]);
+  }, [query]);
 
   //xoa
   const handleDelete = async (examId: number) => {
@@ -50,20 +59,35 @@ export default function Exam() {
   const handleToggleAvailable = async (examId: number, available: boolean) => {
     try {
       await ExamService.toggleExamAvailable(examId, available);
-      setExams((prev) =>
-        prev.map((e) =>
+
+      setExams(prev =>
+        prev.map(e =>
           e.exam_id === examId ? { ...e, available } : e
-        ).filter((e) => {
-          const topicMatch = filterCondition?.topics.includes(e.topic_id);
-          const statusMatch = filterCondition?.status === "All" || filterCondition?.status === e.available.toString();
-          return topicMatch && statusMatch;
-        })
+        )
       );
     } catch (error) {
       console.error("Error toggling exam availability:", error);
     }
   };
 
+  const handleChngeSearch = (keyword: string) => {
+    setQuery(prev => ({
+      ...prev,
+      page: 1,
+      searchKeyword: keyword,
+    }))
+  }
+
+  const handleChangeFilter = (filter: any) => {
+    setQuery(prev => ({
+      ...prev,
+      subject_id:
+        filter.subject !== "All" ? filter.subject : undefined,
+      topic_ids: filter.topics?.length ? filter.topics : undefined,
+      status:
+        filter.status !== "All" ? filter.status : undefined,
+    }))
+  }
   //xem chi tiet
   const detailExam = (id: number, exam: Exam) => {
     localStorage.setItem("exam", JSON.stringify(exam));
@@ -80,8 +104,18 @@ export default function Exam() {
           <div className={styles.button} onClick={() => router.push("/admin/exams/create")}><button className={styles.addButton}>+ Thêm bài thi</button></div>
           {/* filter search */}
           <div className={styles.filter_search}>
-            <FilterExam setFilterCondition={setFilterCondition} setSearchKeyword={setSearchKeyword} />
-            <Search setSearchKeyword={setSearchKeyword} setFilterCondition={setFilterCondition} />
+            <FilterExam
+              value={filterUI}
+              onApply={(filter) => {
+                setFilterUI(filter)
+                handleChangeFilter(filter)
+              }}
+            />
+            <Search
+              searchKeyword={query.searchKeyword}
+              setSearchKeyword={handleChngeSearch}
+              typeSearch="exam"
+            />
           </div>
         </div>
       </div>
@@ -145,7 +179,13 @@ export default function Exam() {
       </table>
 
       {/* pagination */}
-      <Pagination totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <Pagination
+        totalPages={totalPages}
+        currentPage={query.page}
+        setCurrentPage={(page: number) =>
+          setQuery(prev => ({ ...prev, page }))
+        }
+      />
     </div>
   );
 }

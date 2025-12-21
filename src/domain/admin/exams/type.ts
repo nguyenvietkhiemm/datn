@@ -15,7 +15,7 @@ export interface Question {
     question_id: number;
     question_name: string;
     question_content: string;
-    image_question : string;
+    image_question: string;
     available: boolean;
     answers: Answer[];
     sourrce?: string
@@ -25,4 +25,12 @@ export interface CsvFile {
     id: number;
     name: string;
     url: string;
+}
+
+export interface ExamQuery {
+    page: number;
+    searchKeyword: string;
+    subject_id?: number;
+    topic_ids?: number[];
+    status?: "true" | "false" | "All";
 }

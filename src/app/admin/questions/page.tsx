@@ -128,7 +128,7 @@ export default function Question() {
     const handleChangeSearch = (searchKeyword: string) => {
         setQuery(prev => ({
             ...prev,
-            keyword : searchKeyword
+            keyword: searchKeyword
         }))
     }
 
@@ -139,7 +139,10 @@ export default function Question() {
                 <h1 className={styles.title}>Quản lý câu hỏi</h1>
                 <div className={styles.actions}>
                     <div className={styles.search}>
-                        <Search setSearchKeyword={handleChangeSearch} typeSearch={"question"} />
+                        <Search searchKeyword={query.keyword}
+                            setSearchKeyword={handleChangeSearch}
+                            typeSearch={"question"}
+                        />
                     </div>
 
                     <div className={styles.button}>
@@ -169,7 +172,7 @@ export default function Question() {
                                 Danh sách Json
                             </Button>
                         </div>
-                        
+
                         <div className={styles.json}>
                             <Button
                                 variant="primary"

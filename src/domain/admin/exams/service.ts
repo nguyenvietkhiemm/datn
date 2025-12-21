@@ -1,23 +1,47 @@
 import { getHeaders, getToken, API_URL } from "@/lib/service";
-import { Exam } from "./type";
+import { Exam, ExamQuery } from "./type";
 import { FilterSearch } from "@/lib/service";
 
 export const ExamService = {
   // Fetch Exams
-  async fetchExams(page: number, filterCondition: any, searchKeyword: string) {
+  async fetchExams(query: ExamQuery) {
     const token = getToken();
-    let url = `${API_URL}/exams?page=${page}`;
 
-    const link = FilterSearch(filterCondition, searchKeyword, url)
+    const params = new URLSearchParams();
 
-    const resExam = await fetch(link, {
-      method: "GET",
-      headers: getHeaders(token),
-    });
+    // bắt buộc
+    params.append("page", query.page.toString());
 
-    const data = await resExam.json();
+    // optional
+    if (query.searchKeyword) {
+      params.append("keyword", query.searchKeyword);
+    }
 
-    if (!resExam.ok) {
+    if (query.subject_id) {
+      params.append("subject_id", query.subject_id.toString());
+    }
+
+    if (query.topic_ids?.length) {
+      query.topic_ids.forEach(id =>
+        params.append("topic_ids[]", id.toString())
+      );
+    }
+
+    if (query.status) {
+      params.append("available", query.status);
+    }
+
+    const res = await fetch(
+      `${API_URL}/exams?${params.toString()}`,
+      {
+        method: "GET",
+        headers: getHeaders(token),
+      }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) {
       throw new Error("Không thể lấy danh sách bài thi");
     }
 

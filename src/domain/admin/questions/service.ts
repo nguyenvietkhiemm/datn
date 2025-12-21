@@ -11,6 +11,7 @@ export const QuestionService = {
             type_question: query.type_question.toString(),
             keyword: query.keyword,
         });
+        
         const res = await fetch(
             `${API_URL}/questions?${params.toString()}`,
             {

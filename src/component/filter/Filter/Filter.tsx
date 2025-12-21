@@ -7,20 +7,25 @@ import { Button } from "@/component/ui/button/Button";
 import { Topic, Subject } from "@/domain/admin/topic_subject/type";
 
 interface FilterProps {
-    setFilterCondition?: (data: any) => void;
-    setSearchKeyword?: (data : any) => void
-}
+    value: {
+      subject: number | "All";
+      topic: number | "All";
+      status: string;
+    };
+    // onChange: (v: any) => void;
+    onApply: (v: any) => void;
+  }  
 
 function Filter(
-    { setFilterCondition, setSearchKeyword }
+    { value, onApply }
         : FilterProps) {
 
     const [topics, setTopics] = useState<Topic[]>([]);
     const [subjects, setSubjects] = useState<Subject[]>([]);
-    const [selectedSubject, setSelectedSubject] = useState<number | "All">("All");
-    const [selectedTopic, setSelectedTopic] = useState<number | "All">("All");
+    const selectedSubject = value.subject;
+    const selectedTopic = value.topic;
+    const selectedStatus = value.status;
     const [showFilter, setShowFilter] = useState<boolean>(false);
-    const [selectedStatus, setSelectedStatus] = useState<string>("All");
     const Status = [
         { label: 'Tất cả', value: "All" },
         { label: "Hoạt động", value: "true" },
@@ -89,32 +94,31 @@ function Filter(
         </div>
     )
 
-    //ham loc
-    const handleFilter = () => {
-        let topicIds: number[] = [];
+    // // ham loc
+    // const handleFilter = () => {
+    //     let topicIds: number[] = [];
 
-        if (selectedSubject === "All") {
-            if (selectedTopic !== "All") {
-                topicIds = [Number(selectedTopic)];
-            } else {
-                topicIds = topics.map((t) => t.topic_id);
-            }
-        } else {
-            if (selectedTopic !== "All") {
-                topicIds = [Number(selectedTopic)];
-            } else {
-                topicIds = topics
-                .filter((t) => t.subject_id === selectedSubject)
-                .map((t) => t.topic_id);
-            }
-        }
-        setSearchKeyword?.("");
-        setFilterCondition?.({
-            subject : selectedSubject,
-            topics: topicIds,
-            status : selectedStatus
-        });
-    };
+    //     if (selectedSubject === "All") {
+    //         if (selectedTopic !== "All") {
+    //             topicIds = [Number(selectedTopic)];
+    //         } else {
+    //             topicIds = topics.map((t) => t.topic_id);
+    //         }
+    //     } else {
+    //         if (selectedTopic !== "All") {
+    //             topicIds = [Number(selectedTopic)];
+    //         } else {
+    //             topicIds = topics
+    //                 .filter((t) => t.subject_id === selectedSubject)
+    //                 .map((t) => t.topic_id);
+    //         }
+    //     }
+    //     onChange({
+    //         subject: selectedSubject,
+    //         topics: topicIds,
+    //         status: selectedStatus
+    //     });
+    // };
 
     return (
         <div className={styles.filter_container}>
@@ -131,10 +135,13 @@ function Filter(
                         ...subjects?.map((s) => ({ label: s.subject_name, value: s.subject_id }))
                         ]}
                         selected={selectedSubject}
-                        onSelect={(v) => {
-                            setSelectedSubject(v);
-                            setSelectedTopic("All");
-                        }}
+                        onSelect={(v) =>
+                            onApply({
+                                ...value,
+                                subject: v,
+                                topic: "All",
+                            })
+                        }
                     />
                     <FilterGroup
                         title="Chủ đề"
@@ -145,15 +152,26 @@ function Filter(
                                 .map((t) => ({ label: t.title, value: t.topic_id })),
                         ]}
                         selected={selectedTopic}
-                        onSelect={(v) => setSelectedTopic(v)}
+                        onSelect={(v) =>
+                            onApply({
+                                ...value,
+                                topic: v,
+                            })
+                        }
                     />
                     <FilterGroup title="Trạng thái"
                         options={Status}
                         selected={selectedStatus}
-                        onSelect={(v) => setSelectedStatus(v)} />
-                    <Button variant="outline" onClick={handleFilter}>
+                        onSelect={(v) =>
+                            onApply({
+                                ...value,
+                                status: v,
+                            })
+                        }
+                    />
+                    {/* <Button variant="outline" onClick={handleFilter}>
                         Lọc kết quả
-                    </Button>
+                    </Button> */}
                 </div>}
         </div>
     );
