@@ -19,11 +19,11 @@ import styles from "./Sidebar.module.css";
 const navItems = [
   { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
   { name: "Người dùng", href: "/admin/users", icon: Users },
+  { name: "Lịch thi", href: "/admin/schedules", icon: CalendarClock },
+  { name: "Câu hỏi", href: "/admin/questions", icon: HelpCircle },
   { name: "Cuộc thi", href: "/admin/exams", icon: Trophy },
   { name: "Bài luyện tập", href: "/admin/bank", icon: Layers },
   { name: "Môn học và Tiêu đề", href: "/admin/topic_subject", icon: Tags },
-  { name: "Câu hỏi", href: "/admin/questions", icon: HelpCircle },
-  { name: "Lịch thi", href: "/admin/schedules", icon: CalendarClock },
   { name: "Tài liệu", href: "/admin/documents", icon: FileText },
   { name: "Lộ trình", href: "/admin/roadmap", icon: Route },
 ];

@@ -12,6 +12,7 @@ import { API_URL } from "@/lib/service";
 import Search from "@/component/search/Search";
 import { ImagePreview } from "@/component/questionCreate/ImageReview/page";
 import { answerLabel } from "@/lib/model";
+import { useRouter } from "next/navigation";
 
 export default function ExamQuestionCreate() {
 
@@ -22,6 +23,7 @@ export default function ExamQuestionCreate() {
     const [selectedQuestions, setSelectedQuestions] = useState<{ exam_id: number, question_id: number }[]>([]);
     const params = useParams();
     const examId = Number(params.id);
+    const router = useRouter();
     const [query, setQuery] = useState<QuestionQuery>({
         page: 1,
         available: "All",
@@ -83,7 +85,7 @@ export default function ExamQuestionCreate() {
                 },
                 body: JSON.stringify({ selectedQuestions })
             })
-
+            router.push(`/admin/exams`)
         } catch (error) {
             console.error("error:", error);
         }
