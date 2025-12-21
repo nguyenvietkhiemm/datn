@@ -27,5 +27,6 @@ export const config = {
     "/admin/questions/:path*",
     "/admin/settings/:path*",
     "/admin/roadmap/:path*",
+    "/admin/quuestions/:path*",
   ],
 };

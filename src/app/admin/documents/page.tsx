@@ -12,8 +12,6 @@ import { DocumentService } from "@/domain/admin/documents/service";
 export default function DocumentPage() {
     const [documents, setDocuments] = useState<Document[]>([]);
     const [loading, setLoading] = useState(true);
-    const [filterDoc, setFilterDoc] = useState<Document[]>([]);
-    const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPage, setTotalPage] = useState<number>(1);
     const [query, setQuery] = useState<DocumnetQuery>({
         page: 1,

@@ -85,6 +85,7 @@ export default function QuestionCard({
 
                         <p className={styles.answerText}>
                             {ans.answer_content}
+                            {ans.is_correct && <strong>(✔)</strong>}
                         </p>
 
                         {/* ===== Answer Images ===== */}
