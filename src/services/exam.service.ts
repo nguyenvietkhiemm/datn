@@ -115,13 +115,19 @@ const ExamService = {
     let conditions = [];
     let params = [];
     let idx = 1;
-
+    
     // Search
     if (searchValue.trim() !== "") {
-      conditions.push(`(LOWER(e.exam_name) LIKE LOWER($${idx}) OR LOWER(t.title) LIKE LOWER($${idx}))`);
+      conditions.push(`
+        (
+          unaccent(lower(e.exam_name)) LIKE unaccent(lower($${idx}))
+          OR
+          unaccent(lower(t.title)) LIKE unaccent(lower($${idx}))
+        )
+      `);
       params.push(`%${searchValue}%`);
       idx++;
-    }
+    }    
 
     // Status
     if (status !== "All") {

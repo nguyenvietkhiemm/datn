@@ -7,8 +7,8 @@ const ExamController = {
   async list(req: Request, res: Response) {
     const result: DefaultResponse<any> = await safeExecute(async () => {
       const page = Number(req.query.page) || 1;
-      const status = req.query.status?.toString() || "true";
-      const searchValue = req.query.search?.toString() || "";
+      const status = req.query.available?.toString() || "All";
+      const searchValue = req.query.keyword?.toString() || "";
       const topicIds = req.query.topics
         ? req.query.topics.toString().split(",").map(Number)
         : [];
