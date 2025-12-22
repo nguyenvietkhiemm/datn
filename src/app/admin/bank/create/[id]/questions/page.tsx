@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import styles from "./BankQuestion.module.css";
 import { QuestionService } from "@/domain/admin/questions/service";
@@ -15,6 +16,7 @@ import { answerLabel } from "@/lib/model";
 
 export default function BankQuestionCreate() {
     const token = Cookies.get("token");
+    const router = useRouter();
 
     const [questions, setQuestions] = useState<Question[]>([]);
     const [totalPage, setTotalPage] = useState<number>(1);
@@ -25,8 +27,6 @@ export default function BankQuestionCreate() {
         bank_id: number;
         question_id: number;
     }[]>([]);
-
-    console.log(selectedQuestions);
     
     const [query, setQuery] = useState<QuestionQuery>({
         page: 1,
@@ -113,6 +113,7 @@ export default function BankQuestionCreate() {
             }
 
             alert("Thêm câu hỏi vào ngân hàng thành công!");
+            router.push(`/admin/bank`)
         } catch (error) {
             console.error("error:", error);
             alert("Có lỗi xảy ra!");

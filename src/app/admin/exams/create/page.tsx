@@ -117,7 +117,7 @@ export default function ExamCreate() {
       alert("Tạo bài thi thành công!");
 
       router.push(
-        `/admin/exams/create/${res.data.exam_id}/questions?type=${subject_id}`
+        `/admin/exams/create/${res.data.exam_id}/questions`
       );
     } catch (err: any) {
       alert(err.message || "Không thể tạo bài thi!");

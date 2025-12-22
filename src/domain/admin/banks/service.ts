@@ -102,6 +102,6 @@ export const BankService = {
             throw new Error(data.message || "Lỗi khi tạo bài thi!");
         }
 
-        return data;
+        return data.data;
     },
 }
