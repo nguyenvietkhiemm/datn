@@ -6,8 +6,30 @@ const UserController = {
     // Lấy toàn bộ user
     async getAll(req: Request, res: Response) {
         const response: DefaultResponse<any> = await safeExecute(async () => {
-            const users = await UserService.getAll();
-            return { status: 200, data: users, message: 'Danh sách người dùng' };
+            const {
+                page = "1",
+                status = "All",
+                role = "All",
+                search = "",
+            } = req.query;
+            
+            const pageNumber = Number(page);
+
+            const result = await UserService.getAll(
+                pageNumber,
+                status as string,
+                role as string,
+                search as string
+            );
+
+            return {
+                status: 200,
+                data: {
+                    users: result.users,
+                    totalPages: result.totalPages,
+                },
+                message: "Danh sách người dùng",
+            };
         });
 
         res.status(response.status).json(response);
@@ -33,9 +55,9 @@ const UserController = {
 
     // Cập nhật user
     async update(req: Request, res: Response) {
-        const {id} = req.params;
+        const { id } = req.params;
         console.log(id);
-        
+
         const response: DefaultResponse<any> = await safeExecute(async () => {
             const updated = await UserService.update(Number(id), req.body);
             return { status: 200, data: updated, message: 'Cập nhật người dùng thành công' };
