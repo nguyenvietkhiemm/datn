@@ -28,6 +28,7 @@ export default function QuestionCreate() {
 
     /* ===== QUESTION IMAGES ===== */
     const [questionImages, setQuestionImages] = useState<File[] | string[]>([]);
+    const [answerImages, setAnswerImages] = useState<File[] | string[]>([]);
 
     /* ===== HELPERS ===== */
     const updateForm = (key: keyof QuestionForm, value: any) => {
@@ -81,14 +82,21 @@ export default function QuestionCreate() {
             // Upload images
             const imageLinks =
                 questionImages.length > 0
-                    ? await QuestionService.uploadQuestionImages(questionImages)
+                    ? await QuestionService.uploadImages(questionImages)
                     : [];
+            const imageLinksAnswer = answerImages.length > 0
+                ?
+                await QuestionService.uploadImages(answerImages)
+                : []
 
             // Create question
             await QuestionService.createQuestionWithAnswers({
                 ...form,
                 images: imageLinks,
-                answers: answers,
+                answers: answers.map(a => ({
+                    ...a,
+                    images: imageLinksAnswer
+                })),
             });
 
             alert("Tạo câu hỏi thành công!");
@@ -114,16 +122,18 @@ export default function QuestionCreate() {
             />
 
             {/* IMAGES */}
-            <label className={styles.label}>Hình ảnh câu hỏi</label>
-            <input
-                type="file"
-                accept="image/*"
-                multiple
-                onChange={(e) => {
-                    if (!e.target.files) return;
-                    setQuestionImages(Array.from(e.target.files));
-                }}
-            />
+            <div className={styles.uploadImages}>
+                <label className={styles.label}>Hình ảnh câu hỏi</label>
+                <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={(e) => {
+                        if (!e.target.files) return;
+                        setQuestionImages(Array.from(e.target.files));
+                    }}
+                />
+            </div>
 
             <div className={styles.previewWrap}>
                 {questionImages.map((img, i) => (
@@ -169,15 +179,24 @@ export default function QuestionCreate() {
 
             {/* ANSWERS */}
             {form.type_question === 2 && (
-                <MultipleChoiceAnswers answers={answers} setAnswers={setAnswers} />
+                <MultipleChoiceAnswers answers={answers} 
+                setAnswers={setAnswers} 
+                answerImages={answerImages}
+                setAnswerImages={setAnswerImages} />
             )}
 
             {form.type_question === 1 && (
-                <SingleChoice answers={answers} setAnswers={setAnswers} />
+                <SingleChoice answers={answers}
+                setAnswers={setAnswers} 
+                answerImages={answerImages}
+                setAnswerImages={setAnswerImages} />
             )}
 
             {form.type_question === 3 && (
-                <EssayAnswer answers={answers} setAnswers={setAnswers} />
+                <EssayAnswer answers={answers}
+                 setAnswers={setAnswers}
+                 answerImages={answerImages}
+                  setAnswerImages={setAnswerImages} />
             )}
 
             {/* ACTIONS */}

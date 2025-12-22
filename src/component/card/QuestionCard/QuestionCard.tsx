@@ -79,14 +79,15 @@ export default function QuestionCard({
                         key={ans.answer_id}
                         className={styles.answerItem}
                     >
-                        <span className={styles.answerLabel}>
-                            {answerLabel(answerIdx)}.
-                        </span>
-
-                        <p className={styles.answerText}>
-                            {ans.answer_content}
-                            {ans.is_correct && <strong>(✔)</strong>}
-                        </p>
+                        <div className={styles.answer_main}>
+                            <span className={styles.answerLabel}>
+                                {answerLabel(answerIdx)}.
+                            </span>
+                            <p className={styles.answerText}>
+                                {ans.answer_content}
+                                {ans.is_correct && <strong>(✔)</strong>}
+                            </p>
+                        </div>
 
                         {/* ===== Answer Images ===== */}
                         {ans?.images && ans.images?.length > 0 && (

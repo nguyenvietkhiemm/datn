@@ -2,116 +2,120 @@ import { Question, Answer, CreateQuestionPayload, QuestionQuery } from "./type";
 import { API_URL, getHeaders, getToken } from "@/lib/service";
 
 export const QuestionService = {
-    async fetchQuestions(query: QuestionQuery): Promise<{ questions: Question[]; last_page: number }> {
+  async fetchQuestions(query: QuestionQuery): Promise<{ questions: Question[]; last_page: number }> {
 
-        const token = getToken();
-        const params = new URLSearchParams({
-            page: query.page.toString(),
-            available: query.available,
-            type_question: query.type_question.toString(),
-            keyword: query.keyword,
-        });
-        
-        const res = await fetch(
-            `${API_URL}/questions?${params.toString()}`,
-            {
-                method: "GET",
-                headers: getHeaders(token),
-            }
-        );
-        if (!res.ok) {
-            throw new Error("Không thể lấy danh sách câu hỏi");
-        }
+    const token = getToken();
+    const params = new URLSearchParams({
+      page: query.page.toString(),
+      available: query.available,
+      type_question: query.type_question.toString(),
+      keyword: query.keyword,
+    });
 
-        const data = await res.json();
-        return {
-            questions: data.data.question as Question[], // Trả về danh sách câu hỏi
-            last_page: data.data.totalPages as number,  // Trả về số trang cuối
-        };
-    },
+    const res = await fetch(
+      `${API_URL}/questions?${params.toString()}`,
+      {
+        method: "GET",
+        headers: getHeaders(token),
+      }
+    );
+    if (!res.ok) {
+      throw new Error("Không thể lấy danh sách câu hỏi");
+    }
 
-    async createQuestionWithAnswers(payload: CreateQuestionPayload) {
-        const token = getToken();
+    const data = await res.json();
+    return {
+      questions: data.data.question as Question[], // Trả về danh sách câu hỏi
+      last_page: data.data.totalPages as number,  // Trả về số trang cuối
+    };
+  },
 
-        const res = await fetch(`${API_URL}/questions/create`, {
-            method: "POST",
-            headers: getHeaders(token),
-            body: JSON.stringify(payload),
-        });
+  async createQuestionWithAnswers(payload: CreateQuestionPayload) {
+    const token = getToken();
 
-        const data = await res.json();
+    const res = await fetch(`${API_URL}/questions/create`, {
+      method: "POST",
+      headers: getHeaders(token),
+      body: JSON.stringify(payload),
+    });
 
-        if (!res.ok) {
-            throw new Error(data.message || "Tạo câu hỏi thất bại");
-        }
+    const data = await res.json();
 
-        return data;
-    },
+    if (!res.ok) {
+      throw new Error(data.message || "Tạo câu hỏi thất bại");
+    }
 
-    // Xoá câu hỏi
-    async deleteQuestion(questionId: number): Promise<void> {
-        const token = getToken();
-        const res = await fetch(`${API_URL}/questions/remove/${questionId}`, {
-            method: "DELETE",
-            headers: { Authorization: `Bearer ${token}` },
-        });
+    return data;
+  },
 
-        if (!res.ok) throw new Error("Xoá câu hỏi thất bại");
+  // Xoá câu hỏi
+  async deleteQuestion(questionId: number): Promise<void> {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/questions/remove/${questionId}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
-        return; // Không cần trả về gì
-    },
+    if (!res.ok) throw new Error("Xoá câu hỏi thất bại");
 
-    // Cập nhật trạng thái hiển thị câu hỏi
-    async toggleQuestionAvailable(questionId: number, available: boolean): Promise<void> {
-        const token = getToken();
-        const res = await fetch(`${API_URL}/questions/setAvailable/${questionId}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({ available }),
-        });
+    return; // Không cần trả về gì
+  },
 
-        if (!res.ok) throw new Error("Cập nhật trạng thái thất bại");
+  // Cập nhật trạng thái hiển thị câu hỏi
+  async toggleQuestionAvailable(questionId: number, available: boolean): Promise<void> {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/questions/setAvailable/${questionId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ available }),
+    });
 
-        return; // Không cần trả về gì
-    },
+    if (!res.ok) throw new Error("Cập nhật trạng thái thất bại");
 
-    async uploadQuestionImages(
-        files: (File | string)[]
-    ): Promise<string[]> {
+    return; // Không cần trả về gì
+  },
 
-        const token = getToken();
-        const formData = new FormData();
+  async uploadImages(
+    files: (File | string)[]
+  ): Promise<string[]> {
+    const token = getToken();
+    const formData = new FormData();
 
-        const existedUrls: string[] = [];
+    const existedUrls: string[] = [];
 
-        files.forEach(file => {
-            if (file instanceof File) {
-                formData.append("images", file);
-            } else {
-                existedUrls.push(file);
-            }
-        });
+    files.forEach((file) => {
+      if (file instanceof File) {
+        formData.append("images", file);
+      } else {
+        existedUrls.push(file);
+      }
+    });
 
-        let uploadedUrls: string[] = [];
+    let uploadedUrls: string[] = [];
 
-        if (formData.has("images")) {
-            const res = await fetch(`${API_URL}/questions/images`, {
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-                body: formData,
-            });
+    if (formData.has("images")) {
+      const res = await fetch(`${API_URL}/file/images/upload`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
 
-            const data = await res.json();
-            uploadedUrls = data;
-            console.log(uploadedUrls);
+      if (!res.ok) {
+        throw new Error("Upload  images failed");
+      }
 
-        }
+      const result = await res.json();
 
-        return [...existedUrls, ...uploadedUrls];
-    },
+      //  LẤY ĐÚNG DATA
+      uploadedUrls = result.data as string[];
+    }
+
+    return [...existedUrls, ...uploadedUrls];
+  }
+
 }

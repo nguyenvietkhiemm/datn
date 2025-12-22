@@ -13,6 +13,7 @@ export default function DocumentPage() {
     const [documents, setDocuments] = useState<Document[]>([]);
     const [loading, setLoading] = useState(true);
     const [totalPage, setTotalPage] = useState<number>(1);
+    const [selectedDocuments, setSelectedDocuments] = useState<number[]>([]);
     const [query, setQuery] = useState<DocumnetQuery>({
         page: 1,
         searchKeyword: "",
@@ -85,6 +86,9 @@ export default function DocumentPage() {
         }))
     }
 
+    const handleSelectDocument = (document_id: number) => {
+
+    }
     // Xem chi tiết tài liệu
     const detailDocument = (id: number, document: Document) => {
         localStorage.setItem("document", JSON.stringify(document));
@@ -133,6 +137,7 @@ export default function DocumentPage() {
                         <th>Chủ đề</th>
                         <th>Xem</th>
                         <th>Xoá</th>
+                        <th>Chọn</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -185,6 +190,13 @@ export default function DocumentPage() {
                                     >
                                         X
                                     </button>
+                                </td>
+                                <td>
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedDocuments.includes(doc.document_id)}
+                                        onChange={() => handleSelectDocument(doc.document_id)}
+                                    />
                                 </td>
                             </tr>
                         ))
