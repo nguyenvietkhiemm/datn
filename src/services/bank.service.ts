@@ -120,6 +120,7 @@ const BankService = {
             b.description,
             b.topic_id,
             b.available,
+            b.time_limit,
             t.title AS topic_name
           FROM bank b
           JOIN topic t ON b.topic_id = t.topic_id
@@ -151,9 +152,9 @@ const BankService = {
 
     async create(bank: Bank): Promise<Bank> {
         const queryText = `
-            INSERT INTO bank (description, topic_id)
-            VALUES ($1, $2) RETURNING *`;
-        const result = await query(queryText, [bank.description, bank.topic_id]);
+            INSERT INTO bank (description, topic_id, time_limit)
+            VALUES ($1, $2, $3) RETURNING *`;
+        const result = await query(queryText, [bank.description, bank.topic_id, bank.time_limit]);
         return result.rows[0];
     },
 
@@ -274,9 +275,8 @@ const BankService = {
     },
 
     async getUserListBankHistory(
-        bank_id: number
+        user_id: number
     ): Promise<{
-        bank_id: number;
         history: {
             score: number;
             time_test: number;
@@ -285,21 +285,19 @@ const BankService = {
     }> {
         try {
             const listQuery =
-                `SELECT hb.score, hb.time_test, hb.created_at, u.user_name
+                `SELECT hb.score, hb.time_test, hb.created_at, u.user_name, hb.bank_id, hb.history_bank_id
                     FROM history_bank hb
                     JOIN "user" u ON u.user_id = hb.user_id
-                    WHERE bank_id=$1
+                    WHERE hb.user_id=$1
                     ORDER BY history_bank_id DESC`
-            const list = await query(listQuery, [bank_id])
+            const list = await query(listQuery, [user_id])
             if (!list || list.rows.length === 0) {
                 return {
-                    bank_id,
                     history: []
                 };
             }
 
             return {
-                bank_id,
                 history: list.rows
             };
 

@@ -64,6 +64,9 @@ const AuthService = {
       email,
     ]);
 
+    const {available} = userResult.rows[0]
+    if(available === false)  throw new Error("UER_NOT_AVAILABLE");
+
     if (userResult.rows.length === 0) {
       throw new Error("USER_NOT_FOUND");
     }
