@@ -31,8 +31,8 @@ router.get(
 // upload ảnh (hash – không trùng)
 router.post(
   "/images/upload",
-  uploadImage.single("image"),
-  FileController.uploadImage
+  uploadImage.array("images", 10),
+  FileController.uploadImages
 );
 
 router.post("/docx/save/:filename",

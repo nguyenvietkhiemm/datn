@@ -1,14 +1,13 @@
 import multer from "multer";
 import path from "path";
 import fs from "fs";
-import crypto from "crypto";
 import { sanitizeFilename } from "./helper";
 
 /* =========================
  * PATH CONFIG
  * ========================= */
 const docDataDir     = path.join(__dirname, "../../data/uploads/docx");
-const imageOutputDir = path.join(__dirname, "../../data/outputs/media");
+export const imageOutputDir = path.join(__dirname, "../../data/outputs/media");
 const docDirResource = path.join(__dirname, "../../resources/docx_file");
 const pdfDirResource = path.join(__dirname, "../../resources/pdf_file");
 
@@ -90,24 +89,15 @@ const docResourceFilter = (
 const imageStorage = multer.memoryStorage();
 
 export const uploadImage = multer({
-  storage: imageStorage,
-  fileFilter: (_req, file, cb) => {
-    const hash = crypto
-      .createHash("md5")
-      .update(file.buffer)
-      .digest("hex");
-
-    const ext = path.extname(file.originalname);
-    const fileName = `${hash}${ext}`;
-    const filePath = path.join(imageOutputDir, fileName);
-
-    // File đã tồn tại → bỏ qua
-    if (fs.existsSync(filePath)) {
-      return cb(null, false);
+  storage: multer.memoryStorage(),
+  fileFilter: (
+    _req: Express.Request,
+    file: Express.Multer.File,
+    cb: multer.FileFilterCallback 
+  ) => {
+    if (!file.mimetype.startsWith("image/")) {
+      return cb(new Error("Chỉ cho phép upload ảnh images"));
     }
-
-    // Gắn tên file hash để xử lý sau
-    (file as any).hashName = fileName;
     cb(null, true);
   },
 });

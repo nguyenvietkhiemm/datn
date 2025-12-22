@@ -1,6 +1,5 @@
 import fs from "fs";
 import path from "path";
-import pool from "../config/database";
 
 export interface ImageInfo {
     filename: string;
@@ -39,7 +38,7 @@ export class FileService {
             .filter(name => fs.existsSync(path.join(this.mediaDir, name)))
             .map(filename => ({ filename }));
     }
-    
+
     // ===== IMAGE STREAM =====
     static getImageStream(filename: string) {
         const filePath = path.join(this.mediaDir, filename);
