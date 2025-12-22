@@ -87,8 +87,9 @@ export default function DocumentPage() {
     }
 
     const handleSelectDocument = (document_id: number) => {
-
+        setSelectedDocuments(prev => [...prev, document_id])
     }
+    
     // Xem chi tiết tài liệu
     const detailDocument = (id: number, document: Document) => {
         localStorage.setItem("document", JSON.stringify(document));
@@ -145,7 +146,6 @@ export default function DocumentPage() {
                         documents.map((doc, index) => (
                             <tr
                                 key={doc.document_id}
-                                onClick={() => detailDocument(doc.document_id, doc)}
                             >
                                 <td>{index + 1}</td>
                                 <td>{doc.title}</td>
@@ -165,7 +165,7 @@ export default function DocumentPage() {
                                     </span>
                                 </td>
                                 <td>{doc.topic_title || "-"}</td>
-                                <td>
+                                <td onClick={() => detailDocument(doc.document_id, doc)}>
                                     {doc.link ? (
                                         <a
                                             href={doc.link}
