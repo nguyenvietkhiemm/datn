@@ -217,7 +217,7 @@ bankRoute.delete('/remove/:id',
  *         description: Không tìm thấy ngân hàng câu hỏi
  */
 
-bankRoute.post("/questions/add/:id",
+bankRoute.post("/questions/add",
         Authentication.AuthenticateToken,
         Authentication.AuthorizeRoles(...ADMIN),
         BankQuestionController.add);

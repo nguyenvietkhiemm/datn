@@ -60,23 +60,6 @@ export const FileController = {
         return res.status(result.status).json(result);
     },
 
-    // ===== DOCX =====
-    async saveDocx(req: Request, res: Response) {
-        const result = await safeExecute(async () => {
-            if (!req.file) throw new Error("NO_DOCX_FILE");
-
-            const bertOutput = await runBertModel(req.file.path);
-
-            return {
-                status: 200,
-                message: "Xử lý DOCX thành công",
-                bertOutput,
-            };
-        });
-
-        return res.status(result.status).json(result);
-    },
-
     async getImagesInfo(req: Request, res: Response) {
         const result = await safeExecute(
             async (): Promise<DefaultResponse<any>> => {

@@ -9,8 +9,7 @@ const ExamService = {
     const queryText = `
       SELECT
         q.*,
-  
-        -- images của question
+
         COALESCE(
           (
             SELECT json_agg(iq.image_link)
@@ -30,7 +29,6 @@ const ExamService = {
                 'answer_content', a.answer_content,
                 'is_correct', a.is_correct,
   
-                -- image của answer
                 'images',
                 COALESCE(
                   (
@@ -149,7 +147,9 @@ const ExamService = {
     }
 
     //subject
+
     if (subject_id !== "All") {
+
       conditions.push(`sj.subject_id = ($${idx})`);
       params.push(subject_id);
       idx++;

@@ -287,7 +287,6 @@ CREATE TABLE IF NOT EXISTS history_bank (
 -- 28) user_exam_answer (depends on user, exam, history_exam)
 CREATE TABLE IF NOT EXISTS user_exam_answer (
   user_exam_answer_id SERIAL PRIMARY KEY,
-  score DECIMAL(5,2),
   created_at TIMESTAMPTZ DEFAULT now(),
   user_id INT REFERENCES "user"(user_id) ON DELETE CASCADE,
   exam_id INT REFERENCES exam(exam_id) ON DELETE CASCADE,
@@ -308,6 +307,7 @@ CREATE TABLE IF NOT EXISTS user_bank_answer (
   user_id INT REFERENCES "user"(user_id) ON DELETE CASCADE,
   answer_id INT REFERENCES answer(answer_id) ON DELETE SET NULL,
   user_answer_text TEXT DEFAULT '',
+  question_id INT,
   history_bank_id INT,
   CONSTRAINT fk_user_bank_answer_history FOREIGN KEY (history_bank_id) REFERENCES history_bank(history_bank_id) ON DELETE CASCADE
 );
