@@ -18,7 +18,7 @@ export const RoadMapService = {
     },
 
     // Tạo bước roadmap mới
-    async addStep(form: any): Promise<void> {
+    async addStep(form: any): Promise<RoadmapStep> {
         const token = getToken();
 
         const res = await fetch(`${API_URL}/roadmap/create`, {
@@ -28,6 +28,8 @@ export const RoadMapService = {
         });
 
         if (!res.ok) throw new Error("Không thể tạo bước roadmap");
+        const data = await res.json();
+        return data.data
     },
 
     // Xoá bước

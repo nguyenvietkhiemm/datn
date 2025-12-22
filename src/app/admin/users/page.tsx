@@ -16,8 +16,6 @@ export default function User() {
   const [query, setQuery] = useState<UserQuery>({
     page: 1,
   });
-
-  console.log(query);
   
   /* ================= FETCH BY QUERY ================= */
   useEffect(() => {
@@ -76,7 +74,7 @@ export default function User() {
       <div className={styles.user_header}>
         <h1 className={styles.title}>Quản lý người dùng</h1>
 
-        <FilterUser setQuery={setQuery} />
+        <FilterUser query={query} setQuery={setQuery} />
       </div>
 
       <table className={styles.user_table}>

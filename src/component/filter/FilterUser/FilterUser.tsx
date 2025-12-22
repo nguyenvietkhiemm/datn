@@ -1,17 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./FilterUser.module.css";
 import type { UserQuery } from "@/domain/admin/users/type";
 
 interface FilterUserProps {
+    query: UserQuery;
     setQuery: React.Dispatch<React.SetStateAction<UserQuery>>;
 }
 
-export default function FilterUser({ setQuery }: FilterUserProps) {
-    const [search, setSearch] = useState("");
-    const [role, setRole] = useState<"All" | "ADMIN" | "USER">("All");
-    const [status, setStatus] = useState<"All" | "true" | "false">("All");
+export default function FilterUser({ query, setQuery }: FilterUserProps) {
+    // ===== LOCAL STATE (EDIT MODE) =====
+    const [search, setSearch] = useState<string>(query.keyword ?? "");
+    const [role, setRole] = useState<"All" | "ADMIN" | "USER">(
+        query.role ?? "All"
+    );
+    const [status, setStatus] = useState<"All" | "true" | "false">(
+        query.status ?? "All"
+    );
+
+    // ===== SYNC KHI QUERY ĐỔI (pagination / back / reload) =====
+    useEffect(() => {
+        setSearch(query.keyword ?? "");
+        setRole(query.role ?? "All");
+        setStatus(query.status ?? "All");
+    }, [query.keyword, query.role, query.status]);
 
     const applyFilter = () => {
         setQuery((prev) => ({
@@ -44,7 +57,9 @@ export default function FilterUser({ setQuery }: FilterUserProps) {
             {/* Role */}
             <select
                 value={role}
-                onChange={(e) => setRole(e.target.value as any)}
+                onChange={(e) =>
+                    setRole(e.target.value as "All" | "ADMIN" | "USER")
+                }
                 className={styles.select}
             >
                 <option value="All">Tất cả vai trò</option>
@@ -55,7 +70,9 @@ export default function FilterUser({ setQuery }: FilterUserProps) {
             {/* Status */}
             <select
                 value={status}
-                onChange={(e) => setStatus(e.target.value as any)}
+                onChange={(e) =>
+                    setStatus(e.target.value as "All" | "true" | "false")
+                }
                 className={styles.select}
             >
                 <option value="All">Tất cả trạng thái</option>

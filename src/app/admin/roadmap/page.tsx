@@ -43,7 +43,8 @@ export default function RoadmapEditor() {
 
     // Thêm bước
     const handleAdd = async () => {
-        await RoadMapService.addStep(form)
+        const roadmap = await RoadMapService.addStep(form)
+        setSteps(prev => [...prev, roadmap])
     }
 
     // Xoá bước
