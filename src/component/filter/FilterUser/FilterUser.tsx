@@ -1,48 +1,38 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./FilterUser.module.css";
-import type { User } from "@/domain/admin/users/type";
+import type { UserQuery } from "@/domain/admin/users/type";
 
 interface FilterUserProps {
-    users: User[];
-    setFilterUser: React.Dispatch<React.SetStateAction<User[]>>;
+    setQuery: React.Dispatch<React.SetStateAction<UserQuery>>;
 }
 
-export default function FilterUser({ users, setFilterUser }: FilterUserProps) {
+export default function FilterUser({ setQuery }: FilterUserProps) {
     const [search, setSearch] = useState("");
-    const [role, setRole] = useState("user");
-    const [status, setStatus] = useState<string>("true");
+    const [role, setRole] = useState<"All" | "ADMIN" | "USER">("All");
+    const [status, setStatus] = useState<"All" | "true" | "false">("All");
 
-    useEffect(() => {
-        if (!users || users.length === 0) return;
-        
-        let filtered = [...users];
+    const applyFilter = () => {
+        setQuery((prev) => ({
+            ...prev,
+            page: 1,
+            keyword: search.trim() || undefined,
+            role: role !== "All" ? role : undefined,
+            available: status !== "All" ? status : undefined,
+        }));
+    };
 
-        if (search.trim() !== "") {
-            const keyword = search.toLowerCase();
-            filtered = filtered.filter(
-                (u) =>
-                    u.user_name.toLowerCase().includes(keyword) ||
-                    u.email.toLowerCase().includes(keyword)
-            );
-        }
-
-        if (status !== "all") {
-            const isAvailable = status === "true";  
-            filtered = filtered.filter((u) => u.available === isAvailable);
-        }
-        
-        if (role !== "all") {
-            filtered = filtered.filter((u) => u.role_name === role);
-        }
-        
-        setFilterUser(filtered);
-    }, [search, role, status, users]);
+    const resetFilter = () => {
+        setSearch("");
+        setRole("All");
+        setStatus("All");
+        setQuery({ page: 1 });
+    };
 
     return (
         <div className={styles.container}>
-            {/* Ô tìm kiếm */}
+            {/* Search */}
             <input
                 type="text"
                 placeholder="Tìm theo tên hoặc email..."
@@ -51,37 +41,33 @@ export default function FilterUser({ users, setFilterUser }: FilterUserProps) {
                 className={styles.input}
             />
 
-            {/* Lọc theo vai trò */}
+            {/* Role */}
             <select
                 value={role}
-                onChange={(e) => setRole(e.target.value)}
+                onChange={(e) => setRole(e.target.value as any)}
                 className={styles.select}
             >
-                <option value="all">Tất cả vai trò</option>
-                <option value="admin">NgườI quản lý</option>
-                <option value="user">Người dùng</option>
+                <option value="All">Tất cả vai trò</option>
+                <option value="ADMIN">Người quản lý</option>
+                <option value="USER">Người dùng</option>
             </select>
 
-            {/* Lọc theo trạng thái */}
+            {/* Status */}
             <select
                 value={status}
-                onChange={(e) => setStatus(e.target.value)}
+                onChange={(e) => setStatus(e.target.value as any)}
                 className={styles.select}
             >
+                <option value="All">Tất cả trạng thái</option>
                 <option value="true">Hoạt động</option>
-                <option value="all">Tất cả trạng thái</option>
-                <option value="false">Bị khóa</option>
+                <option value="false">Bị khoá</option>
             </select>
 
-            {/* Nút xóa lọc */}
-            <button
-                onClick={() => {
-                    setSearch("");
-                    setRole("all");
-                    setStatus("all");
-                }}
-                className={styles.clearBtn}
-            >
+            <button onClick={applyFilter} className={styles.applyBtn}>
+                Áp dụng
+            </button>
+
+            <button onClick={resetFilter} className={styles.clearBtn}>
                 Đặt lại
             </button>
         </div>

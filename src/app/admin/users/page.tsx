@@ -2,131 +2,88 @@
 
 import { useEffect, useState } from "react";
 import styles from "./User.module.css";
-import Cookies from "js-cookie";
 import FilterUser from "@/component/filter/FilterUser/FilterUser";
-import type { User } from "@/domain/admin/users/type";
+import Pagination from "@/component/pagination/Pagination";
+import type { User, UserQuery } from "@/domain/admin/users/type";
+import { UserService } from "@/domain/admin/users/sevice";
 
 export default function User() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filterUser, setFilterUser] = useState<User[]>([]);
   const [editingRoleId, setEditingRoleId] = useState<number | null>(null);
-  const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
+  const [totalPage, setTotalPage] = useState(1);
 
+  const [query, setQuery] = useState<UserQuery>({
+    page: 1,
+  });
+
+  console.log(query);
+  
+  /* ================= FETCH BY QUERY ================= */
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetch = async () => {
       try {
-        const token = Cookies.get("token");
-        const resUser = await fetch(`${API_URL}/users`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-          }
-        });
-        if (!resUser.ok) throw new Error("Failed to fetch users");
-        const data = await resUser.json();
-        setUsers(data.data);
-      } catch (err) {
-        console.error(err);
+        setLoading(true);
+        const { users, last_page } = await UserService.fetchUsers(query);
+        setUsers(users);
+        setTotalPage(last_page);
+      } catch (e) {
+        console.error(e);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchUsers();
-  }, []);
+    fetch();
+  }, [query]);
 
-  const handleDelete = async (userId: number) => {
-    try {
-      const token = Cookies.get("token");
-      await fetch(`${API_URL}/users/remove/${userId}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      setUsers(users.filter(u => u.user_id !== userId));
-    } catch (err) {
-      console.error(err);
-    }
+  /* ================= ACTIONS ================= */
+
+  const handleDelete = async (id: number) => {
+    if (!confirm("Xoá người dùng?")) return;
+    await UserService.deleteUser(id);
+    setUsers((prev) => prev.filter((u) => u.user_id !== id));
   };
 
-  const handleToggleAvailable = async (userId: number, available: boolean) => {
-    try {
-      const token = Cookies.get("token");
-      const res = await fetch(`${API_URL}/users/update/${userId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({ available })
-      });
-
-      if (!res.ok) throw new Error("cập nhật thất bại");
-
-      setUsers((prev) =>
-        prev.map((u) =>
-          u.user_id === userId ? { ...u, available } : u
-        )
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-
-  if (loading) return <p className={styles.user_loading}>Đang tải danh sách người dùng...</p>;
-
-
-  //handleToggleRole
-
-  const handleChangeRole = async (userId: number, newRole: string) => {
-    try {
-      const token = Cookies.get("token");
-      const res = await fetch(`${API_URL}/users/update/${userId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ role_name: newRole }),
-      });
-
-      if (!res.ok) throw new Error("Cập nhật vai trò thất bại");
-      setUsers((prev) =>
-        prev.map((u) =>
-          u.user_id === userId ? { ...u, role_name: newRole } : u
-        )
-      );
-
-      setEditingRoleId(null); 
-    } catch (error) {
-      console.error(error);
-    }
+  const handleToggleAvailable = async (id: number, available: boolean) => {
+    await UserService.updateUser(id, { available });
+    setUsers((prev) =>
+      prev.map((u) =>
+        u.user_id === id ? { ...u, available } : u
+      )
+    );
   };
 
-  const handleToggleRole = (userId: number) => {
-    setEditingRoleId((prev) => (prev === userId ? null : userId));
+  const handleChangeRole = async (id: number, role: "ADMIN" | "USER") => {
+    await UserService.updateUser(id, { role_name: role });
+    setUsers((prev) =>
+      prev.map((u) =>
+        u.user_id === id ? { ...u, role_name: role } : u
+      )
+    );
+    setEditingRoleId(null);
   };
+
+  if (loading)
+    return (
+      <p className={styles.user_loading}>
+        Đang tải danh sách người dùng...
+      </p>
+    );
 
   return (
     <div className={styles.user_container}>
       <div className={styles.user_header}>
         <h1 className={styles.title}>Quản lý người dùng</h1>
-        <div className={styles.user_add_search}>
-          <div className={styles.button}>
-            <button className={styles.user_addButton}>+ Thêm người dùng</button>
-          </div>
 
-          <FilterUser users={users} setFilterUser={setFilterUser} />
-        </div>
+        <FilterUser setQuery={setQuery} />
       </div>
 
       <table className={styles.user_table}>
         <thead>
-          <tr className={styles.thead}>
+          <tr>
             <th>STT</th>
-            <th>Tên người dùng</th>
+            <th>Tên</th>
             <th>Email</th>
             <th>Ngày sinh</th>
             <th>Ngày tạo</th>
@@ -135,66 +92,104 @@ export default function User() {
             <th>Xoá</th>
           </tr>
         </thead>
+
         <tbody>
-          {filterUser.length > 0 ? (
-            filterUser.map((user, index) => (
-              <tr key={user.user_id} className={styles.tbody}>
-                <td>{index + 1}</td>
-                <td>{user.user_name}</td>
-                <td>{user.email}</td>
-                <td>{new Date(user.birthday).toLocaleDateString("vi-VN")}</td>
-                <td>{new Date(user.created_at).toLocaleString("vi-VN")}</td>
-                <td className={user.available ? styles.active : styles.inactive}>
-                  {user.available ? "Hoạt động" : "Không hoạt động"}
-                  {/* ký hiệu sủa available */}
-                  {user.role_name !== "admin" && (
-                    <span
-                      className={styles.editIcon}
-                      onClick={() => handleToggleAvailable(user.user_id, !user.available)}
-                    >
-                      ✎
-                    </span>
-                  )}
-                </td>
-                <td className={user.role_name === "admin" ? styles.admin : styles.user}>
-                  {user.role_name === "admin" ? "Admin" : "Người dùng"}
-                  {/* ký hiệu sửa role */}
-                  {user.role_name !== "admin" && (
-                    <span
-                      className={styles.editIcon}
-                      onClick={() => handleToggleRole(user.user_id)}
-                    >
-                      ✎
-                    </span>
-                  )}
-                  {editingRoleId === user.user_id && (
-                    <div className={styles.roleGroup}>
-                      <select
-                        onChange={(e) =>
-                          handleChangeRole(user.user_id, e.target.value)
+          {users.length ? (
+            users.map((u, i) => {
+              const isAdmin = u.role_name === "ADMIN";
+
+              return (
+                <tr key={u.user_id}>
+                  <td>{i + 1}</td>
+                  <td>{u.user_name}</td>
+                  <td>{u.email}</td>
+                  <td>
+                    {u.birthday
+                      ? new Date(u.birthday).toLocaleDateString("vi-VN")
+                      : "—"}
+                  </td>
+                  <td>
+                    {new Date(u.created_at).toLocaleString("vi-VN")}
+                  </td>
+
+                  <td className={u.available ? styles.active : styles.inactive}>
+                    {u.available ? "Hoạt động" : "Bị khoá"}
+                    {!isAdmin && (
+                      <span
+                        className={styles.editIcon}
+                        onClick={() =>
+                          handleToggleAvailable(
+                            u.user_id,
+                            !u.available
+                          )
                         }
-                        defaultValue={user.role_name}
                       >
-                        <option value="user">Người dùng</option>
-                        <option value="admin">Quản trị</option>
+                        ✎
+                      </span>
+                    )}
+                  </td>
+
+                  <td className={isAdmin ? styles.admin : styles.user}>
+                    {isAdmin ? "Admin" : "Người dùng"}
+                    {!isAdmin && (
+                      <span
+                        className={styles.editIcon}
+                        onClick={() =>
+                          setEditingRoleId(
+                            editingRoleId === u.user_id
+                              ? null
+                              : u.user_id
+                          )
+                        }
+                      >
+                        ✎
+                      </span>
+                    )}
+
+                    {editingRoleId === u.user_id && (
+                      <select
+                        defaultValue={u.role_name}
+                        onChange={(e) =>
+                          handleChangeRole(
+                            u.user_id,
+                            e.target.value as "ADMIN" | "USER"
+                          )
+                        }
+                      >
+                        <option value="USER">Người dùng</option>
+                        <option value="ADMIN">Quản trị</option>
                       </select>
-                    </div>
-                  )}
-                </td>
-                <td>
-                  <button className={styles.delBtn} onClick={() => handleDelete(user.user_id)}>X</button>
-                </td>
-              </tr>
-            ))
+                    )}
+                  </td>
+
+                  <td>
+                    <button
+                      className={styles.delBtn}
+                      onClick={() => handleDelete(u.user_id)}
+                    >
+                      X
+                    </button>
+                  </td>
+                </tr>
+              );
+            })
           ) : (
             <tr>
               <td colSpan={8} className={styles.empty}>
-                Không có người dùng phù hợp
+                Không có người dùng
               </td>
             </tr>
           )}
         </tbody>
       </table>
+
+      <Pagination
+        totalPages={totalPage}
+        currentPage={query.page}
+        setCurrentPage={(page) =>
+          setQuery((prev) => ({ ...prev, page }))
+        }
+      />
     </div>
   );
 }

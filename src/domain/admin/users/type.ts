@@ -7,3 +7,11 @@ export type User = {
     available: boolean;
     role_name: string;
 };
+
+export interface UserQuery {
+    page: number;
+    keyword?: string;
+    role?: "ADMIN" | "USER";
+    status?: "true" | "false";
+}
+
