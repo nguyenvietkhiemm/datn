@@ -7,30 +7,35 @@ import { useParams, useRouter } from "next/navigation";
 import { BankService } from "../../../../../domain/bank/service";
 import { Question } from "../../../../../domain/question-answer/type";
 import { BankProps } from "../../../../../domain/bank/type";
-import { formatTime } from "../../../../../lib/model";
 
 export default function DoBank() {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [answers, setAnswers] = useState<{ [key: number]: number }>({});
-  const [timeLeft, setTimeLeft] = useState<number | null>(null);
+  const [timeLeft, setTimeLeft] = useState<number>(0);
   const [submitted, setSubmitted] = useState(false);
   const [bank, setBank] = useState<BankProps>();
-
-  const user_name = localStorage.getItem("user_name") || "null";
+  const [userName, setUserName] = useState<string>("anonymous");
   const params = useParams();
   const bank_id = Number(params.id);
   const router = useRouter();
 
   /* Lấy câu hỏi từ bank */
   useEffect(() => {
+
+    // user
+    const userRaw = localStorage.getItem("user");
+    if (userRaw) setUserName(JSON.parse(userRaw).user_name);
+
+    // exam
+    const bankRaw = localStorage.getItem("bank");
+    if (bankRaw) {
+      const bank = JSON.parse(bankRaw);
+      setBank(bank);
+      setTimeLeft(bank.time_limit * 60);
+    }
     const loadBankDetail = async () => {
       const res = await BankService.geDetailBank(bank_id);
-      setQuestions(res.data.questions || []);
-      setBank(res.data.bank);
-
-      if (res.data.bank?.time_limit) {
-        setTimeLeft(res.data.bank.time_limit * 60);
-      }
+      setQuestions(res.data || []);
     };
 
     loadBankDetail();
@@ -53,17 +58,17 @@ export default function DoBank() {
       Number(bank!.subject_type),
       used_time,
       do_bank,
-      user_name
+      userName
     );
 
-    const history_id = res.data.history_bank_id;
+    const history_bank_id = res.data.history_bank_id;
     setSubmitted(true);
-    router.push(`/bank/${bank_id}/result/${history_id}`);
+    router.push(`/practice/${bank_id}/result/${history_bank_id}`);
   };
 
   /* Countdown */
   useEffect(() => {
-    if (submitted || timeLeft === null) return;
+    if (submitted) return;
 
     if (timeLeft <= 0) {
       handleSubmit();
@@ -71,7 +76,7 @@ export default function DoBank() {
     }
 
     const timer = setInterval(() => {
-      setTimeLeft((t) => t! - 1);
+      setTimeLeft(t => t - 1);
     }, 1000);
 
     return () => clearInterval(timer);
@@ -101,7 +106,7 @@ export default function DoBank() {
                 questions.map((q, i) => (
                   <div key={q.question_id} className={styles.questionBox}>
                     <p className={styles.questionText}>
-                      <strong>{i + 1}.</strong> {q.question_content}
+                      <strong>Câu {i + 1}.</strong> {q.question_content}
                     </p>
                     <div className={styles.answers}>
                       {q.answers.map((a) => (
@@ -134,7 +139,7 @@ export default function DoBank() {
           <div className={styles.rightPanel}>
             <div className={styles.topSection}>
               <div className={styles.timer}>
-                ⏱ {timeLeft !== null ? formatTime(timeLeft) : "Đang tải..."}
+                ⏱ {formatTime(timeLeft)}
               </div>
 
               <Button variant="outline" onClick={handleSubmit}>

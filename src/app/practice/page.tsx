@@ -10,6 +10,7 @@ import { RootState } from "@/store";
 import { setBank } from "@/store/slices/bankSlice";
 import { BankService } from "../../../domain/bank/service";
 import { useRouter } from "next/navigation";
+import { BankProps } from "../../../domain/bank/type";
 
 export default function Bank() {
   const dispatch = useDispatch();
@@ -39,7 +40,8 @@ export default function Bank() {
     fetchBanks();
   }, [currentPage, filterCondition, searchKeyword]);
 
-  const handleDoBank = async (bank_id: number) => {
+  const handleDoBank = async (bank_id: number, bank: BankProps) => {
+    localStorage.setItem("bank", JSON.stringify(bank))
     router.push(`/practice/${bank_id}/do`);
   };
 
@@ -59,11 +61,33 @@ export default function Bank() {
       </div>
 
       <div className={styles.grid}>
-        {banks.map((bank) => (
-          <div key={bank.bank_id} className={styles.card}>
-            <p className={styles.description}>{bank.description}</p>
-            <p className={styles.time}>{bank.time_limit}</p>
-            <button className={styles.button} onClick={() => handleDoBank(bank.bank_id)}>Xem chi tiết</button>
+        {banks.map((bank,index) => (
+          <div key={index} className={styles.card}>
+            {/* Tiêu đề */}
+            <h3 className={styles.title}>
+              Ngân hàng câu hỏi số {index + 1}
+            </h3>
+
+            {/* Mô tả */}
+            <p className={styles.description}>
+              {bank.description || "Ngân hàng câu hỏi phục vụ luyện tập và ôn tập."}
+            </p>
+
+            {/* Thông tin phụ */}
+            <div className={styles.meta}>
+              <span className={styles.label}>⏱ Thời gian:</span>
+              <span className={styles.time}>
+                {bank.time_limit ? `${bank.time_limit} phút` : "Không giới hạn"}
+              </span>
+            </div>
+
+            {/* Action */}
+            <button
+              className={styles.button}
+              onClick={() => handleDoBank(bank.bank_id, bank)}
+            >
+              Xem chi tiết
+            </button>
           </div>
         ))}
 

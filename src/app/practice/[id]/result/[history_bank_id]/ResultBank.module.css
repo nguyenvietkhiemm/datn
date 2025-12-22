@@ -1,0 +1,63 @@
+.result {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px;
+    background: #fafafa;
+}
+
+/* ===== TITLE ===== */
+.title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* ===== SCORE ===== */
+.scoreBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    border: 2px solid #e5e7eb;
+}
+
+.scoreBox span {
+    font-size: 15px;
+    color: #6b7280;
+}
+
+.scoreBox b {
+    font-size: 22px;
+    color: #111827;
+}
+
+/* ===== QUESTION LIST ===== */
+.questionList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ===== ESSAY ===== */
+.essay {
+    border-left-color: #8b5cf6;
+    background: #faf5ff;
+}
+
+.resultTagEssay {
+    margin-top: 10px;
+    font-size: 14px;
+    font-style: italic;
+    color: #7c3aed;
+}
+
+/* ===== ACTION ===== */
+.action {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+}

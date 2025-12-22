@@ -23,7 +23,7 @@ export const BankService = {
 
         const res = await fetch(url, {
             method: "GET",
-            headers: getHeaders(token), 
+            headers: getHeaders(token),
         });
 
         if (!res.ok) {
@@ -33,7 +33,7 @@ export const BankService = {
         return res.json();
     },
 
-    async geDetailBank(bank_id : number){
+    async geDetailBank(bank_id: number) {
         const token = getToken();
 
         const res = await fetch(`${API_URL}/banks/${bank_id}`, {
@@ -66,4 +66,27 @@ export const BankService = {
 
         return await res.json();
     },
+
+    async getBankHistory() {
+        const token = getToken();
+        const url = `${API_URL}/banks/user/bank-history`;
+
+        const res = await fetch(url, {
+            method: "GET",
+            headers: getHeaders(token)
+        });
+
+        return await res.json();
+    },
+
+    async getUserAnswer(history_bank_id: number, bank_id: number) {
+        const token = getToken();
+        const res = await fetch(`${API_URL}/banks/user-answer?bank_id=${bank_id}&history_bank_id=${history_bank_id}`,
+            {
+                method: "GET",
+                headers: getHeaders(token)
+            }
+        )
+        return res.json()
+    }
 };

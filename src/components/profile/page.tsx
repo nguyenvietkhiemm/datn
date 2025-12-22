@@ -30,7 +30,7 @@ export default function ProfilePage({
                     Thông tin cá nhân
                 </Link>
                 <Link
-                    href={"/my-account/test"}
+                    href={"/practice/bank-history"}
                     className={`${styles.tab} ${activeTab === "results" ? styles.active : ""
                         }`}
                 >
@@ -47,7 +47,6 @@ export default function ProfilePage({
             <div className={styles.content}>
                 {children}
             </div>
-
         </main>
     );
 }
