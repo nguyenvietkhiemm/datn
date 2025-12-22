@@ -110,7 +110,7 @@ export default function Question() {
 
             if (!file) return;
 
-            const url = `${API_URL}/file/docx/save/${file.name}`;
+            const url = `${API_URL}/microservice/bert/process-docx/${file.name}`;
             await FileService.uploadFile(url, file);
         } catch (error) {
             console.error("Lỗi uploadFile:", error);
