@@ -129,9 +129,9 @@ const BankController = {
 
     async getUserBankHistory(req: Request, res: Response) {
         const result: DefaultResponse<any> = await safeExecute(async () => {
-            const { bank_id } = req.query;
+            const user_id  = req?.user?.user_id;
 
-            const data = await BankService.getUserListBankHistory(Number(bank_id));
+            const data = await BankService.getUserListBankHistory(Number(user_id));
             return {
                 status: 200,
                 message: "Lấy lịch sử làm bài thành công",
@@ -145,6 +145,7 @@ const BankController = {
     async getUserAnswer(req: Request, res: Response) {
         const result: DefaultResponse<any> = await safeExecute(async () => {
             const { history_bank_id, bank_id } = req.query
+            
             const data = await BankService.getUserAnswer(Number(history_bank_id), Number(bank_id));
             return {
                 status: 200,
@@ -152,6 +153,7 @@ const BankController = {
                 data
             }
         });
+        return res.status(result.status).json(result);
     }
 }
 

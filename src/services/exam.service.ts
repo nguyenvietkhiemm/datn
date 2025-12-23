@@ -147,9 +147,7 @@ const ExamService = {
     }
 
     //subject
-
     if (subject_id !== "All") {
-
       conditions.push(`sj.subject_id = ($${idx})`);
       params.push(subject_id);
       idx++;

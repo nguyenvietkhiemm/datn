@@ -6,6 +6,7 @@ export interface Bank {
     topic_id: number;
     questions?: Question[];
     available: boolean;
+    time_limit: number
 }
 
 export type DoBank = {

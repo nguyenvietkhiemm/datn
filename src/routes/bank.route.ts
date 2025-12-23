@@ -20,7 +20,7 @@ const bankRoute = Router();
  */
 bankRoute.get('/', BankController.list);
 
-bankRoute.get("/user/:user_name/exam-history",
+bankRoute.get("/user/bank-history",
         Authentication.AuthenticateToken,
         BankController.getUserBankHistory);
 bankRoute.post("/submit",

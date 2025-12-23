@@ -372,3 +372,5 @@ CREATE INDEX IF NOT EXISTS idx_user_email ON "user"(email);
 -- CREATE INDEX IF NOT EXISTS idx_chunk_embedding ON chunk USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
 
 -- End of ordered merged schema
+
+CREATE EXTENSION IF NOT EXISTS unaccent;
