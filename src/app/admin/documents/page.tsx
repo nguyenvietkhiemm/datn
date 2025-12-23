@@ -8,6 +8,8 @@ import Search from "@/component/search/Search";
 import Pagination from "@/component/pagination/Pagination";
 import { Document, DocumnetQuery } from "@/domain/admin/documents/types";
 import { DocumentService } from "@/domain/admin/documents/service";
+import Link from "next/link";
+import { formatVNDateTime } from "@/lib/model";
 
 export default function DocumentPage() {
     const [documents, setDocuments] = useState<Document[]>([]);
@@ -89,12 +91,6 @@ export default function DocumentPage() {
     const handleSelectDocument = (document_id: number) => {
         setSelectedDocuments(prev => [...prev, document_id])
     }
-    
-    // Xem chi tiết tài liệu
-    const detailDocument = (id: number, document: Document) => {
-        localStorage.setItem("document", JSON.stringify(document));
-        router.push(`/admin/documents/detail/${id}`);
-    };
 
     if (loading)
         return <p className={styles.loading}>Đang tải danh sách tài liệu...</p>;
@@ -149,7 +145,7 @@ export default function DocumentPage() {
                             >
                                 <td>{index + 1}</td>
                                 <td>{doc.title}</td>
-                                <td>{new Date(doc.created_at).toLocaleDateString("vi-VN")}</td>
+                                <td>{formatVNDateTime(doc.created_at)}</td>
                                 <td
                                     className={doc.available ? styles.active : styles.inactive}
                                 >
@@ -165,17 +161,14 @@ export default function DocumentPage() {
                                     </span>
                                 </td>
                                 <td>{doc.topic_title || "-"}</td>
-                                <td onClick={() => detailDocument(doc.document_id, doc)}>
+                                <td >
                                     {doc.link ? (
-                                        <a
-                                            href={doc.link}
+                                        <Link href={`/admin/documents/${doc.document_id}?link=${doc.link}`}
                                             target="_blank"
-                                            rel="noopener noreferrer"
-                                            className={styles.viewBtn}
-                                            onClick={(e) => e.stopPropagation()}
+                                            className={styles.link}
                                         >
-                                            Xem
-                                        </a>
+                                            🔗 Xem tài liệu
+                                        </Link>
                                     ) : (
                                         "-"
                                     )}
