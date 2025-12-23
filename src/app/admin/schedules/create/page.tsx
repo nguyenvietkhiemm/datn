@@ -4,12 +4,14 @@ import { ScheduleService } from "@/domain/admin/schedules/service";
 import { useState } from "react";
 import styles from "./Exam.Schedule.Create.module.css";
 import type { ExamScheduleCreate } from "@/domain/admin/schedules/type";
+import {useRouter} from "next/navigation";
 
 export default function ExamScheduleCreate() {
   const [form, setForm] = useState<ExamScheduleCreate>({
     start_time: "",
     end_time: "",
   });
+  const router = useRouter();
 
   const [loading, setLoading] = useState(false);
 
@@ -23,6 +25,7 @@ export default function ExamScheduleCreate() {
     try {
       setLoading(true);
       await ScheduleService.createSchedule(form);
+      router.push(`/admin/schedules`)
       alert("Thêm lịch thi thành công");
     } catch (e: any) {
       alert(e.message);

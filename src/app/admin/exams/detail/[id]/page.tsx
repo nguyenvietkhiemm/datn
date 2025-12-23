@@ -69,7 +69,7 @@ export default function ExamDetail() {
                                     <div key={`q-${i}`} className={styles.imageWrapperSmall}>
                                         {q.images?.map((src, index) => (
                                             <div key={`q-${index}`} className={styles.imageWrapperSmall}>
-                                                <ImagePreview filename={src} />
+                                                <ImagePreview filename={src} width={200}/>
                                             </div>
                                         ))}
                                     </div>

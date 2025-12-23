@@ -149,7 +149,7 @@ export default function ExamQuestionCreate() {
                             <div className={styles.imageGroup}>
                                 {question?.images?.map((src, index) => (
                                     <div key={index} className={styles.imageWrapper}>
-                                        <ImagePreview filename={src} />
+                                        <ImagePreview filename={src} width={200} />
                                     </div>
                                 ))}
                             </div>
