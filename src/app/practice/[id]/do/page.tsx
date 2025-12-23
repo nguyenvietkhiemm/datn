@@ -1,16 +1,21 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./DoBank.module.css";
 import { Button } from "@/components/ui/button";
 import { useParams, useRouter } from "next/navigation";
 import { BankService } from "../../../../../domain/bank/service";
 import { Question } from "../../../../../domain/question-answer/type";
 import { BankProps } from "../../../../../domain/bank/type";
+import { ImagePreview } from "@/components/ImageReview/page";
+import ExamRightPanel from "@/components/do-question/rightPanel";
+import QuestionItem from "@/components/do-question/page";
+
+type AnswerMap = Record<number, number[] | string>;
 
 export default function DoBank() {
   const [questions, setQuestions] = useState<Question[]>([]);
-  const [answers, setAnswers] = useState<{ [key: number]: number }>({});
+  const [answers, setAnswers] = useState<AnswerMap>({});
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [submitted, setSubmitted] = useState(false);
   const [bank, setBank] = useState<BankProps>();
@@ -18,34 +23,82 @@ export default function DoBank() {
   const params = useParams();
   const bank_id = Number(params.id);
   const router = useRouter();
+  const questionRefs = useRef<Record<number, HTMLDivElement | null>>({});
+
+  const STORAGE_KEY = `bank_doing_${bank_id}`;
 
   /* Lấy câu hỏi từ bank */
   useEffect(() => {
-
     // user
     const userRaw = localStorage.getItem("user");
     if (userRaw) setUserName(JSON.parse(userRaw).user_name);
 
-    // exam
+    // bank
     const bankRaw = localStorage.getItem("bank");
     if (bankRaw) {
-      const bank = JSON.parse(bankRaw);
-      setBank(bank);
-      setTimeLeft(bank.time_limit * 60);
+      const b = JSON.parse(bankRaw);
+      setBank(b);
+      setTimeLeft((b.time_limit ?? 150) * 60);
     }
-    const loadBankDetail = async () => {
-      const res = await BankService.geDetailBank(bank_id);
+
+    BankService.geDetailBank(bank_id).then(res => {
       setQuestions(res.data || []);
+    });
+  }, [bank_id]);
+
+  useEffect(() => {
+    if (!bank) return;
+
+    const nav = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming;
+    const saved = localStorage.getItem(STORAGE_KEY);
+
+    // 👉 Vào lần đầu
+    if (nav.type === "navigate") {
+      localStorage.removeItem(STORAGE_KEY);
+      setAnswers({});
+      setTimeLeft((bank.time_limit ?? 150) * 60);
+      return;
+    }
+
+    // 👉 Reload nhưng không có gì để restore
+    if (!saved) return;
+
+    const data = JSON.parse(saved);
+    setAnswers(data.answers || {});
+    setTimeLeft(data.timeLeft ?? (bank.time_limit ?? 150) * 60);
+    setUserName(data.userName || "anonymous");
+  }, [bank]);
+
+  useEffect(() => {
+    if (!bank || submitted) return;
+
+    const data = {
+      answers,
+      timeLeft,
+      userName,
     };
 
-    loadBankDetail();
-  }, [bank_id]);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }, [answers, timeLeft, submitted, bank]);
+
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (!submitted) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () =>
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [submitted]);
 
   /* Submit */
   const handleSubmit = async () => {
-    const do_bank = Object.entries(answers).map(([q, a]) => ({
+    const do_bank = Object.entries(answers).map(([q, ans]) => ({
       question_id: Number(q),
-      user_answer: [a],
+      user_answer: Array.isArray(ans) ? ans : [ans],
     }));
 
     const used_time =
@@ -63,6 +116,7 @@ export default function DoBank() {
 
     const history_bank_id = res.data.history_bank_id;
     setSubmitted(true);
+    localStorage.removeItem(STORAGE_KEY);
     router.push(`/practice/${bank_id}/result/${history_bank_id}`);
   };
 
@@ -82,14 +136,61 @@ export default function DoBank() {
     return () => clearInterval(timer);
   }, [timeLeft, submitted]);
 
-  const handleSelect = (qid: number, aid: number) => {
-    setAnswers((prev) => ({ ...prev, [qid]: aid }));
+  const isAnswered = (questionId: number) => {
+    const value = answers[questionId];
+
+    if (Array.isArray(value)) {
+      return value.length > 0;
+    }
+
+    if (typeof value === "string") {
+      return value.trim().length > 0;
+    }
+
+    return false;
   };
 
-  const formatTime = (s: number) => {
-    const m = Math.floor(s / 60);
-    const sec = s % 60;
-    return `${m}:${sec.toString().padStart(2, "0")}`;
+  const handleSelect = (
+    questionId: number,
+    answerId: number,
+    type: number
+  ) => {
+    setAnswers(prev => {
+      const current = Array.isArray(prev[questionId])
+        ? (prev[questionId] as number[])
+        : [];
+
+      // 1 đáp án
+      if (type === 1) {
+        return { ...prev, [questionId]: [answerId] };
+      }
+
+      // nhiều đáp án
+      if (type === 2) {
+        return {
+          ...prev,
+          [questionId]: current.includes(answerId)
+            ? current.filter(id => id !== answerId)
+            : [...current, answerId],
+        };
+      }
+
+      return prev;
+    });
+  };
+
+  const scrollToQuestion = (questionId: number) => {
+    questionRefs.current[questionId]?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  const handleEssayChange = (questionId: number, value: string) => {
+    setAnswers(prev => ({
+      ...prev,
+      [questionId]: value,
+    }));
   };
 
   return (
@@ -101,69 +202,29 @@ export default function DoBank() {
         <div className={styles.bank_body}>
           {/* LEFT */}
           <div className={styles.leftPanel}>
-            <div>
-              {questions.length > 0 ? (
-                questions.map((q, i) => (
-                  <div key={q.question_id} className={styles.questionBox}>
-                    <p className={styles.questionText}>
-                      <strong>Câu {i + 1}.</strong> {q.question_content}
-                    </p>
-                    <div className={styles.answers}>
-                      {q.answers.map((a) => (
-                        <label
-                          key={a.answer_id}
-                          className={styles.option}
-                        >
-                          <input
-                            type="radio"
-                            name={`q-${q.question_id}`}
-                            value={a.answer_id}
-                            checked={answers[q.question_id] === a.answer_id}
-                            onChange={() =>
-                              handleSelect(q.question_id, a.answer_id)
-                            }
-                          />
-                          {a.answer_content}
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <>Không có câu hỏi nào</>
-              )}
-            </div>
+            {questions.map((q, i) => (
+              <QuestionItem
+                key={q.question_id}
+                question={q}
+                index={i}
+                answer={answers[q.question_id]}
+                onSelect={handleSelect}
+                onEssayChange={handleEssayChange}
+                questionRef={(el) => {
+                  questionRefs.current[q.question_id] = el;
+                }}
+              />
+            ))}
           </div>
 
           {/* RIGHT */}
-          <div className={styles.rightPanel}>
-            <div className={styles.topSection}>
-              <div className={styles.timer}>
-                ⏱ {formatTime(timeLeft)}
-              </div>
-
-              <Button variant="outline" onClick={handleSubmit}>
-                Nộp bài
-              </Button>
-            </div>
-
-            <div className={styles.grid}>
-              {questions.map((q, i) => (
-                <button
-                  key={q.question_id}
-                  className={`${styles.numButton} ${answers[q.question_id] ? styles.answered : ""
-                    }`}
-                  onClick={() =>
-                    document
-                      .getElementById(`q-${q.question_id}`)
-                      ?.scrollIntoView({ behavior: "smooth" })
-                  }
-                >
-                  {i + 1}
-                </button>
-              ))}
-            </div>
-          </div>
+          <ExamRightPanel
+            timeLeft={timeLeft}
+            questions={questions}
+            isAnswered={isAnswered}
+            onSubmit={handleSubmit}
+            onScrollToQuestion={scrollToQuestion}
+          />
         </div>
       </div>
     </div>

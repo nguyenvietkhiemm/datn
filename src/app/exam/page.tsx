@@ -69,23 +69,22 @@ export default function ExamList() {
                   {exam.description}
                 </p>
                 <div className={styles.top_user}>
-                  {exam.top3 && exam.top3.length > 0 ? (
+                  {exam.top3 && exam.top3.length > 0 && (
                     exam.top3.map((u, idx) => (
                       <div key={idx} className={styles.top_item}>
-                        <span className={styles.medal}>
-                          {idx === 0 ? "🥇" : idx === 1 ? "🥈" : "🥉"}
+                        <span
+                          className={`${styles.rank_badge} ${styles[`rank_${idx}`]}`}
+                        >
+                          {idx + 1}
                         </span>
+
                         <span className={styles.user_name}>
                           {u?.user_name || "Ẩn danh"}
                         </span>
                       </div>
                     ))
-                  ) : (
-                    <span className={styles.no_top}>Chưa có xếp hạng</span>
                   )}
                 </div>
-
-
               </div>
 
               <div className={styles.info}>

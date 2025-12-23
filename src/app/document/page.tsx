@@ -36,7 +36,8 @@ export default function DocumentList() {
 
                 const data = await res.json();
                 if (res.ok) {
-                    setDocument(data.data.document);
+                    setDocument(data.data.data);
+                    setTotalPage(totalPage)
                 } else {
                     console.error("Error fetching documents:", data.message);
                 }
@@ -55,7 +56,7 @@ export default function DocumentList() {
             {/* Bộ lọc */}
             {/* <Filter documents={documents} setDocuments={setDocuments} /> */}
             <div className={styles.list}>
-                {document.length === 0 ? (
+                {document?.length === 0 ? (
                     <p className={styles.empty}>Không có tài liệu nào phù hợp.</p>
                 ) : (
                     document?.map((doc) => (

@@ -120,33 +120,39 @@
 .top_item {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 14px;
-    color: #444;
-    font-weight: 500;
+    gap: 10px;
+    padding: 6px 10px;
 }
 
-.medal {
-    font-size: 18px;
+.rank_badge {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* TOP 1 */
+.rank_0 {
+    background: linear-gradient(135deg, #FFD700, #FFA000);
+}
+
+/* TOP 2 */
+.rank_1 {
+    background: linear-gradient(135deg, #C0C0C0, #9E9E9E);
+}
+
+/* TOP 3 */
+.rank_2 {
+    background: linear-gradient(135deg, #CD7F32, #8D4A16);
 }
 
 .user_name {
-    max-width: 120px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.no_top {
-    font-size: 13px;
-    color: #777;
-    font-style: italic;
-}
-
-.user {
-    display: grid;
-    grid-template-columns: 48px auto;
-    gap: 8px;
+    font-weight: 500;
 }
 
 .info {

@@ -2,11 +2,10 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
 import styles from "./DoExam.module.css";
-import { Button } from "@/components/ui/button";
 import { ExamService } from "../../../../../domain/exam/service";
-import { formatTime } from "../../../../../lib/model";
 import { Question } from "../../../../../domain/question-answer/type";
-import { ImagePreview } from "@/components/ImageReview/page";
+import ExamRightPanel from "@/components/do-question/rightPanel";
+import QuestionItem from "@/components/do-question/page";
 
 type AnswerMap = Record<number, number[] | string>;
 
@@ -14,7 +13,7 @@ export default function DoExam() {
   const params = useParams();
   const router = useRouter();
   const examId = Number(params.id);
-
+  const STORAGE_KEY = `exam_doing_${examId}`;
   const [exam, setExam] = useState<any>(null);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [answers, setAnswers] = useState<AnswerMap>({});
@@ -56,6 +55,53 @@ export default function DoExam() {
 
     return () => clearInterval(timer);
   }, [timeLeft, submitted]);
+
+  useEffect(() => {
+    if (!exam) return;
+
+    const nav = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming;
+    const saved = localStorage.getItem(STORAGE_KEY);
+
+    if (nav.type === "navigate") {
+      localStorage.removeItem(STORAGE_KEY);
+      setAnswers({});
+      setTimeLeft(exam.time_limit * 60);
+      return;
+    }
+
+    if (!saved) return;
+    const data = JSON.parse(saved);
+    setAnswers(data.answers || {});
+    setTimeLeft(data.timeLeft ?? exam.time_limit * 60);
+    setUserName(data.userName || "anonymous");
+  }, [exam]);
+
+  //auto save
+  useEffect(() => {
+    if (!exam || submitted) return;
+
+    const data = {
+      answers,
+      timeLeft,
+      userName,
+    };
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }, [answers, timeLeft, submitted, exam]);
+
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (!submitted) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () =>
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [submitted]);
+
 
   /* ================= SELECT ANSWER ================= */
   const handleSelect = (
@@ -116,6 +162,7 @@ export default function DoExam() {
     );
 
     setSubmitted(true);
+    localStorage.removeItem(STORAGE_KEY);
     router.push(
       `/exam/${exam.exam_id}/result/${res.data.history_exam_id}`
     );
@@ -156,91 +203,29 @@ export default function DoExam() {
           {/* LEFT */}
           <div className={styles.leftPanel}>
             {questions.map((q, i) => (
-              <div key={q.question_id} className={styles.questionBox} ref={(el) => {
-                questionRefs.current[q.question_id] = el;
-              }}
-              >
-                <p className={styles.questionText}>
-                  <strong>{i + 1}.</strong> {q.question_content}
-                  <div key={`q-${i}`} className={styles.imageWrapperSmall}>
-                    {q.images?.map((src, index) => (
-                      <div key={`q-${index}`} className={styles.imageWrapperSmall}>
-                        <ImagePreview filename={src} />
-                      </div>
-                    ))}
-                  </div>
-                </p>
-
-                <div className={styles.answers}>
-                  {/* TRẮC NGHIỆM */}
-                  {q.type_question !== 3 &&
-                    q.answers.map((a) => (
-                      <label key={a.answer_id} className={styles.option}>
-                        <input
-                          type={q.type_question === 2 ? "checkbox" : "radio"}
-                          name={`q-${q.question_id}`}
-                          checked={
-                            Array.isArray(answers[q.question_id]) &&
-                            (answers[q.question_id] as number[]).includes(a.answer_id)
-                          }
-                          onChange={() =>
-                            handleSelect(
-                              q.question_id,
-                              a.answer_id,
-                              q.type_question
-                            )
-                          }
-                        />
-                        <span>{a.answer_content}</span>
-                        {a.images?.map((src, index) => (
-                          <div key={`a-${index}`} className={styles.imageWrapperSmall}>
-                            <ImagePreview filename={src} />
-                          </div>
-                        ))}
-                      </label>
-                    ))}
-
-                  {/* TỰ LUẬN */}
-                  {q.type_question === 3 && (
-                    <textarea
-                      className={styles.essay}
-                      placeholder="Nhập câu trả lời của bạn..."
-                      value={
-                        typeof answers[q.question_id] === "string"
-                          ? answers[q.question_id] as string
-                          : ""
-                      }
-                      onChange={(e) =>
-                        handleEssayChange(q.question_id, e.target.value)
-                      }
-                    />
-                  )}
-                </div>
-              </div>
+              <QuestionItem
+                key={q.question_id}
+                question={q}
+                index={i}
+                answer={answers[q.question_id]}
+                onSelect={handleSelect}
+                onEssayChange={handleEssayChange}
+                questionRef={(el) => {
+                  questionRefs.current[q.question_id] = el;
+                }}
+              />
             ))}
           </div>
 
+
           {/* RIGHT */}
-          <div className={styles.rightPanel}>
-            <div className={styles.timer}>
-              ⏱ {formatTime(timeLeft)}
-            </div>
-            <Button onClick={handleSubmit}>Nộp bài</Button>
-
-            <div className={styles.grid}>
-              {questions.map((q, i) => (
-                <button
-                  key={q.question_id}
-                  onClick={() => scrollToQuestion(q.question_id)}
-                  className={`${styles.numButton} ${isAnswered(q.question_id) ? styles.answered : ""
-                    }`}
-                >
-                  {i + 1}
-                </button>
-
-              ))}
-            </div>
-          </div>
+          <ExamRightPanel
+            timeLeft={timeLeft}
+            questions={questions}
+            isAnswered={isAnswered}
+            onSubmit={handleSubmit}
+            onScrollToQuestion={scrollToQuestion}
+          />
         </div>
       </div>
     </div>

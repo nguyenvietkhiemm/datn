@@ -5,7 +5,7 @@ import { FileParserService } from "../../../domain/file-parser/service";
 
 export function ImagePreview({
     filename,
-    width = 300,
+    width =150,
 }: {
     filename: string;
     width?: number;

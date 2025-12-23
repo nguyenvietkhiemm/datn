@@ -38,7 +38,7 @@ export default function Ranking() {
 
             <div className={styles.myRankRow}>
               <span>Hạng:</span>
-              <b>#{myRank.rank}</b>
+              <b>{myRank.rank}</b>
             </div>
 
             <div className={styles.myRankRow}>
@@ -59,7 +59,7 @@ export default function Ranking() {
         <div className={styles.rankList}>
           {ranking.map((item, index) => (
             <div key={index} className={styles.rankItem}>
-              <div className={styles.rankNumber}>#{index + 1}</div>
+              <div className={styles.rankNumber}>{index + 1}</div>
 
               <div className={styles.rankContent}>
                 <div><b>User:</b> {item.user_name}</div>
