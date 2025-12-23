@@ -147,7 +147,7 @@ const ExamService = {
     }
 
     //subject
-    if(subject_id !== "All"){
+    if (subject_id !== "All") {
       conditions.push(`sj.subject_id = ($${idx})`);
       params.push(subject_id);
       idx++;
@@ -626,7 +626,7 @@ const ExamService = {
       `exam:${exam_id}:user:${user_id}`
     );
 
-    return { check: true };
+    return { check: !hasDone };
   },
 
   async markOverTime() {

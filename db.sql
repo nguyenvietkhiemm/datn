@@ -195,6 +195,11 @@ CREATE TABLE IF NOT EXISTS bank (
   available BOOLEAN DEFAULT true
 );
 
+
+
+
+
+
 -- 20) Question (standalone)
 CREATE TABLE IF NOT EXISTS question (
   question_id SERIAL PRIMARY KEY,
@@ -216,12 +221,19 @@ CREATE TABLE IF NOT EXISTS answer (
   image JSON
 );
 
+
+
+
+
 -- 22) question_bank (depends on question and bank)
 CREATE TABLE IF NOT EXISTS question_bank (
   question_id INT NOT NULL REFERENCES question(question_id) ON DELETE CASCADE,
   bank_id INT NOT NULL REFERENCES bank(bank_id) ON DELETE CASCADE,
   PRIMARY KEY (question_id, bank_id)
 );
+
+
+
 
 -- 23) Exam schedule
 CREATE TABLE IF NOT EXISTS exam_schedule (
@@ -251,13 +263,14 @@ CREATE TABLE IF NOT EXISTS contestants (
   user_id INT REFERENCES "user"(user_id) ON DELETE CASCADE
 );
 
+-- user từng làm exam nào, điểm số ra sao
 -- 26) history_exam (depends on exam and user)
 CREATE TABLE IF NOT EXISTS history_exam (
   history_exam_id SERIAL PRIMARY KEY,
   exam_id INT NOT NULL REFERENCES exam(exam_id) ON DELETE CASCADE,
   user_id INT NOT NULL REFERENCES "user"(user_id) ON DELETE CASCADE,
   score DECIMAL(4,2),
-  time_test VARCHAR(5),
+  time_test  BIGINT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -267,7 +280,7 @@ CREATE TABLE IF NOT EXISTS history_bank (
   bank_id INT NOT NULL REFERENCES bank(bank_id) ON DELETE CASCADE,
   user_id INT NOT NULL REFERENCES "user"(user_id) ON DELETE CASCADE,
   score DECIMAL(4,2),
-  time_test VARCHAR(5),
+  time_test  BIGINT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -283,6 +296,8 @@ CREATE TABLE IF NOT EXISTS user_exam_answer (
   question_id INT,
   CONSTRAINT fk_user_exam_answer_history FOREIGN KEY (history_exam_id) REFERENCES history_exam(history_exam_id) ON DELETE CASCADE
 );
+-- ALTER TABLE user_exam_answer
+-- ADD COLUMN IF NOT EXISTS question_id INT;
 
 -- 29) user_bank_answer (depends on bank, user, answer, history_bank)
 CREATE TABLE IF NOT EXISTS user_bank_answer (
@@ -304,6 +319,11 @@ CREATE TABLE IF NOT EXISTS question_exam (
   PRIMARY KEY (question_id, exam_id)
 );
 
+
+
+
+
+
 -- 31) Chat history (depends on user)
 CREATE TABLE IF NOT EXISTS chat_history (
   chat_history_id SERIAL PRIMARY KEY,
@@ -314,6 +334,11 @@ CREATE TABLE IF NOT EXISTS chat_history (
   embedding vector(1536),
   created_at TIMESTAMPTZ DEFAULT now()
 );
+
+
+
+
+
 
 -- 32) Image tables (depend on question/answer)
 CREATE TABLE IF NOT EXISTS image_question (

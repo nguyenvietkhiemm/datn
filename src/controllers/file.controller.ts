@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import safeExecute, { DefaultResponse } from "../utils/safe.execute";
 import { FileService } from "../services/file.service";
-import { runBertModel } from "../utils/run.bert";
+// import { runBertModel } from "../utils/run.bert";
 import path from "path";
 import fs from "fs";
 import crypto from "crypto";
@@ -56,23 +56,6 @@ export const FileController = {
                 status: 200,
                 message: `Nội dung JSON ${filename}`,
                 data: normalized,
-            };
-        });
-
-        return res.status(result.status).json(result);
-    },
-
-    // ===== DOCX =====
-    async saveDocx(req: Request, res: Response) {
-        const result = await safeExecute(async () => {
-            if (!req.file) throw new Error("NO_DOCX_FILE");
-
-            const bertOutput = await runBertModel(req.file.path);
-
-            return {
-                status: 200,
-                message: "Xử lý DOCX thành công",
-                bertOutput,
             };
         });
 
