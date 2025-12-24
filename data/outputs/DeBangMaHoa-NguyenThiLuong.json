@@ -1,0 +1,3673 @@
+[
+  {
+    "question": {
+      "para_index": 13,
+      "text": "Câu 1. [1.1_1.1_1 ] Thắng lợi nào sau đây dẫn đến sự ra đời của Liên bang Cộng hòa xã hội chủ nghĩa Xô viết (1924)?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 14,
+        "text": "A. Cách mạng tháng Hai (1917) ở Nga.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 15,
+        "text": "B. Cách mạng tháng Mười Nga (1917).",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 16,
+        "text": "C. Cách mạng Nga năm 1905 - 1907.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 17,
+        "text": "D. Công xã Pa-ri năm 1871 ở Pháp.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 18,
+        "text": "E. Đáp án: B",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 20,
+      "text": "Câu 2. [2.4_1.1_1] Cuộc khởi nghĩa nào sau đây của nhân dân Đại Việt đã lật đổ ách đô hộ của nhà Minh?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 21,
+        "text": "A. Lam Sơn.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 22,
+        "text": "B. Tây Sơn.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 23,
+        "text": "C. Bà Triệu.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 24,
+        "text": "D. Phùng Hưng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 25,
+        "text": "E. Đáp án: A",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 27,
+      "text": "Câu 3. [3.5_1.1_1] . Ngày 24/10/1945, sau khi Quốc hội các nước thành viên phê chuẩn, bản Hiến chương Liên hợp quốc",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 28,
+        "text": "A. chính thức có hiệu lực.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 29,
+        "text": "B. chính thức được công bố.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 30,
+        "text": "C. được bổ sung, hoàn chỉnh.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 31,
+        "text": "D. chính thức được thông qua.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 32,
+        "text": "E. Đáp án: A",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 34,
+      "text": "Câu 4. [4.8_1.1_1] Quốc gia nào sau đây là thành viên sáng lập tổ chức Hiệp hội các quốc gia Đông Nam Á (ASEAN)?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 35,
+        "text": "A. Thái Lan.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 36,
+        "text": "B. Hàn Quốc.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 37,
+        "text": "C. Ba Lan.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 38,
+        "text": "D. Mê-hi-cô.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 39,
+        "text": "E. Đáp án: A",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 41,
+      "text": "Câu 5. [4.9_1.1_1] Tính chất của Cộng đồng chính trị - an ninh (APSC) là",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 42,
+        "text": "A. phi quân sự.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 43,
+        "text": "B. phi hạt nhân.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 44,
+        "text": "C. phòng thủ chung.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 45,
+        "text": "D. liên minh quân sự.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 46,
+        "text": "E. Đáp án: A",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 48,
+      "text": "Câu 6. [5.10_1.1_1] Thời cơ của Tổng khởi nghĩa tháng Tám được xác định trong khoảng thời gian nào sau đây?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 49,
+        "text": "A. Nhật đảo chính Pháp đến trước khi quân Đồng minh vào Đông Dương.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 50,
+        "text": "B. Mỹ tuyên chiến với Nhật đến trước khi quân Đồng minh vào Đông Dương.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 51,
+        "text": "C. Nhật đảo chính Pháp đến trước khi quân Đồng minh vào Đông Dương.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 52,
+        "text": "D. Nhật đầu hàng Đồng minh đến trước khi quân Đồng minh vào Đông Dương.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 53,
+        "text": "E. Đáp án: D",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 55,
+      "text": "Câu 7. [5.11_1.1_1] Trong giai đoạn 1945-1954, thắng lợi nào của quân dân Việt Nam đã đánh bại chiến lược đánh nhanh thắng nhanh của Pháp?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 56,
+        "text": "A. Tầm Vu (1948).",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 57,
+        "text": "B. Biên Giới (1950).",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 58,
+        "text": "C. Việt Bắc (1947).",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 59,
+        "text": "D. Hòa Bình (1951)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 60,
+        "text": "E. Đáp án: C",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 62,
+      "text": "Câu 8. [5.12_1.1_1] Từ năm 1969 - 1973, Mĩ thực hiện chiến lược chiến tranh nào ở miền Nam Việt Nam?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 63,
+        "text": "A. Chiến tranh đặc biệt.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 64,
+        "text": "B. Chiến tranh cục bộ.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 65,
+        "text": "C. Chiến tranh đơn phương.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 66,
+        "text": "D. Chiến tranh Việt Nam hóa.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 67,
+        "text": "E. Đáp án: D",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 69,
+      "text": "Câu 9. [6.14_1.1_1] Đường lối đổi mới đất nước của Đảng Cộng sản Việt Nam từ năm 1986 nên hiểu như thế nào cho đúng?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 70,
+        "text": "A. Thay đổi mục tiêu của chủ nghĩa xã hội cho phù hợp với hoàn cảnh Việt Nam.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 71,
+        "text": "B. Xác định đúng bản chất của giai đoạn quá độ lên chủ nghĩa xã hội ở Việt Nam.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 72,
+        "text": "C. Phát triển nền kinh tế tư bản tư nhân để thực hiện mục tiêu phát triển đất nước.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 73,
+        "text": "D. Xây dựng chủ nghĩa xã hội bằng những bước đi và biện pháp thích hợp hơn.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 74,
+        "text": "E. Đáp án: D",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 76,
+      "text": "Câu 10. [7.16_1.1_1] Mục đích thực hiện các hoạt động đối ngoại của Phan Chu Trinh là",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 77,
+        "text": "A. vận động cải cách và duy tân.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 78,
+        "text": "B. tiến hành khởi nghĩa vũ trang.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 79,
+        "text": "C. tập hợp lực lượng cách mạng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 80,
+        "text": "D. xin viện trợ các nước châu Âu.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 81,
+        "text": "E. Đáp án: A",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 83,
+      "text": "Câu 11. [7.18_1.1_1] Năm 1950, Chính phủ Việt Nam Dân chủ Cộng hòa thiết lập quan hệ ngoại giao với các quốc gia nào sau đây?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 84,
+        "text": "A. Trung Quốc.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 85,
+        "text": "B. Nhật Bản.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 86,
+        "text": "C. Ấn Độ.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 87,
+        "text": "D. Hàn Quốc.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 88,
+        "text": "E. Đáp án: A",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 90,
+      "text": "Câu 12. [8.19_2.2_1] Con đường cứu nước giải phóng dân tộc Việt Nam được Nguyễn Ái Quốc tìm thấy vào năm 1920 là con đường",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 91,
+        "text": "A. cách mạng vô sản.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 92,
+        "text": "B. cách mạng tư sản.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 93,
+        "text": "C. cách mạng ôn hòa.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 94,
+        "text": "D. cách mạng bạo lực.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 95,
+        "text": "E. Đáp án: A",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 97,
+      "text": "Câu 13. [1.2_2.2_1] Quốc gia nào sau đây được xem là thành trì của các nước xã hội chủ nghĩa trong giai đoạn từ 1945 đến 1991?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 98,
+        "text": "A. Liên Xô.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 99,
+        "text": "B. Trung Quốc.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 100,
+        "text": "C. Triều Tiên.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 101,
+        "text": "D. Việt Nam.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 102,
+        "text": "E. Đáp án: A",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 104,
+      "text": "Câu 14. [2.4_2.2_1] Một trong những nguyên nhân dẫn tới thất bại của cuộc kháng chiến chống Minh thời Hồ là",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 105,
+        "text": "A. tình hình quốc tế không thuận lợi cho cuộc kháng chiến.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 106,
+        "text": "B. nhân dân không có tinh thần chiến đấu chống xâm lược.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 107,
+        "text": "C. kẻ thù có sức mạnh kinh tế, khoa học - kỹ thuật vượt trội.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 108,
+        "text": "D. triều đình không đoàn kết được nhân dân để kháng chiến.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 109,
+        "text": "E. Đáp án: D",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 111,
+      "text": "Câu 15. [3.6_2.2_1] Sự kiện nào sau đây đánh dấu trật tự hai cực 1-an-ta chấm dứt?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 112,
+        "text": "A. Liên Xô chính thức tan rã (12/1991).",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 113,
+        "text": "B. Chiến tranh lạnh kết thúc (1989).",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 114,
+        "text": "C. Bức tường Béc-lin sụp đổ (1989).",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 115,
+        "text": "D. Khủng hoảng năng lượng (1973).",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 116,
+        "text": "E. Đáp án: A",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 118,
+      "text": "Câu 16. [4.9_2.2_1] Đâu là cơ sở pháp lý để các nước Đông Nam Á xây dựng Cộng đồng ASEAN?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 119,
+        "text": "A. Hiến chương ASEAN.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 120,
+        "text": "B. Tuyên bố Băng - cốc.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 121,
+        "text": "C. Hiến chương Liên hợp quốc.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 122,
+        "text": "D. hiệp ước Ba-li 1976.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 123,
+        "text": "E. Đáp án: A",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 125,
+      "text": "Câu 17. [5.12_2.2_1] Nội dung nào sau đây không phải là ý nghĩa của phong trào “Đồng khởi\" (1959 1960) ở miền Nam Việt Nam?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 126,
+        "text": "A. Lung lay tận gốc chính quyền Ngô Đình Diệm.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 127,
+        "text": "B. Đánh bại \"chiến tranh cục bộ\" của đế quốc Mỹ.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 128,
+        "text": "C. Bước phát triển mới của cách mạng miền Nam.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 129,
+        "text": "D. Cách mạng miền Nam chuyển sang thể phản công.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 130,
+        "text": "E. Đáp án: B",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 132,
+      "text": "Câu 18. [7.18_2.2_1] Nội dung nào sau đây phản ánh đúng kết quả sau 5 năm thực hiện đường lối Đổi mới đất nước (1986 - 1990)?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 133,
+        "text": "A. Trở thành nước xuất khẩu gạo đứng đầu thế giới.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 134,
+        "text": "B. Hoàn thành công cuộc xây dựng chủ nghĩa xã hội.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 135,
+        "text": "C. Đưa Việt Nam trở thành nước công nghiệp mới.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 136,
+        "text": "D. Bước đầu thoát khỏi khủng hoảng kinh tế - xã hội.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 137,
+        "text": "E. Đáp án: D",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 140,
+      "text": "Đọc tư liệu sau đây và trả lời các câu hỏi từ 19 đến 21.",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 141,
+      "text": "“Nghị quyết nêu lên mâu thuẫn cơ bản mà cách mạng miền Nam phải giải quyết là: Mâu thuẫn giữa chủ nghĩa đế quốc xâm lược, giai cấp địa chủ phong kiến và bọn tư sản mại bản quan liêu thống trị ở miền Nam với dân tộc Việt Nam, nhân dân cả nước Việt Nam. Nghị quyết xác định: Cách mạng Việt Nam Nam do Đảng lãnh đạo có hai nhiệm vụ chiến lược là cách mạng xã hội chủ nghĩa ở miền Bắc và cách mạng dân tộc dân chủ nhân dân ở miền Nam. Hai nhiệm vụ đó tuy tính chất khác nhau, nhưng quan hệ hữu cơ với nhau, cùng tác động ảnh hưởng và hỗ trợ lẫn nhau, nhằm giữ vững hòa bình, thống nhất nước nhà, đưa cả nước lên chủ nghĩa xã hội.”",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 142,
+        "text": "A. (Nguồn: Trần Đức Cường: Lịch sử Việt Nam, tập 12, trang 245, NXb Khoa học xã hội, Hà Nội (2014))",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 143,
+      "text": "Câu 19.[5.12_1.1_1] Tư liệu trên trích từ văn kiện lịch sử nào sau đây?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 144,
+        "text": "A. Nghị quyết Hội nghị lần thứ 15 của BCH Trung ương Đảng Lao động Việt Nam.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 145,
+        "text": "B. Nghị quyết Hội nghị lần thứ 21 của BCH Trung ương Đảng Lao động Việt Nam.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 146,
+        "text": "C. Chỉ thị Kháng chiến, kiến quốc của BCH Trung ương Đảng Cộng sản Đông Dương.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 147,
+        "text": "D. Chỉ thị Toàn dân kháng chiến của BCH Trung ương Đảng Cộng sản Đông Dương.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 148,
+        "text": "E. Đáp án: A",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 149,
+      "text": "Câu 20.[5.12_2.2_1] Nghị quyết được đề cập đến ở tư liệu trên đã có tác động như thế nào đối với cách mạng Việt Nam trong giai đoạn 1954 – 1965?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 150,
+        "text": "A. Xác định nhiệm vụ chiến lược và trước mắt của cách mạng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 151,
+        "text": "B. Thổi bùng lên phong trào đấu tranh của nhân dân miền Nam.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 152,
+        "text": "C. Tạo ra thế và lực để tiến tới giải phóng hoàn toàn miền Nam.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 153,
+        "text": "D. Gắn cách mạng Việt Nam với phong trào cách mạng thế giới.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 154,
+        "text": "E. Đáp án: B",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 155,
+      "text": "Câu 21.[5.12_3.3_1]: Nhận định nào sau đây là đúng với sự phát triển của cách mạng Việt Nam trong giai đoạn 1954 – 1975?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 156,
+        "text": "A. Cách mạng miền Nam phát triển phụ thuộc vào cách mạng miền Bắc.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 157,
+        "text": "B. Cách mạng miền Nam quyết định sự phát triển của cách mạng cả nước.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 158,
+        "text": "C. Cách mạng hai miền có mối liên hệ mật thiết, gắn bó, tác động lẫn nhau.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 159,
+        "text": "D. Cách mạng miền Bắc và miền Nam phát triển độc lập và triệt tiêu nhau.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 160,
+        "text": "E. Đáp án: C",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 161,
+      "text": "Câu 22. [2.4_3.3_1] Trong lịch sử chống giặc ngoại xâm của dân tộc Việt Nam, cuộc khởi nghĩa nào sau đây được nổ ra bằng một hội thề và kết thúc cũng bằng một hội thề?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 162,
+        "text": "A. Khởi nghĩa Lam Sơn.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 163,
+        "text": "B. Khởi nghĩa Tây Sơn.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 164,
+        "text": "C. Khởi nghĩa Lý Bí.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 165,
+        "text": "D. Khởi nghĩa Phùng Hưng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 166,
+        "text": "E. Đáp án: A",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 168,
+      "text": "Câu 23. [6.14_3.3_1] Vì sao Đảng Cộng sản Việt Nam phải tiếp tục hoàn thiện, bổ sung đường lối Đổi mới được đề ra từ Đại hội đại biểu toàn quốc lần thứ VI (1986)?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 169,
+        "text": "A. Phù hợp với tình hình thực tế.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 170,
+        "text": "B. Do yêu cầu của Trung Quốc.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 171,
+        "text": "C. Điểm xuất phát còn quá thấp.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 172,
+        "text": "D. Đảm bảo an ninh - quốc phòng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 173,
+        "text": "E. Đáp án: A",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 175,
+      "text": "Câu 24. [8.20_3.3_1] Vì sao tại Đại hội lần XVIII của Đảng Xã hội Pháp, Nguyễn Ái Quốc bỏ phiếu tân thành việc gia nhập Quốc tế thứ Ba?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 176,
+        "text": "A. Bênh vực cho quyền lợi các nước thuộc địa.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 177,
+        "text": "B. Quốc tế thứ Ba giúp nhân dân ta chống Pháp.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 178,
+        "text": "C. Đã đề ra đường lối cho Cách mạng Việt Nam.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 179,
+        "text": "D. Giúp đỡ vật chất cho Việt Nam giành độc lập.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 180,
+        "text": "E. Đáp án: A",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 182,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 183,
+      "text": "Câu 1: [5.12+12+12+12_1+2+3+3_1+2+3+3_2] Cho những thông tin trong bảng sau đây:",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 184,
+        "text": "A. Thời gian",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 185,
+        "text": "B. Hoạt động",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 186,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 187,
+        "text": "D. Chiến thắng Phước Long.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 188,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 189,
+        "text": "F. Chiến dịch Tây Nguyên thắng lợi.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 190,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 191,
+        "text": "H. Chiến dịch Hồ Chí Minh thắng lợi.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 192,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 193,
+        "text": "J. Tỉnh Châu Đốc được giải phóng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 195,
+        "text": "K. a) Tư liệu đề cập đến những thắng lợi lớn trong giai đoạn cuối của cuộc kháng chiến chống Mỹ cứu nước của nhân dân Việt Nam.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 196,
+        "text": "L. Đáp án: ĐÚNG",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 197,
+        "text": "M. b) Chiến thắng Phước Long được xem là “trận trinh sát chiến lược” nhằm hoàn chỉnh quyết tâm giải phóng miền Nam.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 198,
+        "text": "N. Đáp án: ĐÚNG",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 199,
+        "text": "O. c) Châu Đốc là tỉnh cuối cùng ở miền Nam được giải phóng đã đánh dấu sự toàn thắng của chiến dịch Hồ Chí Minh.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 200,
+        "text": "P. Đáp án: SAI",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 201,
+        "text": "Q. d) Với thắng lợi của chiến dịch Tây Nguyên năm 1975, Việt Nam đã hoàn thành nhiệm vụ cách mạng dân chủ nhân dân.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 202,
+        "text": "R. Đáp án: SAI",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 203,
+      "text": "Câu 2: [3.6+6+6+6_1+2+3+3_1+2+3+3_2] Cho đoạn tư liệu sau đây:",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 204,
+      "text": "“Vào thập niên 1980, mối quan hệ nồng ấm giữa Tổng thống Mỹ Ri-gân và nhà lãnh đạo Liên Xô Goóc-ba chốp đã giúp giảm dần tình trạng căng thẳng của Chiến tranh lạnh. Năm 1987, hai nhà lãnh đạo đã đồng ý huỷ bỏ tên lửa hạt nhân tầm trung. Năm 1989, Goóc-ba chốp cho phép các quốc gia xã hội chủ nghĩa ở Đông Âu bầu ra chính phủ dân chủ, và đến năm 1991, Liên Xô tan rã thành 15 nước cộng hoà độc lập. Ngày 12-3-1999, Hung-ga-ri, Ba Lan và Cộng hoà Séc gia nhập khối NATO”.",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 205,
+        "text": "A. (King Fisher, Bách khoa thư lịch sử (Nguyễn Đức Tinh và Ngô Minh Châu dịch),",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 206,
+        "text": "B. NXB Thế giới, Hà Nội, 2016, tr.437)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 207,
+        "text": "C. a) Tư liệu đề cập đến những căng thẳng trong Chiến tranh lạnh giữa Liên Xô và Mỹ sau Chiến tranh thế giới thứ hai.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 208,
+        "text": "D. Đáp án: SAI",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 209,
+        "text": "E. b) Tình trạng căng thẳng của Chiến tranh lạnh bắt nguồn từ những mâu thuẫn cá nhân của các nhà lãnh đạo Xô – Mỹ.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 210,
+        "text": "F. Đáp án: SAI",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 211,
+        "text": "G. c) Năm 1991, Liên Xô tan rã thành 15 nước cộng hòa độc lập đã đánh dấu sự chấm dứt hoàn toàn của Chiến tranh lạnh.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 212,
+        "text": "H. Đáp án: ĐÚNG",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 213,
+        "text": "I. d) Chiến tranh lạnh kết thúc đã dẫn đến sự giải thể và chấm dứt hoạt động của các tổ chức quân sự từ hai phe.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 214,
+        "text": "J. Đáp án: SAI",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 215,
+      "text": "Câu 3: [7.18+18+18+18_1 + 2+3+3_1+2+3+3_2] Cho đoạn tư liệu sau đây:",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 216,
+      "text": "“Việt Nam và Cộng đồng châu Âu (EC) chính thức thiết lập quan hệ ngoại giao từ ngày 28/11/1990 (từ 01/01/1993 EC đổi thành Liên minh châu Âu - EU). Ngày 17/7/1995 hai bên ký Hiệp định khung Việt Nam - EU. Hiệp định nêu những nguyên tắc cơ bản trong quan hệ giữa hai bên về thương mại, đầu tư, quyền sở hữu trí tuệ, hợp tác kinh tế và khoa học công nghệ. Đây là hiệp định đầu tiên Việt Nam ký kết với một tổ chức khu vực có vị thế chính trị và tiềm năng kinh tế to lớn, một trong ba trụ cột kinh tế thế giới (cùng Mỹ và Nhật Bản).”",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 217,
+        "text": "A. Vũ Dương Ninh, Lịch sử quan hệ đối ngoại Việt Nam,",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 218,
+        "text": "B. NXB Chính trị quốc gia Sự thật, 2021)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 219,
+        "text": "C. a) Liên minh châu Âu là tổ chức quốc tế đầu tiên thiết lập quan hệ ngoại giao với Việt Nam từ năm 1990.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 220,
+        "text": "D. Đáp án: SAI",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 221,
+        "text": "E. b) Hiệp định khung Việt Nam – EU (1995) đã nêu lên những nguyên tắc cơ bản trong quan hệ giữa hai bên.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 222,
+        "text": "F. Đáp án: ĐÚNG",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 223,
+        "text": "G. c) Quan hệ đối ngoại với EU đã tạo điều kiện quyết định để Việt Nam hội nhập kinh tế quốc tế thành công.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 224,
+        "text": "H. Đáp án: SAI",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 225,
+        "text": "I. d) Việc thiết lập quan hệ ngoại giao với EU đã khẳng định chính sách đa dạng hóa quan hệ đối ngoại của Việt Nam.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 226,
+        "text": "J. Đáp án: ĐÚNG",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 227,
+        "text": "K. Đáp án: SAI",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 228,
+      "text": "Câu 4: [8.21+21+21+21_1 + 2+3+3_1+2+3+3_2] Cho đoạn tư liệu sau đây:",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 229,
+      "text": "“Hồ Chủ tịch là tượng trưng cao đẹp của chủ nghĩa yêu nước chân chính kết hợp nhuần nhuyễn với chủ nghĩa quốc tế vô sản. Trái tim, khối óc của Người dành cho dân tộc Việt Nam ta cũng hướng về giai cấp vô sản và các dân tộc bị áp bức trên toàn thế giới. Là người học trò trung thành của Các Mác và Lê-nin, Hồ Chủ tịch chẳng những là một nhà yêu nước vĩ đại, mà còn là một chiến sĩ xuất sắc trong phong trào cộng sản quốc tế và phong trào giải phóng dân tộc của thế kỉ XX. Hồ Chủ tịch thường dạy chúng ta phải chăm lo bảo vệ sự đoàn kết quốc tế, vì sự nghiệp to lớn của cách mạng Việt Nam, vì nghĩa vụ cao cả đối với cách mạng thế giới”.",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 230,
+        "text": "A. Hồ Chí Minh, Toàn tập, Tập 15,",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 231,
+        "text": "B. NXB Chính trị Quốc gia Sự thật, Hà Nội, 2011, tr.628)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 232,
+        "text": "C. a) Tư liệu khẳng định Hồ Chí Minh là lãnh tụ vĩ đại của dân tộc Việt Nam và phong trào cộng sản quốc tế.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 233,
+        "text": "D. Đáp án: SAI",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 234,
+        "text": "E. b) Tư tưởng và hoạt động của Hồ Chí Minh nhấn mạnh yếu tố đoàn kết quốc tế, chủ nghĩa quốc tế vô sản.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 235,
+        "text": "F. Đáp án: ĐÚNG",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 236,
+        "text": "G. c) Chủ tịch Hồ Chí Minh đã lãnh đạo nhân dân Việt Nam thực hiện mọi nghĩa vụ với cách mạng thế giới.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 237,
+        "text": "H. Đáp án: SAI",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 238,
+        "text": "I. d) Tư tưởng Hồ Chí Minh góp phần bổ sung và phát triển, làm phong phú lý luận của chủ nghĩa Mác – Lê nin.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 239,
+        "text": "J. Đáp án: ĐÚNG",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 258,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 259,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 260,
+        "text": "M. (Thầy cô điều chỉnh cho đúng với đề đề xuất của nhóm mình)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 262,
+        "text": "N. STT",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 263,
+        "text": "O. Chủ đề",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 264,
+        "text": "P. Tiểu chủ đề",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 265,
+        "text": "Q. Tư duy",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 266,
+        "text": "R. Thành phần năng lực",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 267,
+      "text": "Câu",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 268,
+        "text": "A. Tên",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 269,
+        "text": "B. chủ đề",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 270,
+        "text": "C. Mã hóa",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 271,
+        "text": "D. Tên",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 272,
+        "text": "E. Mã hóa",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 273,
+        "text": "F. Biết",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 274,
+        "text": "G. Hiểu",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 275,
+        "text": "H. Vận dụng",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 276,
+        "text": "I. Tìm hiểu LS",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 277,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 278,
+        "text": "K. Vận dụng KT,KN",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 279,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 280,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 281,
+        "text": "N. Chủ nghĩa xã hội từ năm 1917 đến nay.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 282,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 283,
+        "text": "P. (8,9)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 284,
+        "text": "Q. Sự hình thành Liên bang CHXHCN Xô Viết",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 285,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 286,
+        "text": "S. (19,20)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 287,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 290,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 293,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 294,
+      "text": "Chiến tranh bảo vệ Tổ quốc và chiến tranh giải phóng dân tộc trong lịch sử Việt Nam (trước Cách mạng tháng Tám năm 1945)",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 295,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 296,
+        "text": "B. (9)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 298,
+      "text": "Một số cuộc khởi nghĩa và chiến tranh giải phóng trong LSVN(từ tk III TCN đến tk XIX)",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 299,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 300,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 303,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 306,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 307,
+        "text": "E. Thế giới trong và sau Chiến tranh lạnh;",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 308,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 309,
+        "text": "G. (5,9)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 310,
+        "text": "H. Liên Hợp Quốc",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 311,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 312,
+        "text": "J. (8,22)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 313,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 316,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 319,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 320,
+        "text": "N. ASEAN: Những chặng đường",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 321,
+        "text": "O. lịch sử.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 322,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 323,
+        "text": "Q. (6)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 324,
+      "text": "Sự ra đời và phát triển của Hiệp hội các quốc gia Đông Nam Á (ASEAN)",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 325,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 326,
+        "text": "B. (9)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 327,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 330,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 333,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 334,
+        "text": "F. ASEAN: Những chặng đường",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 335,
+        "text": "G. lịch sử.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 336,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 337,
+        "text": "I. (6,11)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 338,
+        "text": "J. Cộng đồng ASEAN: từ ý tưởng đến hiện thực.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 339,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 340,
+        "text": "L. (8, 15, 24)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 341,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 344,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 347,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 348,
+      "text": "CM tháng Tám năm 1945, chiến tranh GPDT và chiến tranh bảo vệ Tổ quốc trong LSVN (từ tháng 8 năm 1945 đến nay).",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 349,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 350,
+        "text": "B. (8,9,13)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 351,
+        "text": "C. Cách mạng tháng Tám năm 1945.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 352,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 353,
+        "text": "E. (16,19, 20,",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 354,
+        "text": "F. 22, 26)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 355,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 358,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 361,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 362,
+      "text": "CM tháng Tám năm 1945, chiến tranh GPDT và chiến tranh bảo vệ Tổ quốc trong LSVN (từ tháng 8 năm 1945 đến nay).",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 363,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 364,
+        "text": "B. (7,9,13)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 365,
+      "text": "Cuộc kháng chiến chống thực dân Pháp (1945 – 1954)",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 366,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 367,
+        "text": "B. (11,17,19,",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 368,
+        "text": "C. 20,26)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 369,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 372,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 375,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 376,
+      "text": "CM tháng Tám năm 1945, chiến tranh GPDT và chiến tranh bảo vệ Tổ quốc trong LSVN (từ tháng 8 năm 1945 đến nay).",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 377,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 378,
+        "text": "B. (13)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 379,
+      "text": "Cuộc kháng chiến chống Mỹ, cứu nước (1954 - 1975)",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 380,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 381,
+        "text": "B. (26)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 382,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 385,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 388,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 389,
+      "text": "Công cuộc Đổi mới ở Việt Nam từ năm 1986 đến nay",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 390,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 391,
+        "text": "B. (7,11,13)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 392,
+      "text": "Khái quát về công cuộc đổi mới từ 1986 đến nay",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 393,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 394,
+        "text": "B. (18,24,26)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 395,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 398,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 401,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 402,
+        "text": "F. Lịch sử đối ngoại của VN thời cận - hiện đại;",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 403,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 404,
+        "text": "H. (10)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 405,
+      "text": "Hoạt động đối ngoại của VN trong đấu tranh giành độc lập dân tộc (đầu thế kỉ XX đến CM tháng 8- 1945)",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 406,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 407,
+        "text": "B. (23)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 408,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 411,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 414,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 415,
+        "text": "F. Lịch sử đối ngoại của VN thời cận - hiện đại;",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 416,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 417,
+        "text": "H. (12;13)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 418,
+      "text": "Hoạt động đối ngoại của Việ Nam từ năm 1975 đến nay",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 419,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 420,
+        "text": "B. (24, 26)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 421,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 424,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 427,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 428,
+        "text": "F. Hồ Chí Minh trong LSVN",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 429,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 430,
+        "text": "H. (10)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 431,
+        "text": "I. Khái quát về sự nghiệp của HCM.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 432,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 433,
+        "text": "K. (20,23)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 434,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 437,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 440,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 441,
+        "text": "O. CNXH từ năm 1917 đến nay",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 442,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 443,
+        "text": "Q. (6)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 444,
+      "text": "Sự phát triển CNXH từ sau chiến tranh thế giới thứ hai đến nay",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 445,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 446,
+        "text": "B. (14)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 448,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 451,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 453,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 454,
+      "text": "Chiến tranh bảo vệ Tổ quốc và chiến tranh GPDT trong LSVN (trước CM tháng Tám năm 1945).",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 455,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 457,
+      "text": "Một số cuộc khởi nghĩa và CTGP trong LSVN (từ TK III TCN – đến cuối TK XIX)",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 458,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 460,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 463,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 465,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 466,
+        "text": "E. Thế giới trong và sau Chiến tranh lạnh;",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 467,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 468,
+        "text": "G. (7,9;12)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 469,
+        "text": "H. Trật tự TG trong CTL",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 470,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 471,
+        "text": "J. (7,14,18,",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 472,
+        "text": "K. 22,24)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 474,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 477,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 479,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 480,
+        "text": "O. ASEAN: Những chặng đường LS",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 481,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 482,
+        "text": "Q. (6,711)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 483,
+        "text": "R. Cộng đồng ASEAN: Từ ý tưởng đến hiện thực",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 484,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 485,
+        "text": "T. (14,15,",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 486,
+        "text": "U. 18,24)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 488,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 491,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 493,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 494,
+      "text": "CM tháng Tám năm 1945, chiến tranh GPDT và chiến tranh bảo vệ Tổ quốc trong LSVN (từ tháng 8 năm 1945 đến nay)",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 495,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 496,
+        "text": "B. (9,13)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 497,
+        "text": "C. Cuộc kháng chiến chống Mỹ, cứu nước (1954 1975)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 498,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 499,
+        "text": "E. (22,26)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 501,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 504,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 506,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 507,
+        "text": "I. LS đối ngoại của VN thời cận - hiện đại;",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 508,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 509,
+        "text": "K. (6,11,13)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 510,
+      "text": "Hoạt động đối ngoại của VN từ 1975 đến nay",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 511,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 512,
+        "text": "B. (15,14,",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 513,
+        "text": "C. 24,26)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 515,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 518,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 520,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 521,
+      "text": "CM tháng Tám năm 1945, chiến tranh GPDT và chiến tranh bảo vệ Tổ quốc trong LSVN (từ tháng 8 năm 1945 đến nay)",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 522,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 523,
+        "text": "B. (7,8,10,13)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 524,
+        "text": "C. Cuộc kháng chiến chống Mỹ, cứu nước (1954 1975)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 525,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 526,
+        "text": "E. (12,20,26)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 527,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 530,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 533,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 534,
+      "text": "CM tháng Tám năm 1945, chiến tranh GPDT và chiến tranh bảo vệ Tổ quốc trong LSVN (từ tháng 8 năm 1945 đến nay)",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 535,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 536,
+        "text": "B. (12,8,10,13)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 537,
+        "text": "C. Cuộc kháng chiến chống Mỹ, cứu nước (1954 1975)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 538,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 539,
+        "text": "E. (12,20,26)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 541,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 544,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 546,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 547,
+      "text": "CM tháng Tám năm 1945, chiến tranh GPDT và chiến tranh bảo vệ Tổ quốc trong LSVN (từ tháng 8 năm 1945 đến nay)",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 548,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 549,
+        "text": "B. (7,8,10,13)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 550,
+        "text": "C. Cuộc kháng chiến chống Mỹ, cứu nước (1954 1975)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 551,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 552,
+        "text": "E. (9,14,18,",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 553,
+        "text": "F. 22,24)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 556,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 559,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 560,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 561,
+      "text": "Chiến tranh bảo vệ Tổ quốc và chiến tranh GPDT trong LSVN (trước CM tháng Tám năm 1945).",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 562,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 563,
+        "text": "B. (4)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 564,
+      "text": "Một số cuộc khởi nghĩa và CTGP trong LSVN (từ TK III TCN – đến cuối TK XIX)",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 565,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 568,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 571,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 572,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 573,
+      "text": "Công cuộc Đổi mới ở Việt Nam từ năm 1986 đến nay",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 574,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 575,
+      "text": "Khái quát về công cuộc đổi mới từ 1986 đến nay",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 576,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 579,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 582,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 583,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 584,
+        "text": "E. Hồ Chí Minh trong LSVN",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 585,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 586,
+        "text": "G. (5,7,10)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 587,
+        "text": "H. Hồ Chí Minh - anh hùng giải phóng dân tộc.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 588,
+        "text": "I. 20 (19,",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 589,
+        "text": "J. 21,26,10,",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 590,
+        "text": "K. 11,12)",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 593,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 596,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 597,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 598,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 599,
+      "text": "Cách mạng tháng Tám năm 1945, chiến tranh GPDT và chiến tranh bảo vệ Tổ quốc trong LSVN từ tháng 8 năm 1945 đến nay",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 600,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 602,
+      "text": "Cuộc kháng chiến chống Mỹ, cứu nước ( 1954 -1975)",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 603,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 605,
+        "text": "B. 1a",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 606,
+        "text": "C. 2b",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 607,
+        "text": "D. 3c,d",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 608,
+        "text": "E. 1a",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 609,
+        "text": "F. 2b",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 610,
+        "text": "G. 3c,d",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 611,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 612,
+      "text": "Thế giới trong và sau chiến tranh lạnh",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 613,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 615,
+        "text": "B. Trật tự thế giới trong chiến tranh lạnh.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 616,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 618,
+        "text": "D. 1a",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 619,
+        "text": "E. 2b",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 620,
+        "text": "F. 3c,d",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 621,
+        "text": "G. 1a",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 622,
+        "text": "H. 2b",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 623,
+        "text": "I. 3c,d",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 624,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 625,
+      "text": "Lịch sử đối ngoại Việt Nam thời cận-hiện đại",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 626,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 627,
+      "text": "Hoạt động đối ngoại của Việt Nam từ năm1975 đến nay",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 628,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 629,
+        "text": "B. 1a",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 630,
+        "text": "C. 2b",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 631,
+        "text": "D. 3c,d",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 632,
+        "text": "E. 1a",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 633,
+        "text": "F. 2b",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 634,
+        "text": "G. 3c,d",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 635,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 636,
+        "text": "I. Hồ Chí Minh trong lịch sử Việt Nam.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 637,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 638,
+        "text": "K. Dấu ấn Hồ Chí Minh trong lòng nhân dân thế giới và Việt Nam.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 639,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 640,
+        "text": "M. 1a",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 641,
+        "text": "N. 2b",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 642,
+        "text": "O. 3c,d",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 643,
+        "text": "P. 1a",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 644,
+        "text": "Q. 2b",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 645,
+        "text": "R. 3c,d",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  }
+]
