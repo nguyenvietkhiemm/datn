@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Viewer WMF + MathML</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0; padding:0; background:#f7f7f7; color:#111 }
+header { background:#0b5d8c; color:white; padding:14px 16px; display:flex; align-items:center; }
+header h1 { font-size:16px; margin:0 }
+main { padding:12px; max-width:1200px; margin:0 auto; }
+.controls { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:12px; }
+.controls input[type="text"] { width:400px; padding:6px; }
+.para { background:white; border-radius:6px; padding:10px; margin:10px 0; box-shadow:0 1px 2px rgba(0,0,0,0.06) }
+.para-index { color:#666; font-size:12px }
+.para-text { margin:6px 0 8px 0; white-space:pre-wrap }
+.images-grid { display:flex; gap:12px; flex-wrap:wrap; align-items:flex-start }
+.img-card { border:1px solid #e1e1e1; padding:6px; border-radius:6px; width:220px; background:#fff; display:flex; flex-direction:column; align-items:center; }
+.img-card img, .img-card canvas { max-width:100%; height:auto; display:block; background:#eee; }
+.meta { font-size:12px; color:#333; margin-top:6px; text-align:center; }
+.math-block { background:#111; color:#fff; padding:8px; border-radius:6px; font-family:monospace; font-size:12px; overflow:auto; max-height:240px; }
+.small { font-size:12px; color:#666; }
+.badge { display:inline-block; padding:2px 6px; font-size:11px; border-radius:4px; background:#eee; margin-right:6px; }
+.selected-badge { background:#dff0d8; color:#2c662d; }
+button { padding:6px 8px; border-radius:6px; border:1px solid #bbb; background:white; cursor:pointer; }
+button.primary { background:#0b5d8c; color:white; border-color:#09475f; }
+label.file-input { cursor:pointer; padding:6px 8px; border-radius:6px; background:#fff; border:1px dashed #bbb; }
+</style>
+
+<!-- MathJax v3 -->
+<script>
+  window.MathJax = { loader:{load:['input/mml','output/chtml']}, startup:{typeset:false} };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js"></script>
+
+<!-- WMF.js UMD -->
+<script src="https://cdn.jsdelivr.net/npm/wmf@1.0.2/wmf.js"></script>
+</head>
+<body>
+<header><h1>Viewer WMF + MathML</h1></header>
+<main>
+<div class="controls">
+  <input id="jsonUrl" type="text" placeholder="URL tới selective.json (tùy chọn)">
+  <button id="loadUrlBtn" class="primary">Load từ URL</button>
+  <label class="file-input">
+    Chọn JSON cục bộ...
+    <input id="jsonFile" type="file" accept=".json" style="display:none" />
+  </label>
+  <button id="clearBtn">Clear</button>
+  <div id="stats" class="small" style="margin-left:auto"></div>
+</div>
+<div id="content"></div>
+</main>
+
+<script>
+window.addEventListener('load', ()=>{
+const content=document.getElementById('content');
+const stats=document.getElementById('stats');
+const jsonUrlInput=document.getElementById('jsonUrl');
+const loadUrlBtn=document.getElementById('loadUrlBtn');
+const jsonFileInput=document.getElementById('jsonFile');
+const clearBtn=document.getElementById('clearBtn');
+
+let currentData=null;
+
+function mk(tag){ return document.createElement(tag); }
+function isWMF(url){ return url.toLowerCase().endsWith('.wmf') || url.toLowerCase().endsWith('.emf'); }
+
+async function renderWMF(url, container){
+  if(!window.WMF){ console.error('WMF chưa load xong'); return; }
+  try{
+    const res=await fetch(url); if(!res.ok) throw new Error('Fetch WMF fail: '+res.status);
+    const ab=await res.arrayBuffer();
+    const size=WMF.image_size(ab);
+    const canvas=mk('canvas'); canvas.width=size[0]; canvas.height=size[1];
+    WMF.draw_canvas(ab, canvas);
+    container.appendChild(canvas);
+  }catch(e){
+    console.error('WMF load error',e);
+    const p=mk('div'); p.textContent='Không load được WMF: '+url; container.appendChild(p);
+  }
+}
+
+function renderGroupImage(group){
+  const div=mk('div'); div.className='img-card';
+  const url=group.saved_path || (group.img_rels && group.img_rels[0]);
+  if(url){
+    if(isWMF(url)) renderWMF(url,div);
+    else { const img=mk('img'); img.src=url; img.alt=group.sha1||''; img.onerror=()=>{img.style.opacity=0.6; img.style.background='#f5f5f5'; img.title='Không load được: '+url;}; div.appendChild(img); }
+  }else{ const p=mk('div'); p.style.height='100px'; p.textContent='No image'; div.appendChild(p);}
+  const meta=mk('div'); meta.className='meta';
+  const badges=[]; if(group.selected) badges.push('<span class="badge selected-badge">SELECTED</span>');
+  if(group.sha1) badges.push('<span class="badge">sha1:'+group.sha1.slice(0,10)+'…</span>');
+  meta.innerHTML=badges.join('');
+  div.appendChild(meta);
+  return div;
+}
+
+function renderMathML(mathArray){
+  const container=mk('div');
+  mathArray.forEach((item,i)=>{
+    const omml=item.omml||item.mathml||'';
+    const block=mk('details'); const summary=mk('summary'); summary.textContent='Math #'+(i+1); block.appendChild(summary);
+    try{
+      const parser=new DOMParser();
+      const xml=parser.parseFromString(omml,"application/xml");
+      block.appendChild(xml.documentElement);
+      MathJax.typesetPromise([block]);
+    }catch(e){
+      const pre=mk('pre'); pre.className='math-block'; pre.textContent=omml;
+      block.appendChild(pre);
+    }
+    container.appendChild(block);
+  });
+  return container;
+}
+
+function renderParagraph(para){
+  const wrapper=mk('div'); wrapper.className='para';
+  const header=mk('div'); header.innerHTML=`<span class="para-index">para_index: ${para.para_index}</span>`; wrapper.appendChild(header);
+  const text=mk('div'); text.className='para-text'; text.textContent=para.text||''; wrapper.appendChild(text);
+  if(para.math && para.math.length) wrapper.appendChild(renderMathML(para.math));
+  if(para.images && para.images.length){
+    const grid=mk('div'); grid.className='images-grid';
+    para.images.forEach(g=>grid.appendChild(renderGroupImage(g)));
+    wrapper.appendChild(grid);
+  }
+  return wrapper;
+}
+
+function renderAll(data){
+  content.innerHTML=''; currentData=data;
+  let totalParas=data.length, totalImages=0, selected=0;
+  data.forEach(p=>(p.images||[]).forEach(g=>{totalImages++; if(g.selected) selected++;}));
+  stats.textContent=`Paragraphs: ${totalParas} — image groups: ${totalImages} — selected: ${selected}`;
+  data.forEach(p=>content.appendChild(renderParagraph(p)));
+}
+
+async function loadJsonFromUrl(url){
+  try{
+    const res=await fetch(url); if(!res.ok) throw new Error('Fetch JSON failed: '+res.status);
+    const data=await res.json(); renderAll(data);
+  }catch(e){ alert('Lỗi fetch JSON: '+e.message); console.error(e); }
+}
+
+jsonFileInput.addEventListener('change', ev=>{
+  const f=ev.target.files && ev.target.files[0]; if(!f) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{ const data=JSON.parse(e.target.result); renderAll(data); }
+    catch(err){ alert('Lỗi parse JSON: '+err.message); }
+  };
+  reader.readAsText(f,'utf-8');
+});
+
+loadUrlBtn.addEventListener('click',()=>{ const url=jsonUrlInput.value.trim(); if(url) loadJsonFromUrl(url); });
+clearBtn.addEventListener('click',()=>{ content.innerHTML=''; stats.textContent=''; currentData=null; jsonUrlInput.value=''; });
+});
+</script>
+</body>
+</html>

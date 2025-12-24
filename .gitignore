@@ -1,0 +1,11 @@
+.vscode/
+env/
+__pycache__/
+.env
+
+venv
+venv_parse
+
+bert_question_answer_classifier
+
+model_output
