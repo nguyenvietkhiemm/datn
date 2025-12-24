@@ -2,7 +2,7 @@
 
 import styles from "./QuestionCreate.module.css";
 import type { Question } from "@/domain/admin/questions/type";
-import { ChangeValue } from "@/domain/admin/file/file-parser/type";
+import { ChangeValue, JsonQuestion } from "@/domain/admin/file/file-parser/type";
 import { useState } from "react";
 import ListImageQuestion from "./ListImageQuestion/ListImageQuestion";
 import ImageManagePanel from "./ImagePanelEdit/ImagePanelEdit";
@@ -14,6 +14,8 @@ interface QuestionCardProps {
     setEditCell: (cell: { row: number; col: number } | null) => void;
     handleChange: (rowIndex: number, type_change: number, value: ChangeValue) => void;
     isChanged: (rowIndex: number, colIndex: number) => boolean;
+    setSelectedIndexes: React.Dispatch<React.SetStateAction<number[]>>
+    selectedIndexes: number[]
 }
 
 type ImagePanelEditState = {
@@ -28,6 +30,8 @@ export default function QuestionCardEditor({
     setEditCell,
     handleChange,
     isChanged,
+    setSelectedIndexes,
+    selectedIndexes
 }: QuestionCardProps) {
 
     const currentType = question.type_question ?? 1;
@@ -37,6 +41,14 @@ export default function QuestionCardEditor({
             type_add: 0,
             answerIndex: null,
         });
+
+    const toggleSelectQuestion = (index: number) => {
+        setSelectedIndexes(prev =>
+            prev.includes(index)
+                ? prev.filter(i => i !== index)
+                : [...prev, index]
+        );
+    };
 
     return (
         <div className={styles.container}>
@@ -61,8 +73,23 @@ export default function QuestionCardEditor({
                             onClick={() => setEditCell({ row: rowIndex, col: -1 })}
                         >
                             {question.question_content}
+
                         </p>
                     )}
+
+                    <div className={styles.action_question}>
+                        <button
+                            className={styles.removeBtn}
+                            onClick={() => handleChange(rowIndex, -5, true)}
+                        >
+                            Xoá Câu Hỏi
+                        </button>
+                        <input
+                            type="checkbox"
+                            checked={selectedIndexes.includes(rowIndex)}
+                            onChange={() => toggleSelectQuestion(rowIndex)}
+                        />
+                    </div>
                     {/* QUESTION IMAGES */}
                     <ListImageQuestion
                         rowIndex={rowIndex}
@@ -82,13 +109,6 @@ export default function QuestionCardEditor({
                             }}
                         >
                             + Ảnh
-                        </button>
-
-                        <button
-                            className={styles.removeBtn}
-                            onClick={() => handleChange(rowIndex, -5, true)}
-                        >
-                            x
                         </button>
                     </div>
                 </div>

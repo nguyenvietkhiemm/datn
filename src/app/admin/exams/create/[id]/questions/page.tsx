@@ -19,7 +19,6 @@ export default function ExamQuestionCreate() {
     const token = Cookies.get("token");
     const [questions, setQuestions] = useState<Question[]>([]);
     const [totalPage, setTotalPage] = useState<number>(1);
-    const [filterQuestion, setFilterQuestion] = useState<Question[]>([]);
     const [selectedQuestions, setSelectedQuestions] = useState<{ exam_id: number, question_id: number }[]>([]);
     const params = useParams();
     const examId = Number(params.id);

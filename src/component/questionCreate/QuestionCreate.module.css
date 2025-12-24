@@ -40,6 +40,10 @@
     cursor: pointer;
     line-height: 1.5;
     margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
 }
 
 .text:hover {
@@ -174,10 +178,10 @@
     padding: 8px 12px;
     border-radius: 6px;
     border: 1px dashed #9ca3af;
-    background: #f9fafb;
     font-size: 14px;
     cursor: pointer;
-    color: #374151;
+    background: #ef4444;
+    color: #fff;
 }
 
 .removeBtn:hover {
