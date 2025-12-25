@@ -79,9 +79,8 @@ microserviceRoute.post(
  * @openapi
  * /microservice/llm/vectorize:
  *   post:
- *     summary: Vectorize danh sách tài liệu (PDF/DOCX) cho RAG
- *     tags:
- *       - LLM
+ *     summary: Vectorize tài liệu cho RAG
+ *     tags: [LLM]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -90,40 +89,31 @@ microserviceRoute.post(
  *         application/json:
  *           schema:
  *             type: object
- *             required:
- *               - file_paths
+ *             required: [files]
  *             properties:
- *               file_paths:
+ *               files:
  *                 type: array
- *                 description: Danh sách đường dẫn file trên server để vector hóa
  *                 items:
- *                   type: string
- *                   example: "/resources/docx_file/36_Thpt-Cumgar.docx"
+ *                   type: object
+ *                   required: [document_id, file_path]
+ *                   properties:
+ *                     document_id:
+ *                       type: integer
+ *                       example: 36
+ *                     file_path:
+ *                       type: string
+ *                       example: "/resources/docx_file/36_Thpt-Cumgar.docx"
  *     responses:
  *       200:
- *         description: Vectorize thành công
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   type: number
- *                   example: 200
- *                 message:
- *                   type: string
- *                   example: Vectorization completed
- *                 data:
- *                   type: object
- *                   nullable: true
+ *         description: Vectorize started
  *       202:
- *         description: Job vectorize đã được nhận (xử lý async)
+ *         description: Vectorize job accepted
  *       400:
- *         description: Request không hợp lệ
+ *         description: Bad request
  *       401:
- *         description: Không có quyền truy cập
+ *         description: Unauthorized
  *       500:
- *         description: Lỗi server
+ *         description: Server error
  */
 
 microserviceRoute.post(
@@ -135,11 +125,11 @@ microserviceRoute.post(
 
 /**
  * @openapi
- * /microservice/llm/vectorize:
+ * /bert/process-docx/:filename :
  *   post:
- *     summary: Vectorize danh sách tài liệu (PDF/DOCX) cho RAG
+ *     summary: Xử lý tài liệu (DOCX) cho BERT
  *     tags:
- *       - LLM
+ *       - BERT
  *     security:
  *       - bearerAuth: []
  *     requestBody:
