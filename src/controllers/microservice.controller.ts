@@ -38,47 +38,75 @@ const MicroserviceController = {
 
   async vectorize(req: Request, res: Response) {
     const response = await safeExecute(async () => {
-      const { file_paths } = req.body;
+      const files = req.body.files;
 
-      if (!Array.isArray(file_paths) || file_paths.length === 0) {
+      /**
+       * files = [
+       *   { document_id: number, link: string }
+       * ]
+       */
+
+      if (!Array.isArray(files) || files.length === 0) {
         return {
           status: 400,
-          message: "file_paths must be a non-empty array",
+          message: "files must be a non-empty array",
           data: null,
         };
       }
 
-      // 📌 root thư mục project
       const BASE_DIR = path.resolve(__dirname, "../../");
 
-      // ✅ chuẩn hoá + validate tồn tại
-      const absolutePaths = file_paths.map((relativePath: string) => {
-        const absPath = path.join(BASE_DIR, relativePath);
-        if (!fs.existsSync(absPath)) throw new Error(`File not found: ${relativePath}`);
-        return absPath.replace(/\\/g, "/"); // dùng slash chuẩn
-      });
-
-
-      console.log("Vectorizing files:", absolutePaths);
-
-      // 👉 gửi sang Python
-      await axios.post(VECTORIZE_URL, { file_paths: absolutePaths }, {
-        headers: {
-          "Content-Type": "application/json"
+      // ✅ chuẩn hoá + validate
+      const payload = files.map((f: any) => {
+        if (!f.document_id || !f.link) {
+          throw new Error("Each file must have document_id and link");
         }
+
+        const absPath = path.join(BASE_DIR, f.link);
+
+        if (!fs.existsSync(absPath)) {
+          throw new Error(`File not found: ${f.link}`);
+        }
+
+        return {
+          document_id: f.document_id,
+          // Chỉ trả về đường dẫn **tương đối** hoặc gốc
+          link: f.link.replace(/\\/g, "/"),
+        };
       });
+
+      console.log("Vectorizing files:", payload);
+
+      // 👉 gửi sang Python microservice
+      await axios.post(
+        VECTORIZE_URL,
+        { files: payload },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
       return {
         status: 200,
         message: "Vectorize started",
         data: {
-          total_files: absolutePaths.length,
+          total_files: payload.length,
+          files: payload,
         },
       };
     });
 
     res.status(response.status).json(response);
   },
+
+
+
+
+
+
+
+
+
 
   // ===== DOCX =====
   async process_docx(req: Request, res: Response) {
