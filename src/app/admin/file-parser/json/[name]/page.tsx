@@ -1,13 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import styles from "./JsonDetailPage.module.css";
 import { Button } from "@/component/ui/button/Button";
-import { JsonAnswer, JsonQuestion, Change, Params, ChangeValue } from "@/domain/admin/file/file-parser/type";
+import { JsonQuestion, Change, Params, ChangeValue } from "@/domain/admin/file/file-parser/type";
 import { FileParserService } from "@/domain/admin/file/file-parser/service";
-import { FileParserModel } from "@/domain/admin/file/file-parser/model";
 import QuestionCreate from "@/component/questionCreate/page";
 import { QuestionService } from "@/domain/admin/questions/service";
 import { QuestionModel } from "@/domain/admin/questions/model";
@@ -19,6 +18,8 @@ export default function JsonDetailPage() {
     const [jsonData, setJsonData] = useState<JsonQuestion[]>([]);
     const [editCell, setEditCell] = useState<{ row: number; col: number } | null>(null);
     const [changes, setChanges] = useState<Change[]>([]);
+    const [selectedIndexes, setSelectedIndexes] = useState<number[]>([]);
+    const router = useRouter()
 
     // Lấy các thay đổi đã lưu từ localStorage
     useEffect(() => {
@@ -47,25 +48,6 @@ export default function JsonDetailPage() {
 
         loadJson();
     }, [name, token]);
-
-    // Chỉnh sửa text
-    const loadJsonDiff = (data: JsonQuestion[]) => {
-        if (!changes) return data;
-
-        changes.forEach(d => {
-            if (d.col === -1) {
-                data[d.row].question.text = d.value as string;
-            }
-            else if (d.col === -2) {
-                data[d.row].question.type_question = d.value as number;
-            }
-            else {
-                data[d.row].answers[d.col].text = d.value as string;
-            }
-        });
-
-        return data;
-    };
 
     const handleChange = (rowIndex: number, type_change: number, value: ChangeValue) => {
         setJsonData(prev => {
@@ -237,23 +219,43 @@ export default function JsonDetailPage() {
     const handleSubmitQuestionToBE = async (row: JsonQuestion) => {
         try {
             const payload = await QuestionModel.buildPayload(row);
-            const check = row.answers.some((a) =>  a.is_correct === true)
-            if(!check) alert("Vui long chon cau tra loi dung")
+            const check = row.answers.some((a) => a.is_correct === true)
+            if (!check) {
+                alert("Vui long chon cau tra loi dung")
+                return
+            }
             await QuestionService.createQuestionWithAnswers(payload);
 
             alert("Đã lưu câu hỏi vào hệ thống!");
+            router.push(`/admin/questions`)
         } catch (err) {
             console.error("Submit question failed:", err);
             alert("Lỗi khi lưu câu hỏi");
         }
     };
 
-    const handleSubmitAll = async () => {
+    const handleSubmitSelect = async () => {
         try {
-            for (const row of jsonData) {
-                await handleSubmitQuestionToBE(row);
+            for (const index of selectedIndexes) {
+                const row = jsonData[index];
+
+                if (!row) continue;
+
+                const hasCorrect = row.answers.some(
+                    a => a.is_correct === true
+                );
+
+                if (!hasCorrect) {
+                    alert("Vui lòng chọn câu trả lời đúng cho tất cả câu đã chọn");
+                    return;
+                }
+                const payload = await QuestionModel.buildPayload(row);
+                await QuestionService.createQuestionWithAnswers(payload);
             }
+
             alert("Đã import toàn bộ câu hỏi!");
+            setSelectedIndexes([]);
+            router.push(`/admin/questions`)
         } catch (err) {
             console.error(err);
             alert("Lỗi khi import");
@@ -278,8 +280,8 @@ export default function JsonDetailPage() {
                 <Button onClick={handleReset} variant="primary" size="md">
                     Tạo lại JSON gốc
                 </Button>
-                <Button onClick={handleSubmitAll} variant="primary">
-                    Import toàn bộ câu hỏi vào hệ thống
+                <Button onClick={handleSubmitSelect} variant="primary">
+                    Import toàn bộ câu hỏi được chọn vào hệ thống
                 </Button>
             </div>
 
@@ -300,7 +302,7 @@ export default function JsonDetailPage() {
                                     answer_id: i,
                                     answer_content: a.text,
                                     is_correct: a.is_correct,
-                                    images:a.images,
+                                    images: a.images,
                                 })),
                             }}
                             rowIndex={rowIndex}
@@ -308,6 +310,8 @@ export default function JsonDetailPage() {
                             setEditCell={setEditCell}
                             handleChange={handleChange}
                             isChanged={isChanged}
+                            setSelectedIndexes={setSelectedIndexes}
+                            selectedIndexes={selectedIndexes}
                         />
 
                         <Button
