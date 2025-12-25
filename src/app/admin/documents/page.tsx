@@ -152,7 +152,7 @@ export default function DocumentPage() {
                             disabled={selectedDocuments.length === 0}
                             onClick={handleVectorizeSelected}
                         >
-                            ⚡ Vectorize ({selectedDocuments.length})
+                            Vectorize ({selectedDocuments.length})
                         </button>
                     </div>
 
