@@ -95,7 +95,6 @@ export default function FlashcardDetail() {
       <div className={styles.play}>
         <div className={styles.btn_add_update_delete}>
           <button className={styles.btn_add} onClick={() => setShowAddModal(true)}>Thêm flashcard</button>
-          <button className={styles.btn_update}>Chỉnh sửa</button>
           <button className={styles.btn_delete} onClick={deleteDeck}>Xoá</button>
         </div>
         {flashcards.length !== 0 &&

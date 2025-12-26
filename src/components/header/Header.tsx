@@ -66,9 +66,9 @@ export default function Header() {
   }, []);
 
   const listNavbar = [
-    { name: "Thi thử", href: "/exam" },
+    { name: "Cuộc thi", href: "/exam" },
     { name: "Luyện tập", href: "/practice" },
-    { name: "Flashcard", href: "/flashcards" },
+    { name: "Thẻ ghi nhớ", href: "/flashcards" },
     { name: "Lộ trình", href: "/roadmap" },
     { name: "Tài liệu", href: "/document" },
   ];
