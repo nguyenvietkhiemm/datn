@@ -13,7 +13,10 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   const isHiddenPage = hiddenRoutes.includes(pathname);
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+    <ThemeProvider attribute="class"
+      defaultTheme="light"
+      enableSystem={false}
+    >
       <div className="relative flex min-h-screen bg-gray-50 overflow-visible">
         {!isHiddenPage && <Sidebar />}
         <div className="relative flex-1 flex flex-col w-full">
