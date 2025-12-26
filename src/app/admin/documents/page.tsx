@@ -89,7 +89,11 @@ export default function DocumentPage() {
     }
 
     const handleSelectDocument = (document_id: number) => {
-        setSelectedDocuments(prev => [...prev, document_id])
+        setSelectedDocuments(prev => {
+            const exist = prev.some(id => id === document_id)
+            if (exist) return prev.filter(id => id !== document_id)
+            return [...prev, document_id]
+        })
     }
 
     if (loading)

@@ -19,6 +19,7 @@ export default function SubjectManager({
     onDelete,
 }: Props) {
     const [newName, setNewName] = useState("");
+    const [subject_type, setSubject_type] = useState<number | null>(null);
     const [editingId, setEditingId] = useState<number | null>(null);
     const [editName, setEditName] = useState("");
     const [errors, setErrors] = useState<{ title?: string }>({});
@@ -45,6 +46,13 @@ export default function SubjectManager({
                     value={newName}
                     onChange={(e) => setNewName(e.target.value)}
                 />
+
+                <input
+                    placeholder="Loại môn học..."
+                    value={subject_type ? subject_type : ""}
+                    onChange={(e) => setSubject_type(Number(e.target.value))}
+                />
+
                 {errors.title && <p className={styles.error}>{errors.title}</p>}
                 <button onClick={handleCreate}>Thêm</button>
             </div>
@@ -54,6 +62,7 @@ export default function SubjectManager({
                     <tr>
                         <th>ID</th>
                         <th>Tên</th>
+                        <th>Loại môn học</th>
                         <th>Hành động</th>
                     </tr>
                 </thead>
@@ -72,6 +81,7 @@ export default function SubjectManager({
                                     s.subject_name
                                 )}
                             </td>
+                            <td> 1 </td>
 
                             <td>
                                 {editingId === s.subject_id ? (
