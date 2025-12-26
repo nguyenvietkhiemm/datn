@@ -51,13 +51,6 @@ export default function ReviewExam({
                 >
                     Bảng xếp hạng
                 </Link>
-
-                <Link
-                    href={`/exam/${exam_id}/review/exam-history`}
-                    className={`${styles.tab_btn} ${activeTab === "history" ? styles.active : ""}`}
-                >
-                    Lịch sử làm bài
-                </Link>
             </div>
 
             {/* TAB CONTENT */}

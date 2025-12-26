@@ -12,7 +12,7 @@ export default function ProfilePage({
     const pathname = usePathname();
     const getActiveTab = () => {
         if (pathname === "/my-account") return "info";
-        if (pathname === "/my-account/test") return "results";
+        if (pathname === "/my-account/history") return "results";
         if (pathname === "/my-account/user-goal") return "goals";
         return "info";
     };
@@ -30,7 +30,7 @@ export default function ProfilePage({
                     Thông tin cá nhân
                 </Link>
                 <Link
-                    href={"/practice/bank-history"}
+                    href={"/my-account/history"}
                     className={`${styles.tab} ${activeTab === "results" ? styles.active : ""
                         }`}
                 >

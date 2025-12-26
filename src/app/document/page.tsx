@@ -1,7 +1,10 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import styles from "./DocumentList.module.css";
 import Filter from "@/components/filter/Filter";
+import Search from "@/components/search/Search";
+import Pagination from "@/components/pagination/Pagination";
 import Cookies from "js-cookie";
 import Link from "next/link";
 
@@ -11,61 +14,90 @@ interface Document {
     link?: string;
     created_at: string;
     topic_id?: number;
-    available: boolean
+    available: boolean;
 }
 
 export default function DocumentList() {
-    const [document, setDocument] = useState<Document[]>([]);
+    const [documents, setDocuments] = useState<Document[]>([]);
+    const [searchKeyword, setSearchKeyword] = useState("");
+    const [filterCondition, setFilterCondition] = useState<any>(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+
     const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const [totalPage, setTotalPage] = useState<number>(1);
+    const token = Cookies.get("token");
 
     useEffect(() => {
-        const token = Cookies.get("token");
-        const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
-
         const fetchDocuments = async () => {
             try {
-                const res = await fetch(`${API_URL}/documents?page=${currentPage}`, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`
-                    }
-                });
+                const params = new URLSearchParams();
+                params.append("page", currentPage.toString());
 
-                const data = await res.json();
+                if (searchKeyword.trim()) {
+                    params.append("keyword", searchKeyword.trim());
+                }
+
+                if (filterCondition?.topics?.length) {
+                    params.append("topics", filterCondition.topics.join(","));
+                }
+
+                const res = await fetch(
+                    `${API_URL}/documents?${params.toString()}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+
+                const json = await res.json();
+
                 if (res.ok) {
-                    setDocument(data.data.data);
-                    setTotalPage(totalPage)
+                    setDocuments(json.data.documents);
+                    setTotalPages(json.data.totalPages);
                 } else {
-                    console.error("Error fetching documents:", data.message);
+                    console.error(json.message);
                 }
             } catch (err) {
-                console.error("Failed to fetch documents:", err);
+                console.error("Fetch documents failed:", err);
             }
         };
 
         fetchDocuments();
-    }, []);
+    }, [searchKeyword, filterCondition, currentPage]);
 
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>Tài liệu của tôi</h1>
 
-            {/* Bộ lọc */}
-            {/* <Filter documents={documents} setDocuments={setDocuments} /> */}
+            {/* Search + Filter */}
+            <div className={styles.filter_search}>
+                <Filter
+                    setFilterCondition={setFilterCondition}
+                    setSearchKeyword={setSearchKeyword}
+                />
+
+                <Search
+                    setSearchKeyword={setSearchKeyword}
+                    setFilterCondition={setFilterCondition}
+                />
+            </div>
+
+            {/* List */}
             <div className={styles.list}>
-                {document?.length === 0 ? (
+                {documents.length === 0 ? (
                     <p className={styles.empty}>Không có tài liệu nào phù hợp.</p>
                 ) : (
-                    document?.map((doc) => (
-
+                    documents.map((doc) => (
                         <div key={doc.document_id} className={styles.card}>
                             <h3 className={styles.docTitle}>{doc.title}</h3>
 
                             {doc.link ? (
-                                <Link href={`/document/${doc.document_id}?link=${doc.link}`} target="_blank" className={styles.link}>
+                                <Link
+                                    href={`/document/${doc.document_id}?link=${doc.link}`}
+                                    target="_blank"
+                                    className={styles.link}
+                                >
                                     🔗 Xem tài liệu
                                 </Link>
                             ) : (
@@ -73,12 +105,21 @@ export default function DocumentList() {
                             )}
 
                             <p className={styles.date}>
-                                📅 Ngày tạo: {new Date(doc.created_at).toLocaleString("vi-VN")}
+                                📅 {new Date(doc.created_at).toLocaleString("vi-VN")}
                             </p>
                         </div>
                     ))
                 )}
             </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    setCurrentPage={setCurrentPage}
+                />
+            )}
         </div>
     );
 }
