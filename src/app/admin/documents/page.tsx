@@ -75,7 +75,7 @@ export default function DocumentPage() {
             page: 1,
             searchKeyword: keyword,
         }))
-    }
+    };
 
     const handleChangeFilter = (filter: any) => {
         setQuery(prev => ({
@@ -86,7 +86,7 @@ export default function DocumentPage() {
             status:
                 filter.status !== "All" ? filter.status : undefined,
         }))
-    }
+    };
 
     const handleSelectDocument = (document_id: number) => {
         setSelectedDocuments(prev => {
@@ -96,6 +96,39 @@ export default function DocumentPage() {
         })
     }
 
+    const handleVectorizeSelected = async () => {
+        if (selectedDocuments.length === 0) {
+            alert("Vui lòng chọn ít nhất 1 tài liệu để vectorize");
+            return;
+        }
+
+        const files = documents
+            .filter(
+                (doc): doc is Document & { link: string } =>
+                    selectedDocuments.includes(doc.document_id) && typeof doc.link === "string"
+            )
+            .map(doc => ({
+                document_id: doc.document_id,
+                link: doc.link,
+            }));
+
+
+        if (files.length === 0) {
+            alert("Các tài liệu đã chọn không có link hợp lệ");
+            return;
+        }
+
+        try {
+            await DocumentService.vectorize(files);
+            alert("Đã gửi yêu cầu vectorize!");
+            setSelectedDocuments([]);
+        } catch (error) {
+            console.error(error);
+            alert("Vectorize thất bại");
+        }
+    };
+
+
     if (loading)
         return <p className={styles.loading}>Đang tải danh sách tài liệu...</p>;
 
@@ -103,12 +136,23 @@ export default function DocumentPage() {
         <div className={styles.container}>
             <div className={styles.header}>
                 <h1 className={styles.title}>Quản lý tài liệu</h1>
+
                 <div className={styles.actions}>
-                    <div
-                        className={styles.button}
-                        onClick={() => router.push("/admin/documents/create")}
-                    >
-                        <button className={styles.addButton}>+ Thêm tài liệu</button>
+                    <div className={styles.actionGroup}>
+                        <button
+                            className={styles.addButton}
+                            onClick={() => router.push("/admin/documents/create")}
+                        >
+                            + Thêm tài liệu
+                        </button>
+
+                        <button
+                            className={styles.vectorizeButton}
+                            disabled={selectedDocuments.length === 0}
+                            onClick={handleVectorizeSelected}
+                        >
+                            Vectorize ({selectedDocuments.length})
+                        </button>
                     </div>
 
                     <div className={styles.filter_search}>
@@ -127,6 +171,7 @@ export default function DocumentPage() {
                     </div>
                 </div>
             </div>
+
 
             <table className={styles.table}>
                 <thead>

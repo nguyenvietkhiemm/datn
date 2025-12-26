@@ -90,4 +90,26 @@ export const DocumentService = {
         }
         return data;
     },
+
+    async vectorize(files: { document_id: number; link: string }[]) {
+        const token = getToken();
+
+        const res = await fetch(`${API_URL}/microservice/llm/vectorize`, {
+            method: "POST",
+            headers: {
+                ...getHeaders(token),
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                files,
+            }),
+        });
+
+        if (!res.ok) {
+            const error = await res.text();
+            throw new Error(`Vectorize thất bại: ${error}`);
+        }
+
+        return res.json(); // nếu backend có trả kết quả
+    },
 };

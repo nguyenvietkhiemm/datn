@@ -193,3 +193,24 @@
     padding: 20px 0;
     font-style: italic;
 }
+
+.vectorizeButton {
+    background-color: #6f42c1; /* tím AI */
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 12px;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.vectorizeButton:hover:not(:disabled) {
+    background-color: #59339d;
+}
+
+.vectorizeButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
