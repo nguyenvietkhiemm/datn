@@ -9,45 +9,41 @@ const DocumentService = {
         searchValue: string = "",
         topicIds: number | "All",
         subject_id: number | "All"
-    ): Promise<{ data: Document[]; totalPages: number }> {
+    ): Promise<{ documents: Document[]; totalPages: number }> {
 
         const limit = 12;
-
-        // sanitize page
-        const safePage = Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
-        const offset = (safePage - 1) * limit;
+        const offset = (page - 1) * limit;
 
         let conditions: string[] = [];
         let params: any[] = [];
         let idx = 1;
 
-        // Search
+        /* ===== SEARCH ===== */
         if (searchValue.trim() !== "") {
             conditions.push(`
             (
-                unaccent(LOWER(d.title)) LIKE unaccent(LOWER($${idx}))
-                OR unaccent(LOWER(t.title)) LIKE unaccent(LOWER($${idx}))
-              )
-        `);
+              unaccent(lower(d.title)) LIKE unaccent(lower($${idx}))
+            )
+          `);
             params.push(`%${searchValue}%`);
             idx++;
         }
 
-        // Status
+        /* ===== STATUS ===== */
         if (status !== "All") {
             conditions.push(`d.available = $${idx}`);
             params.push(status);
             idx++;
         }
 
-        // Topic filter
+        /* ===== TOPIC FILTER ===== */
         if (topicIds !== "All") {
             conditions.push(`d.topic_id = ($${idx})`);
             params.push(topicIds);
             idx++;
         }
 
-        //subject
+        /* ===== SUBJECT FILTER ===== */
         if (subject_id !== "All") {
             conditions.push(`sj.subject_id = ($${idx})`);
             params.push(subject_id);
@@ -66,32 +62,33 @@ const DocumentService = {
             d.topic_id,
             d.available,
             d.created_at,
-            t.title AS topic_title
+            t.title AS topic_title,
+            sj.subject_type
           FROM document d
-          LEFT JOIN topic t ON d.topic_id = t.topic_id
+          JOIN topic t ON d.topic_id = t.topic_id
           JOIN subject sj ON sj.subject_id = t.subject_id
           ${whereClause}
           ORDER BY d.document_id DESC
-          LIMIT $${idx} OFFSET $${idx + 1}
+          LIMIT ${limit} OFFSET ${offset}
         `;
 
-        const result = await query(queryText, [...params, limit, offset]);
+        const result = await query(queryText, params);
+        const documents = result.rows;
 
         /* ===== COUNT QUERY ===== */
         const countQuery = `
-          SELECT COUNT(*)::int AS total
+          SELECT COUNT(*) AS total
           FROM document d
-          LEFT JOIN topic t ON d.topic_id = t.topic_id
+          JOIN topic t ON d.topic_id = t.topic_id
           JOIN subject sj ON sj.subject_id = t.subject_id
           ${whereClause}
         `;
 
         const countResult = await query(countQuery, params);
-        const totalItems = countResult.rows[0].total;
-        const totalPages = Math.ceil(totalItems / limit);
+        const totalPages = Math.ceil(countResult.rows[0].total / limit);
 
         return {
-            data: result.rows,
+            documents,
             totalPages,
         };
     },

@@ -369,16 +369,6 @@ const ExamService = {
         JSON.stringify({ user_id, user_name })
       );
 
-      await redis.hset(
-        `exam:${exam_id}:user:${user_id}`,
-        "score",
-        score.toString(),
-        "time_test",
-        time_test.toString(),
-        "history_exam_id",
-        history_exam_id.toString()
-      );
-
       await client.query("COMMIT");
       return { score, history_exam_id };
 
@@ -475,9 +465,8 @@ const ExamService = {
   },
 
   async getUserListExamHistory(
-    exam_id: number
+    user_id: number
   ): Promise<{
-    exam_id: number;
     history: {
       hsitory_exam_id: number;
       score: number;
@@ -487,21 +476,19 @@ const ExamService = {
   }> {
     try {
       const listQuery =
-        `SELECT he.history_exam_id, he.score, he.time_test, he.created_at, u.user_name
+        `SELECT he.history_exam_id, he.score, he.time_test, he.created_at, he.exam_id, e.exam_name
       FROM history_exam he
-      JOIN "user" u ON u.user_id = he.user_id
-      WHERE exam_id=$1
+      JOIN exam e ON e.exam_id = he.exam_id
+      WHERE user_id=$1
       ORDER BY history_exam_id DESC`
-      const list = await query(listQuery, [exam_id])
+      const list = await query(listQuery, [user_id])
       if (!list || list.rows.length === 0) {
         return {
-          exam_id,
           history: []
         };
       }
 
       return {
-        exam_id,
         history: list.rows
       };
 
@@ -626,7 +613,7 @@ const ExamService = {
       `exam:${exam_id}:user:${user_id}`
     );
 
-    return { check: !hasDone };
+    return { check: true };
   },
 
   async markOverTime() {

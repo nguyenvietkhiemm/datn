@@ -4,7 +4,6 @@ import Authentication from '../middleware/authentication';
 import { ADMIN, USER } from "../config/permission";
 import { ExamQuestionController } from '../controllers/exam.question.controller';
 import { ScheduleExamController } from '../controllers/schedule.exam.controller';
-import QuestionController from '../controllers/question.controller';
 
 const examRoute = Router();
 
@@ -171,9 +170,10 @@ examRoute.delete(
 
 
 // GET lịch sử làm bài của 1 user
-examRoute.get("/user/:user_name/exam-history",
+examRoute.get("/exam-history",
         Authentication.AuthenticateToken,
         ExamController.getUserExamHistory);
+        
 examRoute.post("/submit",
         Authentication.AuthenticateToken,
         ExamController.submit

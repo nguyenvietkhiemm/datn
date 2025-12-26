@@ -115,21 +115,21 @@ CREATE TABLE IF NOT EXISTS chunk (
 );
 
 -- 12) Roadmap step <-> document mapping (depends on roadmap_step and document)
-CREATE TABLE IF NOT EXISTS roadmap_step_document (
-  roadmap_step_id INT NOT NULL,
-  document_id INT NOT NULL,
-  PRIMARY KEY (roadmap_step_id, document_id),
-  FOREIGN KEY (roadmap_step_id) REFERENCES roadmap_step(roadmap_step_id) ON DELETE CASCADE,
-  FOREIGN KEY (document_id) REFERENCES document(document_id) ON DELETE CASCADE
-);
+-- CREATE TABLE IF NOT EXISTS roadmap_step_document (
+--   roadmap_step_id INT NOT NULL,
+--   document_id INT NOT NULL,
+--   PRIMARY KEY (roadmap_step_id, document_id),
+--   FOREIGN KEY (roadmap_step_id) REFERENCES roadmap_step(roadmap_step_id) ON DELETE CASCADE,
+--   FOREIGN KEY (document_id) REFERENCES document(document_id) ON DELETE CASCADE
+-- );
 
 -- 13) User roadmap step (depends on roadmap_step and user)
-CREATE TABLE IF NOT EXISTS user_roadmap_step (
-  user_roadmap_step_id SERIAL PRIMARY KEY,
-  status roadmap_status DEFAULT 'pending',
-  roadmap_step_id INT REFERENCES roadmap_step(roadmap_step_id) ON DELETE CASCADE,
-  user_id INT REFERENCES "user"(user_id) ON DELETE CASCADE
-);
+-- CREATE TABLE IF NOT EXISTS user_roadmap_step (
+--   user_roadmap_step_id SERIAL PRIMARY KEY,
+--   status roadmap_status DEFAULT 'pending',
+--   roadmap_step_id INT REFERENCES roadmap_step(roadmap_step_id) ON DELETE CASCADE,
+--   user_id INT REFERENCES "user"(user_id) ON DELETE CASCADE
+-- );
 
 -- 14) Flashcard deck (depends on user)
 CREATE TABLE IF NOT EXISTS flashcard_deck (
@@ -206,7 +206,6 @@ CREATE TABLE IF NOT EXISTS question (
   question_name VARCHAR(1000),
   question_content VARCHAR(10000),
   embedding vector(1536),
-  image JSON,
   type_question INT DEFAULT 1,
   source VARCHAR(50),
   available BOOLEAN DEFAULT true
@@ -218,7 +217,6 @@ CREATE TABLE IF NOT EXISTS answer (
   question_id INT NOT NULL REFERENCES question(question_id) ON DELETE CASCADE,
   answer_content VARCHAR(10000) NOT NULL,
   is_correct BOOLEAN DEFAULT FALSE,
-  image JSON
 );
 
 
@@ -268,7 +266,7 @@ CREATE TABLE IF NOT EXISTS contestants (
 CREATE TABLE IF NOT EXISTS history_exam (
   history_exam_id SERIAL PRIMARY KEY,
   exam_id INT NOT NULL REFERENCES exam(exam_id) ON DELETE CASCADE,
-  user_id INT NOT NULL REFERENCES "user"(user_id) ON DELETE CASCADE,
+  user_id INT NOT NULL REFERENCES "user"(user_id) ON DELETE CA0SCADE,
   score DECIMAL(4,2),
   time_test  BIGINT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

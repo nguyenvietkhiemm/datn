@@ -47,14 +47,13 @@ app.listen(PORT, () => {
   .then((res) => console.log("Redis connected:", res))
   .catch((err) => console.error("Redis connection failed:", err));
 
-  // nodeCron.schedule('*/1 * * * *', async () => {
-  //   // chay 1 phut 1 lan de test
-  //   console.log('--- Bắt đầu tác vụ Cron: Kiểm tra và đánh dấu quá hạn ---');
-  //   await StudyScheduleService.markOverTime();
-  //   await ExamService.markOverTime();
-  //   console.log('--- Kết thúc tác vụ Cron ---');
-  // });
-
+  nodeCron.schedule('*/1 * * * *', async () => {
+    // chay 1 phut 1 lan de test
+    console.log('--- Bắt đầu tác vụ Cron: Kiểm tra và đánh dấu quá hạn ---');
+    await StudyScheduleService.markOverTime();
+    await ExamService.markOverTime();
+    console.log('--- Kết thúc tác vụ Cron ---');
+  });
 
 });
 

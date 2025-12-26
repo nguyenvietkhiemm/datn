@@ -54,7 +54,7 @@ export const FlashcardController = {
     return res.status(result.status).json(result);
   },
 
-  review: async (req: Request, res: Response) => {
+  quiz: async (req: Request, res: Response) => {
     const result = await safeExecute(
       async (): Promise<DefaultResponse<any>> => {
         const id = Number(req.params.id);

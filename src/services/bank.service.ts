@@ -2,6 +2,7 @@ import pool, { query } from "../config/database";
 import { Bank, DoBank } from "../models/bank.model";
 import { Question } from "../models/question.model";
 import { UserAnswerGrouped, AnswerCorrectGrouped } from "../models/bank.question.model";
+import { Stringifier } from "csv-stringify/.";
 const BankService = {
     async getById(bankId: number): Promise<Question[] | null> {
         const queryText = `
@@ -281,13 +282,16 @@ const BankService = {
             score: number;
             time_test: number;
             created_at: Date;
+            description: String;
+            history_bank_id: number
+            bank_id: number
         }[];
     }> {
         try {
             const listQuery =
-                `SELECT hb.score, hb.time_test, hb.created_at, u.user_name, hb.bank_id, hb.history_bank_id
+                `SELECT hb.score, hb.time_test, hb.created_at, b.description, hb.bank_id, hb.history_bank_id
                     FROM history_bank hb
-                    JOIN "user" u ON u.user_id = hb.user_id
+                    JOIN bank b ON b.bank_id = hb.bank_id
                     WHERE hb.user_id=$1
                     ORDER BY history_bank_id DESC`
             const list = await query(listQuery, [user_id])

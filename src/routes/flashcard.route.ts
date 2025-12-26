@@ -415,7 +415,7 @@ flashcardRouter.delete("/remove/:id",
 flashcardRouter.get(
   "/quiz/:id",
   Authentication.AuthenticateToken,
-  FlashcardController.review
+  FlashcardController.quiz
 );
 
 flashcardRouter.patch(
