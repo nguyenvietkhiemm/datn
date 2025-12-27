@@ -23,6 +23,7 @@ export default function ResultEssay({
 
     return (
         <div
+        key={index}
             className={`${styles.questionCard} ${!userText
                 ? styles.unanswered
                 : isCorrect
@@ -55,12 +56,9 @@ export default function ResultEssay({
             {/* ===== ĐÁP ÁN ĐÚNG ===== */}
             <div className={styles.answerRow}>
                 <span className={styles.label}>Đáp án đúng:</span>
-                <span className={styles.correctValue}>
-                    {correctText}
-                </span>
                 {q.correct_answers?.map((a, i) => (
-                    <div key={`correct-${i}`}>
-                        <p>{a.answer_content}</p>
+                    <div key={`correct-${i}`} className={styles.correctValue}>
+                        <p className={styles.answer_content_correct}>{a.answer_content}</p>
 
                         {a.images?.map((src, idx) => (
                             <div key={`img-${idx}`} className={styles.imageWrapperSmall}>

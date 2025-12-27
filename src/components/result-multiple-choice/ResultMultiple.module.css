@@ -13,6 +13,9 @@
     background: #f0fdf4;
 }
 
+.answer_content_correct{
+    color: #601feb;
+}
 .wrong {
     border-left-color: #ef4444;
     background: #fef2f2;

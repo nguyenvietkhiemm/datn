@@ -16,7 +16,7 @@ type AnswerMap = Record<number, number[] | string>;
 export default function DoBank() {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [answers, setAnswers] = useState<AnswerMap>({});
-  const [timeLeft, setTimeLeft] = useState<number>(0);
+  const [timeLeft, setTimeLeft] = useState<number>(1);
   const [submitted, setSubmitted] = useState(false);
   const [bank, setBank] = useState<BankProps>();
   const [userName, setUserName] = useState<string>("anonymous");
@@ -24,6 +24,7 @@ export default function DoBank() {
   const bank_id = Number(params.id);
   const router = useRouter();
   const questionRefs = useRef<Record<number, HTMLDivElement | null>>({});
+  const [subjectType, setSubJectType] = useState<number | null>(null);
 
   const STORAGE_KEY = `bank_doing_${bank_id}`;
 
@@ -42,8 +43,10 @@ export default function DoBank() {
     }
 
     BankService.geDetailBank(bank_id).then(res => {
-      setQuestions(res.data || []);
+      setQuestions(res.data.question || []);
+      setSubJectType(res.data.subject_type ?? null);
     });
+    
   }, [bank_id]);
 
   useEffect(() => {
@@ -108,7 +111,7 @@ export default function DoBank() {
 
     const res = await BankService.submitDoBank(
       bank_id,
-      Number(bank!.subject_type),
+      subjectType,
       used_time,
       do_bank,
       userName

@@ -43,3 +43,11 @@ export interface myRank {
   score: number,
   time_test: number
 }
+
+export interface MyExam{
+  exam_id: number,
+  exam_name: string,
+  subject_type: number,
+  time_limit: number
+}
+

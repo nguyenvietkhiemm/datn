@@ -1,7 +1,6 @@
 "use client";
 
 import styles from "./ResultExam.module.css";
-import { Button } from "@/components/ui/button";
 import { ExamService } from "../../../../../../domain/exam/service";
 import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
@@ -44,7 +43,7 @@ export default function ResultExam() {
 
   return (
     <div className={styles.result}>
-      <h3 className={styles.title}>📄 Kết quả bài thi</h3>
+      <h3 className={styles.title}> Kết quả bài thi</h3>
 
       <div className={styles.scoreBox}>
         <span>Điểm của bạn</span>
@@ -80,7 +79,7 @@ export default function ResultExam() {
           const userText = userData?.user_answer_text;
 
           return (
-            <ResultEssay q={q} index={index} userText={userText} />
+            <ResultEssay key={index} q={q} index={index} userText={userText} />
           )
         })}
       </div>

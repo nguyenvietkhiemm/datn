@@ -43,7 +43,7 @@ export default function ResultMultipleChoice({ q, userSelectedIds, isCorrect, in
                         ? q.correct_answers
                             .filter(a => userSelectedIds.includes(a.answer_id))
                             .map(a => a.answer_content)
-                            .join(", ")
+                            .join("| ")
                         : "Chưa trả lời"}
                 </span>
             </div>
@@ -58,7 +58,7 @@ export default function ResultMultipleChoice({ q, userSelectedIds, isCorrect, in
                 </span> */}
                 {q.correct_answers?.map((a, i) => (
                     <div key={`correct-${i}`}>
-                        <p>{a.answer_content}</p>
+                        <p className={styles.answer_content_correct}>{a.answer_content}|</p>
 
                         {a.images?.map((src, idx) => (
                             <div key={`img-${idx}`} className={styles.imageWrapperSmall}>

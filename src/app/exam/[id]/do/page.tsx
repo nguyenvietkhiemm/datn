@@ -6,6 +6,7 @@ import { ExamService } from "../../../../../domain/exam/service";
 import { Question } from "../../../../../domain/question-answer/type";
 import ExamRightPanel from "@/components/do-question/rightPanel";
 import QuestionItem from "@/components/do-question/page";
+import { MyExam } from "../../../../../domain/exam/type";
 
 type AnswerMap = Record<number, number[] | string>;
 
@@ -14,7 +15,7 @@ export default function DoExam() {
   const router = useRouter();
   const examId = Number(params.id);
   const STORAGE_KEY = `exam_doing_${examId}`;
-  const [exam, setExam] = useState<any>(null);
+  const [exam, setExam] = useState<MyExam | null>(null);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [answers, setAnswers] = useState<AnswerMap>({});
   const [timeLeft, setTimeLeft] = useState<number>(0);
@@ -102,7 +103,6 @@ export default function DoExam() {
       window.removeEventListener("beforeunload", handleBeforeUnload);
   }, [submitted]);
 
-
   /* ================= SELECT ANSWER ================= */
   const handleSelect = (
     questionId: number,
@@ -144,15 +144,15 @@ export default function DoExam() {
   /* ================= SUBMIT ================= */
   const handleSubmit = async () => {
     if (!exam || submitted) return;
-
+  
     const payload = Object.entries(answers).map(([qid, ans]) => ({
       question_id: Number(qid),
       user_answer: Array.isArray(ans) ? ans : [ans],
     }));
-
+  
     const used_time =
       (exam.time_limit * 60 - timeLeft) * 1000;
-
+  
     const res = await ExamService.submit(
       exam.exam_id,
       exam.subject_type,
@@ -160,13 +160,13 @@ export default function DoExam() {
       payload,
       userName
     );
-
+  
     setSubmitted(true);
     localStorage.removeItem(STORAGE_KEY);
     router.push(
       `/exam/${exam.exam_id}/result/${res.data.history_exam_id}`
     );
-  };
+  };  
 
   /* ================= HELPER: CHECK ANSWERED ================= */
   const isAnswered = (questionId: number) => {

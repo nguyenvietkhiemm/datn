@@ -1,18 +1,23 @@
-export type Answer = {
+export interface Answer {
     answer_id: number;
-    answer_content: string;
-    is_correct: boolean;
-    images : []
-};
-
-export type Question = {
     question_id: number;
-    question_name: string;
+    answer_content: string;
+    is_correct: boolean | null;
+    images: string[];
+  }
+  
+export interface Question {
+    question_id: number;
+    question_name: string | null;
     question_content: string;
-    answers: Answer[];
+    embedding: string | null;
+    image: string | null;
     type_question: number;
-    images : [];
-};
+    source: string;
+    available: boolean;
+    images: string[];
+    answers: Answer[];
+  }
 
 export type ReviewQuestion = {
     question_id: number;

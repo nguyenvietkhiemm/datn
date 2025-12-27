@@ -46,7 +46,7 @@ export const BankService = {
 
     async submitDoBank(
         bank_id: number,
-        subject_type: number,
+        subject_type: number | null,
         used_time: number,
         do_bank: {
             question_id: number;

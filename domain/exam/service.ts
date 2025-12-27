@@ -1,4 +1,3 @@
-import { Exam } from "./type";
 import { getToken, getHeaders, API_URL, FilterSearch } from "../../lib/service";
 
 export const ExamService = {
@@ -96,6 +95,6 @@ export const ExamService = {
                 headers : getHeaders(token)
             }
         )
-        return res.json()
+        return await res.json()
     }
 };
