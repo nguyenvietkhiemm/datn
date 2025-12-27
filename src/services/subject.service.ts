@@ -10,7 +10,7 @@ const SubjectService = {
     },
 
     async create(subject: Subject): Promise<Subject> {
-        const result = await query('INSERT INTO subject (subject_name) VALUES ($1) RETURNING *', [subject.subject_name]);
+        const result = await query('INSERT INTO subject (subject_name, subject_type) VALUES ($1, $2) RETURNING *', [subject.subject_name, subject.subject_type]);
         return result.rows[0];
     },
 

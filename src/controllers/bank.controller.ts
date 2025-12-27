@@ -90,7 +90,7 @@ const BankController = {
             const { bank_id, subject_type, time_test, user_name } = req.query;
             const user_id = req.user?.user_id;
             const { do_bank } = req.body
-
+   
             if (!bank_id || !subject_type || !time_test) {
                 return {
                     status: 400,
@@ -119,8 +119,7 @@ const BankController = {
                 status: 200,
                 message: "Nộp đè thi thành công",
                 data: await BankService.submit(Number(bank_id),
-                    Number(user_id), do_bank, Number(time_test), Number(subject_type),
-                    String(user_name)
+                    Number(user_id), do_bank, Number(time_test), Number(subject_type)
                 )
             }
         });

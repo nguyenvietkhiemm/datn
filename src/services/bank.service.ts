@@ -2,14 +2,14 @@ import pool, { query } from "../config/database";
 import { Bank, DoBank } from "../models/bank.model";
 import { Question } from "../models/question.model";
 import { UserAnswerGrouped, AnswerCorrectGrouped } from "../models/bank.question.model";
-import { Stringifier } from "csv-stringify/.";
+
 const BankService = {
-    async getById(bankId: number): Promise<Question[] | null> {
+    async getById(bankId: number):
+        Promise<{ question: Question[] | null, subject_type: number | null }> {
         const queryText = `
           SELECT
             q.*,
       
-            -- images của question
             COALESCE(
               (
                 SELECT json_agg(iq.image_link)
@@ -56,9 +56,30 @@ const BankService = {
 
         const result = await query(queryText, [bankId]);
 
-        if (!result.rows.length) return null;
+        if (!result.rows.length) return { question: null, subject_type: null };
 
-        return result.rows as Question[];
+        const subject_type_query =
+            `SELECT s.subject_type
+            FROM bank b
+            JOIN topic t ON t.topic_id = b.topic_id
+            JOIN subject s ON s.subject_id = t.subject_id
+            WHERE b.bank_id = $1;
+            `
+        const subject_type_row = await query(subject_type_query, [bankId])
+        const subject_type: number | null = subject_type_row.rows[0]?.subject_type ?? null;
+
+        // 3. Return đúng type
+        if (!result.rows.length) {
+            return {
+                question: null,
+                subject_type
+            };
+        }
+
+        return {
+            question: result.rows as Question[],
+            subject_type
+        };
     },
 
     async listBank(
@@ -171,7 +192,6 @@ const BankService = {
         do_bank: DoBank[],
         time_test: number,
         subject_type: number,
-        user_name: string
     ): Promise<{ score: number; history_bank_id: number }> {
         const client = await pool.connect();
 
@@ -246,21 +266,42 @@ const BankService = {
             // Insert user_exam_answer
             for (const user of do_bank) {
                 for (const ans of user.user_answer) {
-                    await client.query(
-                        `
-                INSERT INTO user_bank_answer
-                (history_bank_id, bank_id, user_id, question_id, answer_id, user_answer_text)
-                VALUES ($1, $2, $3, $4, $5, $6)
-                `,
-                        [
-                            history_bank_id,
-                            bank_id,
-                            user_id,
-                            user.question_id,
-                            Number(ans),
-                            isNaN(Number(ans)) ? ans : null
-                        ]
-                    );
+
+                    // TRẮC NGHIỆM
+                    if (typeof ans === "number") {
+                        await client.query(
+                            `
+                      INSERT INTO user_bank_answer
+                      (history_bank_id, bank_id, user_id, question_id, answer_id, user_answer_text)
+                      VALUES ($1, $2, $3, $4, $5, NULL)
+                      `,
+                            [
+                                history_bank_id,
+                                bank_id,
+                                user_id,
+                                user.question_id,
+                                ans,      
+                            ]
+                        );
+                    }
+
+                    // TỰ LUẬN
+                    else if (typeof ans === "string") {
+                        await client.query(
+                            `
+                      INSERT INTO user_bank_answer
+                      (history_bank_id, bank_id, user_id, question_id, answer_id, user_answer_text)
+                      VALUES ($1, $2, $3, $4, NULL, $5)
+                      `,
+                            [
+                                history_bank_id,
+                                bank_id,
+                                user_id,
+                                user.question_id,
+                                ans,       
+                            ]
+                        );
+                    }
                 }
             }
 

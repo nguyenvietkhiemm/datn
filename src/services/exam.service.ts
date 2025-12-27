@@ -341,24 +341,44 @@ const ExamService = {
       // Insert user_exam_answer
       for (const user of do_exam) {
         for (const ans of user.user_answer) {
-          const isEssay = isNaN(Number(ans));
-          await client.query(
-            `
-            INSERT INTO user_exam_answer
-            (history_exam_id, exam_id, user_id, question_id, answer_id, user_answer_text)
-            VALUES ($1, $2, $3, $4, $5, $6)
-            `,
-            [
-              history_exam_id,
-              exam_id,
-              user_id,
-              user.question_id,
-              isEssay ? null : Number(ans),
-              isEssay ? String(ans) : null
-            ]
-          );
+
+            // TRẮC NGHIỆM
+            if (typeof ans === "number") {
+                await client.query(
+                    `
+              INSERT INTO user_exam_answer
+              (history_exam_id, exam_id, user_id, question_id, answer_id, user_answer_text)
+              VALUES ($1, $2, $3, $4, $5, NULL)
+              `,
+                    [
+                        history_exam_id,
+                        exam_id,
+                        user_id,
+                        user.question_id,
+                        ans,      
+                    ]
+                );
+            }
+
+            // TỰ LUẬN
+            else if (typeof ans === "string") {
+                await client.query(
+                    `
+              INSERT INTO user_exam_answer
+              (history_exam_id, exam_id, user_id, question_id, answer_id, user_answer_text)
+              VALUES ($1, $2, $3, $4, NULL, $5)
+              `,
+                    [
+                        history_exam_id,
+                        exam_id,
+                        user_id,
+                        user.question_id,
+                        ans,
+                    ]
+                );
+            }
         }
-      }
+    }
 
       // Redis ranking
       const final_score = score * 1e9 - time_test;
@@ -413,18 +433,19 @@ const ExamService = {
 
       for (let i = 0; i < data.length; i += 2) {
         const member = JSON.parse(data[i]);
+        const user_id = member.user_id;
         const final_score = Number(data[i + 1]);
 
         //  LẤY ĐIỂM THẬT TỪ HASH
-        const detail = await redis.hgetall(
-          `exam:${exam_id}:user:${member.user_id}`
-        );
+       const score_query = `SELECT score, time_test FROM history_exam WHERE user_id=$1`
+       const score_rows = await pool.query(score_query, [user_id])
+       const {score, time_test} = score_rows.rows[0]
 
         rank.push({
           user_id: member.user_id,
           user_name: member.user_name,
-          score: Number(detail.score || 0),
-          time_test: Number(detail.time_test || 0),
+          score ,
+          time_test,
           final_score
         });
       }
