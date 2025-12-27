@@ -41,7 +41,7 @@ export default function ListImageQuestion({
       {/* ===== QUESTION IMAGES ===== */}
       {imagesQuestion.map((src, index) => (
         <div key={`q-${index}`} className={styles.imageWrapperSmall}>
-          <ImagePreview filename={src}/>
+          <ImagePreview filename={src}  width={250}/>
           <button
             className={styles.removeBtn}
             onClick={() =>

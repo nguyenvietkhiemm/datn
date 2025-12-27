@@ -145,9 +145,9 @@ export default function RoadmapEditor() {
                     <thead>
                         <tr>
                             <th>Bước</th>
-                            <th>Tiêu đề</th>
+                           
                             <th>Mô tả</th>
-                            <th>Topic</th>
+                         
                             <th>Chỉnh sửa</th>
                             <th>Xoá</th>
                         </tr>
@@ -157,9 +157,9 @@ export default function RoadmapEditor() {
                         {steps?.map((step, index) => (
                             <tr key={step.roadmap_step_id}>
                                 <td>{index + 1}</td>
-                                <td>{step.title}</td>
+                                
                                 <td>{step.description}</td>
-                                <td>{step.topic_name}</td>
+                           
 
                                 <td>
                                     <span className={styles.edit} onClick={() => startEdit(step)}>...</span>

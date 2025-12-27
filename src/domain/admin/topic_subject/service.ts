@@ -66,11 +66,11 @@ export const TopicSubjectService = {
         return (await res.json()).data;
     },
 
-    async createSubject(name: string): Promise<Subject> {
+    async createSubject(name: string, subject_type: number): Promise<Subject> {
         const res = await fetch(`${API_URL}/subjects/create`, {
             method: "POST",
             headers: getHeaders(getToken()),
-            body: JSON.stringify({ subject_name: name }),
+            body: JSON.stringify({ subject_name: name, subject_type: subject_type }),
         });
 
         if (!res.ok) throw new Error("Tạo Subject thất bại");

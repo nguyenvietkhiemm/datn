@@ -19,6 +19,12 @@ export default function ExamDetail() {
     useEffect(() => {
         const token = Cookies.get("token");
         const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
+        const examsRaw = localStorage.getItem("exam");
+
+        if (examsRaw) {
+            const exams = JSON.parse(examsRaw);
+            setExam(exams);
+        }
         const fetchExamId = async () => {
             const resExamId = await fetch(`${API_URL}/exams/${id}`, {
                 method: "GET",
@@ -69,7 +75,7 @@ export default function ExamDetail() {
                                     <div key={`q-${i}`} className={styles.imageWrapperSmall}>
                                         {q.images?.map((src, index) => (
                                             <div key={`q-${index}`} className={styles.imageWrapperSmall}>
-                                                <ImagePreview filename={src} width={200}/>
+                                                <ImagePreview filename={src} width={200} />
                                             </div>
                                         ))}
                                     </div>
@@ -113,7 +119,7 @@ export default function ExamDetail() {
                                 key={q.question_id}
                                 className={`${styles.numButton} ${answers[q.question_id] ? styles.answered : ""
                                     }`}
-                                    onClick={() => scrollToQuestion(q.question_id)}
+                                onClick={() => scrollToQuestion(q.question_id)}
                             >
                                 {i + 1}
                             </button>

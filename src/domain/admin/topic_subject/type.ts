@@ -9,6 +9,7 @@ export interface Topic {
 export type Subject = {
     subject_id: number;
     subject_name: string;
+    subject_type: number
 }
 
 export interface ValidationRules {

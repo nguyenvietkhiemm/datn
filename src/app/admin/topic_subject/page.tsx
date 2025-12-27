@@ -23,8 +23,8 @@ export default function TopicSubject() {
     }, []);
 
     /* ===== SUBJECT API ===== */
-    const createSubject = async (name: string) => {
-        const s = await TopicSubjectService.createSubject(name);
+    const createSubject = async (name: string, subject_type: number) => {
+        const s = await TopicSubjectService.createSubject(name, subject_type);
         setSubjects((prev) => [...prev, s]);
     };
 

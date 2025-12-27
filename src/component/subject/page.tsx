@@ -7,7 +7,7 @@ import { TopicSubjectModel } from "@/domain/admin/topic_subject/model";
 
 type Props = {
     subjects: Subject[];
-    onCreate: (name: string) => void;
+    onCreate: (name: string, subject_type:number) => void;
     onUpdate: (id: number, name: string) => void;
     onDelete: (id: number) => void;
 };
@@ -19,7 +19,7 @@ export default function SubjectManager({
     onDelete,
 }: Props) {
     const [newName, setNewName] = useState("");
-    const [subject_type, setSubject_type] = useState<number | null>(null);
+    const [subject_type, setSubject_type] = useState<number >(1);
     const [editingId, setEditingId] = useState<number | null>(null);
     const [editName, setEditName] = useState("");
     const [errors, setErrors] = useState<{ title?: string }>({});
@@ -32,7 +32,7 @@ export default function SubjectManager({
         );
         if (!valid) return;
 
-        onCreate(newName);
+        onCreate(newName, subject_type);
         setNewName("");
     };
 
@@ -81,7 +81,7 @@ export default function SubjectManager({
                                     s.subject_name
                                 )}
                             </td>
-                            <td> 1 </td>
+                            <td> {s.subject_type} </td>
 
                             <td>
                                 {editingId === s.subject_id ? (
