@@ -64,10 +64,10 @@ const FlashcardApp = () => {
                     transition={{ duration: 0.6 }}
                 >
                     <div className={`${styles.cardContent} ${styles.front}`}>
-                        {deck[index].front}
+                        {deck[index]?.front}
                     </div>
                     <div className={`${styles.cardContent} ${styles.back}`}>
-                        {deck[index].back}
+                        {deck[index]?.back}
                     </div>
                 </motion.div>
             </motion.div>
