@@ -61,12 +61,6 @@ export default function FlashcardQuiz() {
     setAnswers(newAnswers);
   };
 
-  const handleIDontKnow = (index: number) => {
-    const newAnswers = [...answers];
-    newAnswers[index] = "IDONTKNOW";
-    setAnswers(newAnswers);
-  };
-
   const handleSubmit = async () => {
     let correct = 0;
     const answerCorrect : number[] = [];
@@ -136,17 +130,6 @@ export default function FlashcardQuiz() {
                 {opt}
               </button>
             ))}
-
-            {/* Nút "Bạn không biết" */}
-            {!submitted && (
-              <button
-                onClick={() => handleIDontKnow(index)}
-                className={`${styles.option} ${styles.idkBtn}`}
-                disabled={answers[index] !== null}
-              >
-                😕 Bạn không biết
-              </button>
-            )}
           </div>
 
           {/* Khi nộp bài hoặc chọn “Bạn không biết” thì hiện đáp án */}

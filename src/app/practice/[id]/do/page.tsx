@@ -2,12 +2,10 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./DoBank.module.css";
-import { Button } from "@/components/ui/button";
 import { useParams, useRouter } from "next/navigation";
 import { BankService } from "../../../../../domain/bank/service";
 import { Question } from "../../../../../domain/question-answer/type";
 import { BankProps } from "../../../../../domain/bank/type";
-import { ImagePreview } from "@/components/ImageReview/page";
 import ExamRightPanel from "@/components/do-question/rightPanel";
 import QuestionItem from "@/components/do-question/page";
 

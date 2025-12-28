@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import Pagination from "@/components/pagination/Pagination";
 import { AddFlashcardDeck } from "@/components/add-flashcard-deck/AddFlashcardDeck";
+import { formatVNDateTime } from "../../../lib/model";
 
 type FlashcardDeck = {
     flashcard_deck_id: number;
@@ -72,11 +73,8 @@ export default function Flashcards() {
                             <h3>{deck.title}</h3>
                             <p className={styles.description}>{deck.description}</p>
                             <p className={styles.date}>
-                            📅 Ngày tạo:{" "}
-                                {new Date(deck.created_at).toLocaleString("vi-VN", {
-                                    dateStyle: "short",
-                                    timeStyle: "short",
-                                })}
+                            Ngày tạo:{" "}
+                                {formatVNDateTime(deck.created_at)}
                             </p>
                         </div>
                     ))

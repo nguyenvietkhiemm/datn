@@ -51,22 +51,18 @@ export default function ResultMultipleChoice({ q, userSelectedIds, isCorrect, in
             {/* Đáp án đúng */}
             <div className={styles.answerRow}>
                 <span className={styles.label}>Đáp án đúng:</span>
-                {/* <span className={styles.correctValue}>
-                    {q.correct_answers
-                        .map(a => a.answer_content)
-                        .join(", ")}
-                </span> */}
-                {q.correct_answers?.map((a, i) => (
-                    <div key={`correct-${i}`}>
-                        <p className={styles.answer_content_correct}>{a.answer_content}|</p>
-
-                        {a.images?.map((src, idx) => (
-                            <div key={`img-${idx}`} className={styles.imageWrapperSmall}>
-                                <ImagePreview filename={src} />
-                            </div>
-                        ))}
-                    </div>
-                ))}
+                <div className={styles.answerlist}>
+                    {q.correct_answers?.map((a, i) => (
+                        <div key={`correct-${i}`}>
+                            <p className={styles.answer_content_correct}>{a.answer_content}</p>
+                            {a.images?.map((src, idx) => (
+                                <div key={`img-${idx}`} className={styles.imageWrapperSmall}>
+                                    <ImagePreview filename={src} />
+                                </div>
+                            ))}
+                        </div>
+                    ))}
+                </div>
             </div>
 
             <div className={styles.resultTag}>

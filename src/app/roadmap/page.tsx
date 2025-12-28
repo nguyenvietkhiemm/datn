@@ -36,7 +36,7 @@ export default function RoadMap() {
       </p>
 
       <div className={styles.roadmapLine}>
-        {steps.map((step, index) => (
+        {steps?.map((step, index) => (
           <div
             key={step.roadmap_step_id}
             className={styles.roadmapStep}

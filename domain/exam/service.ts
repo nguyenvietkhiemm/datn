@@ -32,7 +32,7 @@ export const ExamService = {
     // Nộp bài thi
     async submit(
         exam_id: number,
-        subject_type: number,
+        subject_type: number | null,
         used_time: number,
         do_exam: {
             question_id: number;

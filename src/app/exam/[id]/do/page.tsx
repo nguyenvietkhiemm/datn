@@ -22,6 +22,7 @@ export default function DoExam() {
   const [submitted, setSubmitted] = useState(false);
   const [userName, setUserName] = useState<string>("anonymous");
   const questionRefs = useRef<Record<number, HTMLDivElement | null>>({});
+  const [subjectType, setSubJectType] = useState<number | null>(null);
 
   useEffect(() => {
     // user
@@ -38,7 +39,8 @@ export default function DoExam() {
 
     // questions
     ExamService.getExamDetail(examId).then(res => {
-      setQuestions(res.data ?? []);
+      setQuestions(res.data.question ?? []);
+      setSubJectType(res.data.subject_type ?? null);
     });
   }, [examId]);
 
@@ -155,7 +157,7 @@ export default function DoExam() {
   
     const res = await ExamService.submit(
       exam.exam_id,
-      exam.subject_type,
+      subjectType,
       used_time,
       payload,
       userName
@@ -202,7 +204,7 @@ export default function DoExam() {
         <div className={styles.exam_body}>
           {/* LEFT */}
           <div className={styles.leftPanel}>
-            {questions.map((q, i) => (
+            {questions?.map((q, i) => (
               <QuestionItem
                 key={q.question_id}
                 question={q}

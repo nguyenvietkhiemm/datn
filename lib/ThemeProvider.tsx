@@ -1,6 +1,5 @@
 "use client";
 
-import { ThemeProvider } from "next-themes";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import ReduxProvider from "@/components/provider/ReduxProvider";
@@ -14,11 +13,6 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     const isDoingExam = pathname.endsWith("/do");
 
     return (
-        <ThemeProvider
-            attribute="class"
-            defaultTheme="light"   
-            enableSystem={false}  
-        >
             <ReduxProvider>
                 <div className="flex flex-col min-h-screen bg-white text-black">
                     <Header />
@@ -33,6 +27,5 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                     {!isDoingExam && <Footer />}
                 </div>
             </ReduxProvider>
-        </ThemeProvider>
     );
 }

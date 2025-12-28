@@ -48,42 +48,61 @@
 
 /* ===== Card của mỗi deck ===== */
 .deckCard {
-    background: #fff;
-    border-radius: 1rem;
-    padding: 1.5rem;
-    transition: transform .3s, box-shadow .3s;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, .08);
-    position: relative;
-    height: 10rem;
-    overflow: hidden;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    border: 1px solid #e5e7eb;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .deckCard:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 20px -6px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.deckCard h3 {
+/* ===== TITLE: tối đa 2 dòng + ... ===== */
+.title {
+    font-size: 16px;
     font-weight: 600;
-    font-size: 1.25rem;
-    color: #1e40af;
-    position: absolute;
-    top: 0.5rem;
-}
+    color: #111827;
 
-.deckCard p {
-    font-size: 15px;
-    color: #475569;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* chỉ 2 dòng */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
     line-height: 1.4;
-    position: absolute;
+    max-height: calc(1.4em * 2);
 }
 
-.date{
-    bottom: 1rem
+/* ===== DESCRIPTION: tối đa 3 dòng ===== */
+.description {
+    font-size: 14px;
+    color: #4b5563;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    line-height: 1.5;
+    max-height: calc(1.5em * 3);
 }
 
-.description{
-top: 3.5rem;
+/* ===== DATE ===== */
+.date {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: auto;
+    /* đẩy ngày xuống đáy card */
 }
 
 /* ===== Pagination ===== */
