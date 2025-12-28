@@ -6,14 +6,16 @@ import { Question } from "@/domain/admin/questions/type";
 import Cookies from "js-cookie";
 import { useParams } from "next/navigation";
 import { ImagePreview } from "@/component/questionCreate/ImageReview/page";
+import { useRouter } from "next/navigation";
+import { Button } from "@/component/ui/button/Button";
 
 export default function ExamDetail() {
     const [questions, setQuestions] = useState<Question[]>([]);
-    const [answers, setAnswers] = useState<{ [key: number]: number }>({});
     const [exam, setExam] = useState<Exam>();
     const params = useParams();
     const id = params.id;
     const questionRefs = useRef<Record<number, HTMLDivElement | null>>({});
+    const router = useRouter();
 
     //dữ liệu câu hỏi
     useEffect(() => {
@@ -44,10 +46,6 @@ export default function ExamDetail() {
         fetchExamId()
     }, [id]);
 
-    // const handleSelect = (questionId: number, answerId: number) => {
-    //     setAnswers({ ...answers, [questionId]: answerId });
-    // };
-
     const scrollToQuestion = (questionId: number) => {
         questionRefs.current[questionId]?.scrollIntoView({
             behavior: "smooth",
@@ -55,11 +53,16 @@ export default function ExamDetail() {
         });
     };
 
+    const editExam = (id: number) => {
+        router.push(`/admin/exams/create/${id}/questions`)
+    }    
+
     return (
         <div className={styles.exam_container}>
             {/* Header */}
             <div className={styles.exam_header}>
                 <h2>{exam?.exam_name}</h2>
+                <Button onClick={() => editExam(Number(id))}>Chỉnh sửa câu hỏi</Button>
             </div>
 
             <div className={styles.exam_body}>
@@ -83,13 +86,6 @@ export default function ExamDetail() {
                                 <div className={styles.answers}>
                                     {q.answers.map((a) => (
                                         <label key={a.answer_id} className={styles.option}>
-                                            {/* <input
-                                                type="radio"
-                                                name={`q-${q.question_id}`}
-                                                value={a.answer_id}
-                                                checked={answers[q.question_id] === a.answer_id}
-                                                onChange={() => handleSelect(q.question_id, a.answer_id)}
-                                            /> */}
                                             {a.answer_content}
                                             {a.is_correct &&
                                                 (
@@ -121,7 +117,7 @@ export default function ExamDetail() {
                         {questions.map((q, i) => (
                             <button
                                 key={q.question_id}
-                                className={`${styles.numButton} ${answers[q.question_id] ? styles.answered : ""
+                                className={`${styles.numButton}
                                     }`}
                                 onClick={() => scrollToQuestion(q.question_id)}
                             >

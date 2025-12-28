@@ -57,6 +57,25 @@ export default function ExamQuestionCreate() {
         fetchData();
     }, [query]);
 
+    useEffect(() => {
+        const fetchQuestionExam = async () => {
+            const data: number[] = await QuestionService.fetchQuestionExam(examId);
+
+            if (data && data.length !== 0) {
+                const mapped = data.map((question_id) => ({
+                    exam_id: Number(examId),
+                    question_id
+                }));
+
+                setSelectedQuestions(mapped);
+            }
+        };
+
+        if (examId) {
+            fetchQuestionExam();
+        }
+    }, [examId]);
+
     const handleSelectQuestion = (questionId: number) => {
 
         setSelectedQuestions((prev) => {
@@ -130,7 +149,7 @@ export default function ExamQuestionCreate() {
 
             <div className={styles.questionList}>
                 {questions?.map((question, index) => (
-                    <div className={styles.question_card}>
+                    <div key={index} className={styles.question_card}>
                         <h2 className={styles.title}>{`Câu ${index + 1}`}</h2>
                         <div
                             className={styles.content}

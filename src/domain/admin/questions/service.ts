@@ -116,6 +116,35 @@ export const QuestionService = {
     }
 
     return [...existedUrls, ...uploadedUrls];
-  }
+  },
 
+  async fetchQuestionExam(exam_id:number){
+    const token = getToken();
+    const res = await fetch(`${API_URL}/exams/${exam_id}/questions`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) throw new Error("Cập nhật trạng thái thất bại");
+    const data = await res.json();
+    return data.data;
+  },
+
+  async fetchQuestionBank(bank_id:number){
+    const token = getToken();
+    const res = await fetch(`${API_URL}/banks/${bank_id}/questions`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) throw new Error("Cập nhật trạng thái thất bại");
+    const data = await res.json();
+    return data.data;
+  }
 }

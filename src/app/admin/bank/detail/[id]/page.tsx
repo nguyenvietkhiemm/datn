@@ -6,6 +6,8 @@ import { Question } from "@/domain/admin/questions/type";
 import Cookies from "js-cookie";
 import { useParams } from "next/navigation";
 import { ImagePreview } from "@/component/questionCreate/ImageReview/page";
+import { Button } from "@/component/ui/button/Button";
+import { useRouter } from "next/navigation";
 
 export interface Bank {
     bank_id: number;
@@ -18,9 +20,8 @@ export interface Bank {
 
 export default function BankDetail() {
     const [questions, setQuestions] = useState<Question[]>([]);
-    const [answers, setAnswers] = useState<{ [key: number]: number }>({});
     const [bank, setBank] = useState<Bank>();
-
+    const router = useRouter();
     const params = useParams();
     const id = params.id;
 
@@ -60,12 +61,9 @@ export default function BankDetail() {
         fetchBank();
     }, [id]);
 
-    const handleSelect = (questionId: number, answerId: number) => {
-        setAnswers((prev) => ({
-            ...prev,
-            [questionId]: answerId,
-        }));
-    };
+    const editBank = (id: number) => {
+        router.push(`/admin/bank/create/${id}/questions`)
+    }
 
     // ================= SCROLL =================
     const scrollToQuestion = (questionId: number) => {
@@ -81,6 +79,7 @@ export default function BankDetail() {
             {/* HEADER */}
             <div className={styles.exam_header}>
                 <h2>{bank?.description}</h2>
+                <Button onClick={() => editBank(Number(id))}>Chỉnh sửa câu hỏi</Button>
             </div>
 
             <div className={styles.exam_body}>
@@ -136,9 +135,7 @@ export default function BankDetail() {
                         {questions.map((q, i) => (
                             <button
                                 key={q.question_id}
-                                className={`${styles.numButton} ${answers[q.question_id]
-                                    ? styles.answered
-                                    : ""
+                                className={`${styles.numButton}
                                     }`}
                                 onClick={() =>
                                     scrollToQuestion(q.question_id)

@@ -27,7 +27,7 @@ export default function BankQuestionCreate() {
         bank_id: number;
         question_id: number;
     }[]>([]);
-    
+
     const [query, setQuery] = useState<QuestionQuery>({
         page: 1,
         available: "true",
@@ -41,7 +41,7 @@ export default function BankQuestionCreate() {
             page,
         }));
     };
-    
+
     const handleChangeSearch = (searchKeyword: string) => {
         setQuery(prev => ({
             ...prev,
@@ -120,6 +120,25 @@ export default function BankQuestionCreate() {
         }
     };
 
+    useEffect(() => {
+        const fetchQuestionExam = async () => {
+            const data: number[] = await QuestionService.fetchQuestionBank(bankId);
+
+            if (data && data.length !== 0) {
+                const mapped = data.map((question_id) => ({
+                    bank_id: Number(bankId),
+                    question_id
+                }));
+
+                setSelectedQuestions(mapped);
+            }
+        };
+
+        if (bankId) {
+            fetchQuestionExam();
+        }
+    }, [bankId]);
+
     // ================= RENDER =================
     return (
         <div className={styles.container}>
@@ -175,7 +194,7 @@ export default function BankQuestionCreate() {
             {/* TABLE */}
             <div className={styles.questionList}>
                 {questions?.map((question, index) => (
-                    <div className={styles.question_card}>
+                    <div className={styles.question_card} key={index}>
                         <h2 className={styles.title}>{`Câu ${index + 1}`}</h2>
                         <div
                             className={styles.content}
@@ -193,7 +212,7 @@ export default function BankQuestionCreate() {
                             <div className={styles.imageGroup}>
                                 {question?.images?.map((src, index) => (
                                     <div key={index} className={styles.imageWrapper}>
-                                        <ImagePreview filename={src} width={200}/>
+                                        <ImagePreview filename={src} width={200} />
                                     </div>
                                 ))}
                             </div>
