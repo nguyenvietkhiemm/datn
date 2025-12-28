@@ -10,6 +10,8 @@ import { FileParserService } from "@/domain/admin/file/file-parser/service";
 import QuestionCreate from "@/component/questionCreate/page";
 import { QuestionService } from "@/domain/admin/questions/service";
 import { QuestionModel } from "@/domain/admin/questions/model";
+import { Upload } from "lucide-react";
+
 
 export default function JsonDetailPage() {
     const { name } = useParams<Params>();
@@ -273,31 +275,38 @@ export default function JsonDetailPage() {
 
     return (
         <div className={styles.container}>
-            <div className={styles.buttonGroup}>
-                <Button onClick={handleSave} variant="primary" size="md">
-                    Lưu thay đổi JSON
+            <div className={styles.actionBar}>
+                <div className={styles.leftActions}>
+                    <Button onClick={handleSave} variant="primary" size="md">
+                        Lưu thay đổi JSON
+                    </Button>
+                    <Button onClick={handleReset} variant="outline" size="md">
+                        Tạo lại JSON gốc
+                    </Button>
+                </div>
+
+                <Button
+                    onClick={handleSubmitSelect}
+                    variant="primary"
+                    size="md"
+                    className={styles.importBtn}
+                >
+                    Import {selectedIndexes.length} câu hỏi đã chọn
                 </Button>
-                <Button onClick={handleReset} variant="primary" size="md">
-                    Tạo lại JSON gốc
-                </Button>
-                <Button onClick={handleSubmitSelect} variant="primary">
-                    Import toàn bộ câu hỏi được chọn vào hệ thống
-                </Button>
+
             </div>
+
 
             <div className={styles.questionList}>
                 {jsonData.map((row, rowIndex) => (
-                    <div key={rowIndex}>
+                    <div key={rowIndex} className={styles.questionCard}>
                         <QuestionCreate
-                            key={rowIndex}
                             question={{
                                 question_content: row.question.text,
                                 available: true,
                                 source: row.question.label,
                                 type_question: row.question.type_question,
-                                //  Tách ảnh của question
                                 images: row.question.images,
-                                //  Tách ảnh của từng answer
                                 answers: row.answers.map((a, i) => ({
                                     answer_id: i,
                                     answer_content: a.text,
@@ -314,15 +323,18 @@ export default function JsonDetailPage() {
                             selectedIndexes={selectedIndexes}
                         />
 
-                        <Button
-                            variant="primary"
-                            size="sm"
-                            onClick={() => handleSubmitQuestionToBE(row)}
-                        >
-                            Lưu câu hỏi này vào hệ thống
-                        </Button>
+                        <div className={styles.cardActions}>
+                            <Button
+                                variant="primary"
+                                size="sm"
+                                onClick={() => handleSubmitQuestionToBE(row)}
+                            >
+                                Lưu câu hỏi này vào hệ thống
+                            </Button>
+                        </div>
                     </div>
                 ))}
+
             </div>
         </div>
     );
