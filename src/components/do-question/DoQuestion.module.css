@@ -5,6 +5,7 @@
     padding: 1rem 1.25rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     scroll-margin-top: 90px;
+    margin: 1rem 0;
 }
 
 .questionText {

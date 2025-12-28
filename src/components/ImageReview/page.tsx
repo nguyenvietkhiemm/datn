@@ -4,34 +4,52 @@ import { useEffect, useState } from "react";
 import { FileParserService } from "../../../domain/file-parser/service";
 
 export function ImagePreview({
-    filename,
-    width =150,
+  filename,
+  width = 100,
 }: {
-    filename: string;
-    width?: number;
+  filename: string;
+  width?: number;
 }) {
-    const [url, setUrl] = useState<string | null>(null);
-    
-    useEffect(() => {
-        let mounted = true;
+  const [url, setUrl] = useState<string | null>(null);
 
-        FileParserService.getImageUrl(filename).then(signedUrl => {
-            if (mounted) setUrl(signedUrl);
-        });
+  useEffect(() => {
+    let mounted = true;
 
-        return () => {
-            mounted = false;
-        };
-    }, [filename]);
+    FileParserService.getImageUrl(filename).then((signedUrl) => {
+      if (mounted) setUrl(signedUrl);
+    });
 
-    if (!url) return null;
+    return () => {
+      mounted = false;
+    };
+  }, [filename]);
 
-    return (
-        <img
-            src={url}
-            width={width}
-            style={{ height: "auto" }}
-            loading="lazy"
-        />
-    );
+  if (!url) return null;
+
+  return (
+    <div
+      style={{
+        width,
+        height: width,            // KHÓA BOX
+        overflow: "hidden",       // CHẶN TRÀN
+        borderRadius: 6,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "#f3f4f6",    // optional
+      }}
+    >
+      <img
+        src={url}
+        style={{
+          maxWidth: "100%",
+          maxHeight: "100%",
+          objectFit: "contain",   // QUAN TRỌNG
+        }}
+        loading="lazy"
+        alt=""
+      />
+    </div>
+  );
 }
+

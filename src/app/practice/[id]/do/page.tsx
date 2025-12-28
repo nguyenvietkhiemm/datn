@@ -8,11 +8,12 @@ import { Question } from "../../../../../domain/question-answer/type";
 import { BankProps } from "../../../../../domain/bank/type";
 import ExamRightPanel from "@/components/do-question/rightPanel";
 import QuestionItem from "@/components/do-question/page";
+import { FlatQuestions, TypeQuestion, PART_LABEL } from "../../../../../lib/model";
 
 type AnswerMap = Record<number, number[] | string>;
 
 export default function DoBank() {
-  const [questions, setQuestions] = useState<Question[]>([]);
+  const [questionGroup, setQuestionGroup] = useState<Record<number, Question[]>>({});
   const [answers, setAnswers] = useState<AnswerMap>({});
   const [timeLeft, setTimeLeft] = useState<number>(1);
   const [submitted, setSubmitted] = useState(false);
@@ -41,10 +42,10 @@ export default function DoBank() {
     }
 
     BankService.geDetailBank(bank_id).then(res => {
-      setQuestions(res.data.question || []);
+      setQuestionGroup(res.data.question || []);
       setSubJectType(res.data.subject_type ?? null);
     });
-    
+
   }, [bank_id]);
 
   useEffect(() => {
@@ -53,7 +54,7 @@ export default function DoBank() {
     const nav = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming;
     const saved = localStorage.getItem(STORAGE_KEY);
 
-    // 👉 Vào lần đầu
+    //  Vào lần đầu
     if (nav.type === "navigate") {
       localStorage.removeItem(STORAGE_KEY);
       setAnswers({});
@@ -61,7 +62,7 @@ export default function DoBank() {
       return;
     }
 
-    // 👉 Reload nhưng không có gì để restore
+    // Reload nhưng không có gì để restore
     if (!saved) return;
 
     const data = JSON.parse(saved);
@@ -194,6 +195,10 @@ export default function DoBank() {
     }));
   };
 
+  let globalIndex = 0;
+
+  const flatQuestions: Question[] = FlatQuestions(questionGroup)
+
   return (
     <div className={styles.bank_container}>
       <div className={styles.box}>
@@ -203,25 +208,39 @@ export default function DoBank() {
         <div className={styles.bank_body}>
           {/* LEFT */}
           <div className={styles.leftPanel}>
-            {questions.map((q, i) => (
-              <QuestionItem
-                key={q.question_id}
-                question={q}
-                index={i}
-                answer={answers[q.question_id]}
-                onSelect={handleSelect}
-                onEssayChange={handleEssayChange}
-                questionRef={(el) => {
-                  questionRefs.current[q.question_id] = el;
-                }}
-              />
+            {TypeQuestion.map((type) => (
+              <div key={type}>
+                {/* TITLE PHẦN */}
+                <h3 className={styles.partTitle}>
+                  {PART_LABEL[type]}
+                </h3>
+
+                {/* QUESTIONS */}
+                {questionGroup[type]?.map((q) => {
+                  const index = globalIndex++;
+
+                  return (
+                    <QuestionItem
+                      key={q.question_id}
+                      question={q}
+                      index={index}
+                      answer={answers[q.question_id]}
+                      onSelect={handleSelect}
+                      onEssayChange={handleEssayChange}
+                      questionRef={(el) => {
+                        questionRefs.current[q.question_id] = el;
+                      }}
+                    />
+                  );
+                })}
+              </div>
             ))}
           </div>
 
           {/* RIGHT */}
           <ExamRightPanel
             timeLeft={timeLeft}
-            questions={questions}
+            questions={flatQuestions}
             isAnswered={isAnswered}
             onSubmit={handleSubmit}
             onScrollToQuestion={scrollToQuestion}

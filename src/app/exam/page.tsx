@@ -11,6 +11,7 @@ import Search from "@/components/search/Search";
 import { Users, CalendarCheck } from "lucide-react";
 import { Exam } from "../../../domain/exam/type"
 import { ExamService } from "../../../domain/exam/service";
+import Image from "next/image";
 
 export default function ExamList() {
   const router = useRouter();
@@ -69,26 +70,44 @@ export default function ExamList() {
           >
             <div className={styles.left_area}>
               <div className={styles.header}>
-                <h2 className={styles.examName}>{exam.exam_name}</h2>
-                <p className={styles.desc}>
-                  {exam.description}
-                </p>
+                <div className={styles.exam_info}>
+                  <h2 className={styles.examName}>{exam.exam_name}</h2>
+                  <p className={styles.desc}>
+                    {exam.description}
+                  </p>
+                </div>
                 <div className={styles.top_user}>
-                  {exam.top3 && exam.top3.length > 0 && (
-                    exam.top3.map((u, idx) => (
-                      <div key={idx} className={styles.top_item}>
-                        <span
-                          className={`${styles.rank_badge} ${styles[`rank_${idx}`]}`}
-                        >
-                          {idx + 1}
-                        </span>
+                  {exam.top3?.map((u, idx) => {
+                    const rankIcons = [
+                      "/IconRank1.svg",
+                      "/IconRank2.svg",
+                      "/IconRank3.svg",
+                    ];
 
-                        <span className={styles.user_name}>
-                          {u?.user_name || "Ẩn danh"}
-                        </span>
+                    return (
+                      <div key={idx} className={styles.top_item}>
+                        <div className={`${styles.avatar_wrap} ${styles[`rank_${idx}`]}`}>
+                          <div className={styles.avatar}>
+                            <img src="/avatar.svg" alt="avatar" />
+                          </div>
+
+                          <div className={styles.user_rank}>
+                            <div className={styles.user_name}>
+                              {u?.user_name || "Ẩn danh"}
+                            </div>
+                            <div className={styles.rank_icon}>
+                              {/* <Image
+                                src={rankIcons[idx]}
+                                alt={`Rank ${idx + 1}`}
+                                width={50}
+                                height={50}
+                              /> */}
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    ))
-                  )}
+                    );
+                  })}
                 </div>
               </div>
 

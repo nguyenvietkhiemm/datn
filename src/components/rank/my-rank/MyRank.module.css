@@ -1,0 +1,20 @@
+/* ===== MY RANK ===== */
+.myRankBox {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 24px;
+}
+
+.myRankTitle {
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.myRankRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 6px;
+}

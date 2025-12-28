@@ -1,73 +1,56 @@
 "use client";
+
 import { useEffect, useState } from "react";
-import { ExamService } from "../../../../../../domain/exam/service";
-import { Rank, myRank } from "../../../../../../domain/exam/type";
+import { useParams } from "next/navigation";
 import styles from "./Rank.module.css";
 import ReviewExam from "../page";
-import { useParams } from "next/navigation";
-import { ExamModel } from "../../../../../../domain/exam/model";
+import { ExamService } from "../../../../../../domain/exam/service";
+import { Rank, myRank } from "../../../../../../domain/exam/type";
+import RightRank from "@/components/rank/right-rank/page";
+import MyRank from "@/components/rank/my-rank/page";
+import MainRank from "@/components/rank/main-rank/page";
 
 export default function Ranking() {
   const params = useParams();
   const exam_id = Number(params.id);
+  const [totalPages, setTotalPages] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [ranking, setRanking] = useState<Rank[]>([]);
   const [myRank, setMyRank] = useState<myRank | null>(null);
 
   useEffect(() => {
-    const user_name = localStorage.getItem("user_name");
-    async function load() {
-      const result = await ExamService.getRanking(exam_id, String(user_name));
+    const user_name = localStorage.getItem("user_name") || "";
 
-      if (result?.data?.ranking) {
-        setRanking(result.data.ranking.rank || []);
-        setMyRank(result.data.ranking.my_rank || null);
+    async function load() {
+      const res = await ExamService.getRanking(exam_id, user_name, currentPage);
+      if (res?.data?.ranking) {
+        setRanking(res.data.ranking.rank || []);
+        setMyRank(res.data.ranking.my_rank || null);
+        setTotalPages(res.data.ranking.total_page)
       }
     }
+
     load();
-  }, [exam_id]);
+  }, [exam_id, currentPage]);
 
   return (
     <ReviewExam>
       <div className={styles.container}>
-        <h2 className={styles.title}>Bảng xếp hạng</h2>
+        <div className={styles.right_rank}>
+          <RightRank rank={ranking} myRank={myRank} />
+        </div>
+        <div className={styles.conatiner_rank}>
+          <MainRank ranking={ranking}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+            totalPages={totalPages} />
+        </div>
+        <div className={styles.container_my_rank}>
+          {/* ===== THÀNH TÍCH CỦA BẠN ===== */}
+          {myRank && (
+            <MyRank myRank={myRank} />
+          )}
 
-        {/* Hạng của bạn */}
-        {myRank && (
-          <div className={styles.myRankBox}>
-            <div className={styles.myRankTitle}>Thành tích của bạn</div>
-
-            <div className={styles.myRankRow}>
-              <span>Hạng:</span>
-              <b>{myRank.rank}</b>
-            </div>
-
-            <div className={styles.myRankRow}>
-              <span>Điểm:</span>
-              <b>{myRank.score}</b>
-            </div>
-
-            <div className={styles.myRankRow}>
-              <span>Thời gian:</span>
-              <b>{ExamModel.formatTime(myRank.time_test)}</b>
-            </div>
-          </div>
-        )}
-
-        {/* Bảng xếp hạng chung */}
-        {ranking.length === 0 && <p className={styles.empty}>Chưa có ai thi bài này</p>}
-
-        <div className={styles.rankList}>
-          {ranking.map((item, index) => (
-            <div key={index} className={styles.rankItem}>
-              <div className={styles.rankNumber}>{index + 1}</div>
-
-              <div className={styles.rankContent}>
-                <div><b>User:</b> {item.user_name}</div>
-                <div><b>Score:</b> {item.score}</div>
-                <div><b>Time:</b> {ExamModel.formatTime(item.time_test)}</div>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </ReviewExam>

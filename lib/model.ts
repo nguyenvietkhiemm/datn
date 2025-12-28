@@ -1,25 +1,36 @@
+import { Question } from "../domain/question-answer/type";
 export function formatVNDateTime(dateInput: string | number | Date): string {
-    const date = new Date(dateInput);
-  
-    // cộng thêm 7 giờ (UTC+7)
-    const vnTime = new Date(date.getTime() + 7 * 60 * 60 * 1000);
-  
-    const pad = (n: number) => n.toString().padStart(2, "0");
-  
-    const day = pad(vnTime.getDate());
-    const month = pad(vnTime.getMonth() + 1);
-    const year = vnTime.getFullYear();
-  
-    const hours = pad(vnTime.getHours());
-    const minutes = pad(vnTime.getMinutes());
-    const seconds = pad(vnTime.getSeconds());
-  
-    return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
-  }
+  const date = new Date(dateInput);
+
+  // cộng thêm 7 giờ (UTC+7)
+  const vnTime = new Date(date.getTime() + 7 * 60 * 60 * 1000);
+
+  const pad = (n: number) => n.toString().padStart(2, "0");
+
+  const day = pad(vnTime.getDate());
+  const month = pad(vnTime.getMonth() + 1);
+  const year = vnTime.getFullYear();
+
+  const hours = pad(vnTime.getHours());
+  const minutes = pad(vnTime.getMinutes());
+  const seconds = pad(vnTime.getSeconds());
+
+  return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+}
 
 export const formatTime = (seconds: number) => {
   const m = Math.floor(seconds / 60);
   const s = seconds % 60;
   return `${m}:${s.toString().padStart(2, "0")}`;
 };
-  
+
+export const TypeQuestion = [1, 2, 3] as const;
+export type questionGroup = Record<number, Question[]>
+export function FlatQuestions(questionGroup: questionGroup): Question[] {
+  return TypeQuestion.flatMap(type => questionGroup?.[type] ?? []);
+}
+export const PART_LABEL: Record<number, string> = {
+  1: "PHẦN I – Trắc nghiệm 4 đáp án",
+  2: "PHẦN II – Đúng / Sai",
+  3: "PHẦN III – Trả lời tự luận",
+};

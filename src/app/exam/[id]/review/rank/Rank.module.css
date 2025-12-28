@@ -1,129 +1,19 @@
-.container {
-    max-width: 520px;
-    margin: 0 auto;
-    padding: 16px;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-}
-
-.title {
-    text-align: center;
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 16px;
-    color: #222;
-}
-
-/* ======================
-     Thành tích của bạn
-  ====================== */
-
-.myRankBox {
-    background: linear-gradient(135deg, #fff7e6, #ffe0b2);
-    border-radius: 12px;
-    padding: 14px;
-    margin-bottom: 20px;
-    box-shadow: inset 0 0 0 1px rgba(255, 167, 38, 0.25);
-}
-
-.myRankTitle {
-    font-weight: 700;
-    font-size: 16px;
-    margin-bottom: 10px;
-    color: #e65100;
-}
-
-.myRankRow {
+.container{
     display: flex;
-    justify-content: space-between;
-    padding: 4px 0;
-    font-size: 14px;
+    flex-direction: row;
 }
 
-.myRankRow b {
-    color: #bf360c;
+.right_rank{
+    flex: 1;
+    margin-left: 20px;
 }
 
-/* ======================
-     Danh sách xếp hạng
-  ====================== */
-
-.rankList {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.conatiner_rank {
+    padding: 24px;
+    flex: 2;
 }
 
-.rankItem {
-    display: flex;
-    align-items: center;
-    background: #f9fafb;
-    border-radius: 10px;
-    padding: 10px 12px;
-    transition: all 0.2s ease;
-    border: 1px solid #eee;
-}
-
-.rankItem:hover {
-    background: #f1f5f9;
-    transform: translateY(-1px);
-}
-
-/* Số thứ hạng */
-.rankNumber {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: #e0e0e0;
-    color: #333;
-    font-weight: 700;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 12px;
-}
-
-/* Nội dung */
-.rankContent {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    font-size: 14px;
-    color: #333;
-}
-
-.rankContent b {
-    font-weight: 600;
-}
-
-/* ======================
-     TOP 3 nổi bật
-  ====================== */
-
-.rankItem:nth-child(1) .rankNumber {
-    background: linear-gradient(135deg, #ffd700, #ffb300);
-    color: #fff;
-}
-
-.rankItem:nth-child(2) .rankNumber {
-    background: linear-gradient(135deg, #c0c0c0, #9e9e9e);
-    color: #fff;
-}
-
-.rankItem:nth-child(3) .rankNumber {
-    background: linear-gradient(135deg, #cd7f32, #8d4a16);
-    color: #fff;
-}
-
-/* ======================
-     Empty
-  ====================== */
-
-.empty {
-    text-align: center;
-    font-style: italic;
-    color: #999;
-    margin-top: 12px;
+.container_my_rank{
+    padding: 24px;
+    flex: 1;
 }

@@ -42,17 +42,6 @@ export default function ReviewExam({
                     Bắt đầu thi
                 </Button>
             </div>
-
-            {/* TABS HEADER */}
-            <div className={styles.tabs_header}>
-                <Link
-                    href={`/exam/${exam_id}/review/rank`}
-                    className={`${styles.tab_btn} ${activeTab === "ranking" ? styles.active : ""}`}
-                >
-                    Bảng xếp hạng
-                </Link>
-            </div>
-
             {/* TAB CONTENT */}
             <div className={styles.tab_content}>
                 {children}

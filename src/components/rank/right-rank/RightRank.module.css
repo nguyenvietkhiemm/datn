@@ -1,0 +1,92 @@
+.right_rank {
+    width: 280px;
+    position: sticky;
+    top: 80px;
+    font-family: var(--font-header);
+}
+
+/* Container */
+.info_box {
+    padding: 18px 16px;
+}
+
+/* Tiêu đề chính */
+.title {
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 16px;
+    letter-spacing: 0.4px;
+}
+
+/* Đoạn văn mô tả */
+.paragraph {
+    font-size: 14.5px;
+    line-height: 1.85;
+    margin-bottom: 12px;
+    color: #111827;
+}
+
+/* Công thức */
+.formula {
+    font-size: 15.5px;
+    font-weight: 600;
+    text-align: center;
+    margin: 14px 0;
+    line-height: 1.7;
+}
+
+/* Danh sách giải thích */
+.explain_list {
+    padding-left: 20px;
+    margin: 0 0 14px 0;
+}
+
+.explain_list li {
+    font-size: 14.5px;
+    line-height: 1.75;
+    margin-bottom: 6px;
+    color: #1f2937;
+}
+
+/* Tiêu đề phụ */
+.sub_title {
+    font-size: 15.5px;
+    font-weight: 600;
+    margin: 16px 0 10px;
+}
+
+/* Quy tắc xếp hạng */
+.rule_list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rule_list li {
+    font-size: 14.5px;
+    line-height: 1.75;
+    margin-bottom: 8px;
+    color: #1f2937;
+}
+
+/* Lưu ý */
+.note {
+    margin-top: 16px;
+    font-size: 13.8px;
+    font-style: italic;
+    line-height: 1.7;
+    color: #4b5563;
+}
+
+/* Responsive nhẹ */
+@media (max-width: 1024px) {
+    .right_rank {
+        width: 100%;
+        position: static;
+    }
+
+    .info_box {
+        padding: 16px 14px;
+    }
+}

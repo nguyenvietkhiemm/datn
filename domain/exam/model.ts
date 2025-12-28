@@ -8,7 +8,7 @@ export const ExamModel = {
       
         const pad = (n: number) => n.toString().padStart(2, "0");
       
-        return `${pad(hours)}giờ: ${pad(minutes)}phút: ${pad(seconds)}giây`;
+        return `${pad(hours)}H: ${pad(minutes)}m: ${pad(seconds)}s`;
       }
       
 }

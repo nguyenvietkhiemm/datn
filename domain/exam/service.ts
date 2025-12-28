@@ -53,13 +53,20 @@ export const ExamService = {
         return await res.json();
     },
 
-    async getRanking(exam_id: number, user_name: string) {
+    async getRanking(exam_id: number, user_name: string, currentPage: number) {
 
-        const res = await fetch(`${API_URL}/exams/${exam_id}/ranking?user_name=${user_name}`, {
-            method: "GET",
-            headers: getHeaders(getToken())
-        }
-        );
+        const params = new URLSearchParams({
+            user_name,
+            page: String(currentPage),
+          });
+          
+          const res = await fetch(
+            `${API_URL}/exams/${exam_id}/ranking?${params.toString()}`,
+            {
+              method: "GET",
+              headers: getHeaders(getToken()),
+            }
+          );          
         return await res.json();
     },
 

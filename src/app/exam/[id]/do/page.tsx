@@ -7,6 +7,7 @@ import { Question } from "../../../../../domain/question-answer/type";
 import ExamRightPanel from "@/components/do-question/rightPanel";
 import QuestionItem from "@/components/do-question/page";
 import { MyExam } from "../../../../../domain/exam/type";
+import { FlatQuestions, TypeQuestion, PART_LABEL } from "../../../../../lib/model";
 
 type AnswerMap = Record<number, number[] | string>;
 
@@ -16,7 +17,7 @@ export default function DoExam() {
   const examId = Number(params.id);
   const STORAGE_KEY = `exam_doing_${examId}`;
   const [exam, setExam] = useState<MyExam | null>(null);
-  const [questions, setQuestions] = useState<Question[]>([]);
+  const [questionGroup, setQuestionGroup] = useState<Record<number, Question[]>>({});
   const [answers, setAnswers] = useState<AnswerMap>({});
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [submitted, setSubmitted] = useState(false);
@@ -39,7 +40,7 @@ export default function DoExam() {
 
     // questions
     ExamService.getExamDetail(examId).then(res => {
-      setQuestions(res.data.question ?? []);
+      setQuestionGroup(res.data.question ?? []);
       setSubJectType(res.data.subject_type ?? null);
     });
   }, [examId]);
@@ -146,15 +147,15 @@ export default function DoExam() {
   /* ================= SUBMIT ================= */
   const handleSubmit = async () => {
     if (!exam || submitted) return;
-  
+
     const payload = Object.entries(answers).map(([qid, ans]) => ({
       question_id: Number(qid),
       user_answer: Array.isArray(ans) ? ans : [ans],
     }));
-  
+
     const used_time =
       (exam.time_limit * 60 - timeLeft) * 1000;
-  
+
     const res = await ExamService.submit(
       exam.exam_id,
       subjectType,
@@ -162,13 +163,13 @@ export default function DoExam() {
       payload,
       userName
     );
-  
+
     setSubmitted(true);
     localStorage.removeItem(STORAGE_KEY);
     router.push(
       `/exam/${exam.exam_id}/result/${res.data.history_exam_id}`
     );
-  };  
+  };
 
   /* ================= HELPER: CHECK ANSWERED ================= */
   const isAnswered = (questionId: number) => {
@@ -192,6 +193,10 @@ export default function DoExam() {
     });
   };
 
+  let globalIndex = 0;
+
+  const flatQuestions: Question[] = FlatQuestions(questionGroup)
+
   /* ================= RENDER ================= */
   return (
     <div className={styles.exam_container}>
@@ -204,26 +209,39 @@ export default function DoExam() {
         <div className={styles.exam_body}>
           {/* LEFT */}
           <div className={styles.leftPanel}>
-            {questions?.map((q, i) => (
-              <QuestionItem
-                key={q.question_id}
-                question={q}
-                index={i}
-                answer={answers[q.question_id]}
-                onSelect={handleSelect}
-                onEssayChange={handleEssayChange}
-                questionRef={(el) => {
-                  questionRefs.current[q.question_id] = el;
-                }}
-              />
+            {TypeQuestion.map((type) => (
+              <div key={type}>
+                {/* TITLE PHẦN */}
+                <h3 className={styles.partTitle}>
+                  {PART_LABEL[type]}
+                </h3>
+                
+                {/* QUESTIONS */}
+                {questionGroup[type]?.map((q) => {
+                  const index = globalIndex++;
+
+                  return (
+                    <QuestionItem
+                      key={q.question_id}
+                      question={q}
+                      index={index}
+                      answer={answers[q.question_id]}
+                      onSelect={handleSelect}
+                      onEssayChange={handleEssayChange}
+                      questionRef={(el) => {
+                        questionRefs.current[q.question_id] = el;
+                      }}
+                    />
+                  );
+                })}
+              </div>
             ))}
           </div>
-
 
           {/* RIGHT */}
           <ExamRightPanel
             timeLeft={timeLeft}
-            questions={questions}
+            questions={flatQuestions}
             isAnswered={isAnswered}
             onSubmit={handleSubmit}
             onScrollToQuestion={scrollToQuestion}
