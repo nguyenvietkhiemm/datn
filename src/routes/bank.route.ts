@@ -50,7 +50,7 @@ bankRoute.get("/user-answer",
  *       500:
  *         description: Lỗi server
  */
-bankRoute.get('/:id', BankController.getById);
+bankRoute.get('/:id', Authentication.AuthenticateToken, BankController.getById);
 
 /**
  * @openapi

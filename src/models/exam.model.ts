@@ -32,3 +32,9 @@ export type AnswerCorrectGrouped = {
         answer_content: string;
     }[];
 };
+
+type CorrectAnswerInfo = {
+    type_question: number;
+    correct_answers: number[];
+    correct_text?: string;
+  };

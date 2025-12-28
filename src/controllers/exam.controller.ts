@@ -12,7 +12,7 @@ const ExamController = {
       const topicIds = req.query.topic_ids
         ? Number(req.query.topic_ids)
         : "All";
-        
+
       const subject_id = req.query.subject_id
         ? Number(req.query.subject_id)
         : "All"
@@ -28,10 +28,32 @@ const ExamController = {
 
   async getById(req: Request, res: Response) {
     const result: DefaultResponse<any> = await safeExecute(async () => {
+
+      const exam_id = Number(req.params.id);
+      if (isNaN(exam_id)) {
+        return {
+          status: 400,
+          message: "exam_id không hợp lệ",
+          data: null
+        };
+      }
+
+      const { question, subject_type } = await ExamService.getById(exam_id);
+
+      const role = req.user?.role_id;
+
+      if (role !== 2) {
+        question?.forEach(q => {
+          q.answers.forEach((a: any) => {
+            delete a.is_correct;
+          });
+        });
+      }
+
       return {
         status: 200,
         message: "Lấy thông tin đề thi thành công",
-        data: await ExamService.getById(Number(req.params.id)),
+        data: { question: question, subject_type: subject_type }
       };
     });
 
@@ -163,7 +185,7 @@ const ExamController = {
   async getUserExamHistory(req: Request, res: Response) {
     const result: DefaultResponse<any> = await safeExecute(async () => {
       const user_id = req?.user?.user_id;
-      const data = await ExamService.getUserListExamHistory(Number( user_id));
+      const data = await ExamService.getUserListExamHistory(Number(user_id));
       return {
         status: 200,
         message: "Lấy lịch sử làm bài thành công",

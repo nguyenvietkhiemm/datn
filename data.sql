@@ -3,37 +3,21 @@
 BEGIN;
 
 -- Subjects
-INSERT INTO subject (subject_name)
-SELECT 'Toán'
-WHERE NOT EXISTS (SELECT 1 FROM subject WHERE subject_name = 'Toán');
+INSERT INTO subject (subject_name, subject_type, available) VALUES
+-- Toán
+('Toán', 1, true),
 
-INSERT INTO subject (subject_name)
-SELECT 'Vật Lý'
-WHERE NOT EXISTS (SELECT 1 FROM subject WHERE subject_name = 'Vật Lý');
-
-INSERT INTO subject (subject_name)
-SELECT 'Hóa Học'
-WHERE NOT EXISTS (SELECT 1 FROM subject WHERE subject_name = 'Hóa Học');
-
-INSERT INTO subject (subject_name)
-SELECT 'Ngữ Văn'
-WHERE NOT EXISTS (SELECT 1 FROM subject WHERE subject_name = 'Ngữ Văn');
-
-INSERT INTO subject (subject_name)
-SELECT 'Tiếng Anh'
-WHERE NOT EXISTS (SELECT 1 FROM subject WHERE subject_name = 'Tiếng Anh');
-
-INSERT INTO subject (subject_name)
-SELECT 'Sinh Học'
-WHERE NOT EXISTS (SELECT 1 FROM subject WHERE subject_name = 'Sinh Học');
-
-INSERT INTO subject (subject_name)
-SELECT 'Lịch Sử'
-WHERE NOT EXISTS (SELECT 1 FROM subject WHERE subject_name = 'Lịch Sử');
-
-INSERT INTO subject (subject_name)
-SELECT 'Địa Lý'
-WHERE NOT EXISTS (SELECT 1 FROM subject WHERE subject_name = 'Địa Lý');
+-- Các môn còn lại
+('Ngữ văn', 2, true),
+('Tiếng Anh', 2, true),
+('Vật lý', 2, true),
+('Hóa học', 2, true),
+('Sinh học', 2, true),
+('Lịch sử', 2, true),
+('Địa lý', 2, true),
+('Giáo dục kinh tế và pháp luật', 2, true),
+('Tin học', 2, true),
+('Công nghệ', 2, true);
 
 -- Topics for Toán
 INSERT INTO topic (title, description, subject_id)
@@ -237,4 +221,129 @@ WHERE s.subject_name = 'Địa Lý'
 
 COMMIT;
 
+INSERT INTO flashcard_deck (title, description, user_id)
+VALUES
+('Toán THPT Quốc gia', 'Công thức – định lý Toán trọng tâm', 1),
+('Ngữ văn THPT Quốc gia', 'Tác phẩm – nghị luận – tiếng Việt', 1),
+('Tiếng Anh THPT Quốc gia', 'Ngữ pháp – từ vựng – cấu trúc câu', 1),
+('Vật lí THPT Quốc gia', 'Công thức và hiện tượng vật lí', 1),
+('Hóa học THPT Quốc gia', 'Phản ứng – khái niệm hóa học', 1),
+('Sinh học THPT Quốc gia', 'Di truyền – sinh thái – tiến hóa', 1),
+('Lịch sử THPT Quốc gia', 'Sự kiện – mốc thời gian', 1),
+('Địa lí THPT Quốc gia', 'Tự nhiên – kinh tế – kỹ năng Atlat', 1),
+('GD Kinh tế & Pháp luật', 'Khái niệm kinh tế – pháp luật cơ bản', 1),
+('Tin học THPT Quốc gia', 'Thuật toán – dữ liệu – CNTT', 1),
+('Công nghệ THPT Quốc gia', 'Kĩ thuật – sản xuất – ứng dụng', 1);
 
+INSERT INTO flashcard (front, back, example, flashcard_deck_id) VALUES
+('Công thức nghiệm PT bậc hai?', 'x = (-b ± √(b² - 4ac)) / 2a', 'x²-3x+2=0', 1),
+('Δ của PT bậc hai?', 'Δ = b² - 4ac', '', 1),
+('Đạo hàm của sin(x)?', 'cos(x)', '', 1),
+('Đạo hàm của cos(x)?', '-sin(x)', '', 1),
+('Nguyên hàm của 1/x?', 'ln|x| + C', '', 1),
+('Thể tích hình chóp?', 'V = 1/3·S·h', '', 1),
+('Thể tích hình cầu?', 'V = 4/3·π·R³', '', 1),
+('Số phức z = a + bi, phần ảo?', 'b', '', 1),
+('Cấp số cộng là?', 'Un+1 = Un + d', '', 1),
+('Xác suất cổ điển?', 'P = số TH thuận lợi / số TH', '', 1);
+
+INSERT INTO flashcard (front, back, example, flashcard_deck_id) VALUES
+('Phong cách ngôn ngữ nghị luận?', 'Lí lẽ – lập luận – dẫn chứng', '', 2),
+('Phong cách ngôn ngữ khoa học?', 'Chính xác – logic – khái quát', '', 2),
+('Các thao tác lập luận?', 'Giải thích, phân tích, chứng minh, bình luận', '', 2),
+('Tác giả Vợ Nhặt?', 'Kim Lân', '', 2),
+('Tác giả Tây Tiến?', 'Quang Dũng', '', 2),
+('Hoàn cảnh ra đời Việt Bắc?', 'Sau chiến thắng Điện Biên Phủ', '', 2),
+('Biện pháp tu từ so sánh?', 'Đối chiếu sự vật có nét tương đồng', '', 2),
+('Biện pháp ẩn dụ?', 'Gọi tên bằng sự vật tương đồng', '', 2),
+('Nghị luận xã hội là gì?', 'Bàn về vấn đề đời sống', '', 2),
+('Nghị luận văn học là gì?', 'Phân tích tác phẩm văn học', '', 2);
+INSERT INTO flashcard (front, back, example, flashcard_deck_id) VALUES
+('Câu bị động HTĐ?', 'S + am/is/are + V3', '', 3),
+('Câu điều kiện loại 1?', 'If + HTĐ, will + V', '', 3),
+('Câu điều kiện loại 2?', 'If + QKĐ, would + V', '', 3),
+('So sánh hơn?', 'adj-er / more + adj', '', 3),
+('So sánh nhất?', 'the adj-est / most + adj', '', 3),
+('Mệnh đề quan hệ?', 'who, which, that', '', 3),
+('Thì hiện tại hoàn thành?', 'have/has + V3', '', 3),
+('Gerund là?', 'V-ing', '', 3),
+('Infinitive là?', 'to V', '', 3),
+('Câu gián tiếp?', 'Reported speech', '', 3);
+
+INSERT INTO flashcard (front, back, example, flashcard_deck_id) VALUES
+('Định luật Ôm?', 'I = U / R', '', 4),
+('Công suất điện?', 'P = UI', '', 4),
+('Động năng?', 'Wđ = 1/2mv²', '', 4),
+('Thế năng trọng trường?', 'Wt = mgh', '', 4),
+('Chu kì con lắc đơn?', 'T = 2π√(l/g)', '', 4),
+('Gia tốc rơi tự do?', 'g ≈ 9,8 m/s²', '', 4),
+('Tốc độ ánh sáng?', 'c = 3×10⁸ m/s', '', 4),
+('Hiện tượng quang điện?', 'Electron bật khỏi kim loại', '', 4),
+('Dòng điện xoay chiều?', 'I = I0cos(ωt)', '', 4),
+('Bước sóng?', 'λ = v/f', '', 4);
+INSERT INTO flashcard (front, back, example, flashcard_deck_id) VALUES
+('pH là gì?', 'pH = -log[H+]', '', 5),
+('Kim loại kiềm?', 'Nhóm IA', '', 5),
+('Este là?', 'Sản phẩm axit + ancol', '', 5),
+('Phản ứng oxi hóa – khử?', 'Có trao đổi electron', '', 5),
+('Ancol no đơn chức?', 'CnH2n+1OH', '', 5),
+('Axit cacboxylic?', 'R-COOH', '', 5),
+('Bazơ là?', 'Chất phân li ra OH-', '', 5),
+('Muối là?', 'Sản phẩm axit + bazơ', '', 5),
+('Chất điện li mạnh?', 'Phân li hoàn toàn', '', 5),
+('Bảo toàn khối lượng?', 'm trước = m sau', '', 5);
+INSERT INTO flashcard (front, back, example, flashcard_deck_id) VALUES
+('ADN gồm mấy loại nu?', '4 loại: A,T,G,X', '', 6),
+('ARN có T không?', 'Không, thay bằng U', '', 6),
+('Quy luật phân li?', 'Mỗi tính trạng do 1 cặp alen', '', 6),
+('Quy luật phân li độc lập?', 'Các cặp gen phân li độc lập', '', 6),
+('Quang hợp diễn ra ở?', 'Lục lạp', '', 6),
+('Hô hấp tế bào?', 'Ti thể', '', 6),
+('NST là gì?', 'Nhiễm sắc thể', '', 6),
+('Đột biến gen?', 'Thay đổi cấu trúc gen', '', 6),
+('Tiến hóa là?', 'Biến đổi di truyền qua thế hệ', '', 6),
+('Sinh thái học?', 'Quan hệ sinh vật – môi trường', '', 6);
+INSERT INTO flashcard (front, back, example, flashcard_deck_id) VALUES
+('Đảng CSVN thành lập?', '1930', '', 7),
+('CMT8 thành công?', '1945', '', 7),
+('Điện Biên Phủ?', '1954', '', 7),
+('Hiệp định Giơ-ne-vơ?', '1954', '', 7),
+('Chiến dịch Hồ Chí Minh?', '1975', '', 7),
+('Kháng chiến chống Pháp?', '1946–1954', '', 7),
+('Kháng chiến chống Mỹ?', '1954–1975', '', 7),
+('Đổi mới đất nước?', '1986', '', 7),
+('ASEAN VN gia nhập?', '1995', '', 7),
+('CT Hồ Chí Minh mất?', '1969', '', 7);
+INSERT INTO flashcard (front, back, example, flashcard_deck_id) VALUES
+('Khí hậu Việt Nam?', 'Nhiệt đới gió mùa', '', 8),
+('Vùng kinh tế trọng điểm?', 'Bắc – Trung – Nam', '', 8),
+('Atlat dùng để?', 'Khai thác số liệu địa lí', '', 8),
+('Đồng bằng lớn nhất?', 'ĐBSCL', '', 8),
+('Nguồn điện chủ yếu?', 'Thủy điện, nhiệt điện', '', 8),
+('Dân số VN đông thứ?', 'Top 15 thế giới', '', 8),
+('Biển Đông thuộc?', 'Thái Bình Dương', '', 8),
+('Khoáng sản chính?', 'Than, dầu khí', '', 8),
+('Cơ cấu kinh tế?', 'NN – CN – DV', '', 8),
+('Đô thị hóa là?', 'Gia tăng dân số đô thị', '', 8);
+INSERT INTO flashcard (front, back, example, flashcard_deck_id) VALUES
+('Pháp luật là gì?', 'Quy tắc xử sự chung', '', 9),
+('Nhà nước là?', 'Tổ chức quyền lực đặc biệt', '', 9),
+('Cung là?', 'Khả năng bán hàng hóa', '', 9),
+('Cầu là?', 'Nhu cầu mua hàng hóa', '', 9),
+('Quyền bình đẳng?', 'Không phân biệt đối xử', '', 9),
+('Công dân là?', 'Người có quốc tịch', '', 9),
+('Kinh tế thị trường?', 'Theo cung – cầu', '', 9),
+('Thuế là?', 'Khoản nộp bắt buộc', '', 9),
+('Vi phạm pháp luật?', 'Hành vi trái pháp luật', '', 9),
+('Trách nhiệm pháp lí?', 'Hậu quả pháp lí', '', 9);
+INSERT INTO flashcard (front, back, example, flashcard_deck_id) VALUES
+('Thuật toán là?', 'Chuỗi bước giải quyết bài toán', '', 10),
+('Ngôn ngữ lập trình?', 'Python, C++, Java...', '', 10),
+('Biến là?', 'Vùng nhớ lưu dữ liệu', '', 10),
+('Kiểu Boolean?', 'True / False', '', 10),
+('Vòng lặp for?', 'Lặp số lần xác định', '', 10),
+('Vòng lặp while?', 'Lặp khi điều kiện đúng', '', 10),
+('Mảng là?', 'Tập hợp phần tử cùng kiểu', '', 10),
+('Hệ điều hành?', 'Windows, Linux', '', 10),
+('Internet là?', 'Mạng toàn cầu', '', 10),
+('An toàn thông tin?', 'Bảo mật dữ liệu', '', 10);

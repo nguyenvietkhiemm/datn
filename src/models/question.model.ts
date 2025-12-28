@@ -22,3 +22,9 @@ export type CreateQuestionPayload = {
   images?: [];
   answers: CreateAnswerInput[];
 };
+
+export type CorrectAnswerInfo = {
+  type_question: number;
+  correct_answers: number[];
+  correct_text?: string;
+};

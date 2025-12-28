@@ -4,12 +4,15 @@ import { Question } from "../models/question.model";
 import { UserAnswerGrouped, AnswerCorrectGrouped } from "../models/bank.question.model";
 
 const BankService = {
-    async getById(bankId: number):
-        Promise<{ question: Question[] | null, subject_type: number | null }> {
+    async getById(
+        bankId: number
+    ): Promise<{ question: Question[] | null; subject_type: number | null }> {
+
         const queryText = `
           SELECT
             q.*,
       
+            -- IMAGE QUESTION
             COALESCE(
               (
                 SELECT json_agg(iq.image_link)
@@ -19,7 +22,7 @@ const BankService = {
               '[]'
             ) AS images,
       
-            -- answers
+            -- ANSWERS (CÓ is_correct – xử lý ở controller)
             COALESCE(
               (
                 SELECT json_agg(
@@ -28,8 +31,6 @@ const BankService = {
                     'question_id', a.question_id,
                     'answer_content', a.answer_content,
                     'is_correct', a.is_correct,
-      
-                    -- image của answer
                     'images',
                     COALESCE(
                       (
@@ -54,30 +55,28 @@ const BankService = {
           ORDER BY qb.question_id ASC
         `;
 
-        const result = await query(queryText, [bankId]);
+        const questionResult = await query(queryText, [bankId]);
 
-        if (!result.rows.length) return { question: null, subject_type: null };
-
-        const subject_type_query =
-            `SELECT s.subject_type
-            FROM bank b
-            JOIN topic t ON t.topic_id = b.topic_id
-            JOIN subject s ON s.subject_id = t.subject_id
-            WHERE b.bank_id = $1;
-            `
-        const subject_type_row = await query(subject_type_query, [bankId])
-        const subject_type: number | null = subject_type_row.rows[0]?.subject_type ?? null;
-
-        // 3. Return đúng type
-        if (!result.rows.length) {
-            return {
-                question: null,
-                subject_type
-            };
+        // Không có câu hỏi
+        if (!questionResult.rows.length) {
+            return { question: null, subject_type: null };
         }
 
+        // LẤY subject_type
+        const subjectTypeQuery = `
+          SELECT s.subject_type
+          FROM bank b
+          JOIN topic t ON t.topic_id = b.topic_id
+          JOIN subject s ON s.subject_id = t.subject_id
+          WHERE b.bank_id = $1
+        `;
+
+        const subjectTypeResult = await query(subjectTypeQuery, [bankId]);
+        const subject_type: number | null =
+            subjectTypeResult.rows[0]?.subject_type ?? null;
+
         return {
-            question: result.rows as Question[],
+            question: questionResult.rows as Question[],
             subject_type
         };
     },
@@ -280,7 +279,7 @@ const BankService = {
                                 bank_id,
                                 user_id,
                                 user.question_id,
-                                ans,      
+                                ans,
                             ]
                         );
                     }
@@ -298,7 +297,7 @@ const BankService = {
                                 bank_id,
                                 user_id,
                                 user.question_id,
-                                ans,       
+                                ans,
                             ]
                         );
                     }

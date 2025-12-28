@@ -7,7 +7,6 @@ const roadmapRouter = Router();
 
 roadmapRouter.get("/",
     Authentication.AuthenticateToken,
-    Authentication.AuthorizeRoles(...ADMIN),
     RoadmapController.getAll
 )
 

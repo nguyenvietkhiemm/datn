@@ -5,11 +5,15 @@ import { redis } from "../config/redis";
 
 const ExamService = {
 
-  async getById(examId: number): Promise<Question[] | null> {
+  async getById(
+    examId: number
+  ): Promise<{ question: Question[] | null; subject_type: number | null }> {
+
     const queryText = `
       SELECT
         q.*,
-
+  
+        -- IMAGE QUESTION
         COALESCE(
           (
             SELECT json_agg(iq.image_link)
@@ -19,7 +23,7 @@ const ExamService = {
           '[]'
         ) AS images,
   
-        -- answers
+        -- ANSWERS (CÓ is_correct – xử lý ở controller)
         COALESCE(
           (
             SELECT json_agg(
@@ -28,13 +32,12 @@ const ExamService = {
                 'question_id', a.question_id,
                 'answer_content', a.answer_content,
                 'is_correct', a.is_correct,
-  
                 'images',
                 COALESCE(
                   (
-                      SELECT json_agg(ia.image_link)
-                      FROM image_answer ia
-                      WHERE ia.answer_id = a.answer_id
+                    SELECT json_agg(ia.image_link)
+                    FROM image_answer ia
+                    WHERE ia.answer_id = a.answer_id
                   ),
                   '[]'
                 )
@@ -53,11 +56,30 @@ const ExamService = {
       ORDER BY qe.question_id ASC
     `;
 
-    const result = await query(queryText, [examId]);
+    const questionResult = await query(queryText, [examId]);
 
-    if (!result.rows.length) return null;
+    //  Không có câu hỏi
+    if (!questionResult.rows.length) {
+      return { question: null, subject_type: null };
+    }
 
-    return result.rows as Question[];
+    // LẤY subject_type
+    const subjectTypeQuery = `
+      SELECT s.subject_type
+      FROM exam e
+      JOIN topic t ON t.topic_id = e.topic_id
+      JOIN subject s ON s.subject_id = t.subject_id
+      WHERE e.exam_id = $1
+    `;
+
+    const subjectTypeResult = await query(subjectTypeQuery, [examId]);
+    const subject_type: number | null =
+      subjectTypeResult.rows[0]?.subject_type ?? null;
+
+    return {
+      question: questionResult.rows as Question[],
+      subject_type
+    };
   },
 
   async create(data: Exam): Promise<Exam> {
@@ -342,43 +364,43 @@ const ExamService = {
       for (const user of do_exam) {
         for (const ans of user.user_answer) {
 
-            // TRẮC NGHIỆM
-            if (typeof ans === "number") {
-                await client.query(
-                    `
+          // TRẮC NGHIỆM
+          if (typeof ans === "number") {
+            await client.query(
+              `
               INSERT INTO user_exam_answer
               (history_exam_id, exam_id, user_id, question_id, answer_id, user_answer_text)
               VALUES ($1, $2, $3, $4, $5, NULL)
               `,
-                    [
-                        history_exam_id,
-                        exam_id,
-                        user_id,
-                        user.question_id,
-                        ans,      
-                    ]
-                );
-            }
+              [
+                history_exam_id,
+                exam_id,
+                user_id,
+                user.question_id,
+                ans,
+              ]
+            );
+          }
 
-            // TỰ LUẬN
-            else if (typeof ans === "string") {
-                await client.query(
-                    `
+          // TỰ LUẬN
+          else if (typeof ans === "string") {
+            await client.query(
+              `
               INSERT INTO user_exam_answer
               (history_exam_id, exam_id, user_id, question_id, answer_id, user_answer_text)
               VALUES ($1, $2, $3, $4, NULL, $5)
               `,
-                    [
-                        history_exam_id,
-                        exam_id,
-                        user_id,
-                        user.question_id,
-                        ans,
-                    ]
-                );
-            }
+              [
+                history_exam_id,
+                exam_id,
+                user_id,
+                user.question_id,
+                ans,
+              ]
+            );
+          }
         }
-    }
+      }
 
       // Redis ranking
       const final_score = score * 1e9 - time_test;
@@ -411,46 +433,81 @@ const ExamService = {
       score: number;
       time_test: number;
       final_score: number;
-    }[],
+    }[];
     my_rank: {
-      rank: number,
-      score: number,
-      time_test: number,
-    } | null
+      rank: number;
+      score: number;
+      time_test: number;
+    } | null;
   }> {
     try {
       const limit = 10;
-
-      //  LẤY TOP 10 TỪ ZSET
-      const data = await redis.zrevrange(
+      const redisData = await redis.zrevrange(
         `exam:${exam_id}:ranking`,
         0,
         limit - 1,
         "WITHSCORES"
       );
 
-      const rank = [];
+      if (!redisData.length) {
+        return { rank: [], my_rank: null };
+      }
 
-      for (let i = 0; i < data.length; i += 2) {
-        const member = JSON.parse(data[i]);
-        const user_id = member.user_id;
-        const final_score = Number(data[i + 1]);
+      const userIds: number[] = [];
+      const redisMembers: {
+        user_id: number;
+        user_name: string;
+        final_score: number;
+      }[] = [];
 
-        //  LẤY ĐIỂM THẬT TỪ HASH
-       const score_query = `SELECT score, time_test FROM history_exam WHERE user_id=$1`
-       const score_rows = await pool.query(score_query, [user_id])
-       const {score, time_test} = score_rows.rows[0]
+      for (let i = 0; i < redisData.length; i += 2) {
+        const member = JSON.parse(redisData[i]);
+        const final_score = Number(redisData[i + 1]);
 
-        rank.push({
+        userIds.push(member.user_id);
+        redisMembers.push({
           user_id: member.user_id,
           user_name: member.user_name,
-          score ,
-          time_test,
           final_score
         });
       }
 
-      // 3LẤY RANK CỦA CHÍNH NGƯỜI DÙNG
+      const scoreQuery = `
+        SELECT user_id, score, time_test
+        FROM history_exam
+        WHERE exam_id = $1
+          AND user_id = ANY($2)
+      `;
+
+      const scoreResult = await pool.query(scoreQuery, [
+        exam_id,
+        userIds
+      ]);
+
+      const scoreMap = new Map<
+        number,
+        { score: number; time_test: number }
+      >();
+
+      for (const row of scoreResult.rows) {
+        scoreMap.set(row.user_id, {
+          score: Number(row.score),
+          time_test: Number(row.time_test)
+        });
+      }
+
+      const rank = redisMembers.map(m => {
+        const detail = scoreMap.get(m.user_id);
+
+        return {
+          user_id: m.user_id,
+          user_name: m.user_name,
+          score: detail?.score ?? 0,
+          time_test: detail?.time_test ?? 0,
+          final_score: m.final_score
+        };
+      });
+
       const memberKey = JSON.stringify({ user_id, user_name });
 
       const myRankIndex = await redis.zrevrank(
@@ -458,29 +515,39 @@ const ExamService = {
         memberKey
       );
 
-      const myFinalScore = await redis.zscore(
-        `exam:${exam_id}:ranking`,
-        memberKey
-      );
-
-      let myRank = null;
-
-      if (myRankIndex !== null && myFinalScore !== null) {
-        const detail = await redis.hgetall(
-          `exam:${exam_id}:user:${user_id}`
-        );
-
-        myRank = {
-          rank: myRankIndex + 1,
-          score: Number(detail.score || 0),
-          time_test: Number(detail.time_test || 0),
-        };
+      if (myRankIndex === null) {
+        return { rank, my_rank: null };
       }
 
-      return { rank, my_rank: myRank };
+      const myScoreQuery = `
+      SELECT score, time_test
+      FROM history_exam
+      WHERE exam_id = $1
+        AND user_id = $2
+      ORDER BY history_exam_id DESC
+      LIMIT 1
+    `;
+
+      const myScoreResult = await pool.query(myScoreQuery, [
+        exam_id,
+        user_id
+      ]);
+
+      const myRow = myScoreResult.rows[0];
+      if (!myRow) {
+        return { rank, my_rank: null };
+      }
+
+      const my_rank = {
+        rank: myRankIndex + 1,
+        score: Number(myRow.score),
+        time_test: Number(myRow.time_test)
+      };
+
+      return { rank, my_rank };
 
     } catch (err) {
-      console.error("Lỗi lấy xếp hạng", err);
+      console.error("Lỗi lấy xếp hạng:", err);
       return { rank: [], my_rank: null };
     }
   },

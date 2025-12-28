@@ -27,12 +27,32 @@ const BankController = {
 
     async getById(req: Request, res: Response) {
         const result: DefaultResponse<any> = await safeExecute(async () => {
-            console.log(req.params.id);
+
+            const bank_id = Number(req.params.id);
+            if (isNaN(bank_id)) {
+                return {
+                    status: 400,
+                    message: "exam_id không hợp lệ",
+                    data: null
+                };
+            }
+
+            const { question, subject_type } = await BankService.getById(bank_id);
+
+            const role = req.user?.role_id;
             
+            if (role !== 2) {
+                question?.forEach(q => {
+                    q.answers.forEach((a: any) => {
+                        delete a.is_correct;
+                    });
+                });
+            }
+
             return {
                 status: 200,
-                message: "Lấy ngân hàng câu hỏi theo ID thành công",
-                data: await BankService.getById(Number(req.params.id)),
+                message: "Lấy thông tin đề thi thành công",
+                data: { question: question, subject_type: subject_type }
             };
         });
         return res.status(result.status).json(result);
@@ -90,7 +110,7 @@ const BankController = {
             const { bank_id, subject_type, time_test, user_name } = req.query;
             const user_id = req.user?.user_id;
             const { do_bank } = req.body
-   
+
             if (!bank_id || !subject_type || !time_test) {
                 return {
                     status: 400,
@@ -128,7 +148,7 @@ const BankController = {
 
     async getUserBankHistory(req: Request, res: Response) {
         const result: DefaultResponse<any> = await safeExecute(async () => {
-            const user_id  = req?.user?.user_id;
+            const user_id = req?.user?.user_id;
 
             const data = await BankService.getUserListBankHistory(Number(user_id));
             return {
@@ -144,7 +164,7 @@ const BankController = {
     async getUserAnswer(req: Request, res: Response) {
         const result: DefaultResponse<any> = await safeExecute(async () => {
             const { history_bank_id, bank_id } = req.query
-            
+
             const data = await BankService.getUserAnswer(Number(history_bank_id), Number(bank_id));
             return {
                 status: 200,
