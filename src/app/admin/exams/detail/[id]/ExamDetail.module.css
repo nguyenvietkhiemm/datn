@@ -59,20 +59,18 @@
 }
 
 .option {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: #f9fafb;
-    padding: 0.4rem 0.6rem;
-    border-radius: 0.4rem;
-    border: 1px solid transparent;
-    transition: all 0.2s ease;
-    cursor: pointer;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    background: #fff;
 }
 
-.option:hover {
-    border-color: #2563eb;
-    background: #eff6ff;
+.correctBadge {
+    margin-left: 8px;
+    color: #16a34a;
+    font-weight: 600;
+    font-size: 13px;
 }
 
 /* ---------------- RIGHT PANEL (Thanh điều hướng) ---------------- */

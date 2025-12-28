@@ -91,6 +91,10 @@ export default function ExamDetail() {
                                                 onChange={() => handleSelect(q.question_id, a.answer_id)}
                                             /> */}
                                             {a.answer_content}
+                                            {a.is_correct &&
+                                                (
+                                                    <span className={styles.correctBadge}>✔ </span>
+                                                )}
                                             {a.images?.map((src, index) => (
                                                 <div key={`a-${index}`} className={styles.imageWrapperSmall}>
                                                     <ImagePreview filename={src} />

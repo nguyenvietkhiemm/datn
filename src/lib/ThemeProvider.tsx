@@ -1,6 +1,5 @@
 "use client";
 
-import { ThemeProvider } from "next-themes";
 import Sidebar from "@/component/sidebar/Sidebar";
 import Header from "@/component/header/Header";
 import TokenChecker from "@/checkCookies";
@@ -13,10 +12,6 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   const isHiddenPage = hiddenRoutes.includes(pathname);
 
   return (
-    <ThemeProvider attribute="class"
-      defaultTheme="light"
-      enableSystem={false}
-    >
       <div className="relative flex min-h-screen bg-gray-50 overflow-visible">
         {!isHiddenPage && <Sidebar />}
         <div className="relative flex-1 flex flex-col w-full">
@@ -31,6 +26,5 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
           </main>
         </div>
       </div>
-    </ThemeProvider>
   );
 }
