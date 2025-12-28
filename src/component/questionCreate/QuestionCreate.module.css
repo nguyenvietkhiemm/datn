@@ -2,19 +2,25 @@
 .container {
     background: #ffffff;
     border: 1px solid #e5e7eb;
-    border-radius: 10px;
-    padding: 16px 18px;
-    margin-bottom: 20px;
-}
-.container_question{
+    border-radius: 12px;
+    padding: 20px 22px;
     display: flex;
     flex-direction: column;
-    gap : 10 px
+    gap: 20px;
 }
-.container_answer{
+
+.container_question {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
+}
+
+.container_answer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed #e5e7eb;
 }
 
 /* ===== LABEL ===== */
@@ -23,27 +29,24 @@
     font-size: 14px;
     font-weight: 600;
     color: #374151;
-    margin-bottom: 6px;
-    margin-top: 14px;
+    margin: 14px 0 6px;
 }
 
-.action_question{
-    display:  flex;
-    gap :  2rem
+.action_question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
 }
 
 /* ===== QUESTION TEXT ===== */
 .text {
-    padding: 10px 12px;
+    padding: 12px 14px;
     background: #f9fafb;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    line-height: 1.5;
-    margin: 1rem 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
+    line-height: 1.6;
+    border: 1px solid #e5e7eb;
 }
 
 .text:hover {
@@ -52,30 +55,29 @@
 
 /* ===== TEXTAREA ===== */
 .textarea {
-    width: 50%;
-    min-height: 80px;
-    padding: 10px 12px;
-    border-radius: 6px;
+    width: 100%;
+    min-height: 100px;
+    padding: 12px 14px;
+    border-radius: 8px;
     border: 1px solid #d1d5db;
     font-size: 14px;
-    outline: none;
 }
 
 .textarea:focus {
     border-color: #2563eb;
 }
 
+/* ===== IMAGE PREVIEW ===== */
 .previewWrap {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
-    margin: 8px 0;
+    margin-top: 6px;          /* ⬅️ giảm từ 8 → 6 cho gọn */
 }
 
 .imageWrapperSmall {
-    display: flex;
-    width: 90px;
-    height: 90px;
+    width: 80px;
+    height: 80px;
 }
 
 .preview {
@@ -83,37 +85,29 @@
     height: 100%;
     object-fit: cover;
     border-radius: 6px;
-    border: 1px solid #ddd;
+    border: 1px solid #d1d5db;
 }
 
-/* ===== INPUT ===== */
+/* ===== ADD BUTTON ===== */
 .addBtn {
-    margin: 10px 0;
-    padding: 8px 12px;
+    padding: 6px 10px;
     border-radius: 6px;
     border: 1px dashed #9ca3af;
     background: #f9fafb;
-    font-size: 14px;
+    font-size: 13px;
     cursor: pointer;
     color: #374151;
+    align-self: flex-start; 
 }
 
 .addBtn:hover {
     background: #f3f4f6;
-    border-color: #6b7280;
-}
-
-
-/* ===== CHANGED STATE ===== */
-.changed {
-    background-color: #fff7ed !important;
-    border-color: #f59e0b !important;
 }
 
 /* ===== RADIO GROUP ===== */
 .radioGroup {
     display: flex;
-    gap: 20px;
+    gap: 24px;
     margin-top: 8px;
 }
 
@@ -128,63 +122,84 @@
 /* ===== ANSWER ROW ===== */
 .answerRow {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-    height: 50px;
+    align-items: flex-start;
+    gap: 12px;                 /* ⬅️ tăng nhẹ */
+    padding: 12px;
+    border-radius: 8px;
+    background: #fafafa;
+    border: 1px solid #e5e7eb;
 }
 
-/* ===== ANSWER TEXT ===== */
-.answerRow span {
-    padding: 8px 10px;
-    background: #f9fafb;
+
+.answerRow p {
+    flex: 1;
+    padding: 10px 12px;
+    background: #ffffff;
     border-radius: 6px;
     cursor: pointer;
-    height: 80%;
-    width: 50%;
+    border: 1px solid #e5e7eb;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;                 /* ⬅️ text – image không dính */
 }
 
-.answerRow span:hover {
-    background: #f3f4f6;
+.answerRow input[type="radio"],
+.answerRow input[type="checkbox"] {
+    margin-top: 6px;
 }
+
 
 /* ===== CORRECT ICON ===== */
 .correct {
     color: #16a34a;
     font-weight: bold;
-    font-size: 16px;
-}
-
-/* ===== IMAGE PREVIEW ===== */
-.previewWrap {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin: 8px 3rem 0;
-}
-
-
-.preview {
-    width: 90px;
-    height: 90px;
-    object-fit: cover;
-    border-radius: 6px;
-    border: 1px solid #1a1b1d;
-}
-
-/* ===== Remove ANSWER BUTTON ===== */
-.removeBtn {
-    margin: 10px 0;
-    padding: 8px 12px;
-    border-radius: 6px;
-    border: 1px dashed #9ca3af;
     font-size: 14px;
-    cursor: pointer;
+    margin-top: 6px;
+}
+
+/* ===== REMOVE BUTTON ===== */
+.removeBtn {
+    padding: 6px 10px;
+    border-radius: 6px;
     background: #ef4444;
     color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    align-self: flex-start;
 }
 
-.removeBtn:hover {
-    background: #f3f4f6;
-    border-color: #6b7280;
+/* ===== CHANGED STATE ===== */
+.changed {
+    background-color: #fff7ed !important;
+    border-color: #f59e0b !important;
+}
+
+/* ===== SELECT QUESTION ===== */
+.selectQuestion {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #374151;
+}
+
+
+/* ===== ANSWER TEXTAREA ===== */
+.input {
+    flex: 1;                  /* 🔥 chiếm toàn bộ chiều ngang còn lại */
+    width: 100%;
+    min-height: 44px;
+    resize: vertical;         /* cho phép kéo dọc, không phá layout */
+    padding: 8px 10px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    line-height: 1.5;
+    background: #ffffff;
+}
+
+.input:focus {
+    border-color: #2563eb;
 }

@@ -329,7 +329,7 @@ export default function JsonDetailPage() {
                                 size="sm"
                                 onClick={() => handleSubmitQuestionToBE(row)}
                             >
-                                Lưu câu hỏi này vào hệ thống
+                                Import câu hỏi này vào hệ thống
                             </Button>
                         </div>
                     </div>
