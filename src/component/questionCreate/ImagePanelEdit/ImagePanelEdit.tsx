@@ -30,7 +30,7 @@ export default function ImageManagePanel({
     type_add,
     answerIndex
 }: ImageManagePanelProps) {
-    
+
     return (
         <div className={styles.overlay}>
             <div className={styles.panel}>
@@ -86,7 +86,7 @@ export default function ImageManagePanel({
                                             } else {
                                                 // thêm cho ANSWER
                                                 handleChange(rowIndex, -8, {
-                                                    answerIndex : answerIndex,
+                                                    answerIndex: answerIndex,
                                                     imagePath: img,
                                                 });
                                             }

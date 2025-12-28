@@ -5,7 +5,7 @@ import styles from "./BankDetail.module.css";
 import { Question } from "@/domain/admin/questions/type";
 import Cookies from "js-cookie";
 import { useParams } from "next/navigation";
-import { ImagePreview } from "@/component/questionCreate/ImageReview/page";
+import { ImagePreview } from "@/component/questionCreate/ImagePreview/page";
 
 export interface Bank {
     bank_id: number;

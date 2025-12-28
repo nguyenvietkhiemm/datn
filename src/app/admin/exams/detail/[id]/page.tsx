@@ -5,7 +5,7 @@ import type { Exam } from "@/domain/admin/exams/type";
 import { Question } from "@/domain/admin/questions/type";
 import Cookies from "js-cookie";
 import { useParams } from "next/navigation";
-import { ImagePreview } from "@/component/questionCreate/ImageReview/page";
+import { ImagePreview } from "@/component/questionCreate/ImagePreview/page";
 
 export default function ExamDetail() {
     const [questions, setQuestions] = useState<Question[]>([]);

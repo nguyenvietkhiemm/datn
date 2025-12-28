@@ -11,7 +11,7 @@ import { useParams } from "next/navigation";
 import { Question, QuestionQuery } from "@/domain/admin/questions/type";
 import { API_URL } from "@/lib/service";
 import Search from "@/component/search/Search";
-import { ImagePreview } from "@/component/questionCreate/ImageReview/page";
+import { ImagePreview } from "@/component/questionCreate/ImagePreview/page";
 import { answerLabel } from "@/lib/model";
 
 export default function BankQuestionCreate() {
