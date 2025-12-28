@@ -9,3 +9,17 @@ declare module "express-serve-static-core" {
     };
   }
 }
+
+// types/express.d.ts
+declare namespace Express {
+  interface Request {
+    fileMeta?: {
+      originalName: string;
+      filename: string;
+      path: string;
+      hash: string;
+      size: number;
+      duplicated: boolean;
+    };
+  }
+}

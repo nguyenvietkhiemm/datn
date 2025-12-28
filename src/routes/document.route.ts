@@ -2,9 +2,8 @@ import { Router } from 'express';
 import DocumentController from '../controllers/document.controller';
 import Authentication from '../middleware/authentication';
 import { ADMIN, USER } from "../config/permission";
-import { uploadDOCResource } from '../utils/upload';
+import { uploadDOCResource, saveDocResourceWithHashCheck } from '../utils/upload';
 const documentRoute = Router();
-
 /**
  * @openapi
  * /documents:
@@ -55,11 +54,13 @@ documentRoute.get('/', DocumentController.getAll);
  *       500:
  *         description: Lỗi server
  */
-documentRoute.post('/create',
+documentRoute.post(
+        '/create',
         Authentication.AuthenticateToken,
         Authentication.AuthorizeRoles(...ADMIN),
-        uploadDOCResource.single("file"),
-        DocumentController.create);
+        saveDocResourceWithHashCheck,  // multer + hash check + lưu file
+        DocumentController.create       // req.savedFile đã có thông tin file
+);
 
 
 /**
