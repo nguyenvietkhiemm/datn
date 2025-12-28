@@ -3,7 +3,7 @@
 import styles from "./QuestionCard.module.css";
 import { Question } from "@/domain/admin/questions/type";
 import { answerLabel } from "@/lib/model";
-import { ImagePreview } from "@/component/questionCreate/ImageReview/page";
+import { ImagePreview } from "@/component/questionCreate/ImagePreview/page";
 interface QuestionCardProps {
     question: Question;
     rowIndex: number;

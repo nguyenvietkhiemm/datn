@@ -55,6 +55,22 @@ export default function QuestionCardEditor({
             {/* QUESTION CONTENT */}
             <div className={styles.container_question}>
                 <div>
+                    <div className={styles.action_question}>
+                        <button
+                            className={styles.removeBtn}
+                            onClick={() => handleChange(rowIndex, -5, true)}
+                        >
+                            Xoá câu hỏi
+                        </button>
+
+                        <label className={styles.selectQuestion}>
+                            <input
+                                type="checkbox"
+                                checked={selectedIndexes.includes(rowIndex)}
+                                onChange={() => toggleSelectQuestion(rowIndex)}
+                            />
+                        </label>
+                    </div>
                     <label className={styles.label}>Nội dung câu hỏi</label>
                     {editCell?.row === rowIndex && editCell.col === -1 ? (
                         <textarea
@@ -77,19 +93,7 @@ export default function QuestionCardEditor({
                         </p>
                     )}
 
-                    <div className={styles.action_question}>
-                        <button
-                            className={styles.removeBtn}
-                            onClick={() => handleChange(rowIndex, -5, true)}
-                        >
-                            Xoá Câu Hỏi
-                        </button>
-                        <input
-                            type="checkbox"
-                            checked={selectedIndexes.includes(rowIndex)}
-                            onChange={() => toggleSelectQuestion(rowIndex)}
-                        />
-                    </div>
+
                     {/* QUESTION IMAGES */}
                     <ListImageQuestion
                         rowIndex={rowIndex}
@@ -112,6 +116,9 @@ export default function QuestionCardEditor({
                         </button>
                     </div>
                 </div>
+
+
+
                 <label className={styles.label}>Loại câu hỏi</label>
                 {/* type_question */}
                 <div className={styles.radioGroup}>
@@ -142,11 +149,15 @@ export default function QuestionCardEditor({
                 </div>
             </div>
 
+
+
             {/* ANSWERS */}
             <div className={styles.container_answer}>
                 <label className={styles.label}>Đáp án</label>
                 {question.answers.map((ans, colIndex) => (
-                    <div key={colIndex} className={styles.answerRow}>
+                    <div key={colIndex} 
+                    className={`${styles.answerRow} ${ans.is_correct ? styles.correctBorder : ''}`}
+                    >
                         <input
                             type={currentType === 1 ? "radio" : "checkbox"}
                             name={`correct-${rowIndex}`}
@@ -224,10 +235,12 @@ export default function QuestionCardEditor({
 
             <button
                 className={styles.addBtn}
+                style={{ alignSelf: "flex-start" }}
                 onClick={() => handleChange(rowIndex, -3, null)}
             >
                 + Thêm đáp án
             </button>
+
         </div>
     );
 }
