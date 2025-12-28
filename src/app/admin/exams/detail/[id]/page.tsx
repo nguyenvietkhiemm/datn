@@ -34,8 +34,8 @@ export default function ExamDetail() {
                 }
             })
             const data = await resExamId.json();
-            if (Array.isArray(data.data)) {
-                setQuestions(data.data);
+            if (Array.isArray(data.data.question)) {
+                setQuestions(data.data.question);
             } else {
                 setQuestions([]);
             }
@@ -70,7 +70,7 @@ export default function ExamDetail() {
                             <div key={q.question_id} className={styles.questionBox} ref={(el) => {
                                 questionRefs.current[q.question_id] = el;
                             }}>
-                                <p className={styles.questionText}>
+                                <div className={styles.questionText}>
                                     <strong>{i + 1}.</strong> {q.question_content}
                                     <div key={`q-${i}`} className={styles.imageWrapperSmall}>
                                         {q.images?.map((src, index) => (
@@ -79,7 +79,7 @@ export default function ExamDetail() {
                                             </div>
                                         ))}
                                     </div>
-                                </p>
+                                </div>
                                 <div className={styles.answers}>
                                     {q.answers.map((a) => (
                                         <label key={a.answer_id} className={styles.option}>

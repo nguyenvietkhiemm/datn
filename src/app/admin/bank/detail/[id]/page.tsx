@@ -27,6 +27,11 @@ export default function BankDetail() {
     const questionRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
     useEffect(() => {
+        const bankRaw = localStorage.getItem("bank");
+        if (bankRaw) {
+            const exams = JSON.parse(bankRaw);
+            setBank(exams);
+        }
         const token = Cookies.get("token");
         const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
 
@@ -42,8 +47,8 @@ export default function BankDetail() {
 
                 const data = await res.json();
 
-                if (Array.isArray(data.data)) {
-                    setQuestions(data.data);
+                if (Array.isArray(data.data.question)) {
+                    setQuestions(data.data.question);
                 } else {
                     setQuestions([]);
                 }
@@ -86,20 +91,24 @@ export default function BankDetail() {
                             <div key={q.question_id} className={styles.questionBox} ref={(el) => {
                                 questionRefs.current[q.question_id] = el;
                             }}>
-                                <p className={styles.questionText}>
+                                <div className={styles.questionText}>
                                     <strong>{i + 1}.</strong> {q.question_content}
                                     <div key={`q-${i}`} className={styles.imageWrapperSmall}>
                                         {q.images?.map((src, index) => (
                                             <div key={`q-${index}`} className={styles.imageWrapperSmall}>
-                                                <ImagePreview filename={src} width={200}/>
+                                                <ImagePreview filename={src} width={200} />
                                             </div>
                                         ))}
                                     </div>
-                                </p>
+                                </div>
                                 <div className={styles.answers}>
                                     {q.answers.map((a) => (
                                         <label key={a.answer_id} className={styles.option}>
                                             {a.answer_content}
+                                            {a.is_correct &&
+                                                (
+                                                    <span className={styles.correctBadge}>✔ </span>
+                                                )}
                                             {a.images?.map((src, index) => (
                                                 <div key={`a-${index}`} className={styles.imageWrapperSmall}>
                                                     <ImagePreview filename={src} />

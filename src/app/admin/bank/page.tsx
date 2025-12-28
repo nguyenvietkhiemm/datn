@@ -92,7 +92,7 @@ export default function Exam() {
   }
   //xem chi tiet
   const detailBank = (id: number, bank: Bank) => {
-    localStorage.setItem("exam", JSON.stringify(bank));
+    localStorage.setItem("bank", JSON.stringify(bank));
     router.push(`/admin/bank/detail/${id}`);
   };
 
