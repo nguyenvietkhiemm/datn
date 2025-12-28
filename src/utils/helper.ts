@@ -1,6 +1,7 @@
 import path from "path";
 import slugify from "slugify";
 import crypto from "crypto";
+import { Question } from "../models/question.model";
 
 const IMAGE_SECRET = process.env.IMAGE_SIGN_SECRET || "image-secret";
 
@@ -46,3 +47,38 @@ export function verifyImage(filename: string, exp: number, sig: string) {
     const expected = signImage(filename, exp);
     return expected === sig;
 }
+
+export enum QuestionType {
+    SINGLE = 1,
+    MULTIPLE = 2,
+    ESSAY = 3
+}
+
+function isQuestionType(value: number): value is QuestionType {
+    return value === QuestionType.SINGLE
+        || value === QuestionType.MULTIPLE
+        || value === QuestionType.ESSAY;
+}
+
+export type QuestionGroup = Record<QuestionType, Question[]>;
+
+export function groupQuestionsByTypeSafe(
+    questions: Question[]
+): QuestionGroup {
+    const result: QuestionGroup = {
+        [QuestionType.SINGLE]: [],
+        [QuestionType.MULTIPLE]: [],
+        [QuestionType.ESSAY]: []
+    };
+
+    questions.forEach(q => {
+        if (q.type_question == null) return;
+        if (!isQuestionType(q.type_question)) return;
+
+        result[q.type_question].push(q);
+    });
+
+    return result;
+}
+
+
