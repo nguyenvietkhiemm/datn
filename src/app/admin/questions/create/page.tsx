@@ -6,9 +6,9 @@ import styles from "./QuestionCreate.module.css";
 import { Button } from "@/component/ui/button/Button";
 import { QuestionService } from "@/domain/admin/questions/service";
 import type { AnswerForm, QuestionForm } from "@/domain/admin/questions/type";
-import MultipleChoiceAnswers from "@/component/createQuestionJson/MultipleChoiceAnswers";
-import EssayAnswer from "@/component/createQuestionJson/EssayAnswer";
-import SingleChoice from "@/component/createQuestionJson/SingleChoice";
+import MultipleChoiceAnswers from "@/component/formQuestionAnswer/MultipleChoiceAnswers";
+import EssayAnswer from "@/component/formQuestionAnswer/EssayAnswer";
+import SingleChoice from "@/component/formQuestionAnswer/SingleChoice";
 
 export default function QuestionCreate() {
     const router = useRouter();

@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import styles from "./ListImageQuestion.module.css";
 import { ChangeValue } from "@/domain/admin/file/file-parser/type";
-import { FileParserService } from "@/domain/admin/file/file-parser/service";
 import { ImagePreview } from "../ImagePreview/page";
 type ListImageQuestionProps = {
   rowIndex: number;

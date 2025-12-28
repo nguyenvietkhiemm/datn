@@ -30,8 +30,8 @@ export function ImagePreview({
     <div
       style={{
         width,
-        height: width,            // 🔒 KHÓA BOX
-        overflow: "hidden",       // 🔒 CHẶN TRÀN
+        height: width,            // KHÓA BOX
+        overflow: "hidden",       // CHẶN TRÀN
         borderRadius: 6,
         display: "flex",
         alignItems: "center",
@@ -44,7 +44,7 @@ export function ImagePreview({
         style={{
           maxWidth: "100%",
           maxHeight: "100%",
-          objectFit: "contain",   // 🔑 QUAN TRỌNG
+          objectFit: "contain",   // QUAN TRỌNG
         }}
         loading="lazy"
         alt=""

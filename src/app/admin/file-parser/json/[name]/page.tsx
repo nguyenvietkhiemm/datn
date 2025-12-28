@@ -152,16 +152,6 @@ export default function JsonDetailPage() {
                 updated[rowIndex].answers[answerIndex].text = value_change;
             }
             else if (type_change === -11) {
-                //xoa anh cu cua cau hoi
-                // const imageIndex = value as number;
-                // const image = FileParserModel.extractQuestionImages(updated[rowIndex], images)
-                // updated[rowIndex] = {
-                //     ...updated[rowIndex],
-                //     question: {
-                //         ...updated[rowIndex].question,
-                //         images: image.filter((__, i) => i !== imageIndex)
-                //     }
-                // }
             }
             else {
                 //tao cau tra loi dung
@@ -188,15 +178,6 @@ export default function JsonDetailPage() {
 
             return updated;
         });
-
-        // setChanges(prev => {
-        //     const updated = [...prev];
-        //     const existing = updated.find(c => c.row === rowIndex && c.col === colIndex);
-        //     if (existing) existing.value = value;
-        //     else updated.push({ row: rowIndex, col: colIndex, value });
-        //     localStorage.setItem(`json_diff_${name}`, JSON.stringify(updated));
-        //     return updated;
-        // });
     };
 
     const isChanged = (rowIndex: number, colIndex: number) => changes.some(c => c.row === rowIndex && c.col === colIndex)
@@ -266,12 +247,6 @@ export default function JsonDetailPage() {
 
 
     if (loading) return <p>Đang tải...</p>;
-    // console.log(
-    //     jsonData.map((j, index) => ({
-    //       cauHoiThu: index + 1,
-    //       anhcauHoimoi: j.question?.newImages,
-    //     }))
-    //   );
 
     return (
         <div className={styles.container}>
