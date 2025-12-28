@@ -173,7 +173,21 @@ const BankController = {
             }
         });
         return res.status(result.status).json(result);
-    }
+    },
+
+    async getQuestionIdBank(req: Request, res: Response){
+        const result: DefaultResponse<any> = await safeExecute(async () => {
+          const {id} = req.params
+          const data = await BankService.getQuestionIdBank(Number(id));
+          return {
+            status: 200,
+            message: "Lay cau hoi bai luyen tap thanh cong",
+            data: data
+          }
+        });
+    
+        return res.status(result.status).json(result)
+      },
 }
 
 export default BankController;

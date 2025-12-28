@@ -51,7 +51,10 @@ bankRoute.get("/user-answer",
  *         description: Lỗi server
  */
 bankRoute.get('/:id', Authentication.AuthenticateToken, BankController.getById);
-
+bankRoute.get('/:id/questions', Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(...ADMIN),
+        BankController.getQuestionIdBank
+)
 /**
  * @openapi
  * /banks/create:

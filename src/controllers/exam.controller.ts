@@ -210,6 +210,20 @@ const ExamController = {
     return res.status(result.status).json(result);
   },
 
+  async getQuestionIdExam(req: Request, res: Response){
+    const result: DefaultResponse<any> = await safeExecute(async () => {
+      const {id} = req.params
+      const data = await ExamService.getQuestionIdExam(Number(id));
+      return {
+        status: 200,
+        message: "Lay cau hoi bai thi thanh cong",
+        data: data
+      }
+    });
+
+    return res.status(result.status).json(result)
+  },
+
   async checkDoExam(req: Request, res: Response) {
     const result: DefaultResponse<any> = await safeExecute(async () => {
       const user_id = req.user?.user_id;

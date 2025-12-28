@@ -372,3 +372,4 @@ CREATE INDEX IF NOT EXISTS idx_user_email ON "user"(email);
 -- End of ordered merged schema
 
 CREATE EXTENSION IF NOT EXISTS unaccent;
+

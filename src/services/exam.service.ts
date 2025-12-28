@@ -704,6 +704,14 @@ const ExamService = {
     return { check: true };
   },
 
+  async getQuestionIdExam(exam_id: number): Promise<number[]>{
+    const questionQuery = `SELECT question_id FROM question_exam WHERE exam_id=$1`
+    const questionRows = await query(questionQuery, [exam_id])
+    return questionRows.rows.map(
+      (row: { question_id: number }) => row.question_id
+    );
+  },
+
   async markOverTime() {
     try {
 

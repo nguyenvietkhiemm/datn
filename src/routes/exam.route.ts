@@ -173,7 +173,7 @@ examRoute.delete(
 examRoute.get("/exam-history",
         Authentication.AuthenticateToken,
         ExamController.getUserExamHistory);
-        
+
 examRoute.post("/submit",
         Authentication.AuthenticateToken,
         ExamController.submit
@@ -236,7 +236,10 @@ examRoute.get("/:id/ranking", Authentication.AuthenticateToken, ExamController.g
  *         description: Lỗi server
  */
 examRoute.get('/:id', Authentication.AuthenticateToken, ExamController.getById);
-
+examRoute.get('/:id/questions', Authentication.AuthenticateToken,
+        Authentication.AuthorizeRoles(...ADMIN),
+        ExamController.getQuestionIdExam
+)
 /**
  * @openapi
  * /exams/create:

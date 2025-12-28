@@ -11,6 +11,7 @@ export const BankQuestionService = {
             const res = await query(
                 `INSERT INTO question_bank (bank_id, question_id)
                  VALUES ($1, $2)
+                 ON CONFLICT (bank_id, question_id) DO NOTHING
                  RETURNING *`,
                 [b.bank_id, b.question_id]
             );

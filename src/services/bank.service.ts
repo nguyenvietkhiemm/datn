@@ -500,7 +500,15 @@ const BankService = {
         const totalPages = Math.ceil(countResult.rows[0].total / limit);
 
         return { banks: result.rows, totalPages };
-    }
+    },
+
+    async getQuestionIdBank(bank_id: number): Promise<number[]>{    
+        const questionQuery = `SELECT question_id FROM question_bank WHERE bank_id=$1`
+        const questionRows = await query(questionQuery, [bank_id])
+        return questionRows.rows.map(
+          (row: { question_id: number }) => row.question_id
+        );
+      },
 };
 
 export default BankService;
