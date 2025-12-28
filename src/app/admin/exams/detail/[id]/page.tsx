@@ -8,9 +8,10 @@ import { useParams } from "next/navigation";
 import { ImagePreview } from "@/component/questionCreate/ImagePreview/page";
 import { useRouter } from "next/navigation";
 import { Button } from "@/component/ui/button/Button";
+import { FlatQuestions, TypeQuestion, PART_LABEL } from "../../../../../lib/model";
 
 export default function ExamDetail() {
-    const [questions, setQuestions] = useState<Question[]>([]);
+    const [questionGroup, setQuestionGroup] = useState<Record<number, Question[]>>({});
     const [exam, setExam] = useState<Exam>();
     const params = useParams();
     const id = params.id;
@@ -36,11 +37,7 @@ export default function ExamDetail() {
                 }
             })
             const data = await resExamId.json();
-            if (Array.isArray(data.data.question)) {
-                setQuestions(data.data.question);
-            } else {
-                setQuestions([]);
-            }
+            setQuestionGroup(data.data.question);
         }
 
         fetchExamId()
@@ -55,7 +52,11 @@ export default function ExamDetail() {
 
     const editExam = (id: number) => {
         router.push(`/admin/exams/create/${id}/questions`)
-    }    
+    }
+
+    let globalIndex = 0;
+
+    const flatQuestions: Question[] = FlatQuestions(questionGroup)
 
     return (
         <div className={styles.exam_container}>
@@ -68,44 +69,56 @@ export default function ExamDetail() {
             <div className={styles.exam_body}>
                 {/* Left: Questions */}
                 <div className={styles.leftPanel}>
-                    {questions.length > 0 ? (
-                        questions?.map((q, i) => (
-                            <div key={q.question_id} className={styles.questionBox} ref={(el) => {
-                                questionRefs.current[q.question_id] = el;
-                            }}>
-                                <div className={styles.questionText}>
-                                    <strong>{i + 1}.</strong> {q.question_content}
-                                    <div key={`q-${i}`} className={styles.imageWrapperSmall}>
-                                        {q.images?.map((src, index) => (
-                                            <div key={`q-${index}`} className={styles.imageWrapperSmall}>
-                                                <ImagePreview filename={src} width={200} />
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                                <div className={styles.answers}>
-                                    {q.answers.map((a) => (
-                                        <label key={a.answer_id} className={styles.option}>
-                                            {a.answer_content}
-                                            {a.is_correct &&
-                                                (
-                                                    <span className={styles.correctBadge}>✔ </span>
-                                                )}
-                                            {a.images?.map((src, index) => (
-                                                <div key={`a-${index}`} className={styles.imageWrapperSmall}>
-                                                    <ImagePreview filename={src} />
-                                                </div>
-                                            ))}
-                                        </label>
-                                    ))}
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        <>Không có câu hỏi nào</>
-                    )}
-                </div>
+                    {TypeQuestion.map((type) => (
+                        <div key={type}>
+                            {/* TITLE PHẦN */}
+                            <h3 className={styles.partTitle}>
+                                {PART_LABEL[type]}
+                            </h3>
 
+                            {/* QUESTIONS */}
+                            {questionGroup[type]?.map((q) => {
+                                const index = globalIndex++;
+
+                                return (
+                                    <div key={q.question_id} className={styles.questionBox} ref={(el) => {
+                                        questionRefs.current[q.question_id] = el;
+                                    }}>
+                                        <div className={styles.questionText}>
+                                            <strong>{index + 1}.</strong> {q.question_content}
+                                            <div key={`q-${index}`} className={styles.imageWrapperSmall}>
+                                                {q.images?.map((src, index) => (
+                                                    <div key={`q-${index}`} className={styles.imageWrapperSmall}>
+                                                        <ImagePreview filename={src} width={200} />
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                        <div className={styles.answers}>
+                                            {q.answers.map((a) => (
+                                                <label key={a.answer_id} className={styles.option}>
+                                                    {a.answer_content}
+                                                    {a.is_correct &&
+                                                        (
+                                                            <span className={styles.correctBadge}>✔ </span>
+                                                        )}
+                                                    {a.images?.map((src, index) => (
+                                                        <div key={`a-${index}`} className={styles.imageWrapperSmall}>
+                                                            <ImagePreview filename={src} />
+                                                        </div>
+                                                    ))}
+                                                </label>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    )
+                    )
+                    }
+
+                </div>
                 {/* Right: Navigator */}
                 <div className={styles.rightPanel}>
                     <div className={styles.topSection}>
@@ -114,7 +127,7 @@ export default function ExamDetail() {
                         </div>
                     </div>
                     <div className={styles.grid}>
-                        {questions.map((q, i) => (
+                        {flatQuestions.map((q, i) => (
                             <button
                                 key={q.question_id}
                                 className={`${styles.numButton}

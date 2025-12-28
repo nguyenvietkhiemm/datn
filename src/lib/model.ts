@@ -1,3 +1,5 @@
+import { Question } from "@/domain/admin/questions/type";
+
 export function formatVNDateTime(dateInput: string | number | Date): string {
     const date = new Date(dateInput);
 
@@ -24,3 +26,14 @@ export const formatTime = (seconds: number) => {
 };
 
 export const answerLabel = (index: number) => String.fromCharCode(65 + index);
+
+export const TypeQuestion = [1, 2, 3] as const;
+export type questionGroup = Record<number, Question[]>
+export function FlatQuestions(questionGroup: questionGroup): Question[] {
+    return TypeQuestion.flatMap(type => questionGroup?.[type] ?? []);
+}
+export const PART_LABEL: Record<number, string> = {
+    1: "PHẦN I – Trắc nghiệm 4 đáp án",
+    2: "PHẦN II – Đúng / Sai",
+    3: "PHẦN III – Trả lời tự luận",
+};

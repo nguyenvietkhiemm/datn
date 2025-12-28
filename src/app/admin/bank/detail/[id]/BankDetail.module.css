@@ -26,7 +26,7 @@
     overflow: hidden;
 }
 
-/* ---------------- LEFT PANEL (Câu hỏi) ---------------- */
+/* ================= LEFT PANEL (CÂU HỎI) ================= */
 .leftPanel {
     flex: 3;
     overflow-y: auto;
@@ -36,22 +36,43 @@
     flex-direction: column;
 }
 
+/* ===== PART TITLE ===== */
+.partTitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 2rem 0 1rem;
+    padding: 0.75rem 1rem;
+    background: #e0e7ff;
+    border-left: 6px solid #2563eb;
+    border-radius: 0.5rem;
+}
+
+/* ===== QUESTION BOX ===== */
 .questionBox {
-    background: #fff;
+    background: #ffffff;
     border-radius: 0.75rem;
     padding: 1rem 1.25rem;
     margin-bottom: 1.25rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    scroll-margin-top: 80px;
-    /* để scroll chính xác khi click số */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    scroll-margin-top: 110px;
 }
 
+/* Khi scroll tới / đang focus */
+.questionBox:target,
+.questionBox.active {
+    outline: 2px solid #2563eb;
+    background: #f8faff;
+}
+
+/* ===== QUESTION TEXT ===== */
 .questionText {
     font-weight: 600;
     margin-bottom: 0.5rem;
     color: #111827;
 }
 
+/* ===== ANSWERS ===== */
 .answers {
     display: flex;
     flex-direction: column;
@@ -59,11 +80,17 @@
 }
 
 .option {
-    border: 1px solid #ddd;
+    border: 1px solid #d1d5db;
     padding: 10px;
     border-radius: 6px;
-    margin-bottom: 8px;
-    background: #fff;
+    background: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.option:hover {
+    background: #eef2ff;
+    border-color: #2563eb;
 }
 
 .correctBadge {
@@ -73,7 +100,7 @@
     font-size: 13px;
 }
 
-/* ---------------- RIGHT PANEL (Thanh điều hướng) ---------------- */
+/* ================= RIGHT PANEL (THANH ĐIỀU HƯỚNG) ================= */
 .rightPanel {
     flex: 1;
     display: flex;
@@ -83,10 +110,10 @@
     background: #ffffff;
     overflow-y: auto;
     justify-content: flex-start;
-    gap: 5rem;
+    gap: 4rem;
 }
 
-/* Thanh chứa thời gian + nút nộp */
+/* ===== TOP SECTION ===== */
 .topSection {
     display: flex;
     flex-direction: column;
@@ -104,20 +131,29 @@
     text-align: center;
 }
 
-/* Lưới câu hỏi */
+/* ===== GRID TITLE (PHẦN I / II / III) ===== */
+.gridTitle {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #374151;
+    margin: 1.25rem 0 0.5rem;
+}
+
+/* ===== GRID SỐ CÂU ===== */
 .grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 0.5rem;
-    margin-top: 2rem;
+    gap: 0.4rem;
 }
 
+/* ===== BUTTON SỐ CÂU ===== */
 .numButton {
-    padding: 0.5rem 0;
+    padding: 0.45rem 0;
     border-radius: 0.5rem;
     border: 1px solid #d1d5db;
-    background: #f3f4f6;
+    background: #f9fafb;
     font-weight: 500;
+    font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.2s ease;
 }
@@ -127,13 +163,20 @@
     border-color: #2563eb;
 }
 
+/* Đã trả lời */
 .answered {
     background: #2563eb;
-    color: white;
+    color: #ffffff;
     border-color: #2563eb;
 }
 
-/* ---------------- RESULT ---------------- */
+/* Đang focus */
+.current {
+    border: 2px solid #16a34a;
+    background: #ecfdf5;
+}
+
+/* ================= RESULT ================= */
 .result {
     text-align: center;
     padding-top: 3rem;
