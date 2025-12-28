@@ -1,0 +1,4541 @@
+[
+  {
+    "question": {
+      "para_index": 9,
+      "text": "Số báo danh:……………………………………………………………….",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 11,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 12,
+      "text": "Câu 1: Trong điều kiện chuẩn về nhiệt độ và áp suất thì",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 13,
+        "text": "A. số phân tử trong một đơn vị thể tích của các chất khí khác nhau là như nhau.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 14,
+        "text": "B. các phân tử của các chất khí khác nhau chuyển động với vận tốc như nhau.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 15,
+        "text": "C. khoảng cách giữa các phân tử rất nhỏ so với kích thước của các phân tử.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 16,
+        "text": "D. các phân tử khí khác nhau va chạm vào thành bình tác dụng vào thành bình những lực bằng nhau.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 17,
+      "text": "Câu 2: Khi truyền nhiệt cho một khối khí thì khối khí có thể",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 18,
+        "text": "A. tăng nội năng và thực hiện công.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 18,
+        "text": "B. giảm nội năng và nhận công.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 19,
+        "text": "C. giảm nội năng.\nD. nhận công.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 20,
+      "text": "Câu 3: Câu nào sau đây nói về nhiệt lượng là không đúng?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 21,
+        "text": "A. Nhiệt lượng là số đo độ tăng nội năng của vật trong quá trình truyền nhiệt.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 22,
+        "text": "B. Một vật lúc nào cũng có nội năng nên lúc nào cũng có nhiệt lượng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 23,
+        "text": "C. Đơn vị của nhiệt lượng cũng là đơn vị của nội năng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 24,
+        "text": "D. Nhiệt lượng không phải là nội năng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 25,
+      "text": "Câu 4: Phóng xạ là",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 26,
+        "text": "A. quá trình hạt nhân nguyên tử phát các tia không nhìn thấy.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 27,
+        "text": "B. quá trình phân rã tự phát của một hạt nhân không bền vững.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 28,
+        "text": "C. quá trình hạt nhân nguyên tử hấp thụ năng lượng để phát ra các tia .",
+        "math": [],
+        "images": [
+          {
+            "sha1": "2958bb9dec92fc79295739938156e80ec0c0b365",
+            "saved_path": "2958bb9dec92fc79295739938156e80ec0c0b365.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 29,
+        "text": "D. quá trình hạt nhân nguyên tử nặng bị phá vỡ thành các hạt nhân nhỏ hơn.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 30,
+      "text": "Câu 5: Phát biểu nào sau đây là không đúng khi nói về điện từ trường",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 31,
+        "text": "A. Khi một điện trường biến thiên theo thời gian, nó sinh ra một từ trường xoáy.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 32,
+        "text": "B. Điện trường xoáy là điện trường có các đường sức là những đường cong.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 33,
+        "text": "C. Khi một từ trường biến thiên theo thời gian, nó sinh ra một điện trường.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 34,
+        "text": "D. Từ trường xoáy có các đường sức từ bao quanh các đường sức điện.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 35,
+      "text": "Câu 6: Ban đầu một mẫu chất phóng xạ nguyên chất có hạt nhân. Biết chu kì bán rã của chất phóng xạ này là T. Sau thời gian 5T, kể từ thời điểm ban đầu số hạt nhân chưa phân rã của mẫu chất phóng xạ này là",
+      "math": [],
+      "images": [
+        {
+          "sha1": "ac5aa1884908e872127c93c8f82b044a8b57f7e8",
+          "saved_path": "ac5aa1884908e872127c93c8f82b044a8b57f7e8.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 36,
+        "text": "A.\nB.\nC. D.",
+        "math": [],
+        "images": [
+          {
+            "sha1": "eba56536dca73ba8e37c5ef4dc8486ec14a793d6",
+            "saved_path": "eba56536dca73ba8e37c5ef4dc8486ec14a793d6.png",
+            "selected": true
+          },
+          {
+            "sha1": "39d88881eb0ecaea0342d0fdd3641647525ed7d6",
+            "saved_path": "39d88881eb0ecaea0342d0fdd3641647525ed7d6.png",
+            "selected": true
+          },
+          {
+            "sha1": "395f9bbe800698a2f3ddf60ad698838287a5a278",
+            "saved_path": "395f9bbe800698a2f3ddf60ad698838287a5a278.png",
+            "selected": true
+          },
+          {
+            "sha1": "27a5cdaeb06b029022fa2ad990bbb480abb3bc3e",
+            "saved_path": "27a5cdaeb06b029022fa2ad990bbb480abb3bc3e.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 37,
+      "text": "Câu 7: Trên hình bên là hai đường đẳng nhiệt của cùng một lượng khí lý tưởng ở hai nhiệt độ khác nhau,",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 38,
+        "text": "",
+        "math": [],
+        "images": [
+          {
+            "sha1": "3c7ee5a63044e178e75d176f7b08214fb306feae",
+            "saved_path": null,
+            "selected": false
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 39,
+      "text": "Thông tin đúng khi so sánh nhiệt độ T1 và T2 là",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 40,
+        "text": "A.\nB.\nC. D.",
+        "math": [],
+        "images": [
+          {
+            "sha1": "0262a48c345542c4c2bf071659c6130d5b9dc4b2",
+            "saved_path": "0262a48c345542c4c2bf071659c6130d5b9dc4b2.png",
+            "selected": true
+          },
+          {
+            "sha1": "0c8dc0a6ca7ad8c7afc2b644c5e8b2bc40e6f5df",
+            "saved_path": "0c8dc0a6ca7ad8c7afc2b644c5e8b2bc40e6f5df.png",
+            "selected": true
+          },
+          {
+            "sha1": "abaa5e6af63635df643af43c5866dea68e359e38",
+            "saved_path": "abaa5e6af63635df643af43c5866dea68e359e38.png",
+            "selected": true
+          },
+          {
+            "sha1": "4c9652358a623279d1b22c6837f64033273a9e90",
+            "saved_path": "4c9652358a623279d1b22c6837f64033273a9e90.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 41,
+      "text": "Câu 8: Trong quá trình truyền sóng điện từ, vector cường độ điện trường và vector cảm ứng từ luôn",
+      "math": [],
+      "images": [
+        {
+          "sha1": "4454cfea5626282d492ba6d87be060b16639d702",
+          "saved_path": "4454cfea5626282d492ba6d87be060b16639d702.png",
+          "selected": true
+        },
+        {
+          "sha1": "f42a7895e5b7a93d9409aefdebeb5d428693c5bc",
+          "saved_path": "f42a7895e5b7a93d9409aefdebeb5d428693c5bc.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 42,
+        "text": "A. có phương vuông góc với nhau và vuông góc với phương truyền sóng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 43,
+        "text": "B. có phương song song và cùng chiều.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 44,
+        "text": "C. có phương song song và ngược chiều.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 45,
+        "text": "D. có phương trùng với phương truyền sóng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 46,
+      "text": "Câu 9: Trong hai nhiệt lượng kế có chứa hai chất lỏng khác nhau ở hai nhiệt độ ban đầu khác nhau. Người ta dùng một nhiệt kế, lần lượt nhúng đi nhúng lại vào nhiệt lượng kế 1 rồi vào nhiệt lượng kế 2. Số chỉ của nhiệt kế lần lượt là 80°C, 16°C, 78°C, 19°C. Đến lần nhúng tiếp theo nhiệt kế chỉ",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 47,
+        "text": "A. 75°C.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 47,
+        "text": "B. 76°C.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 47,
+        "text": "C. 77°C.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 47,
+        "text": "D. 78°C.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 48,
+      "text": "Câu 10: Cuộn thứ cấp của một máy biến áp có 800 vòng. Từ thông trong lõi biến thế biến thiên với tần số 50 Hz và giá trị từ thông cực đại qua một vòng dây bằng 2,4 mWb. Suất điện động hiệu dụng cuộn thứ cấp có giá trị xấp xỉ bằng",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 49,
+        "text": "A. 220 V.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 49,
+        "text": "B. 456,8 V.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 49,
+        "text": "C. 426,5 V.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 49,
+        "text": "D. 140 V.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 50,
+      "text": "Câu 11: Trong việc truyền tải điện năng đi xa, để giảm công suất tiêu hao trên đường dây lần thì cần phải",
+      "math": [],
+      "images": [
+        {
+          "sha1": "fdcbbf8480dff37cd52595560d389986a0ba1359",
+          "saved_path": "fdcbbf8480dff37cd52595560d389986a0ba1359.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 51,
+        "text": "A. giảm điện áp xuống n lần.",
+        "math": [],
+        "images": [
+          {
+            "sha1": "3d1c213d1f9e85facc2def625dee5557e2cb9c17",
+            "saved_path": "3d1c213d1f9e85facc2def625dee5557e2cb9c17.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 51,
+        "text": "B. giảm điện áp xuống lần.",
+        "math": [],
+        "images": [
+          {
+            "sha1": "3d1c213d1f9e85facc2def625dee5557e2cb9c17",
+            "saved_path": "3d1c213d1f9e85facc2def625dee5557e2cb9c17.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 52,
+        "text": "C. tăng điện áp lên n lần.\nD. tăng điện áp lên lần.",
+        "math": [],
+        "images": [
+          {
+            "sha1": "b351b6acc807affc99cdb538d50175983efd0f62",
+            "saved_path": "b351b6acc807affc99cdb538d50175983efd0f62.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 53,
+      "text": "Câu 12: Pôlôni phóng xạ và biến đổi thành chì Pb. Biết khối lượng các hạt nhân P0; ; Pb lần lượt là: và . Năng lượng tỏa ra khi một hạt nhân pôlôni phân rã xấp xỉ bằng",
+      "math": [],
+      "images": [
+        {
+          "sha1": "ae187a30fb499a0f315f18a9264c8c66b0c6e765",
+          "saved_path": "ae187a30fb499a0f315f18a9264c8c66b0c6e765.png",
+          "selected": true
+        },
+        {
+          "sha1": "8d4c56d79c08defc07bec240b68323817b8b3cd3",
+          "saved_path": "8d4c56d79c08defc07bec240b68323817b8b3cd3.png",
+          "selected": true
+        },
+        {
+          "sha1": "7db6977d4cbeb805c50ca4954bedb20447348823",
+          "saved_path": "7db6977d4cbeb805c50ca4954bedb20447348823.png",
+          "selected": true
+        },
+        {
+          "sha1": "51aa4a0f362ad0ed75d7873312bd193c80cc6c61",
+          "saved_path": "51aa4a0f362ad0ed75d7873312bd193c80cc6c61.png",
+          "selected": true
+        },
+        {
+          "sha1": "65c55c3b7e87ab0e43f3c412ea645ee56f3d3bf3",
+          "saved_path": "65c55c3b7e87ab0e43f3c412ea645ee56f3d3bf3.png",
+          "selected": true
+        },
+        {
+          "sha1": "a13fef6e5828e11ded05d90b12046d04f1906fdb",
+          "saved_path": "a13fef6e5828e11ded05d90b12046d04f1906fdb.png",
+          "selected": true
+        },
+        {
+          "sha1": "6050751829e7e9e7e2e13afae1c6b4a0c51e7d7f",
+          "saved_path": "6050751829e7e9e7e2e13afae1c6b4a0c51e7d7f.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 54,
+        "text": "A. .",
+        "math": [],
+        "images": [
+          {
+            "sha1": "d525f24895daffc1db5998f309cc30fc0b63b5a2",
+            "saved_path": "d525f24895daffc1db5998f309cc30fc0b63b5a2.png",
+            "selected": true
+          },
+          {
+            "sha1": "5ba7927a6b768374900aadc7a4bf4ac309180331",
+            "saved_path": "5ba7927a6b768374900aadc7a4bf4ac309180331.png",
+            "selected": true
+          },
+          {
+            "sha1": "1f412f346900048a8698482ee73c3997579590ee",
+            "saved_path": "1f412f346900048a8698482ee73c3997579590ee.png",
+            "selected": true
+          },
+          {
+            "sha1": "43f0bafd8a6d25fbd6e20f4157f5ccdf290310da",
+            "saved_path": "43f0bafd8a6d25fbd6e20f4157f5ccdf290310da.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 54,
+        "text": "B. .",
+        "math": [],
+        "images": [
+          {
+            "sha1": "d525f24895daffc1db5998f309cc30fc0b63b5a2",
+            "saved_path": "d525f24895daffc1db5998f309cc30fc0b63b5a2.png",
+            "selected": true
+          },
+          {
+            "sha1": "5ba7927a6b768374900aadc7a4bf4ac309180331",
+            "saved_path": "5ba7927a6b768374900aadc7a4bf4ac309180331.png",
+            "selected": true
+          },
+          {
+            "sha1": "1f412f346900048a8698482ee73c3997579590ee",
+            "saved_path": "1f412f346900048a8698482ee73c3997579590ee.png",
+            "selected": true
+          },
+          {
+            "sha1": "43f0bafd8a6d25fbd6e20f4157f5ccdf290310da",
+            "saved_path": "43f0bafd8a6d25fbd6e20f4157f5ccdf290310da.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 54,
+        "text": "C. .",
+        "math": [],
+        "images": [
+          {
+            "sha1": "d525f24895daffc1db5998f309cc30fc0b63b5a2",
+            "saved_path": "d525f24895daffc1db5998f309cc30fc0b63b5a2.png",
+            "selected": true
+          },
+          {
+            "sha1": "5ba7927a6b768374900aadc7a4bf4ac309180331",
+            "saved_path": "5ba7927a6b768374900aadc7a4bf4ac309180331.png",
+            "selected": true
+          },
+          {
+            "sha1": "1f412f346900048a8698482ee73c3997579590ee",
+            "saved_path": "1f412f346900048a8698482ee73c3997579590ee.png",
+            "selected": true
+          },
+          {
+            "sha1": "43f0bafd8a6d25fbd6e20f4157f5ccdf290310da",
+            "saved_path": "43f0bafd8a6d25fbd6e20f4157f5ccdf290310da.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 54,
+        "text": "D. .",
+        "math": [],
+        "images": [
+          {
+            "sha1": "d525f24895daffc1db5998f309cc30fc0b63b5a2",
+            "saved_path": "d525f24895daffc1db5998f309cc30fc0b63b5a2.png",
+            "selected": true
+          },
+          {
+            "sha1": "5ba7927a6b768374900aadc7a4bf4ac309180331",
+            "saved_path": "5ba7927a6b768374900aadc7a4bf4ac309180331.png",
+            "selected": true
+          },
+          {
+            "sha1": "1f412f346900048a8698482ee73c3997579590ee",
+            "saved_path": "1f412f346900048a8698482ee73c3997579590ee.png",
+            "selected": true
+          },
+          {
+            "sha1": "43f0bafd8a6d25fbd6e20f4157f5ccdf290310da",
+            "saved_path": "43f0bafd8a6d25fbd6e20f4157f5ccdf290310da.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 55,
+      "text": "Câu 13: Để xác định nhiệt hóa hơi của nước người ta làm thí nghiệm sau. Đưa hơi nước ở vào một nhiệt lượng kế chứa nước ở Nhiệt độ cuối của hệ là biết nhiệt dung của nhiệt lượng kế là nhiệt dung riêng của nước là . Nhiệt hóa hơi của nước là",
+      "math": [],
+      "images": [
+        {
+          "sha1": "49c362528660f035ffd3ff15a25c1d73c6092eb9",
+          "saved_path": "49c362528660f035ffd3ff15a25c1d73c6092eb9.png",
+          "selected": true
+        },
+        {
+          "sha1": "272d6764de9c2aa608023b6137028824f887d42f",
+          "saved_path": "272d6764de9c2aa608023b6137028824f887d42f.png",
+          "selected": true
+        },
+        {
+          "sha1": "b3a300b9b6a5791dddfbbaba6e228e6a0473dd36",
+          "saved_path": "b3a300b9b6a5791dddfbbaba6e228e6a0473dd36.png",
+          "selected": true
+        },
+        {
+          "sha1": "f9713e79e3997c81b3c73541530c8b41c78f75d0",
+          "saved_path": "f9713e79e3997c81b3c73541530c8b41c78f75d0.png",
+          "selected": true
+        },
+        {
+          "sha1": "a78dbfd3238bfcae50678a67dcf5c30d7d759807",
+          "saved_path": "a78dbfd3238bfcae50678a67dcf5c30d7d759807.png",
+          "selected": true
+        },
+        {
+          "sha1": "fb11a3809b239b5a4ad4a9582401ae4b125cd974",
+          "saved_path": "fb11a3809b239b5a4ad4a9582401ae4b125cd974.png",
+          "selected": true
+        },
+        {
+          "sha1": "f82b65845079a827c3e392d84ea0c24b50505d68",
+          "saved_path": "f82b65845079a827c3e392d84ea0c24b50505d68.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 56,
+        "text": "A.\nB.\nC. D.",
+        "math": [],
+        "images": [
+          {
+            "sha1": "4538f414d20fbbc95de073d3e957b4e298c12a5c",
+            "saved_path": "4538f414d20fbbc95de073d3e957b4e298c12a5c.png",
+            "selected": true
+          },
+          {
+            "sha1": "e780f9e77c49067a8edb9b89a80aa2311194fae1",
+            "saved_path": "e780f9e77c49067a8edb9b89a80aa2311194fae1.png",
+            "selected": true
+          },
+          {
+            "sha1": "39463219e36c50d35844f224d8c28a7b90282c7a",
+            "saved_path": "39463219e36c50d35844f224d8c28a7b90282c7a.png",
+            "selected": true
+          },
+          {
+            "sha1": "9a58740b0fafa3e829b5551a6fef2057a7c64dab",
+            "saved_path": "9a58740b0fafa3e829b5551a6fef2057a7c64dab.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 57,
+      "text": "Câu 14: Phát biểu nào sao đây là SAI khi nói về độ phóng xạ (hoạt độ phóng xạ) ?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 58,
+        "text": "A.Độ phóng xạ là đại lượng đặc trưng cho tính phóng xạ mạnh hay yếu của một lượng chất phóng xạ.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 59,
+        "text": "B. Đơn vị đo độ phóng xạ là Becquerel",
+        "math": [],
+        "images": [
+          {
+            "sha1": "76c24171f080031bf24d8628cbd6252a1eeef2f9",
+            "saved_path": "76c24171f080031bf24d8628cbd6252a1eeef2f9.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 60,
+        "text": "C. Với mỗi lượng chất phóng xạ xác định thì độ phóng xạ tỉ lệ với số nguyên tử của lượng chất đó.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 61,
+        "text": "D. Độ phóng xạ của một lượng chất phóng xạ phụ thuộc nhiệt độ của lượng chất đó.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 62,
+      "text": "Câu 15: Khi nói về khối lượng phân tử của chất khí và thì",
+      "math": [],
+      "images": [
+        {
+          "sha1": "53746d7c60a26bbeaa28b9fff11c508ef0bc02c2",
+          "saved_path": "53746d7c60a26bbeaa28b9fff11c508ef0bc02c2.png",
+          "selected": true
+        },
+        {
+          "sha1": "91f2340af4ff20f76134ba40820635b53b135a21",
+          "saved_path": "91f2340af4ff20f76134ba40820635b53b135a21.png",
+          "selected": true
+        },
+        {
+          "sha1": "d6ee1083d6aa76a3150666c446aa2501cd4db24a",
+          "saved_path": "d6ee1083d6aa76a3150666c446aa2501cd4db24a.png",
+          "selected": true
+        },
+        {
+          "sha1": "40ca839677fcafdb39ee2dde724ad1e310c4c524",
+          "saved_path": "40ca839677fcafdb39ee2dde724ad1e310c4c524.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 63,
+        "text": "A. khối lượng phân tử của các khí H2, He,O2 và N2 đều bằng nhau.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 64,
+        "text": "B. khối lượng phân tử của O2 nặng nhất trong 4 loại khí trên.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 65,
+        "text": "C. khối lượng phân tử của N2 nặng nhất trong 4 loại khí trên.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 66,
+        "text": "D. khối lượng phân tử của He nhẹ nhất trong 4 loại khí trên.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 67,
+      "text": "Câu 16: Khi ấn từ từ pit tông xuống để nén khí trong xi lanh thì",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 68,
+        "text": "A. nhiệt độ khí thay đổi.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 68,
+        "text": "B. áp suất khí tăng, thể tích khí tăng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 69,
+        "text": "C. áp suất tỉ lệ thuận với thể tích.\nD. áp suất khí tăng, thể tích khí giảm.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 70,
+      "text": "Câu 17: Hạt nhân X phóng xạ biến đổi thành hạt nhân bên Y. Ban đầu (t = 0) có một mẫu chất X nguyên chất. Tại thời điểm và tỉ số giữa số hạt nhân Y và số hạt nhân X ở trong mẫu tương ứng là 2 và 3. Tại thời điểm tỉ số đó là",
+      "math": [],
+      "images": [
+        {
+          "sha1": "77fcdad7e11a35d966ff16610e4f049bf4912d19",
+          "saved_path": "77fcdad7e11a35d966ff16610e4f049bf4912d19.png",
+          "selected": true
+        },
+        {
+          "sha1": "ff10eaeec365ada6e60c7d1f43f0e9718ba525f7",
+          "saved_path": "ff10eaeec365ada6e60c7d1f43f0e9718ba525f7.png",
+          "selected": true
+        },
+        {
+          "sha1": "0f36cab5ba10fa896ff07407e4abad585f0989d3",
+          "saved_path": "0f36cab5ba10fa896ff07407e4abad585f0989d3.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 71,
+        "text": "A. 17.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 71,
+        "text": "B. 575.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 71,
+        "text": "C. 107.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 71,
+        "text": "D. 72.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 72,
+      "text": "Câu 18: Pôlôni là chất phóng xạ có chu kì bán rã ngày và biến đổi thành hạt nhân chì. Vào lúc ngày một mẫu phóng xạ có khối lượng được phát hiện, trong đó khối lượng của mẫu là chất phóng xạ pôlôni phần còn lại không có tính phóng xạ. Giả sử toàn bộ các hạt sinh ra trong quá trình phóng xạ đều thoát ra khỏi mẫu. Lấy khối lượng của các hạt nhân bằng số khối của chúng tính theo đơn vị Vào ngày nào sau đây khối lượng của mẫu có giá trị là",
+      "math": [],
+      "images": [
+        {
+          "sha1": "511f41d15effbcd887dde2826d31de9bc26458b7",
+          "saved_path": "511f41d15effbcd887dde2826d31de9bc26458b7.png",
+          "selected": true
+        },
+        {
+          "sha1": "fd3429446c0493cd6d439dbb87f8c2de10abbe0c",
+          "saved_path": "fd3429446c0493cd6d439dbb87f8c2de10abbe0c.png",
+          "selected": true
+        },
+        {
+          "sha1": "dd6bbaf3f9e58e8115f9a62048b9607d060bbcfd",
+          "saved_path": "dd6bbaf3f9e58e8115f9a62048b9607d060bbcfd.png",
+          "selected": true
+        },
+        {
+          "sha1": "d3e2827aa05fac77675bf768d9320f7cdf58e0f5",
+          "saved_path": "d3e2827aa05fac77675bf768d9320f7cdf58e0f5.png",
+          "selected": true
+        },
+        {
+          "sha1": "0afa27a22c406891221e0db1263479494bc29ad2",
+          "saved_path": "0afa27a22c406891221e0db1263479494bc29ad2.png",
+          "selected": true
+        },
+        {
+          "sha1": "d835e2ae24dbd9eaebddec269f1aa2acda372394",
+          "saved_path": "d835e2ae24dbd9eaebddec269f1aa2acda372394.png",
+          "selected": true
+        },
+        {
+          "sha1": "d45a8374fc0687289310ab83c281649af9496896",
+          "saved_path": "d45a8374fc0687289310ab83c281649af9496896.png",
+          "selected": true
+        },
+        {
+          "sha1": "fcd403473c2d9bce53c6fddb73005e62b3a4b7bd",
+          "saved_path": "fcd403473c2d9bce53c6fddb73005e62b3a4b7bd.png",
+          "selected": true
+        },
+        {
+          "sha1": "8972700baa3bce0d503cdaadb5f218758c718c77",
+          "saved_path": "8972700baa3bce0d503cdaadb5f218758c718c77.png",
+          "selected": true
+        },
+        {
+          "sha1": "639322c36a2b48c54a0e66bfd6a313cf8cad0cb4",
+          "saved_path": "639322c36a2b48c54a0e66bfd6a313cf8cad0cb4.png",
+          "selected": true
+        },
+        {
+          "sha1": "f98fb4e4649d50eba8180942fc9ddb5e5470d906",
+          "saved_path": "f98fb4e4649d50eba8180942fc9ddb5e5470d906.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 73,
+        "text": "A. 16/2/2024B. 14/2/2024C. 28/4/2024D. 20/12/2024",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 75,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 76,
+      "text": "Câu 1: Trong một ngày, một học sinh theo dõi nhiệt độ không khí trong nhà và lập được bảng bên.",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 77,
+        "text": "A. Thời gian",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 78,
+        "text": "B. Nhiệt độ",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 79,
+        "text": "C. 7 giờ",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 80,
+        "text": "D. 250C",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 81,
+        "text": "E. 9 giờ",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 82,
+        "text": "F. 270C",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 83,
+        "text": "G. 10 giờ",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 84,
+        "text": "H. 290C",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 85,
+        "text": "I. 12 giờ",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 86,
+        "text": "J. 310C",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 87,
+        "text": "K. 16 giờ",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 88,
+        "text": "L. 300C",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 89,
+        "text": "M. 18 giờ",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 90,
+        "text": "N. 290C",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 91,
+        "text": "O. a. Nhiệt độ lúc 9 giờ là 270C.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 92,
+        "text": "P. b. Nhiệt độ đạt 310C vào lúc 18 giờ.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 93,
+        "text": "Q. c. Lúc 10 giờ thì nhà nóng nhất.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 94,
+        "text": "R. d. Lúc 7 giờ thì nhiệt độ thấp nhất.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 95,
+      "text": "Câu 2: Khi tấm kim loại bằng đồng dao động trong từ trường giữa hai cực của một nam châm chữ U.",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 96,
+        "text": "A. a. Trong tấm kim loại xuất hiện dòng điện Foucault.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 97,
+        "text": "B. b. Dòng điện trong tấm kim loại là dòng điện cảm ứng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 98,
+        "text": "C. c. Nhiệt độ của tấm kim loại giảm dần.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 99,
+        "text": "D. d. Dao động của tấm kim loại là dao động tắt dần.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 100,
+      "text": "Câu 3: Một hỗn hợp khí helium và argon ở áp suất và nhiệt độ khối lượng riêng Biết khối lượng mol",
+      "math": [],
+      "images": [
+        {
+          "sha1": "9ac8ba96015cc18bb0afc66ae035439c1595cd5d",
+          "saved_path": "9ac8ba96015cc18bb0afc66ae035439c1595cd5d.png",
+          "selected": true
+        },
+        {
+          "sha1": "12a0fdb960fed6c1615e64f954063748248d4d24",
+          "saved_path": "12a0fdb960fed6c1615e64f954063748248d4d24.png",
+          "selected": true
+        },
+        {
+          "sha1": "bebd90401ddfe6e8bd290c3a3f188a4e8cf05232",
+          "saved_path": "bebd90401ddfe6e8bd290c3a3f188a4e8cf05232.png",
+          "selected": true
+        },
+        {
+          "sha1": "12ca96c77836402afa09fd115c4437fa1fb86111",
+          "saved_path": "12ca96c77836402afa09fd115c4437fa1fb86111.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 101,
+        "text": "A. a. Khối lượng khí Argon trong hỗn hợp là",
+        "math": [],
+        "images": [
+          {
+            "sha1": "e8897db31583bee10bb3c20e2edde1d1b8ce6c7c",
+            "saved_path": "e8897db31583bee10bb3c20e2edde1d1b8ce6c7c.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 102,
+        "text": "B. b. Số phân tử Argon trong hỗn hợp khí là",
+        "math": [],
+        "images": [
+          {
+            "sha1": "1761234a61c47c84b53b6720f90416bb58a47638",
+            "saved_path": "1761234a61c47c84b53b6720f90416bb58a47638.png",
+            "selected": true
+          },
+          {
+            "sha1": "342e8f4541eed03a6cc9567fb33c9aa4b7f92154",
+            "saved_path": "342e8f4541eed03a6cc9567fb33c9aa4b7f92154.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 103,
+        "text": "C. c. Khối lượng khí Helium trong hỗn hợp khí là",
+        "math": [],
+        "images": [
+          {
+            "sha1": "dad6e82ceccfe7cee210c37595aaedd411a56ef0",
+            "saved_path": "dad6e82ceccfe7cee210c37595aaedd411a56ef0.png",
+            "selected": true
+          },
+          {
+            "sha1": "816968e5a2ce93e030c0075114c76fcf2f9c03fa",
+            "saved_path": "816968e5a2ce93e030c0075114c76fcf2f9c03fa.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 104,
+        "text": "D. d. Số phân tử Helium trong hỗn hợp khí là",
+        "math": [],
+        "images": [
+          {
+            "sha1": "3c9a508fcf641fc7441e2952f38d1b4f51b10792",
+            "saved_path": "3c9a508fcf641fc7441e2952f38d1b4f51b10792.png",
+            "selected": true
+          },
+          {
+            "sha1": "d14ce037d2889db23308e0eeb1be2a5d389c723f",
+            "saved_path": "d14ce037d2889db23308e0eeb1be2a5d389c723f.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 105,
+      "text": "Câu 4: Uranium có chu kì bán rã là năm. Khi phóng xạ Uranium biến thành Thorium Ban đầu có Uranium.",
+      "math": [],
+      "images": [
+        {
+          "sha1": "ca0bb18d6da4c9ac47f6c59844621b24f2322c03",
+          "saved_path": "ca0bb18d6da4c9ac47f6c59844621b24f2322c03.png",
+          "selected": true
+        },
+        {
+          "sha1": "b7708e971c0a607464d40d3d0a39f3f7fbde26b5",
+          "saved_path": "b7708e971c0a607464d40d3d0a39f3f7fbde26b5.png",
+          "selected": true
+        },
+        {
+          "sha1": "2db1e004b579d590953973fbfab61ad7c4d90efd",
+          "saved_path": "2db1e004b579d590953973fbfab61ad7c4d90efd.png",
+          "selected": true
+        },
+        {
+          "sha1": "7f4a259a4ed40912a3c39449f5ef3ac98f89cc69",
+          "saved_path": "7f4a259a4ed40912a3c39449f5ef3ac98f89cc69.png",
+          "selected": true
+        },
+        {
+          "sha1": "1f51636c725da62aa3ececff466219b527c3b486",
+          "saved_path": "1f51636c725da62aa3ececff466219b527c3b486.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 106,
+        "text": "A. a. Hạt nhân Thorium bền hơn hạt nhân Uranium",
+        "math": [],
+        "images": [
+          {
+            "sha1": "7e1e73d561aa7405f7997bfa436daf19813f2bf8",
+            "saved_path": "7e1e73d561aa7405f7997bfa436daf19813f2bf8.png",
+            "selected": true
+          },
+          {
+            "sha1": "700a7ce4988a00c3203d3e2e984cf4fc8689e3e8",
+            "saved_path": "700a7ce4988a00c3203d3e2e984cf4fc8689e3e8.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 107,
+        "text": "B. b. Khối lượng Uranium còn lại sau năm là",
+        "math": [],
+        "images": [
+          {
+            "sha1": "0e36f3a40ffcb087216a6a207e263ef73c173e9e",
+            "saved_path": "0e36f3a40ffcb087216a6a207e263ef73c173e9e.png",
+            "selected": true
+          },
+          {
+            "sha1": "6645782d725c3e0c353b1d7b2b5d27da7bed300a",
+            "saved_path": "6645782d725c3e0c353b1d7b2b5d27da7bed300a.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 108,
+        "text": "C. c. Số hạt nhân Uranium còn lại sau năm là 3,7265.1021 hạt nhân.",
+        "math": [],
+        "images": [
+          {
+            "sha1": "cd56c15b095a4a81f08dc6f9d46b7b1b1e134a98",
+            "saved_path": "cd56c15b095a4a81f08dc6f9d46b7b1b1e134a98.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 109,
+        "text": "D. d. Tỉ số giữa số hạt nhân Uranium còn lại và số hạt nhân Thorium tạo thành sau năm là",
+        "math": [],
+        "images": [
+          {
+            "sha1": "37957bdf61c6711bf8d2a07f6f2220907d71bbca",
+            "saved_path": "37957bdf61c6711bf8d2a07f6f2220907d71bbca.png",
+            "selected": true
+          },
+          {
+            "sha1": "c53122c80ec5b593d78c9757879c6fca243a57d6",
+            "saved_path": "c53122c80ec5b593d78c9757879c6fca243a57d6.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 111,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 112,
+      "text": "Câu 1. Tính nhiệt lượng (theo đơi vị kJ) cần cung cấp cho miếng nhôm khối lượng 100 gam ở nhiệt độ 200C, để nó hóa lỏng hoàn toàn ở nhiệt độ 6580C. Biết nhôm có nhiệt dung riêng 896 J/kg.K và nhiệt nóng chảy 39.104 J/kg.",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 113,
+      "text": "Câu 2. Khối lượng riêng của một chất khí ở áp suất 300 mmHg là 0,3 kg/m3. Vận tốc căn quân phương của các phân tử khí khi đó gần bằng bao nhiêu?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 114,
+      "text": "Câu 3. Một hỗn hợp phóng xạ có hai chất phóng xạ X và Y. Biết chu kì bán rã của X và Y lần lượt là và , và lúc đầu số hạt X bằng số hạt Y. Tính khoảng thời gian theo đơn vị h để số hạt nguyên chất của hỗn hợp chỉ còn một nửa số hạt lúc đầu. Kết quả làm tròn đến hai chữ số sau dấu phẩy.",
+      "math": [],
+      "images": [
+        {
+          "sha1": "f3e5798a88b5dd87a22778b66c1bd8940c25623c",
+          "saved_path": "f3e5798a88b5dd87a22778b66c1bd8940c25623c.png",
+          "selected": true
+        },
+        {
+          "sha1": "830b081e2708329043e6d09ae8e58425dfd32fd6",
+          "saved_path": "830b081e2708329043e6d09ae8e58425dfd32fd6.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 115,
+      "text": "Câu 4. Một bình cách nhiệt nhẹ chứa nước ở nhiệt độ t0 = 20°\nC. Người ta lần lượt thả vào bình này những quả cầu giống nhau đã được đốt nóng đến 100°\nC. Sau khi thả quả cầu thứ nhất thì nhiệt độ của nước trong bình khi cân bằng nhiệt là t₁ = 40°\nC. Bỏ qua sự trao đổi nhiệt với bình và môi trường. Giả thiết nước không bị tràn ra ngoài và không tính đến sự bay hơi của nước. Cần phải thả bao nhiêu quả cầu để nhiệt độ của nước trong bình khi cân bằng nhiệt là 90°C?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 116,
+      "text": "Câu 5. Một sóng vô tuyến và một sóng cơ có cùng tần số, khi truyền trong không khí tốc độ hai sóng lần lượt là và Tỉ số của bước sóng giữa sóng vô tuyến và sóng cơ bằng bao nhiêu?",
+      "math": [],
+      "images": [
+        {
+          "sha1": "025cad3e70501ca333a955f50896ca9cbedfde40",
+          "saved_path": "025cad3e70501ca333a955f50896ca9cbedfde40.png",
+          "selected": true
+        },
+        {
+          "sha1": "3a71df8d6cc14509a0c1ba60f8173efcad33a2b4",
+          "saved_path": "3a71df8d6cc14509a0c1ba60f8173efcad33a2b4.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 117,
+      "text": "Câu 6. Hiện nay urani tự nhiên chứa hai đồng vị phóng xạ và với tỉ lệ số hạt và số hạt là Biết chu kì bán rã và lần lượt là năm và năm. Cách đây bao nhiêu tỉ năm, urani tự nhiên có tỷ lệ số hạt và số là (Kết quả làm tròn đến 2 chử số thập phân sau dấu phẩy)?",
+      "math": [],
+      "images": [
+        {
+          "sha1": "23e39ecb5dc72a940926830ef747b7acc7ccae07",
+          "saved_path": "23e39ecb5dc72a940926830ef747b7acc7ccae07.png",
+          "selected": true
+        },
+        {
+          "sha1": "5ed59bf65d361880511d25af7da95028016ee07c",
+          "saved_path": "5ed59bf65d361880511d25af7da95028016ee07c.png",
+          "selected": true
+        },
+        {
+          "sha1": "2159059ccad70236854a71f4838a31eaa9a8fc26",
+          "saved_path": "2159059ccad70236854a71f4838a31eaa9a8fc26.png",
+          "selected": true
+        },
+        {
+          "sha1": "1606f0a35e40aceddeeaedd864fab2f728f37b16",
+          "saved_path": "1606f0a35e40aceddeeaedd864fab2f728f37b16.png",
+          "selected": true
+        },
+        {
+          "sha1": "486d6710fea901fbdd25cd3d4454b7c17efcf4d8",
+          "saved_path": "486d6710fea901fbdd25cd3d4454b7c17efcf4d8.png",
+          "selected": true
+        },
+        {
+          "sha1": "e948dd21cb07d63f4314257877d3f9d54eedf627",
+          "saved_path": "e948dd21cb07d63f4314257877d3f9d54eedf627.png",
+          "selected": true
+        },
+        {
+          "sha1": "b5f27486758b4b3ccf8660b451dce3f17547c431",
+          "saved_path": "b5f27486758b4b3ccf8660b451dce3f17547c431.png",
+          "selected": true
+        },
+        {
+          "sha1": "888536206bdf06bb67c9071896da471d81459d87",
+          "saved_path": "888536206bdf06bb67c9071896da471d81459d87.png",
+          "selected": true
+        },
+        {
+          "sha1": "ce81a2471bcd33f72b3a11182cc3d9f6a0c7f837",
+          "saved_path": "ce81a2471bcd33f72b3a11182cc3d9f6a0c7f837.png",
+          "selected": true
+        },
+        {
+          "sha1": "ce003bed7f999d454d3e6bafb95f24882a030f14",
+          "saved_path": "ce003bed7f999d454d3e6bafb95f24882a030f14.png",
+          "selected": true
+        },
+        {
+          "sha1": "9ab576fe5998fc6fd7ac93b50656dbfcecc8bfc1",
+          "saved_path": "9ab576fe5998fc6fd7ac93b50656dbfcecc8bfc1.png",
+          "selected": true
+        },
+        {
+          "sha1": "e8812dbadc8bdfb158471b09de62f021c29ac865",
+          "saved_path": "e8812dbadc8bdfb158471b09de62f021c29ac865.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 120,
+        "text": "A. ----------------HẾT----------------",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 121,
+        "text": "B. -Thí sinh không được sử dụng tài liệu.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 122,
+        "text": "C. -Giám thị không giải thích gì thêm.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 124,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 125,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 126,
+      "text": "Trong điều kiện chuẩn về nhiệt độ và áp suất thì",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 127,
+        "text": "A. số phân tử trong một đơn vị thể tích của các chất khí khác nhau là như nhau.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 128,
+        "text": "B. các phân tử của các chất khí khác nhau chuyển động với vận tốc như nhau.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 129,
+        "text": "C. khoảng cách giữa các phân tử rất nhỏ so với kích thước của các phân tử.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 130,
+        "text": "D. các phân tử khí khác nhau va chạm vào thành bình tác dụng vào thành bình những lực bằng nhau.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 131,
+        "text": "E. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 132,
+      "text": "Trong điều kiện chuẩn về nhiệt độ và áp suất (điều kiện tiêu chuẩn áp suất 1 atm, nhiệt độ 273 0 K, thể tích 22,4 lít) thì số phân tử trong một đơn vị thể tích của các chất khí khác nhau là như nhau.",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 133,
+      "text": "Khi truyền nhiệt cho một khối khí thì khối khí có thể",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 134,
+        "text": "A. tăng nội năng và thực hiện công.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 134,
+        "text": "B. giảm nội năng và nhận công.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 135,
+        "text": "C. giảm nội năng.\nD. nhận công.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 136,
+        "text": "C. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 137,
+      "text": "Khi truyền nhiệt cho một khối khí thì có thể làm tăng nội năng của khối khí, đồng thời khối khí dãn nở và sinh công.",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 138,
+      "text": "Ví dụ nhiệt lượng cung cấp cho khối khí trong quá trình đẳng áp, ngoài việc dùng để làm nóng khí (tăng nội năng) còn làm cho chất khí dãn nở (khí thực hiện công).",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 139,
+      "text": "Câu nào sau đây nói về nhiệt lượng là không đúng?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 140,
+        "text": "A. Nhiệt lượng là số đo độ tăng nội năng của vật trong quá trình truyền nhiệt.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 141,
+        "text": "B. Một vật lúc nào cũng có nội năng nên lúc nào cũng có nhiệt lượng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 142,
+        "text": "C. Đơn vị của nhiệt lượng cũng là đơn vị của nội năng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 143,
+        "text": "D. Nhiệt lượng không phải là nội năng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 144,
+        "text": "E. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 145,
+        "text": "F. Nhiệt lượng là số đo độ biến thiên nội năng của vật trong quá trình truyền nhiệt.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 146,
+      "text": "Một vật lúc nào cũng có nội năng nhưng không tham gia vào quá trình truyền nhiệt thì nội năng không biến đổi nên không có nhiệt lượng được nhận thêm hay mất đi.",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 147,
+        "text": "A. Phóng xạ là",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 148,
+        "text": "A. quá trình hạt nhân nguyên tử phát các tia không nhìn thấy.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 149,
+        "text": "B. quá trình phân rã tự phát của một hạt nhân không bền vững.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 150,
+        "text": "C. quá trình hạt nhân nguyên tử hấp thụ năng lượng để phát ra các tia .",
+        "math": [],
+        "images": [
+          {
+            "sha1": "2958bb9dec92fc79295739938156e80ec0c0b365",
+            "saved_path": "2958bb9dec92fc79295739938156e80ec0c0b365.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 151,
+        "text": "D. quá trình hạt nhân nguyên tử nặng bị phá vỡ thành các hạt nhân nhỏ hơn.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 152,
+        "text": "F. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 153,
+        "text": "G. - Phóng xạ là hiện tượng hạt nhân nguyên tử của một số nguyên tố (kém bền vững) tự phóng ra các bức xạ rồi biến đổi thành hạt nhân nguyên tử của các nguyên tố khác (bền vững hơn).",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 154,
+        "text": "H. - Như vậy phóng xạ quá trình phân rã tự phát của một hạt nhân không bền vững.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 155,
+      "text": "Phát biểu nào sau đây là không đúng khi nói về điện từ trường",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 156,
+        "text": "A. Khi một điện trường biến thiên theo thời gian, nó sinh ra một từ trường xoáy.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 157,
+        "text": "B. Điện trường xoáy là điện trường có các đường sức là những đường cong.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 158,
+        "text": "C. Khi một từ trường biến thiên theo thời gian, nó sinh ra một điện trường.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 159,
+        "text": "D. Từ trường xoáy có các đường sức từ bao quanh các đường sức điện.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 160,
+        "text": "E. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 161,
+        "text": "F. Điện trường xoáy có các đường sức là những đường cong kín, không phải chỉ là những đường cong.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 162,
+      "text": "Ban đầu một mẫu chất phóng xạ nguyên chất có hạt nhân. Biết chu kì bán rã của chất phóng xạ này là T. Sau thời gian 5T, kể từ thời điểm ban đầu số hạt nhân chưa phân rã của mẫu chất phóng xạ này là",
+      "math": [],
+      "images": [
+        {
+          "sha1": "ac5aa1884908e872127c93c8f82b044a8b57f7e8",
+          "saved_path": "ac5aa1884908e872127c93c8f82b044a8b57f7e8.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 163,
+        "text": "A.\nB.\nC. D.",
+        "math": [],
+        "images": [
+          {
+            "sha1": "eba56536dca73ba8e37c5ef4dc8486ec14a793d6",
+            "saved_path": "eba56536dca73ba8e37c5ef4dc8486ec14a793d6.png",
+            "selected": true
+          },
+          {
+            "sha1": "39d88881eb0ecaea0342d0fdd3641647525ed7d6",
+            "saved_path": "39d88881eb0ecaea0342d0fdd3641647525ed7d6.png",
+            "selected": true
+          },
+          {
+            "sha1": "395f9bbe800698a2f3ddf60ad698838287a5a278",
+            "saved_path": "395f9bbe800698a2f3ddf60ad698838287a5a278.png",
+            "selected": true
+          },
+          {
+            "sha1": "27a5cdaeb06b029022fa2ad990bbb480abb3bc3e",
+            "saved_path": "27a5cdaeb06b029022fa2ad990bbb480abb3bc3e.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 164,
+        "text": "B. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 165,
+        "text": "",
+        "math": [],
+        "images": [
+          {
+            "sha1": "a31f1ff0db5db51facbbd1cfbbc5903a8a20eb2d",
+            "saved_path": "a31f1ff0db5db51facbbd1cfbbc5903a8a20eb2d.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 166,
+      "text": "Trên hình bên là hai đường đẳng nhiệt của cùng một lượng khí lý tưởng ở hai nhiệt độ khác nhau,",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 167,
+        "text": "",
+        "math": [],
+        "images": [
+          {
+            "sha1": "3c7ee5a63044e178e75d176f7b08214fb306feae",
+            "saved_path": null,
+            "selected": false
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 168,
+      "text": "Thông tin đúng khi so sánh nhiệt độ T1 và T2 là",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 169,
+        "text": "A.\nB.\nC. D.",
+        "math": [],
+        "images": [
+          {
+            "sha1": "0262a48c345542c4c2bf071659c6130d5b9dc4b2",
+            "saved_path": "0262a48c345542c4c2bf071659c6130d5b9dc4b2.png",
+            "selected": true
+          },
+          {
+            "sha1": "0c8dc0a6ca7ad8c7afc2b644c5e8b2bc40e6f5df",
+            "saved_path": "0c8dc0a6ca7ad8c7afc2b644c5e8b2bc40e6f5df.png",
+            "selected": true
+          },
+          {
+            "sha1": "abaa5e6af63635df643af43c5866dea68e359e38",
+            "saved_path": "abaa5e6af63635df643af43c5866dea68e359e38.png",
+            "selected": true
+          },
+          {
+            "sha1": "4c9652358a623279d1b22c6837f64033273a9e90",
+            "saved_path": "4c9652358a623279d1b22c6837f64033273a9e90.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 170,
+        "text": "B. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 171,
+        "text": "C. do Từ kẻ đường thẳng song song với trục Op, cắt hai đường đẳng nhiệt tại hai vị trí (1) và (2) . Khi đó ta có nên các phân tử chất khí ở trạng thái (2) chuyển động nhanh hơn các phân tử chất khí ở trạng thái (1) nên",
+        "math": [],
+        "images": [
+          {
+            "sha1": "fe55c6be61ee10c26671db8aefa6b68d670fff4b",
+            "saved_path": "fe55c6be61ee10c26671db8aefa6b68d670fff4b.png",
+            "selected": true
+          },
+          {
+            "sha1": "2461b0e768b26caa7eb70c37b6972216d5421c9e",
+            "saved_path": "2461b0e768b26caa7eb70c37b6972216d5421c9e.png",
+            "selected": true
+          },
+          {
+            "sha1": "d055c4fbe0d94519327390d1393805095a29b7e4",
+            "saved_path": "d055c4fbe0d94519327390d1393805095a29b7e4.png",
+            "selected": true
+          },
+          {
+            "sha1": "9df935592a0501ebfb77c4e59db90be3fc38eca4",
+            "saved_path": "9df935592a0501ebfb77c4e59db90be3fc38eca4.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 172,
+        "text": "D. Trong quá trình truyền sóng điện từ, vector cường độ điện trường và vector cảm ứng từ luôn",
+        "math": [],
+        "images": [
+          {
+            "sha1": "4454cfea5626282d492ba6d87be060b16639d702",
+            "saved_path": "4454cfea5626282d492ba6d87be060b16639d702.png",
+            "selected": true
+          },
+          {
+            "sha1": "f42a7895e5b7a93d9409aefdebeb5d428693c5bc",
+            "saved_path": "f42a7895e5b7a93d9409aefdebeb5d428693c5bc.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 173,
+        "text": "A. có phương vuông góc với nhau và vuông góc với phương truyền sóng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 174,
+        "text": "B. có phương song song và cùng chiều.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 175,
+        "text": "C. có phương song song và ngược chiều.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 176,
+        "text": "D. có phương trùng với phương truyền sóng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 177,
+        "text": "I. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 178,
+        "text": "J. Trong quá trình truyền sóng điện từ, vector cường độ điện trường và vector cảm ứng từ luôn có phương vuông góc với nhau và vuông góc với phương truyền sóng",
+        "math": [],
+        "images": [
+          {
+            "sha1": "4454cfea5626282d492ba6d87be060b16639d702",
+            "saved_path": "4454cfea5626282d492ba6d87be060b16639d702.png",
+            "selected": true
+          },
+          {
+            "sha1": "f42a7895e5b7a93d9409aefdebeb5d428693c5bc",
+            "saved_path": "f42a7895e5b7a93d9409aefdebeb5d428693c5bc.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 179,
+      "text": "Trong hai nhiệt lượng kế có chứa hai chất lỏng khác nhau ở hai nhiệt độ ban đầu khác nhau. Người ta dùng một nhiệt kế, lần lượt nhúng đi nhúng lại vào nhiệt lượng kế 1 rồi vào nhiệt lượng kế 2. Số chỉ của nhiệt kế lần lượt là 80°C, 16°C, 78°C, 19°C. Đến lần nhúng tiếp theo nhiệt kế chỉ",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 180,
+        "text": "A. 75°C.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 180,
+        "text": "B. 76°C.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 180,
+        "text": "C. 77°C.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 180,
+        "text": "D. 78°C.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 181,
+        "text": "B. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 182,
+      "text": "Gọi nhiệt dung của bình 1,2 và nhiệt kế lần lượt là c1, c2, c3.",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 183,
+      "text": "Khi nhúng nhiệt kế vào bình 1 thì nhiệt độ cân bằng là ta có",
+      "math": [],
+      "images": [
+        {
+          "sha1": "566d8fa6e0c1825173aad751ed280aa0e0a0fb6f",
+          "saved_path": "566d8fa6e0c1825173aad751ed280aa0e0a0fb6f.png",
+          "selected": true
+        },
+        {
+          "sha1": "93c09ef10a67e6afb40ebd1e785b23a1121a8a8d",
+          "saved_path": "93c09ef10a67e6afb40ebd1e785b23a1121a8a8d.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 184,
+      "text": "Khi nhúng nhiệt kế vào bình 2 thì nhiệt độ cân bằng là ta có",
+      "math": [],
+      "images": [
+        {
+          "sha1": "9720106f747e805056a3cd1f9ccc43b3b668eb08",
+          "saved_path": "9720106f747e805056a3cd1f9ccc43b3b668eb08.png",
+          "selected": true
+        },
+        {
+          "sha1": "a6f97c63a18523d0241d4065cc93f2112c553fc9",
+          "saved_path": "a6f97c63a18523d0241d4065cc93f2112c553fc9.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 185,
+      "text": "Đến lần nhúng tiếp theo vào bình 1 thì",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 186,
+        "text": "",
+        "math": [],
+        "images": [
+          {
+            "sha1": "603c0df81ed9f9fd40ec8af162e92ab33ddf6ba8",
+            "saved_path": "603c0df81ed9f9fd40ec8af162e92ab33ddf6ba8.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 187,
+      "text": "Cuộn thứ cấp của một máy biến áp có 800 vòng. Từ thông trong lõi biến thế biến thiên với tần số 50 Hz và giá trị từ thông cực đại qua một vòng dây bằng 2,4 mWb. Suất điện động hiệu dụng cuộn thứ cấp có giá trị xấp xỉ bằng",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 188,
+        "text": "A. 220 V.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 188,
+        "text": "B. 456,8 V.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 188,
+        "text": "C. 426,5 V.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 188,
+        "text": "D. 140 V.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 189,
+        "text": "B. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 190,
+        "text": "C. Do cấu tạo của máy biến áp, hầu như mọi đường sức từ chỉ chạy trong lõi biến áp nên từ thông qua mỗi vòng dây ở cả hai cuộn bằng nhau, suất điện động cảm ứng trong mỗi vòng dây cũng bằng nhau.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 191,
+      "text": "Suất điện động ở cuộn thứ cấp là:",
+      "math": [],
+      "images": [
+        {
+          "sha1": "010220e46f860961cb597596ef2b19f5b88a397f",
+          "saved_path": "010220e46f860961cb597596ef2b19f5b88a397f.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 192,
+      "text": "Suất điện động hiệu dụng cuộn thứ cấp là:",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 193,
+        "text": "",
+        "math": [],
+        "images": [
+          {
+            "sha1": "ab14247c3863d31573364cce2f0be8b2989ccab4",
+            "saved_path": "ab14247c3863d31573364cce2f0be8b2989ccab4.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 194,
+      "text": "Trong việc truyền tải điện năng đi xa, để giảm công suất tiêu hao trên đường dây lần thì cần phải",
+      "math": [],
+      "images": [
+        {
+          "sha1": "fdcbbf8480dff37cd52595560d389986a0ba1359",
+          "saved_path": "fdcbbf8480dff37cd52595560d389986a0ba1359.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 195,
+        "text": "A. giảm điện áp xuống n lần.",
+        "math": [],
+        "images": [
+          {
+            "sha1": "3d1c213d1f9e85facc2def625dee5557e2cb9c17",
+            "saved_path": "3d1c213d1f9e85facc2def625dee5557e2cb9c17.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 195,
+        "text": "B. giảm điện áp xuống lần.",
+        "math": [],
+        "images": [
+          {
+            "sha1": "3d1c213d1f9e85facc2def625dee5557e2cb9c17",
+            "saved_path": "3d1c213d1f9e85facc2def625dee5557e2cb9c17.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 196,
+        "text": "C. tăng điện áp lên n lần.\nD. tăng điện áp lên lần.",
+        "math": [],
+        "images": [
+          {
+            "sha1": "b351b6acc807affc99cdb538d50175983efd0f62",
+            "saved_path": "b351b6acc807affc99cdb538d50175983efd0f62.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 197,
+        "text": "C. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 198,
+      "text": "Hao phí trên đường dây tải điện được xác định bằng biểu thức:",
+      "math": [],
+      "images": [
+        {
+          "sha1": "b31ac6b81d9e5ed6898c4ec4a2cc5654ab4c871f",
+          "saved_path": "b31ac6b81d9e5ed6898c4ec4a2cc5654ab4c871f.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 199,
+      "text": "Nên để giảm đi n lần thì U tăng lên",
+      "math": [],
+      "images": [
+        {
+          "sha1": "446c99552885fa34ed347b58352d4513a5dd21d3",
+          "saved_path": "446c99552885fa34ed347b58352d4513a5dd21d3.png",
+          "selected": true
+        },
+        {
+          "sha1": "b351b6acc807affc99cdb538d50175983efd0f62",
+          "saved_path": "b351b6acc807affc99cdb538d50175983efd0f62.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 200,
+      "text": "Pôlôni phóng xạ và biến đổi thành chì Pb. Biết khối lượng các hạt nhân P0; ; Pb lần lượt là: và . Năng lượng tỏa ra khi một hạt nhân pôlôni phân rã xấp xỉ bằng",
+      "math": [],
+      "images": [
+        {
+          "sha1": "ae187a30fb499a0f315f18a9264c8c66b0c6e765",
+          "saved_path": "ae187a30fb499a0f315f18a9264c8c66b0c6e765.png",
+          "selected": true
+        },
+        {
+          "sha1": "8d4c56d79c08defc07bec240b68323817b8b3cd3",
+          "saved_path": "8d4c56d79c08defc07bec240b68323817b8b3cd3.png",
+          "selected": true
+        },
+        {
+          "sha1": "7db6977d4cbeb805c50ca4954bedb20447348823",
+          "saved_path": "7db6977d4cbeb805c50ca4954bedb20447348823.png",
+          "selected": true
+        },
+        {
+          "sha1": "51aa4a0f362ad0ed75d7873312bd193c80cc6c61",
+          "saved_path": "51aa4a0f362ad0ed75d7873312bd193c80cc6c61.png",
+          "selected": true
+        },
+        {
+          "sha1": "65c55c3b7e87ab0e43f3c412ea645ee56f3d3bf3",
+          "saved_path": "65c55c3b7e87ab0e43f3c412ea645ee56f3d3bf3.png",
+          "selected": true
+        },
+        {
+          "sha1": "a13fef6e5828e11ded05d90b12046d04f1906fdb",
+          "saved_path": "a13fef6e5828e11ded05d90b12046d04f1906fdb.png",
+          "selected": true
+        },
+        {
+          "sha1": "6050751829e7e9e7e2e13afae1c6b4a0c51e7d7f",
+          "saved_path": "6050751829e7e9e7e2e13afae1c6b4a0c51e7d7f.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 201,
+        "text": "A. .",
+        "math": [],
+        "images": [
+          {
+            "sha1": "d525f24895daffc1db5998f309cc30fc0b63b5a2",
+            "saved_path": "d525f24895daffc1db5998f309cc30fc0b63b5a2.png",
+            "selected": true
+          },
+          {
+            "sha1": "5ba7927a6b768374900aadc7a4bf4ac309180331",
+            "saved_path": "5ba7927a6b768374900aadc7a4bf4ac309180331.png",
+            "selected": true
+          },
+          {
+            "sha1": "1f412f346900048a8698482ee73c3997579590ee",
+            "saved_path": "1f412f346900048a8698482ee73c3997579590ee.png",
+            "selected": true
+          },
+          {
+            "sha1": "43f0bafd8a6d25fbd6e20f4157f5ccdf290310da",
+            "saved_path": "43f0bafd8a6d25fbd6e20f4157f5ccdf290310da.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 201,
+        "text": "B. .",
+        "math": [],
+        "images": [
+          {
+            "sha1": "d525f24895daffc1db5998f309cc30fc0b63b5a2",
+            "saved_path": "d525f24895daffc1db5998f309cc30fc0b63b5a2.png",
+            "selected": true
+          },
+          {
+            "sha1": "5ba7927a6b768374900aadc7a4bf4ac309180331",
+            "saved_path": "5ba7927a6b768374900aadc7a4bf4ac309180331.png",
+            "selected": true
+          },
+          {
+            "sha1": "1f412f346900048a8698482ee73c3997579590ee",
+            "saved_path": "1f412f346900048a8698482ee73c3997579590ee.png",
+            "selected": true
+          },
+          {
+            "sha1": "43f0bafd8a6d25fbd6e20f4157f5ccdf290310da",
+            "saved_path": "43f0bafd8a6d25fbd6e20f4157f5ccdf290310da.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 201,
+        "text": "C. .",
+        "math": [],
+        "images": [
+          {
+            "sha1": "d525f24895daffc1db5998f309cc30fc0b63b5a2",
+            "saved_path": "d525f24895daffc1db5998f309cc30fc0b63b5a2.png",
+            "selected": true
+          },
+          {
+            "sha1": "5ba7927a6b768374900aadc7a4bf4ac309180331",
+            "saved_path": "5ba7927a6b768374900aadc7a4bf4ac309180331.png",
+            "selected": true
+          },
+          {
+            "sha1": "1f412f346900048a8698482ee73c3997579590ee",
+            "saved_path": "1f412f346900048a8698482ee73c3997579590ee.png",
+            "selected": true
+          },
+          {
+            "sha1": "43f0bafd8a6d25fbd6e20f4157f5ccdf290310da",
+            "saved_path": "43f0bafd8a6d25fbd6e20f4157f5ccdf290310da.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 201,
+        "text": "D. .",
+        "math": [],
+        "images": [
+          {
+            "sha1": "d525f24895daffc1db5998f309cc30fc0b63b5a2",
+            "saved_path": "d525f24895daffc1db5998f309cc30fc0b63b5a2.png",
+            "selected": true
+          },
+          {
+            "sha1": "5ba7927a6b768374900aadc7a4bf4ac309180331",
+            "saved_path": "5ba7927a6b768374900aadc7a4bf4ac309180331.png",
+            "selected": true
+          },
+          {
+            "sha1": "1f412f346900048a8698482ee73c3997579590ee",
+            "saved_path": "1f412f346900048a8698482ee73c3997579590ee.png",
+            "selected": true
+          },
+          {
+            "sha1": "43f0bafd8a6d25fbd6e20f4157f5ccdf290310da",
+            "saved_path": "43f0bafd8a6d25fbd6e20f4157f5ccdf290310da.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 202,
+        "text": "B. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 203,
+        "text": "",
+        "math": [
+          {
+            "omml": "<m:oMath xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:w16se=\"http://schemas.microsoft.com/office/word/2015/wordml/symex\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><m:r><m:rPr><m:sty m:val=\"p\"/></m:rPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:noProof/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t>Δ</m:t></m:r><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:noProof/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t>E=</m:t></m:r><m:d><m:dPr><m:ctrlPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:i/><w:noProof/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\"/><w14:ligatures w14:val=\"none\"/></w:rPr></m:ctrlPr></m:dPr><m:e><m:sSub><m:sSubPr><m:ctrlPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:i/><w:noProof/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\"/><w14:ligatures w14:val=\"none\"/></w:rPr></m:ctrlPr></m:sSubPr><m:e><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:noProof/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t>m</m:t></m:r></m:e><m:sub><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:noProof/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t>Po</m:t></m:r></m:sub></m:sSub><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:noProof/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t>-</m:t></m:r><m:sSub><m:sSubPr><m:ctrlPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:i/><w:noProof/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\"/><w14:ligatures w14:val=\"none\"/></w:rPr></m:ctrlPr></m:sSubPr><m:e><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:noProof/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t>m</m:t></m:r></m:e><m:sub><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:noProof/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t>α</m:t></m:r></m:sub></m:sSub><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:noProof/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t>-</m:t></m:r><m:sSub><m:sSubPr><m:ctrlPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:i/><w:noProof/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\"/><w14:ligatures w14:val=\"none\"/></w:rPr></m:ctrlPr></m:sSubPr><m:e><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:noProof/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t>m</m:t></m:r></m:e><m:sub><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:noProof/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t>x</m:t></m:r></m:sub></m:sSub></m:e></m:d><m:sSup><m:sSupPr><m:ctrlPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:i/><w:noProof/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\"/><w14:ligatures w14:val=\"none\"/></w:rPr></m:ctrlPr></m:sSupPr><m:e><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:noProof/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t>c</m:t></m:r></m:e><m:sup><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:noProof/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t>2</m:t></m:r></m:sup></m:sSup><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:noProof/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w:lang w:val=\"vi-VN\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t>=5,92(MeV)</m:t></m:r></m:oMath>"
+          }
+        ],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 204,
+      "text": "Để xác định nhiệt hóa hơi của nước người ta làm thí nghiệm sau. Đưa hơi nước ở vào một nhiệt lượng kế chứa nước ở Nhiệt độ cuối của hệ là biết nhiệt dung của nhiệt lượng kế là nhiệt dung riêng của nước là . Nhiệt hóa hơi của nước là",
+      "math": [],
+      "images": [
+        {
+          "sha1": "49c362528660f035ffd3ff15a25c1d73c6092eb9",
+          "saved_path": "49c362528660f035ffd3ff15a25c1d73c6092eb9.png",
+          "selected": true
+        },
+        {
+          "sha1": "272d6764de9c2aa608023b6137028824f887d42f",
+          "saved_path": "272d6764de9c2aa608023b6137028824f887d42f.png",
+          "selected": true
+        },
+        {
+          "sha1": "b3a300b9b6a5791dddfbbaba6e228e6a0473dd36",
+          "saved_path": "b3a300b9b6a5791dddfbbaba6e228e6a0473dd36.png",
+          "selected": true
+        },
+        {
+          "sha1": "f9713e79e3997c81b3c73541530c8b41c78f75d0",
+          "saved_path": "f9713e79e3997c81b3c73541530c8b41c78f75d0.png",
+          "selected": true
+        },
+        {
+          "sha1": "a78dbfd3238bfcae50678a67dcf5c30d7d759807",
+          "saved_path": "a78dbfd3238bfcae50678a67dcf5c30d7d759807.png",
+          "selected": true
+        },
+        {
+          "sha1": "fb11a3809b239b5a4ad4a9582401ae4b125cd974",
+          "saved_path": "fb11a3809b239b5a4ad4a9582401ae4b125cd974.png",
+          "selected": true
+        },
+        {
+          "sha1": "f82b65845079a827c3e392d84ea0c24b50505d68",
+          "saved_path": "f82b65845079a827c3e392d84ea0c24b50505d68.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 205,
+        "text": "A.\nB.\nC. D.",
+        "math": [],
+        "images": [
+          {
+            "sha1": "4538f414d20fbbc95de073d3e957b4e298c12a5c",
+            "saved_path": "4538f414d20fbbc95de073d3e957b4e298c12a5c.png",
+            "selected": true
+          },
+          {
+            "sha1": "e780f9e77c49067a8edb9b89a80aa2311194fae1",
+            "saved_path": "e780f9e77c49067a8edb9b89a80aa2311194fae1.png",
+            "selected": true
+          },
+          {
+            "sha1": "39463219e36c50d35844f224d8c28a7b90282c7a",
+            "saved_path": "39463219e36c50d35844f224d8c28a7b90282c7a.png",
+            "selected": true
+          },
+          {
+            "sha1": "9a58740b0fafa3e829b5551a6fef2057a7c64dab",
+            "saved_path": "9a58740b0fafa3e829b5551a6fef2057a7c64dab.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 206,
+        "text": "B. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 207,
+        "text": "C. Ta có",
+        "math": [],
+        "images": [
+          {
+            "sha1": "96e92e731c3db911aa31bf902fd4fc2570eaa0f2",
+            "saved_path": "96e92e731c3db911aa31bf902fd4fc2570eaa0f2.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 208,
+        "text": "",
+        "math": [],
+        "images": [
+          {
+            "sha1": "67712f58cdda6d683a139ac41d09935b9667c893",
+            "saved_path": "67712f58cdda6d683a139ac41d09935b9667c893.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 209,
+      "text": "Phát biểu nào sao đây là SAI khi nói về độ phóng xạ (hoạt độ phóng xạ) ?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 210,
+        "text": "A.Độ phóng xạ là đại lượng đặc trưng cho tính phóng xạ mạnh hay yếu của một lượng chất phóng xạ.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 211,
+        "text": "B. Đơn vị đo độ phóng xạ là Becquerel",
+        "math": [],
+        "images": [
+          {
+            "sha1": "76c24171f080031bf24d8628cbd6252a1eeef2f9",
+            "saved_path": "76c24171f080031bf24d8628cbd6252a1eeef2f9.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 212,
+        "text": "C. Với mỗi lượng chất phóng xạ xác định thì độ phóng xạ tỉ lệ với số nguyên tử của lượng chất đó.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 213,
+        "text": "D. Độ phóng xạ của một lượng chất phóng xạ phụ thuộc nhiệt độ của lượng chất đó.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 214,
+        "text": "E. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 215,
+      "text": "Để đặc trưng cho tính phóng xạ mạnh hay yếu của một lượng chất phóng xạ, người ta dùng đại lượng độ phóng xạ (hay hoạt độ phóng xạ), kí hiệu là H, có giá trị bằng số hạt nhân phân rã trong một giây.",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 216,
+        "text": "A. Đơn vị đo độ phóng xạ là Becquerel, kí hiệu là",
+        "math": [],
+        "images": [
+          {
+            "sha1": "386023d6cdbdab0b6ee99b6a0ecf721d82b9a196",
+            "saved_path": "386023d6cdbdab0b6ee99b6a0ecf721d82b9a196.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 217,
+        "text": "B. 1 phân rã / 1 giây.",
+        "math": [],
+        "images": [
+          {
+            "sha1": "5c4bb71b406d8c329325c253e9616fd31cf89ddc",
+            "saved_path": "5c4bb71b406d8c329325c253e9616fd31cf89ddc.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 218,
+      "text": "Trong thực tế, độ phóng xạ còn được đo bằng đơn vị Curie, kí hiệu là",
+      "math": [],
+      "images": [
+        {
+          "sha1": "683624ef5cceb38cdf2a18dbddd4aa9e97d8e8e0",
+          "saved_path": "683624ef5cceb38cdf2a18dbddd4aa9e97d8e8e0.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 219,
+        "text": "",
+        "math": [],
+        "images": [
+          {
+            "sha1": "4c5fc78f8e99cdd265fc7d26a0ac8336f12b3154",
+            "saved_path": "4c5fc78f8e99cdd265fc7d26a0ac8336f12b3154.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 220,
+        "text": "B. Độ phóng xạ với là hằng số phóng xạ",
+        "math": [],
+        "images": [
+          {
+            "sha1": "87d97268e83ff69aa519ef679e5acf8a644ef36e",
+            "saved_path": "87d97268e83ff69aa519ef679e5acf8a644ef36e.png",
+            "selected": true
+          },
+          {
+            "sha1": "1127ae260cc6589ad9a764e91b7378c34bfd74e3",
+            "saved_path": "1127ae260cc6589ad9a764e91b7378c34bfd74e3.png",
+            "selected": true
+          },
+          {
+            "sha1": "3d6ef94ae4a57edfc91e51e6a233b5b1bbfa6227",
+            "saved_path": "3d6ef94ae4a57edfc91e51e6a233b5b1bbfa6227.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 221,
+      "text": "Khi nói về khối lượng phân tử của chất khí và thì",
+      "math": [],
+      "images": [
+        {
+          "sha1": "53746d7c60a26bbeaa28b9fff11c508ef0bc02c2",
+          "saved_path": "53746d7c60a26bbeaa28b9fff11c508ef0bc02c2.png",
+          "selected": true
+        },
+        {
+          "sha1": "91f2340af4ff20f76134ba40820635b53b135a21",
+          "saved_path": "91f2340af4ff20f76134ba40820635b53b135a21.png",
+          "selected": true
+        },
+        {
+          "sha1": "d6ee1083d6aa76a3150666c446aa2501cd4db24a",
+          "saved_path": "d6ee1083d6aa76a3150666c446aa2501cd4db24a.png",
+          "selected": true
+        },
+        {
+          "sha1": "40ca839677fcafdb39ee2dde724ad1e310c4c524",
+          "saved_path": "40ca839677fcafdb39ee2dde724ad1e310c4c524.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 222,
+        "text": "A. khối lượng phân tử của các khí H2, He,O2 và N2 đều bằng nhau.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 223,
+        "text": "B. khối lượng phân tử của O2 nặng nhất trong 4 loại khí trên.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 224,
+        "text": "C. khối lượng phân tử của N2 nặng nhất trong 4 loại khí trên.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 225,
+        "text": "D. khối lượng phân tử của He nhẹ nhất trong 4 loại khí trên.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 226,
+        "text": "E. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 227,
+      "text": "Khối lượng phân tử của là",
+      "math": [],
+      "images": [
+        {
+          "sha1": "8c7ce3ece262d05022764171530d61f09a877bd4",
+          "saved_path": "8c7ce3ece262d05022764171530d61f09a877bd4.png",
+          "selected": true
+        },
+        {
+          "sha1": "64da34a845ad5f974a6705890d725b88532ee9bb",
+          "saved_path": "64da34a845ad5f974a6705890d725b88532ee9bb.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 228,
+      "text": "Khối lượng phân tử của là",
+      "math": [],
+      "images": [
+        {
+          "sha1": "4d42d425ae2613a2191f7862f5f620bad55701a9",
+          "saved_path": "4d42d425ae2613a2191f7862f5f620bad55701a9.png",
+          "selected": true
+        },
+        {
+          "sha1": "2a6904e5c5d554780e7097078e3dadb9c772f7ba",
+          "saved_path": "2a6904e5c5d554780e7097078e3dadb9c772f7ba.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 229,
+      "text": "Khối lượng phân tử của là",
+      "math": [],
+      "images": [
+        {
+          "sha1": "52a60ed9b83e9d45897b5da3463fb767d65d3d62",
+          "saved_path": "52a60ed9b83e9d45897b5da3463fb767d65d3d62.png",
+          "selected": true
+        },
+        {
+          "sha1": "6544a03297167167296e64a5a7c6c21735ee17c8",
+          "saved_path": "6544a03297167167296e64a5a7c6c21735ee17c8.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 230,
+      "text": "Khối lượng phân tử của là",
+      "math": [],
+      "images": [
+        {
+          "sha1": "cd2a723ffaf4f6be1b9a1127ec3ffe3fa15df3dc",
+          "saved_path": "cd2a723ffaf4f6be1b9a1127ec3ffe3fa15df3dc.png",
+          "selected": true
+        },
+        {
+          "sha1": "6c09ed7caf580a14082648faef7fafd63a3e0d13",
+          "saved_path": "6c09ed7caf580a14082648faef7fafd63a3e0d13.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 231,
+      "text": "Vậy khối lượng phân tử của nặng nhất trong 4 loại khí trên.",
+      "math": [],
+      "images": [
+        {
+          "sha1": "2aab0fbc49a540ab374a99ffa0e4eda2965112f9",
+          "saved_path": "2aab0fbc49a540ab374a99ffa0e4eda2965112f9.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 232,
+      "text": "Khi ấn từ từ pit tông xuống để nén khí trong xi lanh thì",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 233,
+        "text": "A. nhiệt độ khí thay đổi.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 233,
+        "text": "B. áp suất khí tăng, thể tích khí tăng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 234,
+        "text": "C. áp suất tỉ lệ thuận với thể tích.\nD. áp suất khí tăng, thể tích khí giảm.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 235,
+        "text": "C. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 236,
+        "text": "D. Trường hợp thỏa mãn quá trình đẳng nhiệt khi pit tông nén từ từ.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 237,
+      "text": "Hạt nhân X phóng xạ biến đổi thành hạt nhân bên Y. Ban đầu (t = 0) có một mẫu chất X nguyên chất. Tại thời điểm và tỉ số giữa số hạt nhân Y và số hạt nhân X ở trong mẫu tương ứng là 2 và 3. Tại thời điểm tỉ số đó là",
+      "math": [],
+      "images": [
+        {
+          "sha1": "77fcdad7e11a35d966ff16610e4f049bf4912d19",
+          "saved_path": "77fcdad7e11a35d966ff16610e4f049bf4912d19.png",
+          "selected": true
+        },
+        {
+          "sha1": "ff10eaeec365ada6e60c7d1f43f0e9718ba525f7",
+          "saved_path": "ff10eaeec365ada6e60c7d1f43f0e9718ba525f7.png",
+          "selected": true
+        },
+        {
+          "sha1": "0f36cab5ba10fa896ff07407e4abad585f0989d3",
+          "saved_path": "0f36cab5ba10fa896ff07407e4abad585f0989d3.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 238,
+        "text": "A. 17.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 238,
+        "text": "B. 575.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 238,
+        "text": "C. 107.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 238,
+        "text": "D. 72.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 239,
+        "text": "B. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 240,
+        "text": "C. Phương trình phóng xạ: tia phóng xạ.",
+        "math": [],
+        "images": [
+          {
+            "sha1": "8986428d8f60fc652bcfd2531b9ad24328194dcb",
+            "saved_path": "8986428d8f60fc652bcfd2531b9ad24328194dcb.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 241,
+      "text": "Tại , tỉ số giữa số hạt nhân con và hạt nhân mẹ là:",
+      "math": [],
+      "images": [
+        {
+          "sha1": "04b0c0ca953a68500e2aa2a00cbb9f6f9b18c703",
+          "saved_path": "04b0c0ca953a68500e2aa2a00cbb9f6f9b18c703.png",
+          "selected": true
+        },
+        {
+          "sha1": "f53745203d39b3ed927c5bd73ee2021de9127415",
+          "saved_path": "f53745203d39b3ed927c5bd73ee2021de9127415.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 242,
+      "text": "Tại , tỉ số giữa số hạt nhân con và hạt nhân mẹ là:",
+      "math": [],
+      "images": [
+        {
+          "sha1": "45b12452ee106236e86d57decd7cec18110c4912",
+          "saved_path": "45b12452ee106236e86d57decd7cec18110c4912.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 243,
+        "text": "",
+        "math": [],
+        "images": [
+          {
+            "sha1": "215e358294d8c4f4e45985436ccdb597c20a44f8",
+            "saved_path": "215e358294d8c4f4e45985436ccdb597c20a44f8.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 244,
+      "text": "Tại , tỉ số giữa số hạt nhân con và hạt nhân mẹ là:",
+      "math": [],
+      "images": [
+        {
+          "sha1": "bf3df44c2218478c20ec8eac8966960907f8079b",
+          "saved_path": "bf3df44c2218478c20ec8eac8966960907f8079b.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 245,
+        "text": "",
+        "math": [],
+        "images": [
+          {
+            "sha1": "f52ea0f016206c8d8f546e663380346b0b3c9b12",
+            "saved_path": "f52ea0f016206c8d8f546e663380346b0b3c9b12.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 246,
+      "text": "Pôlôni là chất phóng xạ có chu kì bán rã ngày và biến đổi thành hạt nhân chì. Vào lúc ngày một mẫu phóng xạ có khối lượng được phát hiện, trong đó khối lượng của mẫu là chất phóng xạ pôlôni phần còn lại không có tính phóng xạ. Giả sử toàn bộ các hạt sinh ra trong quá trình phóng xạ đều thoát ra khỏi mẫu. Lấy khối lượng của các hạt nhân bằng số khối của chúng tính theo đơn vị Vào ngày nào sau đây khối lượng của mẫu có giá trị là",
+      "math": [],
+      "images": [
+        {
+          "sha1": "511f41d15effbcd887dde2826d31de9bc26458b7",
+          "saved_path": "511f41d15effbcd887dde2826d31de9bc26458b7.png",
+          "selected": true
+        },
+        {
+          "sha1": "fd3429446c0493cd6d439dbb87f8c2de10abbe0c",
+          "saved_path": "fd3429446c0493cd6d439dbb87f8c2de10abbe0c.png",
+          "selected": true
+        },
+        {
+          "sha1": "dd6bbaf3f9e58e8115f9a62048b9607d060bbcfd",
+          "saved_path": "dd6bbaf3f9e58e8115f9a62048b9607d060bbcfd.png",
+          "selected": true
+        },
+        {
+          "sha1": "d3e2827aa05fac77675bf768d9320f7cdf58e0f5",
+          "saved_path": "d3e2827aa05fac77675bf768d9320f7cdf58e0f5.png",
+          "selected": true
+        },
+        {
+          "sha1": "0afa27a22c406891221e0db1263479494bc29ad2",
+          "saved_path": "0afa27a22c406891221e0db1263479494bc29ad2.png",
+          "selected": true
+        },
+        {
+          "sha1": "d835e2ae24dbd9eaebddec269f1aa2acda372394",
+          "saved_path": "d835e2ae24dbd9eaebddec269f1aa2acda372394.png",
+          "selected": true
+        },
+        {
+          "sha1": "d45a8374fc0687289310ab83c281649af9496896",
+          "saved_path": "d45a8374fc0687289310ab83c281649af9496896.png",
+          "selected": true
+        },
+        {
+          "sha1": "fcd403473c2d9bce53c6fddb73005e62b3a4b7bd",
+          "saved_path": "fcd403473c2d9bce53c6fddb73005e62b3a4b7bd.png",
+          "selected": true
+        },
+        {
+          "sha1": "8972700baa3bce0d503cdaadb5f218758c718c77",
+          "saved_path": "8972700baa3bce0d503cdaadb5f218758c718c77.png",
+          "selected": true
+        },
+        {
+          "sha1": "639322c36a2b48c54a0e66bfd6a313cf8cad0cb4",
+          "saved_path": "639322c36a2b48c54a0e66bfd6a313cf8cad0cb4.png",
+          "selected": true
+        },
+        {
+          "sha1": "f98fb4e4649d50eba8180942fc9ddb5e5470d906",
+          "saved_path": "f98fb4e4649d50eba8180942fc9ddb5e5470d906.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 247,
+        "text": "A. 16/2/2024B. 14/2/2024C. 28/4/2024D. 20/12/2024",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 248,
+        "text": "B. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 249,
+        "text": "",
+        "math": [],
+        "images": [
+          {
+            "sha1": "51e88d717b583b7d68c33be529a3bafc500cd3a8",
+            "saved_path": "51e88d717b583b7d68c33be529a3bafc500cd3a8.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 250,
+        "text": "",
+        "math": [],
+        "images": [
+          {
+            "sha1": "e90d8e34aba8119febafd00de0c9370733fb67a0",
+            "saved_path": "e90d8e34aba8119febafd00de0c9370733fb67a0.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 251,
+        "text": "",
+        "math": [],
+        "images": [
+          {
+            "sha1": "f9cf95c60bd24cd7a92f9355364b1bddb1c34c1c",
+            "saved_path": "f9cf95c60bd24cd7a92f9355364b1bddb1c34c1c.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 252,
+      "text": "Khối lượng của mẫu có giá trị là vào ngày",
+      "math": [],
+      "images": [
+        {
+          "sha1": "85cb1796b1102a61f72da281f179331da9a9f2c2",
+          "saved_path": "85cb1796b1102a61f72da281f179331da9a9f2c2.png",
+          "selected": true
+        },
+        {
+          "sha1": "729a07c1b4146ee22c8fe07c0aff00c84c442abe",
+          "saved_path": "729a07c1b4146ee22c8fe07c0aff00c84c442abe.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 254,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 255,
+      "text": "Trong một ngày, một học sinh theo dõi nhiệt độ không khí trong nhà và lập được bảng bên.",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 256,
+        "text": "A. Thời gian",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 257,
+        "text": "B. Nhiệt độ",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 258,
+        "text": "C. 7 giờ",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 259,
+        "text": "D. 250C",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 260,
+        "text": "E. 9 giờ",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 261,
+        "text": "F. 270C",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 262,
+        "text": "G. 10 giờ",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 263,
+        "text": "H. 290C",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 264,
+        "text": "I. 12 giờ",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 265,
+        "text": "J. 310C",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 266,
+        "text": "K. 16 giờ",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 267,
+        "text": "L. 300C",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 268,
+        "text": "M. 18 giờ",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 269,
+        "text": "N. 290C",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 270,
+        "text": "O. a. Nhiệt độ lúc 9 giờ là 270C.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 271,
+        "text": "P. b. Nhiệt độ đạt 310C vào lúc 18 giờ.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 272,
+        "text": "Q. c. Lúc 10 giờ thì nhà nóng nhất.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 273,
+        "text": "R. d. Lúc 7 giờ thì nhiệt độ thấp nhất.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 274,
+        "text": "S. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 275,
+        "text": "T. a. Phát biểu này đúng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 276,
+        "text": "U. b. Phát biểu này sai. Nhiệt độ đạt 310C vào lúc 12 giờ.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 277,
+        "text": "V. c. Phát biểu này sai. Lúc 12 giờ thì nhà nóng nhất.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 278,
+        "text": "W. d. Phát biểu này đúng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 279,
+      "text": "Khi tấm kim loại bằng đồng dao động trong từ trường giữa hai cực của một nam châm chữ U.",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 280,
+        "text": "A. a. Trong tấm kim loại xuất hiện dòng điện Foucault.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 281,
+        "text": "B. b. Dòng điện trong tấm kim loại là dòng điện cảm ứng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 282,
+        "text": "C. c. Nhiệt độ của tấm kim loại giảm dần.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 283,
+        "text": "D. d. Dao động của tấm kim loại là dao động tắt dần.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 284,
+        "text": "E. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 285,
+        "text": "F. a. Phát biểu này đúng. Do tấm kim loại dao động trong từ trường nên trong tấm kim loại xuất hiện dòng điện Foucault.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 286,
+        "text": "G. b. Phát biểu này đúng. Dòng điện Foucault là dòng điện cảm ứng, do đó dòng điện trong tấm kim loại là dòng điện cảm ứng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 287,
+        "text": "H. c. Phát biểu này sai. Dòng điện Foucault có tác dụng tỏa nhiệt làm cho tấm kim loại nóng lên, nhiệt độ tăng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 288,
+        "text": "I. d. Phát biểu này đúng. Dòng điện Foucault là dòng điện cảm ứng, do đó dòng điện trong tấm kim loại là dòng điện cảm ứng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 289,
+      "text": "Một hỗn hợp khí helium và argon ở áp suất và nhiệt độ khối lượng riêng Biết khối lượng mol",
+      "math": [],
+      "images": [
+        {
+          "sha1": "9ac8ba96015cc18bb0afc66ae035439c1595cd5d",
+          "saved_path": "9ac8ba96015cc18bb0afc66ae035439c1595cd5d.png",
+          "selected": true
+        },
+        {
+          "sha1": "12a0fdb960fed6c1615e64f954063748248d4d24",
+          "saved_path": "12a0fdb960fed6c1615e64f954063748248d4d24.png",
+          "selected": true
+        },
+        {
+          "sha1": "bebd90401ddfe6e8bd290c3a3f188a4e8cf05232",
+          "saved_path": "bebd90401ddfe6e8bd290c3a3f188a4e8cf05232.png",
+          "selected": true
+        },
+        {
+          "sha1": "12ca96c77836402afa09fd115c4437fa1fb86111",
+          "saved_path": "12ca96c77836402afa09fd115c4437fa1fb86111.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 290,
+        "text": "A. a. Khối lượng khí Argon trong hỗn hợp là",
+        "math": [],
+        "images": [
+          {
+            "sha1": "e8897db31583bee10bb3c20e2edde1d1b8ce6c7c",
+            "saved_path": "e8897db31583bee10bb3c20e2edde1d1b8ce6c7c.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 291,
+        "text": "B. b. Số phân tử Argon trong hỗn hợp khí là",
+        "math": [],
+        "images": [
+          {
+            "sha1": "1761234a61c47c84b53b6720f90416bb58a47638",
+            "saved_path": "1761234a61c47c84b53b6720f90416bb58a47638.png",
+            "selected": true
+          },
+          {
+            "sha1": "342e8f4541eed03a6cc9567fb33c9aa4b7f92154",
+            "saved_path": "342e8f4541eed03a6cc9567fb33c9aa4b7f92154.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 292,
+        "text": "C. c. Khối lượng khí Helium trong hỗn hợp khí là",
+        "math": [],
+        "images": [
+          {
+            "sha1": "dad6e82ceccfe7cee210c37595aaedd411a56ef0",
+            "saved_path": "dad6e82ceccfe7cee210c37595aaedd411a56ef0.png",
+            "selected": true
+          },
+          {
+            "sha1": "816968e5a2ce93e030c0075114c76fcf2f9c03fa",
+            "saved_path": "816968e5a2ce93e030c0075114c76fcf2f9c03fa.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 293,
+        "text": "D. d. Số phân tử Helium trong hỗn hợp khí là",
+        "math": [],
+        "images": [
+          {
+            "sha1": "3c9a508fcf641fc7441e2952f38d1b4f51b10792",
+            "saved_path": "3c9a508fcf641fc7441e2952f38d1b4f51b10792.png",
+            "selected": true
+          },
+          {
+            "sha1": "d14ce037d2889db23308e0eeb1be2a5d389c723f",
+            "saved_path": "d14ce037d2889db23308e0eeb1be2a5d389c723f.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 294,
+        "text": "E. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 295,
+        "text": "F. a. Phát biểu này đúng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 296,
+      "text": "Xét 1 hỗn hợp khí, khối lượng của 1 hỗn hợp khí là",
+      "math": [],
+      "images": [
+        {
+          "sha1": "a29ce2d84cf4473ce58823c65aca77d7da36d6a0",
+          "saved_path": "a29ce2d84cf4473ce58823c65aca77d7da36d6a0.png",
+          "selected": true
+        },
+        {
+          "sha1": "78968bc5968b7dca8b67e95b3471125111bb45ce",
+          "saved_path": "78968bc5968b7dca8b67e95b3471125111bb45ce.png",
+          "selected": true
+        },
+        {
+          "sha1": "46e3866ecff2a81c06204b05a072275acaa4e2f8",
+          "saved_path": "46e3866ecff2a81c06204b05a072275acaa4e2f8.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 297,
+      "text": "Gọi là khối lượng khí He và Ar trong hỗn hợp, ta có",
+      "math": [],
+      "images": [
+        {
+          "sha1": "b90da9680cccf701c7641a14ae5c2a475ee098cb",
+          "saved_path": "b90da9680cccf701c7641a14ae5c2a475ee098cb.png",
+          "selected": true
+        },
+        {
+          "sha1": "1fbc44299e2517c7a2c32f51582c92805815bd76",
+          "saved_path": "1fbc44299e2517c7a2c32f51582c92805815bd76.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 298,
+        "text": "A. Áp suất riêng phần của khí helium",
+        "math": [],
+        "images": [
+          {
+            "sha1": "cd1ee66ff276a2b5b38810a59945541c11baf1cd",
+            "saved_path": "cd1ee66ff276a2b5b38810a59945541c11baf1cd.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 299,
+        "text": "B. Áp suất riêng phần của khí Argon",
+        "math": [],
+        "images": [
+          {
+            "sha1": "dc4bca9d1796d69bb8957a943f9d455bce75c4e6",
+            "saved_path": "dc4bca9d1796d69bb8957a943f9d455bce75c4e6.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 300,
+      "text": "Theo định luật Dalton ta có",
+      "math": [],
+      "images": [
+        {
+          "sha1": "b67e7320f3b5a21aabd54a96a9bb91ee4f83de38",
+          "saved_path": "b67e7320f3b5a21aabd54a96a9bb91ee4f83de38.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 301,
+        "text": "A. Kết hợp (1) với (3)",
+        "math": [],
+        "images": [
+          {
+            "sha1": "663088cea669192364f48023f1dfda53f53687cf",
+            "saved_path": "663088cea669192364f48023f1dfda53f53687cf.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 302,
+        "text": "B. b. Phát biểu này sai.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 303,
+      "text": "Số phân tử Argon trong 1 hỗn hợp khí",
+      "math": [],
+      "images": [
+        {
+          "sha1": "18097ff7b992c19e5a695fcedaf558e8426df364",
+          "saved_path": "18097ff7b992c19e5a695fcedaf558e8426df364.png",
+          "selected": true
+        },
+        {
+          "sha1": "ace0e9b1f6eb89963fa83f202774aee3f3ec639c",
+          "saved_path": "ace0e9b1f6eb89963fa83f202774aee3f3ec639c.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 304,
+        "text": "A. c. Phát biểu này đúng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 305,
+      "text": "Khối lượng khí Helium trong hỗn hợp khí là",
+      "math": [],
+      "images": [
+        {
+          "sha1": "54af5caa7a6ec89159264cad8262e78bbdd61763",
+          "saved_path": "54af5caa7a6ec89159264cad8262e78bbdd61763.png",
+          "selected": true
+        },
+        {
+          "sha1": "0daafa9aa48e16e376451b0696c3624905483ed7",
+          "saved_path": "0daafa9aa48e16e376451b0696c3624905483ed7.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 306,
+        "text": "A. d. Phát biểu này sai.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 307,
+      "text": "Số phân tử Helium trong hỗn hợp khí là",
+      "math": [],
+      "images": [
+        {
+          "sha1": "3c9a508fcf641fc7441e2952f38d1b4f51b10792",
+          "saved_path": "3c9a508fcf641fc7441e2952f38d1b4f51b10792.png",
+          "selected": true
+        },
+        {
+          "sha1": "ddfc8df0ff178b85fd2b0dba638a22e8db94ddfe",
+          "saved_path": "ddfc8df0ff178b85fd2b0dba638a22e8db94ddfe.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 308,
+      "text": "Uranium có chu kì bán rã là năm. Khi phóng xạ Uranium biến thành Thorium Ban đầu có Uranium.",
+      "math": [],
+      "images": [
+        {
+          "sha1": "ca0bb18d6da4c9ac47f6c59844621b24f2322c03",
+          "saved_path": "ca0bb18d6da4c9ac47f6c59844621b24f2322c03.png",
+          "selected": true
+        },
+        {
+          "sha1": "b7708e971c0a607464d40d3d0a39f3f7fbde26b5",
+          "saved_path": "b7708e971c0a607464d40d3d0a39f3f7fbde26b5.png",
+          "selected": true
+        },
+        {
+          "sha1": "2db1e004b579d590953973fbfab61ad7c4d90efd",
+          "saved_path": "2db1e004b579d590953973fbfab61ad7c4d90efd.png",
+          "selected": true
+        },
+        {
+          "sha1": "7f4a259a4ed40912a3c39449f5ef3ac98f89cc69",
+          "saved_path": "7f4a259a4ed40912a3c39449f5ef3ac98f89cc69.png",
+          "selected": true
+        },
+        {
+          "sha1": "1f51636c725da62aa3ececff466219b527c3b486",
+          "saved_path": "1f51636c725da62aa3ececff466219b527c3b486.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 309,
+        "text": "A. a. Hạt nhân Thorium bền hơn hạt nhân Uranium",
+        "math": [],
+        "images": [
+          {
+            "sha1": "7e1e73d561aa7405f7997bfa436daf19813f2bf8",
+            "saved_path": "7e1e73d561aa7405f7997bfa436daf19813f2bf8.png",
+            "selected": true
+          },
+          {
+            "sha1": "700a7ce4988a00c3203d3e2e984cf4fc8689e3e8",
+            "saved_path": "700a7ce4988a00c3203d3e2e984cf4fc8689e3e8.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 310,
+        "text": "B. b. Khối lượng Uranium còn lại sau năm là",
+        "math": [],
+        "images": [
+          {
+            "sha1": "0e36f3a40ffcb087216a6a207e263ef73c173e9e",
+            "saved_path": "0e36f3a40ffcb087216a6a207e263ef73c173e9e.png",
+            "selected": true
+          },
+          {
+            "sha1": "6645782d725c3e0c353b1d7b2b5d27da7bed300a",
+            "saved_path": "6645782d725c3e0c353b1d7b2b5d27da7bed300a.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 311,
+        "text": "C. c. Số hạt nhân Uranium còn lại sau năm là 3,7265.1021 hạt nhân.",
+        "math": [],
+        "images": [
+          {
+            "sha1": "cd56c15b095a4a81f08dc6f9d46b7b1b1e134a98",
+            "saved_path": "cd56c15b095a4a81f08dc6f9d46b7b1b1e134a98.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 312,
+        "text": "D. d. Tỉ số giữa số hạt nhân Uranium còn lại và số hạt nhân Thorium tạo thành sau năm là",
+        "math": [],
+        "images": [
+          {
+            "sha1": "37957bdf61c6711bf8d2a07f6f2220907d71bbca",
+            "saved_path": "37957bdf61c6711bf8d2a07f6f2220907d71bbca.png",
+            "selected": true
+          },
+          {
+            "sha1": "c53122c80ec5b593d78c9757879c6fca243a57d6",
+            "saved_path": "c53122c80ec5b593d78c9757879c6fca243a57d6.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 313,
+        "text": "E. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 314,
+        "text": "F. a. Phát biểu này đúng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 315,
+        "text": "G. b. Phát biểu này đúng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 316,
+        "text": "H. c. Phát biểu này sai.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 317,
+      "text": "Số hạt nhân Uranium ban đầu:",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 318,
+        "text": "A. hạt.",
+        "math": [],
+        "images": [
+          {
+            "sha1": "bbd35f0754d6b13393f54102e3ef6ca6b95c327f",
+            "saved_path": "bbd35f0754d6b13393f54102e3ef6ca6b95c327f.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 319,
+      "text": "Số hạt nhân Uranium còn lại sau năm:",
+      "math": [],
+      "images": [
+        {
+          "sha1": "e0c327798a22a3059cb106deefbbf3167d2d6af9",
+          "saved_path": "e0c327798a22a3059cb106deefbbf3167d2d6af9.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 320,
+        "text": "A. hạt.",
+        "math": [],
+        "images": [
+          {
+            "sha1": "5faf72957cb4040a8ac7bc43caa529e3c5a312a3",
+            "saved_path": "5faf72957cb4040a8ac7bc43caa529e3c5a312a3.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 321,
+        "text": "B. d. Phát biểu này đúng.",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 322,
+      "text": "Số hạt nhân Thorium có được là do Uranium đã phân rã, do đó",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 323,
+        "text": "",
+        "math": [],
+        "images": [
+          {
+            "sha1": "e2119311e6446013d8f715c83749a5b7f95a69d6",
+            "saved_path": "e2119311e6446013d8f715c83749a5b7f95a69d6.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 324,
+        "text": "B. Suy ra",
+        "math": [],
+        "images": [
+          {
+            "sha1": "dfafb30279546b41e9cad0596e105551b642286f",
+            "saved_path": "dfafb30279546b41e9cad0596e105551b642286f.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 326,
+        "text": "",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 327,
+      "text": "Tính nhiệt lượng (theo đơi vị kJ) cần cung cấp cho miếng nhôm khối lượng 100 gam ở nhiệt độ 200C, để nó hóa lỏng hoàn toàn ở nhiệt độ 6580C. Biết nhôm có nhiệt dung riêng 896 J/kg.K và nhiệt nóng chảy 39.104 J/kg.",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 328,
+        "text": "A. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 329,
+        "text": "B. Nhiệt lượng cần cung cấp",
+        "math": [
+          {
+            "omml": "<m:oMath xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:cx=\"http://schemas.microsoft.com/office/drawing/2014/chartex\" xmlns:cx1=\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:w16se=\"http://schemas.microsoft.com/office/word/2015/wordml/symex\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t>Q=cm</m:t></m:r><m:d><m:dPr><m:ctrlPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:i/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w14:ligatures w14:val=\"none\"/></w:rPr></m:ctrlPr></m:dPr><m:e><m:sSub><m:sSubPr><m:ctrlPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:i/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w14:ligatures w14:val=\"none\"/></w:rPr></m:ctrlPr></m:sSubPr><m:e><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t>t</m:t></m:r></m:e><m:sub><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t>2</m:t></m:r></m:sub></m:sSub><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t>-</m:t></m:r><m:sSub><m:sSubPr><m:ctrlPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:i/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w14:ligatures w14:val=\"none\"/></w:rPr></m:ctrlPr></m:sSubPr><m:e><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t>t</m:t></m:r></m:e><m:sub><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t>1</m:t></m:r></m:sub></m:sSub></m:e></m:d><m:r><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t>+λm=961</m:t></m:r><m:r><m:rPr><m:nor/></m:rPr><w:rPr><w:rFonts w:eastAsia=\"Times New Roman\" w:cs=\"Times New Roman\"/><w:i/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t xml:space=\"preserve\">65 J </m:t></m:r><m:r><m:rPr><m:sty m:val=\"p\"/></m:rPr><w:rPr><w:rFonts w:ascii=\"Cambria Math\" w:eastAsia=\"Times New Roman\" w:hAnsi=\"Cambria Math\" w:cs=\"Times New Roman\"/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t>≈</m:t></m:r><m:r><m:rPr><m:nor/></m:rPr><w:rPr><w:rFonts w:eastAsia=\"Times New Roman\" w:cs=\"Times New Roman\"/><w:i/><w:kern w:val=\"0\"/><w:sz w:val=\"24\"/><w:szCs w:val=\"24\"/><w14:ligatures w14:val=\"none\"/></w:rPr><m:t xml:space=\"preserve\"> 96,17 kJ.</m:t></m:r></m:oMath>"
+          }
+        ],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 330,
+      "text": "Khối lượng riêng của một chất khí ở áp suất 300 mmHg là 0,3 kg/m3. Vận tốc căn quân phương của các phân tử khí khi đó gần bằng bao nhiêu?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 331,
+        "text": "A. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 332,
+        "text": "B. Ta có",
+        "math": [],
+        "images": [
+          {
+            "sha1": "afb1dd251166bfca75909a033f52264cc6ed1fc2",
+            "saved_path": "afb1dd251166bfca75909a033f52264cc6ed1fc2.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 333,
+      "text": "Một hỗn hợp phóng xạ có hai chất phóng xạ X và Y. Biết chu kì bán rã của X và Y lần lượt là và , và lúc đầu số hạt X bằng số hạt Y. Tính khoảng thời gian theo đơn vị h để số hạt nguyên chất của hỗn hợp chỉ còn một nửa số hạt lúc đầu. Kết quả làm tròn đến hai chữ số sau dấu phẩy.",
+      "math": [],
+      "images": [
+        {
+          "sha1": "f3e5798a88b5dd87a22778b66c1bd8940c25623c",
+          "saved_path": "f3e5798a88b5dd87a22778b66c1bd8940c25623c.png",
+          "selected": true
+        },
+        {
+          "sha1": "830b081e2708329043e6d09ae8e58425dfd32fd6",
+          "saved_path": "830b081e2708329043e6d09ae8e58425dfd32fd6.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 334,
+        "text": "A. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 335,
+        "text": "B. .",
+        "math": [],
+        "images": [
+          {
+            "sha1": "bccf29ba2618ac3030bcc64c942cc02eaf21d28e",
+            "saved_path": "bccf29ba2618ac3030bcc64c942cc02eaf21d28e.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 336,
+      "text": "Một bình cách nhiệt nhẹ chứa nước ở nhiệt độ t0 = 20°\nC. Người ta lần lượt thả vào bình này những quả cầu giống nhau đã được đốt nóng đến 100°\nC. Sau khi thả quả cầu thứ nhất thì nhiệt độ của nước trong bình khi cân bằng nhiệt là t₁ = 40°\nC. Bỏ qua sự trao đổi nhiệt với bình và môi trường. Giả thiết nước không bị tràn ra ngoài và không tính đến sự bay hơi của nước. Cần phải thả bao nhiêu quả cầu để nhiệt độ của nước trong bình khi cân bằng nhiệt là 90°C?",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 337,
+        "text": "A. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 338,
+        "text": "B. Gọi nhiệt dung mỗi quả cầu là Cq và nhiệt dung của nước là Cn",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 339,
+        "text": "",
+        "math": [],
+        "images": [
+          {
+            "sha1": "56f900a6e4c48af7a311ffcf69326e088829c315",
+            "saved_path": "56f900a6e4c48af7a311ffcf69326e088829c315.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 340,
+      "text": "Để nhiệt độ cân bằng là 90°C thì cần thả q quả cầu có:",
+      "math": [],
+      "images": [],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 341,
+        "text": "",
+        "math": [],
+        "images": [
+          {
+            "sha1": "6824df7d3d94bc0aa04e522b5abb1613c8d0c8fe",
+            "saved_path": "6824df7d3d94bc0aa04e522b5abb1613c8d0c8fe.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 342,
+      "text": "Một sóng vô tuyến và một sóng cơ có cùng tần số, khi truyền trong không khí tốc độ hai sóng lần lượt là và Tỉ số của bước sóng giữa sóng vô tuyến và sóng cơ bằng bao nhiêu?",
+      "math": [],
+      "images": [
+        {
+          "sha1": "025cad3e70501ca333a955f50896ca9cbedfde40",
+          "saved_path": "025cad3e70501ca333a955f50896ca9cbedfde40.png",
+          "selected": true
+        },
+        {
+          "sha1": "3a71df8d6cc14509a0c1ba60f8173efcad33a2b4",
+          "saved_path": "3a71df8d6cc14509a0c1ba60f8173efcad33a2b4.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 343,
+        "text": "A. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      },
+      {
+        "para_index": 344,
+        "text": "B. Ta có",
+        "math": [],
+        "images": [
+          {
+            "sha1": "b56fc936534abd8ef9f315291f7900a68493b5ed",
+            "saved_path": "b56fc936534abd8ef9f315291f7900a68493b5ed.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 345,
+        "text": "C. Từ",
+        "math": [],
+        "images": [
+          {
+            "sha1": "30e219ccb042a2ad99a2990c800e4531040fcb6d",
+            "saved_path": "30e219ccb042a2ad99a2990c800e4531040fcb6d.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 346,
+      "text": "Hiện nay urani tự nhiên chứa hai đồng vị phóng xạ và với tỉ lệ số hạt và số hạt là Biết chu kì bán rã và lần lượt là năm và năm. Cách đây bao nhiêu tỉ năm, urani tự nhiên có tỷ lệ số hạt và số là (Kết quả làm tròn đến 2 chử số thập phân sau dấu phẩy)?",
+      "math": [],
+      "images": [
+        {
+          "sha1": "23e39ecb5dc72a940926830ef747b7acc7ccae07",
+          "saved_path": "23e39ecb5dc72a940926830ef747b7acc7ccae07.png",
+          "selected": true
+        },
+        {
+          "sha1": "5ed59bf65d361880511d25af7da95028016ee07c",
+          "saved_path": "5ed59bf65d361880511d25af7da95028016ee07c.png",
+          "selected": true
+        },
+        {
+          "sha1": "2159059ccad70236854a71f4838a31eaa9a8fc26",
+          "saved_path": "2159059ccad70236854a71f4838a31eaa9a8fc26.png",
+          "selected": true
+        },
+        {
+          "sha1": "1606f0a35e40aceddeeaedd864fab2f728f37b16",
+          "saved_path": "1606f0a35e40aceddeeaedd864fab2f728f37b16.png",
+          "selected": true
+        },
+        {
+          "sha1": "486d6710fea901fbdd25cd3d4454b7c17efcf4d8",
+          "saved_path": "486d6710fea901fbdd25cd3d4454b7c17efcf4d8.png",
+          "selected": true
+        },
+        {
+          "sha1": "e948dd21cb07d63f4314257877d3f9d54eedf627",
+          "saved_path": "e948dd21cb07d63f4314257877d3f9d54eedf627.png",
+          "selected": true
+        },
+        {
+          "sha1": "b5f27486758b4b3ccf8660b451dce3f17547c431",
+          "saved_path": "b5f27486758b4b3ccf8660b451dce3f17547c431.png",
+          "selected": true
+        },
+        {
+          "sha1": "888536206bdf06bb67c9071896da471d81459d87",
+          "saved_path": "888536206bdf06bb67c9071896da471d81459d87.png",
+          "selected": true
+        },
+        {
+          "sha1": "ce81a2471bcd33f72b3a11182cc3d9f6a0c7f837",
+          "saved_path": "ce81a2471bcd33f72b3a11182cc3d9f6a0c7f837.png",
+          "selected": true
+        },
+        {
+          "sha1": "ce003bed7f999d454d3e6bafb95f24882a030f14",
+          "saved_path": "ce003bed7f999d454d3e6bafb95f24882a030f14.png",
+          "selected": true
+        },
+        {
+          "sha1": "9ab576fe5998fc6fd7ac93b50656dbfcecc8bfc1",
+          "saved_path": "9ab576fe5998fc6fd7ac93b50656dbfcecc8bfc1.png",
+          "selected": true
+        },
+        {
+          "sha1": "e8812dbadc8bdfb158471b09de62f021c29ac865",
+          "saved_path": "e8812dbadc8bdfb158471b09de62f021c29ac865.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 347,
+        "text": "A. Hướng dẫn giải",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 348,
+      "text": "Hiện nay, số hạt và là số hạt còn lại, có tỉ lệ là: .",
+      "math": [],
+      "images": [
+        {
+          "sha1": "6bd0aff95572b393b1e1866b360d27900b51d9aa",
+          "saved_path": "6bd0aff95572b393b1e1866b360d27900b51d9aa.png",
+          "selected": true
+        },
+        {
+          "sha1": "2bf4feb158ecea58874f5b8a0f8fd96ab6994c66",
+          "saved_path": "2bf4feb158ecea58874f5b8a0f8fd96ab6994c66.png",
+          "selected": true
+        },
+        {
+          "sha1": "b5ddea0b21a583a83f8935071264fcef20330dbc",
+          "saved_path": "b5ddea0b21a583a83f8935071264fcef20330dbc.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 349,
+      "text": "Cách đây t năm, tỉ lệ số hạt và là nên ta có:",
+      "math": [],
+      "images": [
+        {
+          "sha1": "f1aabda64db345f76cfc656cfe225ada1be28edf",
+          "saved_path": "f1aabda64db345f76cfc656cfe225ada1be28edf.png",
+          "selected": true
+        },
+        {
+          "sha1": "b264f46a53e5b7242f57df3a47ac107a225d7a1c",
+          "saved_path": "b264f46a53e5b7242f57df3a47ac107a225d7a1c.png",
+          "selected": true
+        },
+        {
+          "sha1": "42b343f753ffe82f5b7ba11edda5392f0d7b03ad",
+          "saved_path": "42b343f753ffe82f5b7ba11edda5392f0d7b03ad.png",
+          "selected": true
+        },
+        {
+          "sha1": "27d5b81e006099b5f9600def6ad228c563acfd24",
+          "saved_path": "27d5b81e006099b5f9600def6ad228c563acfd24.png",
+          "selected": true
+        }
+      ],
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 350,
+        "text": "A. Lập tỉ số ta được:",
+        "math": [],
+        "images": [
+          {
+            "sha1": "314069dd93205a7a932997b17b0ba5fd59fb4450",
+            "saved_path": "314069dd93205a7a932997b17b0ba5fd59fb4450.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 351,
+        "text": "B. Từ đó tỉ năm.",
+        "math": [],
+        "images": [
+          {
+            "sha1": "af49b4b6346aace84600a5a330f5ea56e96182da",
+            "saved_path": "af49b4b6346aace84600a5a330f5ea56e96182da.png",
+            "selected": true
+          }
+        ],
+        "label": "answer"
+      },
+      {
+        "para_index": 352,
+        "text": "C. --------------------- HẾT ------------------------",
+        "math": [],
+        "images": [],
+        "label": "answer"
+      }
+    ]
+  }
+]
