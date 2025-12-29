@@ -2,11 +2,15 @@ import pool, { query } from "../config/database";
 import { Bank, DoBank } from "../models/bank.model";
 import { Question } from "../models/question.model";
 import { UserAnswerGrouped, AnswerCorrectGrouped } from "../models/bank.question.model";
+import { groupQuestionsByTypeSafe, QuestionGroup } from "../utils/helper";
 
 const BankService = {
     async getById(
         bankId: number
-    ): Promise<{ question: Question[] | null; subject_type: number | null }> {
+    ): Promise<{
+        question: QuestionGroup | null;
+        subject_type: number | null;
+    }> {
 
         const queryText = `
           SELECT
@@ -62,6 +66,10 @@ const BankService = {
             return { question: null, subject_type: null };
         }
 
+        const groupedQuestions = groupQuestionsByTypeSafe(
+            questionResult.rows as Question[]
+        );
+
         // LẤY subject_type
         const subjectTypeQuery = `
           SELECT s.subject_type
@@ -76,7 +84,7 @@ const BankService = {
             subjectTypeResult.rows[0]?.subject_type ?? null;
 
         return {
-            question: questionResult.rows as Question[],
+            question: groupedQuestions,
             subject_type
         };
     },

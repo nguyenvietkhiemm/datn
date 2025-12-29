@@ -42,9 +42,12 @@ const ExamController = {
 
       const role = req.user?.role_id;
 
-      if (role !== 2) {
-        question?.forEach(q => {
-          q.answers.forEach((a: any) => {
+      if (question && role !== 2) {
+        // flatten tất cả câu hỏi
+        const allQuestions = Object.values(question).flat();
+
+        allQuestions.forEach(q => {
+          q.answers?.forEach((a: any) => {
             delete a.is_correct;
           });
         });
@@ -158,7 +161,7 @@ const ExamController = {
     const result: DefaultResponse<any> = await safeExecute(async () => {
       const { id } = req.params;
       const user_id = req?.user?.user_id
-      const { user_name } = req.query;
+      const { user_name, page } = req.query;
 
       if (!id) {
         return {
@@ -168,7 +171,7 @@ const ExamController = {
         };
       }
 
-      const ranking = await ExamService.getExamRanking(Number(id), Number(user_id), String(user_name));
+      const ranking = await ExamService.getExamRanking(Number(id), Number(user_id), String(user_name), Number(page));
 
       return {
         status: 200,
@@ -210,9 +213,9 @@ const ExamController = {
     return res.status(result.status).json(result);
   },
 
-  async getQuestionIdExam(req: Request, res: Response){
+  async getQuestionIdExam(req: Request, res: Response) {
     const result: DefaultResponse<any> = await safeExecute(async () => {
-      const {id} = req.params
+      const { id } = req.params
       const data = await ExamService.getQuestionIdExam(Number(id));
       return {
         status: 200,

@@ -40,10 +40,13 @@ const BankController = {
             const { question, subject_type } = await BankService.getById(bank_id);
 
             const role = req.user?.role_id;
-            
-            if (role !== 2) {
-                question?.forEach(q => {
-                    q.answers.forEach((a: any) => {
+
+            if (question && role !== 2) {
+                // flatten tất cả câu hỏi
+                const allQuestions = Object.values(question).flat();
+
+                allQuestions.forEach(q => {
+                    q.answers?.forEach((a: any) => {
                         delete a.is_correct;
                     });
                 });
@@ -175,19 +178,19 @@ const BankController = {
         return res.status(result.status).json(result);
     },
 
-    async getQuestionIdBank(req: Request, res: Response){
+    async getQuestionIdBank(req: Request, res: Response) {
         const result: DefaultResponse<any> = await safeExecute(async () => {
-          const {id} = req.params
-          const data = await BankService.getQuestionIdBank(Number(id));
-          return {
-            status: 200,
-            message: "Lay cau hoi bai luyen tap thanh cong",
-            data: data
-          }
+            const { id } = req.params
+            const data = await BankService.getQuestionIdBank(Number(id));
+            return {
+                status: 200,
+                message: "Lay cau hoi bai luyen tap thanh cong",
+                data: data
+            }
         });
-    
+
         return res.status(result.status).json(result)
-      },
+    },
 }
 
 export default BankController;

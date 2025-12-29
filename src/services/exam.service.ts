@@ -2,12 +2,16 @@ import { Exam, DoExam, UserAnswerGrouped, AnswerCorrectGrouped } from "../models
 import pool, { query } from "../config/database";
 import { Question } from "../models/question.model"
 import { redis } from "../config/redis";
+import { groupQuestionsByTypeSafe, QuestionGroup } from "../utils/helper";
 
 const ExamService = {
 
   async getById(
     examId: number
-  ): Promise<{ question: Question[] | null; subject_type: number | null }> {
+  ): Promise<{
+    question: QuestionGroup | null;
+    subject_type: number | null;
+  }> {
 
     const queryText = `
       SELECT
@@ -63,6 +67,10 @@ const ExamService = {
       return { question: null, subject_type: null };
     }
 
+    const groupedQuestions = groupQuestionsByTypeSafe(
+      questionResult.rows as Question[]
+    );
+
     // LẤY subject_type
     const subjectTypeQuery = `
       SELECT s.subject_type
@@ -77,7 +85,7 @@ const ExamService = {
       subjectTypeResult.rows[0]?.subject_type ?? null;
 
     return {
-      question: questionResult.rows as Question[],
+      question: groupedQuestions,
       subject_type
     };
   },
@@ -425,7 +433,8 @@ const ExamService = {
   async getExamRanking(
     exam_id: number,
     user_id: number,
-    user_name: string
+    user_name: string,
+    page: number
   ): Promise<{
     rank: {
       user_id: number;
@@ -439,18 +448,34 @@ const ExamService = {
       score: number;
       time_test: number;
     } | null;
+    total_page: number;
+    total_rank: number;
   }> {
     try {
       const limit = 10;
+      const start = (page - 1) * limit;
+      const end = start + limit - 1;
+
+      // ✅ tổng số user trong BXH
+      const total_rank = await redis.zcard(
+        `exam:${exam_id}:ranking`
+      );
+      const total_page = Math.ceil(total_rank / limit);
+
       const redisData = await redis.zrevrange(
         `exam:${exam_id}:ranking`,
-        0,
-        limit - 1,
+        start,
+        end,
         "WITHSCORES"
       );
 
       if (!redisData.length) {
-        return { rank: [], my_rank: null };
+        return {
+          rank: [],
+          my_rank: null,
+          total_page,
+          total_rank
+        };
       }
 
       const userIds: number[] = [];
@@ -472,17 +497,15 @@ const ExamService = {
         });
       }
 
-      const scoreQuery = `
-        SELECT user_id, score, time_test
-        FROM history_exam
-        WHERE exam_id = $1
-          AND user_id = ANY($2)
-      `;
-
-      const scoreResult = await pool.query(scoreQuery, [
-        exam_id,
-        userIds
-      ]);
+      const scoreResult = await pool.query(
+        `
+          SELECT user_id, score, time_test
+          FROM history_exam
+          WHERE exam_id = $1
+            AND user_id = ANY($2)
+        `,
+        [exam_id, userIds]
+      );
 
       const scoreMap = new Map<
         number,
@@ -498,7 +521,6 @@ const ExamService = {
 
       const rank = redisMembers.map(m => {
         const detail = scoreMap.get(m.user_id);
-
         return {
           user_id: m.user_id,
           user_name: m.user_name,
@@ -508,47 +530,53 @@ const ExamService = {
         };
       });
 
+      // lấy hạng của user hiện tại
       const memberKey = JSON.stringify({ user_id, user_name });
-
       const myRankIndex = await redis.zrevrank(
         `exam:${exam_id}:ranking`,
         memberKey
       );
 
-      if (myRankIndex === null) {
-        return { rank, my_rank: null };
+      let my_rank = null;
+
+      if (myRankIndex !== null) {
+        const myScoreResult = await pool.query(
+          `
+            SELECT score, time_test
+            FROM history_exam
+            WHERE exam_id = $1
+              AND user_id = $2
+            ORDER BY history_exam_id DESC
+            LIMIT 1
+          `,
+          [exam_id, user_id]
+        );
+
+        const myRow = myScoreResult.rows[0];
+        if (myRow) {
+          my_rank = {
+            rank: myRankIndex + 1,
+            score: Number(myRow.score),
+            time_test: Number(myRow.time_test)
+          };
+        }
       }
 
-      const myScoreQuery = `
-      SELECT score, time_test
-      FROM history_exam
-      WHERE exam_id = $1
-        AND user_id = $2
-      ORDER BY history_exam_id DESC
-      LIMIT 1
-    `;
-
-      const myScoreResult = await pool.query(myScoreQuery, [
-        exam_id,
-        user_id
-      ]);
-
-      const myRow = myScoreResult.rows[0];
-      if (!myRow) {
-        return { rank, my_rank: null };
-      }
-
-      const my_rank = {
-        rank: myRankIndex + 1,
-        score: Number(myRow.score),
-        time_test: Number(myRow.time_test)
+      return {
+        rank,
+        my_rank,
+        total_page,
+        total_rank
       };
-
-      return { rank, my_rank };
 
     } catch (err) {
       console.error("Lỗi lấy xếp hạng:", err);
-      return { rank: [], my_rank: null };
+      return {
+        rank: [],
+        my_rank: null,
+        total_page: 0,
+        total_rank: 0
+      };
     }
   },
 
@@ -704,7 +732,7 @@ const ExamService = {
     return { check: true };
   },
 
-  async getQuestionIdExam(exam_id: number): Promise<number[]>{
+  async getQuestionIdExam(exam_id: number): Promise<number[]> {
     const questionQuery = `SELECT question_id FROM question_exam WHERE exam_id=$1`
     const questionRows = await query(questionQuery, [exam_id])
     return questionRows.rows.map(
