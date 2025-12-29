@@ -1,6 +1,6 @@
 // Header.jsx (or similar)
 "use client"
-import styles from "./Header.module.css"; // 👈 Import the CSS module
+import styles from "./Header.module.css"; 
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button/Button";
 export default function Header() {
@@ -15,7 +15,7 @@ export default function Header() {
         <header className={styles.header}>
             <div className={styles.adminInfoContainer}>
                 {/* Replaced Tailwind classes with styles.adminText */}
-                <Button >Đăng xuất</Button>
+                <Button onClick={hanldeLogout}>Đăng xuất</Button>
             </div>
         </header>
     );
