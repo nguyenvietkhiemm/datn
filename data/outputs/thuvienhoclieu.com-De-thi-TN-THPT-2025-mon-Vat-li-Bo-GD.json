@@ -59,28 +59,7 @@
     "answers": [
       {
         "para_index": 10,
-        "text": "A. khối lượng khác nhau.",
-        "math": [],
-        "images": [],
-        "label": "answer"
-      },
-      {
-        "para_index": 10,
-        "text": "B. nhiệt độ khác nhau.",
-        "math": [],
-        "images": [],
-        "label": "answer"
-      },
-      {
-        "para_index": 10,
-        "text": "C. thế năng khác nhau.",
-        "math": [],
-        "images": [],
-        "label": "answer"
-      },
-      {
-        "para_index": 10,
-        "text": "D. thể tích khác nhau.",
+        "text": "A. khối lượng khác nhau.B. nhiệt độ khác nhau.C. thế năng khác nhau.D. thể tích khác nhau.",
         "math": [],
         "images": [],
         "label": "answer"
@@ -188,28 +167,7 @@
     "answers": [
       {
         "para_index": 22,
-        "text": "A. 238 .",
-        "math": [],
-        "images": [],
-        "label": "answer"
-      },
-      {
-        "para_index": 22,
-        "text": "B. 146 .",
-        "math": [],
-        "images": [],
-        "label": "answer"
-      },
-      {
-        "para_index": 22,
-        "text": "C. 1 .",
-        "math": [],
-        "images": [],
-        "label": "answer"
-      },
-      {
-        "para_index": 22,
-        "text": "D. 92 .",
+        "text": "A. 238 .B. 146 .C. 1 .D. 92 .",
         "math": [],
         "images": [],
         "label": "answer"
@@ -342,91 +300,7 @@
     "answers": [
       {
         "para_index": 34,
-        "text": "A. .",
-        "math": [],
-        "images": [
-          {
-            "sha1": "42fa95567a09e6c97ec8e31f50c8b5b2a8488288",
-            "saved_path": "42fa95567a09e6c97ec8e31f50c8b5b2a8488288.png",
-            "selected": true
-          },
-          {
-            "sha1": "ffdc7d9c1a030af37988deb7aa922f14de816b53",
-            "saved_path": "ffdc7d9c1a030af37988deb7aa922f14de816b53.png",
-            "selected": true
-          },
-          {
-            "sha1": "b218c5d26b856b6c15cb294fed957bb62500b56a",
-            "saved_path": "b218c5d26b856b6c15cb294fed957bb62500b56a.png",
-            "selected": true
-          },
-          {
-            "sha1": "fa31ab6716bbb2bdc092465d458104dd3e19d81a",
-            "saved_path": "fa31ab6716bbb2bdc092465d458104dd3e19d81a.png",
-            "selected": true
-          }
-        ],
-        "label": "answer"
-      },
-      {
-        "para_index": 34,
-        "text": "B. .",
-        "math": [],
-        "images": [
-          {
-            "sha1": "42fa95567a09e6c97ec8e31f50c8b5b2a8488288",
-            "saved_path": "42fa95567a09e6c97ec8e31f50c8b5b2a8488288.png",
-            "selected": true
-          },
-          {
-            "sha1": "ffdc7d9c1a030af37988deb7aa922f14de816b53",
-            "saved_path": "ffdc7d9c1a030af37988deb7aa922f14de816b53.png",
-            "selected": true
-          },
-          {
-            "sha1": "b218c5d26b856b6c15cb294fed957bb62500b56a",
-            "saved_path": "b218c5d26b856b6c15cb294fed957bb62500b56a.png",
-            "selected": true
-          },
-          {
-            "sha1": "fa31ab6716bbb2bdc092465d458104dd3e19d81a",
-            "saved_path": "fa31ab6716bbb2bdc092465d458104dd3e19d81a.png",
-            "selected": true
-          }
-        ],
-        "label": "answer"
-      },
-      {
-        "para_index": 34,
-        "text": "C. .",
-        "math": [],
-        "images": [
-          {
-            "sha1": "42fa95567a09e6c97ec8e31f50c8b5b2a8488288",
-            "saved_path": "42fa95567a09e6c97ec8e31f50c8b5b2a8488288.png",
-            "selected": true
-          },
-          {
-            "sha1": "ffdc7d9c1a030af37988deb7aa922f14de816b53",
-            "saved_path": "ffdc7d9c1a030af37988deb7aa922f14de816b53.png",
-            "selected": true
-          },
-          {
-            "sha1": "b218c5d26b856b6c15cb294fed957bb62500b56a",
-            "saved_path": "b218c5d26b856b6c15cb294fed957bb62500b56a.png",
-            "selected": true
-          },
-          {
-            "sha1": "fa31ab6716bbb2bdc092465d458104dd3e19d81a",
-            "saved_path": "fa31ab6716bbb2bdc092465d458104dd3e19d81a.png",
-            "selected": true
-          }
-        ],
-        "label": "answer"
-      },
-      {
-        "para_index": 34,
-        "text": "D. .",
+        "text": "A. .B. .C. .D. .",
         "math": [],
         "images": [
           {
@@ -504,21 +378,14 @@
     "answers": [
       {
         "para_index": 41,
-        "text": "A. Định luật Coulomb về tương tác điện.",
-        "math": [],
-        "images": [],
-        "label": "answer"
-      },
-      {
-        "para_index": 41,
-        "text": "B. Định luật Lenz về cảm ứng điện từ.",
+        "text": "A. Định luật Coulomb về tương tác điện.B. Định luật Lenz về cảm ứng điện từ.",
         "math": [],
         "images": [],
         "label": "answer"
       },
       {
         "para_index": 42,
-        "text": "C. Định luật Newton về chuyển động.\nD. Định luật Ohm cho vật dẫn kim loại.",
+        "text": "C. Định luật Newton về chuyển động.D. Định luật Ohm cho vật dẫn kim loại.",
         "math": [],
         "images": [],
         "label": "answer"
@@ -536,21 +403,14 @@
     "answers": [
       {
         "para_index": 44,
-        "text": "A. khối lượng riêng của khối khí tăng.",
-        "math": [],
-        "images": [],
-        "label": "answer"
-      },
-      {
-        "para_index": 44,
-        "text": "B. áp suất của khối khí giảm.",
+        "text": "A. khối lượng riêng của khối khí tăng.B. áp suất của khối khí giảm.",
         "math": [],
         "images": [],
         "label": "answer"
       },
       {
         "para_index": 45,
-        "text": "C. khối lượng riêng của khối khí giảm.\nD. áp suất của khối khí tăng.",
+        "text": "C. khối lượng riêng của khối khí giảm.D. áp suất của khối khí tăng.",
         "math": [],
         "images": [],
         "label": "answer"
@@ -574,28 +434,7 @@
     "answers": [
       {
         "para_index": 47,
-        "text": "A. proton.",
-        "math": [],
-        "images": [],
-        "label": "answer"
-      },
-      {
-        "para_index": 47,
-        "text": "B. neutron.",
-        "math": [],
-        "images": [],
-        "label": "answer"
-      },
-      {
-        "para_index": 47,
-        "text": "C. positron.",
-        "math": [],
-        "images": [],
-        "label": "answer"
-      },
-      {
-        "para_index": 47,
-        "text": "D. nucleon.",
+        "text": "A. proton.B. neutron.C. positron.D. nucleon.",
         "math": [],
         "images": [],
         "label": "answer"
@@ -619,25 +458,7 @@
     "answers": [
       {
         "para_index": 49,
-        "text": "A. volt ( ).",
-        "math": [],
-        "images": [
-          {
-            "sha1": "bfe2ea66e514162cdd2f8423eab39420d98781a2",
-            "saved_path": "bfe2ea66e514162cdd2f8423eab39420d98781a2.png",
-            "selected": true
-          },
-          {
-            "sha1": "93cef4aac5ddf9623677c90b239cc701c72bc036",
-            "saved_path": "93cef4aac5ddf9623677c90b239cc701c72bc036.png",
-            "selected": true
-          }
-        ],
-        "label": "answer"
-      },
-      {
-        "para_index": 49,
-        "text": "B. weber .",
+        "text": "A. volt ( ).B. weber .",
         "math": [],
         "images": [
           {
@@ -655,7 +476,7 @@
       },
       {
         "para_index": 50,
-        "text": "C. tesla (T).\nD. coulomb (C).",
+        "text": "C. tesla (T).D. coulomb (C).",
         "math": [],
         "images": [],
         "label": "answer"
@@ -679,91 +500,7 @@
     "answers": [
       {
         "para_index": 52,
-        "text": "A. .",
-        "math": [],
-        "images": [
-          {
-            "sha1": "9cecb5b09130f3f704a609155c988a8c2e802792",
-            "saved_path": "9cecb5b09130f3f704a609155c988a8c2e802792.png",
-            "selected": true
-          },
-          {
-            "sha1": "1b69d446422f63331f79ce5370eda620ff58081d",
-            "saved_path": "1b69d446422f63331f79ce5370eda620ff58081d.png",
-            "selected": true
-          },
-          {
-            "sha1": "50d68263262cf53337f232b3c96ecb22f10ef304",
-            "saved_path": "50d68263262cf53337f232b3c96ecb22f10ef304.png",
-            "selected": true
-          },
-          {
-            "sha1": "9febe740f9ab8e588913046497f3f43d3c1683fd",
-            "saved_path": "9febe740f9ab8e588913046497f3f43d3c1683fd.png",
-            "selected": true
-          }
-        ],
-        "label": "answer"
-      },
-      {
-        "para_index": 52,
-        "text": "B. .",
-        "math": [],
-        "images": [
-          {
-            "sha1": "9cecb5b09130f3f704a609155c988a8c2e802792",
-            "saved_path": "9cecb5b09130f3f704a609155c988a8c2e802792.png",
-            "selected": true
-          },
-          {
-            "sha1": "1b69d446422f63331f79ce5370eda620ff58081d",
-            "saved_path": "1b69d446422f63331f79ce5370eda620ff58081d.png",
-            "selected": true
-          },
-          {
-            "sha1": "50d68263262cf53337f232b3c96ecb22f10ef304",
-            "saved_path": "50d68263262cf53337f232b3c96ecb22f10ef304.png",
-            "selected": true
-          },
-          {
-            "sha1": "9febe740f9ab8e588913046497f3f43d3c1683fd",
-            "saved_path": "9febe740f9ab8e588913046497f3f43d3c1683fd.png",
-            "selected": true
-          }
-        ],
-        "label": "answer"
-      },
-      {
-        "para_index": 52,
-        "text": "C. .",
-        "math": [],
-        "images": [
-          {
-            "sha1": "9cecb5b09130f3f704a609155c988a8c2e802792",
-            "saved_path": "9cecb5b09130f3f704a609155c988a8c2e802792.png",
-            "selected": true
-          },
-          {
-            "sha1": "1b69d446422f63331f79ce5370eda620ff58081d",
-            "saved_path": "1b69d446422f63331f79ce5370eda620ff58081d.png",
-            "selected": true
-          },
-          {
-            "sha1": "50d68263262cf53337f232b3c96ecb22f10ef304",
-            "saved_path": "50d68263262cf53337f232b3c96ecb22f10ef304.png",
-            "selected": true
-          },
-          {
-            "sha1": "9febe740f9ab8e588913046497f3f43d3c1683fd",
-            "saved_path": "9febe740f9ab8e588913046497f3f43d3c1683fd.png",
-            "selected": true
-          }
-        ],
-        "label": "answer"
-      },
-      {
-        "para_index": 52,
-        "text": "D. .",
+        "text": "A. .B. .C. .D. .",
         "math": [],
         "images": [
           {
@@ -823,28 +560,7 @@
     "answers": [
       {
         "para_index": 54,
-        "text": "A. công.",
-        "math": [],
-        "images": [],
-        "label": "answer"
-      },
-      {
-        "para_index": 54,
-        "text": "B. nhiệt độ.",
-        "math": [],
-        "images": [],
-        "label": "answer"
-      },
-      {
-        "para_index": 54,
-        "text": "C. nội năng.",
-        "math": [],
-        "images": [],
-        "label": "answer"
-      },
-      {
-        "para_index": 54,
-        "text": "D. nhiệt dung riêng.",
+        "text": "A. công.B. nhiệt độ.C. nội năng.D. nhiệt dung riêng.",
         "math": [],
         "images": [],
         "label": "answer"
@@ -873,91 +589,7 @@
     "answers": [
       {
         "para_index": 56,
-        "text": "A. .",
-        "math": [],
-        "images": [
-          {
-            "sha1": "147d356e0c937983c88e90224b0416d03a6b1283",
-            "saved_path": "147d356e0c937983c88e90224b0416d03a6b1283.png",
-            "selected": true
-          },
-          {
-            "sha1": "735f205bf7c66c4ccf3a534af106b264f176e2a6",
-            "saved_path": "735f205bf7c66c4ccf3a534af106b264f176e2a6.png",
-            "selected": true
-          },
-          {
-            "sha1": "67d00ed4f6b18aa69e9e6ec5c15e7ac25670adea",
-            "saved_path": "67d00ed4f6b18aa69e9e6ec5c15e7ac25670adea.png",
-            "selected": true
-          },
-          {
-            "sha1": "6233247330563b5c9438a58501e1da6f2cc21618",
-            "saved_path": "6233247330563b5c9438a58501e1da6f2cc21618.png",
-            "selected": true
-          }
-        ],
-        "label": "answer"
-      },
-      {
-        "para_index": 56,
-        "text": "B. .",
-        "math": [],
-        "images": [
-          {
-            "sha1": "147d356e0c937983c88e90224b0416d03a6b1283",
-            "saved_path": "147d356e0c937983c88e90224b0416d03a6b1283.png",
-            "selected": true
-          },
-          {
-            "sha1": "735f205bf7c66c4ccf3a534af106b264f176e2a6",
-            "saved_path": "735f205bf7c66c4ccf3a534af106b264f176e2a6.png",
-            "selected": true
-          },
-          {
-            "sha1": "67d00ed4f6b18aa69e9e6ec5c15e7ac25670adea",
-            "saved_path": "67d00ed4f6b18aa69e9e6ec5c15e7ac25670adea.png",
-            "selected": true
-          },
-          {
-            "sha1": "6233247330563b5c9438a58501e1da6f2cc21618",
-            "saved_path": "6233247330563b5c9438a58501e1da6f2cc21618.png",
-            "selected": true
-          }
-        ],
-        "label": "answer"
-      },
-      {
-        "para_index": 56,
-        "text": "C. .",
-        "math": [],
-        "images": [
-          {
-            "sha1": "147d356e0c937983c88e90224b0416d03a6b1283",
-            "saved_path": "147d356e0c937983c88e90224b0416d03a6b1283.png",
-            "selected": true
-          },
-          {
-            "sha1": "735f205bf7c66c4ccf3a534af106b264f176e2a6",
-            "saved_path": "735f205bf7c66c4ccf3a534af106b264f176e2a6.png",
-            "selected": true
-          },
-          {
-            "sha1": "67d00ed4f6b18aa69e9e6ec5c15e7ac25670adea",
-            "saved_path": "67d00ed4f6b18aa69e9e6ec5c15e7ac25670adea.png",
-            "selected": true
-          },
-          {
-            "sha1": "6233247330563b5c9438a58501e1da6f2cc21618",
-            "saved_path": "6233247330563b5c9438a58501e1da6f2cc21618.png",
-            "selected": true
-          }
-        ],
-        "label": "answer"
-      },
-      {
-        "para_index": 56,
-        "text": "D. .",
+        "text": "A. .B. .C. .D. .",
         "math": [],
         "images": [
           {
@@ -996,21 +628,14 @@
     "answers": [
       {
         "para_index": 58,
-        "text": "A. nhiệt độ và thể tích của vật không đổi.",
-        "math": [],
-        "images": [],
-        "label": "answer"
-      },
-      {
-        "para_index": 58,
-        "text": "B. nhiệt độ của vật thay đổi.",
+        "text": "A. nhiệt độ và thể tích của vật không đổi.B. nhiệt độ của vật thay đổi.",
         "math": [],
         "images": [],
         "label": "answer"
       },
       {
         "para_index": 59,
-        "text": "C. vật truyền năng lượng nhiệt cho vật khác.\nD. thể tích của vật thay đổi.",
+        "text": "C. vật truyền năng lượng nhiệt cho vật khác.D. thể tích của vật thay đổi.",
         "math": [],
         "images": [],
         "label": "answer"
@@ -1028,28 +653,7 @@
     "answers": [
       {
         "para_index": 61,
-        "text": "A. đông đặc.",
-        "math": [],
-        "images": [],
-        "label": "answer"
-      },
-      {
-        "para_index": 61,
-        "text": "B. hoá hơi.",
-        "math": [],
-        "images": [],
-        "label": "answer"
-      },
-      {
-        "para_index": 61,
-        "text": "C. nóng chảy.",
-        "math": [],
-        "images": [],
-        "label": "answer"
-      },
-      {
-        "para_index": 61,
-        "text": "D. ngưng tụ.",
+        "text": "A. đông đặc.B. hoá hơi.C. nóng chảy.D. ngưng tụ.",
         "math": [],
         "images": [],
         "label": "answer"
