@@ -37,7 +37,7 @@ export default function Ranking() {
     <ReviewExam>
       <div className={styles.container}>
         <div className={styles.right_rank}>
-          <RightRank rank={ranking} myRank={myRank} />
+          <RightRank/>
         </div>
         <div className={styles.conatiner_rank}>
           <MainRank ranking={ranking}
@@ -50,7 +50,6 @@ export default function Ranking() {
           {myRank && (
             <MyRank myRank={myRank} />
           )}
-
         </div>
       </div>
     </ReviewExam>

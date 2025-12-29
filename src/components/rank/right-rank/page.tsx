@@ -1,16 +1,8 @@
 import styles from "./RightRank.module.css";
 import { Rank, myRank } from "../../../../domain/exam/type";
 
-interface RightRankProp {
-    rank: Rank[];
-    myRank: myRank | null;
-}
 
-export default function RightRank({
-    rank,
-    myRank,
-}: RightRankProp) {
-    if (!myRank || !rank.length) return null;
+export default function RightRank() {;
 
     return (
         <div className={styles.right_rank}>
