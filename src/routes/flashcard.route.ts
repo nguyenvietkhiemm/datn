@@ -281,8 +281,8 @@ flashcardRouter.post("/decks/create", Authentication.AuthenticateToken, Flashcar
  */
 
 flashcardRouter.post("/decks/add/:id",
-        Authentication.AuthenticateToken,
-        FlashcardController.add);
+  Authentication.AuthenticateToken,
+  FlashcardController.add);
 
 /**
  * @swagger
@@ -340,8 +340,8 @@ flashcardRouter.put("/decks/update/:id", Authentication.AuthenticateToken, Flash
  *         description: Không tìm thấy deck
  */
 flashcardRouter.delete("/decks/remove/:id",
-        Authentication.AuthenticateToken,
-        FlashcardDeckController.remove);
+  Authentication.AuthenticateToken,
+  FlashcardDeckController.remove);
 
 // ======================== FLASHCARD ROUTES ========================
 
@@ -409,8 +409,8 @@ flashcardRouter.put(
  *         description: Không tìm thấy flashcard
  */
 flashcardRouter.delete("/remove/:id",
-        Authentication.AuthenticateToken,
-        FlashcardController.remove);
+  Authentication.AuthenticateToken,
+  FlashcardController.remove);
 
 flashcardRouter.get(
   "/quiz/:id",
@@ -423,5 +423,10 @@ flashcardRouter.patch(
   Authentication.AuthenticateToken,
   FlashcardController.submit
 );
+
+flashcardRouter.get("/review/:id",
+  Authentication.AuthenticateToken,
+  FlashcardController.review
+)
 
 export default flashcardRouter;
