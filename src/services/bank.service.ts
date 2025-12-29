@@ -1,7 +1,6 @@
 import pool, { query } from "../config/database";
 import { Bank, DoBank } from "../models/bank.model";
 import { Question } from "../models/question.model";
-import { UserAnswerGrouped, AnswerCorrectGrouped } from "../models/bank.question.model";
 import { groupQuestionsByTypeSafe, QuestionGroup } from "../utils/helper";
 
 const BankService = {
@@ -103,6 +102,7 @@ const BankService = {
         const conditions: string[] = [];
         const params: any[] = [];
         let idx = 1;
+        console.log(searchValue);
 
         // Search (bank description + topic title)
         if (searchValue.trim()) {
@@ -141,16 +141,13 @@ const BankService = {
         const whereClause = conditions.length
             ? `WHERE ${conditions.join(" AND ")}`
             : "";
-
+            
         // Query data
         const dataQuery = `
           SELECT
-            b.bank_id,
-            b.description,
-            b.topic_id,
-            b.available,
-            b.time_limit,
-            t.title AS topic_name
+            b.*,
+            t.title AS topic_name,
+            sj.subject_type
           FROM bank b
           JOIN topic t ON b.topic_id = t.topic_id
           JOIN subject sj ON sj.subject_id = t.subject_id
@@ -158,7 +155,9 @@ const BankService = {
           ORDER BY b.bank_id DESC
           LIMIT ${limit} OFFSET ${offset}
         `;
-
+        const dataResult = await query(dataQuery, params);
+        console.log(dataResult);
+        
         // Count
         const countQuery = `
           SELECT COUNT(*) AS total
@@ -168,11 +167,10 @@ const BankService = {
           ${whereClause}
         `;
 
-        const [dataResult, countResult] = await Promise.all([
-            query(dataQuery, params),
+        const [ countResult] = await Promise.all([
             query(countQuery, params),
         ]);
-
+        
         return {
             banks: dataResult.rows,
             totalPages: Math.ceil(Number(countResult.rows[0].total) / limit),
@@ -209,10 +207,10 @@ const BankService = {
             const { rows } = await client.query(
                 `
             SELECT q.question_id, q.type_question, a.answer_id, a.answer_content
-            FROM question_exam qe
-            JOIN question q ON q.question_id = qe.question_id
+            FROM question_bank qb
+            JOIN question q ON q.question_id = qb.question_id
             JOIN answer a ON a.question_id = q.question_id
-            WHERE qe.exam_id = $1 AND a.is_correct = true
+            WHERE qb.bank_id = $1 AND a.is_correct = true
             `,
                 [bank_id]
             );
@@ -238,7 +236,7 @@ const BankService = {
             for (const user of do_bank) {
                 const info = map.get(user.question_id);
                 if (!info) continue;
-
+                
                 if (info.type_question === 1 &&
                     user.user_answer[0] == info.correct_answers[0]) {
                     score += 0.25;
@@ -363,81 +361,106 @@ const BankService = {
         history_bank_id: number,
         bank_id: number
     ): Promise<{
-        user_answer: UserAnswerGrouped[];
         score: number | null;
-        answer_correct: AnswerCorrectGrouped[];
+        questions: Record<number, any[]>;
     }> {
 
-        /* ===== ĐÁP ÁN ĐÚNG (GROUP BY question_id + question_content) ===== */
-        const correctSql = `
-          SELECT
-            q.question_id,
-            q.question_content,
-            q.type_question,
-            json_agg(
-              json_build_object(
-                'answer_id', a.answer_id,
-                'answer_content', a.answer_content
-              )
-            ) AS correct_answers
-          FROM bank b
-          JOIN question_bank qb ON b.bank_id = qb.bank_id
-          JOIN question q ON qb.question_id = q.question_id
-          JOIN answer a ON q.question_id = a.question_id
-          WHERE b.bank_id = $1
-            AND a.is_correct = true
-          GROUP BY q.question_id, q.question_content
-          ORDER BY q.question_id;
-        `;
-
-        const correctResult = await pool.query(correctSql, [bank_id]);
-
-        /* ===== ĐÁP ÁN USER ===== */
-        const userSql = `
-          SELECT question_id, answer_id, user_answer_text
-          FROM user_bank_answer
-          WHERE history_bank_id = $1
-          ORDER BY question_id;
-        `;
-
-        const userResult = await pool.query(userSql, [history_bank_id]);
-
-        const userMap = new Map<number, UserAnswerGrouped>();
-
-        for (const row of userResult.rows) {
-            const { question_id, answer_id, user_answer_text } = row;
-
-            if (!userMap.has(question_id)) {
-                userMap.set(question_id, {
-                    question_id,
-                    answer_id: [],
-                    user_answer_text: null
-                });
-            }
-
-            const item = userMap.get(question_id)!;
-
-            if (answer_id !== null) {
-                item.answer_id.push(answer_id);
-            }
-
-            if (user_answer_text !== null) {
-                item.user_answer_text = user_answer_text;
-            }
-        }
-
-        /* ===== SCORE ===== */
+        /* ================= SCORE ================= */
         const scoreResult = await pool.query(
             `SELECT score FROM history_bank WHERE history_bank_id = $1`,
             [history_bank_id]
         );
-
         const score = scoreResult.rows[0]?.score ?? null;
 
+        /* ================= QUESTIONS + CORRECT ANSWERS ================= */
+        const questionSql = `
+          SELECT
+            q.question_id,
+            q.question_content,
+            q.type_question,
+    
+            -- IMAGE QUESTION
+            COALESCE(
+              (
+                SELECT json_agg(iq.image_link)
+                FROM image_question iq
+                WHERE iq.question_id = q.question_id
+              ),
+              '[]'
+            ) AS images,
+    
+            json_agg(
+              DISTINCT jsonb_build_object(
+                'answer_id', a.answer_id,
+                'answer_content', a.answer_content,
+                'images',
+                    COALESCE(
+                      (
+                        SELECT json_agg(ia.image_link)
+                        FROM image_answer ia
+                        WHERE ia.answer_id = a.answer_id
+                      ),
+                      '[]'
+                    )
+              )
+            ) FILTER (WHERE a.is_correct = true) AS correct_answers
+      
+          FROM question_bank qb
+          JOIN question q ON q.question_id = qb.question_id
+          LEFT JOIN answer a ON a.question_id = q.question_id
+          WHERE qb.bank_id = $1
+          GROUP BY q.question_id
+          ORDER BY q.question_id
+        `;
+        const questionResult = await pool.query(questionSql, [bank_id]);
+
+        /* ================= USER ANSWERS ================= */
+        const userSql = `
+          SELECT
+            u.question_id,
+            u.answer_id,
+            u.user_answer_text,
+            a.answer_content
+          FROM user_bank_answer u
+          LEFT JOIN answer a ON a.answer_id = u.answer_id
+          WHERE u.history_bank_id = $1
+        `;
+        const userResult = await pool.query(userSql, [history_bank_id]);
+
+        /* ================= MAP USER ANSWERS ================= */
+        const userMap = new Map<number, {
+            answer_id: number | null;
+            answer_content: string | null;
+        }[]>();
+
+        for (const row of userResult.rows) {
+            if (!userMap.has(row.question_id)) {
+                userMap.set(row.question_id, []);
+            }
+
+            userMap.get(row.question_id)!.push({
+                answer_id: row.answer_id ?? null,
+                answer_content: row.answer_content ?? row.user_answer_text ?? null
+            });
+        }
+
+        /* ================= GROUP BY TYPE QUESTION ================= */
+        const grouped: Record<number, any[]> = { 1: [], 2: [], 3: [] };
+
+        for (const q of questionResult.rows) {
+            grouped[q.type_question].push({
+                question_id: q.question_id,
+                question_content: q.question_content,
+                type_question: q.type_question,
+                images: q.images ?? [],
+                correct_answers: q.correct_answers ?? [],
+                user_answers: userMap.get(q.question_id) ?? []
+            });
+        }
+
         return {
-            user_answer: Array.from(userMap.values()),
             score,
-            answer_correct: correctResult.rows
+            questions: grouped
         };
     },
 

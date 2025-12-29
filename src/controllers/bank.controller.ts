@@ -7,7 +7,7 @@ const BankController = {
         const result: DefaultResponse<any> = await safeExecute(async () => {
             const page = Number(req.query.page) || 1;
             const status = req.query.available?.toString() || "All";
-            const searchValue = req.query.keyword?.toString() || "";
+            const searchValue = req.query.keyword?.toString().trim() || "";
             const topicIds = req.query.topic_ids
                 ? Number(req.query.topic_ids)
                 : "All";
@@ -166,15 +166,52 @@ const BankController = {
 
     async getUserAnswer(req: Request, res: Response) {
         const result: DefaultResponse<any> = await safeExecute(async () => {
-            const { history_bank_id, bank_id } = req.query
+            const history_bank_id = Number(req.query.history_bank_id);
+            const bank_id = Number(req.query.bank_id);
 
-            const data = await BankService.getUserAnswer(Number(history_bank_id), Number(bank_id));
+            /* ========== VALIDATE INPUT ========== */
+            if (
+                !Number.isInteger(history_bank_id) ||
+                !Number.isInteger(bank_id)
+            ) {
+                return {
+                    status: 400,
+                    message: "history_bank_id hoặc bank_id không hợp lệ",
+                    data: null
+                };
+            }
+
+            /* ========== GET DATA ========== */
+            const data = await BankService.getUserAnswer(
+                history_bank_id,
+                bank_id
+            );
+
+            /* ========== CHECK EMPTY ========== */
+            const questions = data?.questions;
+            const isEmpty =
+                !questions ||
+                (
+                    (!questions[1] || questions[1].length === 0) &&
+                    (!questions[2] || questions[2].length === 0) &&
+                    (!questions[3] || questions[3].length === 0)
+                );
+
+            if (isEmpty) {
+                return {
+                    status: 404,
+                    message: "Không tìm thấy bài làm",
+                    data: null
+                };
+            }
+
             return {
                 status: 200,
                 message: "Lấy bài đã làm thành công",
                 data
-            }
+            };
         });
+
         return res.status(result.status).json(result);
     },
 

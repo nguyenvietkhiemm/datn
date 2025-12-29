@@ -618,18 +618,24 @@ const ExamService = {
     history_exam_id: number,
     exam_id: number
   ): Promise<{
-    user_answer: UserAnswerGrouped[];
     score: number | null;
-    answer_correct: AnswerCorrectGrouped[];
+    questions: Record<number, any[]>;
   }> {
 
-    /* ================= ĐÁP ÁN ĐÚNG + ẢNH ================= */
-    const correctSql = `
+    /* ================= SCORE ================= */
+    const scoreResult = await pool.query(
+      `SELECT score FROM history_exam WHERE history_exam_id = $1`,
+      [history_exam_id]
+    );
+    const score = scoreResult.rows[0]?.score ?? null;
+
+    /* ================= QUESTIONS + CORRECT ANSWERS ================= */
+    const questionSql = `
       SELECT
         q.question_id,
         q.question_content,
         q.type_question,
-  
+
         -- IMAGE QUESTION
         COALESCE(
           (
@@ -639,84 +645,79 @@ const ExamService = {
           ),
           '[]'
         ) AS images,
-  
-        -- CORRECT ANSWERS
+
         json_agg(
-          json_build_object(
+          DISTINCT jsonb_build_object(
             'answer_id', a.answer_id,
             'answer_content', a.answer_content,
-  
-            -- IMAGE ANSWER (1 ảnh / đáp án)
             'images',
-            COALESCE(
-              (
-                  SELECT json_agg(ia.image_link)
-                  FROM image_answer ia
-                  WHERE ia.answer_id = a.answer_id
-              ),
-              '[]'
-              )
+                COALESCE(
+                  (
+                    SELECT json_agg(ia.image_link)
+                    FROM image_answer ia
+                    WHERE ia.answer_id = a.answer_id
+                  ),
+                  '[]'
+                )
           )
-        ) AS correct_answers
+        ) FILTER (WHERE a.is_correct = true) AS correct_answers
   
-      FROM exam e
-      JOIN question_exam qe ON e.exam_id = qe.exam_id
-      JOIN question q ON qe.question_id = q.question_id
-      JOIN answer a ON q.question_id = a.question_id
-      WHERE e.exam_id = $1
-        AND a.is_correct = true
-      GROUP BY q.question_id, q.question_content, q.type_question
-      ORDER BY q.question_id;
+      FROM question_exam qe
+      JOIN question q ON q.question_id = qe.question_id
+      LEFT JOIN answer a ON a.question_id = q.question_id
+      WHERE qe.exam_id = $1
+      GROUP BY q.question_id
+      ORDER BY q.question_id
     `;
+    const questionResult = await pool.query(questionSql, [exam_id]);
 
-    const correctResult = await pool.query(correctSql, [exam_id]);
-
-    /* ================= ĐÁP ÁN USER ================= */
+    /* ================= USER ANSWERS ================= */
     const userSql = `
-      SELECT question_id, answer_id, user_answer_text
-      FROM user_exam_answer
-      WHERE history_exam_id = $1
-      ORDER BY question_id;
+      SELECT
+        u.question_id,
+        u.answer_id,
+        u.user_answer_text,
+        a.answer_content
+      FROM user_exam_answer u
+      LEFT JOIN answer a ON a.answer_id = u.answer_id
+      WHERE u.history_exam_id = $1
     `;
-
     const userResult = await pool.query(userSql, [history_exam_id]);
 
-    const userMap = new Map<number, UserAnswerGrouped>();
+    /* ================= MAP USER ANSWERS ================= */
+    const userMap = new Map<number, {
+      answer_id: number | null;
+      answer_content: string | null;
+    }[]>();
 
     for (const row of userResult.rows) {
-      const { question_id, answer_id, user_answer_text } = row;
-
-      if (!userMap.has(question_id)) {
-        userMap.set(question_id, {
-          question_id,
-          answer_id: [],
-          user_answer_text: null
-        });
+      if (!userMap.has(row.question_id)) {
+        userMap.set(row.question_id, []);
       }
 
-      const item = userMap.get(question_id)!;
-
-      if (answer_id !== null) {
-        item.answer_id.push(answer_id);
-      }
-
-      if (user_answer_text !== null) {
-        item.user_answer_text = user_answer_text;
-      }
+      userMap.get(row.question_id)!.push({
+        answer_id: row.answer_id ?? null,
+        answer_content: row.answer_content ?? row.user_answer_text ?? null
+      });
     }
 
-    /* ================= SCORE ================= */
-    const scoreResult = await pool.query(
-      `SELECT score FROM history_exam WHERE history_exam_id = $1`,
-      [history_exam_id]
-    );
+    /* ================= GROUP BY TYPE QUESTION ================= */
+    const grouped: Record<number, any[]> = { 1: [], 2: [], 3: [] };
 
-    const score = scoreResult.rows[0]?.score ?? null;
+    for (const q of questionResult.rows) {
+      grouped[q.type_question].push({
+        question_id: q.question_id,
+        question_content: q.question_content,
+        type_question: q.type_question,
+        images: q.images ?? [],
+        correct_answers: q.correct_answers ?? [],
+        user_answers: userMap.get(q.question_id) ?? []
+      });
+    }
 
     return {
-      user_answer: Array.from(userMap.values()),
       score,
-      answer_correct: correctResult.rows
+      questions: grouped
     };
   },
 

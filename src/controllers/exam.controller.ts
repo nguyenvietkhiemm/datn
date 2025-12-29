@@ -201,17 +201,50 @@ const ExamController = {
 
   async getUserAnswer(req: Request, res: Response) {
     const result: DefaultResponse<any> = await safeExecute(async () => {
-      const { history_exam_id, exam_id } = req.query
-      const data = await ExamService.getUserAnswer(Number(history_exam_id), Number(exam_id));
+      const history_exam_id = Number(req.query.history_exam_id);
+      const exam_id = Number(req.query.exam_id);
+  
+      // Validate input
+      if (!Number.isInteger(history_exam_id) || !Number.isInteger(exam_id)) {
+        return {
+          status: 400,
+          message: "history_exam_id hoặc exam_id không hợp lệ",
+          data: null
+        };
+      }
+  
+      const data = await ExamService.getUserAnswer(
+        history_exam_id,
+        exam_id
+      );
+  
+      // Không có dữ liệu hoặc không có câu hỏi ở mọi type
+      const questions = data?.questions;
+      const isEmpty =
+        !questions ||
+        (
+          (!questions[1] || questions[1].length === 0) &&
+          (!questions[2] || questions[2].length === 0) &&
+          (!questions[3] || questions[3].length === 0)
+        );
+  
+      if (isEmpty) {
+        return {
+          status: 404,
+          message: "Không tìm thấy bài làm",
+          data: null
+        };
+      }
+  
       return {
         status: 200,
         message: "Lấy bài đã làm thành công",
         data
-      }
+      };
     });
-
+  
     return res.status(result.status).json(result);
-  },
+  },  
 
   async getQuestionIdExam(req: Request, res: Response) {
     const result: DefaultResponse<any> = await safeExecute(async () => {
