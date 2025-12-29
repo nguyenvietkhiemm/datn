@@ -24,7 +24,7 @@ export default function FlashcardQuiz() {
       const token = Cookies.get("token");
       const URL_API = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
 
-      const res = await fetch(`${URL_API}/flashcards/quiz/${id}`, {
+      const res = await fetch(`${URL_API}/flashcards/review/${id}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,

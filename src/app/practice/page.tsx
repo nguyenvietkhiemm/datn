@@ -64,7 +64,7 @@ export default function Bank() {
         {banks.map((bank,index) => (
           <div key={index} className={styles.card}>
             {/* Tiêu đề */}
-            <h3 className={styles.title}>
+            <h3 className={styles.card_title}>
               Ngân hàng câu hỏi số {index + 1}
             </h3>
 
