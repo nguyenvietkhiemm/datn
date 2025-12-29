@@ -21,10 +21,8 @@ export function getHeaders(token?: string, is_json: boolean = true) {
 export const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND
 
 export function FilterSearch(filterCondition: any, searchKeyword: string, url: string) {
-    // Filter status
-    if (filterCondition?.status) {
-        url += `&status=${filterCondition.status}`;
-    }
+    // Filter status  
+        url += `&available=true`;
 
     // Filter topics
     if (filterCondition?.topics && filterCondition.topics.length > 0) {
