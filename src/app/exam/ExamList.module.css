@@ -50,7 +50,7 @@
 .grid {
     display: flex;
     flex-direction: column;
-    gap: 2rem
+    gap: 2rem;;
 }
 
 .card {
@@ -58,6 +58,7 @@
     background: white;
     border-radius: 1rem;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    border-top: #1e40af 3px solid;
     padding: 1.5rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     height: 14rem;
@@ -65,6 +66,7 @@
     display: grid;
     grid-template-columns: auto 300px;
     gap: 10px;
+    cursor: pointer;
 }
 
 .card:hover {
@@ -74,7 +76,7 @@
 
 .left_area {
     display: grid;
-    grid-template-columns: 530px auto;
+    grid-template-columns: auto 300px;
     gap: 1rem;
 }
 

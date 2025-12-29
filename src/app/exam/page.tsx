@@ -12,6 +12,7 @@ import { Users, CalendarCheck } from "lucide-react";
 import { Exam } from "../../../domain/exam/type"
 import { ExamService } from "../../../domain/exam/service";
 import Image from "next/image";
+import { formatVNDateTime } from "../../../lib/model";
 
 export default function ExamList() {
   const router = useRouter();
@@ -95,14 +96,14 @@ export default function ExamList() {
                             <div className={styles.user_name}>
                               {u?.user_name || "Ẩn danh"}
                             </div>
-                            <div className={styles.rank_icon}>
-                              {/* <Image
+                            {/* <div className={styles.rank_icon}>
+                              <Image
                                 src={rankIcons[idx]}
                                 alt={`Rank ${idx + 1}`}
                                 width={50}
                                 height={50}
-                              /> */}
-                            </div>
+                              />
+                            </div> */}
                           </div>
                         </div>
                       </div>
@@ -122,7 +123,6 @@ export default function ExamList() {
                 </div>
               </div>
             </div>
-
             <div className={styles.right_area}>
               <p className={styles.stats}>
                 <Users size={16} />
@@ -133,14 +133,14 @@ export default function ExamList() {
                 <div className={styles.dateRow}>
                   <CalendarCheck size={16} />
                   <span>Kết thúc: {exam.end_time
-                    ? new Date(exam.end_time).toLocaleString("vi-VN")
+                    ? formatVNDateTime(exam.end_time)
                     : "Chưa có"}</span>
                 </div>
 
                 <div className={styles.dateRow}>
                   <CalendarCheck size={16} />
                   <span>Bắt đầu: {exam.start_time
-                    ? new Date(exam.start_time).toLocaleString("vi-VN")
+                    ? formatVNDateTime(exam.start_time)
                     : "Chưa có"}</span>
                 </div>
               </div>
