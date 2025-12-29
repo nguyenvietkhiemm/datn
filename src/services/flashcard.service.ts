@@ -21,7 +21,7 @@ export const FlashcardService = {
          RETURNING *`,
         [data.front, data.back, data.example, data.flashcard_deck_id]
       );
-  
+
       return result.rows[0];
     } catch (error) {
       console.error("Lỗi khi thêm flashcard:", error);
@@ -29,7 +29,7 @@ export const FlashcardService = {
     } finally {
       client.release();
     }
-  },  
+  },
 
   async update(
     id: number,
@@ -65,7 +65,7 @@ export const FlashcardService = {
     return (result.rowCount ?? 0) > 0;
   },
 
-  async reviewFlashcard(id : number) : Promise<Flashcard[] | []>{
+  async quizFlashcard(id: number): Promise<Flashcard[] | []> {
     const result = await query(
       `
       SELECT * 
@@ -81,22 +81,37 @@ export const FlashcardService = {
     return result.rows || [];
   },
 
-  async submitFlashcard(answerCorrect : number[], answerMiss : number[]) : Promise<void>{
-    if(answerCorrect.length > 0){
+  async reviewFlashcard(id: number): Promise<Flashcard[] | []> {
+    const result = await query(
+      `
+      SELECT * 
+      FROM flashcard
+      WHERE flashcard_deck_id = $1
+      ORDER BY RANDOM()
+      LIMIT 20
+      `,
+      [id]
+    )
+
+    return result.rows || [];
+  },
+
+  async submitFlashcard(answerCorrect: number[], answerMiss: number[]): Promise<void> {
+    if (answerCorrect.length > 0) {
       await query(`
       UPDATE flashcard
       SET status = 'done'
       WHERE flashcard_id = ANY($1)
       `,
-      [answerCorrect])
+        [answerCorrect])
     }
-    if(answerMiss.length > 0){
+    if (answerMiss.length > 0) {
       await query(`
       UPDATE flashcard
       SET status = 'miss'
       WHERE flashcard_id = ANY($1)
       `,
-      [answerMiss])
+        [answerMiss])
     }
     return
   }

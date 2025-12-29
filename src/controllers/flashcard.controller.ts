@@ -62,6 +62,31 @@ export const FlashcardController = {
           return { status: 400, message: "Invalid deck ID" };
         }
 
+        const flashcards = await FlashcardService.quizFlashcard(id);
+
+        if (!flashcards || flashcards.length === 0) {
+          return { status: 404, message: "Không có flashcard để luyện tập" };
+        }
+
+        return {
+          status: 200,
+          message: "Lấy 20 flashcard để luyện tập thành công",
+          data: flashcards,
+        };
+      }
+    );
+
+    return res.status(result.status).json(result);
+  },
+
+  review: async (req: Request, res: Response) => {
+    const result = await safeExecute(
+      async (): Promise<DefaultResponse<any>> => {
+        const id = Number(req.params.id);
+        if (isNaN(id)) {
+          return { status: 400, message: "Invalid deck ID" };
+        }
+
         const flashcards = await FlashcardService.reviewFlashcard(id);
 
         if (!flashcards || flashcards.length === 0) {
