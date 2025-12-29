@@ -2,7 +2,7 @@
 "use client"
 import styles from "./Header.module.css"; // 👈 Import the CSS module
 import { useRouter } from "next/navigation";
-
+import { Button } from "../ui/button/Button";
 export default function Header() {
 
     const router = useRouter();
@@ -15,7 +15,7 @@ export default function Header() {
         <header className={styles.header}>
             <div className={styles.adminInfoContainer}>
                 {/* Replaced Tailwind classes with styles.adminText */}
-                <span className={styles.adminText}>Đăng xuất</span>
+                <Button >Đăng xuất</Button>
             </div>
         </header>
     );

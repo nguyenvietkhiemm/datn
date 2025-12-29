@@ -77,7 +77,7 @@ export default function ExamDetail() {
                             </h3>
 
                             {/* QUESTIONS */}
-                            {questionGroup[type]?.map((q) => {
+                            {questionGroup && questionGroup[type]?.map((q) => {
                                 const index = globalIndex++;
 
                                 return (
