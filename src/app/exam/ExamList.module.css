@@ -76,7 +76,7 @@
 
 .left_area {
     display: grid;
-    grid-template-columns: auto 300px;
+    grid-template-columns: auto 250px;
     gap: 1rem;
 }
 
@@ -90,7 +90,7 @@
 }
 
 .examName {
-    font-size: 25px;
+    font-size: 22px;
     font-weight: bold;
     margin: 0;
     display: -webkit-box;
@@ -112,7 +112,7 @@
 .top_user {
     display: flex;
     justify-content: flex-start;
-    gap: 24px;
+    gap: 2rem;
     margin-top: 16px;
 }
 

@@ -68,14 +68,6 @@ export default function ResultEssay({
                     </div>
                 ))}
             </div>
-
-            <div className={styles.resultTag}>
-                {!userText
-                    ? "Chưa trả lời"
-                    : isCorrect
-                        ? "✔ Đúng"
-                        : "✘ Sai"}
-            </div>
         </div>
     );
 }

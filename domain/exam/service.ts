@@ -2,19 +2,52 @@ import { getToken, getHeaders, API_URL, FilterSearch } from "../../lib/service";
 
 export const ExamService = {
     // Lấy danh sách đề thi
-    async getList(page: number = 1, filterCondition?: any, searchKeyword: string = "") {
+    async getList(
+        page: number = 1,
+        filterCondition?: any,
+        searchKeyword: string = ""
+    ) {
         const token = getToken();
         let url = `${API_URL}/exams?page=${page}`;
 
-        // Dùng hàm FilterSearch của bạn
+        // apply filter + search
         url = FilterSearch(filterCondition, searchKeyword, url);
 
         const res = await fetch(url, {
             method: "GET",
-            headers: getHeaders(token)
+            headers: getHeaders(token),
         });
 
-        return await res.json();
+        const result = await res.json();
+
+        if (Array.isArray(result?.data?.exams)) {
+            const now = new Date(); // UTC internally
+
+            result.data.exams.sort((a: any, b: any) => {
+                const startA = new Date(a.start_time);
+                const endA = new Date(a.end_time);
+                const startB = new Date(b.start_time);
+                const endB = new Date(b.end_time);
+
+                const isRunningA = startA <= now && now <= endA;
+                const isRunningB = startB <= now && now <= endB;
+
+                // 1. Ưu tiên exam đang diễn ra
+                if (isRunningA !== isRunningB) {
+                    return isRunningA ? -1 : 1;
+                }
+
+                // 2. Ưu tiên số người tham gia (DESC)
+                const countDiff =
+                    Number(b.contestant_count) - Number(a.contestant_count);
+                if (countDiff !== 0) return countDiff;
+
+                // 3. Exam mới hơn (start_time DESC)
+                return startB.getTime() - startA.getTime();
+            });
+        }
+
+        return result;
     },
 
     // Lấy chi tiết bài thi + câu hỏi
@@ -58,15 +91,15 @@ export const ExamService = {
         const params = new URLSearchParams({
             user_name,
             page: String(currentPage),
-          });
-          
-          const res = await fetch(
+        });
+
+        const res = await fetch(
             `${API_URL}/exams/${exam_id}/ranking?${params.toString()}`,
             {
-              method: "GET",
-              headers: getHeaders(getToken()),
+                method: "GET",
+                headers: getHeaders(getToken()),
             }
-          );          
+        );
         return await res.json();
     },
 
@@ -82,7 +115,7 @@ export const ExamService = {
         return await res.json();
     },
 
-    async checkDoExam(exam_id : number){
+    async checkDoExam(exam_id: number) {
         const token = getToken();
         const url = `${API_URL}/exams/check/do/user?exam_id=${exam_id}`;
 
@@ -94,12 +127,12 @@ export const ExamService = {
         return await res.json();
     },
 
-    async getUserAnswer(history_exam_id : number, exam_id : number){
+    async getUserAnswer(history_exam_id: number, exam_id: number) {
         const token = getToken();
         const res = await fetch(`${API_URL}/exams/user-answer?exam_id=${exam_id}&history_exam_id=${history_exam_id}`,
             {
-                method : "GET",
-                headers : getHeaders(token)
+                method: "GET",
+                headers: getHeaders(token)
             }
         )
         return await res.json()

@@ -40,7 +40,7 @@ export default function DocumentList() {
                 if (filterCondition?.topics?.length) {
                     params.append("topics", filterCondition.topics.join(","));
                 }
-
+                params.append("available", "true")
                 const res = await fetch(
                     `${API_URL}/documents?${params.toString()}`,
                     {

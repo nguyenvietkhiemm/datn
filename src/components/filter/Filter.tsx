@@ -123,27 +123,26 @@ export default function Filter(
 
     //ham loc
     const handleFilter = () => {
-        let topicIds: number[] = [];
+        let filterSubjectId: number | undefined = undefined;
+        let filterTopicIds: number[] | undefined = undefined;
+    
+        if (selectedSubject !== "All") {
+            filterSubjectId = Number(selectedSubject);
+        }
 
-        if (selectedSubject === "All") {
-            if (selectedTopic !== "All") {
-                topicIds = [Number(selectedTopic)];
-            } else {
-                topicIds = topics.map((t) => t.topic_id);
-            }
-        } else {
-            if (selectedTopic !== "All") {
-                topicIds = [Number(selectedTopic)];
-            } else {
-                topicIds = topics
+        if (selectedTopic !== "All") {
+            filterTopicIds = [Number(selectedTopic)];
+        } else if (selectedSubject !== "All") {
+            filterTopicIds = topics
                 .filter((t) => t.subject_id === selectedSubject)
                 .map((t) => t.topic_id);
-            }
         }
+    
         setSearchKeyword("");
+    
         setFilterCondition({
-            subject : selectedSubject,
-            topics: topicIds,
+            subject_id: filterSubjectId,
+            topic_ids: filterTopicIds,
         });
     };
 

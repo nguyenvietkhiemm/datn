@@ -28,10 +28,11 @@ export default function Bank() {
           page: currentPage,
           topics: filterCondition?.topics,
           search: searchKeyword,
+          subject_id: filterCondition?.subject_id
         });
 
         dispatch(setBank(res.data.banks));
-        setTotalPages(res.data.totalPages);
+        setTotalPages(res.data.totalPages || 1);
       } catch (err) {
         console.error(err);
       }

@@ -2,24 +2,30 @@ import { getToken, getHeaders, API_URL } from "../../lib/service";
 
 export interface FetchBankParams {
     page?: number;
-    topics?: number[];
+    topics?: number;
     search?: string;
+    subject_id?: number
 }
 
 export const BankService = {
     async fetchBank(params: FetchBankParams) {
-        const { page = 1, topics, search } = params;
+        const { page = 1, topics, search, subject_id } = params;
 
         const token = getToken()
         let url = `${API_URL}/banks?page=${page}`;
 
-        if (topics && topics.length > 0) {
-            url += `&topics=${topics.join(",")}`;
+        if (topics) {
+            url += `&topic_ids=${topics}`;
         }
 
         if (search && search.trim().length > 0) {
-            url += `&search=${encodeURIComponent(search)}`;
+            url += `&keyword=${encodeURIComponent(search)}`;
         }
+        if(subject_id){
+            url += `&subject_id=${subject_id}`
+        }
+
+        url += `&available=true`
 
         const res = await fetch(url, {
             method: "GET",

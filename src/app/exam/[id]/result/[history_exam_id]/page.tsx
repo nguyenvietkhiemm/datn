@@ -2,15 +2,14 @@
 
 import styles from "./ResultExam.module.css";
 import { ExamService } from "../../../../../../domain/exam/service";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useParams } from "next/navigation";
-import { ReviewQuestion, UserAnswerMap } from "../../../../../../domain/question-answer/type";
-import ResultMultipleChoice from "@/components/result-multiple-choice/page";
-import ResultEssay from "@/components/result-essay/page";
+import ResultSummary from "@/components/result-do/ResultSummary";
+import ResultPart from "@/components/result-do/ResultPart";
+import { ReviewQuestion } from "../../../../../../domain/question-answer/type";
 
 export default function ResultExam() {
-  const [questions, setQuestions] = useState<ReviewQuestion[]>([]);
-  const [userAnswers, setUserAnswers] = useState<UserAnswerMap>({});
+  const [questions, setQuestions] = useState<Record<number, ReviewQuestion[]>>({});
   const [score, setScore] = useState<number | null>(null);
 
   const params = useParams();
@@ -20,69 +19,66 @@ export default function ResultExam() {
   useEffect(() => {
     if (!exam_id || !history_exam_id) return;
 
-    // Load đáp án user
     const loadUserAnswer = async () => {
-      const result = await ExamService.getUserAnswer(history_exam_id, exam_id);
+      const result = await ExamService.getUserAnswer(
+        history_exam_id,
+        exam_id
+      );
 
-      setQuestions(result.data.answer_correct)
-      if (Array.isArray(result.data.user_answer)) {
-        const map: UserAnswerMap = {};
-        result.data.user_answer.forEach((item: any) => {
-          map[item.question_id] = {
-            answer_id: item.answer_id || [],
-            user_answer_text: item.user_answer_text
-          };
-        });
-        setUserAnswers(map);
-      }
-      setScore(Number(result.data.score));
-
+      setQuestions(result?.data?.questions ?? {});
+      setScore(
+        result?.data?.score !== null
+          ? Number(result.data.score)
+          : null
+      );
     };
+
     loadUserAnswer();
   }, [exam_id, history_exam_id]);
 
+  const stats = useMemo(() => {
+    let correct = 0;
+    let wrong = 0;
+    let skip = 0;
+
+    Object.values(questions).flat().forEach(q => {
+      const userIds = q.user_answers?.map(a => a.answer_id) ?? [];
+      const correctIds = q.correct_answers?.map(a => a.answer_id) ?? [];
+
+      if (userIds.length === 0) {
+        skip++;
+      } else if (
+        correctIds.length > 0 &&
+        correctIds.every(id => userIds.includes(id)) &&
+        userIds.every(id => correctIds.includes(id))
+      ) {
+        correct++;
+      } else {
+        wrong++;
+      }
+    });
+
+    return { correct, wrong, skip };
+  }, [questions]);
+
   return (
     <div className={styles.result}>
-      <h3 className={styles.title}> Kết quả bài thi</h3>
+      <h3 className={styles.title}>Kết quả bài thi</h3>
 
-      <div className={styles.scoreBox}>
-        <span>Điểm của bạn</span>
-        <b>{score}</b>
-      </div>
+      <ResultSummary
+        correct={stats.correct}
+        wrong={stats.wrong}
+        skip={stats.skip}
+        score={score}
+      />
 
-      <div className={styles.questionList}>
-        {questions.map((q, index) => {
-
-          /* ================= TRẮC NGHIỆM ================= */
-          if (q.type_question !== 3) {
-            const userData = userAnswers[q.question_id];
-            const userSelectedIds = userData?.answer_id || [];
-
-            const correctAnswerIds =
-              q.correct_answers.map(a => a.answer_id);
-
-            const isCorrect = correctAnswerIds.every(id => userSelectedIds.includes(id));
-
-            return (
-              <ResultMultipleChoice
-                key={index}
-                q={q}
-                userSelectedIds={userSelectedIds}
-                isCorrect={isCorrect}
-                index={index}
-              />
-            );
-          }
-
-          /* ================= TỰ LUẬN ================= */
-          const userData = userAnswers[q.question_id];
-          const userText = userData?.user_answer_text;
-
-          return (
-            <ResultEssay key={index} q={q} index={index} userText={userText} />
-          )
-        })}
-      </div>
+      {([1, 2, 3] as const).map(type => (
+        <ResultPart
+          key={type}
+          type={type}
+          questions={questions[type]}
+        />
+      ))}
     </div>
   );
 }

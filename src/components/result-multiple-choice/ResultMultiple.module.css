@@ -1,91 +1,124 @@
-/* ===== QUESTION CARD ===== */
 .questionCard {
     background: #ffffff;
-    border-radius: 12px;
-    padding: 16px 18px;
-    border-left: 6px solid transparent;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    border: 2px solid #e5e7eb;
+    position: relative;
 }
 
-/* ===== STATUS ===== */
+/* ===== TRẠNG THÁI ===== */
 .correct {
-    border-left-color: #22c55e;
+    border-color: #16a34a;
     background: #f0fdf4;
 }
 
-.answerlist{
-    display: flex;
-    flex-direction: column;
-}
-
-.answer_content_correct{
-    color: #601feb;
-}
 .wrong {
-    border-left-color: #ef4444;
+    border-color: #dc2626;
     background: #fef2f2;
 }
 
 .unanswered {
-    border-left-color: #9ca3af;
+    border-color: #9ca3af;
     background: #f9fafb;
 }
 
-/* ===== QUESTION HEADER ===== */
+/* ===== HEADER ===== */
 .questionHeader {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 12px;
-    justify-content: flex-start;
+    margin-bottom: 14px;
 }
 
 .questionIndex {
+    display: inline-block;
     font-weight: 700;
     color: #2563eb;
+    margin-right: 6px;
 }
 
 .questionText {
-    font-size: 15px;
+    font-size: 16px;
+    font-weight: 500;
     color: #111827;
+    line-height: 1.5;
+}
+
+/* ===== IMAGE ===== */
+.imageWrapperSmall {
+    margin-top: 8px;
+    max-width: 240px;
 }
 
 /* ===== ANSWER ROW ===== */
 .answerRow {
     display: flex;
-    margin-top: 8px;
-    font-size: 14px;
+    gap: 10px;
+    margin-top: 10px;
 }
 
 .label {
-    min-width: 130px;
-    color: #6b7280;
-    font-weight: 500;
+    min-width: 110px;
+    font-weight: 600;
+    color: #374151;
 }
 
 .value {
     color: #111827;
 }
 
-.correctValue {
-    color: #16a34a;
+.answerlist {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* ===== CORRECT ANSWER ===== */
+.answer_content_correct {
+    color: #152080;
     font-weight: 600;
 }
 
 /* ===== RESULT TAG ===== */
 .resultTag {
-    margin-top: 10px;
-    font-weight: 700;
+    position: absolute;
+    top: 14px;
+    right: 14px;
+
     font-size: 14px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 999px;
+
+    background: #e5e7eb;
+    color: #374151;
 }
 
 .correct .resultTag {
-    color: #16a34a;
+    background: #16a34a;
+    color: #ffffff;
 }
 
 .wrong .resultTag {
-    color: #dc2626;
+    background: #dc2626;
+    color: #ffffff;
 }
 
 .unanswered .resultTag {
-    color: #6b7280;
+    background: #6b7280;
+    color: #ffffff;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+    .answerRow {
+        flex-direction: column;
+        gap: 4px
+    }
+
+    .label {
+        min-width: auto;
+    }
+
+    .questionText {
+        font-size: 15px;
+    }
 }
