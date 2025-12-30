@@ -730,7 +730,7 @@ const ExamService = {
       `exam:${exam_id}:user:${user_id}`
     );
 
-    return { check: true };
+    return { check: !hasDone };
   },
 
   async getQuestionIdExam(exam_id: number): Promise<number[]> {
