@@ -1,124 +1,194 @@
-.roadmapContainer {
-  max-width: 900px;
-  margin: 60px auto;
-  padding: 20px;
-  text-align: center;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #fff;
+/* ===== LAYOUT ===== */
+.roadmapWrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 16px;
+  display: flex;
+  gap: 24px;
 }
 
-.roadmapTitle {
-  font-size: 28px;
-  font-weight: 700;
-  color: #1a4d9b;
-  margin-bottom: 10px;
-}
-
-.roadmapSubtitle {
-  color: #555;
-  margin-bottom: 40px;
-}
-
-.roadmapLine {
-  position: relative;
+.roadmapList{
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 40px;
-  margin-left: 20px;
 }
 
-/* Đường nối giữa các bước */
-.roadmapLine::before {
-  content: "";
-  position: absolute;
-  left: 17px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background-color: #cbd5e1;
-  z-index: 0;
+/* ===== ROADMAP CARD ===== */
+.roadmapCard {
+  flex: 1;
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid #e5e7eb;
 }
 
-.roadmapStep {
-  position: relative;
+/* ===== ROADMAP TITLE ===== */
+.roadmapTitle {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.roadmapDescription {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+/* ===== STEP ===== */
+.stepBlock {
+  padding-left: 20px;
+  border-left: 3px solid #e5e7eb;
+  margin-bottom: 28px;
+}
+
+.stepTitle {
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.stepTitle:hover {
+  color: #2563eb;
+}
+
+.stepDescription {
+  font-size: 14px;
+  color: #475569;
+  margin-bottom: 12px;
+}
+
+/* ===== SUB STEP ===== */
+.subStepItem {
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+.subStepButton {
+  width: 100%;
+  padding: 12px 14px;
+  background: #f8fafc;
+  border: none;
+  cursor: pointer;
+
   display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  z-index: 1;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 14px;
+  font-weight: 500;
 }
 
-.stepCircle {
-  flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-color: #1a4d9b;
-  color: #fff;
-  font-weight: bold;
+.subStepButton:hover {
+  background: #eef2ff;
+}
+
+.arrow {
+  transition: transform 0.2s ease;
+}
+
+.arrowOpen {
+  transform: rotate(90deg);
+}
+
+.subStepContent {
+  padding: 12px 14px;
+  background: #ffffff;
+  font-size: 14px;
+  color: #334155;
+  line-height: 1.6;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* side panel */
+.panelSubStep {
+  width: 360px;
+  position: sticky;
+  top: 85px;
+  align-self: flex-start;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  gap: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.panelSubStep h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.panelSubStep p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #334155;
+}
+
+/* ===== RESOURCE LINKS ===== */
+.resourceList {
+  margin-top: 12px;
+}
+
+.resourceItem {
   display: flex;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  gap: 8px;
+
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+
+  font-size: 14px;
+  text-decoration: none;
+  color: #2563eb;
+
+  transition: background 0.2s ease, transform 0.15s ease;
 }
 
-.stepContent {
-  text-align: left;
-  background-color: #f8f9fc;
-  padding: 16px 20px;
-  border-radius: 10px;
-  border-left: 4px solid #1a4d9b;
-  width: 100%;
-  transition: all 0.3s ease;
-}
-
-.stepContent:hover {
-  background-color: #eef3ff;
+.resourceItem:hover {
+  background: #eef2ff;
   transform: translateX(4px);
 }
 
-.stepContent h3 {
-  margin: 0 0 8px;
-  color: #1a1a1a;
-  font-size: 18px;
+.resourceIcon {
+  font-size: 16px;
 }
 
-.stepContent p {
-  margin: 0;
-  color: #555;
-  font-size: 15px;
-  line-height: 1.5;
+.resourceText {
+  flex: 1;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .roadmapContainer {
-    padding: 15px;
-  }
+.resourceBadge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
 
-  .roadmapTitle {
-    font-size: 22px;
-  }
+.badgeFree {
+  background: #dcfce7;
+  color: #166534;
+}
 
-  .roadmapStep {
-    gap: 12px;
-  }
-
-  .stepCircle {
-    width: 30px;
-    height: 30px;
-    font-size: 14px;
-  }
-
-  .stepContent {
-    padding: 12px 15px;
-  }
-
-  .stepContent h3 {
-    font-size: 16px;
-  }
-
-  .stepContent p {
-    font-size: 14px;
-  }
+.badgePro {
+  background: #fee2e2;
+  color: #991b1b;
 }
