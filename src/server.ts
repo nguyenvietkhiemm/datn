@@ -6,7 +6,6 @@ import path from "path";
 import routes from './routes/index';
 import nodeCron from 'node-cron';
 import StudyScheduleService from './services/schedule.study.service';
-import ExamService from './services/exam.service';
 import swaggerUi from 'swagger-ui-express';
 import {specs, swaggerOptions} from './config/swagger.jsdoc';
 import morgan from 'morgan';
@@ -51,7 +50,6 @@ app.listen(PORT, () => {
     // chay 1 phut 1 lan de test
     console.log('--- Bắt đầu tác vụ Cron: Kiểm tra và đánh dấu quá hạn ---');
     await StudyScheduleService.markOverTime();
-    await ExamService.markOverTime();
     console.log('--- Kết thúc tác vụ Cron ---');
   });
 

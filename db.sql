@@ -254,13 +254,6 @@ CREATE TABLE IF NOT EXISTS exam (
   available BOOLEAN DEFAULT true
 );
 
--- 25) Contestants (depends on exam and user)
-CREATE TABLE IF NOT EXISTS contestants (
-  contestants_id SERIAL PRIMARY KEY,
-  exam_id INT REFERENCES exam(exam_id) ON DELETE CASCADE,
-  user_id INT REFERENCES "user"(user_id) ON DELETE CASCADE
-);
-
 -- user từng làm exam nào, điểm số ra sao
 -- 26) history_exam (depends on exam and user)
 CREATE TABLE IF NOT EXISTS history_exam (
