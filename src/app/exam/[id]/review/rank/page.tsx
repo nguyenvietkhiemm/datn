@@ -18,15 +18,28 @@ export default function Ranking() {
   const [ranking, setRanking] = useState<Rank[]>([]);
   const [myRank, setMyRank] = useState<myRank | null>(null);
 
+  const sortRanking = (list: Rank[]) => {
+    return [...list].sort((a, b) => {
+      if (b.score !== a.score) {
+        return b.score - a.score;
+      }
+
+      return a.time_test - b.time_test;
+    });
+  };
+
+
   useEffect(() => {
     const user_name = localStorage.getItem("user_name") || "";
 
     async function load() {
       const res = await ExamService.getRanking(exam_id, user_name, currentPage);
       if (res?.data?.ranking) {
-        setRanking(res.data.ranking.rank || []);
+        const rawRank = res.data.ranking.rank || [];
+
+        setRanking(sortRanking(rawRank));
         setMyRank(res.data.ranking.my_rank || null);
-        setTotalPages(res.data.ranking.total_page)
+        setTotalPages(res.data.ranking.total_page);
       }
     }
 
@@ -37,7 +50,7 @@ export default function Ranking() {
     <ReviewExam>
       <div className={styles.container}>
         <div className={styles.right_rank}>
-          <RightRank/>
+          <RightRank />
         </div>
         <div className={styles.conatiner_rank}>
           <MainRank ranking={ranking}

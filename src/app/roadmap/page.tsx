@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
 import styles from "./RoadMap.module.css";
-import { ROADMAPS, SubStep } from "../../../domain/roadmap/type";
+import { ROADMAPS } from "../../../domain/roadmap/type";
+import SubStepPanel from "@/components/step-panel/page";
 
 export default function RoadmapUI() {
   const [openSubStep, setOpenSubStep] = useState<number | null>(null);
@@ -13,7 +14,10 @@ export default function RoadmapUI() {
 
   return (
     <div className={styles.roadmapWrapper}>
-      <div className={styles.roadmapList}>
+      <div
+        className={`${styles.roadmapList} ${panelData ? styles.singleColumn : ""
+          }`}
+      >
         {ROADMAPS.map((roadmap) => (
           <div key={roadmap.roadmap_id} className={styles.roadmapCard}>
             <h2 className={styles.roadmapTitle}>{roadmap.title}</h2>
@@ -95,44 +99,7 @@ export default function RoadmapUI() {
 
               {panelData.data.subSteps.map((sub: any) => (
                 <div key={sub.sub_step_id} className={styles.panelSubItem}>
-                  <h5>{sub.title}</h5>
-                  <p>{sub.content}</p>
-
-                  {/* ===== RESOURCES ===== */}
-                  {sub.resources?.length > 0 && (
-                    <div className={styles.resourceList}>
-                      {sub.resources.map((res: any) => (
-                        <a
-                          key={res.title}
-                          href={res.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={styles.resourceItem}
-                        >
-                          <span className={styles.resourceIcon}>
-                            {res.type === "article" && "📘"}
-                            {res.type === "video" && "🎥"}
-                            {res.type === "quiz" && "❓"}
-                            {res.type === "pdf" && "📄"}
-                            {res.type === "external" && "🔗"}
-                          </span>
-
-                          <span className={styles.resourceText}>
-                            {res.title}
-                          </span>
-
-                          <span
-                            className={`${styles.resourceBadge} ${res.access === "pro"
-                                ? styles.badgePro
-                                : styles.badgeFree
-                              }`}
-                          >
-                            {res.access.toUpperCase()}
-                          </span>
-                        </a>
-                      ))}
-                    </div>
-                  )}
+                  <SubStepPanel subStep={sub} />
                 </div>
               ))}
             </>
@@ -141,43 +108,7 @@ export default function RoadmapUI() {
           {/*  SUB STEP MODE  */}
           {panelData.type === "subStep" && (
             <>
-              <h4>{panelData.data.title}</h4>
-              <p>{panelData.data.content}</p>
-
-              {panelData.data.resources?.length > 0 && (
-                <div className={styles.resourceList}>
-                  {panelData.data.resources.map((res: any) => (
-                    <a
-                      key={res.title}
-                      href={res.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.resourceItem}
-                    >
-                      <span className={styles.resourceIcon}>
-                        {res.type === "article" && "📘"}
-                        {res.type === "video" && "🎥"}
-                        {res.type === "quiz" && "❓"}
-                        {res.type === "pdf" && "📄"}
-                        {res.type === "external" && "🔗"}
-                      </span>
-
-                      <span className={styles.resourceText}>
-                        {res.title}
-                      </span>
-
-                      <span
-                        className={`${styles.resourceBadge} ${res.access === "pro"
-                          ? styles.badgePro
-                          : styles.badgeFree
-                          }`}
-                      >
-                        {res.access.toUpperCase()}
-                      </span>
-                    </a>
-                  ))}
-                </div>
-              )}
+              <SubStepPanel subStep={panelData.data} />
             </>
           )}
         </div>

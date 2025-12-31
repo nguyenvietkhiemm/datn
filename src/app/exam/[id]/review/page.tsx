@@ -1,7 +1,6 @@
 "use client"
 import styles from "./Review.module.css"
 import { useParams, useRouter, usePathname } from "next/navigation"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ExamService } from "../../../../../domain/exam/service"
 
@@ -25,12 +24,37 @@ export default function ReviewExam({
     const activeTab = getActiveTab();
 
     const handleDoExam = async (exam_id: number) => {
-        const checkDoExam = await ExamService.checkDoExam(exam_id);
-    if(checkDoExam.data.check === false){
-      alert("Bạn đã làm bài rồi");
-      return
-    }
-        router.push(`/exam/${exam_id}/do`);
+        try {
+            const res = await ExamService.checkDoExam(exam_id);
+
+            if (!res?.data?.check) {
+                switch (res.data.reason) {
+                    case "ALREADY_DONE":
+                        alert("Bạn đã làm bài thi này rồi");
+                        break;
+
+                    case "EXPIRED":
+                        alert("Đề thi đã hết hạn");
+                        break;
+
+                    case "DISABLED":
+                        alert("Đề thi hiện đang bị khóa");
+                        break;
+
+                    case "EXAM_NOT_FOUND":
+                        alert("Không tìm thấy đề thi");
+                        break;
+
+                    default:
+                        alert("Bạn không thể vào làm đề này");
+                }
+                return;
+            }
+
+            router.push(`/exam/${exam_id}/do`);
+        } catch (error) {
+            alert("Có lỗi xảy ra, vui lòng thử lại");
+        }
     };
 
     return (

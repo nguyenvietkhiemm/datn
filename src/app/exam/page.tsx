@@ -46,6 +46,17 @@ export default function ExamList() {
     router.push(`/exam/${exam_id}/review/rank`)
   }
 
+  const isExpired = (endTime?: string | null) => {
+    if (!endTime) return false;
+  
+    const endUTC = Date.parse(endTime); 
+    const nowUTC = Date.now();
+    console.log({endUTC, nowUTC});
+           
+  
+    return endUTC < nowUTC;
+  };  
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}> Danh sách đề thi thử</h1>
@@ -66,9 +77,15 @@ export default function ExamList() {
         {exams?.map((exam, index) => (
           <div
             key={index}
-            className={styles.card}
+            className={`${styles.card} ${isExpired(exam.end_time) ? styles.expiredCard : ""
+              }`}
             onClick={() => handleReviewExam(exam.exam_id, exam)}
           >
+            {isExpired(exam.end_time) && (
+              <div className={styles.expiredBadge}>
+                HẾT HẠN
+              </div>
+            )}
             <div className={styles.left_area}>
               <div className={styles.header}>
                 <div className={styles.exam_info}>

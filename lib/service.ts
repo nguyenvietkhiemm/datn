@@ -22,7 +22,7 @@ export const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND
 
 export function FilterSearch(filterCondition: any, searchKeyword: string, url: string) {
     // Filter status  
-        url += `&available=true`;
+        url += `&available=All`;
 
     // Filter topics
     if (filterCondition?.topics && filterCondition.topics.length > 0) {

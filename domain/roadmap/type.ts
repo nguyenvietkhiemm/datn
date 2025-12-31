@@ -63,7 +63,7 @@ export const ROADMAPS: Roadmap[] = [
                                 type: "video",
                                 title: "Video: Khái niệm nền tảng cần nhớ",
                                 url: "",
-                                access: "pro"
+                                access: "free"
                             }
                         ]
                     },
@@ -83,7 +83,7 @@ export const ROADMAPS: Roadmap[] = [
                                 type: "pdf",
                                 title: "PDF: Công thức cần nhớ",
                                 url: "",
-                                access: "pro"
+                                access: "free"
                             }
                         ]
                     },

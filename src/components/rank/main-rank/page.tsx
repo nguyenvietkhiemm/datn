@@ -12,54 +12,58 @@ interface MainRankProp {
 }
 
 export default function MainRank({ ranking, totalPages, currentPage, setCurrentPage }: MainRankProp) {
+    console.log(ranking);
+
     return (
         <div className={styles.conatiner_rank}>
             {/* ===== TOP 3 ===== */}
-            {ranking.length >= 3 && (
+            {ranking.length >= 1 && (
                 <div className={styles.top3}>
-                    {[ranking[1], ranking[0], ranking[2]].map((u, i) => {
-                        const rank = i === 1 ? 1 : i === 0 ? 2 : 3;
+                    {[ranking[1], ranking[0], ranking[2]]
+                        .filter(Boolean)
+                        .map((u, i) => {
+                            const rank = i === 1 ? 1 : i === 0 ? 2 : 3;
 
-                        return (
-                            <div
-                                key={rank}
-                                className={`${styles.topCard} ${styles[`rank${rank}`]}`}
-                            >
-                                <div className={styles.topHeader}>
-                                    <Image src={`/bgTop${rank}.png`}
-                                        alt={`Rank ${rank}`}
-                                        width={50}
-                                        height={50} />
-                                </div>
+                            return (
+                                <div
+                                    key={rank}
+                                    className={`${styles.topCard} ${styles[`rank${rank}`]}`}
+                                >
+                                    <div className={styles.topHeader}>
+                                        <Image src={`/bgTop${rank}.png`}
+                                            alt={`Rank ${rank}`}
+                                            width={50}
+                                            height={50} />
+                                    </div>
 
-                                {/* <img
+                                    {/* <img
                                     src={`/IconRank${rank}.svg`}
                                     className={styles.rankIcon}
                                     alt=""
                                 /> */}
-                                <div className={styles.info_user_rank}>
-                                    <div className={styles.avatarWrap}>
-                                        <div className={styles.avatar}>
-                                            <img src="/avatar.svg" alt="avatar" />
+                                    <div className={styles.info_user_rank}>
+                                        <div className={styles.avatarWrap}>
+                                            <div className={styles.avatar}>
+                                                <img src="/avatar.svg" alt="avatar" />
+                                            </div>
+                                        </div>
+                                        <div className={styles.name}>{u.user_name && u.user_name}</div>
+                                        <div className={styles.score}>
+                                            Tổng {u.score} Điểm
+                                        </div>
+                                        <div className={styles.time}>
+                                            {ExamModel.formatTime(u.time_test)}
                                         </div>
                                     </div>
-                                    <div className={styles.name}>{u.user_name}</div>
-                                    <div className={styles.score}>
-                                        Tổng {u.score} Điểm
-                                    </div>
-                                    <div className={styles.time}>
-                                        {ExamModel.formatTime(u.time_test)}
-                                    </div>
                                 </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        })}
                 </div>
             )
             }
 
             {/* ===== BẢNG XẾP HẠNG ===== */}
-            < div className={styles.table} >
+            <div className={styles.table}>
                 <div className={`${styles.row} ${styles.header}`}>
                     <div>Hạng</div>
                     <div>Tài khoản</div>
@@ -67,26 +71,29 @@ export default function MainRank({ ranking, totalPages, currentPage, setCurrentP
                     <div>Thời gian</div>
                 </div>
 
-                {
-                    ranking.map((u, i) => (
-                        <div key={i} className={styles.row}>
-                            {/* {i < 3 ? (
-                                <Image
-                                    src={`/IconRank${i + 1}.svg`}
-                                    alt={`Rank ${i + 1}`}
-                                    width={50}
-                                    height={50}
-                                />
-                            ) : (
-                                <div>{i + 1}</div>
-                            )} */}
+                {ranking.map((u, i) => {
+                    const rankClass =
+                        i === 0
+                            ? styles.rank1
+                            : i === 1
+                                ? styles.rank2
+                                : i === 2
+                                    ? styles.rank3
+                                    : "";
+
+                    return (
+                        <div key={i} className={`${styles.row} ${rankClass}`}>
                             <div>{i + 1}</div>
-                            <div>{u.user_name}</div>
-                            <div>{u.score}</div>
-                            <div>{ExamModel.formatTime(u.time_test)}</div>
+                            <div>{u?.user_name ?? "Ẩn danh"}</div>
+                            <div>{u?.score ?? 0}</div>
+                            <div>
+                                {u?.time_test
+                                    ? ExamModel.formatTime(u.time_test)
+                                    : "--:--"}
+                            </div>
                         </div>
-                    ))
-                }
+                    );
+                })}
             </div>
 
             <Pagination totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />

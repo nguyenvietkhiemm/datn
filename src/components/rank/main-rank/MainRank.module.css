@@ -1,37 +1,41 @@
 /* ===== TOP 3 ===== */
 .top3 {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-end;
-    gap: 24px;
-    margin: 60px 0;
+    gap: 16px;
+    margin: 40px 0;
 }
 
 .topCard {
-    width: 260px;
+    width: 200px;
     background: #fff;
-    border-radius: 14px;
+    border-radius: 12px;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
     text-align: center;
     position: relative;
-    padding-bottom: 20px;
+    padding-bottom: 16px;
 }
 
 .topCard.rank1 .info_user_rank {
-    margin-bottom: 40px;
+    margin-bottom: 28px;
 }
 
 .topCard.rank2 .info_user_rank {
-    margin-bottom: 20px;
+    margin-bottom: 14px;
 }
 
 .topCard.rank3 .info_user_rank {
-    margin-bottom: 0px;
+    margin-bottom: 0;
+}
+
+.rank1 {
+    transform: scale(1.03);
 }
 
 .topHeader {
     width: 100%;
-    height: 100px;
+    height: 80px;
     position: relative;
     overflow: hidden;
     border-top-left-radius: 14px;
@@ -40,22 +44,21 @@
 
 /* Image trong header */
 .topHeader img {
-    height: 100px;
+    height: 80px;
     width: 100%;
-    height: 100%;
     object-fit: cover;
 }
 
 .avatarWrap {
     position: relative;
-    margin-top: -45px;
+    margin-top: -35px;
     display: flex;
     justify-content: center;
 }
 
 .avatar {
-    width: 90px;
-    height: 90px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
     background: #fff;
     display: flex;
@@ -69,24 +72,25 @@
 
 
 .name {
-    font-weight: 700;
-    font-size: 18px;
+    font-size: 16px;
+    margin-top: 6px;
     margin-top: 8px;
 }
 
 .score {
-    margin-top: 8px;
+    margin-top: 6px;
+    padding: 4px 12px;
+    font-size: 14px;
     background: #eef2ff;
     color: #3b5bfd;
-    padding: 6px 14px;
     border-radius: 999px;
     display: inline-block;
     font-weight: 600;
 }
 
 .time {
-    margin-top: 10px;
-    font-size: 14px;
+    margin-top: 6px;
+    font-size: 13px;
     color: #555;
 }
 
@@ -111,14 +115,36 @@
 
 .row {
     display: grid;
-    grid-template-columns: 80px 1fr 120px 160px;
+    grid-template-columns: 60px 1fr 100px 120px;
+    align-items: center;
     padding: 12px 16px;
     border-bottom: 1px solid #e5e7eb;
-    font-size: 14px;
-    align-items: center;
+    border-left: 4px solid transparent;
+    background: #fff;
+}
+
+/* ===== TOP 1 ===== */
+.rank1 {
+    /* vàng */
+    background: #fffbeb;
+    font-weight: 600;
+}
+
+/* ===== TOP 2 ===== */
+.rank2 {
+    /* bạc */
+    background: #f8fafc;
+    font-weight: 600;
+}
+
+/* ===== TOP 3 ===== */
+.rank3 {
+    /* đồng */
+    background: #fff7ed;
+    font-weight: 600;
 }
 
 .header {
-    background: #cbd5e1;
+    background: #55dce7;
     font-weight: 700;
 }
