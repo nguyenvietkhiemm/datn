@@ -196,10 +196,10 @@ const ExamService = {
           JOIN exam_schedule es ON es.exam_schedule_id = e.exam_schedule_id
           JOIN subject sj ON sj.subject_id = t.subject_id
           LEFT JOIN (
-            SELECT exam_id, COUNT(*) AS total_contestants
-            FROM contestants
+            SELECT exam_id, COUNT(DISTINCT user_id) AS total_contestants
+            FROM history_exam
             GROUP BY exam_id
-          ) c ON c.exam_id = e.exam_id
+          ) c ON c.exam_id = e.exam_id         
           ${whereClause}
           ORDER BY e.exam_id DESC
           LIMIT ${limit} OFFSET ${offset}
@@ -278,15 +278,6 @@ const ExamService = {
 
     try {
       await client.query("BEGIN");
-
-      //  Insert contestants (1 lần duy nhất)
-      await client.query(
-        `INSERT INTO contestants (user_id, exam_id)
-         VALUES ($1, $2)
-         ON CONFLICT DO NOTHING`,
-        [user_id, exam_id]
-      );
-
       //  Lấy đáp án đúng
       const { rows } = await client.query(
         `
@@ -730,7 +721,7 @@ const ExamService = {
       `exam:${exam_id}:user:${user_id}`
     );
 
-    return { check: true };
+    return { check: !hasDone };
   },
 
   async getQuestionIdExam(exam_id: number): Promise<number[]> {
