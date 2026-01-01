@@ -27,7 +27,7 @@ export default function MainRank({ ranking, totalPages, currentPage, setCurrentP
                             return (
                                 <div
                                     key={rank}
-                                    className={`${styles.topCard} ${styles[`rank${rank}`]}`}
+                                    className={`${styles.topCard} ${styles[`topRank${rank}`]}`}
                                 >
                                     <div className={styles.topHeader}>
                                         <Image src={`/bgTop${rank}.png`}
@@ -63,38 +63,42 @@ export default function MainRank({ ranking, totalPages, currentPage, setCurrentP
             }
 
             {/* ===== BẢNG XẾP HẠNG ===== */}
-            <div className={styles.table}>
-                <div className={`${styles.row} ${styles.header}`}>
-                    <div>Hạng</div>
-                    <div>Tài khoản</div>
-                    <div>Điểm</div>
-                    <div>Thời gian</div>
-                </div>
+            <table className={styles.table}>
+                <thead>
+                    <tr>
+                        <th className={styles.colRank}>Hạng</th>
+                        <th>Tài khoản</th>
+                        <th className={styles.colCenter}>Điểm</th>
+                        <th className={styles.colCenter}>Thời gian</th>
+                    </tr>
+                </thead>
 
-                {ranking.map((u, i) => {
-                    const rankClass =
-                        i === 0
-                            ? styles.rank1
-                            : i === 1
-                                ? styles.rank2
-                                : i === 2
-                                    ? styles.rank3
-                                    : "";
+                <tbody>
+                    {ranking.map((u, i) => {
+                        const rankClass =
+                            i === 0
+                                ? styles.tableRank1
+                                : i === 1
+                                    ? styles.tableRank2
+                                    : i === 2
+                                        ? styles.tableRank3
+                                        : "";
 
-                    return (
-                        <div key={i} className={`${styles.row} ${rankClass}`}>
-                            <div>{i + 1}</div>
-                            <div>{u?.user_name ?? "Ẩn danh"}</div>
-                            <div>{u?.score ?? 0}</div>
-                            <div>
-                                {u?.time_test
-                                    ? ExamModel.formatTime(u.time_test)
-                                    : "--:--"}
-                            </div>
-                        </div>
-                    );
-                })}
-            </div>
+                        return (
+                            <tr key={i} className={rankClass}>
+                                <td className={styles.colRank}>{i + 1}</td>
+                                <td>{u?.user_name ?? "Ẩn danh"}</td>
+                                <td className={styles.colCenter}>{u?.score ?? 0}</td>
+                                <td className={styles.colCenter}>
+                                    {u?.time_test
+                                        ? ExamModel.formatTime(u.time_test)
+                                        : "--:--"}
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
 
             <Pagination totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
         </div>

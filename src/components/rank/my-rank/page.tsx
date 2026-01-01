@@ -3,11 +3,12 @@ import Image from "next/image"
 import { ExamModel } from "../../../../domain/exam/model"
 import { myRank } from "../../../../domain/exam/type"
 
-interface myRankProp{
+interface myRankProp {
     myRank: myRank
 }
 
-export default function MyRank({myRank} : myRankProp) {
+export default function MyRank({ myRank }: myRankProp) {
+    
     return (
         <div className={styles.myRankBox}>
             <div className={styles.myRankTitle}>Thành tích của bạn</div>
@@ -23,7 +24,20 @@ export default function MyRank({myRank} : myRankProp) {
                 ) : (
                     <div>{myRank.rank}</div>
                 )} */}
-                <div>{myRank.rank}</div>
+                <div
+                    className={
+                        myRank.rank === 1
+                            ? styles.rank1
+                            : myRank.rank === 2
+                                ? styles.rank2
+                                : myRank.rank === 3
+                                    ? styles.rank3
+                                    : ""
+                    }
+                >
+                    {myRank.rank}
+                </div>
+
             </div>
             <div className={styles.myRankRow}>
                 <span>Điểm</span>

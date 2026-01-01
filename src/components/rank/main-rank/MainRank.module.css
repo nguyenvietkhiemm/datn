@@ -1,4 +1,10 @@
 /* ===== TOP 3 ===== */
+.conatiner_rank {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
 .top3 {
     display: flex;
     justify-content: flex-start;
@@ -8,7 +14,7 @@
 }
 
 .topCard {
-    width: 200px;
+    flex: 1;
     background: #fff;
     border-radius: 12px;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
@@ -17,20 +23,28 @@
     padding-bottom: 16px;
 }
 
-.topCard.rank1 .info_user_rank {
+.topCard.topRank1 .info_user_rank {
     margin-bottom: 28px;
 }
 
-.topCard.rank2 .info_user_rank {
+.topCard.topRank2 .info_user_rank {
     margin-bottom: 14px;
 }
 
-.topCard.rank3 .info_user_rank {
+.topCard.topRank3 .info_user_rank {
     margin-bottom: 0;
 }
 
-.rank1 {
-    transform: scale(1.03);
+.topRank1 {
+    transform: scale(1.05);
+}
+
+.topRank2 {
+    transform: scale(1.02);
+}
+
+.topRank3 {
+    transform: scale(1);
 }
 
 .topHeader {
@@ -81,7 +95,7 @@
     margin-top: 6px;
     padding: 4px 12px;
     font-size: 14px;
-    background: #eef2ff;
+    background: #ffffff;
     color: #3b5bfd;
     border-radius: 999px;
     display: inline-block;
@@ -105,46 +119,86 @@
     transform: scale(1.05);
 }
 
-/* ===== TABLE ===== */
 .table {
+    width: 100%;
+    border-collapse: collapse;
     background: #fff;
-    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, .05);
 }
 
-.row {
-    display: grid;
-    grid-template-columns: 60px 1fr 100px 120px;
-    align-items: center;
-    padding: 12px 16px;
-    border-bottom: 1px solid #e5e7eb;
-    border-left: 4px solid transparent;
-    background: #fff;
-}
-
-/* ===== TOP 1 ===== */
-.rank1 {
-    /* vàng */
-    background: #fffbeb;
-    font-weight: 600;
-}
-
-/* ===== TOP 2 ===== */
-.rank2 {
-    /* bạc */
-    background: #f8fafc;
-    font-weight: 600;
-}
-
-/* ===== TOP 3 ===== */
-.rank3 {
-    /* đồng */
-    background: #fff7ed;
-    font-weight: 600;
-}
-
-.header {
-    background: #55dce7;
+/* HEADER */
+.table thead th {
+    background: #58c1db;
     font-weight: 700;
+    font-size: 14px;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* BODY */
+.table tbody td {
+    padding: 12px 16px;
+    font-size: 14px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.colRank {
+    width: 80px;
+    text-align: center;
+    font-weight: 700;
+    position: relative;
+    /* để vẽ thanh màu */
+}
+
+.colCenter {
+    text-align: center;
+    width: 140px;
+}
+
+/* TOP 1 */
+.tableRank1 td:first-child::before {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    bottom: 6px;
+    width: 4px;
+    background: #f7e94e;
+    border-radius: 4px;
+}
+
+/* TOP 2 */
+.tableRank2 td:first-child::before {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    bottom: 6px;
+    width: 4px;
+    background: #b4b4b1;
+    border-radius: 4px;
+}
+
+/* TOP 3 */
+.tableRank3 td:first-child::before {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    bottom: 6px;
+    width: 4px;
+    background: #f09541;
+    border-radius: 4px;
+}
+
+/* HOVER */
+.table tbody tr:hover {
+    background: #eef2ff;
 }
