@@ -7,7 +7,8 @@ import { Question } from "../../../../../domain/question-answer/type";
 import ExamRightPanel from "@/components/do-question/rightPanel";
 import QuestionItem from "@/components/do-question/page";
 import { MyExam } from "../../../../../domain/exam/type";
-import { FlatQuestions, TypeQuestion, PART_LABEL } from "../../../../../lib/model";
+import { FlatQuestions, TypeQuestion, PART_LABEL, typeNoti } from "../../../../../lib/model";
+import NotificationPopup from "@/components/notification/Notification";
 
 type AnswerMap = Record<number, number[] | string>;
 
@@ -24,6 +25,7 @@ export default function DoExam() {
   const [userName, setUserName] = useState<string>("anonymous");
   const questionRefs = useRef<Record<number, HTMLDivElement | null>>({});
   const [subjectType, setSubJectType] = useState<number | null>(null);
+  const [notify, setNotify] = useState<typeNoti | null>(null);
 
   useEffect(() => {
     // user
@@ -171,6 +173,56 @@ export default function DoExam() {
     );
   };
 
+  const getUnansweredQuestions = () => {
+    return flatQuestions.filter(
+      (q) => !isAnswered(q.question_id)
+    );
+  };
+
+  const checkSubmit = () => {
+    if (submitted) return;
+
+    if (timeLeft <= 0) {
+      setNotify({
+        message: "Hết thời gian làm bài. Hệ thống đang nộp bài...",
+        type: "info",
+        confirm: false
+      });
+      handleSubmit();
+      return;
+    }
+
+    //
+    const unanswered = getUnansweredQuestions();
+
+    if (unanswered.length > 0) {
+      const first = unanswered[0];
+
+      setNotify({
+        message: (
+          <>
+            <b>Bạn còn {unanswered.length} câu chưa trả lời</b>
+            <br />
+            Bạn có chắc muốn nộp bài không?
+          </>
+        ),
+        type: "warning",
+        confirm: true
+      });
+
+      scrollToQuestion(first.question_id);
+      return;
+    }
+
+    setNotify({
+      message: "Đang nộp bài...",
+      type: "success",
+      confirm: false
+    });
+
+    handleSubmit();
+  };
+
   /* ================= HELPER: CHECK ANSWERED ================= */
   const isAnswered = (questionId: number) => {
     const value = answers[questionId];
@@ -215,7 +267,7 @@ export default function DoExam() {
                 <h3 className={styles.partTitle}>
                   {PART_LABEL[type]}
                 </h3>
-                
+
                 {/* QUESTIONS */}
                 {questionGroup[type]?.map((q) => {
                   const index = globalIndex++;
@@ -243,11 +295,21 @@ export default function DoExam() {
             timeLeft={timeLeft}
             questions={flatQuestions}
             isAnswered={isAnswered}
-            onSubmit={handleSubmit}
+            onSubmit={checkSubmit}
             onScrollToQuestion={scrollToQuestion}
           />
         </div>
       </div>
+      {notify && (
+        <NotificationPopup
+          message={notify.message}
+          type={notify.type}
+          confirm={notify.confirm}
+          onConfirm={handleSubmit}
+          onCancel={() => console.log("Huỷ nộp")}
+          onClose={() => setNotify(null)}
+        />
+      )}
     </div>
   );
 }

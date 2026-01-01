@@ -1,4 +1,6 @@
 import { Question } from "../domain/question-answer/type";
+import React from "react";
+
 export function formatVNDateTime(dateInput: string | number | Date): string {
   const date = new Date(dateInput);
 
@@ -13,6 +15,12 @@ export function formatVNDateTime(dateInput: string | number | Date): string {
   const seconds = pad(date.getSeconds());
 
   return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+}
+
+export interface typeNoti {
+  message: React.ReactNode;
+  type: "success" | "error" | "warning" | "info";
+  confirm?: boolean;
 }
 
 export const formatTime = (seconds: number) => {

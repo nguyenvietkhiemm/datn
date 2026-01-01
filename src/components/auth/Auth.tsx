@@ -6,6 +6,9 @@ import Link from "next/link";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
+import NotificationPopup from "../notification/Notification";
+import React from "react";
+import { typeNoti } from "../../../lib/model";
 
 interface AuthProps {
   isLogin: boolean;
@@ -24,6 +27,7 @@ export default function Auth({ isLogin }: AuthProps): JSX.Element {
     email: "",
     password: "",
   });
+  const [notify, setNotify] = useState<typeNoti | null>(null);
 
   const handleState = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -77,12 +81,24 @@ export default function Auth({ isLogin }: AuthProps): JSX.Element {
           localStorage.setItem("user", JSON.stringify(user));
         }
 
-        window.location.href = "/";
+        setNotify({
+          message: isLogin
+            ? "Đăng nhập thành công!"
+            : "Đăng ký thành công!",
+          type: "success",
+        });
+
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 800);
       }
     } catch (err: any) {
       // Hiển thị lỗi ra UI hoặc console
       console.error("Lỗi:", err.message);
-      alert(err.message); // Hoặc setError(err.message) nếu dùng state
+      setNotify({
+        message: err.message,
+        type: "error",
+      });
     }
   };
 
@@ -157,6 +173,14 @@ export default function Auth({ isLogin }: AuthProps): JSX.Element {
           </>
         )}
       </div>
+      {notify && (
+        <NotificationPopup
+          message={notify.message}
+          type={notify.type}
+          onClose={() => setNotify(null)}
+        />
+      )}
+
     </form>
   );
 }
