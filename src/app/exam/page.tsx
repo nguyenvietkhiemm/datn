@@ -48,14 +48,14 @@ export default function ExamList() {
 
   const isExpired = (endTime?: string | null) => {
     if (!endTime) return false;
-  
-    const endUTC = Date.parse(endTime); 
+
+    const endUTC = Date.parse(endTime);
     const nowUTC = Date.now();
-    console.log({endUTC, nowUTC});
-           
-  
+    console.log({ endUTC, nowUTC });
+
+
     return endUTC < nowUTC;
-  };  
+  };
 
   return (
     <div className={styles.container}>
@@ -87,33 +87,33 @@ export default function ExamList() {
               </div>
             )}
             <div className={styles.left_area}>
-              <div className={styles.header}>
-                <div className={styles.exam_info}>
+              <div className={styles.header}>         
                   <h2 className={styles.examName}>{exam.exam_name}</h2>
                   <p className={styles.desc}>
                     {exam.description}
                   </p>
-                </div>
-                <div className={styles.top_user}>
-                  {exam.top3?.map((u, idx) => {
-                    const rankIcons = [
-                      "/IconRank1.svg",
-                      "/IconRank2.svg",
-                      "/IconRank3.svg",
-                    ];
+              </div>
 
-                    return (
-                      <div key={idx} className={styles.top_item}>
-                        <div className={`${styles.avatar_wrap} ${styles[`rank_${idx}`]}`}>
-                          <div className={styles.avatar}>
-                            <img src="/avatar.svg" alt="avatar" />
+              <div className={styles.top_user}>
+                {exam.top3?.map((u, idx) => {
+                  const rankIcons = [
+                    "/IconRank1.svg",
+                    "/IconRank2.svg",
+                    "/IconRank3.svg",
+                  ];
+
+                  return (
+                    <div key={idx} className={styles.top_item}>
+                      <div className={`${styles.avatar_wrap} ${styles[`rank_${idx}`]}`}>
+                        <div className={styles.avatar}>
+                          <img src="/avatar.svg" alt="avatar" />
+                        </div>
+
+                        <div className={styles.user_rank}>
+                          <div className={styles.user_name}>
+                            {u?.user_name || "Ẩn danh"}
                           </div>
-
-                          <div className={styles.user_rank}>
-                            <div className={styles.user_name}>
-                              {u?.user_name || "Ẩn danh"}
-                            </div>
-                            {/* <div className={styles.rank_icon}>
+                          {/* <div className={styles.rank_icon}>
                               <Image
                                 src={rankIcons[idx]}
                                 alt={`Rank ${idx + 1}`}
@@ -121,43 +121,40 @@ export default function ExamList() {
                                 height={50}
                               />
                             </div> */}
-                          </div>
                         </div>
                       </div>
-                    );
-                  })}
-                </div>
+                    </div>
+                  );
+                })}
               </div>
 
               <div className={styles.info}>
-                <div className={styles.time}>
-                  <span>
-                    ⏱ Thời gian làm bài: {exam.time_limit} phút
-                  </span>
-                </div>
                 <div className={styles.tags}>
                   <span className={styles.tag}>{exam.topic_name}</span>
+                </div>
+                <div className={styles.time}>
+                  <span>
+                    ⏱: {exam.time_limit} phút
+                  </span>
+                </div>
+                <div className={styles.stats}>
+                  <Users size={16} />
+                  <span> {exam.contestant_count} người </span>
                 </div>
               </div>
             </div>
             <div className={styles.right_area}>
-              <p className={styles.stats}>
-                <Users size={16} />
-                <span> {exam.contestant_count} người đã tham gia</span>
-              </p>
 
               <div className={styles.date}>
+                <CalendarCheck size={16} />
                 <div className={styles.dateRow}>
-                  <CalendarCheck size={16} />
-                  <span>Kết thúc: {exam.end_time
-                    ? formatVNDateTime(exam.end_time)
+                  <span>{exam.start_time
+                    ? formatVNDateTime(exam.start_time)
                     : "Chưa có"}</span>
                 </div>
-
                 <div className={styles.dateRow}>
-                  <CalendarCheck size={16} />
-                  <span>Bắt đầu: {exam.start_time
-                    ? formatVNDateTime(exam.start_time)
+                  <span> - {exam.end_time
+                    ? formatVNDateTime(exam.end_time)
                     : "Chưa có"}</span>
                 </div>
               </div>
