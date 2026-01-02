@@ -16,7 +16,7 @@ import roadmapRouter from './roadmap.route';
 import scheduleStudyRouter from './schedule.study.route';
 import userGoalRoute from './user.goal.route';
 import microserviceRouter from './microservice.route';
-
+import dashBoardRoute from './dashboard.route';
 const router = Router();
 
 router.use('/roles', roleRouter);
@@ -31,9 +31,9 @@ router.use('/exams', examRoute);
 router.use('/banks', bankRoute);
 router.use("/file", fileRouter);
 router.use("/roadmap", roadmapRouter);
-router.use("/schedule/study", scheduleStudyRouter)
-router.use("/goal", userGoalRoute)
-router.use("/microservice", microserviceRouter)
+router.use("/schedule/study", scheduleStudyRouter);
+router.use("/goal", userGoalRoute);
+router.use("/microservice", microserviceRouter);
 router.use("/", authRouter);
-
+router.use("/dashboard", dashBoardRoute);
 export default router;
