@@ -6,6 +6,8 @@ import { ChangeValue, JsonQuestion } from "@/domain/admin/file/file-parser/type"
 import { useState } from "react";
 import ListImageQuestion from "./ListImageQuestion/ListImageQuestion";
 import ImageManagePanel from "./ImagePanelEdit/ImagePanelEdit";
+import NotificationPopup from "../notification/Notification";
+import { typeNoti } from "@/lib/model";
 
 interface QuestionCardProps {
     question: Omit<Question, "question_id">;

@@ -22,6 +22,13 @@ export const formatTime = (seconds: number) => {
     return `${m}:${s.toString().padStart(2, "0")}`;
 };
 
+export interface typeNoti {
+    message: React.ReactNode;
+    type: "success" | "error" | "warning" | "info";
+    confirm?: boolean;
+    duration?: number
+}
+
 export const answerLabel = (index: number) => String.fromCharCode(65 + index);
 
 export const TypeQuestion = [1, 2, 3] as const;

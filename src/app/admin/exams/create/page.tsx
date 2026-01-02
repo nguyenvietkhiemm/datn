@@ -4,17 +4,16 @@ import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import styles from "./ExamCreate.module.css";
 import { useRouter } from "next/navigation";
-
 import { ExamSchedule } from "@/domain/admin/schedules/type";
 import { Topic, Subject } from "@/domain/admin/topic_subject/type";
 import { ExamService } from "@/domain/admin/exams/service";
+import NotificationPopup from "@/component/notification/Notification";
+import { typeNoti } from "@/lib/model";
 
 export default function ExamCreate() {
   const router = useRouter();
   const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
   const token = Cookies.get("token");
-
-  // ================= STATE =================
   const [createExam, setCreateExam] = useState({
     exam_name: "",
     description: "",
@@ -23,13 +22,11 @@ export default function ExamCreate() {
     topic_id: null as number | null,
     exam_schedule_id: null as number | null,
   });
-
   const [examSchedules, setExamSchedules] = useState<ExamSchedule[]>([]);
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [topics, setTopics] = useState<Topic[]>([]);
   const [filterTopic, setFilterTopic] = useState<Topic[]>([]);
-
-  // ================= HELPER =================
+  const [notify, setNotify] = useState<typeNoti | null>(null);
   const updateExam = (
     key: keyof typeof createExam,
     value: any
@@ -40,7 +37,6 @@ export default function ExamCreate() {
     }));
   };
 
-  // ================= FETCH DATA =================
   useEffect(() => {
     const fetchAll = async () => {
       try {
@@ -70,7 +66,6 @@ export default function ExamCreate() {
     fetchAll();
   }, [API_URL, token]);
 
-  // ================= FILTER TOPIC =================
   useEffect(() => {
     setFilterTopic(
       topics.filter(
@@ -79,7 +74,6 @@ export default function ExamCreate() {
     );
   }, [createExam.subject_id, topics]);
 
-  // ================= SUBMIT =================
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -100,7 +94,11 @@ export default function ExamCreate() {
       !topic_id ||
       !exam_schedule_id
     ) {
-      alert("Vui lòng điền đầy đủ thông tin!");
+      setNotify({
+        message: "Vui lòng điền đầy đủ thông tin!",
+        type: "warning",
+        confirm: false
+    });
       return;
     }
 

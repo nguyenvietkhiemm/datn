@@ -11,8 +11,9 @@ import { Question, QuestionQuery } from "@/domain/admin/questions/type";
 import { API_URL } from "@/lib/service";
 import Search from "@/component/search/Search";
 import { ImagePreview } from "@/component/questionCreate/ImagePreview/page";
-import { answerLabel } from "@/lib/model";
+import { answerLabel, typeNoti } from "@/lib/model";
 import { useRouter } from "next/navigation";
+import NotificationPopup from "@/component/notification/Notification";
 
 export default function ExamQuestionCreate() {
 
@@ -23,6 +24,7 @@ export default function ExamQuestionCreate() {
     const params = useParams();
     const examId = Number(params.id);
     const router = useRouter();
+    const [notify, setNotify] = useState<typeNoti | null>(null);
     const [query, setQuery] = useState<QuestionQuery>({
         page: 1,
         available: "All",
@@ -104,6 +106,14 @@ export default function ExamQuestionCreate() {
                 body: JSON.stringify({ selectedQuestions })
             })
             router.push(`/admin/exams`)
+            setNotify({
+                message: (
+                    <>
+                        <b>Tạo câu hỏi cho bài thi thành công</b>
+                    </>
+                ),
+                type: "success",
+            })
         } catch (error) {
             console.error("error:", error);
         }
@@ -212,6 +222,14 @@ export default function ExamQuestionCreate() {
                 currentPage={query.page}
                 setCurrentPage={handleChangePage}
             />
+            {notify && (
+                <NotificationPopup
+                    message={notify.message}
+                    type={notify.type}
+                    confirm={notify.confirm}
+                    onClose={() => setNotify(null)}
+                />
+            )}
         </div>
     );
 }

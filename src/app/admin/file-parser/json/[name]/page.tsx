@@ -11,7 +11,8 @@ import QuestionCreate from "@/component/questionCreate/page";
 import { QuestionService } from "@/domain/admin/questions/service";
 import { QuestionModel } from "@/domain/admin/questions/model";
 import { Upload } from "lucide-react";
-
+import NotificationPopup from "@/component/notification/Notification";
+import { typeNoti } from "@/lib/model";
 
 export default function JsonDetailPage() {
     const { name } = useParams<Params>();
@@ -21,7 +22,8 @@ export default function JsonDetailPage() {
     const [editCell, setEditCell] = useState<{ row: number; col: number } | null>(null);
     const [changes, setChanges] = useState<Change[]>([]);
     const [selectedIndexes, setSelectedIndexes] = useState<number[]>([]);
-    const router = useRouter()
+    const router = useRouter();
+    const [notify, setNotify] = useState<typeNoti | null>(null);
 
     // Lấy các thay đổi đã lưu từ localStorage
     useEffect(() => {
@@ -204,16 +206,27 @@ export default function JsonDetailPage() {
             const payload = await QuestionModel.buildPayload(row);
             const check = row.answers.some((a) => a.is_correct === true)
             if (!check) {
-                alert("Vui long chon cau tra loi dung")
+                setNotify({
+                    message: "Vui long chon cau tra loi dung",
+                    type: "warning",
+                    confirm: false
+                });
                 return
             }
             await QuestionService.createQuestionWithAnswers(payload);
-
-            alert("Đã lưu câu hỏi vào hệ thống!");
+            setNotify({
+                message: "Đã lưu câu hỏi vào hệ thống!",
+                type: "success",
+                confirm: false
+            });
             router.push(`/admin/questions`)
         } catch (err) {
             console.error("Submit question failed:", err);
-            alert("Lỗi khi lưu câu hỏi");
+            setNotify({
+                message: "Lỗi khi lưu câu hỏi",
+                type: "error",
+                confirm: false
+            });
         }
     };
 
@@ -229,19 +242,30 @@ export default function JsonDetailPage() {
                 );
 
                 if (!hasCorrect) {
-                    alert("Vui lòng chọn câu trả lời đúng cho tất cả câu đã chọn");
+                    setNotify({
+                        message: "Vui lòng chọn câu trả lời đúng cho tất cả câu đã chọn",
+                        type: "warning",
+                        confirm: false
+                    });
                     return;
                 }
                 const payload = await QuestionModel.buildPayload(row);
                 await QuestionService.createQuestionWithAnswers(payload);
             }
 
-            alert("Đã import toàn bộ câu hỏi!");
+            setNotify({
+                message: "Đã lưu câu hỏi vào hệ thống!",
+                type: "success",
+                confirm: false
+            });
             setSelectedIndexes([]);
             router.push(`/admin/questions`)
         } catch (err) {
-            console.error(err);
-            alert("Lỗi khi import");
+            setNotify({
+                message: "Lỗi khi lưu câu hỏi",
+                type: "error",
+                confirm: false
+            });
         }
     };
 
@@ -311,6 +335,14 @@ export default function JsonDetailPage() {
                 ))}
 
             </div>
+            {notify && (
+                <NotificationPopup
+                    message={notify.message}
+                    type={notify.type}
+                    confirm={notify.confirm}
+                    onClose={() => setNotify(null)}
+                />
+            )}
         </div>
     );
 }
