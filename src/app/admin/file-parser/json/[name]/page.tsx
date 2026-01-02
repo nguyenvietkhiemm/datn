@@ -10,7 +10,6 @@ import { FileParserService } from "@/domain/admin/file/file-parser/service";
 import QuestionCreate from "@/component/questionCreate/page";
 import { QuestionService } from "@/domain/admin/questions/service";
 import { QuestionModel } from "@/domain/admin/questions/model";
-import { Upload } from "lucide-react";
 import NotificationPopup from "@/component/notification/Notification";
 import { typeNoti } from "@/lib/model";
 
@@ -270,7 +269,7 @@ export default function JsonDetailPage() {
     };
 
 
-    if (loading) return <p>Đang tải...</p>;
+    if (loading) return <p>Loading...</p>;
 
     return (
         <div className={styles.container}>
@@ -289,10 +288,14 @@ export default function JsonDetailPage() {
                     variant="primary"
                     size="md"
                     className={styles.importBtn}
-                >
-                    Import {selectedIndexes.length} câu hỏi đã chọn
+                    disabled={selectedIndexes.length === 0}>
+                    Import câu hỏi
+                    {selectedIndexes.length > 0 && (
+                        <span className={styles.badge}>
+                            {selectedIndexes.length}
+                        </span>
+                    )}
                 </Button>
-
             </div>
 
 
@@ -328,13 +331,13 @@ export default function JsonDetailPage() {
                                 size="sm"
                                 onClick={() => handleSubmitQuestionToBE(row)}
                             >
-                                Import câu hỏi này vào hệ thống
+                                Import
                             </Button>
                         </div>
                     </div>
                 ))}
-
             </div>
+
             {notify && (
                 <NotificationPopup
                     message={notify.message}
