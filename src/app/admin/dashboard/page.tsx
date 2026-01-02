@@ -1,13 +1,15 @@
+"use client"
 import styles from "./Dashboard.module.css";
 import Card from "@/component/dashboard/card/Card";
 import LineChartBox from "@/component/dashboard/line/LineChartBox";
 import Table from "@/component/dashboard/table/Table";
 import BarChartBox from "@/component/dashboard/bar/BarChartBox";
 import PieChartBox from "@/component/dashboard/pie/PieChartBox";
+import { DashboardResponse } from "@/domain/admin/dashboard/type";
+import { useState, useEffect } from "react";
+import DashBoardService from "@/domain/admin/dashboard/service";
 
-// -------------------------------
-// 🔹 1. DATA BAR
-// -------------------------------
+//bar
 const dauData = {
   labels: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'CN'],
   datasets: [
@@ -47,9 +49,7 @@ const mauData = {
   ],
 };
 
-// -------------------------------
-// 🔹 2. DATA LINE
-// -------------------------------
+//line
 const lineData = [
   { date: "Oct 8", value: 42 },
   { date: "Oct 9", value: 58 },
@@ -60,9 +60,7 @@ const lineData = [
   { date: "Oct 14", value: 85 },
 ];
 
-// -------------------------------
-// 🔹 3. DATA PIE
-// -------------------------------
+//pie
 const pieDataBySubject = {
   "Toán": [25, 40, 25, 10],
   "Vật lý": [18, 50, 22, 10],
@@ -89,9 +87,7 @@ const pieDataBySubject3 = {
   "Ngữ văn": 1300,
 };
 
-// -------------------------------
-// 🔹 4. DATA TABLE
-// -------------------------------
+//table
 type UserStats = {
   date: string;
   activeUsers: number;
@@ -108,22 +104,71 @@ const userStats: UserStats[] = [
 
 const labels2 = ["Toán", "Vật lý", "Hóa học", "Tiếng Anh", "Ngữ văn"];
 
-// -------------------------------
-// 🔹 5. COMPONENT CHÍNH
-// -------------------------------
 export default function DashboardPage() {
+  const [data, setData] = useState<DashboardResponse | null>(null);
+
+  useEffect(() => {
+    const fetchDashboard = async () => {
+      try {
+        const data = await DashBoardService.getDashboardStats();
+        if (!data.ok) {
+
+        }
+        setData(data.data)
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchDashboard();
+  },
+    [])
   return (
     <div className={styles.dashboard_container}>
       {/* Tổng quan */}
       <div className={styles.sections}>
         <h1 className={styles.title}>Tổng quan</h1>
         <section className={styles.grid}>
-          <Card title="Số học sinh tham gia" value="1,245" change="+12.3%" tooltip="Tổng số học sinh đã tham gia kỳ thi trong tháng này, so với tháng trước." />
-          <Card title="Bài thi đã nộp" value="6,824" change="+8.7%" tooltip="Số lượng bài thi đã được nộp thành công, bao gồm cả thi thử và chính thức so với tháng trước." />
-          <Card title="Điểm trung bình" value="6.72 / 10" change="+0.3" tooltip="Điểm trung bình của tất cả học sinh trong kỳ thi gần nhất, so với kỳ trước." />
-          <Card title="Tỷ lệ hoàn thành" value="85%" change="-2.1%" tooltip="Tỷ lệ học sinh hoàn thành toàn bộ bài thi, so với kỳ trước." />
-          <Card title="Môn phổ biến nhất" value="Toán" change="+210 lượt" tooltip="Môn học có số lượt tham gia nhiều nhất trong kỳ thi này." />
-          <Card title="Học sinh mới" value="154" change="+5.4%" tooltip="Số lượng học sinh mới đăng ký tham gia hệ thống trong tháng này, so với tháng trước." />
+          <Card
+            title="Học sinh mới"
+            value={String(data?.overview.users_new.total ?? 0)}
+            change={`${data?.overview.users_new.change ?? "0"}%`}
+            tooltip="Số lượng học sinh mới đăng ký tham gia hệ thống trong tháng này, so với tháng trước."
+          />
+          <Card
+            title="Số học sinh tham gia"
+            value={String(data?.overview.submits.total)} change={data?.overview.submits.change}
+            tooltip="Tổng số học sinh đã tham gia cuộc thi trong tháng này, so với tháng trước."
+          />
+          <Card
+            title="Bài thi đã nộp"
+            value={String(data?.overview.submits.total ?? 0)}
+            change={`${data?.overview.submits.change ?? "0"}%`}
+            tooltip="Số lượng bài thi đã được nộp thành công, bao gồm cả thi thử và chính thức so với tháng trước."
+          />
+          <Card
+            title="Điểm trung bình"
+            value={
+              data?.overview.score.total != null
+                ? `${data.overview.score.total} / 10`
+                : "-- / 10"
+            }
+            change={`${data?.overview.score.change ?? "0"}%`}
+            tooltip="Điểm trung bình của tất cả học sinh trong kỳ thi gần nhất, so với kỳ trước."
+          />
+          <Card
+            title="Tỷ lệ đạt điểm chuẩn"
+            value={String(data?.overview.standard_score.change ?? "0")}
+            change={`${data?.overview.standard_score.change ?? "0"}%`}
+            tooltip="Tỷ lệ học sinh đạt từ 5 điểm trở lên trong kỳ thi này, so với kỳ trước."
+          />
+
+          <Card
+            title="Môn phổ biến nhất"
+            value={data?.overview.popular_subject.name ?? "Chưa có"}
+            change={`+${data?.overview.popular_subject.total ?? 0} lượt`}
+            tooltip="Môn học có số lượt tham gia nhiều nhất trong kỳ thi này."
+          />
         </section>
       </div>
 
