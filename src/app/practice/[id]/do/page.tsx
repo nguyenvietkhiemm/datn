@@ -8,7 +8,8 @@ import { Question } from "../../../../../domain/question-answer/type";
 import { BankProps } from "../../../../../domain/bank/type";
 import ExamRightPanel from "@/components/do-question/rightPanel";
 import QuestionItem from "@/components/do-question/page";
-import { FlatQuestions, TypeQuestion, PART_LABEL } from "../../../../../lib/model";
+import { FlatQuestions, TypeQuestion, PART_LABEL, typeNoti } from "../../../../../lib/model";
+import NotificationPopup from "@/components/notification/Notification";
 
 type AnswerMap = Record<number, number[] | string>;
 
@@ -24,7 +25,7 @@ export default function DoBank() {
   const router = useRouter();
   const questionRefs = useRef<Record<number, HTMLDivElement | null>>({});
   const [subjectType, setSubJectType] = useState<number | null>(null);
-
+  const [notify, setNotify] = useState<typeNoti | null>(null);
   const STORAGE_KEY = `bank_doing_${bank_id}`;
 
   /* Lấy câu hỏi từ bank */
@@ -48,6 +49,7 @@ export default function DoBank() {
 
   }, [bank_id]);
 
+  // giu gia tri khi reload
   useEffect(() => {
     if (!bank) return;
 
@@ -71,6 +73,7 @@ export default function DoBank() {
     setUserName(data.userName || "anonymous");
   }, [bank]);
 
+  //poup reload ac dinh chorme
   useEffect(() => {
     if (!bank || submitted) return;
 
@@ -120,6 +123,16 @@ export default function DoBank() {
     setSubmitted(true);
     localStorage.removeItem(STORAGE_KEY);
     router.push(`/practice/${bank_id}/result/${history_bank_id}`);
+    setNotify({
+      message: (
+        <>
+          <b>Nộp bài thành công</b>
+          <br />
+          <b>Đây là kết quả của bạn</b>
+        </>
+      ),
+      type: "info",
+    })
   };
 
   /* Countdown */
@@ -138,6 +151,7 @@ export default function DoBank() {
     return () => clearInterval(timer);
   }, [timeLeft, submitted]);
 
+  //kiem tra cau tra loi cho select
   const isAnswered = (questionId: number) => {
     const value = answers[questionId];
 
@@ -152,6 +166,7 @@ export default function DoBank() {
     return false;
   };
 
+  //select
   const handleSelect = (
     questionId: number,
     answerId: number,
@@ -193,6 +208,58 @@ export default function DoBank() {
       ...prev,
       [questionId]: value,
     }));
+  };
+
+  //kiem tra chon cau hoi
+  const getUnansweredQuestions = () => {
+    return flatQuestions.filter(
+      (q) => !isAnswered(q.question_id)
+    );
+  };
+
+  const checkSubmit = () => {
+    if (submitted) return;
+
+    if (timeLeft <= 0) {
+      setNotify({
+        message: "Hết thời gian làm bài. Hệ thống đang nộp bài...",
+        type: "info",
+        confirm: false
+      });
+      handleSubmit();
+      return;
+    }
+
+    //
+    const unanswered = getUnansweredQuestions();
+
+    if (unanswered.length > 0) {
+      const first = unanswered[0];
+
+      setNotify({
+        message: (
+          <>
+            <b>Bạn còn {unanswered.length} câu chưa trả lời</b>
+            <br />
+            Bạn có chắc muốn nộp bài không?
+          </>
+        ),
+        type: "warning",
+        confirm: true,
+        duration: 3000
+      });
+
+      scrollToQuestion(first.question_id);
+      return;
+    }
+
+    setNotify({
+      message: "Đang nộp bài...",
+      type: "success",
+      confirm: false
+    });
+
+    handleSubmit();
   };
 
   let globalIndex = 0;
@@ -242,11 +309,22 @@ export default function DoBank() {
             timeLeft={timeLeft}
             questions={flatQuestions}
             isAnswered={isAnswered}
-            onSubmit={handleSubmit}
+            onSubmit={checkSubmit}
             onScrollToQuestion={scrollToQuestion}
           />
         </div>
       </div>
+      {notify && (
+        <NotificationPopup
+          message={notify.message}
+          type={notify.type}
+          confirm={notify.confirm}
+          onConfirm={handleSubmit}
+          duration={notify.duration}
+          onCancel={() => console.log("Huỷ nộp")}
+          onClose={() => setNotify(null)}
+        />
+      )}
     </div>
   );
 }

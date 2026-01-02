@@ -9,6 +9,7 @@ export type Exam = {
   description?: string;
   topic_name?: string;
   subject_type: number;
+  subject_name: string;
   contestant_count? : number;
   top3 : {
     user_id : number,

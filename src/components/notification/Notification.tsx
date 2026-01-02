@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import styles from "./NotificationPopup.module.css";
 import React from "react";
 import NotificationIcon from "./icon/NotificationIcon";
+import { Button } from "../ui/button";
 
 export type NotificationType = "success" | "error" | "warning" | "info";
 
@@ -20,7 +21,7 @@ interface NotificationPopupProps {
 export default function NotificationPopup({
     message,
     type = "info",
-    duration = 3000,
+    duration = 1000,
     confirm = false,
     onConfirm,
     onCancel,
@@ -34,37 +35,35 @@ export default function NotificationPopup({
     }, [confirm, duration, onClose]);
 
     return (
-        <div className={styles.overlay}>
+        <div className={`${confirm ? styles.overlay : styles.noti}`}>
             <div className={`${styles.popup} ${styles[type]}`}>
-                <div className={styles.icon}>
+                <div className={styles.infoNoti}>
                     <div className={styles.icon}>
-                        <NotificationIcon type={type} />
+                        <div className={styles.icon}>
+                            <NotificationIcon type={type} />
+                        </div>
                     </div>
-
+                    <div className={styles.message}>{message}</div>
                 </div>
-
-                <div className={styles.message}>{message}</div>
 
                 {confirm && (
                     <div className={styles.actions}>
-                        <button
-                            className={styles.cancel}
+                        <Button
                             onClick={() => {
                                 onCancel?.();
                                 onClose();
                             }}
                         >
                             Không
-                        </button>
-                        <button
-                            className={styles.confirm}
+                        </Button>
+                        <Button
                             onClick={() => {
                                 onConfirm?.();
                                 onClose();
                             }}
                         >
                             Có
-                        </button>
+                        </Button>
                     </div>
                 )}
             </div>

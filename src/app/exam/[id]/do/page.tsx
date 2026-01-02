@@ -171,6 +171,16 @@ export default function DoExam() {
     router.push(
       `/exam/${exam.exam_id}/result/${res.data.history_exam_id}`
     );
+    setNotify({
+      message : (
+        <>
+        <b>Nộp bài thành công</b>
+        <br />
+        <b>Đây là kết quả của bạn</b>
+        </>
+      ),
+      type: "info",
+    })
   };
 
   const getUnansweredQuestions = () => {
@@ -207,7 +217,8 @@ export default function DoExam() {
           </>
         ),
         type: "warning",
-        confirm: true
+        confirm: true,
+        duration: 3000
       });
 
       scrollToQuestion(first.question_id);
@@ -306,6 +317,7 @@ export default function DoExam() {
           type={notify.type}
           confirm={notify.confirm}
           onConfirm={handleSubmit}
+          duration={notify.duration}
           onCancel={() => console.log("Huỷ nộp")}
           onClose={() => setNotify(null)}
         />

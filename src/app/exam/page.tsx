@@ -87,11 +87,11 @@ export default function ExamList() {
               </div>
             )}
             <div className={styles.left_area}>
-              <div className={styles.header}>         
-                  <h2 className={styles.examName}>{exam.exam_name}</h2>
-                  <p className={styles.desc}>
-                    {exam.description}
-                  </p>
+              <div className={styles.header}>
+                <h2 className={styles.examName}>{exam.exam_name}</h2>
+                <p className={styles.desc}>
+                  {exam.description}
+                </p>
               </div>
 
               <div className={styles.top_user}>
@@ -130,7 +130,10 @@ export default function ExamList() {
 
               <div className={styles.info}>
                 <div className={styles.tags}>
-                  <span className={styles.tag}>{exam.topic_name}</span>
+                  <span className={styles.tag}>
+                    <span>{exam.subject_name} - </span>
+                    <span>{exam.topic_name}</span>
+                  </span>
                 </div>
                 <div className={styles.time}>
                   <span>
