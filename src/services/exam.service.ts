@@ -212,6 +212,7 @@ const ExamService = {
     // Lấy top 3 của mỗi exam
     const examsWithTop3 = await Promise.all(
       exams.map(async (exam) => {
+        console.log(exam.end_time);
 
         // Lấy top 3 từ ZSET
         const top3Raw = await redis.zrevrange(
@@ -402,7 +403,9 @@ const ExamService = {
       }
 
       // Redis ranking
-      const final_score = score * 1e9 - time_test;
+      const scoreInt = Math.floor(score * 1000); 
+      const final_score =
+        scoreInt * 1_000_000 + (1_000_000 - time_test);
       await redis.zadd(
         `exam:${exam_id}:ranking`,
         "GT",
@@ -715,13 +718,57 @@ const ExamService = {
   async checkDoExam(
     exam_id: number,
     user_id: number
-  ): Promise<{ check: boolean }> {
+  ): Promise<{ check: boolean; reason?: string }> {
 
     const hasDone = await redis.exists(
       `exam:${exam_id}:user:${user_id}`
     );
 
-    return { check: !hasDone };
+    if (hasDone) {
+      return {
+        check: false,
+        reason: "ALREADY_DONE"
+      };
+    }
+    console.log(exam_id);
+
+    const { rows } = await query(
+      `
+      SELECT 
+        e.available,
+        es.end_time
+      FROM exam e
+      LEFT JOIN exam_schedule es 
+        ON e.exam_schedule_id = es.exam_schedule_id
+      WHERE e.exam_id = $1
+      `,
+      [exam_id]
+    );
+
+    if (!rows.length) {
+      return {
+        check: false,
+        reason: "EXAM_NOT_FOUND"
+      };
+    }
+
+    const { available, end_time } = rows[0];
+
+    if (!available) {
+      return {
+        check: false,
+        reason: "DISABLED"
+      };
+    }
+
+    if (end_time && end_time < new Date()) {
+      return {
+        check: false,
+        reason: "EXPIRED"
+      };
+    }
+
+    return { check: true };
   },
 
   async getQuestionIdExam(exam_id: number): Promise<number[]> {

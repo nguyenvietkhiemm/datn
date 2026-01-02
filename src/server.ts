@@ -6,7 +6,6 @@ import path from "path";
 import routes from './routes/index';
 import nodeCron from 'node-cron';
 import StudyScheduleService from './services/schedule.study.service';
-import ExamService from './services/exam.service';
 import swaggerUi from 'swagger-ui-express';
 import {specs, swaggerOptions} from './config/swagger.jsdoc';
 import morgan from 'morgan';

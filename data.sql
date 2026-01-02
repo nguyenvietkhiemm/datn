@@ -347,3 +347,58 @@ INSERT INTO flashcard (front, back, example, flashcard_deck_id) VALUES
 ('Hệ điều hành?', 'Windows, Linux', '', 10),
 ('Internet là?', 'Mạng toàn cầu', '', 10),
 ('An toàn thông tin?', 'Bảo mật dữ liệu', '', 10);
+
+
+INSERT INTO exam (
+  exam_name,
+  time_limit,
+  topic_id,
+  exam_schedule_id,
+  description,
+  available
+)
+SELECT
+  'THPT Quốc gia ' || t.title || ' 2025 Tổng hợp THPT Lần ' ||
+  ROW_NUMBER() OVER (ORDER BY t.topic_id),
+  90,
+  t.topic_id,
+  4 + ((ROW_NUMBER() OVER (ORDER BY t.topic_id) - 1) % 3),
+  'Đề thi thử THPT Quốc gia môn ' || t.title || ' năm 2025',
+  true
+FROM topic t
+WHERE t.topic_id BETWEEN 35 AND 58;
+
+INSERT INTO exam (exam_name, time_limit, topic_id, exam_schedule_id, description, available)
+SELECT
+  'THPT Quốc gia ' || t.title || ' 2025 Lớp 10 Lần 1',
+  60,
+  t.topic_id,
+  4,
+  'Đề ôn tập lớp 10 môn ' || t.title,
+  true
+FROM topic t
+WHERE t.topic_id BETWEEN 35 AND 42;
+
+INSERT INTO exam (exam_name, time_limit, topic_id, exam_schedule_id, description, available)
+SELECT
+  'THPT Quốc gia ' || t.title || ' 2025 Lớp 11 Lần 1',
+  75,
+  t.topic_id,
+  5,
+  'Đề ôn tập lớp 11 môn ' || t.title,
+  true
+FROM topic t
+WHERE t.topic_id BETWEEN 43 AND 50;
+
+INSERT INTO exam (exam_name, time_limit, topic_id, exam_schedule_id, description, available)
+SELECT
+  'THPT Quốc gia ' || t.title || ' 2025 Lớp 12 Lần 1',
+  90,
+  t.topic_id,
+  6,
+  'Đề luyện thi lớp 12 môn ' || t.title,
+  true
+FROM topic t
+WHERE t.topic_id BETWEEN 51 AND 58;
+
+
