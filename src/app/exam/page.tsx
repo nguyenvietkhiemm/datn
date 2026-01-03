@@ -34,7 +34,7 @@ export default function ExamList() {
     };
 
     fetchExamList();
-  }, [currentPage, filterCondition, searchKeyword])
+  }, [currentPage, filterCondition, searchKeyword]);
 
   const handleReviewExam = async (exam_id: number, exam: Exam) => {
     localStorage.setItem("exam", JSON.stringify({
@@ -44,7 +44,18 @@ export default function ExamList() {
       subject_type: exam.subject_type
     }))
     router.push(`/exam/${exam_id}/review/rank`)
-  }
+  };
+
+  const getExamStatus = (exam: Exam) => {
+    const now = new Date();
+    if (exam.start_time && exam.end_time) {
+      if (now < new Date(exam.start_time)) return "upcoming";
+      if (now > new Date(exam.end_time)) return "ended";
+      return "ongoing";
+    }
+    return "unknown";
+  };
+
 
   const isExpired = (endTime?: string | null) => {
     if (!endTime) return false;
