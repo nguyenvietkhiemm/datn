@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import styles from "./Table.module.css";
+import React from "react";
 
 type UserStats = {
   date: string;
@@ -14,7 +15,7 @@ type StatsProp = {
   userStats:  UserStats[];
 };
 
-export default function UserStatsTable({ userStats }: StatsProp) {
+function UserStatsTable({ userStats }: StatsProp) {
   const [selectedPeriod, setSelectedPeriod] = useState("Đợt 3");
 
   return (
@@ -44,3 +45,5 @@ export default function UserStatsTable({ userStats }: StatsProp) {
     </div>
   );
 }
+
+export default React.memo(UserStatsTable);

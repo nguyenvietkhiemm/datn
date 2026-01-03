@@ -1,6 +1,7 @@
 "use client";
 
 import styles from "./LineChartBox.module.css";
+import React from "react";
 import {
   LineChart,
   Line,
@@ -15,7 +16,7 @@ interface TrafficChartProps {
   data: { date: string; value: number }[];
 }
 
-export default function LineChartBox({ data }: TrafficChartProps) {
+function LineChartBox({ data }: TrafficChartProps) {
   return (
     <div className={styles.chartContainer}>
       <h3 className={styles.title}>Lượng đăng ký trong 30 ngày</h3>
@@ -47,3 +48,5 @@ export default function LineChartBox({ data }: TrafficChartProps) {
     </div>
   );
 }
+
+export default React.memo(LineChartBox);

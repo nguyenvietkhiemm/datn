@@ -10,6 +10,7 @@ import {
     Legend,
 } from 'chart.js';
 import styles from "./RadarChartBox.module.css";
+import React from 'react';
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
@@ -18,7 +19,7 @@ interface Props {
     data: any;
 }
 
-export default function RadarChartBox({ title, data }: Props) {
+function RadarChartBox({ title, data }: Props) {
     const options = {
         responsive: true,
         plugins: { legend: { position: 'bottom' as const } },
@@ -37,3 +38,5 @@ export default function RadarChartBox({ title, data }: Props) {
         </div>
     );
 }
+
+export default React.memo(RadarChartBox);

@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { Doughnut } from 'react-chartjs-2'; 
+import React from 'react';
 import {
   Chart as ChartJS,
   ArcElement,
@@ -17,7 +18,7 @@ interface PieProp {
   labels: string[];
 }
 
-export default function PieChartBox({ title, pieDataBySubject, labels }: PieProp) {
+function PieChartBox({ title, pieDataBySubject, labels }: PieProp) {
   const subjects = Object.keys(pieDataBySubject);
   const isMultiDataset = Array.isArray(pieDataBySubject[subjects[0]]);
 
@@ -84,3 +85,5 @@ export default function PieChartBox({ title, pieDataBySubject, labels }: PieProp
     </div>
   );
 }
+
+export default React.memo(PieChartBox);

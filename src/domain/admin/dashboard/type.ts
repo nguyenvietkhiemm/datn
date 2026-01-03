@@ -15,15 +15,17 @@ export type DashboardResponse = {
         popular_subject: { name: string; total: number };
         users_new: { total: number; change: string };
     };
-
-    charts?: {
-        line: { date: string; value: number }[];
-        dau: any;
-        wau: any;
-        mau: any;
-        pieScoreBySubject: any;
-        pieMostTaken: any;
-        pieMostCompleted: any;
-        table: UserStats[];
-    };
 };
+
+export type BarChartData = {
+    labels: string[];
+    datasets: {
+        label: string;
+        data: number[];
+        backgroundColor: string;
+        borderColor: string;
+        borderWidth: number;
+    }[];
+};
+
+export type LineItem = { date: string; value: number };
