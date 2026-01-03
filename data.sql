@@ -402,3 +402,48 @@ FROM topic t
 WHERE t.topic_id BETWEEN 51 AND 58;
 
 
+INSERT INTO history_exam (
+  exam_id,
+  user_id,
+  score,
+  time_test,
+  created_at
+)
+SELECT
+  floor(random() * (87 - 38 + 1) + 38)::int AS exam_id,
+  floor(random() * (106 - 4 + 1) + 4)::int AS user_id,
+
+  -- điểm từ 0 → 10, có 2 số thập phân
+  round((random() * 10)::numeric, 2) AS score,
+
+  -- thời gian làm bài: 5 → 60 phút (giây)
+  floor(random() * (3600 - 300 + 1) + 300)::bigint AS time_test,
+
+  -- created_at rải đều trong 6 tháng gần đây
+  now()
+    - (floor(random() * 180) || ' days')::interval
+    - (floor(random() * 24) || ' hours')::interval
+    - (floor(random() * 60) || ' minutes')::interval
+FROM generate_series(1, 2000);
+
+
+INSERT INTO "user" (user_name, email, password_hash, role_id)
+SELECT
+  (ARRAY[
+    'Nguyen', 'Tran', 'Le', 'Pham', 'Hoang',
+    'Vu', 'Do', 'Bui', 'Dang', 'Phan'
+  ])[floor(random() * 10 + 1)] || ' ' ||
+  (ARRAY[
+    'Van', 'Thi', 'Minh', 'Quoc', 'Anh',
+    'Ngoc', 'Thanh', 'Duc', 'Gia', 'Khanh'
+  ])[floor(random() * 10 + 1)] || ' ' ||
+  (ARRAY[
+    'An', 'Binh', 'Chau', 'Dung', 'Hieu',
+    'Khang', 'Linh', 'Nam', 'Phuong', 'Trang'
+  ])[floor(random() * 10 + 1)],
+  'user' || gs || '@test.com',
+  '$2b$10$XFOARZELuSTsaJnQI7Irk.VwfBQU/fb3ponw0vHlnSrpLpXHncyJa',
+  1
+FROM generate_series(1, 100) gs;
+
+
