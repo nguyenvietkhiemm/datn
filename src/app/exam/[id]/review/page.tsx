@@ -3,6 +3,9 @@ import styles from "./Review.module.css"
 import { useParams, useRouter, usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { ExamService } from "../../../../../domain/exam/service"
+import NotificationPopup from "@/components/notification/Notification"
+import { typeNoti } from "../../../../../lib/model"
+import { useState } from "react"
 
 export default function ReviewExam({
     children,
@@ -13,6 +16,7 @@ export default function ReviewExam({
     const exam_id = Number(params.id);
     const router = useRouter();
     const pathname = usePathname();
+    const [notify, setNotify] = useState<typeNoti | null>(null);
 
     // xác định tab active từ URL
     const getActiveTab = () => {
@@ -30,23 +34,43 @@ export default function ReviewExam({
             if (!res?.data?.check) {
                 switch (res.data.reason) {
                     case "ALREADY_DONE":
-                        alert("Bạn đã làm bài thi này rồi");
+                        setNotify({
+                            message: "Bạn đã làm bài thi này rồi",
+                            type: "warning",
+                            confirm: false
+                        });
                         break;
 
                     case "EXPIRED":
-                        alert("Đề thi đã hết hạn");
+                        setNotify({
+                            message: "Đề thi đã hết hạn",
+                            type: "warning",
+                            confirm: false
+                        });
                         break;
 
                     case "DISABLED":
-                        alert("Đề thi hiện đang bị khóa");
+                        setNotify({
+                            message: "Đề thi hiện đang bị khóa",
+                            type: "error",
+                            confirm: false
+                        });
                         break;
 
                     case "EXAM_NOT_FOUND":
-                        alert("Không tìm thấy đề thi");
+                        setNotify({
+                            message: "Không tìm thấy đề thi",
+                            type: "info",
+                            confirm: false
+                        });
                         break;
 
                     default:
-                        alert("Bạn không thể vào làm đề này");
+                        setNotify({
+                            message: "Bạn không thể vào làm đề này",
+                            type: "error",
+                            confirm: false
+                        });
                 }
                 return;
             }
@@ -70,6 +94,14 @@ export default function ReviewExam({
             <div className={styles.tab_content}>
                 {children}
             </div>
+            {notify && (
+                <NotificationPopup
+                    message={notify.message}
+                    type={notify.type}
+                    confirm={notify.confirm}
+                    onClose={() => setNotify(null)}
+                />
+            )}
         </div>
     );
 }
