@@ -18,6 +18,22 @@ interface PieProp {
   labels: string[];
 }
 
+const COLORS_13 = [
+  '#27ae60', // xanh lá
+  '#3498db', // xanh dương
+  '#f1c40f', // vàng
+  '#e74c3c', // đỏ
+  '#9b59b6', // tím
+  '#1abc9c', // xanh ngọc
+  '#e67e22', // cam
+  '#2ecc71', // xanh lá nhạt
+  '#34495e', // xanh đậm
+  '#d35400', // cam đậm
+  '#7f8c8d', // xám
+  '#16a085', // xanh teal
+  '#c0392b', // đỏ đậm
+];
+
 function PieChartBox({ title, pieDataBySubject, labels }: PieProp) {
   const subjects = Object.keys(pieDataBySubject);
   const isMultiDataset = Array.isArray(pieDataBySubject[subjects[0]]);
@@ -31,7 +47,7 @@ function PieChartBox({ title, pieDataBySubject, labels }: PieProp) {
       datasets: [
         {
           data: pieDataBySubject[selectedSubject] as number[],
-          backgroundColor: ['#27ae60', '#3498db', '#f1c40f', '#e74c3c'],
+          backgroundColor: COLORS_13,
           borderWidth: 3,        
           borderColor: '#fff',   
           borderRadius: 8,
@@ -43,7 +59,7 @@ function PieChartBox({ title, pieDataBySubject, labels }: PieProp) {
       datasets: [
         {
           data: subjects.map((s) => pieDataBySubject[s] as number),
-          backgroundColor: ['#27ae60', '#3498db', '#f1c40f', '#e74c3c', '#9b59b6'],
+          backgroundColor: COLORS_13,
           borderWidth: 3,        
           borderColor: '#fff',   
           borderRadius: 8,
