@@ -102,7 +102,6 @@ const BankService = {
         const conditions: string[] = [];
         const params: any[] = [];
         let idx = 1;
-        console.log(searchValue);
 
         // Search (bank description + topic title)
         if (searchValue.trim()) {
