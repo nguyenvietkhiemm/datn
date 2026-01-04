@@ -26,8 +26,8 @@ function UserStatsTable({ userStats }: StatsProp) {
             <th>Ngày</th>
             <th>Số active user</th>
             <th>Tỉ trọng user</th>
-            <th>Trung bình thời gian một session (phút)</th>
-            <th>Trung vị thời gian một session (phút)</th>
+            <th>Trung bình số bài thi được hoàn thành mỗi user</th>
+            <th>Trung vị số bài thi được hoàn thành mỗi user</th>
           </tr>
         </thead>
         <tbody>
