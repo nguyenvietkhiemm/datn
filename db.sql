@@ -216,7 +216,7 @@ CREATE TABLE IF NOT EXISTS answer (
   answer_id SERIAL PRIMARY KEY,
   question_id INT NOT NULL REFERENCES question(question_id) ON DELETE CASCADE,
   answer_content VARCHAR(10000) NOT NULL,
-  is_correct BOOLEAN DEFAULT FALSE,
+  is_correct BOOLEAN DEFAULT FALSE
 );
 
 
@@ -259,7 +259,7 @@ CREATE TABLE IF NOT EXISTS exam (
 CREATE TABLE IF NOT EXISTS history_exam (
   history_exam_id SERIAL PRIMARY KEY,
   exam_id INT NOT NULL REFERENCES exam(exam_id) ON DELETE CASCADE,
-  user_id INT NOT NULL REFERENCES "user"(user_id) ON DELETE CA0SCADE,
+  user_id INT NOT NULL REFERENCES "user"(user_id) ON DELETE CASCADE,
   score DECIMAL(4,2),
   time_test  BIGINT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

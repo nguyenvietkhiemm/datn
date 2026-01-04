@@ -40,11 +40,12 @@ venv/
 # ======================
 # Generated data (QUAN TRỌNG)
 # ======================
-# data/outputs/
+data/
 # resources/images/
 # uploads/
 # media/
 
+resources/
 # ======================
 # Notes / temp
 # ======================
