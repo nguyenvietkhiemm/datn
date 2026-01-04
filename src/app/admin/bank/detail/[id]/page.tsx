@@ -73,6 +73,7 @@ export default function BankDetail() {
     let globalIndex = 0;
 
     const flatQuestions: Question[] = FlatQuestions(questionGroup)
+    
     // ================= RENDER =================
     return (
         <div className={styles.exam_container}>
@@ -93,7 +94,7 @@ export default function BankDetail() {
                             </h3>
 
                             {/* QUESTIONS */}
-                            {questionGroup[type]?.map((q) => {
+                            {questionGroup[type] && questionGroup[type]?.map((q) => {
                                 const index = globalIndex++;
 
                                 return (

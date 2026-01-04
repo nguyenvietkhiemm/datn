@@ -38,15 +38,29 @@
 .button {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    flex: 1;
-}
-
-.json {
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-top: 20px;
+  }
+  
+  /* Mỗi khối button */
+  .json {
     display: flex;
-    gap: 0.5rem;
-    margin-top: 1rem;
-}
+    align-items: center;
+  }
+  
+  /* Cho button full height đồng đều */
+  .json button {
+    white-space: nowrap;
+  }
+  
+  /* Responsive: xuống hàng trên màn nhỏ */
+  @media (max-width: 768px) {
+    .button {
+      flex-wrap: wrap;
+    }
+  }  
 
 /* Overlay nền mờ */
 .overlay {

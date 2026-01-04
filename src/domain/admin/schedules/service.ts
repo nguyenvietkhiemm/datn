@@ -5,7 +5,7 @@ import { getHeaders, getToken, API_URL } from "@/lib/service";
 export const ScheduleService = {
 
     // Lấy toàn bộ lịch thi
-    async fetchSchedules(): Promise<ExamSchedule[]> {
+    async fetchSchedules() {
         const token = getToken();
 
         const res = await fetch(`${API_URL}/exams/schedule`, {
@@ -16,7 +16,7 @@ export const ScheduleService = {
         if (!res.ok) throw new Error("Không thể lấy danh sách lịch thi");
 
         const data = await res.json();
-        return data.data as ExamSchedule[];
+        return data.data ;
     },
 
     // Lấy chi tiết 1 lịch thi

@@ -18,8 +18,9 @@
     gap: 12px;
 }
 
-.buttonGroup > :last-child {
-    margin-left: auto;   /* đẩy nút cuối sang phải */
+.buttonGroup> :last-child {
+    margin-left: auto;
+    /* đẩy nút cuối sang phải */
 }
 
 
@@ -65,25 +66,55 @@
 
 .actionBar {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    padding: 16px;
+    align-items: center;
+    padding: 14px 18px;
     background: #ffffff;
-    border-radius: 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
     margin-bottom: 20px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
+/* Nhóm nút bên trái */
 .leftActions {
     display: flex;
     gap: 12px;
 }
 
+/* Nút import bên phải */
 .importBtn {
     position: relative;
-    font-weight: 600;
-    padding: 12px 16px;
+    padding-right: 44px;
+    /* chừa chỗ cho badge */
+}
+
+/* Badge số lượng */
+.badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ef4444;
+    /* đỏ nổi */
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 999px;
+
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4);
+}
+
+/* Disabled import */
+.importBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 .questionCard {
@@ -131,7 +162,8 @@
     height: 22px;
     padding: 0 6px;
 
-    background: #4447ef; /* đỏ nhấn */
+    background: #4447ef;
+    /* đỏ nhấn */
     color: white;
 
     font-size: 12px;
@@ -159,7 +191,8 @@
 .questionList {
     display: flex;
     flex-direction: column;
-    gap: 24px; /* khoảng cách giữa các question */
+    gap: 24px;
+    /* khoảng cách giữa các question */
 }
 
 /* mỗi question là 1 card */

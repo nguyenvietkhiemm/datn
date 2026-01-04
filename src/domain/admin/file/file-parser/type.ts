@@ -1,8 +1,11 @@
+export type LatexMap = Record<string, string>;
+
 export interface JsonAnswer {
     para_index?: number;
     text: string;
     math?: any[];
-    images?: any[]; // images
+    images?: any[];
+    latex?: LatexMap;  
     label?: string;
     is_correct: boolean;
 }
@@ -13,7 +16,8 @@ export interface JsonQuestion {
         text: string;
         type_question?: number;
         math: any[];
-        images: any[]; // images
+        images: any[];
+        latex?: LatexMap; 
         label: string;
     };
     answers: JsonAnswer[];
@@ -41,16 +45,16 @@ export type AddAnswerImageValue = {
 };
 
 export type ChangeAnswerValue = {
-    answerIndex : number;
-    value_change : string
+    answerIndex: number;
+    value_change: string
 }
 
 export type ChangeValue =
-  | string
-  | number
-  | boolean
-  | null
-  | File[]
-  | RemoveAnswerImageValue
-  | AddAnswerImageValue
-  | ChangeAnswerValue
+    | string
+    | number
+    | boolean
+    | null
+    | File[]
+    | RemoveAnswerImageValue
+    | AddAnswerImageValue
+    | ChangeAnswerValue

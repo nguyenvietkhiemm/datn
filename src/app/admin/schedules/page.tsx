@@ -8,6 +8,8 @@ import FilterSchedule from "@/component/filter/FilterSchedules/FilterSchedules";
 import { ExamSchedule } from "@/domain/admin/schedules/type";
 import ScheduleExamView from "./detail/[id]/page";
 import ExamScheduleCreate from "./create/page";
+import Pagination from "@/component/pagination/Pagination";
+import { formatVNDateTime } from "@/lib/model";
 
 type ViewMode = "LIST" | "DETAIL";
 
@@ -17,11 +19,15 @@ export default function Schedule() {
   const [view, setView] = useState<ViewMode>("LIST");
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [openCreate, setOpenCreate] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   const loadSchedules = async () => {
     const data = await ScheduleService.fetchSchedules();
-    setExamSchedules(data);
-    setFilterSchedules(data);
+
+    setExamSchedules(data.schedules || []);
+    setFilterSchedules(data.schedules || []);
+    setTotalPages(data.totalPages || 1)
   };
 
   useEffect(() => {
@@ -85,10 +91,10 @@ export default function Schedule() {
                       onClick={() => openDetail(item.exam_schedule_id)}
                     >
                       <td>{index + 1}</td>
-                      <td>{new Date(item.start_time).toLocaleString("vi-VN")}</td>
-                      <td>{new Date(item.end_time).toLocaleString("vi-VN")}</td>
-                      <td>{new Date(item.created_at).toLocaleString("vi-VN")}</td>
-                      <td>{new Date(item.updated_at).toLocaleString("vi-VN")}</td>
+                      <td>{formatVNDateTime(item.start_time)}</td>
+                      <td>{formatVNDateTime(item.end_time)}</td>
+                      <td>{formatVNDateTime(item.created_at)}</td>
+                      <td>{formatVNDateTime(item.updated_at)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -141,6 +147,8 @@ export default function Schedule() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage} />
 
     </div>
   );

@@ -4,6 +4,8 @@ import styles from "./QuestionCard.module.css";
 import { Question } from "@/domain/admin/questions/type";
 import { answerLabel } from "@/lib/model";
 import { ImagePreview } from "@/component/questionCreate/ImagePreview/page";
+import { LatexPreview } from "@/component/questionCreate/LatexPreview/page";
+
 interface QuestionCardProps {
     question: Question;
     rowIndex: number;
@@ -58,7 +60,7 @@ export default function QuestionCard({
             <div
                 className={styles.content}
             >
-                <p>{question.question_content}</p>
+                <LatexPreview text={question.question_content} />
             </div>
 
             {/* ================= QUESTION IMAGES ================= */}
@@ -66,7 +68,7 @@ export default function QuestionCard({
                 <div className={styles.imageGroup}>
                     {question?.images?.map((src, index) => (
                         <div key={index} className={styles.imageWrapper}>
-                            <ImagePreview filename={src} width={200}/>
+                            <ImagePreview filename={src} width={200} />
                         </div>
                     ))}
                 </div>
@@ -83,10 +85,10 @@ export default function QuestionCard({
                             <span className={styles.answerLabel}>
                                 {answerLabel(answerIdx)}.
                             </span>
-                            <p className={styles.answerText}>
-                                {ans.answer_content}
+                            <div className={styles.answerText}>
+                                <LatexPreview text={ans.answer_content} />
                                 {ans.is_correct && <strong>(✔)</strong>}
-                            </p>
+                            </div>
                         </div>
 
                         {/* ===== Answer Images ===== */}
@@ -94,7 +96,7 @@ export default function QuestionCard({
                             <div className={styles.imageGroupSmall}>
                                 {ans.images?.map((src, index) => (
                                     <div key={index} className={styles.imageWrapperSmall}>
-                                        <ImagePreview filename={src}/>
+                                        <ImagePreview filename={src} />
                                     </div>
                                 ))}
                             </div>

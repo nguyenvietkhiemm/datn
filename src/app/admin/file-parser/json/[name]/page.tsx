@@ -52,129 +52,175 @@ export default function JsonDetailPage() {
         loadJson();
     }, [name, token]);
 
-    const handleChange = (rowIndex: number, type_change: number, value: ChangeValue) => {
+    const handleChange = (
+        rowIndex: number,
+        type_change: number,
+        value: ChangeValue
+    ) => {
         setJsonData(prev => {
             const updated = [...prev];
 
-            if (type_change === -5) {
-                // xoa cau hoi
-                return updated.filter((_, index) => index !== rowIndex);
-            }
-
-            if (type_change === -1) {
-                //thay doi noi dung cau hoi
-                updated[rowIndex].question.text = value as string;
-            }
-            else if (type_change === -2) {
-                //doi type_question
-                updated[rowIndex].question.type_question = value as number;
-            }
-            else if (type_change === -3) {
-                //them cau tra loi
-                updated[rowIndex] = {
-                    ...updated[rowIndex],
-                    answers: [
-                        ...updated[rowIndex].answers,
-                        {
-                            text: "",
-                            is_correct: false,
-                        },
-                    ],
-                };
-            }
-            else if (type_change === -4) {
-                //xoa cau tra loi
-                const removeIndex = value as number;
-                updated[rowIndex] = {
-                    ...updated[rowIndex],
-                    answers: updated[rowIndex].answers.filter(
-                        (_, i) => i !== removeIndex
-                    ),
-                };
-            }
-            else if (type_change === -6) {
-                //them anh cho cau hoi
-                const imagePath = value as string;
-                const currentImages = updated[rowIndex].question.images || [];
-
-                updated[rowIndex] = {
-                    ...updated[rowIndex],
-                    question: {
-                        ...updated[rowIndex].question,
-                        images: [...currentImages, imagePath],
-                    },
-                };
-            }
-            else if (type_change === -7) {
-                //xoa anh cua cu cau tra loi 
-                const { answerIndex, imageIndex } = value as {
-                    answerIndex: number;
-                    imageIndex: number;
-                };
-
-                updated[rowIndex] = {
-                    ...updated[rowIndex],
-                    answers: updated[rowIndex].answers.map((a, i) =>
-                        i === answerIndex
-                            ? {
-                                ...a,
-                                images: a.images?.filter((_, idx) => idx !== imageIndex),
-                            }
-                            : a
-                    ),
-                };
-            }
-            else if (type_change === -8) {
-                // thêm ảnh cho câu trả lời
-                const { answerIndex, imagePath } = value as {
-                    answerIndex: number;
-                    imagePath: string;
-                };
-
-                updated[rowIndex] = {
-                    ...updated[rowIndex],
-                    answers: updated[rowIndex].answers.map((a, i) =>
-                        i === answerIndex
-                            ? {
-                                ...a,
-                                images: [...(a.images || []), imagePath],
-                            }
-                            : a
-                    ),
-                };
-            }
-            else if (type_change === - 9) {
-                // sửa text đáp án
-                const { answerIndex, value_change } = value as {
-                    answerIndex: number;
-                    value_change: string
+            switch (type_change) {
+                case -5: {
+                    // xoá câu hỏi
+                    return updated.filter((_, index) => index !== rowIndex);
                 }
 
-                updated[rowIndex].answers[answerIndex].text = value_change;
-            }
-            else if (type_change === -11) {
-            }
-            else {
-                //tao cau tra loi dung
-                const ansIndex = type_change - 1000;
-                const type = updated[rowIndex].question.type_question ?? 1;
+                case -1: {
+                    // thay đổi nội dung câu hỏi
+                    updated[rowIndex] = {
+                        ...updated[rowIndex],
+                        question: {
+                            ...updated[rowIndex].question,
+                            text: value as string,
+                        },
+                    };
+                    break;
+                }
 
-                updated[rowIndex] = {
-                    ...updated[rowIndex],
-                    answers: updated[rowIndex].answers.map((a, i) => {
-                        if (type === 1) {
-                            return {
-                                ...a,
-                                is_correct: i === ansIndex,
-                            };
-                        } else {
-                            // multiple choice
-                            return i === ansIndex
-                                ? { ...a, is_correct: !a.is_correct }
-                                : a;
-                        }
-                    }),
-                };
+                case -2: {
+                    // đổi type_question
+                    updated[rowIndex] = {
+                        ...updated[rowIndex],
+                        question: {
+                            ...updated[rowIndex].question,
+                            type_question: value as number,
+                        },
+                    };
+                    break;
+                }
+
+                case -3: {
+                    // thêm câu trả lời
+                    updated[rowIndex] = {
+                        ...updated[rowIndex],
+                        answers: [
+                            ...updated[rowIndex].answers,
+                            {
+                                text: "",
+                                is_correct: false,
+                            },
+                        ],
+                    };
+                    break;
+                }
+
+                case -4: {
+                    // xoá câu trả lời
+                    const removeIndex = value as number;
+                    updated[rowIndex] = {
+                        ...updated[rowIndex],
+                        answers: updated[rowIndex].answers.filter(
+                            (_, i) => i !== removeIndex
+                        ),
+                    };
+                    break;
+                }
+
+                case -6: {
+                    // thêm ảnh cho câu hỏi
+                    const imagePath = value as string;
+                    const currentImages = updated[rowIndex].question.images || [];
+
+                    updated[rowIndex] = {
+                        ...updated[rowIndex],
+                        question: {
+                            ...updated[rowIndex].question,
+                            images: [...currentImages, imagePath],
+                        },
+                    };
+                    break;
+                }
+
+                case -7: {
+                    // xoá ảnh của câu trả lời
+                    const { answerIndex, imageIndex } = value as {
+                        answerIndex: number;
+                        imageIndex: number;
+                    };
+
+                    updated[rowIndex] = {
+                        ...updated[rowIndex],
+                        answers: updated[rowIndex].answers.map((a, i) =>
+                            i === answerIndex
+                                ? {
+                                    ...a,
+                                    images: a.images?.filter((_, idx) => idx !== imageIndex),
+                                }
+                                : a
+                        ),
+                    };
+                    break;
+                }
+
+                case -8: {
+                    // thêm ảnh cho câu trả lời
+                    const { answerIndex, imagePath } = value as {
+                        answerIndex: number;
+                        imagePath: string;
+                    };
+
+                    updated[rowIndex] = {
+                        ...updated[rowIndex],
+                        answers: updated[rowIndex].answers.map((a, i) =>
+                            i === answerIndex
+                                ? {
+                                    ...a,
+                                    images: [...(a.images || []), imagePath],
+                                }
+                                : a
+                        ),
+                    };
+                    break;
+                }
+
+                case -9: {
+                    // sửa text đáp án
+                    const { answerIndex, value_change } = value as {
+                        answerIndex: number;
+                        value_change: string;
+                    };
+
+                    updated[rowIndex] = {
+                        ...updated[rowIndex],
+                        answers: updated[rowIndex].answers.map((a, i) =>
+                            i === answerIndex
+                                ? { ...a, text: value_change }
+                                : a
+                        ),
+                    };
+                    break;
+                }
+
+                case -11: {
+                    // (chưa dùng)
+                    break;
+                }
+
+                default: {
+                    // tạo câu trả lời đúng
+                    const ansIndex = type_change - 1000;
+                    const type = updated[rowIndex].question.type_question ?? 1;
+
+                    updated[rowIndex] = {
+                        ...updated[rowIndex],
+                        answers: updated[rowIndex].answers.map((a, i) => {
+                            if (type === 1) {
+                                // single choice
+                                return {
+                                    ...a,
+                                    is_correct: i === ansIndex,
+                                };
+                            } else {
+                                // multiple choice
+                                return i === ansIndex
+                                    ? { ...a, is_correct: !a.is_correct }
+                                    : a;
+                            }
+                        }),
+                    };
+                    break;
+                }
             }
 
             return updated;
@@ -231,39 +277,84 @@ export default function JsonDetailPage() {
 
     const handleSubmitSelect = async () => {
         try {
-            for (const index of selectedIndexes) {
+            // Validate tất cả câu đã chọn
+            const invalidIndexes = selectedIndexes.filter(index => {
                 const row = jsonData[index];
+                return !row || !row.answers.some(a => a.is_correct);
+            });
 
-                if (!row) continue;
-
-                const hasCorrect = row.answers.some(
-                    a => a.is_correct === true
-                );
-
-                if (!hasCorrect) {
-                    setNotify({
-                        message: "Vui lòng chọn câu trả lời đúng cho tất cả câu đã chọn",
-                        type: "warning",
-                        confirm: false
-                    });
-                    return;
-                }
-                const payload = await QuestionModel.buildPayload(row);
-                await QuestionService.createQuestionWithAnswers(payload);
+            if (invalidIndexes.length > 0) {
+                setNotify({
+                    message: `Các câu ${invalidIndexes.map(i => i + 1).join(", ")} chưa có đáp án đúng`,
+                    type: "warning",
+                    confirm: false,
+                });
+                return;
             }
 
-            setNotify({
-                message: "Đã lưu câu hỏi vào hệ thống!",
-                type: "success",
-                confirm: false
+            // Import song song – an toàn
+            const results = await Promise.allSettled(
+                selectedIndexes.map(async index => {
+                    const row = jsonData[index];
+                    if (!row) {
+                        throw new Error(`Missing question at index ${index}`);
+                    }
+
+                    const payload = await QuestionModel.buildPayload(row);
+                    await QuestionService.createQuestionWithAnswers(payload);
+
+                    return index; // success
+                })
+            );
+
+            // Phân tích kết quả
+            const successIndexes: number[] = [];
+            const failedIndexes: number[] = [];
+
+            results.forEach((result, i) => {
+                const originalIndex = selectedIndexes[i];
+
+                if (result.status === "fulfilled") {
+                    successIndexes.push(originalIndex + 1); // +1 cho user
+                } else {
+                    failedIndexes.push(originalIndex + 1);
+                    console.error(
+                        `Import failed at question ${originalIndex + 1}:`,
+                        result.reason
+                    );
+                }
             });
-            setSelectedIndexes([]);
-            router.push(`/admin/questions`)
-        } catch (err) {
+
+            // 4️⃣ Thông báo kết quả
+            if (failedIndexes.length > 0) {
+                setNotify({
+                    message:
+                        successIndexes.length > 0
+                            ? `Đã import câu: ${successIndexes.join(
+                                ", "
+                            )}. Lỗi tại câu: ${failedIndexes.join(", ")}`
+                            : `Import thất bại các câu: ${failedIndexes.join(", ")}`,
+                    type: successIndexes.length > 0 ? "warning" : "error",
+                    confirm: false,
+                });
+                return;
+            }
+
+            // Thành công hoàn toàn
             setNotify({
-                message: "Lỗi khi lưu câu hỏi",
+                message: "Đã lưu tất cả câu hỏi vào hệ thống!",
+                type: "success",
+                confirm: false,
+            });
+
+            setSelectedIndexes([]);
+            router.push(`/admin/questions`);
+        } catch (err) {
+            console.error("Import error:", err);
+            setNotify({
+                message: "Có lỗi không xác định khi import câu hỏi",
                 type: "error",
-                confirm: false
+                confirm: false,
             });
         }
     };

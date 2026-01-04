@@ -93,6 +93,7 @@
     display: flex;
     gap: 6px;
     margin-bottom: 6px;
+    align-items: center;
 }
 
 .answerLabel {
@@ -101,7 +102,9 @@
 }
 
 .answerText {
+    display: flex;
     font-size: 15px;
+    align-items: center;
 }
 
 .answerText strong {

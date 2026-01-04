@@ -38,7 +38,6 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     padding: 0.75rem;
     border-radius: 12px;
-    gap: 0.75rem;
 }
 
 .logo:hover {
@@ -56,11 +55,9 @@
 .logoText {
     display: flex;
     flex-direction: column;
-    gap: 2px;
     font-weight: 700;
     line-height: 1.1;
-    align-items: flex-start; /* căn trái cho sidebar đẹp hơn */
-    margin-left: 0.75rem; /* khoảng cách logo và chữ */
+    align-items: flex-start;
     color: #000000; /* màu xanh đậm bạn muốn */
 }
 
@@ -145,7 +142,7 @@
 }
 
 .adminButton:hover {
-    background-color: #1e40af;
+    background-color: #02346d;
     transform: scale(1.03);
 }
 
