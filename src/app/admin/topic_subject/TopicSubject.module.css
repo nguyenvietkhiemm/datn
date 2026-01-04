@@ -9,18 +9,16 @@
 }
 
 .pageTitle {
-  font-size: 28px;
+  font-size: 1.8rem;
   font-weight: 700;
   color: #02346d;
-  margin-bottom: 24px;
 }
 
 .tabHeader {
   display: flex;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 4px;
   position: relative;
-  border-bottom: 2px solid #e5e7eb; /* nhẹ, phân cách tab với content */
+  border-bottom: 2px solid #e5e7eb;
 }
 
 .tabBtn {
@@ -46,7 +44,7 @@
 
 /* Active tab */
 .tabBtn.active {
-  background: linear-gradient(135deg, #02346d, #0161a5);
+  background: #02346d;
   color: white;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
