@@ -7,7 +7,9 @@ export type Exam = {
     exam_schedule_id: number;
     available: boolean;
     title: string;
-    topic_name: string
+    topic_name: string;
+    start_time?: string;
+    end_time?: string;
 };
 
 export interface CsvFile {
