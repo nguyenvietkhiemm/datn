@@ -3,16 +3,39 @@ import { ScheduleExam } from "../models/schedule.exam.model";
 
 export const ScheduleExamService = {
         //  Lấy danh sách tất cả lịch thi (có phân trang)
-        async getAll(limit: number = 100, offset: number = 0): Promise<ScheduleExam[]> {
-                const queryText = `
-                SELECT * 
-                FROM exam_schedule 
-                ORDER BY exam_schedule_id 
-                LIMIT $1 OFFSET $2`;
-                console.log(queryText);
-                const result = await query(queryText, 
-                        [limit, offset]);
-                return result.rows as ScheduleExam[];
+        async getAll(
+                limit: number = 100,
+                offset: number = 0
+        ): Promise<{
+                schedules: ScheduleExam[];
+                totalPages: number;
+        }> {
+                // Lấy data
+                const dataQuery = `
+                  SELECT *
+                  FROM exam_schedule
+                  ORDER BY exam_schedule_id
+                  LIMIT $1 OFFSET $2
+                `;
+
+                const dataResult = await query(dataQuery, [limit, offset]);
+
+                //Lấy tổng số record
+                const countQuery = `
+                  SELECT COUNT(*)::int AS total
+                  FROM exam_schedule
+                `;
+
+                const countResult = await query(countQuery);
+                const totalRecords = countResult.rows[0].total;
+
+                // Tính totalPages
+                const totalPages = Math.ceil(totalRecords / limit);
+
+                return {
+                        schedules: dataResult.rows as ScheduleExam[],
+                        totalPages,
+                };
         },
 
         //  Lấy lịch thi theo ID + danh sách đề thi
