@@ -136,85 +136,87 @@ const ExamService = {
     return (result.rowCount ?? 0) > 0;
   },
 
-  async list(page: number,
+  async list(
+    page: number,
     status: string,
     searchValue: string,
     topicIds: number | "All",
     subject_id: number | "All"
-  ): Promise<({ exams: Exam[]; totalPages: number }) | []> {
+  ): Promise<{ exams: Exam[]; totalPages: number }> {
     const limit = 12;
     const offset = (page - 1) * limit;
 
-    let conditions = [];
-    let params = [];
+    // -----------------------
+    // Build dynamic WHERE clause
+    // -----------------------
+    const conditions: string[] = [];
+    const params: any[] = [];
     let idx = 1;
 
-    // Search
-    if (searchValue.trim() !== "") {
+    if (searchValue.trim()) {
       conditions.push(`
-        (
-          unaccent(lower(e.exam_name)) LIKE unaccent(lower($${idx}))
-          OR
-          unaccent(lower(t.title)) LIKE unaccent(lower($${idx}))
-        )
-      `);
+      (
+        unaccent(lower(e.exam_name)) LIKE unaccent(lower($${idx}))
+        OR
+        unaccent(lower(t.title)) LIKE unaccent(lower($${idx}))
+      )
+    `);
       params.push(`%${searchValue}%`);
       idx++;
     }
 
-    // Status
     if (status !== "All") {
       conditions.push(`e.available = $${idx}`);
       params.push(status);
       idx++;
     }
 
-    // Topic filter
     if (topicIds !== "All") {
-      conditions.push(`e.topic_id = ($${idx})`);
+      conditions.push(`e.topic_id = $${idx}`);
       params.push(topicIds);
       idx++;
     }
 
-    //subject
     if (subject_id !== "All") {
-      conditions.push(`sj.subject_id = ($${idx})`);
+      conditions.push(`sj.subject_id = $${idx}`);
       params.push(subject_id);
       idx++;
     }
 
     const whereClause = conditions.length ? `WHERE ${conditions.join(" AND ")}` : "";
+
+    // -----------------------
+    // Query danh sách bài thi
+    // -----------------------
     const queryText = `
-          SELECT 
-            e.exam_name, e.topic_id, e.time_limit, e.exam_id, e.created_at, e.available, e.description,
-            t.title AS topic_name,
-            es.start_time, es.end_time,
-            sj.subject_type, sj.subject_name,
-            COALESCE(c.total_contestants, 0) AS contestant_count
-          FROM exam e
-          JOIN topic t ON e.topic_id = t.topic_id
-          JOIN exam_schedule es ON es.exam_schedule_id = e.exam_schedule_id
-          JOIN subject sj ON sj.subject_id = t.subject_id
-          LEFT JOIN (
-            SELECT exam_id, COUNT(DISTINCT user_id) AS total_contestants
-            FROM history_exam
-            GROUP BY exam_id
-          ) c ON c.exam_id = e.exam_id         
-          ${whereClause}
-          ORDER BY e.exam_id DESC
-          LIMIT ${limit} OFFSET ${offset}
-        `;
+    SELECT 
+      e.exam_name, e.topic_id, e.time_limit, e.exam_id, e.created_at, e.available, e.description,
+      t.title AS topic_name,
+      es.start_time, es.end_time,
+      sj.subject_type, sj.subject_name,
+      COALESCE(c.total_contestants, 0) AS contestant_count
+    FROM exam e
+    JOIN topic t ON e.topic_id = t.topic_id
+    JOIN exam_schedule es ON es.exam_schedule_id = e.exam_schedule_id
+    JOIN subject sj ON sj.subject_id = t.subject_id
+    LEFT JOIN (
+      SELECT exam_id, COUNT(DISTINCT user_id) AS total_contestants
+      FROM history_exam
+      GROUP BY exam_id
+    ) c ON c.exam_id = e.exam_id
+    ${whereClause}
+    ORDER BY e.exam_id DESC
+    LIMIT ${limit} OFFSET ${offset}
+  `;
 
     const result = await query(queryText, params);
-
     const exams = result.rows;
 
-    // Lấy top 3 của mỗi exam
+    // -----------------------
+    // Lấy top 3 user từ Redis cho tất cả exam song song
+    // -----------------------
     const examsWithTop3 = await Promise.all(
       exams.map(async (exam) => {
-        console.log(exam.end_time);
-
-        // Lấy top 3 từ ZSET
         const top3Raw = await redis.zrevrange(
           `exam:${exam.exam_id}:ranking`,
           0,
@@ -223,46 +225,36 @@ const ExamService = {
         );
 
         const top3 = [];
-
-        // Duyệt theo cặp (member, score)
         for (let i = 0; i < top3Raw.length; i += 2) {
-          const member = JSON.parse(top3Raw[i]); // { user_id, user_name }
-          const final_score = Number(top3Raw[i + 1]);
-
-          // Lấy điểm thật + thời gian thật từ HASH
-          const detail = await redis.hgetall(
-            `exam:${exam.exam_id}:user:${member.user_id}`
-          );
-
+          const member = JSON.parse(top3Raw[i]);
+          const detail = await redis.hgetall(`exam:${exam.exam_id}:user:${member.user_id}`);
           top3.push({
             user_id: Number(member.user_id),
             user_name: member.user_name,
             score: Number(detail.score || 0),
             time_test: Number(detail.time_test || 0),
-            final_score
+            final_score: Number(top3Raw[i + 1]),
           });
         }
 
-        return {
-          ...exam,
-          top3,
-        };
+        return { ...exam, top3 };
       })
     );
 
-    // Count total
+    // -----------------------
+    // Count tổng số trang
+    // -----------------------
     const countQuery = `
-          SELECT COUNT(*) AS total
-          FROM exam e
-          JOIN topic t ON e.topic_id = t.topic_id
-          JOIN exam_schedule es ON es.exam_schedule_id = e.exam_schedule_id
-          JOIN subject sj ON sj.subject_id = t.subject_id
-          ${whereClause}
-        `;
+    SELECT COUNT(*) AS total
+    FROM exam e
+    JOIN topic t ON e.topic_id = t.topic_id
+    JOIN exam_schedule es ON es.exam_schedule_id = e.exam_schedule_id
+    JOIN subject sj ON sj.subject_id = t.subject_id
+    ${whereClause}
+  `;
 
     const countResult = await query(countQuery, params);
-
-    const totalPages = Math.ceil(countResult.rows[0].total / limit);
+    const totalPages = Math.ceil(Number(countResult.rows[0].total) / limit);
 
     return { exams: examsWithTop3, totalPages };
   },
@@ -307,6 +299,7 @@ const ExamService = {
           : cur.correct_answers.push(r.answer_id);
       }
 
+
       //  Chấm điểm
       let score = 0;
       for (const user of do_exam) {
@@ -348,6 +341,7 @@ const ExamService = {
         }
       }
 
+      
       // Insert history_exam (SAU khi có score)
       const historyResult = await client.query(
         `
@@ -403,7 +397,7 @@ const ExamService = {
       }
 
       // Redis ranking
-      const scoreInt = Math.floor(score * 1000); 
+      const scoreInt = Math.floor(score * 1000);
       const final_score =
         scoreInt * 1_000_000 + (1_000_000 - time_test);
       await redis.zadd(
@@ -578,7 +572,7 @@ const ExamService = {
     user_id: number
   ): Promise<{
     history: {
-      hsitory_exam_id: number;
+      history_exam_id: number;
       score: number;
       time_test: number;
       created_at: Date;
@@ -730,7 +724,7 @@ const ExamService = {
         reason: "ALREADY_DONE"
       };
     }
-    
+
     const { rows } = await query(
       `
       SELECT 

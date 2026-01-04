@@ -167,65 +167,93 @@ async getDashboardStatsLine() {
 
 
   
-async getDashboardStatsPie() {
-  const client = await pool.connect();
-  try {
-    const sql = `
-      SELECT
-        sj.subject_name,
-        -- PIE SCORE DISTRIBUTION
-        COUNT(*) FILTER (WHERE he.score >= 8) AS gioi,
-        COUNT(*) FILTER (WHERE he.score >= 6.5 AND he.score < 8) AS kha,
-        COUNT(*) FILTER (WHERE he.score >= 5 AND he.score < 6.5) AS trung_binh,
-        COUNT(*) FILTER (WHERE he.score < 5) AS yeu,
-        -- SUBJECT JOIN (tổng số lần làm bài)
-        COUNT(*) AS total_join,
-        -- SUBJECT DONE (score >=5)
-        COUNT(*) FILTER (WHERE he.score >= 5) AS total_done
-      FROM subject sj
-      LEFT JOIN topic t ON t.subject_id = sj.subject_id
-      LEFT JOIN exam e ON e.topic_id = t.topic_id
-      LEFT JOIN history_exam he ON he.exam_id = e.exam_id
-      GROUP BY sj.subject_name
-      ORDER BY sj.subject_name;
-    `;
+  async getDashboardStatsPie() {
+    const client = await pool.connect();
+    try {
+      /* PIE SCORE DISTRIBUTION */
+      const scoreSql = `
+        SELECT
+          sj.subject_name,
+          COUNT(*) FILTER (WHERE he.score >= 8)  AS gioi,
+          COUNT(*) FILTER (WHERE he.score >= 6.5 AND he.score < 8) AS kha,
+          COUNT(*) FILTER (WHERE he.score >= 5 AND he.score < 6.5) AS trung_binh,
+          COUNT(*) FILTER (WHERE he.score < 5) AS yeu
+        FROM history_exam he
+        JOIN exam e ON e.exam_id = he.exam_id
+        JOIN topic t ON e.topic_id = t.topic_id
+        JOIN subject sj ON sj.subject_id = t.subject_id
+        GROUP BY sj.subject_name;
+      `;
 
-    const res = await client.query(sql);
+      const scoreRes = await client.query(scoreSql);
 
-    const scoreData: Record<string, number[]> = {};
-    const joinData: Record<string, number> = {};
-    const doneData: Record<string, number> = {};
+      const scoreData: any = {};
+      scoreRes.rows.forEach((r) => {
+        scoreData[r.subject_name] = [
+          Number(r.gioi),
+          Number(r.kha),
+          Number(r.trung_binh),
+          Number(r.yeu),
+        ];
+      });
 
-    res.rows.forEach((r) => {
-      const subject = r.subject_name;
-      scoreData[subject] = [
-        Number(r.gioi),
-        Number(r.kha),
-        Number(r.trung_binh),
-        Number(r.yeu),
-      ];
-      joinData[subject] = Number(r.total_join);
-      doneData[subject] = Number(r.total_done);
-    });
+      /* SUBJECT JOIN */
+      const joinSql = `
+        SELECT
+          sj.subject_name,
+          COUNT(*)::int AS total
+        FROM history_exam he
+        JOIN exam e ON e.exam_id = he.exam_id
+        JOIN topic t ON e.topic_id = t.topic_id
+        JOIN subject sj ON sj.subject_id = t.subject_id
+        GROUP BY sj.subject_name;
+      `;
 
-    return {
-      score: {
-        labels: ["Giỏi (≥8)", "Khá (6.5–7.9)", "Trung bình (5–6.4)", "Yếu (<5)"],
-        data: scoreData,
-      },
-      subject_join: {
-        labels: Object.keys(joinData),
-        data: joinData,
-      },
-      subject_done: {
-        labels: Object.keys(doneData),
-        data: doneData,
-      },
-    };
-  } finally {
-    client.release();
-  }
-},
+      const joinRes = await client.query(joinSql);
+      const joinData: any = {};
+      joinRes.rows.forEach((r) => {
+        joinData[r.subject_name] = r.total;
+      });
+
+      /* SUBJECT DONE (>=5) */
+      const doneSql = `
+        SELECT
+          sj.subject_name,
+          COUNT(*)::int AS total
+        FROM history_exam he
+        JOIN exam e ON e.exam_id = he.exam_id
+        JOIN topic t ON e.topic_id = t.topic_id
+        JOIN subject sj ON sj.subject_id = t.subject_id
+        WHERE he.score >= 5
+        GROUP BY sj.subject_name;
+      `;
+
+      const doneRes = await client.query(doneSql);
+      const doneData: any = {};
+      doneRes.rows.forEach((r) => {
+        doneData[r.subject_name] = r.total;
+      });
+
+      return {
+        score: {
+          labels: ["Giỏi (≥8)", "Khá (6.5–7.9)", "Trung bình (5–6.4)", "Yếu (<5)"],
+          data: scoreData,
+        },
+        subject_join: {
+          labels: Object.keys(joinData),
+          data: joinData,
+        },
+        subject_done: {
+          labels: Object.keys(doneData),
+          data: doneData,
+        },
+      };
+    } finally {
+      client.release();
+    }
+  },
+
+  
 
 
   async getDashboardStatsBar() {
@@ -305,6 +333,8 @@ async getDashboardStatsPie() {
       client.release();
     }
   },
+
+
 
   async getDashboardStatsTable() {
     const sql = `

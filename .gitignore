@@ -60,11 +60,11 @@ microservice/
 ./src/test.ts
 /src/test.ts
 
-data
-./data
-/data
+# data
+# ./data
+# /data
 
-resources
-./resources
+# resources
+# ./resources
 
-/resources
+# /resources
