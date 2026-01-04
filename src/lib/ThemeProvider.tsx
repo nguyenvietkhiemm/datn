@@ -12,19 +12,23 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   const isHiddenPage = hiddenRoutes.includes(pathname);
 
   return (
-      <div className="relative flex min-h-screen bg-gray-50 overflow-visible">
-        {!isHiddenPage && <Sidebar />}
-        <div className="relative flex-1 flex flex-col w-full">
-          {!isHiddenPage && <Header />}
-          <main className={`sticky top-0 z-5 flex-1 p-6 transition-all duration-300
-              ${isHiddenPage
-              ? "flex items-center justify-center w-[700px] mx-auto"
-              : "lg:ml-60 md:ml-45 ml-5"
-            }`}>
-            <TokenChecker />
-            {children}
-          </main>
-        </div>
+    <div className="relative flex min-h-screen bg-gray-50 overflow-visible">
+      {!isHiddenPage && <Sidebar />}
+      <div className="relative flex-1 flex flex-col w-full">
+        {!isHiddenPage && <Header />}
+
+        <main
+          className={`flex-1 transition-all duration-300 p-6
+    ${isHiddenPage
+              ? "flex items-center justify-center w-full max-w-3xl mx-auto"
+              : "ml-[280px] lg:ml-[280px] md:ml-[200px] ml-0"
+            }`}
+        >
+          <TokenChecker />
+          {children}
+        </main>
+
       </div>
+    </div>
   );
 }

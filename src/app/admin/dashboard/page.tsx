@@ -7,7 +7,9 @@ import LineChartBox from "@/component/dashboard/line/LineChartBox";
 import BarChartBox from "@/component/dashboard/bar/BarChartBox";
 import PieChartBox from "@/component/dashboard/pie/PieChartBox";
 import Table from "@/component/dashboard/table/Table";
+
 import DashBoardService from "@/domain/admin/dashboard/service";
+
 import { DashboardResponse, LineItem, BarChartData, UserStats } from "@/domain/admin/dashboard/type";
 import EmptyState from "@/component/empty/Empty";
 
@@ -206,12 +208,14 @@ export default function DashboardPage() {
       </div>
 
       {/* TABLE */}
-      <h1 className={styles.title}>Thống kê theo ngày</h1>
-      {tableData.length > 0 ? (
-        <Table userStats={tableData} />
-      ) : (
-        <EmptyState text="Chưa có dữ liệu thống kê theo ngày" />
-      )}
+      <div className="sections table_section">
+        <h1 className={styles.title}>Thống kê theo ngày</h1>
+        {tableData.length > 0 ? (
+          <Table userStats={tableData} />
+        ) : (
+          <EmptyState text="Chưa có dữ liệu thống kê theo ngày" />
+        )}
+      </div>
 
     </div>
   );

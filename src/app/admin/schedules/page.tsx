@@ -1,79 +1,147 @@
 "use client";
+
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import styles from "./Schedule.module.css";
 import { ScheduleService } from "@/domain/admin/schedules/service";
-import { useRouter } from "next/navigation";
 import FilterSchedule from "@/component/filter/FilterSchedules/FilterSchedules";
 import { ExamSchedule } from "@/domain/admin/schedules/type";
+import ScheduleExamView from "./detail/[id]/page";
+import ExamScheduleCreate from "./create/page";
+
+type ViewMode = "LIST" | "DETAIL";
 
 export default function Schedule() {
-  const [filterSchedules, setFilterSchedules] = useState<ExamSchedule[]>([]);
   const [examSchedules, setExamSchedules] = useState<ExamSchedule[]>([]);
-  const router = useRouter();
+  const [filterSchedules, setFilterSchedules] = useState<ExamSchedule[]>([]);
+  const [view, setView] = useState<ViewMode>("LIST");
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [openCreate, setOpenCreate] = useState(false);
 
-  //lấy lịch thi
+  const loadSchedules = async () => {
+    const data = await ScheduleService.fetchSchedules();
+    setExamSchedules(data);
+    setFilterSchedules(data);
+  };
+
   useEffect(() => {
-    const loadSchedules = async () => {
-        try {
-            const data = await ScheduleService.fetchSchedules();
-            setExamSchedules(data);
-            setFilterSchedules(data);
-        } catch (err) {
-            console.error(err);
-        }
-    };
-
     loadSchedules();
-}, []);
+  }, []);
 
-  useEffect(() => {
-    setFilterSchedules(examSchedules)
-  }, [examSchedules])
+  const openDetail = (id: number) => {
+    setSelectedId(id);
+    setView("DETAIL");
+  };
 
-  const detailExamSchedule = (id : number) => {
-    router.push(`/admin/schedules/detail/${id}`)
-  }
-
-  const renderTable = (data: ExamSchedule[]) => (
-    <table className={styles.schedule_table}>
-      <thead>
-        <tr>
-          <th>STT</th>
-          <th>Bắt đầu</th>
-          <th>Kết thúc</th>
-          <th>Ngày tạo</th>
-          <th>Ngày cập nhật</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((item, index) => (
-          <tr key={item.exam_schedule_id} onClick={() => detailExamSchedule(item.exam_schedule_id)}>
-            <td>{index + 1}</td>
-
-            <td>{new Date(item.start_time).toLocaleString("vi-VN")}</td>
-            <td>{new Date(item.end_time).toLocaleString("vi-VN")}</td>
-
-            <td>{new Date(item.created_at).toLocaleString("vi-VN")}</td>
-            <td>{new Date(item.updated_at).toLocaleString("vi-VN")}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
+  const backToList = () => {
+    setView("LIST");
+    setSelectedId(null);
+  };
 
   return (
-    <div className={styles.schedule_container}>
-      <div className={styles.schedule_header}>
-        <h1 className={styles.schedule_title}>Quản lý lịch thi</h1>
-        <div className={styles.schedule_action}>
-          <button className={styles.schedule_button} onClick={() => router.push("/admin/schedules/create")}>
-            Thêm lịch thi
-          </button>
-          <FilterSchedule examSchedules={examSchedules} setFilteredSchedules={setFilterSchedules}/>
-        </div>
-      </div>
-      {/* Hiển thị bảng */}
-      {renderTable(filterSchedules)}
+    <div className={styles.viewport}>
+      <AnimatePresence mode="wait">
+        {view === "LIST" && (
+          <motion.div
+            key="list"
+            exit={{ x: "-100%", opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            <div className={styles.schedule_container}>
+              <div className={styles.schedule_header}>
+                <h1 className={styles.schedule_title}>QUẢN LÝ LỊCH THI</h1>
+
+                <div className={styles.schedule_action}>
+                  <button
+                    className={styles.schedule_button}
+                    onClick={() => setOpenCreate(true)}
+                  >
+                    + Thêm lịch thi
+                  </button>
+
+                  <div className={styles.filter_wrapper}>
+                    <FilterSchedule
+                      examSchedules={examSchedules}
+                      setFilteredSchedules={setFilterSchedules}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <table className={styles.schedule_table}>
+                <thead>
+                  <tr>
+                    <th>STT</th>
+                    <th>Bắt đầu</th>
+                    <th>Kết thúc</th>
+                    <th>Ngày tạo</th>
+                    <th>Ngày cập nhật</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filterSchedules.map((item, index) => (
+                    <tr
+                      key={item.exam_schedule_id}
+                      onClick={() => openDetail(item.exam_schedule_id)}
+                    >
+                      <td>{index + 1}</td>
+                      <td>{new Date(item.start_time).toLocaleString("vi-VN")}</td>
+                      <td>{new Date(item.end_time).toLocaleString("vi-VN")}</td>
+                      <td>{new Date(item.created_at).toLocaleString("vi-VN")}</td>
+                      <td>{new Date(item.updated_at).toLocaleString("vi-VN")}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </motion.div>
+        )}
+
+        {view === "DETAIL" && selectedId && (
+          <motion.div
+            key="detail"
+            initial={{ x: "100%", opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: "100%", opacity: 0 }}
+          >
+            <ScheduleExamView
+              scheduleId={selectedId}
+              onBack={backToList}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* CREATE MODAL INLINE */}
+      <AnimatePresence>
+        {openCreate && (
+          <motion.div
+            className={styles.backdrop}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setOpenCreate(false)}
+          >
+            <motion.div
+              className={styles.modal}
+              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              <ExamScheduleCreate
+                onCancel={() => setOpenCreate(false)}
+                onSuccess={() => {
+                  loadSchedules();
+                  setOpenCreate(false);
+                }}
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </div>
   );
 }

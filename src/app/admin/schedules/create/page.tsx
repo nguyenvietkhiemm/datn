@@ -4,29 +4,35 @@ import { ScheduleService } from "@/domain/admin/schedules/service";
 import { useState } from "react";
 import styles from "./Exam.Schedule.Create.module.css";
 import type { ExamScheduleCreate } from "@/domain/admin/schedules/type";
-import {useRouter} from "next/navigation";
 
-export default function ExamScheduleCreate() {
+type Props = {
+  onSuccess?: () => void;
+  onCancel?: () => void;
+};
+
+export default function ExamScheduleCreate({ onSuccess, onCancel }: Props) {
   const [form, setForm] = useState<ExamScheduleCreate>({
     start_time: "",
     end_time: "",
   });
-  const router = useRouter();
 
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleAddExamSchedule = async () => {
+  const handleSubmit = async () => {
+    if (!form.start_time || !form.end_time) {
+      alert("Vui lòng nhập đầy đủ thời gian");
+      return;
+    }
+
     try {
       setLoading(true);
       await ScheduleService.createSchedule(form);
-      router.push(`/admin/schedules`)
       alert("Thêm lịch thi thành công");
+      onSuccess?.();
     } catch (e: any) {
       alert(e.message);
     } finally {
@@ -39,6 +45,7 @@ export default function ExamScheduleCreate() {
       <h2 className={styles.form_title}>Tạo lịch thi</h2>
 
       <div className={styles.form_body}>
+
         <div className={styles.field}>
           <label className={styles.label}>Thời gian bắt đầu</label>
           <input
@@ -60,13 +67,18 @@ export default function ExamScheduleCreate() {
             onChange={handleChange}
           />
         </div>
+
       </div>
 
       <div className={styles.actions}>
+        <button onClick={onCancel} className={styles.btn}>
+          Huỷ
+        </button>
+
         <button
-          onClick={handleAddExamSchedule}
-          className={`${styles.btn} ${styles.btn_primary}`}
+          onClick={handleSubmit}
           disabled={loading}
+          className={`${styles.btn} ${styles.btn_primary}`}
         >
           {loading ? "Đang lưu..." : "Tạo lịch thi"}
         </button>

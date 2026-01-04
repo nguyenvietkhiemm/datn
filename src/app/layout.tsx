@@ -18,9 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi" suppressHydrationWarning>
+      
       <body className="antialiased">
         <ClientLayout>{children}</ClientLayout>
       </body>
+      
     </html>
   );
 }

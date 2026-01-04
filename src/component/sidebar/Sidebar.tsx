@@ -20,9 +20,9 @@ const navItems = [
   { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
   { name: "Người dùng", href: "/admin/users", icon: Users },
   { name: "Lịch thi", href: "/admin/schedules", icon: CalendarClock },
-  { name: "Câu hỏi", href: "/admin/questions", icon: HelpCircle },
-  { name: "Môn học và Tiêu đề", href: "/admin/topic_subject", icon: Tags },
   { name: "Cuộc thi", href: "/admin/exams", icon: Trophy },
+  { name: "Kho câu hỏi", href: "/admin/questions", icon: HelpCircle },
+  { name: "Chuyên đề", href: "/admin/topic_subject", icon: Tags },
   { name: "Bài luyện tập", href: "/admin/bank", icon: Layers },
   { name: "Tài liệu", href: "/admin/documents", icon: FileText },
   { name: "Lộ trình", href: "/admin/roadmap", icon: Route },
@@ -45,7 +45,7 @@ export default function Sidebar() {
             />
           </span>
           <p className={styles.logoText}>
-            LÒ LUYỆN <span>ONLINE</span>
+            LÒ LUYỆN <span>Online</span>
           </p>
         </Link>
 
@@ -58,7 +58,7 @@ export default function Sidebar() {
                 href={href}
                 className={`${styles.navItem} ${isActive ? styles.active : ""}`}
               >
-                <Icon size={18} />
+                <Icon size={20} />
                 <span>{name}</span>
               </Link>
             );

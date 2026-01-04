@@ -11,6 +11,7 @@
     font-size: 24px;
     font-weight: 700;
     color: #1f2937;
+    margin-bottom: 16px;
 }
 
 .info_box {
@@ -67,6 +68,7 @@
     border-radius: 10px;
     overflow: hidden;
     border: 1px solid #ccc;
+    background: white;
 }
 
 .table th,
@@ -97,4 +99,32 @@
 .error {
     color: red;
     font-weight: 500;
+}
+
+.container {
+  padding: 20px;
+  background: #f9fafc;
+  border-radius: 12px;
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.info {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+
+
+.empty {
+  color: #9ca3af;
+  font-style: italic;
 }

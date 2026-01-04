@@ -72,7 +72,7 @@ export default function User() {
   return (
     <div className={styles.user_container}>
       <div className={styles.user_header}>
-        <h1 className={styles.title}>Quản lý người dùng</h1>
+        <h1 className={styles.title}>QUẢN LÝ NGƯỜI DÙNG</h1>
 
         <FilterUser query={query} setQuery={setQuery} />
       </div>
@@ -80,7 +80,7 @@ export default function User() {
       <table className={styles.user_table}>
         <thead>
           <tr>
-            <th>STT</th>
+            <th style={{ width: "40px", textAlign: "center" }}>STT</th>
             <th>Tên</th>
             <th>Email</th>
             <th>Ngày sinh</th>
@@ -165,7 +165,7 @@ export default function User() {
                       className={styles.delBtn}
                       onClick={() => handleDelete(u.user_id)}
                     >
-                      X
+                      Xóa
                     </button>
                   </td>
                 </tr>

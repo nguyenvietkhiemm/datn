@@ -1,79 +1,102 @@
 .schedule_container {
   border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
   display: flex;
   flex-direction: column;
+  background-color: #f9fafc;
 }
 
 .schedule_header {
   display: flex;
-  margin-bottom: 1rem;
-  display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .schedule_title {
-  font-size: 24px;
+  font-size: 1.8rem;
   font-weight: 700;
-  color: #1f2937;
+  color: #02346d; /* tone chủ đạo */
 }
 
 .schedule_action {
   display: flex;
-  align-items: start;
-  flex-direction: column;
-  gap: 1rem;
+  justify-content: space-between; 
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 0.5rem;
 }
 
 .schedule_button {
-  background-color: white;
-  color: #0070f3;
-  border: 1px solid #0070f3;
+  background-color: #02346d;
+  color: #fff;
+  border: none;
   border-radius: 8px;
-  padding: 8px 14px;
+  padding: 8px 16px;
   cursor: pointer;
   font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
+.schedule_button:hover {
+  background-color: #021f4d;
+  transform: translateY(-1px);
+}
 
 /* ====== TABLE ====== */
 .schedule_table {
   width: 100%;
   border-collapse: collapse;
-  background-color: white;
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid #ccc;
+  background-color: white;
 }
-
 
 .schedule_table th,
 .schedule_table td {
   padding: 12px 10px;
-  text-align: left;
   border-bottom: 1px solid #eee;
   border: 1px solid #ccc;
 }
 
+/* Header màu xanh đậm, chữ trắng */
 .schedule_table th {
-  background-color: #f0f0f0;
-  font-weight: bold;
+  background-color: #02346d;
+  color: #fff;
+  font-weight: 600;
+  text-align: left;
 }
 
+/* Cột STT căn giữa */
+.schedule_table th:first-child,
+.schedule_table td:first-child {
+  text-align: center;
+  width: 40px;
+}
+
+/* Hover hàng */
 .schedule_table tbody tr:hover {
-  background-color: #f5f5f5;
+  background-color: #f0f4ff;
   cursor: pointer;
+  transition: background 0.2s;
 }
 
-/* ====== STATUS ====== */
+/* Status badges */
 .status {
   font-weight: 500;
   padding: 4px 8px;
   border-radius: 6px;
   text-transform: capitalize;
   display: inline-block;
+  font-size: 0.875rem;
 }
 
 .pending {
@@ -94,4 +117,64 @@
 .cancel {
   background: #fee2e2;
   color: #991b1b;
+}
+
+.filter_wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.filter_wrapper select {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+  background-color: #fff;
+  min-width: 180px;
+  cursor: pointer;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filter_wrapper select:focus {
+  outline: none;
+  border-color: #02346d;
+  box-shadow: 0 0 0 2px rgba(2, 52, 109, 0.2);
+}
+
+/* Responsive nhỏ: stack dọc */
+@media (max-width: 768px) {
+  .schedule_action {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter_wrapper {
+    margin-top: 8px;
+    justify-content: flex-end; /* filter vẫn căn phải */
+  }
+}
+
+.viewport {
+  overflow: hidden;
+  position: relative;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 8px;
+  padding: 0;
+  width: auto;
+  z-index: 1001;
 }
