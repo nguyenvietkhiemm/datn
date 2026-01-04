@@ -60,17 +60,7 @@ const BankService = {
 
         const questionResult = await query(queryText, [bankId]);
 
-        // Không có câu hỏi
-        if (!questionResult.rows.length) {
-            return { question: null, subject_type: null };
-        }
-
-        const groupedQuestions = groupQuestionsByTypeSafe(
-            questionResult.rows as Question[]
-        );
-
-        // LẤY subject_type
-        const subjectTypeQuery = `
+         const subjectTypeQuery = `
           SELECT s.subject_type
           FROM bank b
           JOIN topic t ON t.topic_id = b.topic_id
@@ -79,9 +69,15 @@ const BankService = {
         `;
 
         const subjectTypeResult = await query(subjectTypeQuery, [bankId]);
+        
         const subject_type: number | null =
             subjectTypeResult.rows[0]?.subject_type ?? null;
 
+        const groupedQuestions = groupQuestionsByTypeSafe(
+            questionResult.rows as Question[]
+        );
+
+        // LẤY subject_type
         return {
             question: groupedQuestions,
             subject_type
@@ -155,7 +151,6 @@ const BankService = {
           LIMIT ${limit} OFFSET ${offset}
         `;
         const dataResult = await query(dataQuery, params);
-        console.log(dataResult);
         
         // Count
         const countQuery = `

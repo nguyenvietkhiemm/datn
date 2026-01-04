@@ -62,16 +62,6 @@ const ExamService = {
 
     const questionResult = await query(queryText, [examId]);
 
-    //  Không có câu hỏi
-    if (!questionResult.rows.length) {
-      return { question: null, subject_type: null };
-    }
-
-    const groupedQuestions = groupQuestionsByTypeSafe(
-      questionResult.rows as Question[]
-    );
-
-    // LẤY subject_type
     const subjectTypeQuery = `
       SELECT s.subject_type
       FROM exam e
@@ -83,6 +73,12 @@ const ExamService = {
     const subjectTypeResult = await query(subjectTypeQuery, [examId]);
     const subject_type: number | null =
       subjectTypeResult.rows[0]?.subject_type ?? null;
+
+    const groupedQuestions = groupQuestionsByTypeSafe(
+      questionResult.rows as Question[]
+    );
+
+    // LẤY subject_type
 
     return {
       question: groupedQuestions,
@@ -403,7 +399,7 @@ const ExamService = {
       }
 
       // Redis ranking
-      const scoreInt = Math.floor(score * 1000); 
+      const scoreInt = Math.floor(score * 1000);
       const final_score =
         scoreInt * 1_000_000 + (1_000_000 - time_test);
       await redis.zadd(
@@ -730,7 +726,7 @@ const ExamService = {
         reason: "ALREADY_DONE"
       };
     }
-    
+
     const { rows } = await query(
       `
       SELECT 

@@ -195,11 +195,6 @@ CREATE TABLE IF NOT EXISTS bank (
   available BOOLEAN DEFAULT true
 );
 
-
-
-
-
-
 -- 20) Question (standalone)
 CREATE TABLE IF NOT EXISTS question (
   question_id SERIAL PRIMARY KEY,
@@ -219,19 +214,12 @@ CREATE TABLE IF NOT EXISTS answer (
   is_correct BOOLEAN DEFAULT FALSE,
 );
 
-
-
-
-
 -- 22) question_bank (depends on question and bank)
 CREATE TABLE IF NOT EXISTS question_bank (
   question_id INT NOT NULL REFERENCES question(question_id) ON DELETE CASCADE,
   bank_id INT NOT NULL REFERENCES bank(bank_id) ON DELETE CASCADE,
   PRIMARY KEY (question_id, bank_id)
 );
-
-
-
 
 -- 23) Exam schedule
 CREATE TABLE IF NOT EXISTS exam_schedule (
