@@ -17,6 +17,47 @@ export function normalizeImages(images: any[]): string[] {
         .filter(Boolean) as string[];
 }
 
+export function applyLatexMapping(
+  text: string,
+  latexMap?: Record<string, string>
+): string {
+  if (!text || !latexMap) return text;
+
+  let result = text;
+
+  for (const [token, latex] of Object.entries(latexMap)) {
+    if (!latex) continue;
+
+    const normalized = normalizeLatex(latex);
+
+    result = result.replace(
+      new RegExp(escapeRegExp(token), "g"),
+      `$${normalized}$`
+    );
+  }
+
+  return result;
+}
+
+function escapeRegExp(str: string): string {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function normalizeLatex(latex: string): string {
+  let s = latex.trim();
+
+  // Fix OCR phổ biến
+  s = s.replace(/\\mathrm\{\\g\}/g, "\\mathrm{g}");
+
+  // Fix thiếu }
+  const open = (s.match(/{/g) || []).length;
+  const close = (s.match(/}/g) || []).length;
+  if (close < open) {
+    s += "}".repeat(open - close);
+  }
+
+  return s;
+}
 
 
 export function sanitizeFilename(originalName: string) {

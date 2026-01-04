@@ -189,7 +189,7 @@ const ExamService = {
             e.exam_name, e.topic_id, e.time_limit, e.exam_id, e.created_at, e.available, e.description,
             t.title AS topic_name,
             es.start_time, es.end_time,
-            sj.subject_type,
+            sj.subject_type, sj.subject_name,
             COALESCE(c.total_contestants, 0) AS contestant_count
           FROM exam e
           JOIN topic t ON e.topic_id = t.topic_id
@@ -730,8 +730,7 @@ const ExamService = {
         reason: "ALREADY_DONE"
       };
     }
-    console.log(exam_id);
-
+    
     const { rows } = await query(
       `
       SELECT 
