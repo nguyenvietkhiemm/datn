@@ -2,20 +2,16 @@ import pool, { query } from "../config/database";
 import { DateProp } from "../models/dashboard.model";
 
 export const DashBoardService = {
-  async getDashboardStatsCard(date: DateProp) {
-    const client = await pool.connect()
-    try {
-      await client.query("BEGIN");
-      //overview
-      const currentStart = new Date(date.year, date.month - 1, 1);
-      const currentEnd = new Date(date.year, date.month, 1);
+async getDashboardStatsCard(date: DateProp) {
+  const client = await pool.connect();
+  try {
+    const currentStart = new Date(Date.UTC(date.year, date.month - 1, 1));
+    const currentEnd   = new Date(Date.UTC(date.year, date.month, 1));
+    const prevStart    = new Date(Date.UTC(date.year, date.month - 2, 1));
+    const prevEnd      = new Date(Date.UTC(date.year, date.month - 1, 1));
 
-      const prevStart = new Date(date.year, date.month - 2, 1);
-      const prevEnd = new Date(date.year, date.month - 1, 1);
-      //bai nop, nguoi dung, diem dung
-      const sql = `
+    const sql = `
       SELECT
-        -- CURRENT MONTH
         COUNT(history_exam_id) FILTER (
           WHERE created_at >= $1 AND created_at < $2
         )::int AS current_submits,
@@ -25,9 +21,9 @@ export const DashBoardService = {
         )::int AS current_users,
 
         ROUND(
-          AVG(score) FILTER (
+          COALESCE(AVG(score) FILTER (
             WHERE created_at >= $1 AND created_at < $2
-          ),
+          ), 0),
           2
         ) AS current_score,
 
@@ -35,8 +31,7 @@ export const DashBoardService = {
           WHERE score >= 5
             AND created_at >= $1 AND created_at < $2
         )::int AS current_standard_score,
-        
-        -- PREVIOUS MONTH
+
         COUNT(history_exam_id) FILTER (
           WHERE created_at >= $3 AND created_at < $4
         )::int AS prev_submits,
@@ -46,53 +41,33 @@ export const DashBoardService = {
         )::int AS prev_users,
 
         ROUND(
-          AVG(score) FILTER (
+          COALESCE(AVG(score) FILTER (
             WHERE created_at >= $3 AND created_at < $4
-          ),
+          ), 0),
           2
         ) AS prev_score,
-        
+
         COUNT(score) FILTER (
           WHERE score >= 5
             AND created_at >= $3 AND created_at < $4
         )::int AS prev_standard_score
-
       FROM history_exam;
     `;
 
-      const { rows } = await client.query(sql, [
-        currentStart,
-        currentEnd,
-        prevStart,
-        prevEnd,
-      ]);
+    const { rows } = await client.query(sql, [
+      currentStart,
+      currentEnd,
+      prevStart,
+      prevEnd,
+    ]);
 
-      const data = rows[0];
+    const d = rows[0];
 
-      const submitChange =
-        data.prev_submits === 0
-          ? 100
-          : ((data.current_submits - data.prev_submits) / data.prev_submits) * 100;
+    const calcChange = (c: number, p: number) =>
+      p === 0 ? (c === 0 ? 0 : 100) : ((c - p) / p) * 100;
 
-      const userChange =
-        data.prev_users === 0
-          ? 100
-          : ((data.current_users - data.prev_users) / data.prev_users) * 100;
-
-      const scoreChange =
-        data.prev_score == null
-          ? 100
-          : ((data.current_score - data.prev_score) / data.prev_score) * 100;
-
-      const standardScoreChage =
-        data.prev_standard_score === 0
-          ? 100
-          : ((data.current_standard_score - data.prev_standard_score) / data.prev_standard_score) * 100
-
-      //mon pho bien nhat
-      const sql1 = `
+    const sql1 = `
       SELECT
-        sj.subject_id,
         sj.subject_name,
         COUNT(*)::int AS total
       FROM history_exam he
@@ -100,186 +75,158 @@ export const DashBoardService = {
       JOIN topic t ON e.topic_id = t.topic_id
       JOIN subject sj ON sj.subject_id = t.subject_id
       WHERE he.created_at >= $1 AND he.created_at < $2
-      GROUP BY sj.subject_id, sj.subject_name
+      GROUP BY sj.subject_name
       ORDER BY total DESC
       LIMIT 1;
-      `
-      const result1 = await client.query(sql1, [currentStart, currentEnd]);
-      const data1 = result1.rows[0];
-      //hoc sinh moi
-      const sql2 = `
-    SELECT 
-    -- CURRENT MONTH
-    COUNT(user_id) FILTER
-    (
-      WHERE created_at >= $1 AND created_at < $2
-    )::int AS current_user_new ,
-    
-    -- PREVIOUS MONTH
-    COUNT(user_id) FILTER
-    (
-      WHERE created_at >= $3 AND created_at < $4
-    )::int AS prev_user_new 
-    FROM "user"
-    `
-      const result2 = await client.query(sql2, [
-        currentStart,
-        currentEnd,
-        prevStart,
-        prevEnd,
-      ]);
-
-      const data2 = result2.rows[0];
-      const userNewChange =
-        data2.prev_user_new === 0
-          ? 100
-          : ((data2.current_user_new - data2.prev_user_new) / data2.prev_user_new) * 100;
-
-      await client.query("COMMIT");
-      return {
-        overview: {
-          submits: {
-            total: data.current_submits,
-            change: submitChange.toFixed(2),
-          },
-          users: {
-            total: data.current_users,
-            change: userChange.toFixed(2),
-          },
-          score: {
-            total: data.current_score,
-            change: scoreChange.toFixed(2),
-          },
-          users_new: {
-            total: data2.current_user_new,
-            change: userNewChange.toFixed(2),
-          },
-          popular_subject: {
-            total: data1.total,
-            name: data1.subject_name,
-          },
-          standard_score: {
-            total: data.current_standard_score,
-            change: standardScoreChage.toFixed(2),
-          }
-        },
-      };
-    } catch (error) {
-      await client.query("ROLLBACK");
-      throw error;
-    } finally {
-      client.release();
-    }
-  },
-
-  async getDashboardStatsLine() {
-    const sql = `
-      SELECT
-        to_char(d.day, 'Mon DD') AS date,
-        COUNT(u.user_id)::int AS value
-      FROM generate_series(
-        CURRENT_DATE - INTERVAL '29 days',
-        CURRENT_DATE,
-        INTERVAL '1 day'
-      ) AS d(day)
-      LEFT JOIN "user" u
-        ON DATE(u.created_at) = d.day
-      GROUP BY d.day
-      ORDER BY d.day;
     `;
 
-    const { rows } = await pool.query(sql);
+    const popular = (await client.query(sql1, [currentStart, currentEnd])).rows[0]
+      ?? { subject_name: null, total: 0 };
+
+    const sql2 = `
+      SELECT
+        COUNT(user_id) FILTER (
+          WHERE created_at >= $1 AND created_at < $2
+        )::int AS current_user_new,
+        COUNT(user_id) FILTER (
+          WHERE created_at >= $3 AND created_at < $4
+        )::int AS prev_user_new
+      FROM "user";
+    `;
+
+    const u = (await client.query(sql2, [
+      currentStart,
+      currentEnd,
+      prevStart,
+      prevEnd,
+    ])).rows[0];
 
     return {
-      line: rows,
-    };
-  },
-
-  async getDashboardStatsPie() {
-    const client = await pool.connect();
-    try {
-      /* PIE SCORE DISTRIBUTION */
-      const scoreSql = `
-        SELECT
-          sj.subject_name,
-          COUNT(*) FILTER (WHERE he.score >= 8)  AS gioi,
-          COUNT(*) FILTER (WHERE he.score >= 6.5 AND he.score < 8) AS kha,
-          COUNT(*) FILTER (WHERE he.score >= 5 AND he.score < 6.5) AS trung_binh,
-          COUNT(*) FILTER (WHERE he.score < 5) AS yeu
-        FROM history_exam he
-        JOIN exam e ON e.exam_id = he.exam_id
-        JOIN topic t ON e.topic_id = t.topic_id
-        JOIN subject sj ON sj.subject_id = t.subject_id
-        GROUP BY sj.subject_name;
-      `;
-
-      const scoreRes = await client.query(scoreSql);
-
-      const scoreData: any = {};
-      scoreRes.rows.forEach((r) => {
-        scoreData[r.subject_name] = [
-          Number(r.gioi),
-          Number(r.kha),
-          Number(r.trung_binh),
-          Number(r.yeu),
-        ];
-      });
-
-      /* SUBJECT JOIN */
-      const joinSql = `
-        SELECT
-          sj.subject_name,
-          COUNT(*)::int AS total
-        FROM history_exam he
-        JOIN exam e ON e.exam_id = he.exam_id
-        JOIN topic t ON e.topic_id = t.topic_id
-        JOIN subject sj ON sj.subject_id = t.subject_id
-        GROUP BY sj.subject_name;
-      `;
-
-      const joinRes = await client.query(joinSql);
-      const joinData: any = {};
-      joinRes.rows.forEach((r) => {
-        joinData[r.subject_name] = r.total;
-      });
-
-      /* SUBJECT DONE (>=5) */
-      const doneSql = `
-        SELECT
-          sj.subject_name,
-          COUNT(*)::int AS total
-        FROM history_exam he
-        JOIN exam e ON e.exam_id = he.exam_id
-        JOIN topic t ON e.topic_id = t.topic_id
-        JOIN subject sj ON sj.subject_id = t.subject_id
-        WHERE he.score >= 5
-        GROUP BY sj.subject_name;
-      `;
-
-      const doneRes = await client.query(doneSql);
-      const doneData: any = {};
-      doneRes.rows.forEach((r) => {
-        doneData[r.subject_name] = r.total;
-      });
-
-      return {
+      overview: {
+        submits: {
+          total: d.current_submits,
+          change: calcChange(d.current_submits, d.prev_submits).toFixed(2),
+        },
+        users: {
+          total: d.current_users,
+          change: calcChange(d.current_users, d.prev_users).toFixed(2),
+        },
         score: {
-          labels: ["Giỏi (≥8)", "Khá (6.5–7.9)", "Trung bình (5–6.4)", "Yếu (<5)"],
-          data: scoreData,
+          total: d.current_score,
+          change: calcChange(d.current_score, d.prev_score).toFixed(2),
         },
-        subject_join: {
-          labels: Object.keys(joinData),
-          data: joinData,
+        users_new: {
+          total: u.current_user_new,
+          change: calcChange(u.current_user_new, u.prev_user_new).toFixed(2),
         },
-        subject_done: {
-          labels: Object.keys(doneData),
-          data: doneData,
+        standard_score: {
+          total: d.current_standard_score,
+          change: calcChange(
+            d.current_standard_score,
+            d.prev_standard_score
+          ).toFixed(2),
         },
-      };
-    } finally {
-      client.release();
-    }
-  },
+        popular_subject: {
+          name: popular.subject_name,
+          total: popular.total,
+        },
+      },
+    };
+  } finally {
+    client.release();
+  }
+}, 
+
+
+
+
+async getDashboardStatsLine() {
+  const sql = `
+    SELECT
+      to_char(d.day, 'YYYY-MM-DD') AS date,
+      COUNT(u.user_id)::int AS value
+    FROM generate_series(
+      (CURRENT_DATE AT TIME ZONE 'UTC') - INTERVAL '29 days',
+      (CURRENT_DATE AT TIME ZONE 'UTC'),
+      INTERVAL '1 day'
+    ) AS d(day)
+    LEFT JOIN "user" u
+      ON u.created_at >= d.day
+     AND u.created_at < d.day + INTERVAL '1 day'
+    GROUP BY d.day
+    ORDER BY d.day;
+  `;
+
+  const { rows } = await pool.query(sql);
+
+  return {
+    line: rows,
+  };
+},
+
+
+
+  
+async getDashboardStatsPie() {
+  const client = await pool.connect();
+  try {
+    const sql = `
+      SELECT
+        sj.subject_name,
+        -- PIE SCORE DISTRIBUTION
+        COUNT(*) FILTER (WHERE he.score >= 8) AS gioi,
+        COUNT(*) FILTER (WHERE he.score >= 6.5 AND he.score < 8) AS kha,
+        COUNT(*) FILTER (WHERE he.score >= 5 AND he.score < 6.5) AS trung_binh,
+        COUNT(*) FILTER (WHERE he.score < 5) AS yeu,
+        -- SUBJECT JOIN (tổng số lần làm bài)
+        COUNT(*) AS total_join,
+        -- SUBJECT DONE (score >=5)
+        COUNT(*) FILTER (WHERE he.score >= 5) AS total_done
+      FROM subject sj
+      LEFT JOIN topic t ON t.subject_id = sj.subject_id
+      LEFT JOIN exam e ON e.topic_id = t.topic_id
+      LEFT JOIN history_exam he ON he.exam_id = e.exam_id
+      GROUP BY sj.subject_name
+      ORDER BY sj.subject_name;
+    `;
+
+    const res = await client.query(sql);
+
+    const scoreData: Record<string, number[]> = {};
+    const joinData: Record<string, number> = {};
+    const doneData: Record<string, number> = {};
+
+    res.rows.forEach((r) => {
+      const subject = r.subject_name;
+      scoreData[subject] = [
+        Number(r.gioi),
+        Number(r.kha),
+        Number(r.trung_binh),
+        Number(r.yeu),
+      ];
+      joinData[subject] = Number(r.total_join);
+      doneData[subject] = Number(r.total_done);
+    });
+
+    return {
+      score: {
+        labels: ["Giỏi (≥8)", "Khá (6.5–7.9)", "Trung bình (5–6.4)", "Yếu (<5)"],
+        data: scoreData,
+      },
+      subject_join: {
+        labels: Object.keys(joinData),
+        data: joinData,
+      },
+      subject_done: {
+        labels: Object.keys(doneData),
+        data: doneData,
+      },
+    };
+  } finally {
+    client.release();
+  }
+},
+
 
   async getDashboardStatsBar() {
     const client = await pool.connect();

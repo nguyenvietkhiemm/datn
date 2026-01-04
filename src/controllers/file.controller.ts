@@ -5,7 +5,7 @@ import { FileService } from "../services/file.service";
 import path from "path";
 import fs from "fs";
 import crypto from "crypto";
-import { normalizeImages } from "../utils/helper";
+import { applyLatexMapping, normalizeImages } from "../utils/helper";
 import { signImage, verifyImage } from "../utils/helper";
 
 export const FileController = {
@@ -39,16 +39,25 @@ export const FileController = {
             const normalized = Array.isArray(data)
                 ? data.map((item: any) => ({
                     ...item,
+
                     question: {
                         ...item.question,
-                        images: normalizeImages(item.question?.images),
+                        text: applyLatexMapping(
+                            item.question.text,
+                            item.question.latex
+                        ),
+                        images: normalizeImages(item.question.images),
                     },
-                    answers: Array.isArray(item.answers)
-                        ? item.answers.map((ans: any) => ({
-                            ...ans,
-                            images: normalizeImages(ans.images),
-                        }))
-                        : [],
+
+                    answers: item.answers.map((ans: any) => ({
+                        ...ans,
+                        text: applyLatexMapping(
+                            ans.text,
+                            ans.latex
+                        ),
+                        images: normalizeImages(ans.images),
+                    })),
+
                 }))
                 : data;
 
@@ -182,57 +191,57 @@ export const FileController = {
 
     async uploadImages(req: Request, res: Response) {
         const result = await safeExecute(
-          async (): Promise<DefaultResponse<string[]>> => {
-            const files = req.files as Express.Multer.File[];
-      
-            if (!files || files.length === 0) {
-              return {
-                status: 400,
-                message: "Images duplicated or not provided",
-                data: [],
-              };
+            async (): Promise<DefaultResponse<string[]>> => {
+                const files = req.files as Express.Multer.File[];
+
+                if (!files || files.length === 0) {
+                    return {
+                        status: 400,
+                        message: "Images duplicated or not provided",
+                        data: [],
+                    };
+                }
+
+                const uploadDir = path.join(
+                    __dirname,
+                    "../../data/outputs/media"
+                );
+
+                if (!fs.existsSync(uploadDir)) {
+                    fs.mkdirSync(uploadDir, { recursive: true });
+                }
+
+                const fileNames: string[] = [];
+
+                for (const file of files) {
+                    // ✅ HASH BUFFER (CÁCH 1)
+                    const hash = crypto
+                        .createHash("md5")
+                        .update(file.buffer)
+                        .digest("hex");
+
+                    const ext = path.extname(file.originalname);
+                    const fileName = `${hash}${ext}`;
+                    const filePath = path.join(uploadDir, fileName);
+
+                    // ✅ nếu chưa tồn tại thì mới ghi
+                    if (!fs.existsSync(filePath)) {
+                        fs.writeFileSync(filePath, file.buffer);
+                    }
+
+                    // ✅ luôn push filename (kể cả duplicate)
+                    fileNames.push(fileName);
+                }
+
+                return {
+                    status: 200,
+                    message: "Upload images thành công",
+                    data: fileNames, // ["abc.png", "xyz.jpg"]
+                };
             }
-      
-            const uploadDir = path.join(
-              __dirname,
-              "../../data/outputs/media"
-            );
-      
-            if (!fs.existsSync(uploadDir)) {
-              fs.mkdirSync(uploadDir, { recursive: true });
-            }
-      
-            const fileNames: string[] = [];
-      
-            for (const file of files) {
-              // ✅ HASH BUFFER (CÁCH 1)
-              const hash = crypto
-                .createHash("md5")
-                .update(file.buffer)
-                .digest("hex");
-      
-              const ext = path.extname(file.originalname);
-              const fileName = `${hash}${ext}`;
-              const filePath = path.join(uploadDir, fileName);
-      
-              // ✅ nếu chưa tồn tại thì mới ghi
-              if (!fs.existsSync(filePath)) {
-                fs.writeFileSync(filePath, file.buffer);
-              }
-      
-              // ✅ luôn push filename (kể cả duplicate)
-              fileNames.push(fileName);
-            }
-      
-            return {
-              status: 200,
-              message: "Upload images thành công",
-              data: fileNames, // ["abc.png", "xyz.jpg"]
-            };
-          }
         );
-      
+
         return res.status(result.status).json(result);
-      }      
+    }
 
 };
