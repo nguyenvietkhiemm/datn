@@ -349,6 +349,252 @@ INSERT INTO flashcard (front, back, example, flashcard_deck_id) VALUES
 ('An toàn thông tin?', 'Bảo mật dữ liệu', '', 10);
 
 
+-- INSERT INTO exam (
+--   exam_name,
+--   time_limit,
+--   topic_id,
+--   exam_schedule_id,
+--   description,
+--   available
+-- )
+-- SELECT
+--   'THPT Quốc gia ' || t.title || ' 2025 - Đề số ' || g.n,
+--   90,
+--   t.topic_id,
+--   1, -- tạm, sẽ random ở phần sau
+--   'Đề thi thử THPT Quốc gia môn ' || t.title || ' năm 2025',
+--   true
+-- FROM topic t
+-- CROSS JOIN generate_series(1, 3) AS g(n);
+
+
+
+-- INSERT INTO exam (
+--   exam_name,
+--   time_limit,
+--   topic_id,
+--   exam_schedule_id,
+--   description,
+--   available
+-- )
+-- SELECT
+--   'THPT Quốc gia ' || t.title || ' 2025 Lớp 12 Lần 1',
+--   90,
+--   t.topic_id,
+--   s.exam_schedule_id,
+--   'Đề luyện thi lớp 10 môn ' || t.title,
+--   true
+-- FROM topic t
+-- CROSS JOIN LATERAL (
+--   SELECT exam_schedule_id
+--   FROM exam_schedule
+--   ORDER BY random()
+--   LIMIT 1
+-- ) s;
+
+
+
+
+-- INSERT INTO exam (
+--   exam_name,
+--   time_limit,
+--   topic_id,
+--   exam_schedule_id,
+--   description,
+--   available
+-- )
+-- SELECT
+--   'THPT Quốc gia ' || t.title || ' 2025 Lớp 12 Lần 1',
+--   90,
+--   t.topic_id,
+--   s.exam_schedule_id,
+--   'Đề luyện thi lớp 11 môn ' || t.title,
+--   true
+-- FROM topic t
+-- CROSS JOIN LATERAL (
+--   SELECT exam_schedule_id
+--   FROM exam_schedule
+--   ORDER BY random()
+--   LIMIT 1
+-- ) s;
+
+
+
+-- INSERT INTO exam (
+--   exam_name,
+--   time_limit,
+--   topic_id,
+--   exam_schedule_id,
+--   description,
+--   available
+-- )
+-- SELECT
+--   'THPT Quốc gia ' || t.title || ' 2025 Lớp 12 Lần 1',
+--   90,
+--   t.topic_id,
+--   s.exam_schedule_id,
+--   'Đề luyện thi lớp 12 môn ' || t.title,
+--   true
+-- FROM topic t
+-- CROSS JOIN LATERAL (
+--   SELECT exam_schedule_id
+--   FROM exam_schedule
+--   ORDER BY random()
+--   LIMIT 1
+-- ) s;
+
+
+
+-- INSERT INTO history_exam (
+--   exam_id,
+--   user_id,
+--   score,
+--   time_test,
+--   created_at
+-- )
+-- SELECT
+--   e.exam_id,
+--   u.user_id,
+
+--   round(
+--     LEAST(10, GREATEST(0, random() * 4 + 4))::numeric,
+--     2
+--   ),
+
+--   CASE
+--     WHEN random() < 0.2 THEN floor(random() * 600 + 300)
+--     WHEN random() < 0.8 THEN floor(random() * 1800 + 1800)
+--     ELSE floor(random() * 600 + 3000)
+--   END,
+
+--   now()
+--     - (floor(random() * 180) || ' days')::interval
+--     - (floor(random() * 24) || ' hours')::interval
+--     - (floor(random() * 60) || ' minutes')::interval
+-- FROM generate_series(1, 2000)
+-- CROSS JOIN LATERAL (
+--   SELECT exam_id FROM exam ORDER BY random() LIMIT 1
+-- ) e
+-- CROSS JOIN LATERAL (
+--   SELECT user_id FROM "user" ORDER BY random() LIMIT 1
+-- ) u;
+
+
+
+-- INSERT INTO "user" (
+--   user_name,
+--   email,
+--   password_hash,
+--   role_id
+-- )
+-- SELECT
+--   -- Tên tiếng Việt random
+--   (ARRAY[
+--     'Nguyen', 'Tran', 'Le', 'Pham', 'Hoang',
+--     'Vu', 'Do', 'Bui', 'Dang', 'Phan'
+--   ])[ceil(random() * 10)] || ' ' ||
+--   (ARRAY[
+--     'Van', 'Thi', 'Minh', 'Quoc', 'Anh',
+--     'Ngoc', 'Thanh', 'Duc', 'Gia', 'Khanh'
+--   ])[ceil(random() * 10)] || ' ' ||
+--   (ARRAY[
+--     'An', 'Binh', 'Chau', 'Dung', 'Hieu',
+--     'Khang', 'Linh', 'Nam', 'Phuong', 'Trang'
+--   ])[ceil(random() * 10)],
+
+--   -- Email unique 100%
+--   'user_' || gs || '@demo.edu.vn',
+
+--   -- password: 123456
+--   '$2b$10$XFOARZELuSTsaJnQI7Irk.VwfBQU/fb3ponw0vHlnSrpLpXHncyJa',
+
+--   -- 90% học sinh, 8% giáo viên, 2% admin
+--   CASE
+--     WHEN random() < 0.90 THEN 1
+--     WHEN random() < 0.98 THEN 2
+--     ELSE 1
+--   END
+-- FROM generate_series(1, 100000) gs;
+
+
+
+INSERT INTO "user" (
+  user_name,
+  email,
+  password_hash,
+  role_id,
+  created_at
+)
+SELECT
+  -- Tên tiếng Việt random
+  (ARRAY[
+    'Nguyen', 'Tran', 'Le', 'Pham', 'Hoang',
+    'Vu', 'Do', 'Bui', 'Dang', 'Phan'
+  ])[ceil(random() * 10)] || ' ' ||
+  (ARRAY[
+    'Van', 'Thi', 'Minh', 'Quoc', 'Anh',
+    'Ngoc', 'Thanh', 'Duc', 'Gia', 'Khanh'
+  ])[ceil(random() * 10)] || ' ' ||
+  (ARRAY[
+    'An', 'Binh', 'Chau', 'Dung', 'Hieu',
+    'Khang', 'Linh', 'Nam', 'Phuong', 'Trang'
+  ])[ceil(random() * 10)],
+
+  -- email unique
+  'user_' || gs || '@demo.edu.vn',
+
+  -- password: 123456
+  '$2b$10$XFOARZELuSTsaJnQI7Irk.VwfBQU/fb3ponw0vHlnSrpLpXHncyJa',
+
+  -- role
+  CASE
+    WHEN random() < 0.90 THEN 1
+    WHEN random() < 0.98 THEN 2
+    ELSE 1
+  END,
+
+  -- 🔥 created_at: random từ 01/11/2025 → now
+  TIMESTAMPTZ '2025-11-01'
+    + random() * (now() - TIMESTAMPTZ '2025-11-01')
+
+FROM generate_series(1, 100000) gs;
+
+
+
+
+
+INSERT INTO exam_schedule (
+  start_time,
+  end_time,
+  created_at,
+  updated_at
+)
+SELECT
+  start_time,
+  start_time + (window_days || ' days')::interval AS end_time,
+  now(),
+  now()
+FROM (
+  SELECT
+    -- mỗi lịch có start_time khác nhau (nhờ seq)
+    date_trunc('day', now() - interval '30 days')
+      + (seq * interval '3 hours')   -- mỗi lịch lệch nhau 3h
+      + CASE slot
+          WHEN 1 THEN interval '08:00'
+          WHEN 2 THEN interval '13:30'
+          ELSE interval '18:00'
+        END AS start_time,
+
+    floor(random() * 3) + 1 AS window_days
+  FROM generate_series(0, 19) seq
+  CROSS JOIN generate_series(1, 3) slot
+) s;
+
+
+
+
+
+
 INSERT INTO exam (
   exam_name,
   time_limit,
@@ -358,48 +604,37 @@ INSERT INTO exam (
   available
 )
 SELECT
-  'THPT Quốc gia ' || t.title || ' 2025 Tổng hợp THPT Lần ' ||
-  ROW_NUMBER() OVER (ORDER BY t.topic_id),
+  'THPT Quốc gia ' || t.title || ' 2025 - Đề số ' || g.n || ' - Ca ' || s.k,
   90,
   t.topic_id,
-  4 + ((ROW_NUMBER() OVER (ORDER BY t.topic_id) - 1) % 3),
+  es.exam_schedule_id,
   'Đề thi thử THPT Quốc gia môn ' || t.title || ' năm 2025',
   true
-FROM topic t
-WHERE t.topic_id BETWEEN 35 AND 58;
+FROM exam_schedule es
 
-INSERT INTO exam (exam_name, time_limit, topic_id, exam_schedule_id, description, available)
-SELECT
-  'THPT Quốc gia ' || t.title || ' 2025 Lớp 10 Lần 1',
-  60,
-  t.topic_id,
-  4,
-  'Đề ôn tập lớp 10 môn ' || t.title,
-  true
-FROM topic t
-WHERE t.topic_id BETWEEN 35 AND 42;
+-- mỗi schedule chọn ngẫu nhiên 3–7 exam
+JOIN LATERAL (
+  SELECT
+    t.topic_id,
+    t.title,
+    g.n,
+    s.k
+  FROM topic t
+  CROSS JOIN generate_series(1, 3) AS g(n)   -- 3 đề / topic
+  CROSS JOIN generate_series(1, 3) AS s(k)   -- 3 ca / đề
+  ORDER BY random()
+  LIMIT floor(random() * 5) + 3   -- 3 → 7
+) x ON true
 
-INSERT INTO exam (exam_name, time_limit, topic_id, exam_schedule_id, description, available)
-SELECT
-  'THPT Quốc gia ' || t.title || ' 2025 Lớp 11 Lần 1',
-  75,
-  t.topic_id,
-  5,
-  'Đề ôn tập lớp 11 môn ' || t.title,
-  true
-FROM topic t
-WHERE t.topic_id BETWEEN 43 AND 50;
+JOIN topic t ON t.topic_id = x.topic_id
+JOIN generate_series(x.n, x.n) g(n) ON true
+JOIN generate_series(x.k, x.k) s(k) ON true
 
-INSERT INTO exam (exam_name, time_limit, topic_id, exam_schedule_id, description, available)
-SELECT
-  'THPT Quốc gia ' || t.title || ' 2025 Lớp 12 Lần 1',
-  90,
-  t.topic_id,
-  6,
-  'Đề luyện thi lớp 12 môn ' || t.title,
-  true
-FROM topic t
-WHERE t.topic_id BETWEEN 51 AND 58;
+-- đảm bảo schedule đủ dài
+WHERE EXTRACT(EPOCH FROM (es.end_time - es.start_time)) >= 90 * 60;
+
+
+
 
 
 INSERT INTO history_exam (
@@ -410,40 +645,48 @@ INSERT INTO history_exam (
   created_at
 )
 SELECT
-  floor(random() * (87 - 38 + 1) + 38)::int AS exam_id,
-  floor(random() * (106 - 4 + 1) + 4)::int AS user_id,
+  e.exam_id,
+  u.user_id,
 
-  -- điểm từ 0 → 10, có 2 số thập phân
-  round((random() * 10)::numeric, 2) AS score,
+  round(
+    LEAST(10, GREATEST(0, random() * 4 + 4))::numeric,
+    2
+  ) AS score,
 
-  -- thời gian làm bài: 5 → 60 phút (giây)
-  floor(random() * (3600 - 300 + 1) + 300)::bigint AS time_test,
+  tt.time_test,
 
-  -- created_at rải đều trong 6 tháng gần đây
-  now()
-    - (floor(random() * 180) || ' days')::interval
-    - (floor(random() * 24) || ' hours')::interval
-    - (floor(random() * 60) || ' minutes')::interval
-FROM generate_series(1, 2000);
+  es.start_time
+    + random()
+      * (
+        (es.end_time - es.start_time)
+        - (tt.time_test || ' seconds')::interval
+      ) AS created_at
 
+FROM exam e
+JOIN exam_schedule es
+  ON es.exam_schedule_id = e.exam_schedule_id
 
-INSERT INTO "user" (user_name, email, password_hash, role_id)
-SELECT
-  (ARRAY[
-    'Nguyen', 'Tran', 'Le', 'Pham', 'Hoang',
-    'Vu', 'Do', 'Bui', 'Dang', 'Phan'
-  ])[floor(random() * 10 + 1)] || ' ' ||
-  (ARRAY[
-    'Van', 'Thi', 'Minh', 'Quoc', 'Anh',
-    'Ngoc', 'Thanh', 'Duc', 'Gia', 'Khanh'
-  ])[floor(random() * 10 + 1)] || ' ' ||
-  (ARRAY[
-    'An', 'Binh', 'Chau', 'Dung', 'Hieu',
-    'Khang', 'Linh', 'Nam', 'Phuong', 'Trang'
-  ])[floor(random() * 10 + 1)],
-  'user' || gs || '@test.com',
-  '$2b$10$XFOARZELuSTsaJnQI7Irk.VwfBQU/fb3ponw0vHlnSrpLpXHncyJa',
-  1
-FROM generate_series(1, 100) gs;
+-- 🔑 số user PHỤ THUỘC exam_id (70–200)
+JOIN LATERAL (
+  SELECT
+    170 + (abs(hashtext(e.exam_id::text)) % 31) AS user_count
+) uc ON true
 
+JOIN LATERAL (
+  SELECT user_id
+  FROM "user"
+  ORDER BY random()
+  LIMIT uc.user_count
+) u ON true
 
+JOIN LATERAL (
+  SELECT
+    LEAST(
+      floor(random() * e.time_limit * 60),
+      EXTRACT(EPOCH FROM (es.end_time - es.start_time))
+    )::bigint AS time_test
+) tt ON true
+
+WHERE
+  e.available = true
+  AND es.end_time > es.start_time;

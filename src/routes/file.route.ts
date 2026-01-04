@@ -8,11 +8,10 @@ import { ADMIN } from "../config/permission";
 const router = Router();
 
 router.get("/json", FileController.getAllJson);
+
 router.get("/json/:filename", FileController.getJsonById);
-router.post(
-  "/images/info",
-  FileController.getImagesInfo
-);
+
+router.post("/images/info",FileController.getImagesInfo);
 
 // stream ảnh (FE đọc được)
 router.get(
@@ -34,11 +33,5 @@ router.post(
   FileController.uploadImages
 )
 
-// router.post("/docx/save/:filename",
-//   Authentication.AuthenticateToken,
-//   Authentication.AuthorizeRoles(...ADMIN),
-//   uploadDOC.single("file"),
-//   FileController.saveDocx
-// );
 
 export default router;

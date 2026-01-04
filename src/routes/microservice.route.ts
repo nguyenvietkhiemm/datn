@@ -70,7 +70,7 @@ const microserviceRoute = Router();
 
 microserviceRoute.post(
     "/llm/ask",
-    Authentication.AuthenticateToken,
+    // Authentication.AuthenticateToken,
     MicroserviceController.askLLM
 );
 

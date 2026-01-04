@@ -52,7 +52,20 @@ resources/
 __note__.txt
 
 
+
 # ======================
 ./microservice
 /microservice
 microservice/
+
+./src/test.ts
+/src/test.ts
+
+# data
+# ./data
+# /data
+
+# resources
+# ./resources
+
+# /resources

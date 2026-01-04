@@ -110,8 +110,21 @@ const MicroserviceController = {
 
   // ===== DOCX =====
   async process_docx(req: Request, res: Response) {
-    const result = await safeExecute(async () => {
-      if (!req.file) throw new Error("NO_DOCX_FILE");
+    let tmpZipPath: string | null = null;
+
+    const cleanupFiles = () => {
+      try {
+        if (tmpZipPath && fs.existsSync(tmpZipPath)) fs.unlinkSync(tmpZipPath);
+        if (req.file && fs.existsSync(req.file.path)) fs.unlinkSync(req.file.path);
+      } catch (e) {
+        console.warn("[CLEANUP] Failed to remove temp files:", e);
+      }
+    };
+
+    try {
+      if (!req.file) {
+        return res.status(400).json({ status: 400, error: "NO_DOCX_FILE" });
+      }
 
       // =====================
       // 1. Gửi file sang Python
@@ -122,20 +135,24 @@ const MicroserviceController = {
         contentType: req.file.mimetype,
       });
 
-      const pyRes = await axios.post(
-        DOCX_PROCESS_URL,
-        form,
-        {
+      let pyRes;
+      try {
+        pyRes = await axios.post(DOCX_PROCESS_URL, form, {
           headers: form.getHeaders(),
           responseType: "arraybuffer", // ZIP
           maxBodyLength: Infinity,
-        }
-      );
+          timeout: 120000, // tăng timeout nếu file lớn
+        });
+      } catch (err: any) {
+        console.error("[PYTHON] DOCX processing failed:", err?.message || err);
+        cleanupFiles();
+        return res.status(500).json({ status: 500, error: "PYTHON_PROCESS_FAILED" });
+      }
 
       // =====================
       // 2. Lưu zip tạm
       // =====================
-      const tmpZipPath = req.file.path.replace(/\.docx$/i, "_result.zip");
+      tmpZipPath = req.file.path.replace(/\.docx$/i, "_result.zip");
       fs.writeFileSync(tmpZipPath, pyRes.data);
 
       // =====================
@@ -150,44 +167,52 @@ const MicroserviceController = {
       // =====================
       // 4. Unzip + phân loại
       // =====================
-      const zip = new AdmZip(tmpZipPath);
-      const entries = zip.getEntries();
+      try {
+        const zip = new AdmZip(tmpZipPath);
+        const entries = zip.getEntries();
 
-      for (const entry of entries) {
-        if (entry.isDirectory) continue;
+        for (const entry of entries) {
+          if (entry.isDirectory) continue;
 
-        // 📄 JSON
-        if (entry.entryName.endsWith(".json")) {
-          const jsonPath = path.join(BASE_OUTPUT, entry.entryName);
-          fs.writeFileSync(jsonPath, entry.getData());
+          // 📄 JSON
+          if (entry.entryName.endsWith(".json")) {
+            const jsonPath = path.join(BASE_OUTPUT, entry.entryName);
+            fs.writeFileSync(jsonPath, entry.getData());
+          }
+
+          // 🖼️ IMAGE
+          if (entry.entryName.startsWith("media/")) {
+            const imageName = path.basename(entry.entryName);
+            const imagePath = path.join(MEDIA_DIR, imageName);
+            fs.writeFileSync(imagePath, entry.getData());
+          }
         }
-
-        // 🖼️ IMAGE
-        if (entry.entryName.startsWith("media/")) {
-          const imageName = path.basename(entry.entryName);
-          const imagePath = path.join(MEDIA_DIR, imageName);
-          fs.writeFileSync(imagePath, entry.getData());
-        }
+      } catch (zipErr) {
+        console.error("[ZIP] Failed to extract zip:", zipErr);
+        cleanupFiles();
+        return res.status(500).json({ status: 500, error: "ZIP_EXTRACTION_FAILED" });
       }
 
       // =====================
       // 5. Cleanup file tạm
       // =====================
-      fs.unlinkSync(tmpZipPath);
-      fs.unlinkSync(req.file.path);
+      cleanupFiles();
 
-      return {
+      return res.status(200).json({
         status: 200,
         message: "Xử lý DOCX thành công",
         data: {
           json_output: BASE_OUTPUT,
           media_output: MEDIA_DIR,
         },
-      };
-    });
+      });
 
-    return res.status(result.status).json(result);
-  }
+    } catch (err) {
+      console.error("[PROCESS_DOCX] Unexpected error:", err);
+      cleanupFiles();
+      return res.status(500).json({ status: 500, error: "UNEXPECTED_ERROR", details: err });
+    }
+  },
 
 };
 
