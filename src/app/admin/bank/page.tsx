@@ -103,7 +103,7 @@ export default function Exam() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1 className={styles.title}>Quản lý luyện tập</h1>
+        <h1 className={styles.title}>QUẢN LÝ LUYỆN TẬP</h1>
         <div className={styles.actions}>
           <div
             className={styles.button}

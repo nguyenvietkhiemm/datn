@@ -135,7 +135,7 @@ export default function DocumentPage() {
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <h1 className={styles.title}>Quản lý tài liệu</h1>
+                <h1 className={styles.title}>QUẢN LÝ LUYỆN TẬP</h1>
 
                 <div className={styles.actions}>
                     <div className={styles.actionGroup}>

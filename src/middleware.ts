@@ -10,7 +10,6 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-
   return NextResponse.next();
 }
 
