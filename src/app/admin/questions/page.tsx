@@ -136,7 +136,7 @@ export default function Question() {
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <h1 className={styles.title}>Quản lý câu hỏi</h1>
+                <h1 className={styles.title}>QUẢN LÝ CÂU HỎI</h1>
                 <div className={styles.actions}>
                     <div className={styles.search}>
                         <Search searchKeyword={query.keyword}

@@ -15,9 +15,9 @@
 }
 
 .title {
-    font-size: 24px;
+    font-size: 1.8rem;
     font-weight: 700;
-    color: #1f2937;
+    color: #02346d;
 }
 
 .actions {
@@ -131,8 +131,12 @@
 }
 
 .table th {
-    background-color: #f0f0f0;
-    font-weight: bold;
+    background-color: #02346d;
+    /* màu xanh đậm mới */
+    color: #ffffff;
+    font-weight: 600;
+    padding: 14px 12px;
+    text-align: left;
 }
 
 .table tbody tr:hover {
@@ -195,7 +199,8 @@
 }
 
 .vectorizeButton {
-    background-color: #6f42c1; /* tím AI */
+    background-color: #6f42c1;
+    /* tím AI */
     color: #fff;
     border: none;
     border-radius: 6px;

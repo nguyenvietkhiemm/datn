@@ -14,9 +14,9 @@
 }
 
 .title {
-    font-size: 24px;
+    font-size: 1.8rem;
     font-weight: 700;
-    color: #1f2937;
+    color: #02346d;
 }
 
 .actions {
@@ -42,25 +42,25 @@
     padding: 12px 16px;
     border-radius: 12px;
     margin-top: 20px;
-  }
-  
-  /* Mỗi khối button */
-  .json {
+}
+
+/* Mỗi khối button */
+.json {
     display: flex;
     align-items: center;
-  }
-  
-  /* Cho button full height đồng đều */
-  .json button {
+}
+
+/* Cho button full height đồng đều */
+.json button {
     white-space: nowrap;
-  }
-  
-  /* Responsive: xuống hàng trên màn nhỏ */
-  @media (max-width: 768px) {
+}
+
+/* Responsive: xuống hàng trên màn nhỏ */
+@media (max-width: 768px) {
     .button {
-      flex-wrap: wrap;
+        flex-wrap: wrap;
     }
-  }  
+}
 
 /* Overlay nền mờ */
 .overlay {
