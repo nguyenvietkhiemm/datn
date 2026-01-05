@@ -16,7 +16,7 @@ export const ScheduleService = {
         if (!res.ok) throw new Error("Không thể lấy danh sách lịch thi");
 
         const data = await res.json();
-        return data.data ;
+        return data.data;
     },
 
     // Lấy chi tiết 1 lịch thi
@@ -30,7 +30,8 @@ export const ScheduleService = {
 
         const data = await res.json();
 
-        if (!res.ok) throw new Error(data.message || "Không thể tải chi tiết lịch thi");
+        if (!res.ok)
+            throw new Error(data.message || "Không thể tải chi tiết lịch thi");
 
         return data.data as ExamSchedule;
     },
@@ -47,6 +48,59 @@ export const ScheduleService = {
 
         const data = await res.json();
 
-        if (!res.ok) throw new Error(data.message || "Tạo lịch thi thất bại");
-    }
+        if (!res.ok)
+            throw new Error(data.message || "Tạo lịch thi thất bại");
+    },
+
+    // CẬP NHẬT lịch thi
+    async updateSchedule(
+        id: number,
+        form: ExamScheduleCreate
+    ): Promise<void> {
+        const token = getToken();
+
+        const res = await fetch(
+            `${API_URL}/exams/schedule/update/${id}`,
+            {
+                method: "PUT",
+                headers: getHeaders(token),
+                body: JSON.stringify(form),
+            }
+        );
+
+        const data = await res.json();
+
+        if (!res.ok)
+            throw new Error(data.message || "Cập nhật lịch thi thất bại");
+    },
+
+    // XÓA lịch thi
+    async deleteSchedule(id: number): Promise<void> {
+        const token = getToken();
+
+        const res = await fetch(
+            `${API_URL}/exams/schedule/remove/${id}`,
+            {
+                method: "DELETE",
+                headers: getHeaders(token),
+            }
+        );
+
+
+        let data: any = null;
+
+        const contentType = res.headers.get("content-type");
+
+        if (contentType && contentType.includes("application/json")) {
+            data = await res.json();
+        } else {
+            // có thể là empty body hoặc text
+            const text = await res.text();
+            data = text ? { message: text } : {};
+        }
+
+        if (!res.ok) {
+            throw new Error(data?.message || "Xóa lịch thi thất bại");
+        }
+    },
 };

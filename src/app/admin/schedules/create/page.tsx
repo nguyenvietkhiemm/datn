@@ -4,17 +4,29 @@ import { ScheduleService } from "@/domain/admin/schedules/service";
 import { useState } from "react";
 import styles from "./Exam.Schedule.Create.module.css";
 import type { ExamScheduleCreate } from "@/domain/admin/schedules/type";
+import { ExamSchedule } from "@/domain/admin/schedules/type";
 
 type Props = {
-  onSuccess?: () => void;
-  onCancel?: () => void;
+  initialData?: ExamSchedule;
+  onCancel: () => void;
+  onSuccess: () => void;
 };
 
-export default function ExamScheduleCreate({ onSuccess, onCancel }: Props) {
+export default function ExamScheduleCreate({
+  initialData,
+  onSuccess,
+  onCancel,
+}: Props) {
+  const isEdit = Boolean(initialData);
   const [form, setForm] = useState<ExamScheduleCreate>({
-    start_time: "",
-    end_time: "",
+    start_time: initialData?.start_time
+      ? initialData.start_time.slice(0, 16)
+      : "",
+    end_time: initialData?.end_time
+      ? initialData.end_time.slice(0, 16)
+      : "",
   });
+
 
   const [loading, setLoading] = useState(false);
 
@@ -28,10 +40,28 @@ export default function ExamScheduleCreate({ onSuccess, onCancel }: Props) {
       return;
     }
 
+    if (new Date(form.start_time) >= new Date(form.end_time)) {
+      alert("Thời gian kết thúc phải sau thời gian bắt đầu");
+      return;
+    }
+
     try {
       setLoading(true);
-      await ScheduleService.createSchedule(form);
-      alert("Thêm lịch thi thành công");
+      if (new Date(form.start_time) >= new Date(form.end_time)) {
+        alert("Thời gian kết thúc phải sau thời gian bắt đầu");
+        return;
+      }
+
+      if (isEdit && initialData) {
+        await ScheduleService.updateSchedule(
+          initialData.exam_schedule_id,
+          form
+        );
+        alert("Cập nhật lịch thi thành công");
+      } else {
+        await ScheduleService.createSchedule(form);
+        alert("Thêm lịch thi thành công");
+      }
       onSuccess?.();
     } catch (e: any) {
       alert(e.message);
@@ -42,7 +72,10 @@ export default function ExamScheduleCreate({ onSuccess, onCancel }: Props) {
 
   return (
     <div className={styles.form_container}>
-      <h2 className={styles.form_title}>Tạo lịch thi</h2>
+      <h2 className={styles.form_title}>
+        {isEdit ? "Cập nhật lịch thi" : "Tạo lịch thi"}
+      </h2>
+
 
       <div className={styles.form_body}>
 
@@ -80,7 +113,12 @@ export default function ExamScheduleCreate({ onSuccess, onCancel }: Props) {
           disabled={loading}
           className={`${styles.btn} ${styles.btn_primary}`}
         >
-          {loading ? "Đang lưu..." : "Tạo lịch thi"}
+          {loading
+            ? "Đang lưu..."
+            : isEdit
+              ? "Cập nhật"
+              : "Tạo lịch thi"}
+
         </button>
       </div>
     </div>

@@ -179,3 +179,83 @@
   width: auto;
   z-index: 1001;
 }
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Nút xóa */
+.deleteBtn {
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #fee2e2;
+  color: #b91c1c;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.deleteBtn:hover {
+  background-color: #fca5a5;
+  color: #7f1d1d;
+  transform: scale(1.05);
+}
+
+.editBtn {
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #dbeafe; /* blue-100 */
+  color: #1d4ed8;           /* blue-700 */
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.editBtn:hover {
+  background-color: #93c5fd; /* blue-300 */
+  color: #1e3a8a;            /* blue-900 */
+  transform: scale(1.05);
+}
+
+/* Khi bảng trống */
+.empty {
+  text-align: center;
+  padding: 20px;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.confirmModal {
+  background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+  padding: 24px;
+  border-radius: 16px;
+  width: 360px;
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.12),
+    0 4px 10px rgba(0, 0, 0, 0.06);
+
+  animation: popIn 0.18s ease-out;
+}
+
+.confirmModal h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  color: #111827;
+}
+
+.confirmModal p {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+.confirmActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}

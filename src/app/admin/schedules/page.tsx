@@ -21,6 +21,11 @@ export default function Schedule() {
   const [openCreate, setOpenCreate] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [editSchedule, setEditSchedule] = useState<ExamSchedule | null>(null);
+
+  const [deleteId, setDeleteId] = useState<number | null>(null);
+
 
   const loadSchedules = async () => {
     const data = await ScheduleService.fetchSchedules();
@@ -82,22 +87,48 @@ export default function Schedule() {
                     <th>Kết thúc</th>
                     <th>Ngày tạo</th>
                     <th>Ngày cập nhật</th>
+                    <th>Chỉnh sửa</th>
                   </tr>
                 </thead>
                 <tbody>
                   {filterSchedules.map((item, index) => (
-                    <tr
-                      key={item.exam_schedule_id}
-                      onClick={() => openDetail(item.exam_schedule_id)}
-                    >
+                    <tr key={item.exam_schedule_id}>
                       <td>{index + 1}</td>
-                      <td>{formatVNDateTime(item.start_time)}</td>
-                      <td>{formatVNDateTime(item.end_time)}</td>
+                      <td onClick={() => openDetail(item.exam_schedule_id)}>
+                        {formatVNDateTime(item.start_time)}
+                      </td>
+                      <td onClick={() => openDetail(item.exam_schedule_id)}>
+                        {formatVNDateTime(item.end_time)}
+                      </td>
                       <td>{formatVNDateTime(item.created_at)}</td>
                       <td>{formatVNDateTime(item.updated_at)}</td>
+
+                      <td className={styles.actions}>
+                        <button
+                          className={styles.editBtn}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setEditSchedule(item);
+                            setOpenEdit(true);
+                          }}
+                        >
+                          Sửa
+                        </button>
+
+                        <button
+                          className={styles.deleteBtn}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setDeleteId(item.exam_schedule_id);
+                          }}
+                        >
+                          Xóa
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
+
               </table>
             </div>
           </motion.div>
@@ -147,6 +178,57 @@ export default function Schedule() {
           </motion.div>
         )}
       </AnimatePresence>
+
+
+      <AnimatePresence>
+        {openEdit && editSchedule && (
+          <motion.div className={styles.backdrop} onClick={() => setOpenEdit(false)}>
+            <motion.div
+              className={styles.modal}
+              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+            >
+              <ExamScheduleCreate
+                initialData={editSchedule}
+                onCancel={() => setOpenEdit(false)}
+                onSuccess={() => {
+                  loadSchedules();
+                  setOpenEdit(false);
+                }}
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+
+      <AnimatePresence>
+        {deleteId && (
+          <motion.div className={styles.backdrop}>
+            <motion.div className={styles.confirmModal}>
+              <h3>Bạn muốn xóa lịch thi này?</h3>
+
+              <div className={styles.confirmActions}>
+                <button className={styles.editBtn} onClick={() => setDeleteId(null)}>Hủy</button>
+                <button
+                  className={styles.deleteBtn}
+                  onClick={async () => {
+                    await ScheduleService.deleteSchedule(deleteId);
+                    setDeleteId(null);
+                    loadSchedules();
+                  }}
+                >
+                  Xóa
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+
 
       <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage} />
 
