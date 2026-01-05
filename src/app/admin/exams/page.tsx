@@ -167,16 +167,13 @@ export default function Exam() {
             exams.map((exam, index) => (
               <tr key={exam.exam_id}>
                 <td>{index + 1}</td>
-
                 <td
                   className={styles.detailBtn}
                   onClick={() => detailExam(exam.exam_id, exam)}
                 >
                   {exam.exam_name}
                 </td>
-
                 <td>{exam.time_limit}</td>
-
                 {/* Hiển thị time_start và time_end */}
                 <td>
                   {exam.start_time
@@ -188,9 +185,7 @@ export default function Exam() {
                     ? new Date(exam.end_time).toLocaleString("vi-VN")
                     : "-"}
                 </td>
-
                 <td>{new Date(exam.created_at).toLocaleDateString("vi-VN")}</td>
-
                 <td className={exam.available ? styles.active : styles.inactive}>
                   {exam.available ? "Hoạt động" : "Không hoạt động"}
                   <span
@@ -203,9 +198,7 @@ export default function Exam() {
                     ✎
                   </span>
                 </td>
-
                 <td>{exam.topic_name}</td>
-
                 <td>
                   <button
                     className={styles.delBtn}

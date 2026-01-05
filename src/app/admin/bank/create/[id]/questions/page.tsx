@@ -13,6 +13,7 @@ import { API_URL } from "@/lib/service";
 import Search from "@/component/search/Search";
 import { ImagePreview } from "@/component/questionCreate/ImagePreview/page";
 import { answerLabel } from "@/lib/model";
+import { LatexPreview } from "@/component/questionCreate/LatexPreview/page";
 
 export default function BankQuestionCreate() {
     const token = Cookies.get("token");
@@ -199,7 +200,7 @@ export default function BankQuestionCreate() {
                         <div
                             className={styles.content}
                         >
-                            <p>{question.question_content}</p>
+                            <LatexPreview text={question.question_content} />
                             <input
                                 type="checkbox"
                                 checked={selectedQuestions.some(item => item.question_id === question.question_id)}
@@ -229,10 +230,10 @@ export default function BankQuestionCreate() {
                                         {answerLabel(answerIdx)}.
                                     </span>
 
-                                    <p className={styles.answerText}>
-                                        {ans.answer_content}{""}
+                                    <div className={styles.answerText}>
+                                        <LatexPreview text={ans.answer_content} />
                                         {ans.is_correct && <strong>(✔)</strong>}
-                                    </p>
+                                    </div>
 
                                     {/* ===== Answer Images ===== */}
                                     {ans?.images && ans.images?.length > 0 && (

@@ -14,6 +14,7 @@ import { ImagePreview } from "@/component/questionCreate/ImagePreview/page";
 import { answerLabel, typeNoti } from "@/lib/model";
 import { useRouter } from "next/navigation";
 import NotificationPopup from "@/component/notification/Notification";
+import { LatexPreview } from "@/component/questionCreate/LatexPreview/page";
 
 export default function ExamQuestionCreate() {
 
@@ -164,7 +165,7 @@ export default function ExamQuestionCreate() {
                         <div
                             className={styles.content}
                         >
-                            <p>{question.question_content}</p>
+                            <LatexPreview text={question.question_content} />
                             <input
                                 type="checkbox"
                                 checked={selectedQuestions.some(item => item.question_id === question.question_id)}
@@ -194,10 +195,10 @@ export default function ExamQuestionCreate() {
                                         {answerLabel(answerIdx)}.
                                     </span>
 
-                                    <p className={styles.answerText}>
-                                        {ans.answer_content}{""}
+                                    <div className={styles.answerText}>
+                                        <LatexPreview text={ans.answer_content} />
                                         {ans.is_correct && <strong>(✔)</strong>}
-                                    </p>
+                                    </div>
 
                                     {/* ===== Answer Images ===== */}
                                     {ans?.images && ans.images?.length > 0 && (

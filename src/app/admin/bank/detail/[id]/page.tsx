@@ -9,6 +9,7 @@ import { ImagePreview } from "@/component/questionCreate/ImagePreview/page";
 import { Button } from "@/component/ui/button/Button";
 import { useRouter } from "next/navigation";
 import { FlatQuestions, TypeQuestion, PART_LABEL } from "../../../../../lib/model";
+import { LatexPreview } from "@/component/questionCreate/LatexPreview/page";
 
 export interface Bank {
     bank_id: number;
@@ -73,7 +74,7 @@ export default function BankDetail() {
     let globalIndex = 0;
 
     const flatQuestions: Question[] = FlatQuestions(questionGroup)
-    
+
     // ================= RENDER =================
     return (
         <div className={styles.exam_container}>
@@ -102,7 +103,8 @@ export default function BankDetail() {
                                         questionRefs.current[q.question_id] = el;
                                     }}>
                                         <div className={styles.questionText}>
-                                            <strong>{index + 1}.</strong> {q.question_content}
+                                            <strong>{index + 1}.</strong>
+                                            <LatexPreview text={q.question_content} />
                                             <div key={`q-${index}`} className={styles.imageWrapperSmall}>
                                                 {q.images?.map((src, index) => (
                                                     <div key={`q-${index}`} className={styles.imageWrapperSmall}>
@@ -114,11 +116,11 @@ export default function BankDetail() {
                                         <div className={styles.answers}>
                                             {q.answers.map((a) => (
                                                 <label key={a.answer_id} className={styles.option}>
-                                                    {a.answer_content}
-                                                    {a.is_correct &&
-                                                        (
-                                                            <span className={styles.correctBadge}>✔ </span>
-                                                        )}
+                                                    <LatexPreview text={a.answer_content} />
+
+                                                    {a.is_correct && (
+                                                        <span className={styles.correctBadge}>✔</span>
+                                                    )}
                                                     {a.images?.map((src, index) => (
                                                         <div key={`a-${index}`} className={styles.imageWrapperSmall}>
                                                             <ImagePreview filename={src} />

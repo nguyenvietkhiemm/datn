@@ -9,6 +9,7 @@ import { ImagePreview } from "@/component/questionCreate/ImagePreview/page";
 import { useRouter } from "next/navigation";
 import { Button } from "@/component/ui/button/Button";
 import { FlatQuestions, TypeQuestion, PART_LABEL } from "../../../../../lib/model";
+import { LatexPreview } from "@/component/questionCreate/LatexPreview/page";
 
 export default function ExamDetail() {
     const [questionGroup, setQuestionGroup] = useState<Record<number, Question[]>>({});
@@ -85,7 +86,8 @@ export default function ExamDetail() {
                                         questionRefs.current[q.question_id] = el;
                                     }}>
                                         <div className={styles.questionText}>
-                                            <strong>{index + 1}.</strong> {q.question_content}
+                                            <strong>{index + 1}.</strong>
+                                            <LatexPreview text={q.question_content} />
                                             <div key={`q-${index}`} className={styles.imageWrapperSmall}>
                                                 {q.images?.map((src, index) => (
                                                     <div key={`q-${index}`} className={styles.imageWrapperSmall}>
@@ -97,11 +99,8 @@ export default function ExamDetail() {
                                         <div className={styles.answers}>
                                             {q.answers.map((a) => (
                                                 <label key={a.answer_id} className={styles.option}>
-                                                    {a.answer_content}
-                                                    {a.is_correct &&
-                                                        (
-                                                            <span className={styles.correctBadge}>✔ </span>
-                                                        )}
+                                                    <LatexPreview text={a.answer_content} />
+                                                    {a.is_correct && <span className={styles.correctBadge}>✔</span>}
                                                     {a.images?.map((src, index) => (
                                                         <div key={`a-${index}`} className={styles.imageWrapperSmall}>
                                                             <ImagePreview filename={src} />
