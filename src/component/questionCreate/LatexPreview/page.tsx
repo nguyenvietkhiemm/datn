@@ -2,39 +2,7 @@
 
 import { InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
-
-function splitLatex(text: string) {
-  const regex = /\$(.+?)\$/g;
-  const parts: Array<{ type: "text" | "latex"; value: string }> = [];
-
-  let lastIndex = 0;
-  let match;
-
-  while ((match = regex.exec(text)) !== null) {
-    if (match.index > lastIndex) {
-      parts.push({
-        type: "text",
-        value: text.slice(lastIndex, match.index),
-      });
-    }
-
-    parts.push({
-      type: "latex",
-      value: match[1],
-    });
-
-    lastIndex = regex.lastIndex;
-  }
-
-  if (lastIndex < text.length) {
-    parts.push({
-      type: "text",
-      value: text.slice(lastIndex),
-    });
-  }
-
-  return parts;
-}
+import { splitLatex } from "../../../utils/latex";
 
 export function LatexPreview({ text }: { text: string }) {
   if (!text) return null;
