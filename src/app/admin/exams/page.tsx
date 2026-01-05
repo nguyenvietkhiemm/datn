@@ -118,7 +118,7 @@ export default function Exam() {
     <div className={styles.container}>
       {/* Header */}
       <div className={styles.header}>
-        <h1 className={styles.title}>Quản lý bài thi</h1>
+        <h1 className={styles.title}>QUẢN LÝ CUỘC THI</h1>
         <div className={styles.actions}>
           <div className={styles.button}>
             <button
@@ -154,6 +154,8 @@ export default function Exam() {
             <th>STT</th>
             <th>Tên bài thi</th>
             <th>Thời gian (phút)</th>
+            <th>Thời gian bắt đầu</th>   {/* mới */}
+            <th>Thời gian kết thúc</th>  {/* mới */}
             <th>Ngày tạo</th>
             <th>Trạng thái</th>
             <th>Chủ đề</th>
@@ -174,6 +176,19 @@ export default function Exam() {
                 </td>
 
                 <td>{exam.time_limit}</td>
+
+                {/* Hiển thị time_start và time_end */}
+                <td>
+                  {exam.start_time
+                    ? new Date(exam.start_time).toLocaleString("vi-VN")
+                    : "-"}
+                </td>
+                <td>
+                  {exam.end_time
+                    ? new Date(exam.end_time).toLocaleString("vi-VN")
+                    : "-"}
+                </td>
+
                 <td>{new Date(exam.created_at).toLocaleDateString("vi-VN")}</td>
 
                 <td className={exam.available ? styles.active : styles.inactive}>
@@ -196,20 +211,21 @@ export default function Exam() {
                     className={styles.delBtn}
                     onClick={() => handleDelete(exam.exam_id)}
                   >
-                    X
+                    Xóa
                   </button>
                 </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan={7} className={styles.empty}>
+              <td colSpan={9} className={styles.empty}>
                 Không có bài thi phù hợp
               </td>
             </tr>
           )}
         </tbody>
       </table>
+
 
       {/* Pagination */}
       <Pagination

@@ -4,10 +4,12 @@ import SubjectManager from "@/component/subject/page";
 import TopicManager from "@/component/topic/page";
 import { Topic, Subject } from "@/domain/admin/topic_subject/type";
 import { TopicSubjectService } from "@/domain/admin/topic_subject/service";
+import styles from "./TopicSubject.module.css"; // nếu dùng module
 
 export default function TopicSubject() {
     const [topics, setTopics] = useState<Topic[]>([]);
     const [subjects, setSubjects] = useState<Subject[]>([]);
+    const [activeTab, setActiveTab] = useState<"subject" | "topic">("subject");
 
     const loadAll = async () => {
         const [topicData, subjectData] = await Promise.all([
@@ -64,21 +66,35 @@ export default function TopicSubject() {
     };
 
     return (
-        <>
-            <SubjectManager
-                subjects={subjects}
-                onCreate={createSubject}
-                onUpdate={updateSubject}
-                onDelete={deleteSubject}
-            />
 
-            <TopicManager
-                topics={topics}
-                subjects={subjects}
-                onCreate={createTopic}
-                onUpdate={updateTopic}
-                onDelete={deleteTopic}
-            />
-        </>
+        <div className={styles.container}>
+            <h1 className={styles.pageTitle}>QUẢN LÝ MÔN & CHUYÊN ĐỀ</h1>
+
+            <div className={styles.tabHeader}>
+                <button className={`${styles.tabBtn} ${activeTab === "subject" ? styles.active : ""}`} onClick={() => setActiveTab("subject")}>Môn học</button>
+                <button className={`${styles.tabBtn} ${activeTab === "topic" ? styles.active : ""}`} onClick={() => setActiveTab("topic")}>Chủ đề</button>
+            </div>
+
+            <div className="tabContent">
+                {activeTab === "subject" && (
+                    <SubjectManager
+                        subjects={subjects}
+                        onCreate={createSubject}
+                        onUpdate={updateSubject}
+                        onDelete={deleteSubject}
+                    />
+                )}
+                {activeTab === "topic" && (
+                    <TopicManager
+                        topics={topics}
+                        subjects={subjects}
+                        onCreate={createTopic}
+                        onUpdate={updateTopic}
+                        onDelete={deleteTopic}
+                    />
+                )}
+            </div>
+        </div>
+
     );
 }

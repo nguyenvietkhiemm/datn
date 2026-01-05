@@ -97,17 +97,23 @@
   transform: translateY(-1px);
 }
 
-/* Trạng thái */
+.active,
+.inactive {
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
 .active {
-  color: #16a34a; /* xanh lá nổi bật */
-  font-weight: 600;
+  background-color: #dcfce7;
+  color: #166534;
 }
 
 .inactive {
-  color: #dc2626; /* đỏ nổi bật */
-  font-weight: 600;
+  background-color: #fee2e2;
+  color: #991b1b;
 }
-
 /* Role */
 .admin {
   color: #d946ef; /* tím sang */
