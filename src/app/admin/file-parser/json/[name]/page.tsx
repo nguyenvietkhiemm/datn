@@ -12,6 +12,7 @@ import { QuestionService } from "@/domain/admin/questions/service";
 import { QuestionModel } from "@/domain/admin/questions/model";
 import NotificationPopup from "@/component/notification/Notification";
 import { typeNoti } from "@/lib/model";
+import { FileParserModel } from "@/domain/admin/file/file-parser/model";
 
 export default function JsonDetailPage() {
     const { name } = useParams<Params>();
@@ -38,17 +39,34 @@ export default function JsonDetailPage() {
         // Tải JSON
         const loadJson = async () => {
             if (!name || !token) return;
-
+          
             try {
-                const data = await FileParserService.loadJson(name, token);
-                setJsonData(data);
+              const data = await FileParserService.loadJson(name, token);
+          
+              const cleanedData = data.map((item: any) => ({
+                ...item,
+                question: {
+                  ...item.question,
+                  text: FileParserModel.stripLatexWithMap(
+                    item.question.text,
+                    item.question.latex
+                  ),
+                  latex: {}, // xoá luôn cho sạch
+                },
+                answers: item.answers.map((ans: any) => ({
+                  ...ans,
+                  text: FileParserModel.stripLatexWithMap(ans.text, ans.latex),
+                  latex: {},
+                })),
+              }));
+          
+              setJsonData(cleanedData);
             } catch (err) {
-                console.error("Lỗi tải JSON:", err);
+              console.error("Lỗi tải JSON:", err);
             } finally {
-                setLoading(false);
+              setLoading(false);
             }
-        };
-
+          };
         loadJson();
     }, [name, token]);
 

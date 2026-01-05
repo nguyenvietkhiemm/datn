@@ -1,4 +1,4 @@
-import {  JsonQuestion } from "../file/file-parser/type";
+import { JsonQuestion } from "../file/file-parser/type";
 import { useState, useEffect } from "react";
 import { FileParserService } from "../file/file-parser/service";
 
