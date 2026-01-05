@@ -134,7 +134,6 @@ examRoute.put(
         Authentication.AuthenticateToken,
         Authentication.AuthorizeRoles(...ADMIN),
         ScheduleExamController.update
-
 );
 
 /**
