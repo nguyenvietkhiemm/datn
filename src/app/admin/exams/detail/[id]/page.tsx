@@ -64,7 +64,7 @@ export default function ExamDetail() {
             {/* Header */}
             <div className={styles.exam_header}>
                 <h2>{exam?.exam_name}</h2>
-                <Button onClick={() => editExam(Number(id))}>Chỉnh sửa câu hỏi</Button>
+                <Button onClick={() => editExam(Number(id))}>Thay đổi câu hỏi</Button>
             </div>
 
             <div className={styles.exam_body}>
@@ -86,7 +86,7 @@ export default function ExamDetail() {
                                         questionRefs.current[q.question_id] = el;
                                     }}>
                                         <div className={styles.questionText}>
-                                            <strong>{index + 1}.</strong>
+                                            <strong>Câu {index + 1}:</strong>
                                             <LatexPreview text={q.question_content} />
                                             <div key={`q-${index}`} className={styles.imageWrapperSmall}>
                                                 {q.images?.map((src, index) => (

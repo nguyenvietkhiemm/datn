@@ -55,7 +55,13 @@ export default function ExamCreate() {
         const subjectData = await subjectRes.json();
         const topicData = await topicRes.json();
 
-        setExamSchedules(scheduleData.data || []);
+        if (!scheduleRes.ok) throw new Error("Lỗi tải lịch thi");
+        if (!subjectRes.ok) throw new Error("Lỗi tải môn học");
+        if (!topicRes.ok) throw new Error("Lỗi tải chủ đề");
+
+
+        setExamSchedules(scheduleData.data?.schedules || []);
+
         setSubjects(subjectData.data || []);
         setTopics(topicData.data || []);
       } catch (err) {
@@ -98,7 +104,7 @@ export default function ExamCreate() {
         message: "Vui lòng điền đầy đủ thông tin!",
         type: "warning",
         confirm: false
-    });
+      });
       return;
     }
 

@@ -1,209 +1,283 @@
+/* ====== Container chính ====== */
 .container {
-    border-radius: 8px;
-    padding: 24px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  background-color: #f9fafc;
+  gap: 1.5rem;
 }
 
+/* ===== Header ===== */
 .header {
-    display: flex;
-    margin-bottom: 20px;
-    flex-direction: column;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #1f2937;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #02346d; /* tone chủ đạo */
 }
 
+/* ===== Actions (Search + Button) ===== */
 .actions {
-    display: flex;
-    /* để responsive */
-    gap: 0.75rem;
-    align-items: center;
-    background-color: #fff;
-    border-radius: 16px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    padding: 16px 16px 32px;
-    justify-content: space-between;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  padding: 16px;
+  justify-content: space-between;
 }
 
+/* Ô search */
 .search {
-    flex: 2;
+  flex: 2;
 }
 
-.button {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    border-radius: 12px;
-    margin-top: 20px;
-  }
-  
-  /* Mỗi khối button */
-  .json {
-    display: flex;
-    align-items: center;
-  }
-  
-  /* Cho button full height đồng đều */
-  .json button {
-    white-space: nowrap;
-  }
-  
-  /* Responsive: xuống hàng trên màn nhỏ */
-  @media (max-width: 768px) {
-    .button {
-      flex-wrap: wrap;
-    }
-  }  
+.search input {
+  width: 100%;
+  border: 1px solid #d0d7ff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  outline: none;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+}
 
-/* Overlay nền mờ */
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(2px);
-    display: flex;
-    align-items: center;
+.search input:focus {
+  border-color: #0070f3;
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
+}
+
+/* ===== Button group ===== */
+/* .button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.json {
+  display: flex;
+  align-items: center;
+}
+
+.json button {
+  white-space: nowrap;
+} */
+
+/* ===== Button Group ===== */
+:root {
+  --primary: #02346d;
+  --primary-hover: #012a58;
+  --primary-soft: #e6effa;
+}
+
+/* ===== Group ===== */
+.buttonGroup {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Wrapper */
+.actionBtn {
+  display: flex;
+}
+
+/* Button chung */
+.actionBtn button {
+  background-color: var(--primary);
+  color: #ffffff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Hover sang */
+.actionBtn button:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(2, 52, 109, 0.25);
+}
+
+/* Focus (keyboard / accessibility) */
+.actionBtn button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+/* Disabled */
+.actionBtn button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .buttonGroup {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actionBtn button {
+    width: 100%;
     justify-content: center;
-    z-index: 999;
-    /* nổi trên mọi thứ */
+  }
 }
 
-/* Khung modal json */
+/* ===== Overlay ===== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+/* ===== Modal JSON ===== */
 .jsonModal {
-    background: white;
-    border-radius: 12px;
-    padding: 1.5rem;
-    width: 80%;
-    max-width: 900px;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-    animation: slideIn 0.25s ease;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 80%;
+  max-width: 900px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.25s ease;
 }
 
-/* Header modal */
+/* Modal header */
 .jsonHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
+/* Filter */
 .filterType {
-    display: flex;
+  display: flex;
 }
 
 .select {
-    width: 100%;
-    height: 36px;
-    padding: 6px 12px;
-    border-radius: 6px;
-    border: 1px solid #d1d5db;
-    font-size: 14px;
-    background-color: #fff;
-    cursor: pointer;
+  width: 100%;
+  height: 36px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid #d0d7ff;
+  font-size: 0.95rem;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.select:hover {
+  border-color: #0070f3;
 }
 
 .select:focus {
-    outline: none;
-    border-color: #2563eb;
+  outline: none;
+  border-color: #0070f3;
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
 }
 
-/* Nút đóng */
+/* ===== Close button ===== */
 .closeBtn {
-    background: transparent;
-    border: none;
-    font-size: 1.4rem;
-    cursor: pointer;
-    color: #333;
-    transition: 0.2s;
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #374151;
+  transition: 0.2s;
 }
 
 .closeBtn:hover {
-    color: #0070f3;
-    transform: scale(1.1);
+  color: #02346d;
+  transform: scale(1.1);
 }
 
-/* Hiệu ứng xuất hiện nhẹ */
+/* ===== Animation ===== */
 @keyframes slideIn {
-    from {
-        transform: translateY(-10px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
-/* === TRẠNG THÁI === */
+/* ===== Trạng thái ===== */
 .active {
-    color: #28a745;
-    font-weight: 600;
-    cursor: pointer;
+  background-color: #dcfce7;
+  color: #166534;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .inactive {
-    color: #dc3545;
-    font-weight: 600;
-    cursor: pointer;
+  background-color: #fee2e2;
+  color: #991b1b;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.active:hover,
-.inactive:hover {
-    text-decoration: underline;
-}
-
-/* === NÚT XOÁ === */
+/* ===== Nút xoá ===== */
 .delBtn {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: 0.2s;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #fee2e2;
+  color: #b91c1c;
+  font-weight: 600;
+  transition: all 0.2s;
 }
 
 .delBtn:hover {
-    background-color: #b02a37;
+  background-color: #fca5a5;
+  color: #7f1d1d;
+  transform: scale(1.05);
 }
 
-/* === LOADING === */
+/* ===== Loading ===== */
 .loading {
-    text-align: center;
-    margin-top: 100px;
-    font-size: 18px;
-    color: #666;
-    font-weight: 500;
+  text-align: center;
+  margin-top: 100px;
+  font-size: 18px;
+  color: #6b7280;
+  font-weight: 500;
 }
 
-/* === RESPONSIVE === */
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
-    .table {
-        font-size: 14px;
-    }
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-    .header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-    }
-
-    .actions {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+  .button {
+    flex-wrap: wrap;
+  }
 }

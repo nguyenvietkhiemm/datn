@@ -36,7 +36,7 @@ export default function QuestionCard({
                             handleToggleAvailable(question.question_id, !question.available);
                         }}
                     >
-                        {question.available ? "hoạt động" : "Không hoạt động"}
+                        {question.available ? "Hoạt động" : "Không hoạt động"}
                     </button>
                 )}
 
