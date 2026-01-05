@@ -47,16 +47,13 @@ export default function JsonDetailPage() {
                 ...item,
                 question: {
                   ...item.question,
-                  text: FileParserModel.stripLatexWithMap(
-                    item.question.text,
-                    item.question.latex
-                  ),
-                  latex: {}, // xoá luôn cho sạch
+                  text: item.question.text,
+                  latex:item.question.latex,
                 },
                 answers: item.answers.map((ans: any) => ({
                   ...ans,
-                  text: FileParserModel.stripLatexWithMap(ans.text, ans.latex),
-                  latex: {},
+                  text: ans.text,
+                  latex: ans.latex,
                 })),
               }));
           

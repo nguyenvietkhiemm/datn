@@ -71,36 +71,42 @@ export const FileParserModel = {
         return Array.from(files);
     },
 
-    stripLatex(text: string): string {
-        if (!text) return "";
+    // stripLatex(text: string): string {
+    //     if (!text) return "";
 
-        return (
-            text
-                // 1. remove $...$
-                .replace(/\$[^$]*\$/g, "")
-                // 2. remove latex commands \xxx{...} or \xxx
-                .replace(/\\[a-zA-Z]+(\{[^}]*\})?/g, "")
-                // 3. remove leftover braces
-                .replace(/[{}]/g, "")
-                // 4. normalize spaces
-                .replace(/\s+/g, " ")
-                .trim()
-        );
-    },
+    //     return (
+    //         text
+    //             // 1. remove $...$
+    //             .replace(/\$[^$]*\$/g, "")
+    //             // 2. remove latex commands \xxx{...} or \xxx
+    //             .replace(/\\[a-zA-Z]+(\{[^}]*\})?/g, "")
+    //             // 3. remove leftover braces
+    //             .replace(/[{}]/g, "")
+    //             // 4. normalize spaces
+    //             .replace(/\s+/g, " ")
+    //             .trim()
+    //     );
+    // },
 
-    stripLatexWithMap(
-        text: string,
-        latex?: Record<string, string>
-    ): string {
-        let result = text;
+    // stripLatexWithMap(
+    //     text: string,
+    //     latex?: Record<string, string>
+    // ): string {
+    //     if (!text) return "";
 
-        // bỏ placeholder [LATEX_X]
-        if (latex) {
-            Object.keys(latex).forEach(key => {
-                result = result.replaceAll(key, "");
-            });
-        }
+    //     console.log("Stripping latex from text:", text, "with latex map:", latex);
 
-        return this.stripLatex(result);
-    }
+    //     let result = text;
+
+    //     // remove [LATEX_X] placeholders
+    //     if (latex && typeof latex === "object") {
+    //         Object.keys(latex).forEach((key) => {
+    //             result = result.split(key).join("");
+    //         });
+    //     }
+
+    //     // return result;
+    //     return this.stripLatex(result);
+    // }
+
 }
