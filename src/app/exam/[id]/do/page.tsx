@@ -108,7 +108,7 @@ export default function DoExam() {
       window.removeEventListener("beforeunload", handleBeforeUnload);
   }, [submitted]);
 
-  /* ================= SELECT ANSWER ================= */
+  /* SELECT ANSWER */
   const handleSelect = (
     questionId: number,
     answerId: number,
@@ -138,7 +138,7 @@ export default function DoExam() {
     });
   };
 
-  /* ================= ESSAY ================= */
+  /* ESSAY */
   const handleEssayChange = (questionId: number, value: string) => {
     setAnswers(prev => ({
       ...prev,
@@ -146,7 +146,7 @@ export default function DoExam() {
     }));
   };
 
-  /* ================= SUBMIT ================= */
+  /* SUBMIT */
   const handleSubmit = async () => {
     if (!exam || submitted) return;
 
@@ -234,7 +234,7 @@ export default function DoExam() {
     handleSubmit();
   };
 
-  /* ================= HELPER: CHECK ANSWERED ================= */
+  /* HELPER: CHECK ANSWERED */
   const isAnswered = (questionId: number) => {
     const value = answers[questionId];
 
@@ -260,7 +260,7 @@ export default function DoExam() {
 
   const flatQuestions: Question[] = FlatQuestions(questionGroup)
 
-  /* ================= RENDER ================= */
+  /* RENDER */
   return (
     <div className={styles.exam_container}>
       <div className={styles.box}>

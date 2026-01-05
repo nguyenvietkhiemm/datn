@@ -2,6 +2,7 @@
 import { Question } from "../../../domain/question-answer/type";
 import styles from "./DoQuestion.module.css";
 import { ImagePreview } from "@/components/ImageReview/page";
+import { LatexPreview } from "../LatexPreview/page";
 
 type Props = {
   question: Question;
@@ -25,9 +26,10 @@ export default function QuestionItem({
       className={styles.questionBox}
       ref={questionRef}
     >
-      <p className={styles.questionText}>
-        <strong>{index + 1}.</strong> {question.question_content}
-      </p>
+      <div className={styles.questionText}>
+        <strong>{index + 1}.</strong>
+        <LatexPreview text={question.question_content} />
+      </div>
 
       {/* images của question */}
       <div className={styles.imageWrapperSmall}>
@@ -55,7 +57,7 @@ export default function QuestionItem({
                   )
                 }
               />
-              <span>{a.answer_content}</span>
+              <LatexPreview text={a.answer_content} />
 
               {a.images?.map((src, i) => (
                 <div key={i} className={styles.imageWrapperSmall}>
