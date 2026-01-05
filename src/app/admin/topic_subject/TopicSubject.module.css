@@ -147,29 +147,38 @@
 }
 
 /* Action Buttons */
-.editBtn {
-  background: #ffd000;
-  padding: 6px 10px;
-  border-radius: 6px;
+.deleteBtn {
   border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: transform 0.2s;
-}
-.editBtn:hover {
-  transform: translateY(-1px);
+  background-color: #fee2e2;
+  color: #b91c1c;
+  font-weight: 600;
+  transition: all 0.2s;
 }
 
-.deleteBtn {
-  background: #ff4d4f;
-  color: white;
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
 .deleteBtn:hover {
-  transform: translateY(-1px);
+  background-color: #fca5a5;
+  color: #7f1d1d;
+  transform: scale(1.05);
+}
+
+.editBtn {
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #dbeafe; /* blue-100 */
+  color: #1d4ed8;           /* blue-700 */
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.editBtn:hover {
+  background-color: #93c5fd; /* blue-300 */
+  color: #1e3a8a;            /* blue-900 */
+  transform: scale(1.05);
 }
 
 .saveBtn {

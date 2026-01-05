@@ -112,24 +112,38 @@
   transition: all 0.2s ease;
 }
 
+.deleteBtn {
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #fee2e2;
+  color: #b91c1c;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.deleteBtn:hover {
+  background-color: #fca5a5;
+  color: #7f1d1d;
+  transform: scale(1.05);
+}
+
 .editBtn {
-  background: #008cff;
-  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #dbeafe; /* blue-100 */
+  color: #1d4ed8;           /* blue-700 */
+  font-weight: 600;
+  transition: all 0.2s;
 }
 
 .editBtn:hover {
-  background: #0075d4;
-  color: white;
-  transform: translateY(-1px);
-}
-
-.deleteBtn {
-  background: #ff4d4f;
-  color: white;
-}
-.deleteBtn:hover {
-  background: #e04348;
-  transform: translateY(-1px);
+  background-color: #93c5fd; /* blue-300 */
+  color: #1e3a8a;            /* blue-900 */
+  transform: scale(1.05);
 }
 
 .saveBtn {
