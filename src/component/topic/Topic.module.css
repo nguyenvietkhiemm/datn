@@ -1,4 +1,4 @@
-/* ========================= SECTION ========================= */
+/* SECTION */
 .section {
   margin-bottom: 50px;
   background: #fff;
@@ -15,7 +15,7 @@
   color: #02346d;
 }
 
-/* ========================= FORM ========================= */
+/* FORM */
 .formRow {
   display: flex;
   flex-wrap: wrap;
@@ -65,7 +65,7 @@
   margin-top: 4px;
 }
 
-/* ========================= TABLE ========================= */
+/* TABLE */
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -98,7 +98,7 @@
   transition: background 0.2s;
 }
 
-/* ========================= ACTION BUTTONS ========================= */
+/* ACTION BUTTONS */
 .editBtn,
 .deleteBtn,
 .saveBtn,
@@ -117,8 +117,8 @@
   padding: 6px 12px;
   border-radius: 8px;
   cursor: pointer;
-  background-color: #fee2e2;
-  color: #b91c1c;
+  background-color: #ef4444;
+  color: white;
   font-weight: 600;
   transition: all 0.2s;
 }
@@ -164,7 +164,7 @@
   transform: translateY(-1px);
 }
 
-/* ========================= INLINE INPUT ========================= */
+/* INLINE INPUT */
 .inlineInput,
 .inlineSelect {
   width: 100%;

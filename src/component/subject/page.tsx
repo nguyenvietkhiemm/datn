@@ -68,16 +68,16 @@ export default function SubjectManager({
       <table className={styles.table}>
         <thead>
           <tr>
-            <th>ID</th>
+            <th>STT</th>
             <th>Tên môn học</th>
             <th>Loại môn học</th>
             <th>Hành động</th>
           </tr>
         </thead>
         <tbody>
-          {subjects.map((s) => (
-            <tr key={s.subject_id}>
-              <td>{s.subject_id}</td>
+          {subjects.map((s,index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
 
               <td>
                 {editingId === s.subject_id ? (

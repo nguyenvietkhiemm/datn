@@ -230,7 +230,7 @@ export default function DocumentPage() {
                                             handleDelete(doc.document_id);
                                         }}
                                     >
-                                        X
+                                        Xoá
                                     </button>
                                 </td>
                                 <td>

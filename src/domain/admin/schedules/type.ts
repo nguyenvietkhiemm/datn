@@ -13,3 +13,4 @@ export type ExamScheduleCreate = {
     end_time: string;
 };
 
+export type ScheduleStatus = "UPCOMING" | "ONGOING" | "FINISHED";

@@ -63,7 +63,7 @@ export default function BankDetail() {
         router.push(`/admin/bank/create/${id}/questions`)
     }
 
-    // ================= SCROLL =================
+    // SCROLL
     const scrollToQuestion = (questionId: number) => {
         questionRefs.current[questionId]?.scrollIntoView({
             behavior: "smooth",
@@ -75,7 +75,7 @@ export default function BankDetail() {
 
     const flatQuestions: Question[] = FlatQuestions(questionGroup)
 
-    // ================= RENDER =================
+    // RENDER
     return (
         <div className={styles.exam_container}>
             {/* HEADER */}

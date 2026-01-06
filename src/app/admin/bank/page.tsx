@@ -172,7 +172,7 @@ export default function Exam() {
                     className={styles.delBtn}
                     onClick={() => handleDelete(bank.bank_id)}
                   >
-                    X
+                    Xoá
                   </button>
                 </td>
               </tr>

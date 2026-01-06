@@ -104,7 +104,7 @@ export default function TopicManager({
       <table className={styles.table}>
         <thead>
           <tr>
-            <th>ID</th>
+            <th>STT</th>
             <th>Tiêu đề</th>
             <th>Mô tả</th>
             <th>Môn học</th>
@@ -113,9 +113,9 @@ export default function TopicManager({
         </thead>
 
         <tbody>
-          {topics.map((t) => (
-            <tr key={t.topic_id}>
-              <td>{t.topic_id}</td>
+          {topics.map((t, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
 
               <td>
                 {editingId === t.topic_id ? (

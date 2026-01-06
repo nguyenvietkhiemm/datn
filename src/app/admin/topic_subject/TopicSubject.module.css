@@ -27,7 +27,8 @@
   padding: 10px 20px;
   border-radius: 12px 12px 0 0;
   border: none;
-  background-color: #f3f4ff; /* nền sáng cho tab chưa active */
+  background-color: #f3f4ff;
+  /* nền sáng cho tab chưa active */
   color: #02346d;
   font-weight: 600;
   font-size: 1rem;
@@ -42,14 +43,14 @@
   background-color: #e0e7ff;
   color: #021f4d;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Active tab */
 .tabBtn.active {
   background: #02346d;
   color: white;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Optional: indicator underline animation */
@@ -82,7 +83,7 @@
   background-color: white;
   padding: 16px 20px;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   margin-bottom: 24px;
 }
 
@@ -124,7 +125,7 @@
   border-collapse: collapse;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .table th,
@@ -152,8 +153,8 @@
   padding: 6px 12px;
   border-radius: 8px;
   cursor: pointer;
-  background-color: #fee2e2;
-  color: #b91c1c;
+  background-color: #ef4444;
+  color: white;
   font-weight: 600;
   transition: all 0.2s;
 }
@@ -169,15 +170,19 @@
   padding: 6px 12px;
   border-radius: 8px;
   cursor: pointer;
-  background-color: #dbeafe; /* blue-100 */
-  color: #1d4ed8;           /* blue-700 */
+  background-color: #dbeafe;
+  /* blue-100 */
+  color: #1d4ed8;
+  /* blue-700 */
   font-weight: 600;
   transition: all 0.2s;
 }
 
 .editBtn:hover {
-  background-color: #93c5fd; /* blue-300 */
-  color: #1e3a8a;            /* blue-900 */
+  background-color: #93c5fd;
+  /* blue-300 */
+  color: #1e3a8a;
+  /* blue-900 */
   transform: scale(1.05);
 }
 
@@ -190,6 +195,7 @@
   cursor: pointer;
   transition: transform 0.2s;
 }
+
 .saveBtn:hover {
   transform: translateY(-1px);
 }
@@ -203,6 +209,7 @@
   cursor: pointer;
   transition: transform 0.2s;
 }
+
 .cancelBtn:hover {
   transform: translateY(-1px);
 }
