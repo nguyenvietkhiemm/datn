@@ -11,7 +11,6 @@ import Search from "@/components/search/Search";
 import { Users, CalendarCheck } from "lucide-react";
 import { Exam } from "../../../domain/exam/type"
 import { ExamService } from "../../../domain/exam/service";
-import Image from "next/image";
 import { formatVNDateTime } from "../../../lib/model";
 
 export default function ExamList() {
@@ -44,16 +43,6 @@ export default function ExamList() {
       subject_type: exam.subject_type
     }))
     router.push(`/exam/${exam_id}/review/rank`)
-  };
-
-  const getExamStatus = (exam: Exam) => {
-    const now = new Date();
-    if (exam.start_time && exam.end_time) {
-      if (now < new Date(exam.start_time)) return "upcoming";
-      if (now > new Date(exam.end_time)) return "ended";
-      return "ongoing";
-    }
-    return "unknown";
   };
 
 
