@@ -145,8 +145,8 @@ export default function Question() {
                         />
                     </div>
 
-                    <div className={styles.button}>
-                        <div className={styles.json}>
+                    <div className={styles.buttonGroup}>
+                        <div className={styles.actionBtn}>
                             <input
                                 type="file"
                                 accept=".docx"
@@ -157,23 +157,19 @@ export default function Question() {
                             <Button
                                 variant="primary"
                                 size="md"
-                                onClick={() => docxInputRef.current?.click()}>
+                                onClick={() => docxInputRef.current?.click()}
+                            >
                                 Thêm câu hỏi từ DOCX
                             </Button>
                         </div>
-                        {/* Upload json */}
-                        <div className={styles.json}>
 
-                            <Button
-                                variant="primary"
-                                size="md"
-                                onClick={handleFetchJson}
-                            >
-                                Danh sách Json
+                        <div className={styles.actionBtn}>
+                            <Button variant="primary" size="md" onClick={handleFetchJson}>
+                                Danh sách JSON
                             </Button>
                         </div>
 
-                        <div className={styles.json}>
+                        <div className={styles.actionBtn}>
                             <Button
                                 variant="primary"
                                 size="md"

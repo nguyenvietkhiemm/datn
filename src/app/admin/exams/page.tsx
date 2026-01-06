@@ -140,14 +140,15 @@ export default function Exam() {
             <th>STT</th>
             <th>Tên bài thi</th>
             <th>Thời gian (phút)</th>
-            <th>Thời gian bắt đầu</th>   {/* mới */}
-            <th>Thời gian kết thúc</th>  {/* mới */}
+            <th>Thời gian bắt đầu</th>
+            <th>Thời gian kết thúc</th>
             <th>Ngày tạo</th>
             <th>Trạng thái</th>
             <th>Chủ đề</th>
             <th>Xoá</th>
           </tr>
         </thead>
+
         <tbody>
           {exams.length > 0 ? (
             exams.map((exam, index) => (
