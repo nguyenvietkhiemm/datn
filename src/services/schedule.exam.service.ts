@@ -12,10 +12,19 @@ export const ScheduleExamService = {
         }> {
                 // Lấy data
                 const dataQuery = `
-                  SELECT *
-                  FROM exam_schedule
-                  ORDER BY exam_schedule_id
-                  LIMIT $1 OFFSET $2
+                        SELECT
+                        es.exam_schedule_id,
+                        es.start_time,
+                        es.end_time,
+                        es.created_at,
+                        es.updated_at,
+                        COUNT(e.exam_id) AS total_exams
+                FROM exam_schedule es
+                LEFT JOIN exam e
+                        ON e.exam_schedule_id = es.exam_schedule_id
+                GROUP BY es.exam_schedule_id
+                ORDER BY es.exam_schedule_id
+                LIMIT $1 OFFSET $2;              
                 `;
 
                 const dataResult = await query(dataQuery, [limit, offset]);
