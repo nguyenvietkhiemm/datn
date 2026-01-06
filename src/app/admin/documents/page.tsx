@@ -135,7 +135,7 @@ export default function DocumentPage() {
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <h1 className={styles.title}>QUẢN LÝ LUYỆN TẬP</h1>
+                <h1 className={styles.title}>QUẢN LÝ TÀI LIỆU</h1>
 
                 <div className={styles.actions}>
                     <div className={styles.actionGroup}>
@@ -216,7 +216,7 @@ export default function DocumentPage() {
                                             target="_blank"
                                             className={styles.link}
                                         >
-                                            🔗 Xem tài liệu
+                                            Xem tài liệu
                                         </Link>
                                     ) : (
                                         "-"
@@ -230,7 +230,7 @@ export default function DocumentPage() {
                                             handleDelete(doc.document_id);
                                         }}
                                     >
-                                        X
+                                        Xóa
                                     </button>
                                 </td>
                                 <td>

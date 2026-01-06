@@ -104,6 +104,7 @@ export default function Exam() {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1 className={styles.title}>QUẢN LÝ LUYỆN TẬP</h1>
+
         <div className={styles.actions}>
           <div
             className={styles.button}
@@ -128,6 +129,7 @@ export default function Exam() {
             />
           </div>
         </div>
+        
       </div>
       {/* noi hien  bang*/}
       <table className={styles.table}>
@@ -138,7 +140,7 @@ export default function Exam() {
             <th>Thời gian (phút)</th>
             <th>Trạng thái</th>
             <th>Chủ đề</th>
-            <th>Xoá</th>
+            <th>Chỉnh sửa</th>
           </tr>
         </thead>
         <tbody>
@@ -172,7 +174,7 @@ export default function Exam() {
                     className={styles.delBtn}
                     onClick={() => handleDelete(bank.bank_id)}
                   >
-                    X
+                    Xóa
                   </button>
                 </td>
               </tr>

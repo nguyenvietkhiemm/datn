@@ -181,6 +181,7 @@ export default function Question() {
                     </div>
 
                 </div>
+                
                 <div className={styles.filterType}>
                     <div>
                         <select
