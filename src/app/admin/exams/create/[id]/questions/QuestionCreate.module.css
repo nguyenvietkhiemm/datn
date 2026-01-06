@@ -22,7 +22,7 @@
     margin-bottom: 3rem;
 }
 
-.search{
+.search {
     margin-bottom: 1rem;
 }
 
@@ -83,12 +83,19 @@
 .content {
     display: flex;
     gap: 2rem;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .content {
     font-size: 16px;
     margin-bottom: 12px;
     color: #333;
+}
+
+.content input[type="checkbox"] {
+    transform: scale(1.5);
+    cursor: pointer;
 }
 
 .imageGroup {

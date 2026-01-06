@@ -5,6 +5,7 @@ export type ExamSchedule = {
     end_time: string;
     created_at: string;
     updated_at: string;
+    total_exams: number;
     exams?: Exam[];
 };
 

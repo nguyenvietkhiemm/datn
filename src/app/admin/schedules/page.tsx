@@ -12,6 +12,7 @@ import Pagination from "@/component/pagination/Pagination";
 import { formatVNDateTime } from "@/lib/model";
 
 type ViewMode = "LIST" | "DETAIL";
+type ScheduleStatus = "UPCOMING" | "ONGOING" | "FINISHED";
 
 export default function Schedule() {
   const [examSchedules, setExamSchedules] = useState<ExamSchedule[]>([]);
@@ -23,21 +24,45 @@ export default function Schedule() {
   const [totalPages, setTotalPages] = useState(1);
   const [openEdit, setOpenEdit] = useState(false);
   const [editSchedule, setEditSchedule] = useState<ExamSchedule | null>(null);
-
   const [deleteId, setDeleteId] = useState<number | null>(null);
 
+  /* STATUS LOGIC */
+
+  const getStatus = (start: string, end: string): ScheduleStatus => {
+    const now = Date.now();
+    const startTime = new Date(start).getTime();
+    const endTime = new Date(end).getTime();
+
+    if (now < startTime) return "UPCOMING";
+    if (now <= endTime) return "ONGOING";
+    return "FINISHED";
+  };
+
+  const renderStatus = (status: ScheduleStatus) => {
+    switch (status) {
+      case "UPCOMING":
+        return <span className={styles.statusUpcoming}>Sắp diễn ra</span>;
+      case "ONGOING":
+        return <span className={styles.statusOngoing}>Đang diễn ra</span>;
+      case "FINISHED":
+        return <span className={styles.statusFinished}>Đã kết thúc</span>;
+    }
+  };
+
+  /* DATA */
 
   const loadSchedules = async () => {
     const data = await ScheduleService.fetchSchedules();
-
     setExamSchedules(data.schedules || []);
     setFilterSchedules(data.schedules || []);
-    setTotalPages(data.totalPages || 1)
+    setTotalPages(data.totalPages || 1);
   };
 
   useEffect(() => {
     loadSchedules();
   }, []);
+
+  /* VIEW HANDLERS */
 
   const openDetail = (id: number) => {
     setSelectedId(id);
@@ -48,6 +73,8 @@ export default function Schedule() {
     setView("LIST");
     setSelectedId(null);
   };
+
+  /* RENDER */
 
   return (
     <div className={styles.viewport}>
@@ -83,52 +110,70 @@ export default function Schedule() {
                 <thead>
                   <tr>
                     <th>STT</th>
-                    <th>Bắt đầu</th>
-                    <th>Kết thúc</th>
-                    <th>Ngày tạo</th>
-                    <th>Ngày cập nhật</th>
-                    <th>Chỉnh sửa</th>
+                    <th>Thời gian thi</th>
+                    <th>Trạng thái</th>
+                    <th>Tổng bài thi</th>
+                    <th>Cập nhật</th>
+                    <th>Hành động</th>
                   </tr>
                 </thead>
+
                 <tbody>
-                  {filterSchedules.map((item, index) => (
-                    <tr key={item.exam_schedule_id}>
-                      <td>{index + 1}</td>
-                      <td onClick={() => openDetail(item.exam_schedule_id)}>
-                        {formatVNDateTime(item.start_time)}
-                      </td>
-                      <td onClick={() => openDetail(item.exam_schedule_id)}>
-                        {formatVNDateTime(item.end_time)}
-                      </td>
-                      <td>{formatVNDateTime(item.created_at)}</td>
-                      <td>{formatVNDateTime(item.updated_at)}</td>
+                  {filterSchedules.map((item, index) => {
+                    const status = getStatus(
+                      item.start_time,
+                      item.end_time
+                    );
+                    const isOngoing = status === "ONGOING";
 
-                      <td className={styles.actions}>
-                        <button
-                          className={styles.editBtn}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setEditSchedule(item);
-                            setOpenEdit(true);
-                          }}
-                        >
-                          Sửa
-                        </button>
+                    return (
+                      <tr key={item.exam_schedule_id}>
+                        <td>{index + 1}</td>
 
-                        <button
-                          className={styles.deleteBtn}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setDeleteId(item.exam_schedule_id);
-                          }}
+                        <td
+                          className={styles.timeCell}
+                          onClick={() =>
+                            openDetail(item.exam_schedule_id)
+                          }
                         >
-                          Xóa
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                          <div>{formatVNDateTime(item.start_time)}</div>
+                          <div className={styles.timeArrow}>→</div>
+                          <div>{formatVNDateTime(item.end_time)}</div>
+                        </td>
+
+                        <td>{renderStatus(status)}</td>
+
+                        <td>{item.total_exams}</td>
+                        <td>{formatVNDateTime(item.updated_at)}</td>
+
+                        <td className={styles.actions}>
+                          <button
+                            className={styles.editBtn}
+                            disabled={isOngoing}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setEditSchedule(item);
+                              setOpenEdit(true);
+                            }}
+                          >
+                            Sửa
+                          </button>
+
+                          <button
+                            className={styles.deleteBtn}
+                            disabled={isOngoing}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setDeleteId(item.exam_schedule_id);
+                            }}
+                          >
+                            Xóa
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
-
               </table>
             </div>
           </motion.div>
@@ -149,23 +194,16 @@ export default function Schedule() {
         )}
       </AnimatePresence>
 
-      {/* CREATE MODAL INLINE */}
+      {/* CREATE */}
       <AnimatePresence>
         {openCreate && (
           <motion.div
             className={styles.backdrop}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
             onClick={() => setOpenCreate(false)}
           >
             <motion.div
               className={styles.modal}
               onClick={(e) => e.stopPropagation()}
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
             >
               <ExamScheduleCreate
                 onCancel={() => setOpenCreate(false)}
@@ -179,16 +217,16 @@ export default function Schedule() {
         )}
       </AnimatePresence>
 
-
+      {/* EDIT */}
       <AnimatePresence>
         {openEdit && editSchedule && (
-          <motion.div className={styles.backdrop} onClick={() => setOpenEdit(false)}>
+          <motion.div
+            className={styles.backdrop}
+            onClick={() => setOpenEdit(false)}
+          >
             <motion.div
               className={styles.modal}
               onClick={(e) => e.stopPropagation()}
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
             >
               <ExamScheduleCreate
                 initialData={editSchedule}
@@ -203,15 +241,19 @@ export default function Schedule() {
         )}
       </AnimatePresence>
 
-
+      {/* DELETE */}
       <AnimatePresence>
         {deleteId && (
           <motion.div className={styles.backdrop}>
             <motion.div className={styles.confirmModal}>
               <h3>Bạn muốn xóa lịch thi này?</h3>
-
               <div className={styles.confirmActions}>
-                <button className={styles.editBtn} onClick={() => setDeleteId(null)}>Hủy</button>
+                <button
+                  className={styles.editBtn}
+                  onClick={() => setDeleteId(null)}
+                >
+                  Hủy
+                </button>
                 <button
                   className={styles.deleteBtn}
                   onClick={async () => {
@@ -228,10 +270,11 @@ export default function Schedule() {
         )}
       </AnimatePresence>
 
-
-
-      <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage} />
-
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 }
