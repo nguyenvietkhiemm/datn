@@ -6,15 +6,21 @@ import CreateToken from "../utils/create.token";
 
 const ROLE_PERMISSIONS: { [key: number]: { [key: string]: boolean } } = {
   2: {
-    "post:view": true,
-    "post:create": true,
-    "post:delete": true,
-    "user:manage": true,
-    "admin:access": true,
   },
 };
 
-const getPermissionsByRole = (roleId: number): { [key: string]: boolean } => {
+const ADMIN_ROLE_ID = 2;
+
+const getPermissionsByRole = (
+  roleId: number
+): Record<string, boolean> => {
+  if (roleId === ADMIN_ROLE_ID) {
+    return {
+      "admin:access": true,
+      "*": true
+    };
+  }
+
   return ROLE_PERMISSIONS[roleId] || {};
 };
 
@@ -58,36 +64,46 @@ const AuthService = {
   ): Promise<{
     user: User;
     token: string;
-    permissions: {[key: string]: boolean };
+    permissions: Record<string, boolean>;
   }> {
-    const userResult = await query(`SELECT * FROM "user" WHERE email = $1`, [
-      email,
-    ]);
+    const userResult = await query(
+      `SELECT * FROM "user" WHERE email = $1`,
+      [email]
+    );
 
     if (userResult.rows.length === 0) {
       throw new Error("USER_NOT_FOUND");
     }
 
-    const {available} = userResult.rows[0]
-    if(available === false)  throw new Error("UER_NOT_AVAILABLE");
-
     const foundUser: User = userResult.rows[0];
 
-    // kiểm tra password
-    const isMatch = await bcrypt.compare(password, foundUser.password_hash);
+    if (foundUser.available === false) {
+      throw new Error("USER_NOT_AVAILABLE");
+    }
+
+    const isMatch = await bcrypt.compare(
+      password,
+      foundUser.password_hash
+    );
     if (!isMatch) {
       throw new Error("INVALID_PASSWORD");
     }
 
-    // tạo token
-    const token = CreateToken(foundUser.user_id, foundUser.email);
-    //lấy permision
-    const permissions = getPermissionsByRole(foundUser.role_id);
-    // loại bỏ password_hash trước khi trả về
-    const { password_hash, user_id, role_id, ...safeUser } = foundUser;
+    const token = CreateToken(
+      foundUser.user_id,
+      foundUser.email
+    );
 
-    return { user: safeUser as User, token, permissions };
-  },
+    const permissions = getPermissionsByRole(foundUser.role_id);
+
+    const { password_hash, ...safeUser } = foundUser;
+
+    return {
+      user: safeUser as User,
+      token,
+      permissions,
+    };
+  }
 };
 
 export default AuthService;

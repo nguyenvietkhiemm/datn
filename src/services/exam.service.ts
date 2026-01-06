@@ -142,9 +142,6 @@ const ExamService = {
     const limit = 12;
     const offset = (page - 1) * limit;
 
-    // -----------------------
-    // Build dynamic WHERE clause
-    // -----------------------
     const conditions: string[] = [];
     const params: any[] = [];
     let idx = 1;
@@ -181,9 +178,6 @@ const ExamService = {
 
     const whereClause = conditions.length ? `WHERE ${conditions.join(" AND ")}` : "";
 
-    // -----------------------
-    // Query danh sách bài thi
-    // -----------------------
     const queryText = `
     SELECT 
       e.exam_name, e.topic_id, e.time_limit, e.exam_id, e.created_at, e.available, e.description,
@@ -337,7 +331,6 @@ const ExamService = {
         }
       }
 
-      
       // Insert history_exam (SAU khi có score)
       const historyResult = await client.query(
         `
@@ -710,14 +703,20 @@ const ExamService = {
     user_id: number
   ): Promise<{ check: boolean; reason?: string }> {
 
-    const hasDone = await redis.exists(
-      `exam:${exam_id}:user:${user_id}`
-    );
+    const sql = `
+      SELECT EXISTS (
+        SELECT 1
+        FROM history_exam
+        WHERE user_id = $1 AND exam_id = $2
+      ) AS is_done
+    `;
 
-    if (hasDone) {
+    const result = await query(sql, [user_id, exam_id]);
+
+    if (result.rows[0].is_done) {
       return {
         check: false,
-        reason: "ALREADY_DONE"
+        reason: "ALREADY_DONE",
       };
     }
 
