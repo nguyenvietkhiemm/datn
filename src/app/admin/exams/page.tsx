@@ -29,9 +29,7 @@ export default function Exam() {
 
   const router = useRouter();
 
-  // -------------------------
   // Fetch danh sách bài thi
-  // -------------------------
   useEffect(() => {
     const fetchExams = async () => {
       try {
@@ -49,9 +47,7 @@ export default function Exam() {
     fetchExams();
   }, [query]);
 
-  // -------------------------
   // Xóa bài thi
-  // -------------------------
   const handleDelete = async (examId: number) => {
     try {
       await ExamService.deleteExam(examId);
@@ -61,9 +57,7 @@ export default function Exam() {
     }
   };
 
-  // -------------------------
   // Chuyển trạng thái hoạt động
-  // -------------------------
   const handleToggleAvailable = async (examId: number, available: boolean) => {
     try {
       await ExamService.toggleExamAvailable(examId, available);
@@ -77,9 +71,7 @@ export default function Exam() {
     }
   };
 
-  // -------------------------
   // Search
-  // -------------------------
   const handleChangeSearch = (keyword: string) => {
     setQuery((prev) => ({
       ...prev,
@@ -88,9 +80,7 @@ export default function Exam() {
     }));
   };
 
-  // -------------------------
   // Filter
-  // -------------------------
   const handleChangeFilter = (filter: any) => {
     setQuery((prev) => ({
       ...prev,
@@ -100,17 +90,13 @@ export default function Exam() {
     }));
   };
 
-  // -------------------------
   // Xem chi tiết bài thi
-  // -------------------------
   const detailExam = (id: number, exam: Exam) => {
     localStorage.setItem("exam", JSON.stringify(exam));
     router.push(`/admin/exams/detail/${id}`);
   };
 
-  // -------------------------
   // Loading state
-  // -------------------------
   if (loading)
     return <p className={styles.loading}>Đang tải danh sách bài thi...</p>;
 

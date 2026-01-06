@@ -4,11 +4,13 @@ import { useState } from "react";
 import styles from "./Login.module.css";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie"
+import NotificationPopup from "@/component/notification/Notification";
+import { typeNoti } from "@/lib/model";
 
 export default function Login() {
 
     const router = useRouter()
-
+    const [notify, setNotify] = useState<typeNoti | null>(null);
     interface SendData {
         email: string;
         password: string;
@@ -38,8 +40,6 @@ export default function Login() {
             });
 
             const data = await res.json();
-        
-            console.log("Login response data:", data);
 
             if (!res.ok) {
                 if (data.error === "USER_NOT_FOUND") {
@@ -54,7 +54,10 @@ export default function Login() {
             }
 
             if (!data?.data?.permissions?.["admin:access"]) {
-                alert("Tài khoản này không có quyền truy cập trang admin!");
+                setNotify({
+                    message: "Tài khoản này không có quyền truy cập trang admin!",
+                    type: "warning",
+                })
                 return;
             }
 
@@ -64,8 +67,12 @@ export default function Login() {
 
             router.push("/admin/dashboard");
         } catch (err: any) {
-            console.error("Login error:", err);
-            alert(err.message || "Không thể kết nối đến server. Vui lòng thử lại sau!");
+            setNotify({
+                message: (
+                    err.message
+                ),
+                type: "error",
+            })
         }
     };
 
@@ -107,6 +114,13 @@ export default function Login() {
                     Đăng nhập
                 </button>
             </div>
+            {notify && (
+                <NotificationPopup
+                    message={notify.message}
+                    type={notify.type}
+                    onClose={() => setNotify(null)}
+                />
+            )}
         </form>
     )
 }
