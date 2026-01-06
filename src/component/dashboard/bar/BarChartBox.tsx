@@ -34,6 +34,22 @@ function BarChartBox({ title, datasets }: Props) {
     const options = useMemo(() => ({
         responsive: true,
         plugins: {
+            tooltip: {
+                backgroundColor: '#1f2937',
+                titleColor: '#fff',
+                bodyColor: '#e5e7eb',
+                borderColor: '#9ca3af',
+                borderWidth: 1,
+                padding: 10,
+                cornerRadius: 6,
+                titleFont: {
+                    size: 14,
+                    weight: 10,
+                },
+                bodyFont: {
+                    size: 12,
+                },
+            },
             legend: { display: false },
             title: { display: false },
             datalabels: {

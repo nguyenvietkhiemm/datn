@@ -99,8 +99,10 @@ export default function ExamDetail() {
                                         <div className={styles.answers}>
                                             {q.answers.map((a) => (
                                                 <label key={a.answer_id} className={styles.option}>
-                                                    <LatexPreview text={a.answer_content} />
-                                                    {a.is_correct && <span className={styles.correctBadge}>✔</span>}
+                                                    <div className={styles.answerText}>
+                                                        <LatexPreview text={a.answer_content} />
+                                                        {a.is_correct && <strong>(✔)</strong>}
+                                                    </div>
                                                     {a.images?.map((src, index) => (
                                                         <div key={`a-${index}`} className={styles.imageWrapperSmall}>
                                                             <ImagePreview filename={src} />

@@ -127,7 +127,7 @@
 
 .answerItem {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     padding: 12px;
     border-radius: 8px;
     margin-bottom: 12px;
@@ -140,11 +140,12 @@
     min-width: 20px;
 }
 
+.answerText {
+    display: flex;
+    align-items: center;
+}
+
 .answerText strong {
     color: #28a745;
     margin-left: 1rem;
-}
-
-.answerText {
-    font-size: 15px;
 }

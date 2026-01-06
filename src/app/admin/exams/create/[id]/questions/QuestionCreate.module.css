@@ -140,11 +140,12 @@
     min-width: 20px;
 }
 
+.answerText {
+    display: flex;
+    align-items: center;
+}
+
 .answerText strong {
     color: #28a745;
     margin-left: 1rem;
-}
-
-.answerText {
-    font-size: 15px;
 }

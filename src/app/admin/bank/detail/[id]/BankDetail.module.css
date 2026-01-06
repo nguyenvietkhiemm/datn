@@ -93,11 +93,14 @@
     border-color: #2563eb;
 }
 
-.correctBadge {
-    margin-left: 8px;
-    color: #16a34a;
-    font-weight: 600;
-    font-size: 13px;
+.answerText {
+    display: flex;
+    align-items: center;
+}
+
+.answerText strong {
+    color: #28a745;
+    margin-left: 1rem;
 }
 
 /* ================= RIGHT PANEL (THANH ĐIỀU HƯỚNG) ================= */

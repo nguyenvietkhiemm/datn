@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import { ExamSchedule } from "@/domain/admin/schedules/type";
 import { Topic, Subject } from "@/domain/admin/topic_subject/type";
 import { ExamService } from "@/domain/admin/exams/service";
-import NotificationPopup from "@/component/notification/Notification";
 import { typeNoti } from "@/lib/model";
 
 export default function ExamCreate() {
@@ -118,7 +117,11 @@ export default function ExamCreate() {
         exam_schedule_id,
       });
 
-      alert("Tạo bài thi thành công!");
+      setNotify({
+        message: "Tạo bài thi thành công!",
+        type: "success",
+        confirm: false
+      });
 
       router.push(
         `/admin/exams/create/${res.data.exam_id}/questions`

@@ -12,18 +12,18 @@ import { Question, QuestionQuery } from "@/domain/admin/questions/type";
 import { API_URL } from "@/lib/service";
 import Search from "@/component/search/Search";
 import { ImagePreview } from "@/component/questionCreate/ImagePreview/page";
-import { answerLabel } from "@/lib/model";
+import { answerLabel, typeNoti } from "@/lib/model";
 import { LatexPreview } from "@/component/questionCreate/LatexPreview/page";
+import NotificationPopup from "@/component/notification/Notification";
 
 export default function BankQuestionCreate() {
     const token = Cookies.get("token");
     const router = useRouter();
-
+    const [notify, setNotify] = useState<typeNoti | null>(null);
     const [questions, setQuestions] = useState<Question[]>([]);
     const [totalPage, setTotalPage] = useState<number>(1);
     const params = useParams();
     const bankId = Number(params.id);
-
     const [selectedQuestions, setSelectedQuestions] = useState<{
         bank_id: number;
         question_id: number;
@@ -64,7 +64,7 @@ export default function BankQuestionCreate() {
         fetchData();
     }, [query]);
 
-    // ================= SELECT QUESTION =================
+    // SELECT QUESTION
     const handleSelectQuestion = (questionId: number) => {
         setSelectedQuestions((prev) => {
             const exists = prev.some(
@@ -84,15 +84,22 @@ export default function BankQuestionCreate() {
         });
     };
 
-    // ================= RESET =================
+    // RESET
     const handleReset = () => {
         setSelectedQuestions([])
     };
 
-    // ================= SUBMIT =================
+    // SUBMIT
     const handleCreateBankQuestion = async () => {
         if (selectedQuestions.length === 0) {
-            alert("Vui lòng chọn ít nhất một câu hỏi!");
+            setNotify({
+                message: (
+                    <>
+                        <b>Vui lòng chọn câu hỏi</b>
+                    </>
+                ),
+                type: "warning",
+            })
             return;
         }
 
@@ -113,8 +120,15 @@ export default function BankQuestionCreate() {
                 throw new Error("Không thể thêm câu hỏi vào ngân hàng");
             }
 
-            alert("Thêm câu hỏi vào ngân hàng thành công!");
-            router.push(`/admin/bank`)
+            setNotify({
+                message: (
+                    <>
+                        <b>Tạo câu hỏi cho bài luyện tập thành công</b>
+                    </>
+                ),
+                type: "success",
+            })
+            router.push(`/admin/bank/detail/${bankId}`)
         } catch (error) {
             console.error("error:", error);
             alert("Có lỗi xảy ra!");
@@ -140,7 +154,7 @@ export default function BankQuestionCreate() {
         }
     }, [bankId]);
 
-    // ================= RENDER =================
+    // RENDER
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>
@@ -208,7 +222,7 @@ export default function BankQuestionCreate() {
                             />
                         </div>
 
-                        {/* ================= QUESTION IMAGES ================= */}
+                        {/* QUESTION IMAGES */}
                         {question?.images && question.images.length > 0 && (
                             <div className={styles.imageGroup}>
                                 {question?.images?.map((src, index) => (
@@ -219,7 +233,7 @@ export default function BankQuestionCreate() {
                             </div>
                         )}
 
-                        {/* ================= ANSWERS ================= */}
+                        {/* ANSWERS */}
                         <div className={styles.answerList}>
                             {question.answers.map((ans, answerIdx) => (
                                 <div
@@ -258,6 +272,13 @@ export default function BankQuestionCreate() {
                 currentPage={query.page}
                 setCurrentPage={handleChangePage}
             />
+            {notify && (
+                <NotificationPopup
+                    message={notify.message}
+                    type={notify.type}
+                    onClose={() => setNotify(null)}
+                />
+            )}
         </div>
     );
 }

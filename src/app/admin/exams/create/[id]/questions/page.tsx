@@ -98,6 +98,17 @@ export default function ExamQuestionCreate() {
 
     const handleCretaeExamQuestion = async () => {
         try {
+            if (selectedQuestions.length === 0) {
+                setNotify({
+                    message: (
+                        <>
+                            <b>Vui lòng chọn câu hỏi</b>
+                        </>
+                    ),
+                    type: "warning",
+                })
+                return;
+            }
             const res = await fetch(`${API_URL}/exams/questions/add`, {
                 method: "POST",
                 headers: {
@@ -106,7 +117,7 @@ export default function ExamQuestionCreate() {
                 },
                 body: JSON.stringify({ selectedQuestions })
             })
-            router.push(`/admin/exams`)
+            router.push(`/admin/exams/detail/${examId}`)
             setNotify({
                 message: (
                     <>
@@ -227,7 +238,6 @@ export default function ExamQuestionCreate() {
                 <NotificationPopup
                     message={notify.message}
                     type={notify.type}
-                    confirm={notify.confirm}
                     onClose={() => setNotify(null)}
                 />
             )}

@@ -100,16 +100,19 @@ export default function DashboardPage() {
             title="Học sinh mới"
             value={String(overview?.overview.users_new.total ?? 0)}
             change={`${overview?.overview.users_new.change ?? 0}%`}
+            tooltip="Số lượng học sinh mới đăng ký tham gia hệ thống trong tháng này, so với tháng trước."
           />
           <Card
             title="Số học sinh tham gia"
             value={String(overview?.overview.users.total ?? 0)}
             change={`${overview?.overview.users.change ?? 0}%`}
+            tooltip="Tổng số học sinh đã tham gia cuộc thi trong tháng này, so với tháng trước."
           />
           <Card
             title="Bài thi đã nộp"
             value={String(overview?.overview.submits.total ?? 0)}
             change={`${overview?.overview.submits.change ?? 0}%`}
+            tooltip="Số lượng bài thi đã được nộp thành công, bao gồm cả thi thử và chính thức so với tháng trước."
           />
           <Card
             title="Điểm trung bình"
@@ -119,16 +122,19 @@ export default function DashboardPage() {
                 : "-- / 10"
             }
             change={`${overview?.overview.score.change ?? 0}%`}
+            tooltip="Điểm trung bình của tất cả học sinh trong kỳ thi gần nhất, so với kỳ trước."
           />
           <Card
             title="Đạt điểm chuẩn"
             value={String(overview?.overview.standard_score.total ?? 0)}
             change={`${overview?.overview.standard_score.change ?? 0}%`}
+            tooltip="Tỷ lệ học sinh đạt từ 5 điểm trở lên trong kỳ thi này, so với kỳ trước."
           />
           <Card
             title="Môn phổ biến nhất"
             value={overview?.overview.popular_subject.name ?? "Chưa có"}
             change={`+${overview?.overview.popular_subject.total ?? 0} lượt`}
+            tooltip="Môn học có số lượt tham gia nhiều nhất trong kỳ thi này."
           />
         </section>
       </div>
