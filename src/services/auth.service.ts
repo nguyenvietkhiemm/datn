@@ -15,7 +15,10 @@ const getPermissionsByRole = (
   roleId: number
 ): Record<string, boolean> => {
   if (roleId === ADMIN_ROLE_ID) {
-    return { "*": true };
+    return {
+      "admin:access": true,
+      "*": true
+    };
   }
 
   return ROLE_PERMISSIONS[roleId] || {};
