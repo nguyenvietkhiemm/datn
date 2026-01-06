@@ -1,121 +1,157 @@
-/* Container chính */
+/* ================= CONTAINER ================= */
 .container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 24px;
-    gap: 24px;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    justify-content: flex-start;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 24px;
+  background-color: #f9fafc;
+  font-family: "Inter", "Segoe UI", sans-serif;
 }
 
+/* ================= HEADING ================= */
 .heading {
-    font-size: 28px;
-    font-weight: bold;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #02346d;
 }
 
-/* Form nhập liệu */
+/* ================= FORM ================= */
 .form {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    align-items: center;
-    background-color: #fff;
-    padding: 16px;
-    border-radius: 16px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    width: 100%;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-/* Input / Textarea đồng bộ */
+/* ================= INPUT / SELECT / TEXTAREA ================= */
 .textarea,
 .selectDropdown {
-    padding: 10px 12px;
-    font-size: 14px;
-    border: 1px solid #d0d0d0;
-    border-radius: 8px;
-    height: 42px;
-    min-width: 27%;
-    background: #fafafa;
-    transition: border-color 0.2s;
-    outline: none;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  border: 1px solid #d0d7ff;
+  border-radius: 8px;
+  height: 42px;
+  min-width: 260px;
+  background-color: #ffffff;
+  transition: all 0.2s ease;
+  outline: none;
 }
 
-/* Textarea auto mở rộng theo nội dung, không scroll */
 .textarea {
-    resize: none;
-    overflow: hidden;
+  resize: none;
+  overflow: hidden;
 }
 
 .textarea:focus,
 .selectDropdown:focus {
-    border-color: #007bff;
-    background: #fff;
+  border-color: #0070f3;
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
 }
 
+/* ================= TABLE WRAPPER ================= */
 .tableWrapper {
-    margin-top: 20px;
-    overflow-x: auto;
+  margin-top: 12px;
+  overflow-x: auto;
 }
 
+/* ================= TABLE ================= */
 .table {
-    width: 100%;
-    border-collapse: collapse !important;
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    border: 1px solid #e5e5e5;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
-.table th, 
-.table td {
-    border: 1px solid #dcdcdc;
-    padding: 12px;
-    text-align: center;
-}
-
+/* ===== TABLE HEADER ===== */
 .table th {
-    background: #1a4d9b;
-    color: white;
+  background-color: #02346d;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 14px 12px;
+  text-align: center;
+}
+
+/* ===== TABLE CELL ===== */
+.table td {
+  padding: 12px;
+  font-size: 0.95rem;
+  text-align: center;
+  border-bottom: 1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb;
 }
 
 .table td:last-child,
 .table th:last-child {
-    border-right: none;
+  border-right: none;
 }
 
-.table tr:hover td {
-    background: #f5f8ff;
+/* ===== HOVER ROW ===== */
+.table tbody tr {
+  transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
-/* Cột hành động */
+.table tbody tr:hover {
+  background-color: #eef4ff;
+  transform: translateY(-1px);
+}
+
+/* ================= ACTION CELL ================= */
 .actionCell {
-    display: flex;
-    gap: 8px;
-
+  display: flex;
+  justify-content: center;
+  gap: 8px;
 }
 
-/* Nút edit */
+/* ================= ICON BUTTON ================= */
 .edit,
 .remove {
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    transition: 0.2s;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Edit */
+.edit {
+  color: #02346d;
 }
 
 .edit:hover {
-    background: #ececec;
+  background-color: #eef4ff;
 }
 
+/* Remove */
 .remove {
-    color: #d9534f;
+  color: #dc2626;
 }
 
 .remove:hover {
-    background: #ffe6e6;
+  background-color: #fee2e2;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .textarea,
+  .selectDropdown {
+    width: 100%;
+    min-width: unset;
+  }
 }

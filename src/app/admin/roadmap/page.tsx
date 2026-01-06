@@ -94,7 +94,7 @@ export default function RoadmapEditor() {
 
     return (
         <div className={styles.container}>
-            <h2 className={styles.heading}>Quản lý Roadmap</h2>
+            <h2 className={styles.heading}>QUẢN LÝ ROADMAP</h2>
 
             <div className={styles.form}>
                 <textarea

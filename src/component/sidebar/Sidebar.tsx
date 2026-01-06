@@ -20,10 +20,10 @@ const navItems = [
   { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
   { name: "Người dùng", href: "/admin/users", icon: Users },
   { name: "Lịch thi", href: "/admin/schedules", icon: CalendarClock },
+  { name: "Cuộc thi", href: "/admin/exams", icon: Trophy },
   { name: "Kho câu hỏi", href: "/admin/questions", icon: HelpCircle },
   { name: "Chuyên đề", href: "/admin/topic_subject", icon: Tags },
   { name: "Bài luyện tập", href: "/admin/bank", icon: Layers },
-  { name: "Cuộc thi", href: "/admin/exams", icon: Trophy },
   { name: "Tài liệu", href: "/admin/documents", icon: FileText },
   { name: "Lộ trình", href: "/admin/roadmap", icon: Route },
 ];
