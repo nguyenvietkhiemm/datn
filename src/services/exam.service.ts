@@ -434,7 +434,7 @@ async getExamRanking(
 
     const redisKey = `exam:${exam_id}:ranking`;
 
-    // 1️⃣ Kiểm tra Redis có dữ liệu không
+    // Kiểm tra Redis có dữ liệu không
     let total_rank = await redis.zcard(redisKey);
 
     if (total_rank === 0) {
@@ -471,7 +471,7 @@ async getExamRanking(
 
     const total_page = Math.ceil(total_rank / limit);
 
-    // 2️⃣ Lấy dữ liệu top N từ Redis
+    // Lấy dữ liệu top N từ Redis
     const redisData = await redis.zrevrange(redisKey, start, end, "WITHSCORES");
 
     if (!redisData.length) {
@@ -501,7 +501,7 @@ async getExamRanking(
       });
     }
 
-    // 3️⃣ Lấy score/time_test từ DB để đảm bảo chính xác
+    // Lấy score/time_test từ DB để đảm bảo chính xác
     const scoreResult = await pool.query(
       `
       SELECT user_id, score, time_test
@@ -536,7 +536,7 @@ async getExamRanking(
       };
     });
 
-    // 5️⃣ Lấy hạng của user hiện tại
+    // Lấy hạng của user hiện tại
     const memberKey = JSON.stringify({ user_id, user_name });
     const myRankIndex = await redis.zrevrank(redisKey, memberKey);
 
