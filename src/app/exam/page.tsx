@@ -51,8 +51,6 @@ export default function ExamList() {
 
     const endUTC = Date.parse(endTime);
     const nowUTC = Date.now();
-    console.log({ endUTC, nowUTC });
-
 
     return endUTC < nowUTC;
   };

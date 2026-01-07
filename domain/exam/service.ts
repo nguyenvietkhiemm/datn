@@ -12,7 +12,8 @@ export const ExamService = {
 
         // apply filter + search
         url = FilterSearch(filterCondition, searchKeyword, url);
-
+        console.log(url);
+        
         const res = await fetch(url, {
             method: "GET",
             headers: getHeaders(token),

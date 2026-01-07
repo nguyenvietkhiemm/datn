@@ -139,7 +139,6 @@ export default function Filter(
         }
     
         setSearchKeyword("");
-    
         setFilterCondition({
             subject_id: filterSubjectId,
             topic_ids: filterTopicIds,
