@@ -56,7 +56,7 @@ export const ROADMAPS: Roadmap[] = [
                             {
                                 type: "article",
                                 title: "Giới thiệu khái niệm cơ bản",
-                                url: "/theory/khai-niem-co-ban",
+                                url: "https://vi.wikipedia.org/wiki/V%E1%BA%ADt_l%C3%BD_h%E1%BB%8Dc",
                                 access: "free",
                             },
                             {
@@ -75,14 +75,14 @@ export const ROADMAPS: Roadmap[] = [
                         resources: [
                             {
                                 type: "article",
-                                title: "Danh sách công thức trọng tâm",
-                                url: "/formula/cong-thuc-trong-tam",
+                                title: "Danh sách công thức vật lý THPT",
+                                url: "https://hoc247.net/vat-ly/tong-hop-cong-thuc-vat-ly-lop-12-l6925.html",
                                 access: "free",
                             },
                             {
                                 type: "pdf",
                                 title: "PDF: Công thức cần nhớ",
-                                url: "/files/cong-thuc-can-nho.pdf",
+                                url: "https://tailieu.vn/doc/tong-hop-cong-thuc-vat-ly-thpt-2529811.html",
                                 access: "free",
                             },
                         ],
@@ -95,8 +95,8 @@ export const ROADMAPS: Roadmap[] = [
                         resources: [
                             {
                                 type: "article",
-                                title: "Các lỗi sai thường gặp khi áp dụng công thức",
-                                url: "/mistakes/loi-ap-dung-cong-thuc",
+                                title: "Các lỗi sai thường gặp khi làm bài Vật lý",
+                                url: "https://vndoc.com/nhung-loi-sai-thuong-gap-khi-lam-bai-thi-vat-ly-186774",
                                 access: "free",
                             },
                         ],
@@ -122,8 +122,8 @@ export const ROADMAPS: Roadmap[] = [
                         resources: [
                             {
                                 type: "quiz",
-                                title: "Quiz: Lý thuyết cơ bản",
-                                url: "/quiz/ly-thuyet-co-ban",
+                                title: "Quiz trắc nghiệm vật lý cơ bản",
+                                url: "https://hoc247.net/vat-ly/trac-nghiem-vat-ly-l12-l6928.html",
                                 access: "free",
                             },
                         ],
@@ -152,8 +152,8 @@ export const ROADMAPS: Roadmap[] = [
                         resources: [
                             {
                                 type: "article",
-                                title: "Cách đọc và phân tích đề hiệu quả",
-                                url: "/skills/phan-tich-de",
+                                title: "Cách phân tích đề bài trắc nghiệm",
+                                url: "https://vndoc.com/cach-lam-bai-trac-nghiem-vat-ly-hieu-qua-154210",
                                 access: "free",
                             },
                         ],
@@ -194,7 +194,7 @@ export const ROADMAPS: Roadmap[] = [
                             {
                                 type: "article",
                                 title: "Chiến thuật làm bài đạt điểm cao",
-                                url: "/skills/chien-thuat-lam-bai",
+                                url: "https://vndoc.com/chien-thuat-lam-bai-thi-trac-nghiem-vat-ly-165709",
                                 access: "free",
                             },
                         ],
