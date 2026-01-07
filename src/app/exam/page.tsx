@@ -63,6 +63,7 @@ export default function ExamList() {
         <Filter
           setFilterCondition={setFilterCondition}
           setSearchKeyword={setSearchKeyword}
+          setCurrentPage={setCurrentPage}
         />
 
         <Search

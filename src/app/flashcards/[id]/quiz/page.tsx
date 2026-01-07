@@ -63,14 +63,12 @@ export default function FlashcardQuiz() {
 
   const handleSubmit = async () => {
     let correct = 0;
-    const answerCorrect : number[] = [];
-    const answerMiss : number[] = [];
+    const answerCorrect: number[] = [];
+    const answerMiss: number[] = [];
     flashcards.forEach((card, index) => {
       if (answers[index] === card.back) {
         correct++;
         answerCorrect.push(card.flashcard_id)
-      }else if( answers[index] == "IDONTKNOW"){
-        answerMiss.push(card.flashcard_id)
       }
     });
     setScore(correct);
@@ -92,7 +90,6 @@ export default function FlashcardQuiz() {
       });
 
       const data = await res.json();
-      console.log("Kết quả gửi lên backend:", data);
     } catch (error) {
       console.error("Lỗi khi gửi kết quả lên backend:", error);
     }
@@ -115,16 +112,11 @@ export default function FlashcardQuiz() {
               <button
                 key={i}
                 onClick={() => handleSelect(index, opt)}
-                className={`${styles.option} 
-                  ${answers[index] === opt ? styles.selected : ""} 
-                  ${submitted
-                    ? opt === card.back
-                      ? styles.correct
-                      : answers[index] === opt
-                        ? styles.wrong
-                        : ""
-                    : ""
-                  }`}
+                className={`${styles.option}
+                ${!submitted && answers[index] === opt ? styles.selected : ""}
+                ${submitted && answers[index] === opt && opt === card.back ? styles.correct : ""}
+                ${submitted && answers[index] === opt && opt !== card.back ? styles.wrong : ""}
+                  `}
                 disabled={submitted}
               >
                 {opt}
@@ -133,7 +125,7 @@ export default function FlashcardQuiz() {
           </div>
 
           {/* Khi nộp bài hoặc chọn “Bạn không biết” thì hiện đáp án */}
-          {(submitted || answers[index] === "IDONTKNOW") && (
+          {(submitted) && (
             <p className={styles.correctAnswer}>
               Đáp án đúng: <strong>{card.back}</strong>
             </p>

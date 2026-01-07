@@ -47,10 +47,11 @@ interface Document {
 interface FilterProps {
     setFilterCondition: (data: any) => void;
     setSearchKeyword: (data: any) => void;
+    setCurrentPage: (page: any) => void;
 }
 
 export default function Filter(
-    { setFilterCondition, setSearchKeyword }
+    { setFilterCondition, setSearchKeyword, setCurrentPage }
         : FilterProps) {
 
     const [topics, setTopics] = useState<Topic[]>([]);
@@ -139,6 +140,7 @@ export default function Filter(
             subject_id: filterSubjectId,
             topic_ids: filterTopicIds,
         });
+        setCurrentPage(1);
     };
 
     return (

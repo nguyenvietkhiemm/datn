@@ -54,6 +54,7 @@ export default function Bank() {
         <Filter
           setFilterCondition={setFilterCondition}
           setSearchKeyword={setSearchKeyword}
+          setCurrentPage={setCurrentPage}
         />
         <Search
           setSearchKeyword={setSearchKeyword}
