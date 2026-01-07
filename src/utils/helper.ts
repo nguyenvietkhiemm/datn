@@ -125,16 +125,38 @@ export function groupQuestionsByTypeSafe(
 
 export async function withCache<T>(
   key: string,
-  ttlSeconds: number,
-  fetcher: () => Promise<T>
-): Promise<T>
-{
+  ttl: number,
+  fn: () => Promise<T>
+): Promise<T> {
   const cached = await redis.get(key);
+
   if (cached) {
-    return JSON.parse(cached);
+    if (process.env.NODE_ENV !== "production") {
+      console.log(`[CACHE HIT] → ${key}`);
+    }
+    return JSON.parse(cached) as T;
   }
 
-  const data = await fetcher();
-  await redis.set(key, JSON.stringify(data), "EX", ttlSeconds);
+  if (process.env.NODE_ENV !== "production") {
+    console.log(`[CACHE MISS] → ${key} (query DB)`);
+  }
+
+  const data = await fn();
+
+  await redis.set(key, JSON.stringify(data), "EX", ttl);
+
   return data;
+}
+
+export async function invalidateExamCache(exam_id: number) {
+  const pattern = `exam:${exam_id}:*`;
+  const keys = await redis.keys(pattern);
+
+  if (keys.length > 0) {
+    await redis.del(...keys);
+  }
+
+  if (process.env.NODE_ENV !== "production") {
+    console.log(`[CACHE INVALIDATE] ${keys.length} keys for exam ${exam_id}`);
+  }
 }

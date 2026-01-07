@@ -1,5 +1,6 @@
 import pool, { query } from "../config/database";
 import { ExamQuestion } from "../models/exam.question.model";
+import { redis } from "../config/redis";
 
 export const ExamQuestionService = {
     async add(
@@ -48,6 +49,9 @@ export const ExamQuestionService = {
 
             await client.query("COMMIT");
 
+            // XÓA CACHE – KHÔNG rebuild
+            await redis.del(`exam:${exam_id}:full`);
+
             return {
                 exam_id,
                 total: newQuestionIds.length,
@@ -67,6 +71,8 @@ export const ExamQuestionService = {
             `DELETE FROM question_exam WHERE exam_id = $1 AND question_id = $2`,
             [data.exam_id, data.question_id]
         );
+        // XÓA CACHE – KHÔNG rebuild
+        await redis.del(`exam:${data.exam_id}:full`);
         return (result.rowCount ?? 0) > 0;
     }
 }
