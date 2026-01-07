@@ -5,6 +5,8 @@ import { useState } from "react";
 import styles from "./Exam.Schedule.Create.module.css";
 import type { ExamScheduleCreate } from "@/domain/admin/schedules/type";
 import { ExamSchedule } from "@/domain/admin/schedules/type";
+import NotificationPopup from "@/component/notification/Notification";
+import { typeNoti } from "@/lib/model";
 
 type Props = {
   initialData?: ExamSchedule;
@@ -18,6 +20,7 @@ export default function ExamScheduleCreate({
   onCancel,
 }: Props) {
   const isEdit = Boolean(initialData);
+  const [notify, setNotify] = useState<typeNoti | null>(null);
   const [form, setForm] = useState<ExamScheduleCreate>({
     start_time: initialData?.start_time
       ? initialData.start_time.slice(0, 16)
@@ -36,35 +39,47 @@ export default function ExamScheduleCreate({
 
   const handleSubmit = async () => {
     if (!form.start_time || !form.end_time) {
-      alert("Vui lòng nhập đầy đủ thời gian");
+      setNotify({
+        message: "Vui lòng nhập đầy đủ thời gian",
+        type: "warning",
+      })
       return;
     }
 
     if (new Date(form.start_time) >= new Date(form.end_time)) {
-      alert("Thời gian kết thúc phải sau thời gian bắt đầu");
+      setNotify({
+        message: "Thời gian kết thúc phải sau thời gian bắt đầu",
+        type: "warning",
+      })
       return;
     }
 
     try {
       setLoading(true);
-      if (new Date(form.start_time) >= new Date(form.end_time)) {
-        alert("Thời gian kết thúc phải sau thời gian bắt đầu");
-        return;
-      }
 
       if (isEdit && initialData) {
         await ScheduleService.updateSchedule(
           initialData.exam_schedule_id,
           form
         );
-        alert("Cập nhật lịch thi thành công");
+        setNotify({
+          message: "Cập nhật lịch thi thành công",
+          type: "success",
+        })
+
       } else {
         await ScheduleService.createSchedule(form);
-        alert("Thêm lịch thi thành công");
+        setNotify({
+          message: "Thêm lịch thi thành công",
+          type: "success",
+        })
       }
       onSuccess?.();
     } catch (e: any) {
-      alert(e.message);
+      setNotify({
+        message: `${e.message}`,
+        type: "error",
+      })
     } finally {
       setLoading(false);
     }
@@ -121,6 +136,13 @@ export default function ExamScheduleCreate({
 
         </button>
       </div>
+      {notify && (
+        <NotificationPopup
+          message={notify.message}
+          type={notify.type}
+          onClose={() => setNotify(null)}
+        />
+      )}
     </div>
   );
 }

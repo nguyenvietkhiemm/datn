@@ -11,6 +11,7 @@ import ExamScheduleCreate from "./create/page";
 import Pagination from "@/component/pagination/Pagination";
 import { formatVNDateTime } from "@/lib/model";
 import { ScheduleModel } from "@/domain/admin/schedules/model";
+import NotificationPopup from "@/component/notification/Notification";
 
 type ViewMode = "LIST" | "DETAIL";
 type ScheduleStatus = "UPCOMING" | "ONGOING" | "FINISHED";
@@ -26,6 +27,7 @@ export default function Schedule() {
   const [openEdit, setOpenEdit] = useState(false);
   const [editSchedule, setEditSchedule] = useState<ExamSchedule | null>(null);
   const [deleteId, setDeleteId] = useState<number | null>(null);
+  
 
   /* STATUS LOGIC */
 
@@ -43,7 +45,7 @@ export default function Schedule() {
   /* DATA */
 
   const loadSchedules = async () => {
-    const data = await ScheduleService.fetchSchedules();
+    const data = await ScheduleService.fetchSchedules(currentPage);
     setExamSchedules(data.schedules || []);
     setFilterSchedules(data.schedules || []);
     setTotalPages(data.totalPages || 1);
@@ -51,7 +53,7 @@ export default function Schedule() {
 
   useEffect(() => {
     loadSchedules();
-  }, []);
+  }, [currentPage]);
 
   /* VIEW HANDLERS */
 
