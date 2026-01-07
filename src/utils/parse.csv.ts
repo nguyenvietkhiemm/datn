@@ -77,16 +77,16 @@ export async function parseQuestionsFromCSV(filePath: string): Promise<Question[
           }
 
           // Push vào danh sách nếu có ít nhất 1 đáp án
-          if (answers.length > 0) {
-            questions.push({
-              question_id: 0,
-              question_name,
-              question_content,
-              available,
-              answers,
-              source
-            });
-          }
+        //   if (answers.length > 0) {
+        //     questions.push({
+        //       question_id: 0,
+        //       question_name,
+        //       question_content,
+        //       available,
+        //       answers,
+        //       source
+        //     });
+        //   }
         } catch (err) {
           console.error("⚠️ Lỗi xử lý dòng CSV:", row, err);
         }

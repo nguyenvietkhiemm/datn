@@ -2,6 +2,7 @@ import path from "path";
 import slugify from "slugify";
 import crypto from "crypto";
 import { Question } from "../models/question.model";
+import { redis } from "../config/redis";
 
 const IMAGE_SECRET = process.env.IMAGE_SIGN_SECRET || "image-secret";
 
@@ -122,4 +123,18 @@ export function groupQuestionsByTypeSafe(
     return result;
 }
 
+export async function withCache<T>(
+  key: string,
+  ttlSeconds: number,
+  fetcher: () => Promise<T>
+): Promise<T>
+{
+  const cached = await redis.get(key);
+  if (cached) {
+    return JSON.parse(cached);
+  }
 
+  const data = await fetcher();
+  await redis.set(key, JSON.stringify(data), "EX", ttlSeconds);
+  return data;
+}

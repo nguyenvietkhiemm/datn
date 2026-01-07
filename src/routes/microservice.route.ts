@@ -118,7 +118,7 @@ microserviceRoute.post(
 
 microserviceRoute.post(
     "/llm/vectorize",
-    Authentication.AuthenticateToken,
+    // Authentication.AuthenticateToken,
     MicroserviceController.vectorize
 );
 
