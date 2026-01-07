@@ -141,7 +141,7 @@ const MicroserviceController = {
           headers: form.getHeaders(),
           responseType: "arraybuffer", // ZIP
           maxBodyLength: Infinity,
-          timeout: 240000, // tăng timeout nếu file lớn
+          timeout: 6000000, // tăng timeout nếu file lớn
         });
       } catch (err: any) {
         console.error("[PYTHON] DOCX processing failed:", err?.message || err);
