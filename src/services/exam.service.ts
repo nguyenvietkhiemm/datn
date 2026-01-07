@@ -385,18 +385,17 @@ const ExamService = {
         }
       }
 
+      await client.query("COMMIT");
       // Redis ranking
       const scoreInt = Math.floor(score * 1000);
       const final_score =
         scoreInt * 1_000_000 + (1_000_000 - time_test);
       await redis.zadd(
         `exam:${exam_id}:ranking`,
-        "GT",
+        // "GT",
         final_score,
         JSON.stringify({ user_id, user_name })
       );
-
-      await client.query("COMMIT");
       return { score, history_exam_id };
 
     } catch (err) {
@@ -407,155 +406,180 @@ const ExamService = {
     }
   },
 
-  async getExamRanking(
-    exam_id: number,
-    user_id: number,
-    user_name: string,
-    page: number
-  ): Promise<{
-    rank: {
-      user_id: number;
-      user_name: string;
-      score: number;
-      time_test: number;
-      final_score: number;
-    }[];
-    my_rank: {
-      rank: number;
-      score: number;
-      time_test: number;
-    } | null;
-    total_page: number;
-    total_rank: number;
-  }> {
-    try {
-      const limit = 10;
-      const start = (page - 1) * limit;
-      const end = start + limit - 1;
+async getExamRanking(
+  exam_id: number,
+  user_id: number,
+  user_name: string,
+  page: number
+): Promise<{
+  rank: {
+    user_id: number;
+    user_name: string;
+    score: number;
+    time_test: number;
+    final_score: number;
+  }[];
+  my_rank: {
+    rank: number;
+    score: number;
+    time_test: number;
+  } | null;
+  total_page: number;
+  total_rank: number;
+}> {
+  try {
+    const limit = 10;
+    const start = (page - 1) * limit;
+    const end = start + limit - 1;
 
-      // ✅ tổng số user trong BXH
-      const total_rank = await redis.zcard(
-        `exam:${exam_id}:ranking`
-      );
-      const total_page = Math.ceil(total_rank / limit);
+    const redisKey = `exam:${exam_id}:ranking`;
 
-      const redisData = await redis.zrevrange(
-        `exam:${exam_id}:ranking`,
-        start,
-        end,
-        "WITHSCORES"
-      );
+    // 1️⃣ Kiểm tra Redis có dữ liệu không
+    let total_rank = await redis.zcard(redisKey);
 
-      if (!redisData.length) {
-        return {
-          rank: [],
-          my_rank: null,
-          total_page,
-          total_rank
-        };
-      }
-
-      const userIds: number[] = [];
-      const redisMembers: {
-        user_id: number;
-        user_name: string;
-        final_score: number;
-      }[] = [];
-
-      for (let i = 0; i < redisData.length; i += 2) {
-        const member = JSON.parse(redisData[i]);
-        const final_score = Number(redisData[i + 1]);
-
-        userIds.push(member.user_id);
-        redisMembers.push({
-          user_id: member.user_id,
-          user_name: member.user_name,
-          final_score
-        });
-      }
-
-      const scoreResult = await pool.query(
+    if (total_rank === 0) {
+      // Redis trống → rebuild từ DB
+      const { rows } = await pool.query(
         `
-          SELECT user_id, score, time_test
+        SELECT h.user_id, u.user_name, h.score, h.time_test
+        FROM history_exam h
+        JOIN "user" u ON h.user_id = u.user_id
+        WHERE h.exam_id = $1
+        AND h.history_exam_id IN (
+          SELECT MAX(history_exam_id)
           FROM history_exam
           WHERE exam_id = $1
-            AND user_id = ANY($2)
+          GROUP BY user_id
+        )
         `,
-        [exam_id, userIds]
+        [exam_id]
       );
 
-      const scoreMap = new Map<
-        number,
-        { score: number; time_test: number }
-      >();
+      // Update Redis
+      for (const row of rows) {
+        const scoreInt = Math.floor(Number(row.score) * 1000);
+        const final_score = scoreInt * 1_000_000 + (1_000_000 - Number(row.time_test));
+        await redis.zadd(
+          redisKey,
+          final_score,
+          JSON.stringify({ user_id: row.user_id, user_name: row.user_name })
+        );
+      }
 
-      for (const row of scoreResult.rows) {
+      total_rank = rows.length;
+    }
+
+    const total_page = Math.ceil(total_rank / limit);
+
+    // 2️⃣ Lấy dữ liệu top N từ Redis
+    const redisData = await redis.zrevrange(redisKey, start, end, "WITHSCORES");
+
+    if (!redisData.length) {
+      return {
+        rank: [],
+        my_rank: null,
+        total_page,
+        total_rank
+      };
+    }
+
+    const userIds: number[] = [];
+    const redisMembers: {
+      user_id: number;
+      user_name: string;
+      final_score: number;
+    }[] = [];
+
+    for (let i = 0; i < redisData.length; i += 2) {
+      const member = JSON.parse(redisData[i]);
+      const final_score = Number(redisData[i + 1]);
+      userIds.push(member.user_id);
+      redisMembers.push({
+        user_id: member.user_id,
+        user_name: member.user_name,
+        final_score
+      });
+    }
+
+    // 3️⃣ Lấy score/time_test từ DB để đảm bảo chính xác
+    const scoreResult = await pool.query(
+      `
+      SELECT user_id, score, time_test
+      FROM history_exam
+      WHERE exam_id = $1
+        AND user_id = ANY($2)
+      ORDER BY history_exam_id DESC
+      `,
+      [exam_id, userIds]
+    );
+
+    const scoreMap = new Map<number, { score: number; time_test: number }>();
+
+    for (const row of scoreResult.rows) {
+      if (!scoreMap.has(row.user_id)) {
         scoreMap.set(row.user_id, {
           score: Number(row.score),
           time_test: Number(row.time_test)
         });
       }
+    }
 
-      const rank = redisMembers.map(m => {
-        const detail = scoreMap.get(m.user_id);
-        return {
-          user_id: m.user_id,
-          user_name: m.user_name,
-          score: detail?.score ?? 0,
-          time_test: detail?.time_test ?? 0,
-          final_score: m.final_score
-        };
-      });
+    // 4️⃣ Tạo rank array
+    const rank = redisMembers.map(m => {
+      const detail = scoreMap.get(m.user_id);
+      return {
+        user_id: m.user_id,
+        user_name: m.user_name,
+        score: detail?.score ?? 0,
+        time_test: detail?.time_test ?? 0,
+        final_score: m.final_score
+      };
+    });
 
-      // lấy hạng của user hiện tại
-      const memberKey = JSON.stringify({ user_id, user_name });
-      const myRankIndex = await redis.zrevrank(
-        `exam:${exam_id}:ranking`,
-        memberKey
+    // 5️⃣ Lấy hạng của user hiện tại
+    const memberKey = JSON.stringify({ user_id, user_name });
+    const myRankIndex = await redis.zrevrank(redisKey, memberKey);
+
+    let my_rank = null;
+    if (myRankIndex !== null) {
+      const myScoreResult = await pool.query(
+        `
+        SELECT score, time_test
+        FROM history_exam
+        WHERE exam_id = $1
+          AND user_id = $2
+        ORDER BY history_exam_id DESC
+        LIMIT 1
+        `,
+        [exam_id, user_id]
       );
 
-      let my_rank = null;
-
-      if (myRankIndex !== null) {
-        const myScoreResult = await pool.query(
-          `
-            SELECT score, time_test
-            FROM history_exam
-            WHERE exam_id = $1
-              AND user_id = $2
-            ORDER BY history_exam_id DESC
-            LIMIT 1
-          `,
-          [exam_id, user_id]
-        );
-
-        const myRow = myScoreResult.rows[0];
-        if (myRow) {
-          my_rank = {
-            rank: myRankIndex + 1,
-            score: Number(myRow.score),
-            time_test: Number(myRow.time_test)
-          };
-        }
+      const myRow = myScoreResult.rows[0];
+      if (myRow) {
+        my_rank = {
+          rank: myRankIndex + 1,
+          score: Number(myRow.score),
+          time_test: Number(myRow.time_test)
+        };
       }
-
-      return {
-        rank,
-        my_rank,
-        total_page,
-        total_rank
-      };
-
-    } catch (err) {
-      console.error("Lỗi lấy xếp hạng:", err);
-      return {
-        rank: [],
-        my_rank: null,
-        total_page: 0,
-        total_rank: 0
-      };
     }
-  },
+
+    return {
+      rank,
+      my_rank,
+      total_page,
+      total_rank
+    };
+  } catch (err) {
+    console.error("Lỗi lấy xếp hạng:", err);
+    return {
+      rank: [],
+      my_rank: null,
+      total_page: 0,
+      total_rank: 0
+    };
+  }
+},
 
   async getUserListExamHistory(
     user_id: number
