@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import { BookOpen, Award, Clock, CheckCircle, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
@@ -41,7 +40,8 @@ export default function LandingPage() {
             Học không chỉ để thi, học để bứt phá chính mình.
           </p>
 
-          <Button
+          <Link
+            href="/practice"
             className="
                   font-heading
                   text-lg
@@ -57,7 +57,7 @@ export default function LandingPage() {
                 "
           >
             Bắt đầu ngay!
-          </Button>
+          </Link>
 
         </motion.div>
 
@@ -80,7 +80,7 @@ export default function LandingPage() {
             { title: "Tiếng Anh 12", desc: "Luyện ngữ pháp, từ vựng và các đề thi thật." },
             { title: "Vật lý 12", desc: "Tổng hợp bài tập trọng tâm và đề thi thử chuẩn cấu trúc." },
             { title: "Hóa học 12", desc: "Các chuyên đề nâng cao và bài tập chọn lọc." },
-            { title: "Lịch sử & Địa lý", desc: "Ôn luyện nhanh, nắm vững các mốc thời gian & sự kiện." },
+            { title: "Lịch sử 12", desc: "Ôn luyện nhanh, nắm vững các mốc thời gian & sự kiện." },
           ].map((course, i) => (
             <motion.div
               key={i}
@@ -96,9 +96,9 @@ export default function LandingPage() {
                 {course.desc}
               </p>
               <Link
-                href="#"
+                href="/practice"
                 className="text-indigo-500 font-medium inline-flex items-center hover:text-indigo-600 transition">
-                Xem chi tiết <ArrowRight className="w-4 h-4 ml-1" />
+                Bắt đầu học tập <ArrowRight className="w-4 h-4 ml-1" />
               </Link>
             </motion.div>
           ))}
