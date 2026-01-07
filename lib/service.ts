@@ -30,6 +30,10 @@ export function FilterSearch(filterCondition: any, searchKeyword: string, url: s
     if (filterCondition?.topic_ids && filterCondition.topic_ids.length > 0) {
         url += `&topic_ids=${filterCondition.topic_ids.join(",")}`;
     }
+    
+    if(filterCondition?.subject_id){
+        url += `&subject_id=${filterCondition.subject_id}`
+    }
 
     // Search
     if (searchKeyword.trim().length > 0) {

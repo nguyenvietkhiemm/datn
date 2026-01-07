@@ -132,10 +132,6 @@ export default function Filter(
 
         if (selectedTopic !== "All") {
             filterTopicIds = [Number(selectedTopic)];
-        } else if (selectedSubject !== "All") {
-            filterTopicIds = topics
-                .filter((t) => t.subject_id === selectedSubject)
-                .map((t) => t.topic_id);
         }
     
         setSearchKeyword("");
