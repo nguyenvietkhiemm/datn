@@ -84,6 +84,7 @@ export default function Exam() {
   const handleChangeFilter = (filter: any) => {
     setQuery((prev) => ({
       ...prev,
+      page: 1,
       subject_id: filter.subject !== "All" ? filter.subject : undefined,
       topic_ids: filter.topic !== "All" ? filter.topic : undefined,
       status: filter.status !== "All" ? filter.status : undefined,
