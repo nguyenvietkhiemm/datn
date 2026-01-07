@@ -5,7 +5,6 @@ export const ExamService = {
   // Fetch Exams
   async fetchExams(query: ExamQuery) {
     const token = getToken();
-    console.log(query);
 
     const params = new URLSearchParams();
 

@@ -5,10 +5,10 @@ import { getHeaders, getToken, API_URL } from "@/lib/service";
 export const ScheduleService = {
 
     // Lấy toàn bộ lịch thi
-    async fetchSchedules() {
+    async fetchSchedules(currentPage: number) {
         const token = getToken();
 
-        const res = await fetch(`${API_URL}/exams/schedule`, {
+        const res = await fetch(`${API_URL}/exams/schedule?page=${currentPage}`, {
             method: "GET",
             headers: getHeaders(token),
         });

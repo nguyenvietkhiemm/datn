@@ -58,9 +58,13 @@ export default function ExamCreate() {
         if (!subjectRes.ok) throw new Error("Lỗi tải môn học");
         if (!topicRes.ok) throw new Error("Lỗi tải chủ đề");
 
+        const now = new Date();
 
-        setExamSchedules(scheduleData.data?.schedules || []);
+        const validSchedules = (scheduleData.data?.schedules || []).filter(
+          (item: any) => new Date(item.end_time).getTime() >= now.getTime()
+        );
 
+        setExamSchedules(validSchedules);
         setSubjects(subjectData.data || []);
         setTopics(topicData.data || []);
       } catch (err) {
@@ -70,6 +74,7 @@ export default function ExamCreate() {
 
     fetchAll();
   }, [API_URL, token]);
+
 
   useEffect(() => {
     setFilterTopic(
