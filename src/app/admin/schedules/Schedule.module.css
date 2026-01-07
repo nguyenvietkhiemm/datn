@@ -72,6 +72,11 @@
   border: 1px solid #ccc;
 }
 
+.schedule_table th:nth-child(2),
+.schedule_table td:nth-child(2) {
+  width: 420px;
+}
+
 .schedule_table th:last-child,
 .schedule_table td:last-child {
   width: 160px;
@@ -106,7 +111,7 @@
   border-radius: 6px;
   text-transform: capitalize;
   display: inline-block;
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 
 .pending {
@@ -185,7 +190,7 @@
 
 .timeArrow {
   font-size: 12px;
-  color: #9ca3af;
+  color: #000000;
 }
 
 /* Responsive nhỏ: stack dọc */

@@ -130,7 +130,7 @@ export default function Schedule() {
                           }
                         >
                           <div>{formatVNDateTime(item.start_time)}</div>
-                          <div className={styles.timeArrow}>→</div>
+                          <div className={styles.timeArrow}> → </div>
                           <div>{formatVNDateTime(item.end_time)}</div>
                         </td>
 
@@ -169,6 +169,7 @@ export default function Schedule() {
                   })}
                 </tbody>
               </table>
+              
             </div>
           </motion.div>
         )}

@@ -6,7 +6,7 @@ import React from "react";
 import NotificationIcon from "./icon/NotificationIcon";
 import { Button } from "../ui/button/Button";
 
-export type NotificationType = "success" | "error" | "warning" | "info";
+export type NotificationType = "success" | "error" | "warning" | "info" | "loading";
 
 interface NotificationPopupProps {
     message: React.ReactNode;
