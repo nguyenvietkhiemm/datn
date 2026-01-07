@@ -26,7 +26,7 @@ export default function Bank() {
       try {
         const res = await BankService.fetchBank({
           page: currentPage,
-          topics: filterCondition?.topics,
+          topics: filterCondition?.topic_ids,
           search: searchKeyword,
           subject_id: filterCondition?.subject_id
         });
