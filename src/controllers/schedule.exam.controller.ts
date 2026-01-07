@@ -4,16 +4,18 @@ import { ScheduleExamService } from "../services/schedule.exam.service";
 import { ScheduleExam } from "../models/schedule.exam.model";
 
 export const  ScheduleExamController = {
-    // ✅ Lấy danh sách tất cả lịch thi
+  
     async getAll(req: Request, res: Response) {
-        console.log("ScheduleExamController.getAll called");
         const result: DefaultResponse<any> = await safeExecute(async () => {
+            const pageRaw = req.query.page;
+            const page = pageRaw ? Number(pageRaw) : undefined;
+          
             return {
-                status: 200,
-                message: "Lấy danh sách lịch thi thành công",
-                data: await ScheduleExamService.getAll(),
+              status: 200,
+              message: "Lấy danh sách lịch thi thành công",
+              data: await ScheduleExamService.getAll(page),
             };
-        });
+          });
 
         return res.status(result.status).json(result);
     },

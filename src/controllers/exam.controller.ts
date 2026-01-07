@@ -16,7 +16,6 @@ const ExamController = {
       const subject_id = req.query.subject_id
         ? Number(req.query.subject_id)
         : "All"
-        console.log(subject_id);
         
       return {
         status: 200,

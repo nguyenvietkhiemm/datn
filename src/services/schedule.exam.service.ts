@@ -4,42 +4,61 @@ import { ScheduleExam } from "../models/schedule.exam.model";
 export const ScheduleExamService = {
         //  Lấy danh sách tất cả lịch thi (có phân trang)
         async getAll(
-                limit: number = 20,
-                offset: number = 0
+                page?: number
         ): Promise<{
                 schedules: ScheduleExam[];
                 totalPages: number;
         }> {
-                // Lấy data
-                const dataQuery = `
-                        SELECT
-                        es.exam_schedule_id,
-                        es.start_time,
-                        es.end_time,
-                        es.created_at,
-                        es.updated_at,
-                        COUNT(e.exam_id) AS total_exams
-                FROM exam_schedule es
-                LEFT JOIN exam e
-                        ON e.exam_schedule_id = es.exam_schedule_id
-                GROUP BY es.exam_schedule_id
-                ORDER BY es.exam_schedule_id
-                LIMIT $1 OFFSET $2;              
-                `;
+                const isPaging = Number.isInteger(page) && page! > 0;
 
-                const dataResult = await query(dataQuery, [limit, offset]);
+                const limit = 10;
+                const offset = isPaging ? (page! - 1) * limit : 0;
 
-                //Lấy tổng số record
+                // Query data
+                const dataQuery = isPaging
+                        ? `
+                    SELECT
+                      es.exam_schedule_id,
+                      es.start_time,
+                      es.end_time,
+                      es.created_at,
+                      es.updated_at,
+                      COUNT(e.exam_id) AS total_exams
+                    FROM exam_schedule es
+                    LEFT JOIN exam e
+                      ON e.exam_schedule_id = es.exam_schedule_id
+                    GROUP BY es.exam_schedule_id
+                    ORDER BY es.exam_schedule_id
+                    LIMIT $1 OFFSET $2;
+                  `
+                        : `
+                    SELECT
+                      es.exam_schedule_id,
+                      es.start_time,
+                      es.end_time,
+                      es.created_at,
+                      es.updated_at,
+                      COUNT(e.exam_id) AS total_exams
+                    FROM exam_schedule es
+                    LEFT JOIN exam e
+                      ON e.exam_schedule_id = es.exam_schedule_id
+                    GROUP BY es.exam_schedule_id
+                    ORDER BY es.exam_schedule_id;
+                  `;
+
+                const dataResult = isPaging
+                        ? await query(dataQuery, [limit, offset])
+                        : await query(dataQuery);
+
+                // Count tổng record
                 const countQuery = `
                   SELECT COUNT(*)::int AS total
                   FROM exam_schedule
                 `;
-
                 const countResult = await query(countQuery);
                 const totalRecords = countResult.rows[0].total;
 
-                // Tính totalPages
-                const totalPages = Math.ceil(totalRecords / limit);
+                const totalPages = isPaging ? Math.ceil(totalRecords / limit) : 1;
 
                 return {
                         schedules: dataResult.rows as ScheduleExam[],
