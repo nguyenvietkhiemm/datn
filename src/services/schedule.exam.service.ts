@@ -4,7 +4,7 @@ import { ScheduleExam } from "../models/schedule.exam.model";
 export const ScheduleExamService = {
         //  Lấy danh sách tất cả lịch thi (có phân trang)
         async getAll(
-                limit: number = 20,
+                limit: number = 10,
                 offset: number = 0
         ): Promise<{
                 schedules: ScheduleExam[];
