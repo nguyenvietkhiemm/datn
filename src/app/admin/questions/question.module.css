@@ -236,9 +236,10 @@
 }
 
 /* wrapper mỗi select */
-.filterType > div {
+.filterType>div {
     display: flex;
 }
+
 /* select */
 .select {
     min-width: 180px;
@@ -267,6 +268,7 @@
     box-shadow: 0 0 0 2px rgba(2, 52, 109, 0.15);
     background-color: #ffffff;
 }
+
 /* ===== Close button ===== */
 .closeBtn {
     background: transparent;
@@ -320,8 +322,8 @@
     padding: 6px 12px;
     border-radius: 8px;
     cursor: pointer;
-    background-color: #ef4444;
-    color: white;
+    background-color: #fee2e2;
+    color: #b91c1c;
     font-weight: 600;
     transition: all 0.2s;
 }

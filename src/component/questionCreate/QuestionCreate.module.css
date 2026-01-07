@@ -22,7 +22,8 @@
     flex-direction: column;
     gap: 12px;
 
-    margin-top: 16px;              /* 🔥 QUAN TRỌNG */
+    margin-top: 16px;
+    /* 🔥 QUAN TRỌNG */
     padding-top: 16px;
 
     border-top: 1px dashed #e5e7eb;
@@ -112,8 +113,8 @@
     font-size: 14px;
     font-weight: 600;
 
-    color: #dc2626;
-    background: transparent;
+    background-color: #fee2e2;
+    color: #b91c1c;
 
     border: 1px solid transparent;
     border-radius: 999px;
@@ -227,7 +228,7 @@
     background: #f3f4f6;
 }
 
-.radioItem input:checked + span {
+.radioItem input:checked+span {
     font-weight: 600;
     color: #2563eb;
 }
@@ -245,8 +246,8 @@
     align-items: center;
     gap: 12px;
 
-    padding: 10px 12px;        
-    border-radius: 8px;        
+    padding: 10px 12px;
+    border-radius: 8px;
 
     background: #ffffff;
     border: 1px solid #e5e7eb;

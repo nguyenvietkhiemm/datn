@@ -6,7 +6,7 @@ export const ExamService = {
   async fetchExams(query: ExamQuery) {
     const token = getToken();
     console.log(query);
-    
+
     const params = new URLSearchParams();
 
     // bắt buộc
@@ -22,13 +22,13 @@ export const ExamService = {
     }
 
     if (query.topic_ids) {
-        params.append("topic_ids", query.topic_ids.toString())
+      params.append("topic_ids", query.topic_ids.toString())
     }
 
     if (query.status) {
       params.append("available", query.status);
     }
-    
+
     const res = await fetch(
       `${API_URL}/exams?${params.toString()}`,
       {
@@ -43,6 +43,32 @@ export const ExamService = {
       throw new Error("Không thể lấy danh sách bài thi");
     }
 
+    if (Array.isArray(data?.data?.exams)) {
+      const now = new Date(); // UTC internally
+
+      data.data.exams.sort((a: any, b: any) => {
+        const startA = new Date(a.start_time);
+        const endA = new Date(a.end_time);
+        const startB = new Date(b.start_time);
+        const endB = new Date(b.end_time);
+
+        const isRunningA = startA <= now && now <= endA;
+        const isRunningB = startB <= now && now <= endB;
+
+        // 1. Ưu tiên exam đang diễn ra
+        if (isRunningA !== isRunningB) {
+          return isRunningA ? -1 : 1;
+        }
+
+        // 2. Ưu tiên số người tham gia (DESC)
+        const countDiff =
+          Number(b.contestant_count) - Number(a.contestant_count);
+        if (countDiff !== 0) return countDiff;
+
+        // 3. Exam mới hơn (start_time DESC)
+        return startB.getTime() - startA.getTime();
+      });
+    }
     return {
       exams: data.data.exams as Exam[],
       totalPages: data.data.totalPages as number,

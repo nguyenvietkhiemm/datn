@@ -60,16 +60,21 @@
 .schedule_table {
   width: 100%;
   border-collapse: collapse;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid #ccc;
   background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 0;        /* ❌ bỏ bo góc */
+  overflow: visible;      /* ❌ không cắt */
 }
 
 .schedule_table th,
 .schedule_table td {
   padding: 12px 10px;
   border: 1px solid #ccc;
+}
+
+.schedule_table th:last-child,
+.schedule_table td:last-child {
+  width: 160px;
 }
 
 /* Header màu xanh đậm, chữ trắng */
@@ -257,6 +262,13 @@
   transform: scale(1.05);
 }
 
+.editBtn,
+.deleteBtn {
+  min-width: 56px;
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
 /* Khi bảng trống */
 .empty {
   text-align: center;
@@ -293,6 +305,6 @@
 
 .confirmActions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 12px;
 }

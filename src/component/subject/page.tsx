@@ -71,7 +71,8 @@ export default function SubjectManager({
             <th>STT</th>
             <th>Tên môn học</th>
             <th>Loại môn học</th>
-            <th>Hành động</th>
+            <th>Sửa</th>
+            <th>Xoá</th>
           </tr>
         </thead>
         <tbody>
@@ -93,47 +94,53 @@ export default function SubjectManager({
 
               <td>{s.subject_type}</td>
 
-              <td>
                 {editingId === s.subject_id ? (
                   <>
-                    <button
-                      className={styles.saveBtn}
-                      onClick={() => {
-                        onUpdate(s.subject_id, editName);
-                        setEditingId(null);
-                      }}
-                    >
-                      Lưu
-                    </button>
-                    <button
-                      className={styles.cancelBtn}
-                      onClick={() => setEditingId(null)}
-                    >
-                      Huỷ
-                    </button>
+                    <td>
+                      <button
+                        className={styles.saveBtn}
+                        onClick={() => {
+                          onUpdate(s.subject_id, editName);
+                          setEditingId(null);
+                        }}
+                      >
+                        Lưu
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        className={styles.cancelBtn}
+                        onClick={() => setEditingId(null)}
+                      >
+                        Huỷ
+                      </button>
+                    </td>
                   </>
                 ) : (
                   <>
-                    <button
-                      className={styles.editBtn}
-                      onClick={() => {
-                        setEditingId(s.subject_id);
-                        setEditName(s.subject_name);
-                      }}
-                    >
-                      Sửa
-                    </button>
-                    <button
-                      className={styles.deleteBtn}
-                      onClick={() => {
-                        if (confirm("Xoá môn học?")) onDelete(s.subject_id);
-                      }}
-                    >
-                      Xoá
-                    </button>
+                    <td>
+                      <button
+                        className={styles.editBtn}
+                        onClick={() => {
+                          setEditingId(s.subject_id);
+                          setEditName(s.subject_name);
+                        }}
+                      >
+                        Sửa
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        className={styles.deleteBtn}
+                        onClick={() => {
+                          if (confirm("Xoá môn học?")) onDelete(s.subject_id);
+                        }}
+                      >
+                        Xoá
+                      </button>
+                    </td>
                   </>
                 )}
-              </td>
             </tr>
           ))}
         </tbody>

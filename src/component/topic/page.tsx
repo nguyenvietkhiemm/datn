@@ -108,7 +108,8 @@ export default function TopicManager({
             <th>Tiêu đề</th>
             <th>Mô tả</th>
             <th>Môn học</th>
-            <th>Hành động</th>
+            <th>Sửa</th>
+            <th>Xoá</th>
           </tr>
         </thead>
 
@@ -173,9 +174,9 @@ export default function TopicManager({
                 )}
               </td>
 
-              <td>
-                {editingId === t.topic_id ? (
-                  <>
+              {editingId === t.topic_id ? (
+                <>
+                  <td>
                     <button
                       className={styles.saveBtn}
                       onClick={() => {
@@ -185,15 +186,19 @@ export default function TopicManager({
                     >
                       Lưu
                     </button>
+                  </td>
+                  <td>
                     <button
                       className={styles.cancelBtn}
                       onClick={() => setEditingId(null)}
                     >
                       Huỷ
                     </button>
-                  </>
-                ) : (
-                  <>
+                  </td>
+                </>
+              ) : (
+                <>
+                  <td>
                     <button
                       className={styles.editBtn}
                       onClick={() => {
@@ -203,6 +208,8 @@ export default function TopicManager({
                     >
                       Sửa
                     </button>
+                  </td>
+                  <td>
                     <button
                       className={styles.deleteBtn}
                       onClick={() => {
@@ -211,9 +218,9 @@ export default function TopicManager({
                     >
                       Xoá
                     </button>
-                  </>
-                )}
-              </td>
+                  </td>
+                </>
+              )}
             </tr>
           ))}
         </tbody>

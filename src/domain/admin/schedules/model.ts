@@ -10,4 +10,5 @@ export const ScheduleModel = {
         if (now <= endTime) return "ONGOING";
         return "FINISHED";
     }
+    
 };

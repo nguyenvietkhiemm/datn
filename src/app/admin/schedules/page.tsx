@@ -10,6 +10,7 @@ import ScheduleExamView from "./detail/[id]/page";
 import ExamScheduleCreate from "./create/page";
 import Pagination from "@/component/pagination/Pagination";
 import { formatVNDateTime } from "@/lib/model";
+import { ScheduleModel } from "@/domain/admin/schedules/model";
 
 type ViewMode = "LIST" | "DETAIL";
 type ScheduleStatus = "UPCOMING" | "ONGOING" | "FINISHED";
@@ -27,16 +28,6 @@ export default function Schedule() {
   const [deleteId, setDeleteId] = useState<number | null>(null);
 
   /* STATUS LOGIC */
-
-  const getStatus = (start: string, end: string): ScheduleStatus => {
-    const now = Date.now();
-    const startTime = new Date(start).getTime();
-    const endTime = new Date(end).getTime();
-
-    if (now < startTime) return "UPCOMING";
-    if (now <= endTime) return "ONGOING";
-    return "FINISHED";
-  };
 
   const renderStatus = (status: ScheduleStatus) => {
     switch (status) {
@@ -114,16 +105,18 @@ export default function Schedule() {
                     <th>Trạng thái</th>
                     <th>Tổng bài thi</th>
                     <th>Cập nhật</th>
-                    <th>Hành động</th>
+                    <th>Sửa</th>
+                    <th>Xoá</th>
                   </tr>
                 </thead>
 
                 <tbody>
                   {filterSchedules.map((item, index) => {
-                    const status = getStatus(
+                    const status = ScheduleModel.getStatus(
                       item.start_time,
                       item.end_time
                     );
+
                     const isOngoing = status === "ONGOING";
 
                     return (
@@ -146,7 +139,7 @@ export default function Schedule() {
                         <td>{item.total_exams}</td>
                         <td>{formatVNDateTime(item.updated_at)}</td>
 
-                        <td className={styles.actions}>
+                        <td>
                           <button
                             className={styles.editBtn}
                             disabled={isOngoing}
@@ -158,7 +151,8 @@ export default function Schedule() {
                           >
                             Sửa
                           </button>
-
+                        </td>
+                        <td>
                           <button
                             className={styles.deleteBtn}
                             disabled={isOngoing}

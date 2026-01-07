@@ -5,7 +5,7 @@
   padding: 20px;
   border-radius: 8px;
   border: 1px solid #e5e7eb;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .sectionTitle {
@@ -35,7 +35,7 @@
 .formRow input:focus,
 .formRow select:focus {
   border-color: #02346d;
-  box-shadow: 0 0 0 2px rgba(2,52,109,0.15);
+  box-shadow: 0 0 0 2px rgba(2, 52, 109, 0.15);
   outline: none;
 }
 
@@ -72,7 +72,7 @@
   margin-top: 12px;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
 .table th,
@@ -117,8 +117,8 @@
   padding: 6px 12px;
   border-radius: 8px;
   cursor: pointer;
-  background-color: #ef4444;
-  color: white;
+  background-color: #fee2e2;
+  color: #b91c1c;
   font-weight: 600;
   transition: all 0.2s;
 }
@@ -134,15 +134,19 @@
   padding: 6px 12px;
   border-radius: 8px;
   cursor: pointer;
-  background-color: #dbeafe; /* blue-100 */
-  color: #1d4ed8;           /* blue-700 */
+  background-color: #dbeafe;
+  /* blue-100 */
+  color: #1d4ed8;
+  /* blue-700 */
   font-weight: 600;
   transition: all 0.2s;
 }
 
 .editBtn:hover {
-  background-color: #93c5fd; /* blue-300 */
-  color: #1e3a8a;            /* blue-900 */
+  background-color: #93c5fd;
+  /* blue-300 */
+  color: #1e3a8a;
+  /* blue-900 */
   transform: scale(1.05);
 }
 
@@ -150,6 +154,7 @@
   background: #16a34a;
   color: white;
 }
+
 .saveBtn:hover {
   background: #13803d;
   transform: translateY(-1px);
@@ -159,6 +164,7 @@
   background: #6b7280;
   color: white;
 }
+
 .cancelBtn:hover {
   background: #4b5563;
   transform: translateY(-1px);
@@ -177,6 +183,6 @@
 .inlineInput:focus,
 .inlineSelect:focus {
   border-color: #02346d;
-  box-shadow: 0 0 0 2px rgba(2,52,109,0.15);
+  box-shadow: 0 0 0 2px rgba(2, 52, 109, 0.15);
   outline: none;
 }

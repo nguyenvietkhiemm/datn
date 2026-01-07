@@ -1,4 +1,4 @@
-import { Exam } from "../exams/type";
+import { ScheduleModel } from "./model";
 import { ExamSchedule, ExamScheduleCreate } from "./type";
 import { getHeaders, getToken, API_URL } from "@/lib/service";
 
@@ -16,6 +16,31 @@ export const ScheduleService = {
         if (!res.ok) throw new Error("Không thể lấy danh sách lịch thi");
 
         const data = await res.json();
+
+        const STATUS_PRIORITY = {
+            ONGOING: 1,
+            UPCOMING: 2,
+            FINISHED: 3
+        };
+        if (Array.isArray(data?.data?.schedules)) {
+            const now = Date.now();
+            data.data.schedules.sort((a: any, b: any) => {
+                const statusA = ScheduleModel.getStatus(a.start_time, a.end_time);
+                const statusB = ScheduleModel.getStatus(b.start_time, b.end_time);
+                console.log({statusA, statusB});
+                
+                // So sánh theo trọng số trạng thái trước
+                if (STATUS_PRIORITY[statusA] !== STATUS_PRIORITY[statusB]) {
+                    return STATUS_PRIORITY[statusA] - STATUS_PRIORITY[statusB];
+                }
+
+                // Nếu cùng trạng thái, so sánh end_time (lớn hơn lên trước)
+                const endA = new Date(a.end_time).getTime();
+                const endB = new Date(b.end_time).getTime();
+
+                return endA - endB;
+            });
+        }
         return data.data;
     },
 
