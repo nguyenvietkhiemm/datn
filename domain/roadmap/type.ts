@@ -1,38 +1,38 @@
 export type ResourceType =
-  | "article"
-  | "video"
-  | "quiz"
-  | "pdf"
-  | "external";
+    | "article"
+    | "video"
+    | "quiz"
+    | "pdf"
+    | "external";
 
 export type ResourceAccess = "free" | "pro";
 
 export interface Resource {
-  type: ResourceType;
-  title: string;
-  url: string;
-  access: ResourceAccess;
+    type: ResourceType;
+    title: string;
+    url: string;
+    access: ResourceAccess;
 }
 
 export interface SubStep {
-  sub_step_id: number;
-  title: string;
-  content: string;
-  resources?: Resource[];
+    sub_step_id: number;
+    title: string;
+    content: string;
+    resources?: Resource[];
 }
 
 export interface RoadmapStep {
-  roadmap_step_id: number;
-  title: string;
-  description: string;
-  subSteps: SubStep[];
+    roadmap_step_id: number;
+    title: string;
+    description: string;
+    subSteps: SubStep[];
 }
 
 export interface Roadmap {
-  roadmap_id: number;
-  title: string;
-  description: string;
-  steps: RoadmapStep[];
+    roadmap_id: number;
+    title: string;
+    description: string;
+    steps: RoadmapStep[];
 }
 
 export const ROADMAPS: Roadmap[] = [
@@ -56,16 +56,16 @@ export const ROADMAPS: Roadmap[] = [
                             {
                                 type: "article",
                                 title: "Giới thiệu khái niệm cơ bản",
-                                url: "",
-                                access: "free"
+                                url: "/theory/khai-niem-co-ban",
+                                access: "free",
                             },
                             {
                                 type: "video",
                                 title: "Video: Khái niệm nền tảng cần nhớ",
-                                url: "",
-                                access: "free"
-                            }
-                        ]
+                                url: "https://www.youtube.com/watch?v=5MgBikgcWnY",
+                                access: "free",
+                            },
+                        ],
                     },
                     {
                         sub_step_id: 2,
@@ -76,16 +76,16 @@ export const ROADMAPS: Roadmap[] = [
                             {
                                 type: "article",
                                 title: "Danh sách công thức trọng tâm",
-                                url: "",
-                                access: "free"
+                                url: "/formula/cong-thuc-trong-tam",
+                                access: "free",
                             },
                             {
                                 type: "pdf",
                                 title: "PDF: Công thức cần nhớ",
-                                url: "",
-                                access: "free"
-                            }
-                        ]
+                                url: "/files/cong-thuc-can-nho.pdf",
+                                access: "free",
+                            },
+                        ],
                     },
                     {
                         sub_step_id: 3,
@@ -96,12 +96,12 @@ export const ROADMAPS: Roadmap[] = [
                             {
                                 type: "article",
                                 title: "Các lỗi sai thường gặp khi áp dụng công thức",
-                                url: "",
-                                access: "free"
-                            }
-                        ]
-                    }
-                ]
+                                url: "/mistakes/loi-ap-dung-cong-thuc",
+                                access: "free",
+                            },
+                        ],
+                    },
+                ],
             },
             {
                 roadmap_step_id: 2,
@@ -112,7 +112,7 @@ export const ROADMAPS: Roadmap[] = [
                         sub_step_id: 4,
                         title: "Áp dụng trực tiếp công thức",
                         content:
-                            "Giải nhanh các bài chỉ cần thế số và tính toán cơ bản."
+                            "Giải nhanh các bài chỉ cần thế số và tính toán cơ bản.",
                     },
                     {
                         sub_step_id: 5,
@@ -123,14 +123,14 @@ export const ROADMAPS: Roadmap[] = [
                             {
                                 type: "quiz",
                                 title: "Quiz: Lý thuyết cơ bản",
-                                url: "",
-                                access: "free"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+                                url: "/quiz/ly-thuyet-co-ban",
+                                access: "free",
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
     },
 
     {
@@ -153,10 +153,10 @@ export const ROADMAPS: Roadmap[] = [
                             {
                                 type: "article",
                                 title: "Cách đọc và phân tích đề hiệu quả",
-                                url: "",
-                                access: "free"
-                            }
-                        ]
+                                url: "/skills/phan-tich-de",
+                                access: "free",
+                            },
+                        ],
                     },
                     {
                         sub_step_id: 7,
@@ -167,12 +167,12 @@ export const ROADMAPS: Roadmap[] = [
                             {
                                 type: "video",
                                 title: "Video: Kỹ thuật biến đổi công thức",
-                                url: "",
-                                access: "free"
-                            }
-                        ]
-                    }
-                ]
+                                url: "https://www.youtube.com/watch?v=7m0gJ8zG5Xk",
+                                access: "free",
+                            },
+                        ],
+                    },
+                ],
             },
             {
                 roadmap_step_id: 4,
@@ -183,7 +183,7 @@ export const ROADMAPS: Roadmap[] = [
                         sub_step_id: 8,
                         title: "Bài toán tổng hợp",
                         content:
-                            "Kết hợp nhiều chương, nhiều kiến thức trong cùng một bài."
+                            "Kết hợp nhiều chương, nhiều kiến thức trong cùng một bài.",
                     },
                     {
                         sub_step_id: 9,
@@ -195,13 +195,14 @@ export const ROADMAPS: Roadmap[] = [
                                 type: "article",
                                 title: "Chiến thuật làm bài đạt điểm cao",
                                 url: "/skills/chien-thuat-lam-bai",
-                                access: "free"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    }
+                                access: "free",
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
 ];
+
 
