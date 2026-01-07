@@ -31,7 +31,7 @@ export function FilterSearch(filterCondition: any, searchKeyword: string, url: s
 
     // Search
     if (searchKeyword.trim().length > 0) {
-        url += `&search=${encodeURIComponent(searchKeyword)}`;
+        url += `&keyword=${encodeURIComponent(searchKeyword)}`;
     }
     return url
 }
