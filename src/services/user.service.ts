@@ -6,12 +6,12 @@ const UserService = {
     async getAll(
         page: number,
         status: string,
-        role: string,
+        role: number | string,
         searchValue: string
     ): Promise<{ users: User[]; totalPages: number }> {
         const limit = 12;
         const offset = (page - 1) * limit;
-
+        
         const params: any[] = [];
         let paramIndex = 1;
 
@@ -26,7 +26,7 @@ const UserService = {
 
         // ===== FILTER ROLE =====
         if (role && role !== "All") {
-            whereClause += ` AND r.role_name = $${paramIndex}`;
+            whereClause += ` AND r.role_id = $${paramIndex}`;
             params.push(role);
             paramIndex++;
         }

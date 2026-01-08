@@ -18,7 +18,7 @@ const UserController = {
             const result = await UserService.getAll(
                 pageNumber,
                 status as string,
-                role as string,
+                role as number | string,
                 search as string
             );
 
