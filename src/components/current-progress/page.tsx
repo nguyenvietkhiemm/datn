@@ -21,6 +21,7 @@ export default function CurrentProgress({ isOpen, setIsOpen }: CurrentProp) {
     const [goals, setGoals] = useState<Goal[]>([]);
     const API = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
     const token = Cookies.get("token");
+    const [mounted, setMounted] = useState(false);
 
     const fetchGoals = async () => {
         try {
@@ -54,6 +55,11 @@ export default function CurrentProgress({ isOpen, setIsOpen }: CurrentProp) {
         setIsOpen(false);
     };
 
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) return null;
     // Tính % tiến độ
     const calcProgress = (goal: Goal) => {
         const target = Number(goal.target_score);
