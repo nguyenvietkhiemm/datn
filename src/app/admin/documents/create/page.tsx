@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import { Topic, Subject } from "@/domain/admin/topic_subject/type";
 import { TopicSubjectService } from "@/domain/admin/topic_subject/service";
 import { DocumentService } from "@/domain/admin/documents/service";
+import { typeNoti } from "@/lib/model";
+import NotificationPopup from "@/component/notification/Notification";
 
 export default function DocumentCreate() {
   const [title, setTitle] = useState("");
@@ -18,7 +20,7 @@ export default function DocumentCreate() {
   const [filterTopic, setFilterTopic] = useState<Topic[]>([]);
   const embedding = "";
   const router = useRouter();
-
+  const [notify, setNotify] = useState<typeNoti | null>(null);
   const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
   const token = Cookies.get("token");
 
@@ -47,18 +49,27 @@ export default function DocumentCreate() {
   //  Xử lý submit form
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     if (!title || !file || !topicId || !subjectId) {
-      alert("Vui lòng điền đầy đủ thông tin và chọn file!");
+      setNotify({
+        message: "Vui lòng điền đầy đủ thông tin và chọn file!",
+        type: "warning",
+      })
       return;
     }
     try {
       await DocumentService.create(title, topicId, file);
-      alert("Tải tài liệu thành công!");
+      setNotify({
+        message: "Tải tài liệu thành công!",
+        type: "success",
+      })
       router.push("/admin/documents");
     } catch (error) {
       console.error(error);
-      alert("Không thể tải tài liệu!");
+      setNotify({
+        message: "Không thể tải tài liệu!",
+        type: "error",
+      })
     }
   };
 
@@ -121,6 +132,13 @@ export default function DocumentCreate() {
           Lưu tài liệu
         </button>
       </form>
+      {notify && (
+        <NotificationPopup
+          message={notify.message}
+          type={notify.type}
+          onClose={() => setNotify(null)}
+        />
+      )}
     </div>
   );
 }
