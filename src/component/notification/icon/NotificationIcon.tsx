@@ -47,6 +47,40 @@ export default function NotificationIcon({ type }: Props) {
                 </svg>
             );
 
+        case "loading":
+            return (
+                <svg
+                    viewBox="0 0 24 24"
+                    width="32"
+                    height="32"
+                    fill="none"
+                >
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeOpacity="0.25"
+                    />
+                    <path
+                        d="M22 12a10 10 0 0 1-10 10"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                    >
+                        <animateTransform
+                            attributeName="transform"
+                            type="rotate"
+                            from="0 12 12"
+                            to="360 12 12"
+                            dur="1s"
+                            repeatCount="indefinite"
+                        />
+                    </path>
+                </svg>
+            );
+
         case "info":
         default:
             return (
