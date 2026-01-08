@@ -8,6 +8,7 @@ const BankController = {
             const page = Number(req.query.page) || 1;
             const status = req.query.available?.toString() || "All";
             const searchValue = req.query.keyword?.toString().trim() || "";
+            
             const topicIds = req.query.topic_ids
                 ? Number(req.query.topic_ids)
                 : "All";

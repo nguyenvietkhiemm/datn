@@ -4,12 +4,28 @@ import { UserGoal } from "../models/user.goal.models"
 export const UserGoalService = {
     async getAll(userId: number): Promise<UserGoal[]> {
         const result = await query(
-            `SELECT ug.*, s.subject_name, cg.current_progress 
+            `SELECT 
+                ug.*,
+                s.subject_name,
+                MAX(he.score) AS max_score
             FROM user_goal ug
-            JOIN subject s ON s.subject_id = ug.subject_id
-            LEFT JOIN current_progress cg ON cg.user_goal_id = ug.user_goal_id
-            WHERE ug.user_id = $1 
-            ORDER BY ug.user_goal_id DESC`,
+            JOIN subject s 
+                ON s.subject_id = ug.subject_id
+            LEFT JOIN exam e 
+                ON e.topic_id IS NULL 
+                OR e.topic_id IN (
+                    SELECT t.topic_id FROM topic t WHERE t.subject_id = ug.subject_id
+                )
+            LEFT JOIN history_exam he 
+                ON he.exam_id = e.exam_id
+                AND he.user_id = ug.user_id
+            WHERE 
+                ug.user_id = $1
+            GROUP BY 
+                ug.user_goal_id, s.subject_name
+            ORDER BY 
+                ug.deadline DESC;
+            `,
             [userId]
         );
         return result.rows;

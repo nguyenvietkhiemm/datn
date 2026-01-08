@@ -346,6 +346,8 @@ const ExamService = {
 
       const history_exam_id = historyResult.rows[0].history_exam_id;
 
+      //
+
       // Insert user_exam_answer
       for (const user of do_exam) {
         for (const ans of user.user_answer) {
