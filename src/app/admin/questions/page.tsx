@@ -128,6 +128,7 @@ export default function Question() {
     const handleChangeSearch = (searchKeyword: string) => {
         setQuery(prev => ({
             ...prev,
+            page:1,
             keyword: searchKeyword
         }))
     }
