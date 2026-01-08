@@ -75,7 +75,7 @@
 /* ===================== */
 /* GOAL LIST */
 /* ===================== */
-.list_goal{
+.list_goal {
     background-color: #fff;
     border-radius: 8px;
     padding: 24px 32px;
@@ -112,6 +112,7 @@
 .list_goal td {
     vertical-align: middle;
 }
+
 /* ===================== */
 /* EMPTY STATE */
 /* ===================== */
@@ -125,4 +126,26 @@
     font-size: 0.9rem;
     color: #e00;
     margin: 4px 0 0 2px;
+}
+
+.status {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.active {
+    background: #e6f4ea;
+    color: #137333;
+}
+
+.warning {
+    background: #fff4e5;
+    color: #b45309;
+}
+
+.expired {
+    background: #fdecea;
+    color: #b91c1c;
 }

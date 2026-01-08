@@ -30,7 +30,6 @@ export default function PDFViewer({ link, zoom = 1 }: { link: string; zoom?: num
               backgroundColor: "white",
               boxShadow: "4px 4px 4px rgba(0,0,0,0.15)",
               marginBottom: "24px",
-              borderRadius: "4px",
               transform: `scale(${zoom})`,
               transformOrigin: "top center",
               transition: "transform 0.2s ease",

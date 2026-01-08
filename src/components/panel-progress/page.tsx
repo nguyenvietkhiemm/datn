@@ -28,7 +28,7 @@ export default function ProgressPanel() {
           <X size={20} />
         </button>
 
-        <CurrentProgress setIsOpen={setIsOpen} />
+        <CurrentProgress isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
 
       {/* Floating Toggle */}

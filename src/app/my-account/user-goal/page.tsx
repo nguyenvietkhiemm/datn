@@ -5,13 +5,16 @@ import Cookies from "js-cookie";
 import styles from "./UserGoal.module.css";
 import { Button } from "@/components/ui/button";
 import ProfilePage from "@/components/profile/page";
+import { getGoalStatusDetail, GoalStatus } from "../../../../domain/user-goal/model";
+import { formatVNDateTime } from "../../../../lib/model";
 
 interface Goal {
     user_goal_id: number;
-    target_score: number;
+    target_score: string;
+    max_score: string | null;
     deadline: string;
     subject_name: string;
-    current_progress: number;
+    status?: GoalStatus;
 }
 
 interface Subject {
@@ -19,10 +22,17 @@ interface Subject {
     subject_name: string;
 }
 
+const STATUS_LABEL: Record<GoalStatus, string> = {
+    CON_HAN: "Còn hạn",
+    SAP_HET_HAN: "Sắp hết hạn",
+    HET_HAN: "Hết hạn",
+};
+
 export default function UserGoal() {
     const [goals, setGoals] = useState<Goal[]>([]);
     const [subjects, setSubjects] = useState<Subject[]>([]);
     const [error, setError] = useState<string>("");
+
     const [form, setForm] = useState({
         target_score: "",
         deadline: "",
@@ -32,25 +42,28 @@ export default function UserGoal() {
     const API = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
     const token = Cookies.get("token");
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    /*  FORM  */
+
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ) => {
         const { name, value } = e.target;
 
         if (name === "target_score") {
             let numericOnly = value.replace(/[^0-9.]/g, "");
 
-            // Không cho nhập 2 dấu chấm
             if ((numericOnly.match(/\./g) || []).length > 1) {
                 setError("Chỉ được phép nhập một dấu thập phân.");
                 return;
             }
 
+            const num = Number(numericOnly);
+
             if (numericOnly === "") {
-                setForm(prev => ({ ...prev, target_score: "" }));
                 setError("Số điểm mục tiêu không được để trống.");
+                setForm(prev => ({ ...prev, target_score: "" }));
                 return;
             }
-
-            const num = Number(numericOnly);
 
             if (isNaN(num)) {
                 setError("Điểm phải là số.");
@@ -67,17 +80,14 @@ export default function UserGoal() {
             return;
         }
 
-        setForm(prev => ({
-            ...prev,
-            [name]: value,
-        }));
+        setForm(prev => ({ ...prev, [name]: value }));
     };
 
     const handleCreate = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!form.target_score || !form.deadline || !form.subject_id) {
-            alert("Vui lòng nhập đầy đủ!");
+            setError("Vui lòng nhập đầy đủ!");
             return;
         }
 
@@ -99,16 +109,24 @@ export default function UserGoal() {
         fetchGoals();
     };
 
+    /*  FETCH  */
+
     const fetchGoals = async () => {
         const res = await fetch(`${API}/goal`, {
-            method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`
             }
         });
+
         const data = await res.json();
-        setGoals(data.data || []);
+
+        setGoals(
+            (data.data || []).map((g: Goal) => ({
+                ...g,
+                status: getGoalStatusDetail(g.deadline),
+            }))
+        );
     };
 
     const fetchSubjects = async () => {
@@ -122,22 +140,26 @@ export default function UserGoal() {
     useEffect(() => {
         fetchGoals();
         fetchSubjects();
+
     }, []);
 
-    const formatDate = (str: string) => {
-        return new Date(str).toLocaleString("vi-VN", {
-            hour: "2-digit",
-            minute: "2-digit",
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric"
-        });
+
+    const calcProgress = (goal: Goal) => {
+        const target = Number(goal.target_score);
+        const max = Number(goal.max_score ?? 0);
+
+        if (!target || target <= 0) return 0;
+
+        return Math.min(Math.round((max / target) * 100), 100);
     };
+
+    /*  RENDER  */
 
     return (
         <ProfilePage>
             <div className={styles.goal_container}>
 
+                {/* ===== FORM ===== */}
                 <form onSubmit={handleCreate} className={styles.goal_form}>
                     <label className={styles.label}>
                         Điểm mục tiêu
@@ -181,34 +203,68 @@ export default function UserGoal() {
                     </label>
 
                     <div className={styles.btn}>
-                        <Button>
-                            Tạo mục tiêu
-                        </Button>
+                        <Button>Tạo mục tiêu</Button>
                     </div>
                 </form>
 
+                {/* ===== LIST ===== */}
                 <div className={styles.list_goal}>
                     <h3 className={styles.list_title}>Danh sách mục tiêu</h3>
+
                     <table>
                         <thead>
                             <tr>
-                                <th>Mục tiêu điểm số</th>
+                                <th>Mục tiêu</th>
                                 <th>Thời hạn</th>
                                 <th>Môn học</th>
-                                <th>Tiến trình hiện tại</th>
+                                <th>Tiến trình</th>
+                                <th>Trạng thái</th>
                             </tr>
                         </thead>
+
                         <tbody>
-                            {goals.map((g, i) => (
-                                <tr key={i}>
-                                    <td>{g.target_score}</td>
-                                    <td>{formatDate(g.deadline)}</td>
-                                    <td>{g.subject_name}</td>
-                                </tr>
-                            ))}
+                            {goals.map(goal => {
+                                const progress = calcProgress(goal);
+                                const maxScore = Number(goal.max_score ?? 0);
+
+                                return (
+                                    <tr key={goal.user_goal_id}>
+                                        <td>{goal.target_score}</td>
+                                        <td>{formatVNDateTime(goal.deadline)}</td>
+                                        <td>{goal.subject_name}</td>
+
+                                        <td>
+                                            <div className={styles.progressWrap}>
+                                                <span className={styles.progressText}>
+                                                    {maxScore}/{goal.target_score} ({progress}%)
+                                                </span>
+                                                <div className={styles.progressBox}>
+                                                    <div
+                                                        className={styles.bar}
+                                                        style={{ width: `${progress}%` }}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span
+                                                className={`${styles.status} ${goal.status === "HET_HAN"
+                                                    ? styles.expired
+                                                    : goal.status === "SAP_HET_HAN"
+                                                        ? styles.warning
+                                                        : styles.active
+                                                    }`}
+                                            >
+                                                {goal.status ? STATUS_LABEL[goal.status] : "—"}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
                         </tbody>
                     </table>
                 </div>
+
             </div>
         </ProfilePage>
     );

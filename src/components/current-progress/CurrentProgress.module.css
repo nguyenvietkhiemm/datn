@@ -1,48 +1,76 @@
-.header{
+.header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
 }
 
 .title {
     font-size: 18px;
     font-weight: 600;
-    margin-bottom: 12px;
+    color: #1f2937;
+    /* gray-800 */
 }
 
 .arrow {
     cursor: pointer;
-    font-size: 22px;
-    transition: transform 0.2s ease;
+    font-size: 20px;
+    color: #6b7280;
+    /* gray-500 */
+    transition: color 0.2s ease;
 }
 
 .arrow:hover {
-    transform: translateX(3px);
+    color: #111827;
+    /* gray-900 */
+}
+
+.noData {
+    text-align: center;
+    color: #6b7280;
+    padding: 24px;
+    font-style: italic;
 }
 
 .goalItem {
-    margin-bottom: 16px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .goalHeader {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 4px;
-    font-weight: 500;
+    align-items: center;
+    margin-bottom: 6px;
 }
 
 .subjectName {
-    color: #333;
+    font-weight: 500;
+    color: #111827;
+}
+
+.percent {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2563eb;
+    /* blue-600 */
 }
 
 .progressBox {
-    background-color: #eee;
-    border-radius: 8px;
-    height: 20px;
+    width: 100%;
+    height: 8px;
+    background: #e5e7eb;
+    /* gray-200 */
+    border-radius: 999px;
     overflow: hidden;
 }
 
 .bar {
     height: 100%;
-    background-color: #4caf50;
-    transition: width 0.3s ease;
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    border-radius: 999px;
+    transition: width 0.4s ease;
 }

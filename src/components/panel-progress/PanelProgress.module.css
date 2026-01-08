@@ -1,71 +1,82 @@
-/* Overlay mờ */
+/* Overlay nền mờ */
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.25);
-  z-index: 998;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 40;
 }
 
-/* Panel */
+/* Slide panel */
 .slidePanel {
   position: fixed;
-  top: 120;
-  right: 0;
-  width: 320px;
-  height: 80vh;
-  background: #fff;
-  box-shadow: -12px 0 30px rgba(0, 0, 0, 0.12);
-  transform: translateX(100%);
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-  z-index: 999;
-  padding: 24px;
+  top: 80px;
+  right: -360px;
+  /* Ẩn bên phải */
+  width: 360px;
+  height: 100vh;
+  background: #f9fafb;
+  /* gray-50 */
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+  transition: right 0.3s ease;
+  z-index: 50;
+  padding: 16px;
+  overflow-y: auto;
 }
 
+/* Khi mở */
 .open {
-  transform: translateX(0);
+  right: 0;
 }
 
 /* Nút đóng */
 .closeBtn {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  background: #f3f4f6;
-  border-radius: 999px;
-  padding: 6px;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
   cursor: pointer;
-  transition: background 0.2s;
+  color: #374151;
+  /* gray-700 */
+  padding: 4px;
 }
 
 .closeBtn:hover {
-  background: #e5e7eb;
+  color: #111827;
+  /* gray-900 */
 }
 
 /* Floating button */
 .floatingBtn {
   position: fixed;
-  top: 40%;
-  right: 0;
-  background: linear-gradient(135deg, #0d0950, #6366f1);
-  color: white;
-  padding: 12px 14px;
-  border-radius: 12px 0 0 12px;
+  top: 50%;
+  right: 3px;
+  z-index: 30;
+
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 6px;
-  box-shadow: -4px 6px 20px rgba(0, 0, 0, 0.2);
+  gap: 8px;
+
+  padding: 10px 14px;
+  background: #2563eb;
+  /* blue-600 */
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
   cursor: pointer;
-  z-index: 997;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .floatingBtn:hover {
-  transform: translateX(-6px);
-  box-shadow: -6px 10px 30px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(37, 99, 235, 0.45);
 }
 
 .floatingBtn span {
-  font-size: 13px;
-  font-weight: 500;
+  white-space: nowrap;
 }

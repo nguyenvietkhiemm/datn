@@ -10,7 +10,6 @@ export interface FetchBankParams {
 export const BankService = {
     async fetchBank(params: FetchBankParams) {
         const { page = 1, topics, search, subject_id } = params;
-        console.log({page, topics, search, subject_id});
         
         const token = getToken()
         let url = `${API_URL}/banks?page=${page}`;
@@ -27,8 +26,7 @@ export const BankService = {
         }
 
         url += `&available=true`
-        console.log();
-        
+        console.log(url);
 
         const res = await fetch(url, {
             method: "GET",
