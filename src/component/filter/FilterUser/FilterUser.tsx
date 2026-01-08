@@ -32,7 +32,7 @@ export default function FilterUser({ query, setQuery }: FilterUserProps) {
             page: 1,
             keyword: search.trim() || undefined,
             role: role !== "All" ? role : undefined,
-            available: status !== "All" ? status : undefined,
+            status: status !== "All" ? status : undefined,
         }));
     };
 
@@ -63,8 +63,8 @@ export default function FilterUser({ query, setQuery }: FilterUserProps) {
                 className={styles.select}
             >
                 <option value="All">Tất cả vai trò</option>
-                <option value="ADMIN">Người quản lý</option>
-                <option value="USER">Người dùng</option>
+                <option value="2">Người quản lý</option>
+                <option value="1">Người dùng</option>
             </select>
 
             {/* Status */}
