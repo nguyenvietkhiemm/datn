@@ -68,7 +68,6 @@ export default function User() {
         Đang tải danh sách người dùng...
       </p>
     );
-    console.log(query);
     
   return (
     <div className={styles.user_container}>
