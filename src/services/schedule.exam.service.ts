@@ -10,50 +10,44 @@ export const ScheduleExamService = {
                 totalPages: number;
         }> {
                 const isPaging = Number.isInteger(page) && page! > 0;
-
+                const now = new Date();
                 const limit = 10;
                 const offset = isPaging ? (page! - 1) * limit : 0;
 
-                // Query data
-                const dataQuery = isPaging
-                        ? `
-                    SELECT
-                      es.exam_schedule_id,
-                      es.start_time,
-                      es.end_time,
-                      es.created_at,
-                      es.updated_at,
-                      COUNT(e.exam_id) AS total_exams
-                    FROM exam_schedule es
-                    LEFT JOIN exam e
-                      ON e.exam_schedule_id = es.exam_schedule_id
-                    GROUP BY es.exam_schedule_id
-                    ORDER BY es.exam_schedule_id
-                    LIMIT $1 OFFSET $2;
-                  `
-                        : `
-                    SELECT
-                      es.exam_schedule_id,
-                      es.start_time,
-                      es.end_time,
-                      es.created_at,
-                      es.updated_at,
-                      COUNT(e.exam_id) AS total_exams
-                    FROM exam_schedule es
-                    LEFT JOIN exam e
-                      ON e.exam_schedule_id = es.exam_schedule_id
-                    GROUP BY es.exam_schedule_id
-                    ORDER BY es.exam_schedule_id;
-                  `;
+                const dataQuery = `
+                        SELECT
+                                es.exam_schedule_id,
+                                es.start_time,
+                                es.end_time,
+                                es.created_at,
+                                es.updated_at,
+                                COUNT(e.exam_id) AS total_exams
+                        FROM exam_schedule es
+                        LEFT JOIN exam e
+                                ON e.exam_schedule_id = es.exam_schedule_id
+                        GROUP BY
+                                es.exam_schedule_id,
+                                es.start_time,
+                                es.end_time,
+                                es.created_at,
+                                es.updated_at
+                        ORDER BY
+                                CASE
+                                        WHEN es.start_time <= $3 AND es.end_time >= $3 THEN 1
+                                        WHEN es.start_time > $3 THEN 2
+                                        ELSE 3
+                                END,
+                                es.end_time
+                ${isPaging ? "LIMIT $1 OFFSET $2" : ""}
+                `;
 
-                const dataResult = isPaging
-                        ? await query(dataQuery, [limit, offset])
-                        : await query(dataQuery);
+                const params = isPaging ? [limit, offset, now] : [null, null, now];
 
-                // Count tổng record
+                const dataResult = await query(dataQuery, params);
+
                 const countQuery = `
-                  SELECT COUNT(*)::int AS total
-                  FROM exam_schedule
+                SELECT COUNT(*)::int AS total
+                FROM exam_schedule
                 `;
                 const countResult = await query(countQuery);
                 const totalRecords = countResult.rows[0].total;
@@ -61,10 +55,11 @@ export const ScheduleExamService = {
                 const totalPages = isPaging ? Math.ceil(totalRecords / limit) : 1;
 
                 return {
-                        schedules: dataResult.rows as ScheduleExam[],
-                        totalPages,
+                schedules: dataResult.rows as ScheduleExam[],
+                totalPages,
                 };
         },
+
 
         //  Lấy lịch thi theo ID + danh sách đề thi
         async getById(id: number): Promise<ScheduleExam | null> {
