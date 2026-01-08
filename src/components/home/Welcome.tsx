@@ -75,12 +75,12 @@ export default function LandingPage() {
         <h2 className="font-heading text-3xl font-bold text-slate-800 mb-12">BỘ ĐỀ THI NỔI BẬT</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
           {[
-            { title: "Toán học 12", desc: "Ôn luyện toàn diện kiến thức và bài tập theo chương." },
-            { title: "Ngữ văn 12", desc: "Hệ thống bài giảng chi tiết, luyện viết & đọc hiểu." },
-            { title: "Tiếng Anh 12", desc: "Luyện ngữ pháp, từ vựng và các đề thi thật." },
-            { title: "Vật lý 12", desc: "Tổng hợp bài tập trọng tâm và đề thi thử chuẩn cấu trúc." },
-            { title: "Hóa học 12", desc: "Các chuyên đề nâng cao và bài tập chọn lọc." },
-            { title: "Lịch sử 12", desc: "Ôn luyện nhanh, nắm vững các mốc thời gian & sự kiện." },
+            { title: "Toán học 12", desc: "Ôn luyện toàn diện kiến thức và bài tập theo chương.", search: "Toán" },
+            { title: "Ngữ văn 12", desc: "Hệ thống bài giảng chi tiết, luyện viết & đọc hiểu.", search: "Văn" },
+            { title: "Tiếng Anh 12", desc: "Luyện ngữ pháp, từ vựng và các đề thi thật.", search: "Tiếng anh" },
+            { title: "Vật lý 12", desc: "Tổng hợp bài tập trọng tâm và đề thi thử chuẩn cấu trúc.", search: "Vật lý" },
+            { title: "Hóa học 12", desc: "Các chuyên đề nâng cao và bài tập chọn lọc.", search: "Hoá học" },
+            { title: "Lịch sử 12", desc: "Ôn luyện nhanh, nắm vững các mốc thời gian & sự kiện.", search: "Lịch sử" },
           ].map((course, i) => (
             <motion.div
               key={i}
@@ -96,7 +96,10 @@ export default function LandingPage() {
                 {course.desc}
               </p>
               <Link
-                href="/practice"
+                href={{
+                  pathname: '/practice',
+                  query: { search: course.search }, 
+                }}
                 className="text-indigo-500 font-medium inline-flex items-center hover:text-indigo-600 transition">
                 Bắt đầu học tập <ArrowRight className="w-4 h-4 ml-1" />
               </Link>
@@ -141,12 +144,12 @@ export default function LandingPage() {
               whileHover={{ y: -6 }}
               transition={{ type: "spring", stiffness: 180 }}
               className="
-          p-6 rounded-2xl text-left
-          bg-white/10 backdrop-blur-lg
-          border border-white/15
-          shadow-lg shadow-black/20
-          hover:bg-white/15 transition
-        "
+                p-6 rounded-2xl text-left
+                bg-white/10 backdrop-blur-lg
+                border border-white/15
+                shadow-lg shadow-black/20
+                hover:bg-white/15 transition
+              "
             >
               {item.icon}
 

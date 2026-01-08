@@ -9,16 +9,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { setBank } from "@/store/slices/bankSlice";
 import { BankService } from "../../../domain/bank/service";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { BankProps } from "../../../domain/bank/type";
 
 export default function Bank() {
   const dispatch = useDispatch();
   const banks = useSelector((state: RootState) => state.bank.banks);
   const [currentPage, setCurrentPage] = useState(1);
+  const searchParams = useSearchParams();
+  const subject = searchParams.get('search');
   const [totalPages, setTotalPages] = useState(1);
   const [filterCondition, setFilterCondition] = useState<any>(null);
-  const [searchKeyword, setSearchKeyword] = useState("");
+  const [searchKeyword, setSearchKeyword] = useState(subject || "");
   const router = useRouter();
 
   useEffect(() => {
