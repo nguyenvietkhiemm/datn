@@ -11,6 +11,8 @@ export const ScheduleExamService = {
         }> {
                 const isPaging = Number.isInteger(page) && page! > 0;
                 const now = new Date();
+                now.setHours(now.getHours() + 7)
+                
                 const limit = 10;
                 const offset = isPaging ? (page! - 1) * limit : 0;
 
@@ -36,8 +38,8 @@ export const ScheduleExamService = {
                                         WHEN es.start_time <= $3 AND es.end_time >= $3 THEN 1
                                         WHEN es.start_time > $3 THEN 2
                                         ELSE 3
-                                END,
-                                es.end_time
+                                END ASC,
+                                es.end_time ASC
                 ${isPaging ? "LIMIT $1 OFFSET $2" : ""}
                 `;
 
@@ -55,8 +57,8 @@ export const ScheduleExamService = {
                 const totalPages = isPaging ? Math.ceil(totalRecords / limit) : 1;
 
                 return {
-                schedules: dataResult.rows as ScheduleExam[],
-                totalPages,
+                        schedules: dataResult.rows as ScheduleExam[],
+                        totalPages,
                 };
         },
 
@@ -89,6 +91,7 @@ export const ScheduleExamService = {
 
         //  Tạo mới lịch thi
         async create(data: ScheduleExam): Promise<ScheduleExam> {
+
                 const queryText = `
                 INSERT INTO exam_schedule (start_time, end_time)
                 VALUES ($1, $2)
