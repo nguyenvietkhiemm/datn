@@ -5,13 +5,14 @@ export function formatVNDateTime(dateInput: string | number | Date): string {
 
     const pad = (n: number) => n.toString().padStart(2, "0");
 
-    const day = pad(date.getDate());
-    const month = pad(date.getMonth() + 1);
-    const year = date.getFullYear();
+    // Sử dụng các hàm getUTC để lấy đúng con số lưu trong DB
+    const day = pad(date.getUTCDate());
+    const month = pad(date.getUTCMonth() + 1);
+    const year = date.getUTCFullYear();
 
-    const hours = pad(date.getHours());
-    const minutes = pad(date.getMinutes());
-    const seconds = pad(date.getSeconds());
+    const hours = pad(date.getUTCHours());
+    const minutes = pad(date.getUTCMinutes());
+    const seconds = pad(date.getUTCSeconds());
 
     return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
 }
