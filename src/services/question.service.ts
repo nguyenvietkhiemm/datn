@@ -27,12 +27,12 @@ const QuestionService = {
         const params: any[] = [];
         let paramIndex = 1;
 
-        let whereClause = `WHERE 1=1`;
+        let whereClause = `WHERE 1=1`;       
 
         // ===== FILTER STATUS =====
         if (status && status !== "All") {
             whereClause += ` AND q.available = $${paramIndex}`;
-            params.push(status === status);
+            params.push(status );
             paramIndex++;
         }
 
