@@ -2,14 +2,13 @@
 import React, { useState } from "react";
 import DocxViewer from "./docView";
 // import styles from "./FileView.module.css";
-// import PDFViewer from "./PDFView";
 
 import { Maximize2, Minimize2, ZoomIn, ZoomOut, RefreshCw, Download } from "lucide-react";
 import dynamic from "next/dynamic";
 
-// const PDFViewer = dynamic(() => import("./PDFView"), {
-//     ssr: false,
-// });
+const PDFViewerClient = dynamic(() => import("./pdfView"), {
+    ssr: false,
+});
 
 interface FileViewerProps {
     link: string;
@@ -55,7 +54,7 @@ export default function FileViewer({ link }: FileViewerProps) {
 
             {/* Content */}
             <div style={{ background: "#7f7f7f", height: "80vh", overflow: "auto" }}>
-                {/* {ext === "pdf" && <PDFViewer link={link} zoom={zoom} />} */}
+                {ext === "pdf" && <PDFViewerClient link={link} zoom={zoom} />}
                 {ext === "docx" && <DocxViewer link={link} />}
                 {!["pdf", "docx"].includes(ext || "") && (
                     <div className="p-4 text-center text-gray-600">
