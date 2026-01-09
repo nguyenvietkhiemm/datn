@@ -25,7 +25,7 @@ export const formatTime = (seconds: number) => {
 
 export interface typeNoti {
     message: React.ReactNode;
-    type: "success" | "error" | "warning" | "info";
+    type: "success" | "error" | "warning" | "info" | "loading";
     confirm?: boolean;
     duration?: number
 }

@@ -21,7 +21,7 @@ interface NotificationPopupProps {
 export default function NotificationPopup({
     message,
     type = "info",
-    duration = 1000,
+    duration = 1000000,
     confirm = false,
     onConfirm,
     onCancel,
