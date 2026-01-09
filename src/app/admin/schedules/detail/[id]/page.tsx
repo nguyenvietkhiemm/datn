@@ -4,16 +4,18 @@ import { useEffect, useState } from "react";
 import { ScheduleService } from "@/domain/admin/schedules/service";
 import { ExamSchedule } from "@/domain/admin/schedules/type";
 import styles from "./Exam.Schedule.Detail.module.css";
+import Pagination from "@/component/pagination/Pagination";
+import { useParams } from "next/navigation";
 
 export default function ScheduleExamView({
-  scheduleId,
-  onBack,
 }: {
-  scheduleId: number;
-  onBack: () => void;
 }) {
   const [schedule, setSchedule] = useState<ExamSchedule | null>(null);
   const [loading, setLoading] = useState(true);
+  const [totalPages, setTotalPages] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const params = useParams()
+  const scheduleId = Number(params.id)
 
   useEffect(() => {
     const loadDetail = async () => {
@@ -23,16 +25,13 @@ export default function ScheduleExamView({
       setLoading(false);
     };
     loadDetail();
-  }, [scheduleId]);
+  }, [scheduleId, currentPage]);
 
   if (loading) return <p>Đang tải...</p>;
   if (!schedule) return null;
 
   return (
     <div className={styles.container}>
-      <button className={styles.backBtn} onClick={onBack}>
-        ← Quay lại
-      </button>
 
       <h2 className={styles.title}>Chi tiết lịch thi</h2>
 
@@ -67,6 +66,8 @@ export default function ScheduleExamView({
       ) : (
         <p className={styles.empty}>Không có đề thi</p>
       )}
+
+    <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage}/>
     </div>
   );
 }
