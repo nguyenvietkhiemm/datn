@@ -12,7 +12,7 @@ export const ScheduleExamService = {
                 const isPaging = Number.isInteger(page) && page! > 0;
                 const now = new Date();
                 now.setHours(now.getHours() + 7)
-                
+
                 const limit = 10;
                 const offset = isPaging ? (page! - 1) * limit : 0;
 
@@ -64,29 +64,57 @@ export const ScheduleExamService = {
 
 
         //  Lấy lịch thi theo ID + danh sách đề thi
-        async getById(id: number): Promise<ScheduleExam | null> {
-                const queryText = `
-                SELECT e.exam_name, e.topic_id, e.time_limit, e.exam_id, e.created_at, t.title
-                FROM exam_schedule s
-                JOIN exam e ON s.exam_schedule_id = e.exam_schedule_id
-                JOIN topic t ON t.topic_id = e.topic_id
-                WHERE s.exam_schedule_id = $1 AND e.available =true`;
-                const result = await query(queryText, [id]);
+        async getById(
+                id: number,
+                page: number = 1,
+                limit: number = 10
+        ): Promise<ScheduleExam | null> {
 
-                // Lấy thông tin cơ bản của lịch thi (từ dòng đầu tiên)
-                const scheduleQuery = await query(
-                        `SELECT * FROM exam_schedule WHERE exam_schedule_id = $1`,
-                        [id]
-                );
-                const schedule = scheduleQuery.rows[0];
+                const offset = (page - 1) * limit;
 
-                // Gắn danh sách exam vào
-                const scheduleWithExams = {
+                /* 1. LẤY TOTAL EXAMS */
+                const countQuery = `
+                  SELECT COUNT(*) 
+                  FROM exam 
+                  WHERE exam_schedule_id = $1
+                `;
+                const countResult = await query(countQuery, [id]);
+                const totalItems = Number(countResult.rows[0].count);
+                const totalPages = Math.max(1, Math.ceil(totalItems / limit));
+
+                /* 2. LẤY DANH SÁCH EXAMS (CÓ LIMIT) */
+                const examQuery = `
+                  SELECT 
+                    e.exam_name,
+                    e.topic_id,
+                    e.time_limit,
+                    e.exam_id,
+                    e.created_at,
+                    t.title
+                  FROM exam e
+                  JOIN topic t ON t.topic_id = e.topic_id
+                  WHERE e.exam_schedule_id = $1
+                  ORDER BY e.created_at DESC
+                  LIMIT $2 OFFSET $3
+                `;
+                const examResult = await query(examQuery, [id, limit, offset]);
+
+                /* 3. LẤY THÔNG TIN SCHEDULE */
+                const scheduleQuery = `
+                  SELECT * FROM exam_schedule WHERE exam_schedule_id = $1
+                `;
+                const scheduleResult = await query(scheduleQuery, [id]);
+                const schedule = scheduleResult.rows[0];
+
+                if (!schedule) return null;
+
+                /* 4. GHÉP DATA */
+                return {
                         ...schedule,
-                        exams: result.rows.length > 0 ? result.rows : [], // danh sách các đề thi trong lịch này
-                };
-
-                return scheduleWithExams as ScheduleExam;
+                        exams: examResult.rows,
+                        totalPages,
+                        currentPage: page,
+                } as ScheduleExam;
         },
 
         //  Tạo mới lịch thi

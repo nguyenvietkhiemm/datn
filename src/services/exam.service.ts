@@ -205,9 +205,7 @@ const ExamService = {
     const result = await query(queryText, params);
     const exams = result.rows;
 
-    // -----------------------
     // Lấy top 3 user từ Redis cho tất cả exam song song
-    // -----------------------
     const examsWithTop3 = await Promise.all(
       exams.map(async (exam) => {
         const top3Raw = await redis.zrevrange(
@@ -234,9 +232,7 @@ const ExamService = {
       })
     );
 
-    // -----------------------
     // Count tổng số trang
-    // -----------------------
     const countQuery = `
     SELECT COUNT(*) AS total
     FROM exam e
