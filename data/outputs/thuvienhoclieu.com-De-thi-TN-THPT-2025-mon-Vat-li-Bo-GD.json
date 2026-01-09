@@ -1,0 +1,1656 @@
+[
+  {
+    "question": {
+      "para_index": 1,
+      "text": "KỲ THI TỐT NGHIỆP TRUNG HỌC PHỔ THÔNG NĂM 2025Môn thi: VẬT LÍThời gian làm bài 50 phút, không kể thời gian phát đề",
+      "math": [],
+      "images": [],
+      "latex": {},
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 3,
+        "text": "A. Họ, tên thí sinh: …………………………………………………",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 4,
+        "text": "B. Mã đề: 0203",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 5,
+        "text": "C. Mã đề: 0203",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 6,
+        "text": "D. Số báo danh: …………………………………………………….",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 8,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 9,
+      "text": "Câu 1: Khi hai vật được đặt tiếp xúc với nhau, năng lượng nhiệt chỉ truyền từ vật này sang vật kia nếu chúng có",
+      "math": [],
+      "images": [],
+      "latex": {},
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 10,
+        "text": "A. khối lượng khác nhau.B. nhiệt độ khác nhau.C. thế năng khác nhau.D. thể tích khác nhau.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 11,
+      "text": "Câu 2: Hạt nhân càng bền vững nếu",
+      "math": [],
+      "images": [],
+      "latex": {},
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 12,
+        "text": "A. năng lượng liên kết riêng của hạt nhân càng lớn.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 13,
+        "text": "B. năng lượng liên kết của hạt nhân càng lớn.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 14,
+        "text": "C. độ hụt khối của hạt nhân càng lớn.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 15,
+        "text": "D. điện tích của hạt nhân càng lớn.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 16,
+      "text": "Câu 3: Thí nghiệm tán xạ hạt [LATEX_1] của Rutherford là bằng chứng thực nghiệm cho thấy",
+      "math": [],
+      "images": [],
+      "latex": {
+        "[LATEX_1]": "a l p h a"
+      },
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 17,
+        "text": "A. điện tích dương của nguyên tử tập trung ở một thể tích rất nhỏ.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 18,
+        "text": "B. điện tích dương của nguyên tử được phân bố đều trong nguyên tử.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 19,
+        "text": "C. các electron được phân bố đều trong nguyên tử.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 20,
+        "text": "D. khối lượng của nguyên tử được phân bố đều trong nguyên tử.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 21,
+      "text": "Câu 4: Trong nguyên tử Uranium, có bao nhiêu electron chuyển động xung quanh hạt nhân [LATEX_1] ?",
+      "math": [],
+      "images": [],
+      "latex": {
+        "[LATEX_1]": "{\\frac{238}{92}}U"
+      },
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 22,
+        "text": "A. 238 .B. 146 .C. 1 .D. 92 .",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 23,
+      "text": "Câu 5: Trong quá trình đẳng nhiệt của một khối khí lí tưởng xác định",
+      "math": [],
+      "images": [],
+      "latex": {},
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 24,
+        "text": "A. áp suất của khối khí tăng khi thể tích của khối khí tăng.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 25,
+        "text": "B. áp suất của khối khí không đổi.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 26,
+        "text": "C. thể tích của khối khí không đổi.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 27,
+        "text": "D. áp suất của khối khí tăng khi thể tích của khối khí giảm.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 28,
+      "text": "Câu 6: Vật nào sau đây không gây ra từ trường xung quanh nó?",
+      "math": [],
+      "images": [],
+      "latex": {},
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 29,
+        "text": "A. Một điện tích đứng yên.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 30,
+        "text": "B. Một dây dẫn có dòng điện không đổi.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 31,
+        "text": "C. Một thanh nam châm thẳng.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 32,
+        "text": "D. Một nam châm chữ [LATEX_1].",
+        "math": [],
+        "images": [],
+        "latex": {
+          "[LATEX_1]": "\\textstyle\\bigcap J"
+        },
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 33,
+      "text": "Câu 7: Một mặt [LATEX_1] (được coi là phẳng) có diện tích [LATEX_2], được đặt trong từ trường đều có độ lớn cảm ứng từ [LATEX_3], góc giữa cảm ứng từ và vector pháp tuyến của mặt [LATEX_4] là [LATEX_5]. Từ thông qua mặt [LATEX_6] được xác định bởi công thức",
+      "math": [],
+      "images": [],
+      "latex": {
+        "[LATEX_1]": "{\\dot{M}}",
+        "[LATEX_2]": "\\subseteq\\bigcup",
+        "[LATEX_3]": "\\implies",
+        "[LATEX_4]": "\\Phi",
+        "[LATEX_5]": "{\\mathcal{Q}}",
+        "[LATEX_6]": "\\Phi"
+      },
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 34,
+        "text": "A. [LATEX_1].B. [LATEX_2].C. [LATEX_3].D. [LATEX_4].",
+        "math": [],
+        "images": [],
+        "latex": {
+          "[LATEX_1]": "\\phi=B S\\cos\\alpha",
+          "[LATEX_2]": "\\phi=B S\\mathrm{cot}\\alpha",
+          "[LATEX_3]": "\\phi=B S\\tan\\alpha",
+          "[LATEX_4]": "\\phi=B S{\\mathrm{sin}}\\ \\alpha"
+        },
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 35,
+      "text": "Câu 8: Theo mô hình động học phân tử, ở thể khí, các phân tử",
+      "math": [],
+      "images": [],
+      "latex": {},
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 36,
+        "text": "A. dao động quanh vị trí cân bằng không cố định.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 37,
+        "text": "B. sắp xếp có trật tự.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 38,
+        "text": "C. chỉ dao động quanh vị trí cân bằng cố định.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 39,
+        "text": "D. chuyển động hỗn loạn.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 40,
+      "text": "Câu 9: Chiều dòng điện cảm ứng được xác định bằng định luật nào trong các định luật sau đây?",
+      "math": [],
+      "images": [],
+      "latex": {},
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 41,
+        "text": "A. Định luật Coulomb về tương tác điện.B. Định luật Lenz về cảm ứng điện từ.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 42,
+        "text": "C. Định luật Newton về chuyển động.D. Định luật Ohm cho vật dẫn kim loại.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 43,
+      "text": "Câu 10: Trong quá trình làm lạnh đẳng tích một khối khí lí tưởng xác định,",
+      "math": [],
+      "images": [],
+      "latex": {},
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 44,
+        "text": "A. khối lượng riêng của khối khí tăng.B. áp suất của khối khí giảm.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 45,
+        "text": "C. khối lượng riêng của khối khí giảm.D. áp suất của khối khí tăng.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 46,
+      "text": "Câu 11: Trong kí hiệu hạt nhân [LATEX_1] là số",
+      "math": [],
+      "images": [],
+      "latex": {
+        "[LATEX_1]": "{}_{1}{}_{X},Z"
+      },
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 47,
+        "text": "A. proton.B. neutron.C. positron.D. nucleon.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 48,
+      "text": "Câu 12: Trong hệ đơn vị [LATEX_1], đơn vị cảm ứng từ là",
+      "math": [],
+      "images": [],
+      "latex": {
+        "[LATEX_1]": "{\\boldsymbol{S}}{\\boldsymbol{I}}"
+      },
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 49,
+        "text": "A. volt ( [LATEX_1] ).B. weber [LATEX_2].",
+        "math": [],
+        "images": [],
+        "latex": {
+          "[LATEX_1]": "\\textstyle\\nabla",
+          "[LATEX_2]": "(w b)"
+        },
+        "label": "answer"
+      },
+      {
+        "para_index": 50,
+        "text": "C. tesla (T).D. coulomb (C).",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 51,
+      "text": "Câu 13: Trong hệ đơn vị [LATEX_1], đơn vị của nhiệt dung riêng là",
+      "math": [],
+      "images": [],
+      "latex": {
+        "[LATEX_1]": "{\\boldsymbol{S}}{\\boldsymbol{I}}"
+      },
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 52,
+        "text": "A. [LATEX_1].B. [LATEX_2].C. [LATEX_3].D. [LATEX_4].",
+        "math": [],
+        "images": [],
+        "latex": {
+          "[LATEX_1]": "\\frac{\\mathbf{J}}{\\mathrm{kg}}",
+          "[LATEX_2]": "\\frac{J}{\\epsilon}",
+          "[LATEX_3]": "\\frac{\\mathbf{J}}{\\left|\\mathbf{kg}\\cdot\\mathbf{K}\\right.}",
+          "[LATEX_4]": "\\frac{J}{K}"
+        },
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 53,
+      "text": "Câu 14: Công thức định luật [LATEX_1] của nhiệt động lực học là [LATEX_2], với [LATEX_3] là kí hiệu nhiệt lượng và [LATEX_4] là kí hiệu",
+      "math": [],
+      "images": [],
+      "latex": {
+        "[LATEX_1]": "\\int\\int",
+        "[LATEX_2]": "\\Delta U=A+Q",
+        "[LATEX_3]": "\\complement\\bigcap",
+        "[LATEX_4]": "{\\mathcal{L}}\\,"
+      },
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 54,
+        "text": "A. công.B. nhiệt độ.C. nội năng.D. nhiệt dung riêng.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 55,
+      "text": "Câu 15: Gọi [LATEX_1] là nhiệt lượng cần thiết để làm một lượng chất có khối lượng [LATEX_2] chuyển hoàn toàn từ thể rắn sang thể lỏng ở nhiệt độ nóng chảy. Công thức xác định nhiệt nóng chảy riêng của chất này là",
+      "math": [],
+      "images": [],
+      "latex": {
+        "[LATEX_1]": "\\complement\\bigcap",
+        "[LATEX_2]": "{\\mathit{\\operatorname{2}}}/{\\mathit{1}}"
+      },
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 56,
+        "text": "A. [LATEX_1].B. [LATEX_2].C. [LATEX_3].D. [LATEX_4].",
+        "math": [],
+        "images": [],
+        "latex": {
+          "[LATEX_1]": "\\frac{\\d Q}{\\d\\Sigma_{I I}}",
+          "[LATEX_2]": "\\frac{2Q}{m}",
+          "[LATEX_3]": "\\frac{17l}{\\mathrm{G}}",
+          "[LATEX_4]": "\\frac{m}{2Q}"
+        },
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 57,
+      "text": "Câu 16: Nội năng của một vật xác định không đổi khi",
+      "math": [],
+      "images": [],
+      "latex": {},
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 58,
+        "text": "A. nhiệt độ và thể tích của vật không đổi.B. nhiệt độ của vật thay đổi.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 59,
+        "text": "C. vật truyền năng lượng nhiệt cho vật khác.D. thể tích của vật thay đổi.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 60,
+      "text": "Câu 17: Khi đúc một vật bằng đồng, quá trình đồng chuyển từ thể lỏng thành thể rắn là quá trình",
+      "math": [],
+      "images": [],
+      "latex": {},
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 61,
+        "text": "A. đông đặc.B. hoá hơi.C. nóng chảy.D. ngưng tụ.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 62,
+      "text": "Câu 18: Theo mô hình động học phân tử, giữa các phân tử",
+      "math": [],
+      "images": [],
+      "latex": {},
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 63,
+        "text": "A. có lực tương tác luôn là lực đẩy.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 64,
+        "text": "B. có lực tương tác bao gồm lực hút và lực đẩy.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 65,
+        "text": "C. không có lực tương tác.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 66,
+        "text": "D. có lực tương tác luôn là lực hút.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 68,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 69,
+      "text": "Câu 1: Một nhóm học sinh thảo luận phương án thí nghiệm làm giảm ảnh hưởng của sự trao đổi nhiệt với môi trường khi đo nhiệt nóng chảy riêng của nước đá. Họ dùng các dụng cụ: Phễu chứa nước đá (1), dây điện trở (2), cốc (3), cận điện tử (4) như hình bên.",
+      "math": [],
+      "images": [],
+      "latex": {},
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 70,
+        "text": "",
+        "math": [],
+        "images": [
+          {
+            "sha1": "e9be2056eafd46c99a782ca236f8a6040de14a8d",
+            "saved_path": "e9be2056eafd46c99a782ca236f8a6040de14a8d.jpg",
+            "ext": ".jpg",
+            "latex": null
+          }
+        ],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 71,
+      "text": "Nhóm học sinh cho rằng: Trong thời gian cấp điện cho đây điện trở, nếu xác định được càng chính xác khối lượng nước đá tan chảy vào cốc do nhiệt lượng nhận từ môi trường thì sẽ giảm được càng nhiều ảnh hưởng của sụ trao đổi nhiệt giữa nước đá với môi trường.",
+      "math": [],
+      "images": [],
+      "latex": {},
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 72,
+      "text": "Phương án thí nghiệm của họ gồm hai giai đoạn và được tóm tắt như sau:",
+      "math": [],
+      "images": [],
+      "latex": {},
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 73,
+      "text": "Giai đoạn 1: Chưa cấp điện cho dây điện trở: Xác định khối lượng [LATEX_1] của nước đá tan và đã chảy từ phễu vào cốc trong khoảng thời gian [LATEX_2].",
+      "math": [],
+      "images": [],
+      "latex": {
+        "[LATEX_1]": "T_{1}",
+        "[LATEX_2]": "\\overline{{\\left\\{c_{\\mathrm{i}}\\right\\}}}"
+      },
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 74,
+      "text": "Giai đoạn 2: Cấp điện cho dây điện trở: Xác định khối lượng [LATEX_1] của nước đá tan và đã chảy từ phễu vào cốc trong khoảng thời gian [LATEX_2]. Ở cả hai giai đoạn, coi rằng khối lượng nước đá tan và đã chảy vào cốc do nhiệt",
+      "math": [],
+      "images": [],
+      "latex": {
+        "[LATEX_1]": "\\textstyle\\eta_{2}",
+        "[LATEX_2]": "{\\mathit{t}}_{2}"
+      },
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 75,
+      "text": "lượng nhận từ môi trường trong những khoảng thời gian bằng nhau là như nhau và bỏ qua các ảnh hưởng khác (bay hơi, ngưng tụ của nước...).",
+      "math": [],
+      "images": [],
+      "latex": {},
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 76,
+        "text": "A. a) Ở Giai đoạn 1, nước đá tan do nhận nhiệt lượng từ môi trường.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 77,
+        "text": "B. b) Ở Giai đoạn 2 , nước đá tan do nhận nhiệt lượng từ dây điện trở và từ môi trường.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 78,
+        "text": "C. c) Nếu [LATEX_1] thì có thể coi khối lượng của nước đá tan do nhận nhiệt lượng từ dây điện trở là [LATEX_2] [LATEX_3].",
+        "math": [],
+        "images": [],
+        "latex": {
+          "[LATEX_1]": "t_{2}-t_{1}",
+          "[LATEX_2]": "m=m_{2}{\\cdot}",
+          "[LATEX_3]": "T_{1}"
+        },
+        "label": "answer"
+      },
+      {
+        "para_index": 79,
+        "text": "D. d) Phương án thí nghiệm này là một trong những phương án có thể làm giảm được ảnh hưởng của sự trao đổi nhiệt với môi trường đến kết quả thí nghiệm.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 80,
+      "text": "Câu 2: Một nam châm được đặt trên cân. Một đoạn dây dẫn cứng được giữ cố định, nằm ngang, vuông góc với các đường sức từ của từ trường đều giữa hai cực của nam châm (hình vẽ bên dưới). Cảm ứng từ [LATEX_1] của từ trường có phương nằm ngang và có độ lớn là [LATEX_2]. Chiều dài của phần dây dẫn [LATEX_3] nằm trong vùng từ trường đều giữa hai cực của nam châm là [LATEX_4]. Ban đầu, chưa có dòng điện chạy trong dây dẫn, cân chỉ một giá trị xác định. Sau đó, cho dòng điện không đổi với cường độ [LATEX_5] chạy trong dây dẫn theo chiều từ [LATEX_6] đến [LATEX_7].",
+      "math": [],
+      "images": [],
+      "latex": {
+        "[LATEX_1]": "\\ B",
+        "[LATEX_2]": "\\implies",
+        "[LATEX_3]": "P Q",
+        "[LATEX_4]": "\\frac{\\bar{\\beta}}{\\hbar}",
+        "[LATEX_5]": "\\int\\int",
+        "[LATEX_6]": "\\ D",
+        "[LATEX_7]": "\\complement\\bigcap"
+      },
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 81,
+        "text": "A. Bỏ qua ảnh hưởng của từ trường Trái Đất.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 82,
+        "text": "B. a) Cảm ứng từ [LATEX_1] có hướng từ cực [LATEX_2] sang cực [LATEX_3] của nam châm.",
+        "math": [],
+        "images": [],
+        "latex": {
+          "[LATEX_1]": "\\bar{B}",
+          "[LATEX_2]": "\\it M~",
+          "[LATEX_3]": "\\subseteq\\bigcup"
+        },
+        "label": "answer"
+      },
+      {
+        "para_index": 83,
+        "text": "C. b) Lực từ do từ trường tác dụng lên đoạn dây [LATEX_1] hướng thẳng đứng lên trên.",
+        "math": [],
+        "images": [],
+        "latex": {
+          "[LATEX_1]": "P Q"
+        },
+        "label": "answer"
+      },
+      {
+        "para_index": 84,
+        "text": "D. c) Cân chỉ giá trị nhỏ hơn giá trị ban đầu.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 85,
+        "text": "E. d) Lực từ do từ trường tác dụng lên đoạn dây [LATEX_1] có độ lớn là [LATEX_2].",
+        "math": [],
+        "images": [],
+        "latex": {
+          "[LATEX_1]": "P Q",
+          "[LATEX_2]": "B I I"
+        },
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 86,
+      "text": "Câu 3: Sóng điện từ được ứng dụng nhiều trong thông tin liên lạc.",
+      "math": [],
+      "images": [],
+      "latex": {},
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 87,
+        "text": "A. a) Giả sử tại một điểm có sóng điện từ truyền qua theo phương thẳng đứng hướng lên trên, nếu cảm ứng từ có hướng Bắc - Nam thì cường độ điện trường có hướng Đông - Tây.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 88,
+        "text": "B. b) Tại một điểm có sóng điện từ truyền qua, cường độ điện trường và cảm ứng từ luôn dao động cùng pha.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 89,
+        "text": "C. c) Sóng điện từ là sóng dọc.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 90,
+        "text": "D. d) Không thể tạo ra hiện tượng giao thoa đối với sóng điện từ.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 91,
+      "text": "Câu 4: Các quá trình biến đổi hạt nhân là cơ sở của nhiều ứng dụng.",
+      "math": [],
+      "images": [],
+      "latex": {},
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 92,
+        "text": "A. a) Phản ứng nhiệt hạch là phản ứng thu năng lượng.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 93,
+        "text": "B. b) Phản ứng phân hạch là phản ứng tỏa năng lượng.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 94,
+        "text": "C. c) Phóng xạ là quá trình tự phát và ngẫu nhiên.",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 95,
+        "text": "D. d) Hạt nhân Carbon [LATEX_1] phóng xạ [LATEX_2]và biến đổi thành hạt nhân Nitrogen [LATEX_3].",
+        "math": [],
+        "images": [],
+        "latex": {
+          "[LATEX_1]": "\\stackrel{4}{\\propto}C",
+          "[LATEX_2]": "\\textstyle\\iint^{x}\\oint^{x}",
+          "[LATEX_3]": "\\stackrel{15}{\\mathcal{}}M"
+        },
+        "label": "answer"
+      },
+      {
+        "para_index": 97,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 98,
+      "text": "Dùng thông tin sau cho Câu 1 và Câu 2: Một khung dây dẫn phẳng, kín có diện tích [LATEX_1], gồm 25 vòng dây được đặt trong từ trường đều sao cho cảm ứng từ [LATEX_2] vuông góc với mặt phẳng khung dây. Trong [LATEX_3], độ lớn cảm ứng từ của từ trường tăng đều từ [LATEX_4] đến [LATEX_5].",
+      "math": [],
+      "images": [],
+      "latex": {
+        "[LATEX_1]": "3.06\\cdot10^{-4}~{\\mathrm{m}}^{2}",
+        "[LATEX_2]": "\\textstyle{B}\\,",
+        "[LATEX_3]": "0,900\\,S",
+        "[LATEX_4]": "0.100\\ 7",
+        "[LATEX_5]": "0,600,\\,\\mathbb{T}"
+      },
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 99,
+      "text": "Câu 1: Độ lớn suất điện động cảm ứng trong khung dây là [LATEX_1]. Tìm [LATEX_2] (làm tròn kết quả đến chữ số hàng phần trăm).",
+      "math": [],
+      "images": [],
+      "latex": {
+        "[LATEX_1]": "\\chi\\cdot10^{-3}\\ \\mathrm{V}",
+        "[LATEX_2]": "X"
+      },
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 100,
+      "text": "Câu 2: Biết điện trở của khung dây là [LATEX_1]. Nhiệt lượng tỏa ra trên khung dây trong khoảng thời gian từ trường biến thiên là [LATEX_2]. Tìm [LATEX_3] (làm tròn kết quả đến chữ số hàng phần trăm).",
+      "math": [],
+      "images": [],
+      "latex": {
+        "[LATEX_1]": "0,270\\Omega",
+        "[LATEX_2]": "x\\cdot10^{-5}~\\rfloor",
+        "[LATEX_3]": "X"
+      },
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 101,
+      "text": "Dùng thông tin sau cho Câu 3 và Câu 4: Trong các trạm không gian vũ trụ, cần thu hồi khí oxygen [LATEX_1] từ khí carbon dioxide [LATEX_2] do các nhà du hành thở ra để tái sử dụng. Trong một phương pháp thu hồi, cứ [LATEX_3] tạo ra [LATEX_4] và [LATEX_5] methane [LATEX_6]. Sau một thời gian, lượng khí [LATEX_7] thu được là [LATEX_8]. Khí [LATEX_9] và [LATEX_10] tạo thành từ lượng [LATEX_11] nói trên được chứa trong hai bình khác nhau ban đầu đều chưa chứa khí. Khối lượng mol của [LATEX_12] và [LATEX_13] lần lượt là [LATEX_14] và [LATEX_15] Coi các khí là khí lí tưởng.",
+      "math": [],
+      "images": [],
+      "latex": {
+        "[LATEX_1]": "\\left(\\sum\\right)_{\\tau}",
+        "[LATEX_2]": "\\mathrm{CO}_{2}",
+        "[LATEX_3]": "1.00\\;\\mathrm{molCO}",
+        "[LATEX_4]": "1,00~\\mathrm{molO}",
+        "[LATEX_5]": "1,00\\;\\mathrm{mol}",
+        "[LATEX_6]": "\\mathrm{CH}_{4}",
+        "[LATEX_7]": "\\mathrm{CO}_{2}",
+        "[LATEX_8]": "0,480{\\mathrm{~kg}}",
+        "[LATEX_9]": "\\mathrm{CH}_{4}",
+        "[LATEX_10]": "\\left(\\sum\\right)_{\\tau}",
+        "[LATEX_11]": "\\mathrm{CO}_{2}",
+        "[LATEX_12]": "\\mathrm{CO}_{2}",
+        "[LATEX_13]": "\\left(\\sum\\right)_{\\tau}",
+        "[LATEX_14]": "44,0.{\\frac{\\mathrm{g}}{\\mathrm{mol}}}",
+        "[LATEX_15]": "32,0{\\frac{\\mathrm{\\g}}{{\\mathrm{mol}}}}"
+      },
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 102,
+      "text": "Câu 3: Bình chứa khí [LATEX_1], có thể tích 129 L và được duy trì ở nhiệt độ [LATEX_2]. Áp suất của khí [LATEX_3] trong bình là [LATEX_4]. Tìm [LATEX_5] (làm tròn kết quả đến chữ số hàng phần trăm).",
+      "math": [],
+      "images": [],
+      "latex": {
+        "[LATEX_1]": "{\\mathit{C H}}_{4}",
+        "[LATEX_2]": "\\sim42\\ \\mathrm{C}",
+        "[LATEX_3]": "{\\mathit{C H}}_{4}",
+        "[LATEX_4]": "x:10^{5}{\\mathrm{~Pa}}",
+        "[LATEX_5]": "X"
+      },
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 103,
+      "text": "Câu 4: Khi một lượng khí [LATEX_1] được rút ra để sử dụng thì áp suất khí trong bình chứa khí [LATEX_2] bằng [LATEX_3] áp suất khí khi chưa rút, nhiệt độ của bình khí không đổi. Khối lượng [LATEX_4] đã được rút ra khỏi bình là bao nhiêu kilôgam (làm tròn kết quả đến chữ số hàng phần trăm)?",
+      "math": [],
+      "images": [],
+      "latex": {
+        "[LATEX_1]": "\\textstyle{\\cal Q}_{2}",
+        "[LATEX_2]": "\\textstyle{\\cal Q}_{2}",
+        "[LATEX_3]": "{\\mathsf{G S O N}}_{0}",
+        "[LATEX_4]": "\\textstyle{\\cal Q}_{2}"
+      },
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 104,
+      "text": "Dùng thông tin sau cho Câu 5 và Câu 6: Trước đây, để thuận tiện cho việc xem giờ, các nhà sản xuất đồng hồ đã sơn mặt số và kim của đồng hồ bằng một lớp dạ quang chứa đồng vị phóng xạ radium [LATEX_1] có chu kì bán rã là 1600 năm. Ban đầu, lớp dạ quang này chứa [LATEX_2]. Lấy số ngày trong một năm là 365 . Khối lượng mol của [LATEX_3] là [LATEX_4].",
+      "math": [],
+      "images": [],
+      "latex": {
+        "[LATEX_1]": "\\stackrel{26}{\\otimes}R",
+        "[LATEX_2]": "5,7\\rho\\ {\\mathrm{g}}_{83}^{2/0}\\,\\mathrm{Re}\\nonumber",
+        "[LATEX_3]": "\\overset{226}{\\otimes}\\mathrm{Ra}",
+        "[LATEX_4]": "226\\,{\\frac{\\mathrm{g}}{\\mathrm{mol}}}"
+      },
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 105,
+      "text": "Câu 5: Độ phóng xạ ban đầu của lượng [LATEX_1] được sơn trên đồng hồ là bao nhiêu megabecoren ( [LATEX_2], làm tròn kết quả đến chữ số hàng phần trăm)?",
+      "math": [],
+      "images": [],
+      "latex": {
+        "[LATEX_1]": "{\\frac{226}{98}}R q",
+        "[LATEX_2]": "M B q"
+      },
+      "label": "question"
+    },
+    "answers": []
+  },
+  {
+    "question": {
+      "para_index": 106,
+      "text": "Câu 6: Sau bao nhiêu năm thì độ phóng xạ của lượng [LATEX_1] còn lại bằng [LATEX_2] so với độ phóng xạ ban đầu (làm tròn kết quả đến chữ số hàng đơn vị)?",
+      "math": [],
+      "images": [],
+      "latex": {
+        "[LATEX_1]": "\\stackrel{26}{\\otimes}R",
+        "[LATEX_2]": "25{\\mathfrak{D}}^{0}"
+      },
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 108,
+        "text": "A. ------------------ HẾT ------------------",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 109,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 110,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 111,
+      "text": "Câu",
+      "math": [],
+      "images": [],
+      "latex": {},
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 112,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 113,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 114,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 115,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 116,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 117,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 118,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 119,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 120,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 121,
+        "text": "J. ĐA",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 122,
+        "text": "K. B",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 123,
+        "text": "L. A",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 124,
+        "text": "M. A",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 125,
+        "text": "N. D",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 126,
+        "text": "O. D",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 127,
+        "text": "P. A",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 128,
+        "text": "Q. A",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 129,
+        "text": "R. D",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 130,
+        "text": "S. B",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 131,
+      "text": "Câu",
+      "math": [],
+      "images": [],
+      "latex": {},
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 132,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 133,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 134,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 135,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 136,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 137,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 138,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 139,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 140,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 141,
+        "text": "J. ĐA",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 142,
+        "text": "K. B",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 143,
+        "text": "L. A",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 144,
+        "text": "M. C",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 145,
+        "text": "N. C",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 146,
+        "text": "O. A",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 147,
+        "text": "P. A",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 148,
+        "text": "Q. A",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 149,
+        "text": "R. A",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 150,
+        "text": "S. B",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 152,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 153,
+      "text": "Câu",
+      "math": [],
+      "images": [],
+      "latex": {},
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 154,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 155,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 156,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 157,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 158,
+        "text": "E. Đáp án",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 159,
+        "text": "F. DDDD",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 160,
+        "text": "G. DDSD",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 161,
+        "text": "H. DDSS",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 162,
+        "text": "I. SDDS",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 164,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  },
+  {
+    "question": {
+      "para_index": 165,
+      "text": "Câu",
+      "math": [],
+      "images": [],
+      "latex": {},
+      "label": "question"
+    },
+    "answers": [
+      {
+        "para_index": 166,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 167,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 168,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 169,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 170,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 171,
+        "text": "",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 172,
+        "text": "G. Đáp án",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 173,
+        "text": "H. 4.25",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 174,
+        "text": "I. 6.02",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 175,
+        "text": "J. 1.62",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 176,
+        "text": "K. 0.11",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 177,
+        "text": "L. 0.21",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      },
+      {
+        "para_index": 178,
+        "text": "M. 3200; 3201",
+        "math": [],
+        "images": [],
+        "latex": {},
+        "label": "answer"
+      }
+    ]
+  }
+]
