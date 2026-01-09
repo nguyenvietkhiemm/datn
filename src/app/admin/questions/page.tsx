@@ -13,10 +13,14 @@ import QuestionCard from "@/component/card/QuestionCard/QuestionCard";
 import { QuestionModel } from "@/domain/admin/questions/model";
 import { FileService } from "@/domain/admin/file/service";
 import { useRouter } from "next/navigation";
+import NotificationPopup from "@/component/notification/Notification";
+import type { typeNoti } from "@/lib/model";
+
 
 export default function Question() {
     const [questions, setQuestions] = useState<Question[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const [notify, setNotify] = useState<typeNoti | null>(null);
     const [totalPage, setTotalPage] = useState<number>(1);
     const [isFileList, setIsFileList] = useState<boolean>(false);
     const [fileList, setFileList] = useState<FileInfo[]>([]);
@@ -29,6 +33,7 @@ export default function Question() {
         type_question: 0,
         keyword: "",
     });
+    const isLoadingNoti = notify?.type === "loading";
     const router = useRouter();
 
     // Lấy danh sách câu hỏi
@@ -107,16 +112,38 @@ export default function Question() {
     const handleUploadDocx = async (e: React.ChangeEvent<HTMLInputElement>) => {
         try {
             const file = e.target.files?.[0];
-
             if (!file) return;
+
+            // 🔵 SHOW LOADING
+            setNotify({
+                type: "loading",
+                message: "Đang xử lý file DOCX, vui lòng chờ...",
+            });
 
             const url = `${API_URL}/microservice/bert/process-docx/${file.name}`;
             await FileService.uploadFile(url, file);
+
+            // 🟢 SUCCESS
+            setNotify({
+                type: "success",
+                message: "Đã xử lý xong, vui lòng chọn Danh sách json!",
+            });
+
+            // reset input để upload lại cùng file nếu cần
+            if (docxInputRef.current) {
+                docxInputRef.current.value = "";
+            }
         } catch (error) {
             console.error("Lỗi uploadFile:", error);
-            throw error;
+
+            // 🔴 ERROR
+            setNotify({
+                type: "error",
+                message: "Xử lý file DOCX thất bại. Vui lòng thử lại!",
+            });
         }
     };
+
 
     const handleChangePage = (page: number) => {
         setQuery(prev => ({
@@ -128,7 +155,7 @@ export default function Question() {
     const handleChangeSearch = (searchKeyword: string) => {
         setQuery(prev => ({
             ...prev,
-            page:1,
+            page: 1,
             keyword: searchKeyword
         }))
     }
@@ -158,6 +185,7 @@ export default function Question() {
                             <Button
                                 variant="primary"
                                 size="md"
+                                disabled={isLoadingNoti}
                                 onClick={() => docxInputRef.current?.click()}
                             >
                                 Thêm câu hỏi từ DOCX
@@ -165,7 +193,7 @@ export default function Question() {
                         </div>
 
                         <div className={styles.actionBtn}>
-                            <Button variant="primary" size="md" onClick={handleFetchJson}>
+                            <Button variant="primary" size="md" onClick={handleFetchJson} disabled={isLoadingNoti}>
                                 Danh sách JSON
                             </Button>
                         </div>
@@ -175,6 +203,7 @@ export default function Question() {
                                 variant="primary"
                                 size="md"
                                 onClick={() => router.push(`/admin/questions/create`)}
+                                disabled={isLoadingNoti}
                             >
                                 + Thêm câu hỏi
                             </Button>
@@ -182,7 +211,7 @@ export default function Question() {
                     </div>
 
                 </div>
-                
+
                 <div className={styles.filterType}>
                     <div>
                         <select
@@ -271,6 +300,15 @@ export default function Question() {
                 currentPage={query.page}
                 setCurrentPage={handleChangePage}
             />
+
+            {notify && (
+                <NotificationPopup
+                    message={notify.message}
+                    type={notify.type}
+                    onClose={() => setNotify(null)}
+                />
+            )}
+
         </div>
     );
 }
