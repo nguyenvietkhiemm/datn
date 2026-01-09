@@ -12,7 +12,7 @@ export default function MyPage() {
   const link = linkParam
     ? `${API_URL}/${linkParam}`
     : "";
-
+    
   if (!link) {
     return <p>Không có tài liệu để hiển thị.</p>;
   }

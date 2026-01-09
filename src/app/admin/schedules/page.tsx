@@ -12,6 +12,7 @@ import Pagination from "@/component/pagination/Pagination";
 import { formatVNDateTime } from "@/lib/model";
 import { ScheduleModel } from "@/domain/admin/schedules/model";
 import NotificationPopup from "@/component/notification/Notification";
+import { useRouter } from "next/navigation";
 
 type ViewMode = "LIST" | "DETAIL";
 type ScheduleStatus = "UPCOMING" | "ONGOING" | "FINISHED";
@@ -27,7 +28,7 @@ export default function Schedule() {
   const [openEdit, setOpenEdit] = useState(false);
   const [editSchedule, setEditSchedule] = useState<ExamSchedule | null>(null);
   const [deleteId, setDeleteId] = useState<number | null>(null);
-  
+  const router = useRouter();
 
   /* STATUS LOGIC */
 
@@ -58,8 +59,7 @@ export default function Schedule() {
   /* VIEW HANDLERS */
 
   const openDetail = (id: number) => {
-    setSelectedId(id);
-    setView("DETAIL");
+    router.push(`/admin/schedules/detail/${id}`)
   };
 
   const backToList = () => {
@@ -173,20 +173,6 @@ export default function Schedule() {
               </table>
               
             </div>
-          </motion.div>
-        )}
-
-        {view === "DETAIL" && selectedId && (
-          <motion.div
-            key="detail"
-            initial={{ x: "100%", opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: "100%", opacity: 0 }}
-          >
-            <ScheduleExamView
-              scheduleId={selectedId}
-              onBack={backToList}
-            />
           </motion.div>
         )}
       </AnimatePresence>
