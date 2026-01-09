@@ -7,6 +7,7 @@ import Search from "@/components/search/Search";
 import Pagination from "@/components/pagination/Pagination";
 import Cookies from "js-cookie";
 import Link from "next/link";
+import { FilterSearch } from "../../../lib/service";
 
 interface Document {
     document_id: number;
@@ -30,19 +31,13 @@ export default function DocumentList() {
     useEffect(() => {
         const fetchDocuments = async () => {
             try {
-                const params = new URLSearchParams();
-                params.append("page", currentPage.toString());
+                let url = `${API_URL}/documents?page=${currentPage}`
 
-                if (searchKeyword.trim()) {
-                    params.append("keyword", searchKeyword.trim());
-                }
-
-                if (filterCondition?.topics?.length) {
-                    params.append("topics", filterCondition.topics.join(","));
-                }
-                params.append("available", "true")
+                url = FilterSearch(filterCondition, searchKeyword, url);
+                console.log(url);
+                
                 const res = await fetch(
-                    `${API_URL}/documents?${params.toString()}`,
+                    url,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -75,6 +70,7 @@ export default function DocumentList() {
                 <Filter
                     setFilterCondition={setFilterCondition}
                     setSearchKeyword={setSearchKeyword}
+                    setCurrentPage={setCurrentPage}
                 />
 
                 <Search
