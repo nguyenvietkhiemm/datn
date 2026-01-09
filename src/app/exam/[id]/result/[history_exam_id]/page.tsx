@@ -7,6 +7,7 @@ import { useParams } from "next/navigation";
 import ResultSummary from "@/components/result-do/ResultSummary";
 import ResultPart from "@/components/result-do/ResultPart";
 import { ReviewQuestion } from "../../../../../../domain/question-answer/type";
+import { LatexPreview } from "@/components/LatexPreview/page";
 
 export default function ResultExam() {
   const [questions, setQuestions] = useState<Record<number, ReviewQuestion[]>>({});

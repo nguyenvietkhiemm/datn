@@ -3,6 +3,7 @@
 import { ReviewQuestion } from "../../../domain/question-answer/type";
 import styles from "./ResultMultiple.module.css";
 import { ImagePreview } from "../ImageReview/page";
+import { LatexPreview } from "../LatexPreview/page";
 
 type ResultMultipleChoiceProp = {
   q: ReviewQuestion;
@@ -38,7 +39,7 @@ export default function ResultMultipleChoice({
       <div className={styles.questionHeader}>
         <span className={styles.questionIndex}>Câu {index + 1}</span>
         <span className={styles.questionText}>
-          {q.question_content}
+        <LatexPreview text={q.question_content} />
         </span>
 
         {q.images?.map((src, idx) => (
@@ -55,7 +56,7 @@ export default function ResultMultipleChoice({
           {isAnswered ? (
             q.user_answers.map((a, idx) => (
               <div key={`user-${idx}`}>
-                {a.answer_content}
+                <LatexPreview text={a.answer_content as string} />
               </div>
             ))
           ) : (

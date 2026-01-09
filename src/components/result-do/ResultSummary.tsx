@@ -1,4 +1,5 @@
 import styles from "./ResultSummary.module.css";
+import { LatexPreview } from "../LatexPreview/page";
 
 interface Props {
   correct: number;
