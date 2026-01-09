@@ -133,7 +133,7 @@ export default function SubjectManager({
                       <button
                         className={styles.deleteBtn}
                         onClick={() => {
-                          if (confirm("Xoá môn học?")) onDelete(s.subject_id);
+                          onDelete(s.subject_id);
                         }}
                       >
                         Xoá

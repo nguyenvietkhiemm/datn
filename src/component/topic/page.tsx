@@ -213,7 +213,7 @@ export default function TopicManager({
                     <button
                       className={styles.deleteBtn}
                       onClick={() => {
-                        if (confirm("Xoá chủ đề?")) onDelete(t.topic_id);
+                        onDelete(t.topic_id);
                       }}
                     >
                       Xoá
