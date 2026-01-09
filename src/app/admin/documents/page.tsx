@@ -9,11 +9,13 @@ import Pagination from "@/component/pagination/Pagination";
 import { Document, DocumnetQuery } from "@/domain/admin/documents/types";
 import { DocumentService } from "@/domain/admin/documents/service";
 import Link from "next/link";
-import { formatVNDateTime } from "@/lib/model";
+import { formatVNDateTime, typeNoti } from "@/lib/model";
+import NotificationPopup from "@/component/notification/Notification";
 
 export default function DocumentPage() {
     const [documents, setDocuments] = useState<Document[]>([]);
     const [loading, setLoading] = useState(true);
+    const [notify, setNotify] = useState<typeNoti | null>(null);
     const [totalPage, setTotalPage] = useState<number>(1);
     const [selectedDocuments, setSelectedDocuments] = useState<number[]>([]);
     const [query, setQuery] = useState<DocumnetQuery>({
@@ -99,35 +101,59 @@ export default function DocumentPage() {
 
     const handleVectorizeSelected = async () => {
         if (selectedDocuments.length === 0) {
-            alert("Vui lòng chọn ít nhất 1 tài liệu để vectorize");
+            setNotify({
+                type: "warning",
+                message: "Vui lòng chọn ít nhất 1 tài liệu để vectorize",
+            });
             return;
         }
 
         const files = documents
             .filter(
                 (doc): doc is Document & { link: string } =>
-                    selectedDocuments.includes(doc.document_id) && typeof doc.link === "string"
+                    selectedDocuments.includes(doc.document_id) &&
+                    typeof doc.link === "string"
             )
             .map(doc => ({
                 document_id: doc.document_id,
                 link: doc.link,
             }));
 
-
         if (files.length === 0) {
-            alert("Các tài liệu đã chọn không có link hợp lệ");
+            setNotify({
+                type: "error",
+                message: "Các tài liệu đã chọn không có link hợp lệ",
+            });
             return;
         }
 
         try {
+            // 🔵 SHOW LOADING NOTI
+            setNotify({
+                type: "loading",
+                message: "Đang vectorize tài liệu, vui lòng chờ...",
+            });
+
             await DocumentService.vectorize(files);
-            alert("Đã gửi yêu cầu vectorize!");
+
+            // 🟢 SUCCESS
+            setNotify({
+                type: "success",
+                message: "Đã vectorize thành công!",
+            });
+
             setSelectedDocuments([]);
         } catch (error) {
             console.error(error);
-            alert("Vectorize thất bại");
+
+            // 🔴 ERROR
+            setNotify({
+                type: "error",
+                message: "Vectorize thất bại. Vui lòng thử lại!",
+            });
         }
     };
+
 
 
     if (loading)
@@ -260,6 +286,14 @@ export default function DocumentPage() {
                     setQuery(prev => ({ ...prev, page }))
                 }
             />
+
+            {notify && (
+                <NotificationPopup
+                    message={notify.message}
+                    type={notify.type}
+                    onClose={() => setNotify(null)}
+                />
+            )}
         </div>
     );
 }
