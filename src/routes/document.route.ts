@@ -56,8 +56,8 @@ documentRoute.get('/', DocumentController.getAll);
  */
 documentRoute.post(
         '/create',
-        Authentication.AuthenticateToken,
-        Authentication.AuthorizeRoles(...ADMIN),
+        // Authentication.AuthenticateToken,
+        // Authentication.AuthorizeRoles(...ADMIN),
         saveDocResourceWithHashCheck,  // multer + hash check + lưu file
         DocumentController.create       // req.savedFile đã có thông tin file
 );
