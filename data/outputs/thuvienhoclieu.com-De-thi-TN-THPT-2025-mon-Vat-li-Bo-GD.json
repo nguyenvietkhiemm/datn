@@ -168,7 +168,7 @@
       "math": [],
       "images": [],
       "latex": {
-        "[LATEX_1]": "{}_{92}^{238}U"
+        "[LATEX_1]": "{\\frac{238}{92}}U"
       },
       "label": "question"
     },
@@ -282,10 +282,10 @@
       "latex": {
         "[LATEX_1]": "{\\dot{M}}",
         "[LATEX_2]": "\\subseteq\\bigcup",
-        "[LATEX_3]": "\\textstyle\\bigcap",
-        "[LATEX_4]": "h\\backslash\\surd A",
+        "[LATEX_3]": "\\implies",
+        "[LATEX_4]": "\\Phi",
         "[LATEX_5]": "{\\mathcal{Q}}",
-        "[LATEX_6]": "{\\dot{M}}"
+        "[LATEX_6]": "\\Phi"
       },
       "label": "question"
     },
@@ -412,7 +412,7 @@
       "math": [],
       "images": [],
       "latex": {
-        "[LATEX_1]": "{}_{1}{}_{X}{}_{,Z}"
+        "[LATEX_1]": "{}_{1}{}_{X},Z"
       },
       "label": "question"
     },
@@ -478,9 +478,9 @@
         "math": [],
         "images": [],
         "latex": {
-          "[LATEX_1]": "\\frac{\\mathbf{J}}{\\mathbf{kg}}",
-          "[LATEX_2]": "\\frac{J}{\\epsilon_{\\mathrm{C}}}",
-          "[LATEX_3]": "\\frac{\\mathbf{J}}{\\mathrm{kg}\\cdot\\mathbf{K}}",
+          "[LATEX_1]": "\\frac{\\mathbf{J}}{\\mathrm{kg}}",
+          "[LATEX_2]": "\\frac{J}{\\epsilon}",
+          "[LATEX_3]": "\\frac{\\mathbf{J}}{\\left|\\mathbf{kg}\\cdot\\mathbf{K}\\right.}",
           "[LATEX_4]": "\\frac{J}{K}"
         },
         "label": "answer"
@@ -497,7 +497,7 @@
         "[LATEX_1]": "\\int\\int",
         "[LATEX_2]": "\\Delta U=A+Q",
         "[LATEX_3]": "\\complement\\bigcap",
-        "[LATEX_4]": "\\mathbb{Z}\\left(\\underline{{{\\Lambda}}}"
+        "[LATEX_4]": "{\\mathcal{L}}\\,"
       },
       "label": "question"
     },
@@ -520,7 +520,7 @@
       "images": [],
       "latex": {
         "[LATEX_1]": "\\complement\\bigcap",
-        "[LATEX_2]": "{\\cal I}{\\cal I}{\\cal I}"
+        "[LATEX_2]": "{\\mathit{\\operatorname{2}}}/{\\mathit{1}}"
       },
       "label": "question"
     },
@@ -697,7 +697,7 @@
       "images": [],
       "latex": {
         "[LATEX_1]": "T_{1}",
-        "[LATEX_2]": "\\overline{{\\left\\{c_{1}\\right.}}"
+        "[LATEX_2]": "\\overline{{\\left\\{c_{\\mathrm{i}}\\right\\}}}"
       },
       "label": "question"
     },
@@ -710,7 +710,7 @@
       "math": [],
       "images": [],
       "latex": {
-        "[LATEX_1]": "\\textstyle W_{2}",
+        "[LATEX_1]": "\\textstyle\\eta_{2}",
         "[LATEX_2]": "{\\mathit{t}}_{2}"
       },
       "label": "question"
@@ -772,7 +772,7 @@
       "math": [],
       "images": [],
       "latex": {
-        "[LATEX_1]": "\\bar{B}",
+        "[LATEX_1]": "\\ B",
         "[LATEX_2]": "\\implies",
         "[LATEX_3]": "P Q",
         "[LATEX_4]": "\\frac{\\bar{\\beta}}{\\hbar}",
@@ -798,8 +798,8 @@
         "images": [],
         "latex": {
           "[LATEX_1]": "\\bar{B}",
-          "[LATEX_2]": "\\mathcal{N}",
-          "[LATEX_3]": "\\subseteq\\"
+          "[LATEX_2]": "\\it M~",
+          "[LATEX_3]": "\\subseteq\\bigcup"
         },
         "label": "answer"
       },
@@ -920,7 +920,7 @@
         "latex": {
           "[LATEX_1]": "\\stackrel{4}{\\propto}C",
           "[LATEX_2]": "\\textstyle\\iint^{x}\\oint^{x}",
-          "[LATEX_3]": "\\stackrel{15}{\\mathcal{T}}\\mathcal{M}"
+          "[LATEX_3]": "\\stackrel{15}{\\mathcal{}}M"
         },
         "label": "answer"
       },
@@ -942,7 +942,7 @@
       "images": [],
       "latex": {
         "[LATEX_1]": "3.06\\cdot10^{-4}~{\\mathrm{m}}^{2}",
-        "[LATEX_2]": "\\bar{B}",
+        "[LATEX_2]": "\\textstyle{B}\\,",
         "[LATEX_3]": "0,900\\,S",
         "[LATEX_4]": "0.100\\ 7",
         "[LATEX_5]": "0,600,\\,\\mathbb{T}"
@@ -958,7 +958,7 @@
       "math": [],
       "images": [],
       "latex": {
-        "[LATEX_1]": "\\chi:10^{-3}\\ \\mathrm{V}",
+        "[LATEX_1]": "\\chi\\cdot10^{-3}\\ \\mathrm{V}",
         "[LATEX_2]": "X"
       },
       "label": "question"
@@ -990,7 +990,7 @@
         "[LATEX_1]": "\\left(\\sum\\right)_{\\tau}",
         "[LATEX_2]": "\\mathrm{CO}_{2}",
         "[LATEX_3]": "1.00\\;\\mathrm{molCO}",
-        "[LATEX_4]": "1,00\\mathrm{~molO}",
+        "[LATEX_4]": "1,00~\\mathrm{molO}",
         "[LATEX_5]": "1,00\\;\\mathrm{mol}",
         "[LATEX_6]": "\\mathrm{CH}_{4}",
         "[LATEX_7]": "\\mathrm{CO}_{2}",
@@ -1001,7 +1001,7 @@
         "[LATEX_12]": "\\mathrm{CO}_{2}",
         "[LATEX_13]": "\\left(\\sum\\right)_{\\tau}",
         "[LATEX_14]": "44,0.{\\frac{\\mathrm{g}}{\\mathrm{mol}}}",
-        "[LATEX_15]": "32,0{\\frac{\\mathrm{g}}{\\mathrm{mol}}}"
+        "[LATEX_15]": "32,0{\\frac{\\mathrm{\\g}}{{\\mathrm{mol}}}}"
       },
       "label": "question"
     },
@@ -1015,7 +1015,7 @@
       "images": [],
       "latex": {
         "[LATEX_1]": "{\\mathit{C H}}_{4}",
-        "[LATEX_2]": "\\ -42\\ \\mathrm{C}",
+        "[LATEX_2]": "\\sim42\\ \\mathrm{C}",
         "[LATEX_3]": "{\\mathit{C H}}_{4}",
         "[LATEX_4]": "x:10^{5}{\\mathrm{~Pa}}",
         "[LATEX_5]": "X"
@@ -1033,8 +1033,8 @@
       "latex": {
         "[LATEX_1]": "\\textstyle{\\cal Q}_{2}",
         "[LATEX_2]": "\\textstyle{\\cal Q}_{2}",
-        "[LATEX_3]": "699_{0}",
-        "[LATEX_4]": "G_{2}"
+        "[LATEX_3]": "{\\mathsf{G S O N}}_{0}",
+        "[LATEX_4]": "\\textstyle{\\cal Q}_{2}"
       },
       "label": "question"
     },
@@ -1047,8 +1047,8 @@
       "math": [],
       "images": [],
       "latex": {
-        "[LATEX_1]": "{\\frac{226}{98}}R q",
-        "[LATEX_2]": "5,7\\mu\\mathrm{{\\g_{ss}^{2}R a}}",
+        "[LATEX_1]": "\\stackrel{26}{\\otimes}R",
+        "[LATEX_2]": "5,7\\rho\\ {\\mathrm{g}}_{83}^{2/0}\\,\\mathrm{Re}\\nonumber",
         "[LATEX_3]": "\\overset{226}{\\otimes}\\mathrm{Ra}",
         "[LATEX_4]": "226\\,{\\frac{\\mathrm{g}}{\\mathrm{mol}}}"
       },
@@ -1077,8 +1077,8 @@
       "math": [],
       "images": [],
       "latex": {
-        "[LATEX_1]": "{\\frac{226}{98}}R a",
-        "[LATEX_2]": "25{\\mathfrak{D}}\\not\\to"
+        "[LATEX_1]": "\\stackrel{26}{\\otimes}R",
+        "[LATEX_2]": "25{\\mathfrak{D}}^{0}"
       },
       "label": "question"
     },

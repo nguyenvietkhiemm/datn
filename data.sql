@@ -633,8 +633,24 @@ JOIN generate_series(x.k, x.k) s(k) ON true
 -- đảm bảo schedule đủ dài
 WHERE EXTRACT(EPOCH FROM (es.end_time - es.start_time)) >= 90 * 60;
 
-
-
+INSERT INTO bank (
+  description,
+  topic_id,
+  time_limit,
+  available
+)
+SELECT
+  'Ngân hàng câu hỏi luyện thi THPT Quốc gia môn ' || t.title || ' năm 2025 - Bộ ' || g.n,
+  t.topic_id,
+  90,
+  true
+FROM topic t
+JOIN LATERAL (
+  SELECT n
+  FROM generate_series(1, 10) g(n)          -- pool
+  ORDER BY random()
+  LIMIT floor(random() * 5) + 3             -- 3 → 7 bank / topic
+) g ON true;
 
 
 INSERT INTO history_exam (
