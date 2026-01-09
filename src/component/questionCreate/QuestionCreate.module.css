@@ -1,0 +1,329 @@
+/* =========================================================
+   CONTAINER
+========================================================= */
+.container {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.container_question {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.container_answer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    margin-top: 16px;
+    /* 🔥 QUAN TRỌNG */
+    padding-top: 16px;
+
+    border-top: 1px dashed #e5e7eb;
+}
+
+/* =========================================================
+   QUESTION HEADER
+========================================================= */
+.questionWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.questionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 6px;
+    margin-bottom: 4px;
+
+    background: transparent;
+    border: none;
+}
+
+
+.questionIndex {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+/* =========================================================
+   LABEL
+========================================================= */
+.label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin: 14px 0 6px;
+}
+
+/* =========================================================
+   BUTTON BASE
+========================================================= */
+.addBtn,
+.removeBtn {
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+
+/* ---------- ADD BUTTON ---------- */
+.addBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 500;
+
+    color: #374151;
+    background: #ffffff;
+
+    border: 1px dashed #e5e7eb;
+    border-radius: 8px;
+}
+
+.addBtn:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+/* ---------- REMOVE BUTTON ---------- */
+.removeBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 36px;
+    height: 28px;
+    padding: 0 10px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    background-color: #fee2e2;
+    color: #b91c1c;
+
+    border: 1px solid transparent;
+    border-radius: 999px;
+}
+
+.removeBtn:hover {
+    background: #fef2f2;
+    border-color: #fecaca;
+}
+
+/* Remove button trong header */
+.questionHeader .removeBtn {
+    min-width: 92px;
+    height: 30px;
+
+    background: #fff;
+    color: #dc2626;
+
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+}
+
+.questionHeader .removeBtn:hover {
+    background: #fef2f2;
+}
+
+/* =========================================================
+   QUESTION / ANSWER CONTENT
+========================================================= */
+.text,
+.preview,
+.input {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* ---------- TEXT VIEW ---------- */
+.text {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 6px 2px;
+    cursor: pointer;
+}
+
+.text:hover {
+    background: #f8fafc;
+    border-radius: 6px;
+}
+
+/* ---------- TEXTAREA ---------- */
+.textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+}
+
+.textarea:focus,
+.input:focus {
+    border-color: #2563eb;
+}
+
+/* ---------- ANSWER INPUT ---------- */
+.input {
+    flex: 1;
+    width: 100%;
+    min-height: 36px;
+    padding: 6px 8px;
+    resize: vertical;
+}
+
+/* ---------- LATEX PREVIEW ---------- */
+.preview {
+    border: none;
+    background: transparent;
+    padding: 2px 0;
+}
+
+/* =========================================================
+   ACTION ROW
+========================================================= */
+.action_question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* =========================================================
+   RADIO GROUP
+========================================================= */
+.radioGroup {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.radioGroup label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.radioItem:hover {
+    background: #f3f4f6;
+}
+
+.radioItem input:checked+span {
+    font-weight: 600;
+    color: #2563eb;
+}
+
+.radioItem input {
+    accent-color: #2563eb;
+    cursor: pointer;
+}
+
+/* =========================================================
+   ANSWER ROW
+========================================================= */
+.answerRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 10px 12px;
+    border-radius: 8px;
+
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+}
+
+.answerRow input[type="radio"],
+.answerRow input[type="checkbox"] {
+    margin: 0;
+}
+
+/* Hover action buttons */
+.answerRow .addBtn,
+.answerRow .removeBtn {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.answerRow:hover .addBtn,
+.answerRow:hover .removeBtn {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* =========================================================
+   CORRECT ICON
+========================================================= */
+.correctAnswer {
+    border-color: #22c55e;
+    background: #f0fdf4;
+}
+
+/* =========================================================
+   IMAGE PREVIEW
+========================================================= */
+.previewWrap {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+}
+
+.imageWrapperSmall {
+    width: 80px;
+    height: 80px;
+}
+
+.previewWrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+}
+
+/* =========================================================
+   STATE
+========================================================= */
+.changed {
+    background-color: #fff7ed !important;
+    border-color: #f59e0b !important;
+}
+
+/* =========================================================
+   SELECT QUESTION
+========================================================= */
+.selectQuestion {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #374151;
+}
+
+.typeQuestionBox {
+    padding: 12px 14px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}

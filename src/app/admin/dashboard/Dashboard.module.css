@@ -1,0 +1,136 @@
+/* ====== Container tổng ====== */
+.dashboard_container {
+    padding: 2rem;
+    background-color: #f5f6fa; /* màu nền nhẹ, dễ nhìn */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem; /* tăng khoảng cách các sections */
+    box-sizing: border-box;
+}
+
+.overview {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e293b; /* màu chữ đậm sang */
+    margin-bottom: 0.5rem;
+}
+/* ====== Lưới hiển thị Card KPI ====== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+}
+
+.grid > * {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.grid > *:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ====== Khu vực biểu đồ ====== */
+.charts {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+}
+
+.sections {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+.line {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+    flex-wrap: wrap; /* responsive auto wrap */
+}
+
+/* 3 biểu đồ Bar – auto responsive */
+.bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    align-items: stretch;
+}
+
+/* Pie chart: dùng grid để auto responsive */
+.pie_chart {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+}
+
+@media(max-width:1024px) {
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.2rem;
+    }
+
+    .pie_chart {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        width: 100%;
+    }
+    
+}
+
+/* ====== Responsive dưới 768px (Tablet và mobile lớn) ====== */
+@media (max-width: 768px) {
+    .dashboard_container {
+        padding: 1rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .line {
+        flex-direction: column;
+    }
+
+    /* Card hiển thị 2 cột */
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .pie_chart {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ====== Responsive dưới 500px (điện thoại nhỏ) ====== */
+@media (max-width: 500px) {
+    .dashboard_container {
+        padding: 0.5rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .title {
+        font-size: 1.6rem;
+    }
+}
+
+.table_section {
+    width: 100%;
+}

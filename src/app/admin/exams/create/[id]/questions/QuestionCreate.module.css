@@ -1,0 +1,158 @@
+.container {
+    padding: 24px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 10px;
+    margin-bottom: 3rem;
+}
+
+.search {
+    margin-bottom: 1rem;
+}
+
+.filterType {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+/* ================= SELECT ================= */
+.select {
+    min-width: 220px;
+    padding: 10px 14px;
+    font-size: 14px;
+    color: #111827;
+    background-color: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* hover */
+.select:hover {
+    border-color: #9ca3af;
+}
+
+/* focus */
+.select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* option */
+.select option {
+    font-size: 14px;
+    padding: 8px;
+}
+
+.question_card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.content {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.content input[type="checkbox"] {
+    transform: scale(1.5);
+    cursor: pointer;
+}
+
+.imageGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 12px 0;
+}
+
+.imageWrapper {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+.imageGroupSmall {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.imageWrapperSmall {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+.image {
+    object-fit: cover;
+}
+
+.answerList {
+    margin-top: 20px;
+}
+
+.answerItem {
+    display: flex;
+    align-items: flex-start;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #e5e7eb;
+    background: #fafafa;
+}
+
+.answerLabel {
+    font-weight: 600;
+    min-width: 20px;
+}
+
+.answerText {
+    display: flex;
+    align-items: center;
+}
+
+.answerText strong {
+    color: #28a745;
+    margin-left: 1rem;
+}

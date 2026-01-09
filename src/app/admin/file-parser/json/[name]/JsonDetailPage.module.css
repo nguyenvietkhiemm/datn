@@ -1,0 +1,217 @@
+.title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.button {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 2rem 0 0;
+}
+
+.buttonGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.buttonGroup> :last-child {
+    margin-left: auto;
+    /* đẩy nút cuối sang phải */
+}
+
+
+
+.button_save {
+    display: flex;
+    justify-content: flex-start;
+    gap: 3rem;
+
+}
+
+
+.changed {
+    border: 2px solid #156e82 !important;
+    transition: border-color 0.3s;
+}
+
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+    .csv_container {
+        padding: 10px;
+    }
+
+    .table {
+        font-size: 13px;
+        overflow-x: auto;
+        display: block;
+    }
+
+    .button_savecsv,
+    .button_save_question {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 24px auto;
+    background: #f8fafc;
+}
+
+.actionBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    margin-bottom: 20px;
+}
+
+/* Nhóm nút bên trái */
+.leftActions {
+    display: flex;
+    gap: 12px;
+}
+
+/* Nút import bên phải */
+.importBtn {
+    position: relative;
+    padding-right: 44px;
+    /* chừa chỗ cho badge */
+}
+
+/* Badge số lượng */
+.badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ef4444;
+    /* đỏ nổi */
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 999px;
+
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4);
+}
+
+/* Disabled import */
+.importBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.questionCard {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.2s ease;
+}
+
+.questionCard:hover {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.questionActions {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+@media (max-width: 768px) {
+    .actionBar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .leftActions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .importBtn {
+        width: 100%;
+    }
+}
+
+/* badge số lượng */
+.badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+
+    background: #4447ef;
+    /* đỏ nhấn */
+    color: white;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+
+.importBtn::before {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    line-height: 1;
+}
+
+
+.questionList {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    /* khoảng cách giữa các question */
+}
+
+/* mỗi question là 1 card */
+.questionCard {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e5e7eb;
+}
+
+/* khu vực nút bên dưới question */
+.cardActions {
+    margin-top: 16px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.importBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

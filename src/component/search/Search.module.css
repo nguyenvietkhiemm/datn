@@ -1,0 +1,84 @@
+/* Wrapper filter */
+.filter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-top: 1rem;
+    max-height: 44px;
+}
+
+/* Search box */
+.searchBox {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    height: 40px;
+    border: 1px solid #d0d7e2;
+    border-radius: 10px;
+    background-color: #f8faff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* focus state (áp cho input focus bên trong) */
+.searchBox:focus-within {
+    border-color: #02346d;
+    box-shadow: 0 0 0 2px rgba(2, 52, 109, 0.15);
+    background-color: #ffffff;
+}
+
+/* Input */
+.input {
+    flex: 1;
+    height: 100%;
+    padding: 8px 72px 8px 12px; /* chừa chỗ clear + search */
+    font-size: 14px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #02346d;
+}
+
+.input::placeholder {
+    color: #8a94a6;
+}
+
+/* Clear button */
+.clearBtn {
+    position: absolute;
+    right: 52px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #9ca3af;
+    transition: color 0.2s ease;
+}
+
+.clearBtn:hover {
+    color: #02346d;
+}
+
+/* Search button */
+.searchBtn {
+    height: 32px;
+    margin-right: 6px;
+    padding: 0 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #e9edf5;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    color: #02346d;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+    display: flex;
+    align-items: center;
+}
+
+.searchBtn:hover {
+    background-color: #dbe3f3;
+    transform: translateY(-1px);
+}

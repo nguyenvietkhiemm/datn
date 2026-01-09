@@ -1,0 +1,212 @@
+/* ========== SIDEBAR CONTAINER ========== */
+.sidebar {
+    width: 280px;
+    height: 100vh;
+    background: linear-gradient(180deg, #ffffff 0%, #f7f9ff 100%);
+    color: #1f2937;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border-radius: 25px 0 0 25px;
+    border-right: 1px solid rgba(0, 112, 243, 0.15);
+
+    position: fixed; /* sửa từ flex thành fixed */
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+
+.top {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem; /* khoảng cách hợp lý */
+    padding: 1.5rem 1rem;
+}
+
+
+/* ========== LOGO ========== */
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 0.75rem;
+    border-radius: 12px;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(1, 68, 145, 0.2); /* shadow màu xanh đậm nhẹ */
+}
+
+.logoWrapper {
+    position: relative;
+    width: 100px;
+    aspect-ratio: 5 / 3;
+    flex-shrink: 0; /* không bị co khi sidebar nhỏ */
+}
+
+.logoText {
+    display: flex;
+    flex-direction: column;
+    font-weight: 700;
+    line-height: 1.1;
+    align-items: flex-start;
+    color: #000000; /* màu xanh đậm bạn muốn */
+}
+
+.logoText span {
+    font-size: 0.8em;
+    color: #014491;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .logoWrapper {
+        width: 80px;
+    }
+
+    .logoText {
+        font-size: 0.9rem;
+        margin-left: 0.5rem;
+    }
+}
+/* ========== NAVIGATION ========== */
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    
+}
+
+.navItem {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    text-decoration: none;
+    opacity: 0.9;
+    transition: all 0.25s ease;
+    color: #1f2937;
+    font-weight: 500;
+}
+
+.navItem:hover {
+    opacity: 1;
+    transform: translateX(6px);
+    background: rgba(37, 99, 235, 0.1);
+    color: #2563eb;
+}
+
+.navItem svg {
+    transition: all 0.25s ease;
+}
+
+.navItem:hover svg {
+    color: #2563eb;
+}
+
+.active {
+    background: rgba(37, 99, 235, 0.15);
+    color: #0d368d;
+    border-left: 4px solid #1f4fb7;
+    opacity: 1;
+}
+
+/* ========== BOTTOM BUTTON ========== */
+.buttonContainer {
+    padding: 2rem 1rem 1rem;
+}
+
+.adminButton {
+    width: 100%;
+    background-color: #2563eb;
+    color: #fff;
+    padding: 0.75rem 0;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+}
+
+.adminButton:hover {
+    background-color: #02346d;
+    transform: scale(1.03);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .logoWrapper {
+        width: 80px;
+    }
+
+    .navItem {
+        padding: 0.6rem 0.8rem;
+    }
+}
+
+
+/* --- Mobile 768px --- */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+        position: fixed;
+        left: -240px;         
+        top: 0;
+        height: 100vh;
+        border-radius: 0 16px 16px 0;
+        box-shadow: 4px 0 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .menuToggle {
+        position: fixed;
+        top: 18px;
+        left: 16px;
+        z-index: 20;
+        background: white;
+        border: 1px solid #d0d7ff;
+        padding: 8px 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: all 0.2s ease;
+    }
+}
+
+
+/* --- Small Mobile 480px --- */
+@media (max-width: 480px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .navItem {
+        padding: 0.55rem 0.7rem;
+        font-size: 0.9rem;
+    }
+
+    .adminButton {
+        padding: 0.6rem 0;
+        font-size: 0.9rem;
+    }
+}

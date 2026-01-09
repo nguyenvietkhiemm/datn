@@ -1,0 +1,215 @@
+.container {
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  background-color: #f9fafc;
+  /* gap: 1.5rem; */
+}
+
+.pageTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #02346d;
+  margin-bottom: 1.5rem;
+}
+
+.tabHeader {
+  display: flex;
+  gap: 4px;
+  position: relative;
+  /* border-bottom: 2px solid #e5e7eb; */
+  /* border: 1px solid black; */
+}
+
+.tabBtn {
+  padding: 10px 20px;
+  border-radius: 12px 12px 0 0;
+  border: none;
+  background-color: #f3f4ff;
+  /* nền sáng cho tab chưa active */
+  color: #02346d;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  margin-left: 16px;
+}
+
+/* Hover */
+.tabBtn:hover {
+  background-color: #e0e7ff;
+  color: #021f4d;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Active tab */
+.tabBtn.active {
+  background: #02346d;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Optional: indicator underline animation */
+.tabHeader::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  width: 0;
+  left: 0;
+  background: #02346d;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* Khi active, underline theo tab active */
+.tabBtn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #e5e7eb;
+  border-radius: 3px;
+}
+
+/* Section Card */
+.section {
+  background-color: white;
+  padding: 16px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 24px;
+}
+
+/* Form Row */
+.formRow {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.formRow input,
+.formRow select {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  min-width: 180px;
+}
+
+.formRow button {
+  padding: 8px 16px;
+  background-color: #02346d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.formRow button:hover {
+  background-color: #021f4d;
+  transform: translateY(-1px);
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.table th,
+.table td {
+  border: 1px solid #e5e7eb;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #02346d;
+  color: white;
+  font-weight: 600;
+}
+
+.table tbody tr:hover {
+  background-color: #f0f4ff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+/* Action Buttons */
+.deleteBtn {
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #ef4444;
+  color: white;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.deleteBtn:hover {
+  background-color: #fca5a5;
+  color: #7f1d1d;
+  transform: scale(1.05);
+}
+
+.editBtn {
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #dbeafe;
+  /* blue-100 */
+  color: #1d4ed8;
+  /* blue-700 */
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.editBtn:hover {
+  background-color: #93c5fd;
+  /* blue-300 */
+  color: #1e3a8a;
+  /* blue-900 */
+  transform: scale(1.05);
+}
+
+.saveBtn {
+  background: #16a34a;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.saveBtn:hover {
+  transform: translateY(-1px);
+}
+
+.cancelBtn {
+  background: #6b7280;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.cancelBtn:hover {
+  transform: translateY(-1px);
+}

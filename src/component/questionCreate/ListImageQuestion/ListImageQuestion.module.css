@@ -1,0 +1,28 @@
+.previewWrap {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.imageWrapperSmall {
+    position: relative;
+}
+
+.image {
+    border-radius: 6px;
+    max-width: 120px;
+}
+
+.removeBtn {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    background: #ef4444;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+}

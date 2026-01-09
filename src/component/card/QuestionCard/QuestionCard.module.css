@@ -1,0 +1,121 @@
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #e5e7eb;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.actions {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 10px;
+    justify-content: flex-end;
+}
+
+.active {
+    color: #16a34a;
+    font-weight: 600;
+}
+
+.inactive {
+    color: #dc2626;
+    font-weight: 600;
+}
+
+.deleteBtn {
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #fee2e2;
+    color: #b91c1c;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.deleteBtn:hover {
+    background-color: #fca5a5;
+    color: #7f1d1d;
+    transform: scale(1.05);
+}
+
+.content {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.imageGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 12px 0;
+}
+
+.imageWrapper {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+.imageGroupSmall {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.imageWrapperSmall {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+.image {
+    object-fit: cover;
+}
+
+.answerList {
+    margin-top: 20px;
+}
+
+.answerItem {
+    display: flex;
+    align-items: flex-start;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #e5e7eb;
+    background: #fafafa;
+    flex-direction: column;
+}
+
+.answer_main {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 6px;
+    align-items: center;
+}
+
+.answerLabel {
+    font-weight: 600;
+    min-width: 20px;
+}
+
+.answerText {
+    display: flex;
+    font-size: 15px;
+    align-items: center;
+}
+
+.answerText strong {
+    color: #28a745;
+    margin-left: 1rem;
+}

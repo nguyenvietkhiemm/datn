@@ -1,0 +1,192 @@
+.exam_container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: #f9fafb;
+    font-family: "Inter", sans-serif;
+}
+
+/* ---------------- HEADER ---------------- */
+.exam_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: #1f2937;
+}
+
+/* ---------------- BODY ---------------- */
+.exam_body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* ================= LEFT PANEL (CÂU HỎI) ================= */
+.leftPanel {
+    flex: 3;
+    overflow-y: auto;
+    padding: 1.5rem;
+    background: #f3f4f6;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== PART TITLE ===== */
+.partTitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 2rem 0 1rem;
+    padding: 0.75rem 1rem;
+    background: #e0e7ff;
+    border-left: 6px solid #2563eb;
+    border-radius: 0.5rem;
+}
+
+/* ===== QUESTION BOX ===== */
+.questionBox {
+    background: #ffffff;
+    border-radius: 0.75rem;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    scroll-margin-top: 110px;
+}
+
+/* Khi scroll tới / đang focus */
+.questionBox:target,
+.questionBox.active {
+    outline: 2px solid #2563eb;
+    background: #f8faff;
+}
+
+/* ===== QUESTION TEXT ===== */
+.questionText {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #111827;
+}
+
+/* ===== ANSWERS ===== */
+.answers {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.option {
+    border: 1px solid #d1d5db;
+    padding: 10px;
+    border-radius: 6px;
+    background: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.option:hover {
+    background: #eef2ff;
+    border-color: #2563eb;
+}
+
+.answerText {
+    display: flex;
+    align-items: center;
+}
+
+.answerText strong {
+    color: #28a745;
+    margin-left: 1rem;
+}
+
+/* ================= RIGHT PANEL (THANH ĐIỀU HƯỚNG) ================= */
+.rightPanel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    border-left: 1px solid #e5e7eb;
+    background: #ffffff;
+    overflow-y: auto;
+    justify-content: flex-start;
+    gap: 4rem;
+}
+
+/* ===== TOP SECTION ===== */
+.topSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.timer {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2563eb;
+    background: #eef2ff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.75rem;
+    text-align: center;
+}
+
+/* ===== GRID TITLE (PHẦN I / II / III) ===== */
+.gridTitle {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #374151;
+    margin: 1.25rem 0 0.5rem;
+}
+
+/* ===== GRID SỐ CÂU ===== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.4rem;
+}
+
+/* ===== BUTTON SỐ CÂU ===== */
+.numButton {
+    padding: 0.45rem 0;
+    border-radius: 0.5rem;
+    border: 1px solid #d1d5db;
+    background: #f9fafb;
+    font-weight: 500;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.numButton:hover {
+    background: #e0e7ff;
+    border-color: #2563eb;
+}
+
+/* Đã trả lời */
+.answered {
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
+}
+
+/* Đang focus */
+.current {
+    border: 2px solid #16a34a;
+    background: #ecfdf5;
+}
+
+/* ================= RESULT ================= */
+.result {
+    text-align: center;
+    padding-top: 3rem;
+}
+
+.result h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #111827;
+}
