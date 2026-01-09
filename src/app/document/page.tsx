@@ -76,6 +76,7 @@ export default function DocumentList() {
                 <Search
                     setSearchKeyword={setSearchKeyword}
                     setFilterCondition={setFilterCondition}
+                    setCurrentPage={setCurrentPage}
                 />
             </div>
 

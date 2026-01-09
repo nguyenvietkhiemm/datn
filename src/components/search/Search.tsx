@@ -3,15 +3,18 @@ import { useState } from "react";
 import styles from "./Search.module.css";
 
 type SearchProp = {
+  searchKeyword?: string
   setSearchKeyword: (data: any) => void;
   setFilterCondition: (data: any) => void;
+  setCurrentPage: (page: any) => void;
 }
 
-export default function Search({ setSearchKeyword, setFilterCondition }: SearchProp) {
-  const [keyword, setKeyword] = useState("");
+export default function Search({ searchKeyword, setSearchKeyword, setFilterCondition, setCurrentPage }: SearchProp) {
+  const [keyword, setKeyword] = useState(searchKeyword ?? "");
 
   const handleSearch = () => {
     setSearchKeyword(keyword);
+    setCurrentPage(1);
     setFilterCondition("");
   };
 

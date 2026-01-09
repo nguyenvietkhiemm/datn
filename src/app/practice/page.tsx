@@ -59,8 +59,10 @@ export default function Bank() {
           setCurrentPage={setCurrentPage}
         />
         <Search
+        searchKeyword={searchKeyword}
           setSearchKeyword={setSearchKeyword}
           setFilterCondition={setFilterCondition}
+          setCurrentPage={setCurrentPage}
         />
       </div>
 
