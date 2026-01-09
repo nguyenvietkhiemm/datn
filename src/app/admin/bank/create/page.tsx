@@ -6,12 +6,14 @@ import styles from "./BankCreate.module.css";
 import { useRouter } from "next/navigation";
 import { Topic, Subject } from "@/domain/admin/topic_subject/type";
 import { BankService } from "@/domain/admin/banks/service";
+import NotificationPopup from "@/component/notification/Notification";
+import { typeNoti } from "@/lib/model";
 
 export default function BankCreate() {
   const router = useRouter();
   const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_BACKEND;
   const token = Cookies.get("token");
-
+  const [notify, setNotify] = useState<typeNoti | null>(null);
   // ================= STATE =================
   const [createBank, setCreateBank] = useState({
     description: "",
@@ -92,7 +94,11 @@ export default function BankCreate() {
     } = createBank;
 
     if (!description || !time_limit || !subject_id || !topic_id) {
-      alert("Vui lòng điền đầy đủ thông tin!");
+      setNotify({
+        message: "Vui lòng điền đầy đủ thông tin!",
+        type: "warning",
+        confirm: false
+      });
       return;
     }
 
@@ -104,13 +110,20 @@ export default function BankCreate() {
         topic_id,
       });
 
-      alert("Tạo ngân hàng câu hỏi thành công!");
-
       router.push(
         `/admin/bank/create/${res.bank_id}/questions`
       );
+      setNotify({
+        message: "Tạo ngân hàng câu hỏi thành công!",
+        type: "success",
+        confirm: false
+      });
     } catch (err: any) {
-      alert(err.message || "Không thể tạo ngân hàng!");
+      setNotify({
+        message: err.message,
+        type: "error",
+        confirm: false
+      });
     }
   };
 
@@ -187,6 +200,13 @@ export default function BankCreate() {
           Lưu ngân hàng
         </button>
       </form>
+      {notify && (
+        <NotificationPopup
+          message={notify.message}
+          type={notify.type}
+          onClose={() => setNotify(null)}
+        />
+      )}
     </div>
   );
 }

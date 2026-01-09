@@ -9,10 +9,12 @@ import type { AnswerForm, QuestionForm } from "@/domain/admin/questions/type";
 import MultipleChoiceAnswers from "@/component/formQuestionAnswer/MultipleChoiceAnswers";
 import EssayAnswer from "@/component/formQuestionAnswer/EssayAnswer";
 import SingleChoice from "@/component/formQuestionAnswer/SingleChoice";
+import NotificationPopup from "@/component/notification/Notification";
+import { typeNoti } from "@/lib/model";
 
 export default function QuestionCreate() {
     const router = useRouter();
-
+    const [notify, setNotify] = useState<typeNoti | null>(null);
     /* ===== QUESTION FORM ===== */
     const [form, setForm] = useState<QuestionForm>({
         question_content: "",
@@ -56,24 +58,36 @@ export default function QuestionCreate() {
     /* ===== SUBMIT ===== */
     const handleSubmit = async () => {
         if (!form.question_content.trim()) {
-            alert("Vui lòng nhập nội dung câu hỏi");
+            setNotify({
+                message: "Vui lòng nhập nội dung câu hỏi",
+                type: "warning",
+            })
             return;
         }
 
         if (form.type_question !== 3) {
             if (answers.length < 4) {
-                alert("Cần ít nhất 4 đáp án");
+                setNotify({
+                    message: "Cần ít nhất 4 đáp án",
+                    type: "warning",
+                })
                 return;
             }
 
             if (!answers.some((a) => a.is_correct)) {
-                alert("Phải có ít nhất 1 đáp án đúng");
+                setNotify({
+                    message: "Phải có ít nhất 1 đáp án đúng",
+                    type: "warning",
+                })
                 return;
             }
         }
         else {
             if (!answers[0]?.answer_content.trim()) {
-                alert("Vui lòng nhập đáp án tự luận");
+                setNotify({
+                    message: "Vui lòng nhập đáp án tự luận",
+                    type: "warning",
+                })
                 return;
             }
         }
@@ -98,12 +112,17 @@ export default function QuestionCreate() {
                     images: imageLinksAnswer
                 })),
             });
-
-            alert("Tạo câu hỏi thành công!");
             router.push("/admin/questions");
+            setNotify({
+                message: "Tạo câu hỏi thành công!",
+                type: "success",
+            })
         } catch (err) {
             console.error(err);
-            alert("Lỗi khi tạo câu hỏi");
+            setNotify({
+                message: "Lỗi khi tạo câu hỏi",
+                type: "error",
+            })
         }
     };
 
@@ -179,24 +198,24 @@ export default function QuestionCreate() {
 
             {/* ANSWERS */}
             {form.type_question === 2 && (
-                <MultipleChoiceAnswers answers={answers} 
-                setAnswers={setAnswers} 
-                answerImages={answerImages}
-                setAnswerImages={setAnswerImages} />
+                <MultipleChoiceAnswers answers={answers}
+                    setAnswers={setAnswers}
+                    answerImages={answerImages}
+                    setAnswerImages={setAnswerImages} />
             )}
 
             {form.type_question === 1 && (
                 <SingleChoice answers={answers}
-                setAnswers={setAnswers} 
-                answerImages={answerImages}
-                setAnswerImages={setAnswerImages} />
+                    setAnswers={setAnswers}
+                    answerImages={answerImages}
+                    setAnswerImages={setAnswerImages} />
             )}
 
             {form.type_question === 3 && (
                 <EssayAnswer answers={answers}
-                 setAnswers={setAnswers}
-                 answerImages={answerImages}
-                  setAnswerImages={setAnswerImages} />
+                    setAnswers={setAnswers}
+                    answerImages={answerImages}
+                    setAnswerImages={setAnswerImages} />
             )}
 
             {/* ACTIONS */}
@@ -209,6 +228,13 @@ export default function QuestionCreate() {
                     Lưu câu hỏi
                 </Button>
             </div>
+            {notify && (
+                <NotificationPopup
+                    message={notify.message}
+                    type={notify.type}
+                    onClose={() => setNotify(null)}
+                />
+            )}
         </div>
     );
 }

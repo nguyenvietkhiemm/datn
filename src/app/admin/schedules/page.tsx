@@ -139,8 +139,11 @@ export default function Schedule() {
                         <td>{renderStatus(status)}</td>
 
                         <td>{item.total_exams}</td>
-                        <td>{formatVNDateTime(item.updated_at)}</td>
-
+                        <td>
+                          {new Date(item.updated_at).toLocaleString('vi-VN', {
+                            timeZone: 'Asia/Ho_Chi_Minh'
+                          })}
+                        </td>
                         <td>
                           <button
                             className={styles.editBtn}
@@ -171,7 +174,7 @@ export default function Schedule() {
                   })}
                 </tbody>
               </table>
-              
+
             </div>
           </motion.div>
         )}

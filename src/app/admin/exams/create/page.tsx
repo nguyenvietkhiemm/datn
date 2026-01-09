@@ -8,6 +8,7 @@ import { ExamSchedule } from "@/domain/admin/schedules/type";
 import { Topic, Subject } from "@/domain/admin/topic_subject/type";
 import { ExamService } from "@/domain/admin/exams/service";
 import { typeNoti } from "@/lib/model";
+import NotificationPopup from "@/component/notification/Notification";
 
 export default function ExamCreate() {
   const router = useRouter();
@@ -122,17 +123,20 @@ export default function ExamCreate() {
         exam_schedule_id,
       });
 
+      router.push(
+        `/admin/exams/create/${res.data.exam_id}/questions`
+      );
       setNotify({
         message: "Tạo bài thi thành công!",
         type: "success",
         confirm: false
       });
-
-      router.push(
-        `/admin/exams/create/${res.data.exam_id}/questions`
-      );
     } catch (err: any) {
-      alert(err.message || "Không thể tạo bài thi!");
+      setNotify({
+        message: err.message,
+        type: "error",
+        confirm: false
+      });
     }
   };
 
@@ -255,6 +259,13 @@ export default function ExamCreate() {
           Lưu bài thi
         </button>
       </form>
+      {notify && (
+        <NotificationPopup
+          message={notify.message}
+          type={notify.type}
+          onClose={() => setNotify(null)}
+        />
+      )}
     </div>
   );
 }
