@@ -37,7 +37,7 @@ export default function FileViewer({ link }: FileViewerProps) {
     };
 
     return (
-        <div className="border rounded-lg overflow-hidden bg-gray-100">
+        <div className="border overflow-hidden bg-gray-100">
             {/* Toolbar */}
             <div className="flex justify-between items-center bg-gray-800 text-white p-2">
                 <span>Xem tài liệu ({ext?.toUpperCase()})</span>

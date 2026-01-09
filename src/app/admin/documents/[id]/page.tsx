@@ -19,8 +19,6 @@ export default function MyPage() {
 
   return (
     <div className={styles.pageWrapper}>
-      <h1 className={styles.pageTitle}>Preview tài liệu</h1>
-
       <div className={styles.viewerContainer}>
         <FileViewer link={link} />
       </div>

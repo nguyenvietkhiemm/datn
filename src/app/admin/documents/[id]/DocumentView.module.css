@@ -2,22 +2,11 @@
    Container toàn trang
 =============================== */
 .pageWrapper {
-  padding: 24px;
   background: #f6f7f9;
   min-height: 100vh;
 }
 
-/* Tiêu đề */
-.pageTitle {
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: #111;
-  letter-spacing: -0.3px;
-}
-
 /* Bọc nội dung viewer */
 .viewerContainer {
-  max-width: 1600px;
   margin: 0 auto;
 }
