@@ -5,6 +5,9 @@ import { Question } from "@/domain/admin/questions/type";
 import { answerLabel } from "@/lib/model";
 import { ImagePreview } from "@/component/questionCreate/ImagePreview/page";
 import { LatexPreview } from "@/component/questionCreate/LatexPreview/page";
+import NotificationPopup from "@/component/notification/Notification";
+import { typeNoti } from "@/lib/model";
+import { useState } from "react";
 
 interface QuestionCardProps {
     question: Question;
@@ -19,7 +22,7 @@ export default function QuestionCard({
     handleDelete,
     handleToggleAvailable
 }: QuestionCardProps) {
-
+    const [notify, setNotify] = useState<typeNoti | null>(null);
     return (
         <div className={styles.card}>
 
@@ -46,9 +49,19 @@ export default function QuestionCard({
                         className={styles.deleteBtn}
                         onClick={(e) => {
                             e.stopPropagation();
-                            if (confirm("Bạn có chắc muốn xoá câu hỏi này?")) {
-                                handleDelete(question.question_id);
-                            }
+                            setNotify({
+                                message: (
+                                    <>
+                                        "Bạn có chắc muốn xoá câu hỏi này?"
+                                    </>
+                                ),
+                                type: "warning",
+                                confirm: true,
+                                duration: 3000
+                            });
+
+                            handleDelete(question.question_id);
+
                         }}
                     >
                         Xoá

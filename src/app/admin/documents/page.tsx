@@ -50,7 +50,18 @@ export default function DocumentPage() {
     const handleDelete = async (docId: number) => {
         try {
             await DocumentService.deleteDocument(docId)
+            setNotify({
+                message: (
+                    <>
+                        Bạn có chắc muốn xoá tài liệu không?
+                    </>
+                ),
+                type: "warning",
+                confirm: true,
+                duration: 3000
+            });
             setDocuments((prev) => prev.filter((d) => d.document_id !== docId));
+
         } catch (err) {
             console.error(err);
         }
