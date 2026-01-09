@@ -2,6 +2,7 @@
 import { useState } from "react";
 import styles from "./ChatMini.module.css";
 import Cookies from "js-cookie";
+import ReactMarkdown from "react-markdown";
 
 type Source = {
     file_name: string;
@@ -116,9 +117,12 @@ export default function MiniChat() {
                                 <div
                                     className={`${styles.message} ${msg.sender === "user" ? styles.user : styles.bot
                                         }`}
-                                >
-                                    {msg.text}
-                                </div>
+                                    dangerouslySetInnerHTML={{
+                                        __html: msg.text
+                                            .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+                                            .replace(/\n/g, "<br/>"),
+                                    }}
+                                />
 
                                 {/* SOURCE PANEL */}
                                 {msg.sender === "bot" && msg.sources && msg.sources.length > 0 && (
