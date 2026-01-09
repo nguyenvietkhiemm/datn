@@ -16,6 +16,7 @@ const DocumentController = {
       const subject_id = req.query.subject_id
         ? Number(req.query.subject_id)
         : "All"
+        
       return {
         status: 200,
         message: "Lấy danh sách tài liệu thành công",
