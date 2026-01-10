@@ -71,9 +71,9 @@ export default function ResultMultipleChoice({
         <div className={styles.answerlist}>
           {q.correct_answers.map((a, idx) => (
             <div key={`correct-${idx}`}>
-              <p className={styles.answer_content_correct}>
-                {a.answer_content}
-              </p>
+              <div className={styles.answer_content_correct}>
+                <LatexPreview text={a.answer_content as string} />
+              </div>
 
               {a.images?.map((src, imgIdx) => (
                 <div
