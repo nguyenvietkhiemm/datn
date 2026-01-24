@@ -1,0 +1,41 @@
+.myRankBox {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 24px;
+}
+
+/* TITLE */
+.myRankTitle {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 14px;
+}
+
+/* ROW */
+.myRankRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    padding: 8px 0;
+    border-bottom: 1px dashed #e5e7eb;
+}
+
+.myRankRow:last-child {
+    border-bottom: none;
+}
+
+/* LABEL */
+.myRankRow span {
+    color: #64748b;
+}
+
+/* VALUE */
+.myRankRow b,
+.myRankRow div {
+    font-weight: 700;
+    color: #111827;
+}

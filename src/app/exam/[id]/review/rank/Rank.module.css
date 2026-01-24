@@ -1,0 +1,19 @@
+.container{
+    display: flex;
+    flex-direction: row;
+}
+
+.right_rank{
+    flex: 1;
+    margin-left: 20px;
+}
+
+.conatiner_rank {
+    padding: 24px;
+    flex: 2;
+}
+
+.container_my_rank{
+    padding: 24px;
+    flex: 1;
+}

@@ -1,0 +1,82 @@
+/* Overlay nền mờ */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 40;
+}
+
+/* Slide panel */
+.slidePanel {
+  position: fixed;
+  top: 80px;
+  right: -360px;
+  /* Ẩn bên phải */
+  width: 360px;
+  height: 100vh;
+  background: #f9fafb;
+  /* gray-50 */
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+  transition: right 0.3s ease;
+  z-index: 50;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+/* Khi mở */
+.open {
+  right: 0;
+}
+
+/* Nút đóng */
+.closeBtn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #374151;
+  /* gray-700 */
+  padding: 4px;
+}
+
+.closeBtn:hover {
+  color: #111827;
+  /* gray-900 */
+}
+
+/* Floating button */
+.floatingBtn {
+  position: fixed;
+  top: 50%;
+  right: 3px;
+  z-index: 30;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 14px;
+  background: #2563eb;
+  /* blue-600 */
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.floatingBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(37, 99, 235, 0.45);
+}
+
+.floatingBtn span {
+  white-space: nowrap;
+}

@@ -1,0 +1,12 @@
+/* ===============================
+   Container toàn trang
+=============================== */
+.pageWrapper {
+  background: #f6f7f9;
+  min-height: 100vh;
+}
+
+/* Bọc nội dung viewer */
+.viewerContainer {
+  margin: 0 auto;
+}

@@ -1,0 +1,257 @@
+.container {
+    min-height: 100vh;
+    padding: 24px;
+    max-width: 70%;
+    margin: 0 auto;
+}
+
+.title {
+    text-align: left;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 2rem;
+}
+
+.filter_search {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 3rem;
+}
+
+.topicButton {
+    padding: 0.4rem 1rem;
+    font-size: 0.95rem;
+    border: none;
+    background: transparent;
+    color: #111827;
+    border-radius: 0.6rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.topicButton:hover {
+    background: #e5edff;
+    color: #1d4ed8;
+}
+
+.active {
+    background: #e0e7ff;
+    color: #1e40af;
+    font-weight: 600;
+}
+
+/* ===== GRID ===== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+/* ===== CARD ===== */
+.card {
+    position: relative;
+    background: #fff;
+    border-radius: 1rem;
+    border-top: 3px solid #1e40af;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .08);
+    transition: transform .3s ease, box-shadow .3s ease;
+    cursor: pointer;
+    min-height: 270px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .15);
+}
+
+/* ===== EXPIRED ===== */
+.expiredCard {
+    opacity: .65;
+}
+
+.expiredCard:hover {
+    opacity: .75;
+}
+
+.expiredBadge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+    z-index: 2;
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+/* ===== LEFT AREA ===== */
+.left_area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    flex: 0 0 auto;
+}
+
+.examName {
+    font-size: 21px;
+    font-weight: 800;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.desc {
+    font-size: 14px;
+    color: #6b7280;
+    display: -webkit-box;
+    line-height: 1.4; 
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    white-space: normal;
+    word-break: break-word
+}
+
+/* ===== TOP USER ===== */
+.top_user {
+    display: flex;
+    gap: 2rem;
+    margin-top: auto;
+}
+
+.top_item {
+    display: flex;
+}
+
+.avatar_wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.avatar {
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    background: #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 3px #fde68a;
+}
+
+.avatar img {
+    width: 60%;
+    height: 60%;
+}
+
+.user_rank {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.user_name {
+    font-size: 12px;
+    font-weight: 700;
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ===== RANK GLOW ===== */
+.rank_0 .avatar {
+    box-shadow: 0 0 0 3px gold;
+}
+
+.rank_1 .avatar {
+    box-shadow: 0 0 0 3px silver;
+}
+
+.rank_2 .avatar {
+    box-shadow: 0 0 0 3px #cd7f32;
+}
+
+/* ===== INFO (luôn ở đáy trái) ===== */
+.info {
+    margin-top: auto;
+    display: flex;
+    font-size: 14px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.time span {
+    font-size: 12px;
+    color: #555;
+}
+
+.stats {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #555;
+}
+
+.tags {
+    display: flex;
+    gap: 6px;
+}
+
+.tag {
+    font-size: 12px;
+    border-radius: 6px;
+    color: #000000;
+    white-space: nowrap;
+    border: 1px solid #2563eb;
+    padding: 4px;
+}
+
+/* ===== RIGHT AREA ===== */
+.right_area {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    font-size: 14px;
+    color: #888;
+}
+
+/* ===== DATE ===== */
+.date {
+    display: flex;
+    gap: 6px;
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+.dateRow {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+/* ===== EMPTY ===== */
+.empty {
+    text-align: center;
+    color: #6b7280;
+    grid-column: 1 / -1;
+    margin-top: 2rem;
+}

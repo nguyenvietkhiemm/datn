@@ -1,0 +1,64 @@
+/* ===== CONTAINER ===== */
+.container {
+    width: 100%;
+    padding: 24px;
+    background-color: #ffffff;
+}
+
+/* ===== TITLE ===== */
+.title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 20px;
+}
+
+/* ===== TABS ===== */
+.tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.tab {
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    background-color: #ffffff;
+    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+
+    transition: all 0.2s ease;
+}
+
+.tab:hover {
+    background-color: #f9fafb;
+}
+
+.active {
+    border-color: #2563eb;
+    background-color: #eff6ff;
+    color: #2563eb;
+}
+
+/* ===== CONTENT ===== */
+.content {
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .tabs {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .tab {
+        width: 100%;
+        text-align: center;
+    }
+}

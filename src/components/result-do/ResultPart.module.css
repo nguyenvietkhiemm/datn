@@ -1,0 +1,40 @@
+/* ===== PART ===== */
+.part {
+    margin-bottom: 48px;
+}
+
+.partTitle {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+
+    padding-left: 12px;
+    border-left: 5px solid #2563eb;
+    color: #1f2937;
+}
+
+/* spacing cho từng câu hỏi */
+.part :global(.questionItem),
+.part :global(.resultItem) {
+    margin-bottom: 20px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+    .title {
+        font-size: 22px;
+    }
+
+    .scoreBox {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .scoreBox b {
+        font-size: 26px;
+    }
+
+    .partTitle {
+        font-size: 18px;
+    }
+}

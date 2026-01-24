@@ -1,0 +1,60 @@
+/* ================= QUESTION ================= */
+.questionBox {
+    background: #ffffff;
+    border-radius: 0.75rem;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    scroll-margin-top: 90px;
+    margin: 1rem 0;
+}
+
+.questionText {
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #111827;
+}
+
+/* ================= ANSWERS ================= */
+.answers {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #f9fafb;
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.4rem;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.option:hover {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+
+.option input {
+    cursor: pointer;
+}
+
+/* ================= ESSAY ================= */
+.essay {
+    width: 100%;
+    min-height: 120px;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid #d1d5db;
+    resize: vertical;
+    font-size: 0.95rem;
+}
+
+.essay:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}

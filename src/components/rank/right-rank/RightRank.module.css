@@ -1,0 +1,71 @@
+.right_rank {
+    width: 100%;
+    padding: 16px 18px;
+}
+
+.info_box {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-size: 14px;
+    color: #0f172a;
+    font-family: var(--font-body);
+}
+
+/* TITLE */
+.title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+/* TEXT */
+.text {
+    color: #475569;
+    margin-bottom: 12px;
+}
+
+/* FORMULA */
+.formula {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    background: #ffffff;
+    border: 1px dashed #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.formula span {
+    font-size: 13px;
+}
+
+/* LIST */
+.list,
+.rules {
+    padding-left: 16px;
+    margin-bottom: 12px;
+}
+
+.list li,
+.rules li {
+    margin-bottom: 6px;
+    color: #475569;
+}
+
+/* DIVIDER */
+.divider {
+    height: 1px;
+    background: #e5e7eb;
+    margin: 12px 0;
+}
+
+/* NOTE */
+.note {
+    font-size: 12px;
+    color: #64748b;
+}
